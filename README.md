@@ -1,4 +1,4 @@
-# Dagpenger-SERVICENAME
+# Dagpenger-melding-om-vedtak
 
 ## Komme i gang
 
@@ -15,9 +15,8 @@ Gradle brukes som byggverktøy og er bundlet inn.
 
 # Henvendelser
 
-Spørsmål knyttet til koden eller prosjektet kan rettes mot:
+Spørsmål knyttet til koden eller prosjektet kan meldes ved å bruke issues på GitHub:
 
-* André Roaldseth, andre.roaldseth@nav.no
 * Eller en annen måte for omverden å kontakte teamet på
 
 ## For NAV-ansatte

@@ -14,7 +14,7 @@ class HelsesjekkTest {
                 helsesjekker()
             }
 
-            client.get("/internal/isAlive").status shouldBe HttpStatusCode.OK
-            client.get("/internal/isReady").status shouldBe HttpStatusCode.OK
+            client.get("/isalive").status shouldBe HttpStatusCode.OK
+            client.get("/isready").status shouldBe HttpStatusCode.OK
         }
 }

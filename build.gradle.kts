@@ -1,6 +1,9 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 plugins {
     id("common")
-    `java-library`
+    application
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 dependencies {
     implementation(libs.bundles.ktor.server)
@@ -10,4 +13,12 @@ dependencies {
     testImplementation(libs.bundles.kotest.assertions)
 
     testImplementation(libs.ktor.server.test.host)
+}
+
+application {
+    mainClass.set("no.nav.dagpenger.vedtaksmeldin.AppKt")
+}
+
+tasks.withType<ShadowJar> {
+    mergeServiceFiles()
 }
