@@ -8,10 +8,10 @@ import io.ktor.server.routing.routing
 
 fun Application.helsesjekker() {
     routing {
-        get("/internal/isAlive") {
+        get("/isalive") {
             call.respondText("I'm alive!")
         }
-        get("/internal/isReady") {
+        get("/isready") {
             call.respondText("I'm ready!")
         }
     }
