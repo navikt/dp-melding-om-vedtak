@@ -1,4 +1,4 @@
-package no.nav.dagpenger.vedtaksmelding
+package no.nav.dagpenger.vedtaksmelding.model
 
 class Opplysning(
     val id: String,
