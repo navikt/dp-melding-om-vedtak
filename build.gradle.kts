@@ -16,7 +16,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("no.nav.dagpenger.vedtaksmeldin.AppKt")
+    mainClass.set("no.nav.dagpenger.vedtaksmelding.AppKt")
 }
 
 tasks.withType<ShadowJar> {
