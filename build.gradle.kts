@@ -7,6 +7,7 @@ plugins {
 }
 dependencies {
     val ktorVersion = libs.versions.ktor.get()
+    implementation(project(":openapi"))
     implementation(libs.bundles.ktor.server)
     implementation("io.ktor:ktor-server-swagger:$ktorVersion")
     implementation(libs.ktor.server.cio)
