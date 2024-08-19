@@ -1,0 +1,47 @@
+openapi: 3.0.3
+info:
+  title: Melding om vedtak API
+  version: 1.0.0
+  description: Et API for å hente ut brevblokker som utgjør melding om vedtak.
+paths:
+  /melding-om-vedtak/{behandlingId}:
+    get:
+      summary: Hent brevblokkIder og korresponderende opplysninger som utgjør melding om vedtak
+      description: Henter melding om vedtak for en gitt behandlingId
+      parameters:
+        - name: behandlingId
+          in: path
+          description: id for behandling
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Brevblokk'
+
+
+components:
+  schemas:
+    Brevblokk:
+      type: object
+      properties:
+        tekstId:
+          type: string
+        opplysninger:
+          type: array
+          items:
+            $ref: '#/components/schemas/Opplysning'
+    Opplysning:
+      type: object
+      properties:
+        tekstId:
+          type: string
+        verdi:
+            type: string
