@@ -1,5 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.vedtaksmelding
 
+import io.kotest.assertions.json.shouldEqualSpecifiedJsonIgnoringOrder
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import io.ktor.client.request.get
@@ -16,7 +17,7 @@ class MeldingOmVedtakApiTest {
 
         testApplication {
             application {
-                meldingOmVedtak()
+                meldingOmVedtakApi()
             }
 
             client.get("/melding-om-vedtak/${UUID.randomUUID()}").let { response ->
@@ -24,19 +25,15 @@ class MeldingOmVedtakApiTest {
                 response.contentType().toString() shouldContain "application/json"
                 val expectedResponse =
                     """
-                    [
-                        {
-                            "tekstId": "someTekstId",
-                            "opplysninger": [
-                                {
-                                    "tekstId": "someOpplysningTekstId",
-                                    "verdi": "someVerdi"
-                                }
-                            ]
-                        }
-                    ]
+                    [ {
+                        "tekstId" : "someTekstId",
+                        "opplysninger" : [ {
+                            "tekstId" : "someOpplysningTekstId",
+                            "verdi" : "someVerdi"
+                        } ]
+                    } ]
                     """.trimIndent()
-                response.bodyAsText() shouldBe expectedResponse
+                response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder expectedResponse
             }
         }
 }
