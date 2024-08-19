@@ -8,7 +8,6 @@ import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
 import no.nav.dagpenger.saksbehandling.api.models.BrevblokkDTO
 import no.nav.dagpenger.saksbehandling.api.models.OpplysningDTO
-import no.nav.dagpenger.vedtaksmelding.apiConfig
 
 fun Application.meldingOmVedtakApi() {
     apiConfig()

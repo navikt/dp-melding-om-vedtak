@@ -1,4 +1,4 @@
-package no.nav.dagpenger.vedtaksmelding
+package no.nav.dagpenger.vedtaksmelding.vedtaksmelding
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.DeserializationFeature
@@ -11,6 +11,7 @@ import io.ktor.serialization.jackson.JacksonConverter
 import io.ktor.serialization.jackson.jackson
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
+import io.ktor.server.auth.Authentication
 import io.ktor.server.plugins.callloging.CallLogging
 import io.ktor.server.plugins.callloging.processingTimeMillis
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
@@ -44,6 +45,10 @@ fun Application.apiConfig() {
         jackson {
             register(ContentType.Application.Json, JacksonConverter(objectMapper))
         }
+    }
+
+    install(Authentication) {
+        jwt("azureAd")
     }
 }
 
