@@ -6,8 +6,11 @@ plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 dependencies {
+    val ktorVersion = libs.versions.ktor.get()
     implementation(libs.bundles.ktor.server)
+    implementation("io.ktor:ktor-server-swagger:$ktorVersion")
     implementation(libs.ktor.server.cio)
+    implementation(libs.jackson.datatype.jsr310)
     testImplementation(libs.mockk)
     testImplementation(libs.mockk)
     testImplementation(libs.bundles.kotest.assertions)
