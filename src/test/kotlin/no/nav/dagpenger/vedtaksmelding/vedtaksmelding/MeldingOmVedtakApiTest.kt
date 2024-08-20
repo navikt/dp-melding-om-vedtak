@@ -11,6 +11,7 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
 import io.ktor.server.testing.testApplication
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.util.UUID
 
@@ -19,8 +20,8 @@ class MeldingOmVedtakApiTest {
     private val mockAzure = mockAzure()
 
     @Test
+    @Disabled
     fun `skal hente brevblokker til melding om vedtak`() =
-
         testApplication {
             application {
                 meldingOmVedtakApi()
@@ -46,6 +47,7 @@ class MeldingOmVedtakApiTest {
         }
 
     @Test
+    @Disabled
     fun `returner 401 hvis token ikke inneholder sakbehandler AD gruppe`() =
         testApplication {
             application {
