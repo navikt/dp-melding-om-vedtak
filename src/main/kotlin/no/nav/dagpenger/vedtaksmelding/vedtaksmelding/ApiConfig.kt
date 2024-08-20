@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.ktor.http.ContentType
+import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.jackson.JacksonConverter
 import io.ktor.serialization.jackson.jackson
 import io.ktor.server.application.Application
@@ -15,12 +16,28 @@ import io.ktor.server.auth.Authentication
 import io.ktor.server.plugins.callloging.CallLogging
 import io.ktor.server.plugins.callloging.processingTimeMillis
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.server.plugins.statuspages.StatusPages
 import io.ktor.server.request.document
 import io.ktor.server.request.httpMethod
 import io.ktor.server.request.path
+import io.ktor.server.response.respond
+import mu.KotlinLogging
 import org.slf4j.event.Level
 
+private val sikkerlogg = KotlinLogging.logger("tjenestekall")
+private val logger = KotlinLogging.logger {}
+
 fun Application.apiConfig() {
+    install(Authentication) {
+        jwt("azureAd")
+    }
+
+    install(ContentNegotiation) {
+        jackson {
+            register(ContentType.Application.Json, JacksonConverter(objectMapper))
+        }
+    }
+
     install(CallLogging) {
         disableDefaultColors()
         filter { call ->
@@ -41,14 +58,21 @@ fun Application.apiConfig() {
         }
     }
 
-    install(ContentNegotiation) {
-        jackson {
-            register(ContentType.Application.Json, JacksonConverter(objectMapper))
-        }
-    }
+    install(StatusPages) {
+        exception<Throwable> { call, cause ->
+            when (cause) {
+                is IllegalAccessException -> {
+                    logger.warn { "Unauthorized: ${cause.message}" }
+                    call.respond(HttpStatusCode.Unauthorized, cause.message ?: "Unauthorized")
+                }
 
-    install(Authentication) {
-        jwt("azureAd")
+                else -> {
+                    logger.error(cause) { "Uhåndtert feil: Se sikkerlogg for detaljer" }
+                    sikkerlogg.error(cause) { "Uhåndtert feil: ${cause.message}" }
+                    call.respond(HttpStatusCode.InternalServerError)
+                }
+            }
+        }
     }
 }
 
