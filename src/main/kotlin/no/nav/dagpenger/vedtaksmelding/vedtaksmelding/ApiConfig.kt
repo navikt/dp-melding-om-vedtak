@@ -63,6 +63,7 @@ fun Application.apiConfig() {
             when (cause) {
                 is IllegalAccessException -> {
                     logger.warn { "Unauthorized: ${cause.message}" }
+                    sikkerlogg.warn { "Unauthorized, se sikkerlogg for detaljer: ${cause.stackTrace}" }
                     call.respond(HttpStatusCode.Unauthorized, cause.message ?: "Unauthorized")
                 }
 
