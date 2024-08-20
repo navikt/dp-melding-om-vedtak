@@ -22,3 +22,7 @@ spec:
       memory: 256Mi
   secureLogs:
     enabled: true
+  accessPolicy:
+    inbound:
+      rules:
+        - application: dp-saksbehandling-frontend
