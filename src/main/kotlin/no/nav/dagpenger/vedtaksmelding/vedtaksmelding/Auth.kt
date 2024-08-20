@@ -7,7 +7,7 @@ import io.ktor.server.auth.jwt.JWTCredential
 import io.ktor.server.auth.jwt.JWTPrincipal
 import io.ktor.server.auth.jwt.jwt
 import mu.KotlinLogging
-import no.nav.dagpenger.vedtaksmelding.Configuration.saksbehandlerADGruppe
+import no.nav.dagpenger.vedtaksmelding.Configuration
 import java.net.URL
 
 private val logger = KotlinLogging.logger {}
@@ -16,7 +16,7 @@ fun AuthenticationConfig.jwt(name: String) {
     jwt(name) {
         verifier(AzureAd)
         validate { jwtClaims ->
-            jwtClaims.måInneholde(autorisertADGruppe = saksbehandlerADGruppe)
+            jwtClaims.måInneholde(autorisertADGruppe = Configuration.saksbehandlerADGruppe)
             JWTPrincipal(jwtClaims.payload)
         }
     }
