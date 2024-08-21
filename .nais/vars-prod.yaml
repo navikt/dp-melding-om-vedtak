@@ -4,3 +4,4 @@ azure:
     saksbehandler: "2e9c63d8-322e-4c1f-b500-a0abb812761c" # 0000-GA-Dagpenger-Saksbehandler
 
 wonderwalled: false
+DP_BEHANDLING_API_SCOPE: "api://prod-gcp.teamdagpenger.dp-behandling/.default"
