@@ -26,6 +26,12 @@ spec:
     inbound:
       rules:
         - application: dp-saksbehandling-frontend
+        {{#if wonderwalled}}
+        - application: wonderwalled-azure
+          namespace: aura
+        - application: azure-token-generator
+          namespace: aura
+       {{/if}}
   env:
     - name: JDK_JAVA_OPTIONS
       value: -XX:+UseParallelGC -XX:MaxRAMPercentage=50.0 -XX:ActiveProcessorCount=4 -XX:+PrintFlagsFinal
