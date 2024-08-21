@@ -14,39 +14,66 @@ import io.ktor.client.request.header
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.serialization.jackson.jackson
+import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
-import java.util.*
+import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
+import java.util.UUID
+
+private val logger = KotlinLogging.logger {}
+
+interface BehandlingKlient {
+    suspend fun hentOpplysninger(
+        behandling: UUID,
+        saksbehandler: Saksbehandler,
+    ): Result<Set<Opplysning>>
+}
 
 internal class BehandlngHttpKlient(
     private val dpBehandlingApiUrl: String,
-    private val tokenProvider: () -> String,
+    private val tokenProvider: (String) -> String,
     private val httpClient: HttpClient = createHttpClient(engine = CIO.create { }),
 ) : BehandlingKlient {
-    override suspend fun hentOpplysninger(behandling: UUID): Result<Set<Opplysning>> {
+    override suspend fun hentOpplysninger(
+        behandling: UUID,
+        saksbehandler: Saksbehandler,
+    ): Result<Set<Opplysning>> {
         return kotlin.runCatching {
-            httpClient.get(urlString = dpBehandlingApiUrl) {
-                header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke()}")
+            httpClient.get(urlString = "$dpBehandlingApiUrl/$behandling") {
+                header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(saksbehandler.token)}")
                 accept(ContentType.Application.Json)
-            }.body<List<Opplysning>>().toSet()
-        }.onFailure { throwable -> logger.error(throwable) { "Kall til dp-behandling feilet" } }
+            }.body<BehandlingDTO>().opplysning.map { opplysningDTO ->
+                Opplysning(
+                    id = opplysningDTO.id,
+                    navn = opplysningDTO.navn,
+                    verdi = opplysningDTO.verdi,
+                    datatype = opplysningDTO.datatype,
+                )
+            }.toSet()
+        }.onFailure { throwable -> logger.error(throwable) { "Kall til dp-behandling feilet ${throwable.message}" } }
     }
 }
 
-interface BehandlingKlient {
-    suspend fun hentOpplysninger(behandlingId: UUID): Result<Set<Opplysning>>
+private data class BehandlingDTO(
+    val behandlingId: String,
+    val tilstand: String,
+    val opplysning: List<OpplysningDTO>,
+) {
+    data class OpplysningDTO(
+        val id: String,
+        val navn: String,
+        val verdi: String,
+        val datatype: String,
+    )
 }
 
-fun createHttpClient(
-    engine: HttpClientEngine,
-) = HttpClient(engine) {
-    expectSuccess = true
-
-    install(ContentNegotiation) {
-        jackson {
-            registerModule(JavaTimeModule())
-            disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-            configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+fun createHttpClient(engine: HttpClientEngine) =
+    HttpClient(engine) {
+        expectSuccess = true
+        install(ContentNegotiation) {
+            jackson {
+                registerModule(JavaTimeModule())
+                disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+            }
         }
     }
-}
-
