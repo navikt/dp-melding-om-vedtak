@@ -26,6 +26,8 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.mock.oauth2.server)
     testImplementation(libs.bundles.kotest.assertions)
+
+    testImplementation("io.kubernetes:client-java:21.0.1")
 }
 
 application {
