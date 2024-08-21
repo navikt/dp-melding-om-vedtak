@@ -31,7 +31,7 @@ spec:
           namespace: aura
         - application: azure-token-generator
           namespace: aura
-       {{/if}}
+        {{/if}}
   env:
     - name: JDK_JAVA_OPTIONS
       value: -XX:+UseParallelGC -XX:MaxRAMPercentage=50.0 -XX:ActiveProcessorCount=4 -XX:+PrintFlagsFinal
