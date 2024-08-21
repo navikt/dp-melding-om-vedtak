@@ -30,17 +30,7 @@ class MeldingOmVedtakApiTest {
             }.let { response ->
                 response.status shouldBe HttpStatusCode.OK
                 response.contentType().toString() shouldContain "application/json"
-                val expectedResponse =
-                    """
-                    [ {
-                        "tekstId" : "someTekstId",
-                        "opplysninger" : [ {
-                            "tekstId" : "someOpplysningTekstId",
-                            "verdi" : "someVerdi"
-                        } ]
-                    } ]
-                    """.trimIndent()
-                response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder expectedResponse
+                response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder hubba
             }
         }
 
