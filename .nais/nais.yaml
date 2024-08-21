@@ -37,6 +37,8 @@ spec:
       value: -XX:+UseParallelGC -XX:MaxRAMPercentage=50.0 -XX:ActiveProcessorCount=4 -XX:+PrintFlagsFinal
     - name: GRUPPE_SAKSBEHANDLER
       value: {{azure.grupper.saksbehandler}}
+    - name: DP_BEHANDLING_API_SCOPE
+      value: {{DP_BEHANDLING_API_SCOPE}}
   azure:
     application:
       enabled: true
