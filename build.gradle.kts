@@ -9,6 +9,7 @@ dependencies {
     implementation(project(":openapi"))
     implementation("ch.qos.logback:logback-classic:1.5.7")
     implementation("net.logstash.logback:logstash-logback-encoder:8.0")
+    implementation("com.fasterxml.uuid:java-uuid-generator:5.1.0")
     implementation(libs.kotlin.logging)
     implementation(libs.konfig)
     implementation(libs.bundles.ktor.server)
