@@ -18,6 +18,10 @@ dependencies {
     implementation(libs.jackson.datatype.jsr310)
     implementation(libs.dp.biblioteker.oauth2.klient)
 
+    implementation(libs.ktor.client.cio)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.client.logging.jvm)
+
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.mockk)
     testImplementation(libs.mock.oauth2.server)
