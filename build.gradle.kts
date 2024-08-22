@@ -26,6 +26,7 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.mock.oauth2.server)
     testImplementation(libs.bundles.kotest.assertions)
+    testImplementation("io.ktor:ktor-client-mock:${libs.versions.ktor.get()}")
 
     testImplementation("io.kubernetes:client-java:21.0.1")
 }

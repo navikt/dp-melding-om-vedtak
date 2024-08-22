@@ -1,15 +1,52 @@
 package no.nav.dagpenger.vedtaksmelding.vedtaksmelding
 
+import io.kotest.matchers.ints.shouldBeGreaterThan
+import io.kotest.matchers.shouldBe
+import io.ktor.client.engine.mock.MockEngine
+import io.ktor.client.engine.mock.respond
+import io.ktor.http.headersOf
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.Configuration
 import no.nav.dagpenger.vedtaksmelding.k8.setAzureAuthEnv
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.util.UUID
 
 internal class BehandlingKlientTest {
-    fun `test`() {
+    private val resourseRetriever = object {}.javaClass
+
+    @Test
+    fun `Test av request og parsing av respons`() {
+        val behandlingId = UUID.randomUUID()
+        val dpBehandlingApiUrl = "https://dp-behandling.intern.dev.nav.no/behandling"
+        val responseJson = resourseRetriever.getResource("/json/behandling.json").readText()
+        val mockEngine =
+            MockEngine { request ->
+                request.headers["Authorization"] shouldBe "Bearer tulleToken"
+                request.url.toString() shouldBe "$dpBehandlingApiUrl/$behandlingId"
+                respond(responseJson, headers = headersOf("Content-Type", "application/json"))
+            }
+        val klient =
+            BehandlngHttpKlient(
+                dpBehandlingApiUrl = dpBehandlingApiUrl,
+                tokenProvider = { "tulleToken" },
+                httpClient = createHttpClient(engine = mockEngine),
+            )
+        runBlocking {
+            klient.hentOpplysninger(behandling = behandlingId, saksbehandler = Saksbehandler("tulleToken")).getOrThrow()
+                .let { opplysninger ->
+                    opplysninger.size shouldBeGreaterThan 0
+                    opplysninger.first { it.navn == "fagsakId" } shouldBe
+                        Opplysning(
+                            "019145eb-6fbb-708a-8fab-ebc69cecb70f",
+                            "fagsakId",
+                            "14952127",
+                            "heltall",
+                        )
+                }
+        }
     }
 
     @Test
