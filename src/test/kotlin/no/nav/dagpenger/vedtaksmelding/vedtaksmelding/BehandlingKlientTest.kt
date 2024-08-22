@@ -19,7 +19,7 @@ internal class BehandlingKlientTest {
 
     @Test
     fun `Test av request og parsing av respons`() {
-        val behandlingId = UUID.randomUUID()
+        val behandlingId = UUID.fromString("019145eb-6fbb-769f-b1b1-d2450b383a98")
         val dpBehandlingApiUrl = "https://dp-behandling.intern.dev.nav.no/behandling"
         val responseJson = resourseRetriever.getResource("/json/behandling.json").readText()
         val mockEngine =
@@ -35,16 +35,20 @@ internal class BehandlingKlientTest {
                 httpClient = createHttpClient(engine = mockEngine),
             )
         runBlocking {
-            klient.hentOpplysninger(behandling = behandlingId, saksbehandler = Saksbehandler("tulleToken")).getOrThrow()
-                .let { opplysninger ->
-                    opplysninger.size shouldBeGreaterThan 0
-                    opplysninger.first { it.navn == "fagsakId" } shouldBe
-                        Opplysning(
-                            "019145eb-6fbb-708a-8fab-ebc69cecb70f",
-                            "fagsakId",
-                            "14952127",
-                            "heltall",
-                        )
+            klient.hentBehandling(behandling = behandlingId, saksbehandler = Saksbehandler("tulleToken")).getOrThrow()
+                .let { behandling ->
+                    behandling.id shouldBe behandlingId.toString()
+                    behandling.tilstand shouldBe "ForslagTilVedtak"
+                    behandling.opplysninger.let { opplysninger ->
+                        opplysninger.size shouldBeGreaterThan 0
+                        opplysninger.first { it.navn == "fagsakId" } shouldBe
+                            Opplysning(
+                                "019145eb-6fbb-708a-8fab-ebc69cecb70f",
+                                "fagsakId",
+                                "14952127",
+                                "heltall",
+                            )
+                    }
                 }
         }
     }
@@ -71,9 +75,9 @@ internal class BehandlingKlientTest {
                     tokenProvider = tokenProvider,
                 )
             runBlocking {
-                val opplysninger =
-                    klient.hentOpplysninger(behandling = behandlingId, saksbehandler = Saksbehandler(token))
-                println(opplysninger)
+                val behandling =
+                    klient.hentBehandling(behandling = behandlingId, saksbehandler = Saksbehandler(token))
+                println(behandling)
             }
         }
     }
