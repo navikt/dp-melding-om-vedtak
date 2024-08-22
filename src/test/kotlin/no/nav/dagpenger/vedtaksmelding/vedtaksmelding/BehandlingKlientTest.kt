@@ -14,13 +14,15 @@ internal class BehandlingKlientTest {
 
     @Test
     @Disabled
-    fun `manuell test`() {
+    fun `brukes for å hente ut en behandling manuelt, må ha saksbehandler token`() {
         val behandlingId = UUID.fromString("019145eb-6fbb-769f-b1b1-d2450b383a98")
 
+        // saksbhehandler token, hentes fra azure-token-generator f,eks
         @Suppress("ktlint:standard:max-line-length")
         val token = ""
 
-        // krever at man er logget inn paa naisdevice og dev-gcp
+        // krever at man er logget inn paa naisdevice, dev-gcp
+        // k8s kontekst er satt til dev-gcp og i riktig namespace
         setAzureAuthEnv(
             app = "dp-melding-om-vedtak",
             type = "azurerator.nais.io",
