@@ -1,3 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
-class Behandling(val opplysninger: Set<Opplysning>)
+class Behandling(
+    val id: String,
+    val tilstand: String,
+    val opplysninger: Set<Opplysning>,
+)

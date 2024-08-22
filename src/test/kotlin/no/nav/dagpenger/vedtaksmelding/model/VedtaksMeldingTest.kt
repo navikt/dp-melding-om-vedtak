@@ -22,7 +22,11 @@ class VedtaksMeldingTest {
             )
         val opplysninger = setOf<Opplysning>(boolskOpplysning, stringOpplysning)
 
-        Behandling(opplysninger).let { behandling ->
+        Behandling(
+            id = "019145eb-6fbb-769f-b1b1-d2450b383a98",
+            tilstand = "Tilstand",
+            opplysninger = opplysninger,
+        ).let { behandling ->
             VedtaksMelding(behandling).let { vedtaksMelding ->
                 vedtaksMelding.blokker() shouldBe listOf(
                     "brev.blokk.vedtak-avslag",

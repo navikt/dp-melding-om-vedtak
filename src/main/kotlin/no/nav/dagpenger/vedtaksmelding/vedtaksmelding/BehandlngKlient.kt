@@ -15,6 +15,7 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.serialization.jackson.jackson
 import mu.KotlinLogging
+import no.nav.dagpenger.vedtaksmelding.model.Behandling
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import java.util.UUID
@@ -22,10 +23,10 @@ import java.util.UUID
 private val logger = KotlinLogging.logger {}
 
 interface BehandlingKlient {
-    suspend fun hentOpplysninger(
+    suspend fun hentBehandling(
         behandling: UUID,
         saksbehandler: Saksbehandler,
-    ): Result<Set<Opplysning>>
+    ): Result<Behandling>
 }
 
 internal class BehandlngHttpKlient(
@@ -33,23 +34,30 @@ internal class BehandlngHttpKlient(
     private val tokenProvider: (String) -> String,
     private val httpClient: HttpClient = createHttpClient(engine = CIO.create { }),
 ) : BehandlingKlient {
-    override suspend fun hentOpplysninger(
+    override suspend fun hentBehandling(
         behandling: UUID,
         saksbehandler: Saksbehandler,
-    ): Result<Set<Opplysning>> {
+    ): Result<Behandling> {
         return kotlin.runCatching {
             httpClient.get(urlString = "$dpBehandlingApiUrl/$behandling") {
                 header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(saksbehandler.token)}")
                 accept(ContentType.Application.Json)
-            }.body<BehandlingDTO>().opplysning.map { opplysningDTO ->
-                Opplysning(
-                    id = opplysningDTO.id,
-                    navn = opplysningDTO.navn,
-                    verdi = opplysningDTO.verdi,
-                    datatype = opplysningDTO.datatype,
+            }.body<BehandlingDTO>().let { behandlingDTO ->
+                Behandling(
+                    id = behandlingDTO.behandlingId,
+                    tilstand = behandlingDTO.tilstand,
+                    opplysninger =
+                        behandlingDTO.opplysning.map { opplysningDTO ->
+                            Opplysning(
+                                id = opplysningDTO.id,
+                                navn = opplysningDTO.navn,
+                                verdi = opplysningDTO.verdi,
+                                datatype = opplysningDTO.datatype,
+                            )
+                        }.toSet(),
                 )
-            }.toSet()
-        }.onFailure { throwable -> logger.error(throwable) { "Kall til dp-behandling feilet ${throwable.message}" } }
+            }
+        }.onFailure { logger.error(it) { "Kall til dp-behandling feilet ${it.message}" } }
     }
 }
 
