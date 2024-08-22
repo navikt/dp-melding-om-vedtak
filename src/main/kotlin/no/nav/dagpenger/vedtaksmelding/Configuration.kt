@@ -15,6 +15,7 @@ object Configuration {
             mapOf(
                 "GRUPPE_SAKSBEHANDLER" to "SaksbehandlerADGruppe",
                 "DP_BEHANDLING_API_SCOPE" to "api://dev-gcp.teamdagpenger.dp-behandling/.default",
+                "DP_BEHANDLING_API_URL" to "http://dp-behandling/behandling",
             ),
         )
 
@@ -29,6 +30,8 @@ object Configuration {
             authType = azureAdConfig.clientSecret(),
         )
     }
+
+    val dbBehandlingApiUrl by lazy { properties[Key("DP_BEHANDLING_API_URL", stringType)] }
 
     val dpBehandlingOboExchanger: (String) -> String by lazy {
         val scope = properties[Key("DP_BEHANDLING_API_SCOPE", stringType)]
