@@ -10,21 +10,25 @@ class VedtaksMelding(private val behandling: Behandling) {
             )
     }
 
-    private val kravPåDagpenger: String by lazy {
-        behandling.opplysninger.first { it.id == "opplysning.krav-paa-dagpenger" }.verdi
+    private val kravPåDagpenger: Opplysning by lazy {
+        behandling.opplysninger.first { it.id == "opplysning.krav-paa-dagpenger" }
     }
-    private val oppfyllerMinsteinntekt by lazy {
-        behandling.opplysninger.first { it.id == "opplysning.krav-til-minsteinntekt" }.verdi
+    private val oppfyllerMinsteinntekt: Opplysning by lazy {
+        behandling.opplysninger.first { it.id == "opplysning.krav-til-minsteinntekt" }
+    }
+
+    fun hubba(): Pair<List<String>, Set<Opplysning>> {
+        return Pair(blokker(), setOf(kravPåDagpenger, oppfyllerMinsteinntekt))
     }
 
     fun blokker(): List<String> {
         val blokker = mutableListOf<String>()
 
-        if (kravPåDagpenger == "false") {
+        if (kravPåDagpenger.verdi == "false") {
             blokker.add("brev.blokk.vedtak-avslag")
         }
 
-        if (oppfyllerMinsteinntekt == "false") {
+        if (oppfyllerMinsteinntekt.verdi == "false") {
             blokker.add("brev.blokk.begrunnelse-avslag-minsteinntekt")
         }
 
