@@ -1,12 +1,9 @@
 package no.nav.dagpenger.vedtaksmelding.vedtaksmelding
 
-import com.fasterxml.jackson.module.kotlin.readValue
-import io.ktor.http.HttpStatusCode.Companion.OK
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.call
 import io.ktor.server.auth.authenticate
-import io.ktor.server.response.respond
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
 import no.nav.dagpenger.saksbehandling.api.models.BrevblokkDTO
@@ -23,12 +20,14 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                 val behandlingId = call.parseUUID("behandlingId")
                 val saksbehandler = call.parseSaksbehandler()
                 mediator.sendVedtak(behandlingId, saksbehandler).let { (meldinger, opplysninger) ->
-                    val opplysningrDTO = opplysninger.map {
-                        OpplysningDTO(tekstId = it.id, verdi = it.verdi)
-                    }
+                    val opplysningrDTO =
+                        opplysninger.map {
+                            OpplysningDTO(tekstId = it.id, verdi = it.verdi)
+                        }
                     meldinger.map { tekstId ->
                         BrevblokkDTO(
-                            tekstId = tekstId, opplysninger = opplysningrDTO
+                            tekstId = tekstId,
+                            opplysninger = opplysningrDTO,
                         )
                     }
                 }

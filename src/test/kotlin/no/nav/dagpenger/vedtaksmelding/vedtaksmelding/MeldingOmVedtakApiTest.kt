@@ -11,10 +11,8 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
 import io.ktor.server.testing.testApplication
-import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
-import io.mockk.just
 import io.mockk.mockk
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
@@ -38,7 +36,7 @@ class MeldingOmVedtakApiTest {
     fun `skal hente brevblokker til melding om vedtak`() {
         val mediator =
             mockk<Mediator>().also {
-                coEvery { it.sendVedtak(behandlingId, saksbehandler) } just Runs
+                coEvery { it.sendVedtak(behandlingId, saksbehandler) } returns Pair(emptyList(), emptySet())
             }
         testApplication {
             application {
