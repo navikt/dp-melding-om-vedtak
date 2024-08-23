@@ -1,5 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
@@ -13,6 +14,7 @@ class VedtaksMeldingTest {
             navn = "test",
             verdi = verdi,
             datatype = "boolean",
+            opplysningId = "test",
         )
     }
 
@@ -39,6 +41,19 @@ class VedtaksMeldingTest {
             VedtaksMelding(behandling).let { vedtaksMelding ->
                 vedtaksMelding.blokker() shouldBe VedtaksMelding.FASTE_BLOKKER
             }
+        }
+    }
+
+    @Test
+    fun `Skal kaste exception når vi ikke finner krav på dagpenger`() {
+        shouldThrow<UgyldigVedtakException> {
+            VedtaksMelding(
+                Behandling(
+                    id = "x",
+                    tilstand = "y",
+                    opplysninger = setOf(),
+                ),
+            ).blokker()
         }
     }
 

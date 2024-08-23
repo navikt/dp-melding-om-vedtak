@@ -1,5 +1,9 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
+import mu.KotlinLogging
+
+private val logger = KotlinLogging.logger {}
+
 class VedtaksMelding(private val behandling: Behandling) {
     companion object {
         val FASTE_BLOKKER =
@@ -13,25 +17,32 @@ class VedtaksMelding(private val behandling: Behandling) {
     private val kravPåDagpenger: Opplysning by lazy {
         behandling.opplysninger.first { it.id == "opplysning.krav-paa-dagpenger" }
     }
+
     private val oppfyllerMinsteinntekt: Opplysning by lazy {
         behandling.opplysninger.first { it.id == "opplysning.krav-til-minsteinntekt" }
     }
 
-    fun hubba(): Pair<List<String>, Set<Opplysning>> {
-        return Pair(blokker(), setOf(kravPåDagpenger, oppfyllerMinsteinntekt))
-    }
-
     fun blokker(): List<String> {
-        val blokker = mutableListOf<String>()
+        try {
+            val blokker = mutableListOf<String>()
 
-        if (kravPåDagpenger.verdi == "false") {
-            blokker.add("brev.blokk.vedtak-avslag")
+            if (kravPåDagpenger.verdi == "false") {
+                blokker.add("brev.blokk.vedtak-avslag")
+            }
+
+            if (oppfyllerMinsteinntekt.verdi == "false") {
+                blokker.add("brev.blokk.begrunnelse-avslag-minsteinntekt")
+            }
+
+            return (blokker + FASTE_BLOKKER).toList()
+        } catch (e: Exception) {
+            logger.error { "Ugyldig vedtak for behandling ${behandling.id}: ${e.message}" }
+            throw UgyldigVedtakException(behandling.id)
         }
-
-        if (oppfyllerMinsteinntekt.verdi == "false") {
-            blokker.add("brev.blokk.begrunnelse-avslag-minsteinntekt")
-        }
-
-        return (blokker + FASTE_BLOKKER).toList()
     }
+}
+
+internal class UgyldigVedtakException(private val behandlingId: String) : RuntimeException() {
+    override val message: String
+        get() = "Ugyldig vedtak for behandling $behandlingId"
 }

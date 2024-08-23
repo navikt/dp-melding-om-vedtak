@@ -43,10 +43,11 @@ internal class BehandlingKlientTest {
                         opplysninger.size shouldBeGreaterThan 0
                         opplysninger.first { it.navn == "fagsakId" } shouldBe
                             Opplysning(
-                                "019145eb-6fbb-708a-8fab-ebc69cecb70f",
-                                "fagsakId",
-                                "14952127",
-                                "heltall",
+                                id = "ukjent.opplysning.fagsakId",
+                                navn = "fagsakId",
+                                verdi = "14952127",
+                                datatype = "heltall",
+                                opplysningId = "019145eb-6fbb-708a-8fab-ebc69cecb70f",
                             )
                     }
                 }
