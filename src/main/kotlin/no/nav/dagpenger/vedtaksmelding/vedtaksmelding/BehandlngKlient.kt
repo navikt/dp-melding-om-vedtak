@@ -11,9 +11,11 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.accept
 import io.ktor.client.request.get
 import io.ktor.client.request.header
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.serialization.jackson.jackson
+import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.Behandling
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
@@ -85,3 +87,24 @@ fun createHttpClient(engine: HttpClientEngine) =
             }
         }
     }
+
+fun main() {
+    HttpClient().let { client ->
+        runBlocking {
+            client.get("https://rt6o382n.api.sanity.io/v2021-10-21/data/query/development") {
+                url {
+                    parameters.append("query", "*[_type == \"brevBlokk\"]")
+                }
+            }.bodyAsText().let {
+                objectMapper.readTree(it)["result"].toString().let { println(it) }
+            }
+            client.get("https://rt6o382n.api.sanity.io/v2021-10-21/data/query/development") {
+                url {
+                    parameters.append("query", "*[_type == \"opplysningReference\"]")
+                }
+            }.bodyAsText().let {
+                println(it)
+            }
+        }
+    }
+}

@@ -4,7 +4,6 @@ import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.call
 import io.ktor.server.auth.authenticate
-import io.ktor.server.response.respond
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
 import no.nav.dagpenger.saksbehandling.api.models.BrevblokkDTO
@@ -19,11 +18,23 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
             get("/melding-om-vedtak/{behandlingId}") {
                 val behandlingId = call.parseUUID("behandlingId")
                 val saksbehandler = call.parseSaksbehandler()
+<<<<<<< Updated upstream
                 val brevblokkDTO =
                     mediator.sendVedtak(behandlingId, saksbehandler).map { tekstId ->
                         BrevblokkDTO(
                             tekstId = tekstId,
                             opplysninger = emptyList(),
+=======
+                mediator.sendVedtak(behandlingId, saksbehandler).let { (meldinger, opplysninger) ->
+                    val opplysningrDTO =
+                        opplysninger.map {
+                            OpplysningDTO(tekstId = it.id, verdi = it.verdi)
+                        }
+                    meldinger.map { tekstId ->
+                        BrevblokkDTO(
+                            tekstId = tekstId,
+                            opplysninger = opplysningrDTO,
+>>>>>>> Stashed changes
                         )
                     }
                 call.respond(brevblokkDTO)
