@@ -4,23 +4,58 @@ import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
 class VedtaksMeldingTest {
+    private fun lagOpplysning(
+        id: String,
+        verdi: String,
+    ): Opplysning {
+        return Opplysning(
+            id = id,
+            navn = "test",
+            verdi = verdi,
+            datatype = "boolean",
+        )
+    }
+
     @Test
-    fun `skal lage en vedtaksmelding basert på en behandling`() {
-        val boolskOpplysning: Opplysning =
-            Opplysning(
+    fun `Rikig vedtaksmelding for innvilgelse `() {
+        val kravPåDagpenger: Opplysning =
+            lagOpplysning(
                 id = "opplysning.krav-paa-dagpenger",
-                navn = "Opplysningens navn",
-                verdi = "false",
-                datatype = "boolean",
+                verdi = "true",
             )
-        val stringOpplysning: Opplysning =
-            Opplysning(
+
+        val minsteinntekt: Opplysning =
+            lagOpplysning(
                 id = "opplysning.krav-til-minsteinntekt",
-                navn = "Opplysningens navn",
-                verdi = "false",
-                datatype = "boolean",
+                verdi = "true",
             )
-        val opplysninger = setOf<Opplysning>(boolskOpplysning, stringOpplysning)
+        val opplysninger = setOf(kravPåDagpenger, minsteinntekt)
+
+        Behandling(
+            id = "019145eb-6fbb-769f-b1b1-d2450b383a98",
+            tilstand = "Tilstand",
+            opplysninger = opplysninger,
+        ).let { behandling ->
+            VedtaksMelding(behandling).let { vedtaksMelding ->
+                vedtaksMelding.blokker() shouldBe VedtaksMelding.FASTE_BLOKKER
+            }
+        }
+    }
+
+    @Test
+    fun `Rikig vedtaksmelding for avslag på minsteinntekt`() {
+        val kravPåDagpenger: Opplysning =
+            lagOpplysning(
+                id = "opplysning.krav-paa-dagpenger",
+                verdi = "false",
+            )
+
+        val minsteinntekt: Opplysning =
+            lagOpplysning(
+                id = "opplysning.krav-til-minsteinntekt",
+                verdi = "false",
+            )
+        val opplysninger = setOf(kravPåDagpenger, minsteinntekt)
 
         Behandling(
             id = "019145eb-6fbb-769f-b1b1-d2450b383a98",
