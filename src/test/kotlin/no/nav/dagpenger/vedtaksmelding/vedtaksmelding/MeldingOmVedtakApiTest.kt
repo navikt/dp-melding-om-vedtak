@@ -34,9 +34,10 @@ class MeldingOmVedtakApiTest {
 
     @Test
     fun `skal hente brevblokker til melding om vedtak`() {
+        val brevBlokker = listOf("A", "B", "C")
         val mediator =
             mockk<Mediator>().also {
-                coEvery { it.sendVedtak(behandlingId, saksbehandler) } returns Pair(emptyList(), emptySet())
+                coEvery { it.sendVedtak(behandlingId, saksbehandler) } returns brevBlokker
             }
         testApplication {
             application {
@@ -48,7 +49,22 @@ class MeldingOmVedtakApiTest {
             }.let { response ->
                 response.status shouldBe HttpStatusCode.OK
                 response.contentType().toString() shouldContain "application/json"
-                response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder hubba
+                response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
+                    """
+                      [{
+                        "tekstId": "A",
+                        "opplysninger": []
+                      },
+                      {
+                        "tekstId": "B",
+                        "opplysninger": []
+                      },
+                      {
+                        "tekstId": "C",
+                        "opplysninger": []
+                      }
+                    ]
+                    """.trimIndent()
             }
         }
         coVerify(exactly = 1) {

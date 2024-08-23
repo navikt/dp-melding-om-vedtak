@@ -49,10 +49,10 @@ internal class BehandlngHttpKlient(
                     opplysninger =
                         behandlingDTO.opplysning.map { opplysningDTO ->
                             Opplysning(
-                                id = opplysningDTO.id,
                                 navn = opplysningDTO.navn,
                                 verdi = opplysningDTO.verdi,
                                 datatype = opplysningDTO.datatype,
+                                opplysningId = opplysningDTO.id,
                             )
                         }.toSet(),
                 )

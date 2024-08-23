@@ -17,10 +17,18 @@ class MediatorTest {
     private val opplysninger =
         setOf(
             Opplysning(
-                id = "aliquet",
+                id = "opplysning.krav-til-minsteinntekt",
                 navn = "curae",
-                verdi = "civibus",
-                datatype = "movet",
+                verdi = "true",
+                datatype = "bolsk",
+                opplysningId = "aliquet",
+            ),
+            Opplysning(
+                id = "opplysning.krav-paa-dagpenger",
+                navn = "curae",
+                verdi = "true",
+                datatype = "bolsk",
+                opplysningId = "aliquet",
             ),
         )
     private val behandling =
@@ -40,7 +48,7 @@ class MediatorTest {
         val mediator = Mediator(behandlingKlient)
         runBlocking {
             mediator.sendVedtak(
-                behandling = behandlingId,
+                behandlingId = behandlingId,
                 saksbehandler = saksbehandler,
             )
         }
@@ -61,7 +69,7 @@ class MediatorTest {
         runBlocking {
             shouldThrow<RuntimeException> {
                 mediator.sendVedtak(
-                    behandling = behandlingId,
+                    behandlingId = behandlingId,
                     saksbehandler = saksbehandler,
                 )
             }
