@@ -70,55 +70,33 @@ fun mapJsonToResponseDTO(jsonNode: JsonNode): ResponseDTO {
     val result =
         jsonNode["result"].map { brevBlokkNode ->
             val textId = brevBlokkNode["textId"].asText()
-
-            val innhold =
-                brevBlokkNode["innhold"].mapNotNull { innholdNode ->
-                    val children =
-                        innholdNode["children"].mapNotNull { childNode ->
-                            val behandlingOpplysningNode = childNode["behandlingOpplysning"]
-                            if (behandlingOpplysningNode != null) {
-                                BehandlingOpplysningDTO(
-                                    textId = behandlingOpplysningNode["textId"].asText(),
-                                    type = behandlingOpplysningNode["type"].asText(),
-                                )
-                            } else {
-                                null
-                            }
-                        }
-                    if (children.isNotEmpty()) {
-                        BrevBlokkDTO.InnholdDTO(children = children)
-                    } else {
-                        null
-                    }
-                }
-
-            /* val innhold =
-                 brevBlokkNode["innhold"].map { innholdNode ->
-                     val children =
-                         innholdNode["children"].mapNotNull { childNode ->
-              childNode.mapNotNull { behandlingOpplysningNode ->
-                                 BehandlingOpplysningDTO(
-                                     textId = behandlingOpplysningNode["textId"].asText(),
-                                     type = behandlingOpplysningNode["type"].asText(),
-                                 )
-                             }
-                             when (childNode.isEmpty()) {
-                                 true -> null
-                                 false ->
-                                     BehandlingOpplysningDTO(
-                                         textId = childNode["textId"].asText(),
-                                         type = childNode["type"].asText(),
-                                     )
-                             }
-                         }
-                     BrevBlokkDTO.InnholdDTO(children = children)
-                 }*/
-            BrevBlokkDTO(
-                textId = textId,
-                innhold = innhold,
-            )
+            val innhold = mapInnhold(brevBlokkNode["innhold"])
+            BrevBlokkDTO(textId = textId, innhold = innhold)
         }
     return ResponseDTO(result = result)
+}
+
+private fun mapInnhold(innholdNodeArray: JsonNode): List<BrevBlokkDTO.InnholdDTO> {
+    return innholdNodeArray.mapNotNull { innholdNode ->
+        val children = mapChildren(innholdNode["children"])
+        if (children.isNotEmpty()) {
+            BrevBlokkDTO.InnholdDTO(children = children)
+        } else {
+            null
+        }
+    }
+}
+
+private fun mapChildren(childrenNodeArray: JsonNode): List<BehandlingOpplysningDTO> {
+    return childrenNodeArray.mapNotNull { childNode ->
+        val behandlingOpplysningNode = childNode["behandlingOpplysning"]
+        behandlingOpplysningNode?.let {
+            BehandlingOpplysningDTO(
+                textId = it["textId"].asText(),
+                type = it["type"].asText(),
+            )
+        }
+    }
 }
 
 // https://rt6o382n.api.sanity.io/v2021-10-21/data/query/development
