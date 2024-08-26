@@ -70,19 +70,49 @@ fun mapJsonToResponseDTO(jsonNode: JsonNode): ResponseDTO {
     val result =
         jsonNode["result"].map { brevBlokkNode ->
             val textId = brevBlokkNode["textId"].asText()
+
             val innhold =
-                brevBlokkNode["innhold"].map { innholdNode ->
+                brevBlokkNode["innhold"].mapNotNull { innholdNode ->
                     val children =
                         innholdNode["children"].mapNotNull { childNode ->
-                            childNode["behandlingOpplysning"]?.let { behandlingOpplysningNode ->
+                            val behandlingOpplysningNode = childNode["behandlingOpplysning"]
+                            if (behandlingOpplysningNode != null) {
                                 BehandlingOpplysningDTO(
                                     textId = behandlingOpplysningNode["textId"].asText(),
                                     type = behandlingOpplysningNode["type"].asText(),
                                 )
+                            } else {
+                                null
                             }
                         }
-                    BrevBlokkDTO.InnholdDTO(children = children)
+                    if (children.isNotEmpty()) {
+                        BrevBlokkDTO.InnholdDTO(children = children)
+                    } else {
+                        null
+                    }
                 }
+
+            /* val innhold =
+                 brevBlokkNode["innhold"].map { innholdNode ->
+                     val children =
+                         innholdNode["children"].mapNotNull { childNode ->
+              childNode.mapNotNull { behandlingOpplysningNode ->
+                                 BehandlingOpplysningDTO(
+                                     textId = behandlingOpplysningNode["textId"].asText(),
+                                     type = behandlingOpplysningNode["type"].asText(),
+                                 )
+                             }
+                             when (childNode.isEmpty()) {
+                                 true -> null
+                                 false ->
+                                     BehandlingOpplysningDTO(
+                                         textId = childNode["textId"].asText(),
+                                         type = childNode["type"].asText(),
+                                     )
+                             }
+                         }
+                     BrevBlokkDTO.InnholdDTO(children = children)
+                 }*/
             BrevBlokkDTO(
                 textId = textId,
                 innhold = innhold,
