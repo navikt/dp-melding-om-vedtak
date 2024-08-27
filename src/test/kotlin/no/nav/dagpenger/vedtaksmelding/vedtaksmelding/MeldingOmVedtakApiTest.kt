@@ -1,6 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.vedtaksmelding
 
-import io.kotest.assertions.json.shouldEqualSpecifiedJsonIgnoringOrder
+import io.kotest.assertions.json.shouldEqualSpecifiedJson
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import io.ktor.client.request.HttpRequestBuilder
@@ -49,7 +49,7 @@ class MeldingOmVedtakApiTest {
             }.let { response ->
                 response.status shouldBe HttpStatusCode.OK
                 response.contentType().toString() shouldContain "application/json"
-                response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
+                response.bodyAsText() shouldEqualSpecifiedJson
                     """
                       [{
                         "tekstId": "A",

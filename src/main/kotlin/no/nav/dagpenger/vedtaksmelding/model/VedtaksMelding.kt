@@ -7,7 +7,7 @@ private val logger = KotlinLogging.logger {}
 class VedtaksMelding(private val behandling: Behandling) {
     companion object {
         val FASTE_BLOKKER =
-            setOf(
+            listOf(
                 "brev.blokk.rett-til-aa-klage",
                 "brev.blokk.rett-til-innsyn",
                 "brev.blokk.sporsmaal",
@@ -34,7 +34,8 @@ class VedtaksMelding(private val behandling: Behandling) {
                 blokker.add("brev.blokk.begrunnelse-avslag-minsteinntekt")
             }
 
-            return (blokker + FASTE_BLOKKER).toList()
+            val alleBlokker = (blokker + FASTE_BLOKKER)
+            return alleBlokker
         } catch (e: Exception) {
             logger.error { "Ugyldig vedtak for behandling ${behandling.id}: ${e.message}" }
             throw UgyldigVedtakException(behandling.id)
