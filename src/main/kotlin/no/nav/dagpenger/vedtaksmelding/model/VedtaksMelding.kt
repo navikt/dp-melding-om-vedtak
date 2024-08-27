@@ -15,11 +15,11 @@ class VedtaksMelding(private val behandling: Behandling) {
     }
 
     private val kravPåDagpenger: Opplysning by lazy {
-        behandling.opplysninger.first { it.id == "opplysning.krav-paa-dagpenger" }
+        behandling.opplysninger.first { it.opplysningTekstId == "opplysning.krav-paa-dagpenger" }
     }
 
     private val oppfyllerMinsteinntekt: Opplysning by lazy {
-        behandling.opplysninger.first { it.id == "opplysning.krav-til-minsteinntekt" }
+        behandling.opplysninger.first { it.opplysningTekstId == "opplysning.krav-til-minsteinntekt" }
     }
 
     fun blokker(): List<String> {
