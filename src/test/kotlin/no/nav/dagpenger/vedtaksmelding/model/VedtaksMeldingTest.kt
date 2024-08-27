@@ -10,7 +10,7 @@ class VedtaksMeldingTest {
         verdi: String,
     ): Opplysning {
         return Opplysning(
-            id = id,
+            opplysningTekstId = id,
             navn = "test",
             verdi = verdi,
             datatype = "boolean",

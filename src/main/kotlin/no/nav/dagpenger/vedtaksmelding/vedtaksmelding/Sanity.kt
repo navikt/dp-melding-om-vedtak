@@ -4,14 +4,14 @@ import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.ktor.client.HttpClient
-import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
+import io.ktor.client.statement.bodyAsText
 import io.ktor.serialization.jackson.jackson
-import io.ktor.util.reflect.typeInfo
 
 internal fun lagHttpKlient(engine: HttpClientEngine): HttpClient {
     return HttpClient(engine) {
@@ -31,6 +31,12 @@ class Sanity(
     private val httpKlient: HttpClient = lagHttpKlient(engine = CIO.create { }),
 ) {
     companion object {
+        private val objectMapper =
+            jacksonObjectMapper()
+                .registerModule(JavaTimeModule())
+                .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+
         private val query = """*[_type == "brevBlokk"]{
                               textId,
                               innhold[]{
@@ -47,16 +53,25 @@ class Sanity(
                               }"""
     }
 
-    suspend fun hentBrevBlokk(): JsonNode {
-        return httpKlient.get("$sanityUrl") {
-            url {
-                parameters.append("query", query)
+    suspend fun hentOpplysningTekstId(brevBlokkIder: List<String>): List<String> {
+        val brevBlokkDTOS =
+            httpKlient.get("$sanityUrl") {
+                url {
+                    parameters.append("query", query)
+                }
+            }.bodyAsText().let { objectMapper.readTree(it) }.mapJsonToResponseDTO().result
+
+        val behandlingOpplysningDTOer = mutableSetOf<BehandlingOpplysningDTO>()
+        brevBlokkDTOS.filter { it.textId in brevBlokkIder }
+            .forEach {
+                behandlingOpplysningDTOer.addAll(it.innhold.behandlingOpplysninger)
             }
-        }.body(typeInfo<JsonNode>())
+
+        return behandlingOpplysningDTOer.map { it.textId }
     }
 }
 
-fun JsonNode.mapJsonToResponseDTO(): ResponseDTO {
+private fun JsonNode.mapJsonToResponseDTO(): ResponseDTO {
     val result =
         this["result"].map { brevBlokkNode ->
             val textId = brevBlokkNode["textId"].asText()
@@ -88,9 +103,9 @@ private fun JsonNode.mapBehandlingOpplysning(): List<BehandlingOpplysningDTO> {
 }
 
 // https://rt6o382n.api.sanity.io/v2021-10-21/data/query/development
-data class ResponseDTO(val result: List<BrevBlokkDTO>)
+private data class ResponseDTO(val result: List<BrevBlokkDTO>)
 
-data class BrevBlokkDTO(
+private data class BrevBlokkDTO(
     val textId: String,
     val innhold: InnholdDTO,
 ) {
@@ -99,16 +114,7 @@ data class BrevBlokkDTO(
     )
 }
 
-data class BehandlingOpplysningDTO(
+private data class BehandlingOpplysningDTO(
     val textId: String,
     val type: String,
 )
-
-/*fun main() {
-    val sanity = Sanity("https://rt6o382n.api.sanity.io/v2021-10-21/data/query/development")
-    runBlocking {
-        val brevBlokk: JsonNode = sanity.hentBrevBlokk()
-        val responseDto = mapJsonToResponseDTO(brevBlokk)
-        println(responseDto)
-    }
-}*/
