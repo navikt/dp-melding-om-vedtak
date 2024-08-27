@@ -78,10 +78,14 @@ class VedtaksMeldingTest {
             opplysninger = opplysninger,
         ).let { behandling ->
             VedtaksMelding(behandling).let { vedtaksMelding ->
-                vedtaksMelding.blokker() shouldBe listOf(
-                    "brev.blokk.vedtak-avslag",
-                    "brev.blokk.begrunnelse-avslag-minsteinntekt",
-                ) + VedtaksMelding.FASTE_BLOKKER
+                vedtaksMelding.blokker() shouldBe
+                    listOf(
+                        "brev.blokk.vedtak-avslag",
+                        "brev.blokk.begrunnelse-avslag-minsteinntekt",
+                        "brev.blokk.rett-til-aa-klage",
+                        "brev.blokk.rett-til-innsyn",
+                        "brev.blokk.sporsmaal",
+                    )
             }
         }
     }
