@@ -12,7 +12,6 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.serialization.jackson.jackson
 import io.ktor.util.reflect.typeInfo
-import kotlinx.coroutines.runBlocking
 
 internal fun lagHttpKlient(engine: HttpClientEngine): HttpClient {
     return HttpClient(engine) {
@@ -57,38 +56,27 @@ class Sanity(
     }
 }
 
-fun main() {
-    val sanity = Sanity("https://rt6o382n.api.sanity.io/v2021-10-21/data/query/development")
-    runBlocking {
-        val brevBlokk: JsonNode = sanity.hentBrevBlokk()
-        val responseDto = mapJsonToResponseDTO(brevBlokk)
-        println(responseDto)
-    }
-}
-
-fun mapJsonToResponseDTO(jsonNode: JsonNode): ResponseDTO {
+fun JsonNode.mapJsonToResponseDTO(): ResponseDTO {
     val result =
-        jsonNode["result"].map { brevBlokkNode ->
+        this["result"].map { brevBlokkNode ->
             val textId = brevBlokkNode["textId"].asText()
-            val innhold = mapInnhold(brevBlokkNode["innhold"])
+            val innhold = brevBlokkNode.mapInnhold()
             BrevBlokkDTO(textId = textId, innhold = innhold)
         }
     return ResponseDTO(result = result)
 }
 
-private fun mapInnhold(innholdNodeArray: JsonNode): List<BrevBlokkDTO.InnholdDTO> {
-    return innholdNodeArray.mapNotNull { innholdNode ->
-        val children = mapChildren(innholdNode["children"])
-        if (children.isNotEmpty()) {
-            BrevBlokkDTO.InnholdDTO(children = children)
-        } else {
-            null
-        }
-    }
+private fun JsonNode.mapInnhold(): BrevBlokkDTO.InnholdDTO {
+    val alleBehandlingOpplysninger =
+        this["innhold"].mapNotNull { innholdNode ->
+            innholdNode.mapBehandlingOpplysning()
+        }.flatten()
+
+    return BrevBlokkDTO.InnholdDTO(behandlingOpplysninger = alleBehandlingOpplysninger)
 }
 
-private fun mapChildren(childrenNodeArray: JsonNode): List<BehandlingOpplysningDTO> {
-    return childrenNodeArray.mapNotNull { childNode ->
+private fun JsonNode.mapBehandlingOpplysning(): List<BehandlingOpplysningDTO> {
+    return this["children"].mapNotNull { childNode ->
         val behandlingOpplysningNode = childNode["behandlingOpplysning"]
         behandlingOpplysningNode?.let {
             BehandlingOpplysningDTO(
@@ -104,10 +92,10 @@ data class ResponseDTO(val result: List<BrevBlokkDTO>)
 
 data class BrevBlokkDTO(
     val textId: String,
-    val innhold: List<InnholdDTO>,
+    val innhold: InnholdDTO,
 ) {
     data class InnholdDTO(
-        val children: List<BehandlingOpplysningDTO>,
+        val behandlingOpplysninger: List<BehandlingOpplysningDTO>,
     )
 }
 
@@ -115,3 +103,12 @@ data class BehandlingOpplysningDTO(
     val textId: String,
     val type: String,
 )
+
+/*fun main() {
+    val sanity = Sanity("https://rt6o382n.api.sanity.io/v2021-10-21/data/query/development")
+    runBlocking {
+        val brevBlokk: JsonNode = sanity.hentBrevBlokk()
+        val responseDto = mapJsonToResponseDTO(brevBlokk)
+        println(responseDto)
+    }
+}*/

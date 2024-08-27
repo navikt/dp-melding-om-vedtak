@@ -33,8 +33,8 @@ class VedtaksMelding(private val behandling: Behandling) {
             if (oppfyllerMinsteinntekt.verdi == "false") {
                 blokker.add("brev.blokk.begrunnelse-avslag-minsteinntekt")
             }
-
-            return (blokker + FASTE_BLOKKER).toList()
+            val alleBlokker = (blokker + FASTE_BLOKKER).toList()
+            return alleBlokker
         } catch (e: Exception) {
             logger.error { "Ugyldig vedtak for behandling ${behandling.id}: ${e.message}" }
             throw UgyldigVedtakException(behandling.id)

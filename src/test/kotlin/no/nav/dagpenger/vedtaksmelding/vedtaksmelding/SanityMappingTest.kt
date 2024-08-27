@@ -15,21 +15,20 @@ class SanityMappingTest {
     @Test
     fun `test av enkel brevblokk mapping med kun en opplysning`() {
         val jsonNode = toJsonNode(insanity)
-        val responseDTO = mapJsonToResponseDTO(jsonNode)
+        val responseDTO = jsonNode.mapJsonToResponseDTO()
         responseDTO.result[0].textId shouldBe "brev.blokk.vedtak-avslag-forskuttert"
-        responseDTO.result[0].innhold.size shouldBe 1
-        responseDTO.result[0].innhold[0].children[0].textId shouldBe "Søknadsdato"
-        responseDTO.result[0].innhold[0].children[0].type shouldBe "dato"
+        responseDTO.result[0].innhold.behandlingOpplysninger[0].textId shouldBe "Søknadsdato"
+        responseDTO.result[0].innhold.behandlingOpplysninger[0].type shouldBe "dato"
     }
 
     @Test
     fun `test av brevblokk med flere opplysnigner`() {
         val jsonNode = toJsonNode(sanityFlereOpplysninger)
-        val responseDTO = mapJsonToResponseDTO(jsonNode)
+        val responseDTO = jsonNode.mapJsonToResponseDTO()
+        responseDTO.result[0].innhold.behandlingOpplysninger.size shouldBe 4
         responseDTO.result[0].textId shouldBe "brev.blokk.begrunnelse-avslag-minsteinntekt"
-        responseDTO.result[0].innhold.size shouldBe 4
-        responseDTO.result[0].innhold[0].children[0].textId shouldBe "Arbeidsinntekt siste 12 mnd"
-        responseDTO.result[0].innhold[1].children[1].textId shouldBe "Inntektskrav for siste 12 mnd"
+        responseDTO.result[0].innhold.behandlingOpplysninger[0].textId shouldBe "Arbeidsinntekt siste 12 mnd"
+        responseDTO.result[0].innhold.behandlingOpplysninger[1].textId shouldBe "Inntektskrav for siste 12 mnd"
     }
 
     // language=JSON
