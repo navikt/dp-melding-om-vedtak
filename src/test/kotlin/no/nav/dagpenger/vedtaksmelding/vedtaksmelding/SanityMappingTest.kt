@@ -15,7 +15,7 @@ class SanityMappingTest {
         runBlocking {
             Sanity(
                 sanityUrl = "http://locahost/sanity", httpKlient = lagHttpKlient(engine = lageMockEngine()),
-            ).hentOpplysningTekstId(listOf("brev.blokk.vedtak-avslag-forskuttert")) shouldBe listOf("Søknadsdato")
+            ).hentOpplysningTekstIder(listOf("brev.blokk.vedtak-avslag-forskuttert")) shouldBe listOf("Søknadsdato")
         }
     }
 
@@ -24,7 +24,7 @@ class SanityMappingTest {
         runBlocking {
             Sanity(
                 sanityUrl = "http://locahost/sanity", httpKlient = lagHttpKlient(engine = lageMockEngine()),
-            ).hentOpplysningTekstId(listOf("brev.blokk.begrunnelse-avslag-minsteinntekt")) shouldBe
+            ).hentOpplysningTekstIder(listOf("brev.blokk.begrunnelse-avslag-minsteinntekt")) shouldBe
                 listOf(
                     "Arbeidsinntekt siste 12 mnd",
                     "Inntektskrav for siste 12 mnd",
@@ -39,7 +39,7 @@ class SanityMappingTest {
         runBlocking {
             Sanity(
                 sanityUrl = "http://locahost/sanity", httpKlient = lagHttpKlient(engine = lageMockEngine()),
-            ).hentOpplysningTekstId(listOf("brev.blokk.vedtak-innvilget")) shouldBe emptyList()
+            ).hentOpplysningTekstIder(listOf("brev.blokk.vedtak-innvilget")) shouldBe emptyList()
         }
     }
 
@@ -49,7 +49,6 @@ class SanityMappingTest {
         }
     }
 
-    // language=JSON
     // language=JSON
     private val sanityPayload =
         """
