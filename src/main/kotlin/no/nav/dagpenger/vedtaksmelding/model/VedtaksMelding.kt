@@ -14,14 +14,6 @@ class VedtaksMelding(private val behandling: Behandling) {
             )
     }
 
-    private val kravPåDagpenger: Opplysning by lazy {
-        behandling.opplysninger.first { it.opplysningTekstId == "opplysning.krav-paa-dagpenger" }
-    }
-
-    private val oppfyllerMinsteinntekt: Opplysning by lazy {
-        behandling.opplysninger.first { it.opplysningTekstId == "opplysning.krav-til-minsteinntekt" }
-    }
-
     fun blokker(): List<String> {
         try {
             val blokker = mutableListOf<String>()
@@ -39,6 +31,14 @@ class VedtaksMelding(private val behandling: Behandling) {
             logger.error { "Ugyldig vedtak for behandling ${behandling.id}: ${e.message}" }
             throw UgyldigVedtakException(behandling.id)
         }
+    }
+
+    private val kravPåDagpenger: Opplysning by lazy {
+        behandling.opplysninger.first { it.opplysningTekstId == "opplysning.krav-paa-dagpenger" }
+    }
+
+    private val oppfyllerMinsteinntekt: Opplysning by lazy {
+        behandling.opplysninger.first { it.opplysningTekstId == "opplysning.krav-til-minsteinntekt" }
     }
 }
 

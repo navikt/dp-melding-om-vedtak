@@ -35,7 +35,7 @@ class Mediator(
 //
 //        val brevBlokkIder: List<String> = VedtaksMelding(behandling).blokker()
 //
-//        val opplysningMetadata = sanity.hentOpplysningTekstId(brevBlokkIder)
+//        val opplysningMetadata = sanity.hentOpplysningTekstIder(brevBlokkIder)
 //
 //        opplysningMetadata.map {
 //            Opplysning(

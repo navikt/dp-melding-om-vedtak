@@ -53,7 +53,7 @@ class Sanity(
                               }"""
     }
 
-    suspend fun hentOpplysningTekstId(brevBlokkIder: List<String>): List<String> {
+    suspend fun hentOpplysningTekstIder(brevBlokkIder: List<String>): List<String> {
         val brevBlokkDTOS =
             httpKlient.get("$sanityUrl") {
                 url {
