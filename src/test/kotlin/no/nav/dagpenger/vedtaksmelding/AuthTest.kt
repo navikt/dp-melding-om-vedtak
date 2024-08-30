@@ -1,4 +1,4 @@
-package no.nav.dagpenger.vedtaksmelding.vedtaksmelding
+package no.nav.dagpenger.vedtaksmelding
 
 import io.kotest.matchers.shouldNotBe
 import io.ktor.client.request.get
@@ -8,6 +8,7 @@ import io.ktor.server.application.call
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
 import io.ktor.server.testing.testApplication
+import no.nav.dagpenger.vedtaksmelding.apiconfig.jwt
 import org.junit.jupiter.api.Test
 
 class AuthTest {

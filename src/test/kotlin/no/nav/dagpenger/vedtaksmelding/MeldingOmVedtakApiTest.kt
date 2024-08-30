@@ -1,4 +1,4 @@
-package no.nav.dagpenger.vedtaksmelding.vedtaksmelding
+package no.nav.dagpenger.vedtaksmelding
 
 import io.kotest.assertions.json.shouldEqualSpecifiedJsonIgnoringOrder
 import io.kotest.matchers.shouldBe

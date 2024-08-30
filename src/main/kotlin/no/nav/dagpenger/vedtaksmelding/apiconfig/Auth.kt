@@ -1,4 +1,4 @@
-package no.nav.dagpenger.vedtaksmelding.vedtaksmelding
+package no.nav.dagpenger.vedtaksmelding.apiconfig
 
 import com.auth0.jwk.JwkProviderBuilder
 import io.ktor.http.auth.HttpAuthHeader

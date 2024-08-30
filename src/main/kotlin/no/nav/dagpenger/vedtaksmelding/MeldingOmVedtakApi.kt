@@ -1,4 +1,4 @@
-package no.nav.dagpenger.vedtaksmelding.vedtaksmelding
+package no.nav.dagpenger.vedtaksmelding
 
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
@@ -9,8 +9,9 @@ import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDTO
 import no.nav.dagpenger.saksbehandling.api.models.OpplysningDTO
+import no.nav.dagpenger.vedtaksmelding.apiconfig.apiConfig
+import no.nav.dagpenger.vedtaksmelding.apiconfig.jwt
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
-import org.intellij.lang.annotations.Language
 import java.util.UUID
 
 fun Application.meldingOmVedtakApi(mediator: Mediator) {
@@ -18,7 +19,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
     routing {
         authenticate("azureAd") {
             get("/melding-om-vedtak/{behandlingId}") {
-                val behandlingId = call.parseUUID("behandlingId")
+                val behandlingId = call.parseUUID()
                 val saksbehandler = call.parseSaksbehandler()
                 val vedtak = mediator.sendVedtak(behandlingId, saksbehandler)
 
@@ -42,43 +43,8 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
 
 private fun ApplicationCall.parseSaksbehandler(): Saksbehandler = Saksbehandler(this.request.jwt())
 
-private fun ApplicationCall.parseUUID(s: String): UUID {
+private fun ApplicationCall.parseUUID(): UUID {
     return this.parameters["behandlingId"]?.let {
         UUID.fromString(it)
     } ?: throw IllegalArgumentException("")
 }
-
-@Language("JSON")
-internal val hubba =
-    """
-    [
-      {
-        "tekstId": "brev.blokk.vedtak-avslag",
-        "opplysninger": [{ "tekstId": "Søknadsdato", "type": "dato", "verdi": "12-05-2024" }]
-      },
-      {
-        "tekstId": "brev.blokk.begrunnelse-avslag-minsteinntekt",
-        "opplysninger": [{ "tekstId": "Søknadsdato", "type": "dato", "verdi": "12-05-2024" }]
-      },
-      {
-        "tekstId": "brev.blokk.rett-til-aa-klaage",
-        "opplysninger": [
-          {
-            "tekstId": "Arbeidsinntekt siste 12 mnd",
-            "type": "penger",
-            "verdi": "0"
-          },
-          { "tekstId": "Inntektskrav for siste 12 mnd", "type": "penger", "verdi": "176000" },
-          {
-            "tekstId": "Arbeidsinntekt siste 36 mnd",
-            "type": "penger",
-            "verdi": "58000"
-          },
-          { "tekstId": "Inntektskrav for siste 36 mnd", "type": "penger", "verdi": "528000" }
-        ]
-      },
-      { "tekstId": "brev.blokk.rett-til-innsyn", "opplysninger": [] },
-      { "tekstId": "brev.blokk.sporsmaal", "opplysninger": [] }
-    ]
-
-    """.trimIndent()
