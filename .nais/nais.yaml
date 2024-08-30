@@ -33,6 +33,8 @@ spec:
           namespace: aura
         {{/if}}
     outbound:
+      external:
+        - host: rt6o382n.apicdn.sanity.io
       rules:
         - application: dp-behandling
           namespace: teamdagpenger
