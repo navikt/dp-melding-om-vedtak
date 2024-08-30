@@ -14,7 +14,7 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.serialization.jackson.jackson
 import mu.KotlinLogging
 
-private val logger = KotlinLogging.logger {  }
+private val logger = KotlinLogging.logger { }
 
 internal fun lagHttpKlient(engine: HttpClientEngine): HttpClient {
     return HttpClient(engine) {
@@ -63,8 +63,11 @@ class Sanity(
                 url {
                     parameters.append("query", query)
                 }
-            }.bodyAsText().also { logger.info { "Response fra Sanity: $it" } }.let { objectMapper.readTree(it) }.mapJsonToResponseDTO().result
-
+            }.bodyAsText().also { logger.info { "Response fra Sanity: $it" } }.let {
+                objectMapper.readTree(
+                    it,
+                )
+            }.mapJsonToResponseDTO().result
 
         val behandlingOpplysningDTOer = mutableSetOf<BehandlingOpplysningDTO>()
         brevBlokkDTOS.filter { it.textId in brevBlokkIder }
