@@ -32,7 +32,7 @@ internal class BehandlingKlientTest {
             BehandlngHttpKlient(
                 dpBehandlingApiUrl = dpBehandlingApiUrl,
                 tokenProvider = { "tulleToken" },
-                httpClient = createHttpClient(engine = mockEngine),
+                httpClient = lagHttpKlient(engine = mockEngine),
             )
         runBlocking {
             klient.hentBehandling(behandling = behandlingId, saksbehandler = Saksbehandler("tulleToken")).getOrThrow()
