@@ -46,8 +46,6 @@ components:
       properties:
         tekstId:
           type: string
-        navn:
-          type: string
         verdi:
             type: string
         datatype:

@@ -14,7 +14,9 @@ import io.ktor.server.testing.testApplication
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
+import no.nav.dagpenger.vedtaksmelding.model.VedtaksMelding
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 import java.util.UUID
@@ -35,9 +37,31 @@ class MeldingOmVedtakApiTest {
     @Test
     fun `skal hente brevblokker til melding om vedtak`() {
         val brevBlokker = listOf("A", "B", "C")
+        val opplysning1 =
+            Opplysning(
+                opplysningTekstId = "opplysning.krav-paa-dagpenger",
+                navn = "Krav på dagpenger",
+                verdi = "true",
+                datatype = "boolean",
+                opplysningId = "test",
+            )
+        val opplysning2 =
+            Opplysning(
+                opplysningTekstId = "opplysning.krav-til-minsteinntekt",
+                navn = "Krav til minsteinntekt",
+                verdi = "true",
+                datatype = "boolean",
+                opplysningId = "test",
+            )
+        val opplysninger = listOf(opplysning1, opplysning2)
+        val vedtak =
+            mockk<VedtaksMelding>().also {
+                coEvery { it.hentBrevBlokkIder() } returns brevBlokker
+                coEvery { it.hentOpplysninger() } returns opplysninger
+            }
         val mediator =
             mockk<Mediator>().also {
-                coEvery { it.sendVedtak(behandlingId, saksbehandler) } returns mockk(relaxed = true)
+                coEvery { it.sendVedtak(behandlingId, saksbehandler) } returns vedtak
             }
         testApplication {
             application {
@@ -50,20 +74,27 @@ class MeldingOmVedtakApiTest {
                 response.status shouldBe HttpStatusCode.OK
                 response.contentType().toString() shouldContain "application/json"
                 response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
+                    //language=json
                     """
-                      [{
-                        "tekstId": "A",
-                        "opplysninger": []
-                      },
-                      {
-                        "tekstId": "B",
-                        "opplysninger": []
-                      },
-                      {
-                        "tekstId": "C",
-                        "opplysninger": []
-                      }
-                    ]
+                                          {
+                                          "brevblokkIder": [
+                                            "A",
+                                            "B",
+                                            "C"
+                                          ],
+                                          "opplysninger": [
+                                            {
+                                              "tekstId": "opplysning.krav-paa-dagpenger",
+                                              "verdi": "true",
+                                              "datatype": "boolean"
+                                            },
+                                            {
+                                              "tekstId": "opplysning.krav-til-minsteinntekt",
+                                              "verdi": "true",
+                                              "datatype": "boolean"
+                                            }
+                                          ]
+                    }
                     """.trimIndent()
             }
         }
