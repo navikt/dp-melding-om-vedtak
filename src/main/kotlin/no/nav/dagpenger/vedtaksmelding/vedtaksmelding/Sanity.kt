@@ -57,12 +57,12 @@ class Sanity(
     }
 
     suspend fun hentOpplysningTekstIder(brevBlokkIder: List<String>): List<String> {
-        logger.info { "Henter opplysning fra Sanity" }
+        logger.info { "Henter opplysning fra Sanity på url: $sanityUrl" }
         val brevBlokkDTOS =
             httpKlient.get("$sanityUrl") {
                 url {
                     parameters.append("query", query)
-                }
+                }.also { logger.info { "Url med query til sanity: $it" } }
             }.bodyAsText().also { logger.info { "Response fra Sanity: $it" } }.let {
                 objectMapper.readTree(
                     it,
