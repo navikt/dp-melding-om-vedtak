@@ -23,33 +23,34 @@ class Mediator(
 
         return VedtaksMelding(behandling).blokker()
     }
+/*
+    suspend fun sendVedtak2(
+    behandlingId: UUID,
+    saksbehandler: Saksbehandler,
+    ): List<BrevBlokk> {
+    val behandling =
+    behandlingKlient.hentBehandling(behandlingId, saksbehandler).onFailure { throwable ->
+    logger.error { "Fikk ikke hentet opplysninger for $behandlingId: $throwable" }
+    }.getOrThrow()
 
-//    suspend fun sendVedtak2(
-//        behandlingId: UUID,
-//        saksbehandler: Saksbehandler,
-//    ): List<BrevBlokk> {
-//        val behandling =
-//            behandlingKlient.hentBehandling(behandlingId, saksbehandler).onFailure { throwable ->
-//                logger.error { "Fikk ikke hentet opplysninger for $behandlingId: $throwable" }
-//            }.getOrThrow()
-//
-//        val brevBlokkIder: List<String> = VedtaksMelding(behandling).blokker()
-//
-//        val opplysningMetadata = sanity.hentOpplysningTekstIder(brevBlokkIder)
-//
-//        opplysningMetadata.map {
-//            Opplysning(
-//                opplysningTekstId = opplysningMetadata.opplysningTekstId,
-//                navn = behandling.navn(metaData.opplysningTekstId),
-//                verdi = behandling.hentVerdi(metaData.opplysningTekstId),
-//                datatype = behandling.hentType(metaData.opplysningTekstId),
-//                opplysningId = behandling.hentOpplysningId(metaData.opplysningTekstId),
-//            )
-//        }
-//    }
+    val brevBlokkIder: List<String> = VedtaksMelding(behandling).blokker()
+
+    val opplysningMetadata = sanity.hentOpplysningTekstIder(brevBlokkIder)
+
+    opplysningMetadata.map {
+    Opplysning(
+    opplysningTekstId = opplysningMetadata.opplysningTekstId,
+    navn = behandling.navn(metaData.opplysningTekstId),
+    verdi = behandling.hentVerdi(metaData.opplysningTekstId),
+    datatype = behandling.hentType(metaData.opplysningTekstId),
+    opplysningId = behandling.hentOpplysningId(metaData.opplysningTekstId),
+    )
+    }
+    }
+}*/
+
+    data class OpenApiVedttak(
+        val brevBlokkId: List<String>,
+        val opplysninger: List<Opplysning>,
+    )
 }
-
-data class OpenApiVedttak(
-    val brevBlokkId: List<String>,
-    val opplysninger: List<Opplysning>,
-)
