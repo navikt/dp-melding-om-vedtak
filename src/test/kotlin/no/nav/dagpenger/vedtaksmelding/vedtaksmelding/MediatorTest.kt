@@ -17,14 +17,14 @@ class MediatorTest {
     private val opplysninger =
         setOf(
             Opplysning(
-                id = "opplysning.krav-til-minsteinntekt",
+                opplysningTekstId = "opplysning.krav-til-minsteinntekt",
                 navn = "curae",
                 verdi = "true",
                 datatype = "bolsk",
                 opplysningId = "aliquet",
             ),
             Opplysning(
-                id = "opplysning.krav-paa-dagpenger",
+                opplysningTekstId = "opplysning.krav-paa-dagpenger",
                 navn = "curae",
                 verdi = "true",
                 datatype = "bolsk",
@@ -45,7 +45,7 @@ class MediatorTest {
                 coEvery { it.hentBehandling(behandlingId, saksbehandler) } returns Result.success(behandling)
             }
 
-        val mediator = Mediator(behandlingKlient)
+        val mediator = Mediator(behandlingKlient, mockk())
         runBlocking {
             mediator.sendVedtak(
                 behandlingId = behandlingId,
@@ -65,6 +65,7 @@ class MediatorTest {
                 mockk<BehandlingKlient>().also {
                     coEvery { it.hentBehandling(any(), any()) } throws RuntimeException("Noe gikk galt")
                 },
+                mockk(),
             )
         runBlocking {
             shouldThrow<RuntimeException> {

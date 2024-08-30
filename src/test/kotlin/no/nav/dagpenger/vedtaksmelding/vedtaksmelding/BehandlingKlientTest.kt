@@ -43,7 +43,7 @@ internal class BehandlingKlientTest {
                         opplysninger.size shouldBeGreaterThan 0
                         opplysninger.first { it.navn == "fagsakId" } shouldBe
                             Opplysning(
-                                id = "ukjent.opplysning.fagsakId",
+                                opplysningTekstId = "ukjent.opplysning.fagsakId",
                                 navn = "fagsakId",
                                 verdi = "14952127",
                                 datatype = "heltall",
