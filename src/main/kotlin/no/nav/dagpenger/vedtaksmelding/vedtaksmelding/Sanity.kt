@@ -41,20 +41,18 @@ class Sanity(
     }
 
     suspend fun hentOpplysningTekstIder(brevBlokkIder: List<String>): List<String> {
-        logger.info { "Henter opplysning fra Sanity på url: $sanityUrl" }
-        val brevBlokkDTOS =
+        logger.info { "Henter opplysning fra Sanity med url: $sanityUrl" }
+        val brevblokkDTOer =
             httpKlient.get("$sanityUrl") {
                 url {
                     parameters.append("query", query)
-                }.also { logger.info { "Url med query til sanity: $it" } }
-            }.bodyAsText().also { logger.info { "Response fra Sanity: $it" } }.let {
-                objectMapper.readTree(
-                    it,
-                )
+                }
+            }.bodyAsText().let { responseBody ->
+                objectMapper.readTree(responseBody)
             }.mapJsonToResponseDTO().result
 
         val behandlingOpplysningDTOer = mutableSetOf<BehandlingOpplysningDTO>()
-        brevBlokkDTOS.filter { it.textId in brevBlokkIder }
+        brevblokkDTOer.filter { it.textId in brevBlokkIder }
             .forEach {
                 behandlingOpplysningDTOer.addAll(it.innhold.behandlingOpplysninger)
             }
