@@ -5,7 +5,7 @@ import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
-import no.nav.dagpenger.vedtaksmelding.vedtaksmelding.Mediator
+import no.nav.dagpenger.vedtaksmelding.Mediator
 import org.junit.jupiter.api.Test
 
 class VedtaksMeldingTest {

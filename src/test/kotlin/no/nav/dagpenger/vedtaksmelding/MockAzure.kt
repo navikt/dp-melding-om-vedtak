@@ -1,4 +1,4 @@
-package no.nav.dagpenger.vedtaksmelding.vedtaksmelding
+package no.nav.dagpenger.vedtaksmelding
 
 import no.nav.security.mock.oauth2.MockOAuth2Server
 

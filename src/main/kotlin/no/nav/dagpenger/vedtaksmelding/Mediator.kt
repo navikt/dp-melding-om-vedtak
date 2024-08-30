@@ -1,15 +1,16 @@
-package no.nav.dagpenger.vedtaksmelding.vedtaksmelding
+package no.nav.dagpenger.vedtaksmelding
 
 import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.VedtaksMelding
+import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
 import java.util.UUID
 
 private val logger = KotlinLogging.logger {}
 
 class Mediator(
     private val behandlingKlient: BehandlingKlient,
-    private val sanity: Sanity,
+    private val sanityKlient: SanityKlient,
 ) {
     suspend fun sendVedtak(
         behandlingId: UUID,
@@ -23,6 +24,6 @@ class Mediator(
     }
 
     suspend fun hentOpplysningTekstIder(brevbklokkIder: List<String>): List<String> {
-        return sanity.hentOpplysningTekstIder(brevbklokkIder)
+        return sanityKlient.hentOpplysningTekstIder(brevbklokkIder)
     }
 }

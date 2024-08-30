@@ -1,7 +1,6 @@
-package no.nav.dagpenger.vedtaksmelding.vedtaksmelding
+package no.nav.dagpenger.vedtaksmelding.sanity
 
 import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -10,10 +9,11 @@ import io.ktor.client.engine.cio.CIO
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 import mu.KotlinLogging
+import no.nav.dagpenger.vedtaksmelding.lagHttpKlient
 
 private val logger = KotlinLogging.logger { }
 
-class Sanity(
+class SanityKlient(
     private val sanityUrl: String,
     private val httpKlient: HttpClient = lagHttpKlient(engine = CIO.create { }),
 ) {
@@ -60,51 +60,3 @@ class Sanity(
         return behandlingOpplysningDTOer.map { it.textId }
     }
 }
-
-private fun JsonNode.mapJsonToResponseDTO(): ResponseDTO {
-    val result =
-        this["result"].map { brevBlokkNode ->
-            val textId = brevBlokkNode["textId"].asText()
-            val innhold = brevBlokkNode.mapInnhold()
-            BrevBlokkDTO(textId = textId, innhold = innhold)
-        }
-    return ResponseDTO(result = result)
-}
-
-private fun JsonNode.mapInnhold(): BrevBlokkDTO.InnholdDTO {
-    val alleBehandlingOpplysninger =
-        this["innhold"].mapNotNull { innholdNode ->
-            innholdNode.mapBehandlingOpplysning()
-        }.flatten()
-
-    return BrevBlokkDTO.InnholdDTO(behandlingOpplysninger = alleBehandlingOpplysninger)
-}
-
-private fun JsonNode.mapBehandlingOpplysning(): List<BehandlingOpplysningDTO> {
-    return this["children"].mapNotNull { childNode ->
-        val behandlingOpplysningNode = childNode["behandlingOpplysning"]
-        behandlingOpplysningNode?.let {
-            BehandlingOpplysningDTO(
-                textId = it["textId"].asText(),
-                type = it["type"].asText(),
-            )
-        }
-    }
-}
-
-// https://rt6o382n.api.sanity.io/v2021-10-21/data/query/development
-private data class ResponseDTO(val result: List<BrevBlokkDTO>)
-
-private data class BrevBlokkDTO(
-    val textId: String,
-    val innhold: InnholdDTO,
-) {
-    data class InnholdDTO(
-        val behandlingOpplysninger: List<BehandlingOpplysningDTO>,
-    )
-}
-
-private data class BehandlingOpplysningDTO(
-    val textId: String,
-    val type: String,
-)

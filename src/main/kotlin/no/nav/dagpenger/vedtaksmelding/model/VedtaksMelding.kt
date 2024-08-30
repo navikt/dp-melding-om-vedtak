@@ -1,7 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
 import mu.KotlinLogging
-import no.nav.dagpenger.vedtaksmelding.vedtaksmelding.Mediator
+import no.nav.dagpenger.vedtaksmelding.Mediator
 
 private val logger = KotlinLogging.logger {}
 
