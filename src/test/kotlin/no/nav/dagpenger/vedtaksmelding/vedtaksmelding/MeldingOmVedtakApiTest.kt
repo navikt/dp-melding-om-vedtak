@@ -37,7 +37,7 @@ class MeldingOmVedtakApiTest {
         val brevBlokker = listOf("A", "B", "C")
         val mediator =
             mockk<Mediator>().also {
-                coEvery { it.sendVedtak(behandlingId, saksbehandler) } returns brevBlokker
+                coEvery { it.sendVedtak(behandlingId, saksbehandler) } returns mockk(relaxed = true)
             }
         testApplication {
             application {

@@ -1,7 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.vedtaksmelding
 
 import mu.KotlinLogging
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.VedtaksMelding
 import java.util.UUID
@@ -15,42 +14,15 @@ class Mediator(
     suspend fun sendVedtak(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
-    ): List<String> {
+    ): VedtaksMelding {
         val behandling =
             behandlingKlient.hentBehandling(behandlingId, saksbehandler).onFailure { throwable ->
                 logger.error { "Fikk ikke hentet opplysninger for $behandlingId: $throwable" }
             }.getOrThrow()
-
-        return VedtaksMelding(behandling).blokker()
+        return VedtaksMelding(behandling, this)
     }
-/*
-    suspend fun sendVedtak2(
-    behandlingId: UUID,
-    saksbehandler: Saksbehandler,
-    ): List<BrevBlokk> {
-    val behandling =
-    behandlingKlient.hentBehandling(behandlingId, saksbehandler).onFailure { throwable ->
-    logger.error { "Fikk ikke hentet opplysninger for $behandlingId: $throwable" }
-    }.getOrThrow()
 
-    val brevBlokkIder: List<String> = VedtaksMelding(behandling).blokker()
-
-    val opplysningMetadata = sanity.hentOpplysningTekstIder(brevBlokkIder)
-
-    opplysningMetadata.map {
-    Opplysning(
-    opplysningTekstId = opplysningMetadata.opplysningTekstId,
-    navn = behandling.navn(metaData.opplysningTekstId),
-    verdi = behandling.hentVerdi(metaData.opplysningTekstId),
-    datatype = behandling.hentType(metaData.opplysningTekstId),
-    opplysningId = behandling.hentOpplysningId(metaData.opplysningTekstId),
-    )
+    suspend fun hentOpplysningTekstIder(brevbklokkIder: List<String>): List<String> {
+        return sanity.hentOpplysningTekstIder(brevbklokkIder)
     }
-    }
-}*/
-
-    data class OpenApiVedttak(
-        val brevBlokkId: List<String>,
-        val opplysninger: List<Opplysning>,
-    )
 }
