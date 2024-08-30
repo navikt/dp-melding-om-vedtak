@@ -16,7 +16,9 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
     }
 
     suspend fun hentOpplysninger(): List<Opplysning> {
-        return mediator.hentOpplysningTekstIder(hentBrevBlokkIder()).map { behandling.hentOpplysning(it) }
+        val opplysningstekstIder = mediator.hentOpplysningTekstIder(hentBrevBlokkIder())
+        logger.info { "Skal hente opplysninger basert på følgende tekstider: $opplysningstekstIder" }
+        return opplysningstekstIder.map { behandling.hentOpplysning(it) }
     }
 
     fun hentBrevBlokkIder(): List<String> {
