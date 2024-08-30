@@ -1,10 +1,11 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
 import mu.KotlinLogging
+import no.nav.dagpenger.vedtaksmelding.vedtaksmelding.Mediator
 
 private val logger = KotlinLogging.logger {}
 
-class VedtaksMelding(private val behandling: Behandling) {
+class VedtaksMelding(private val behandling: Behandling, private val mediator: Mediator) {
     companion object {
         val FASTE_BLOKKER =
             setOf(
@@ -14,7 +15,11 @@ class VedtaksMelding(private val behandling: Behandling) {
             )
     }
 
-    fun blokker(): List<String> {
+    suspend fun hentOpplysninger(): List<Opplysning> {
+        return mediator.hentOpplysningTekstIder(hentBrevBlokkIder()).map { behandling.hentOpplysning(it) }
+    }
+
+    fun hentBrevBlokkIder(): List<String> {
         try {
             val blokker = mutableListOf<String>()
 

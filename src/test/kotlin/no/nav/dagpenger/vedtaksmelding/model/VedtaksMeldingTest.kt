@@ -2,6 +2,10 @@ package no.nav.dagpenger.vedtaksmelding.model
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
+import io.mockk.coEvery
+import io.mockk.mockk
+import kotlinx.coroutines.runBlocking
+import no.nav.dagpenger.vedtaksmelding.vedtaksmelding.Mediator
 import org.junit.jupiter.api.Test
 
 class VedtaksMeldingTest {
@@ -33,13 +37,20 @@ class VedtaksMeldingTest {
             )
         val opplysninger = setOf(kravPåDagpenger, minsteinntekt)
 
-        Behandling(
-            id = "019145eb-6fbb-769f-b1b1-d2450b383a98",
-            tilstand = "Tilstand",
-            opplysninger = opplysninger,
-        ).let { behandling ->
-            VedtaksMelding(behandling).let { vedtaksMelding ->
-                vedtaksMelding.blokker() shouldBe VedtaksMelding.FASTE_BLOKKER
+        val mediator =
+            mockk<Mediator>().also {
+                coEvery { it.hentOpplysningTekstIder(VedtaksMelding.FASTE_BLOKKER.toList()) } returns emptyList()
+            }
+        runBlocking {
+            Behandling(
+                id = "019145eb-6fbb-769f-b1b1-d2450b383a98",
+                tilstand = "Tilstand",
+                opplysninger = opplysninger,
+            ).let { behandling ->
+                VedtaksMelding(behandling, mediator).let { vedtaksMelding ->
+                    vedtaksMelding.hentBrevBlokkIder() shouldBe VedtaksMelding.FASTE_BLOKKER
+                    vedtaksMelding.hentOpplysninger() shouldBe emptyList()
+                }
             }
         }
     }
@@ -53,7 +64,8 @@ class VedtaksMeldingTest {
                     tilstand = "y",
                     opplysninger = setOf(),
                 ),
-            ).blokker()
+                mockk(relaxed = true),
+            ).hentBrevBlokkIder()
         }
     }
 
@@ -71,17 +83,30 @@ class VedtaksMeldingTest {
                 verdi = "false",
             )
         val opplysninger = setOf(kravPåDagpenger, minsteinntekt)
+        val forventedeBrevblokkIder =
+            listOf(
+                "brev.blokk.vedtak-avslag",
+                "brev.blokk.begrunnelse-avslag-minsteinntekt",
+            ) + VedtaksMelding.FASTE_BLOKKER
 
-        Behandling(
-            id = "019145eb-6fbb-769f-b1b1-d2450b383a98",
-            tilstand = "Tilstand",
-            opplysninger = opplysninger,
-        ).let { behandling ->
-            VedtaksMelding(behandling).let { vedtaksMelding ->
-                vedtaksMelding.blokker() shouldBe listOf(
-                    "brev.blokk.vedtak-avslag",
-                    "brev.blokk.begrunnelse-avslag-minsteinntekt",
-                ) + VedtaksMelding.FASTE_BLOKKER
+        val mediator =
+            mockk<Mediator>().also {
+                coEvery { it.hentOpplysningTekstIder(forventedeBrevblokkIder) } returns
+                    listOf(
+                        kravPåDagpenger.opplysningTekstId,
+                        minsteinntekt.opplysningTekstId,
+                    )
+            }
+        runBlocking {
+            Behandling(
+                id = "019145eb-6fbb-769f-b1b1-d2450b383a98",
+                tilstand = "Tilstand",
+                opplysninger = opplysninger,
+            ).let { behandling ->
+                VedtaksMelding(behandling, mediator).let { vedtaksMelding ->
+                    vedtaksMelding.hentBrevBlokkIder() shouldBe forventedeBrevblokkIder
+                    vedtaksMelding.hentOpplysninger() shouldBe listOf(kravPåDagpenger, minsteinntekt)
+                }
             }
         }
     }
