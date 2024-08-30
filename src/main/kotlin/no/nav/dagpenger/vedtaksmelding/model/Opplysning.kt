@@ -12,6 +12,11 @@ data class Opplysning(
             return when (navn) {
                 "Krav på dagpenger" -> "opplysning.krav-paa-dagpenger"
                 "Krav til minsteinntekt" -> return "opplysning.krav-til-minsteinntekt"
+                "Søknadsdato" -> return "opplysning.soknadsdato"
+                "Inntektskrav for siste 12 mnd" -> return "opplysning.inntektskrav-for-siste-12-mnd"
+                "Inntektskrav for siste 36 mnd" -> return "opplysning.inntektskrav-for-siste-36-mnd"
+                "Arbeidsinntekt siste 12 mnd" -> return "opplysning.arbeidsinntekt-siste-12-mnd"
+                "Arbeidsinntekt siste 36 mnd" -> return "opplysning.arbeidsinntekt-siste-36-mnd"
                 else -> return "ukjent.opplysning.$navn"
             }
         }
