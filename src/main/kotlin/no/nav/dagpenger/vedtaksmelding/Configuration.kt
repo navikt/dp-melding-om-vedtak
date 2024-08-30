@@ -16,6 +16,7 @@ object Configuration {
                 "GRUPPE_SAKSBEHANDLER" to "SaksbehandlerADGruppe",
                 "DP_BEHANDLING_API_SCOPE" to "api://dev-gcp.teamdagpenger.dp-behandling/.default",
                 "DP_BEHANDLING_API_URL" to "http://dp-behandling/behandling",
+                "SANITY_API_URL" to "https://rt6o382n.api.sanity.io/v2021-10-21/data/query/development",
             ),
         )
 
@@ -43,4 +44,5 @@ object Configuration {
     }
 
     val saksbehandlerADGruppe by lazy { properties[Key("GRUPPE_SAKSBEHANDLER", stringType)] }
+    val sanityApiUrl by lazy { properties[Key("SANITY_API_URL", stringType)] }
 }

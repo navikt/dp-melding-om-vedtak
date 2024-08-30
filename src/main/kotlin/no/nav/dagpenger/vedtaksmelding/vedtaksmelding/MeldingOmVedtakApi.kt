@@ -7,7 +7,8 @@ import io.ktor.server.auth.authenticate
 import io.ktor.server.response.respond
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
-import no.nav.dagpenger.saksbehandling.api.models.BrevblokkDTO
+import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDTO
+import no.nav.dagpenger.saksbehandling.api.models.OpplysningDTO
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import org.intellij.lang.annotations.Language
 import java.util.UUID
@@ -19,14 +20,21 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
             get("/melding-om-vedtak/{behandlingId}") {
                 val behandlingId = call.parseUUID("behandlingId")
                 val saksbehandler = call.parseSaksbehandler()
-                val brevblokkDTO =
-                    mediator.sendVedtak(behandlingId, saksbehandler).map { tekstId ->
-                        BrevblokkDTO(
-                            tekstId = tekstId,
-                            opplysninger = emptyList(),
-                        )
-                    }
-                call.respond(brevblokkDTO)
+                val vedtak = mediator.sendVedtak(behandlingId, saksbehandler)
+
+                val meldingOmVedtakDTO =
+                    MeldingOmVedtakDTO(
+                        brevblokkIder = vedtak.hentBrevBlokkIder(),
+                        opplysninger =
+                            vedtak.hentOpplysninger().map {
+                                OpplysningDTO(
+                                    tekstId = it.opplysningTekstId,
+                                    verdi = it.verdi,
+                                    datatype = it.datatype,
+                                )
+                            },
+                    )
+                call.respond(meldingOmVedtakDTO)
             }
         }
     }

@@ -1,7 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
 data class Opplysning(
-    val id: String,
+    val opplysningTekstId: String,
     val navn: String,
     val verdi: String,
     val datatype: String,
@@ -23,7 +23,7 @@ data class Opplysning(
         datatype: String,
         opplysningId: String,
     ) : this(
-        id = mapping(navn),
+        opplysningTekstId = mapping(navn),
         navn = navn,
         verdi = verdi,
         datatype = datatype,

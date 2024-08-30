@@ -24,20 +24,23 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Brevblokk'
+                  $ref: '#/components/schemas/MeldingOmVedtak'
 
 
 components:
   schemas:
-    Brevblokk:
+    MeldingOmVedtak:
       type: object
       properties:
-        tekstId:
-          type: string
+        brevblokkIder:
+          type: array
+          items:
+            type: string
         opplysninger:
           type: array
           items:
             $ref: '#/components/schemas/Opplysning'
+
     Opplysning:
       type: object
       properties:
@@ -45,3 +48,5 @@ components:
           type: string
         verdi:
             type: string
+        datatype:
+          type: string

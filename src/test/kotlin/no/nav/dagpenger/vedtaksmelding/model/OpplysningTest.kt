@@ -11,20 +11,20 @@ class OpplysningTest {
             verdi = "true",
             datatype = "boolean",
             opplysningId = "test",
-        ).id shouldBe "opplysning.krav-paa-dagpenger"
+        ).opplysningTekstId shouldBe "opplysning.krav-paa-dagpenger"
 
         Opplysning(
             navn = "Krav til minsteinntekt",
             verdi = "true",
             datatype = "boolean",
             opplysningId = "test",
-        ).id shouldBe "opplysning.krav-til-minsteinntekt"
+        ).opplysningTekstId shouldBe "opplysning.krav-til-minsteinntekt"
 
         Opplysning(
             navn = "ukjent",
             verdi = "true",
             datatype = "boolean",
             opplysningId = "test",
-        ).id shouldBe "ukjent.opplysning.ukjent"
+        ).opplysningTekstId shouldBe "ukjent.opplysning.ukjent"
     }
 }
