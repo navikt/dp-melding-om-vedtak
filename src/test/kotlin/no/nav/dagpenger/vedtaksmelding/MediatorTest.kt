@@ -47,7 +47,7 @@ class MediatorTest {
 
         val mediator = Mediator(behandlingKlient, mockk())
         runBlocking {
-            mediator.sendVedtak(
+            mediator.hentVedtaksmelding(
                 behandlingId = behandlingId,
                 saksbehandler = saksbehandler,
             )
@@ -69,7 +69,7 @@ class MediatorTest {
             )
         runBlocking {
             shouldThrow<RuntimeException> {
-                mediator.sendVedtak(
+                mediator.hentVedtaksmelding(
                     behandlingId = behandlingId,
                     saksbehandler = saksbehandler,
                 )

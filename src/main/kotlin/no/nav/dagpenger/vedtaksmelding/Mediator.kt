@@ -12,7 +12,7 @@ class Mediator(
     private val behandlingKlient: BehandlingKlient,
     private val sanityKlient: SanityKlient,
 ) {
-    suspend fun sendVedtak(
+    suspend fun hentVedtaksmelding(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
     ): VedtaksMelding {

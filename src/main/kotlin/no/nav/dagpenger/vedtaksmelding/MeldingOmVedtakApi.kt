@@ -21,13 +21,13 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
             get("/melding-om-vedtak/{behandlingId}") {
                 val behandlingId = call.parseUUID()
                 val saksbehandler = call.parseSaksbehandler()
-                val vedtak = mediator.sendVedtak(behandlingId, saksbehandler)
+                val vedtaksmelding = mediator.hentVedtaksmelding(behandlingId, saksbehandler)
 
                 val meldingOmVedtakDTO =
                     MeldingOmVedtakDTO(
-                        brevblokkIder = vedtak.hentBrevBlokkIder(),
+                        brevblokkIder = vedtaksmelding.hentBrevBlokkIder(),
                         opplysninger =
-                            vedtak.hentOpplysninger().map {
+                            vedtaksmelding.hentOpplysninger().map {
                                 OpplysningDTO(
                                     tekstId = it.opplysningTekstId,
                                     verdi = it.verdi,
