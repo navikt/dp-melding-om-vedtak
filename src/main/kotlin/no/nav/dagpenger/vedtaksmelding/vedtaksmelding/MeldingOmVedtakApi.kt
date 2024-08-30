@@ -29,7 +29,6 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                             vedtak.hentOpplysninger().map {
                                 OpplysningDTO(
                                     tekstId = it.opplysningTekstId,
-                                    navn = it.navn,
                                     verdi = it.verdi,
                                     datatype = it.datatype,
                                 )
