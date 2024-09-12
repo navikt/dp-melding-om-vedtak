@@ -9,9 +9,9 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
     companion object {
         val FASTE_BLOKKER =
             listOf(
+                "brev.blokk.sporsmaal",
                 "brev.blokk.rett-til-aa-klage",
                 "brev.blokk.rett-til-innsyn",
-                "brev.blokk.sporsmaal",
             )
     }
 
