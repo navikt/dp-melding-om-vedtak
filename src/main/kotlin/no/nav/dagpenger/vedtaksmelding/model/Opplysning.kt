@@ -13,6 +13,7 @@ data class Opplysning(
                 "Krav på dagpenger" -> "opplysning.krav-paa-dagpenger"
                 "Krav til minsteinntekt" -> return "opplysning.krav-til-minsteinntekt"
                 "Søknadsdato" -> return "opplysning.soknadsdato"
+                "Siste avsluttende kalendermåned" -> return "opplysning.siste-avsluttende-kalendermaaned"
                 "Inntektskrav for siste 12 mnd" -> return "opplysning.inntektskrav-for-siste-12-mnd"
                 "Inntektskrav for siste 36 mnd" -> return "opplysning.inntektskrav-for-siste-36-mnd"
                 "Arbeidsinntekt siste 12 mnd" -> return "opplysning.arbeidsinntekt-siste-12-mnd"
