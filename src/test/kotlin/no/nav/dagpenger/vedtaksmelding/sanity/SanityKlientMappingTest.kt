@@ -12,7 +12,8 @@ class SanityKlientMappingTest {
     fun `test av enkel brevblokk mapping med kun en opplysning`() {
         runBlocking {
             SanityKlient(
-                sanityUrl = "http://locahost/sanity", httpKlient = lagHttpKlient(engine = lageMockEngine()),
+                sanityUrl = "http://locahost/sanity",
+                httpKlient = lagHttpKlient(engine = lageMockEngine(), SanityKlient.httpClientConfig),
             ).hentOpplysningTekstIder(listOf("brev.blokk.vedtak-avslag-forskuttert")) shouldBe listOf("Søknadsdato")
         }
     }

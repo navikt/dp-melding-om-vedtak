@@ -25,7 +25,7 @@ import mu.KotlinLogging
 import org.slf4j.event.Level
 
 private val sikkerlogg = KotlinLogging.logger("tjenestekall")
-private val logger = KotlinLogging.logger {}
+private val log = KotlinLogging.logger {}
 
 fun Application.apiConfig() {
     install(Authentication) {
@@ -47,7 +47,7 @@ fun Application.apiConfig() {
                 "metrics",
             ).contains(call.request.document())
         }
-        level = Level.DEBUG
+        level = Level.INFO
         format { call ->
             val status = call.response.status()?.value ?: "Unhandled"
             val method = call.request.httpMethod.value
@@ -56,19 +56,20 @@ fun Application.apiConfig() {
             val queryParams = call.request.queryParameters.entries()
             "$status $method $path $queryParams $duration ms"
         }
+        this.logger = log
     }
 
     install(StatusPages) {
         exception<Throwable> { call, cause ->
             when (cause) {
                 is IllegalAccessException -> {
-                    logger.warn { "Unauthorized: ${cause.message}" }
+                    log.warn { "Unauthorized: ${cause.message}" }
                     sikkerlogg.warn { "Unauthorized, se sikkerlogg for detaljer: ${cause.stackTrace}" }
                     call.respond(HttpStatusCode.Unauthorized, cause.message ?: "Unauthorized")
                 }
 
                 else -> {
-                    logger.error(cause) { "Uhåndtert feil: Se sikkerlogg for detaljer" }
+                    log.error(cause) { "Uhåndtert feil: Se sikkerlogg for detaljer" }
                     sikkerlogg.error(cause) { "Uhåndtert feil: ${cause.message}" }
                     call.respond(HttpStatusCode.InternalServerError)
                 }
