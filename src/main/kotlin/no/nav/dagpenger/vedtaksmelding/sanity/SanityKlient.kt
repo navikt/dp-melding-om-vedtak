@@ -5,19 +5,35 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.ktor.client.HttpClient
+import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.cio.CIO
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.lagHttpKlient
 
-private val logger = KotlinLogging.logger { }
+private val log = KotlinLogging.logger { }
 
 class SanityKlient(
     private val sanityUrl: String,
-    private val httpKlient: HttpClient = lagHttpKlient(engine = CIO.create { }),
+    private val httpKlient: HttpClient = lagHttpKlient(engine = CIO.create { }, httpClientConfig),
 ) {
     companion object {
+        val httpClientConfig: HttpClientConfig<*>.() -> Unit = {
+            install(Logging) {
+                level = LogLevel.BODY
+                logger =
+                    object : Logger {
+                        override fun log(message: String) {
+                            log.info { message }
+                        }
+                    }
+            }
+        }
+
         private val objectMapper =
             jacksonObjectMapper()
                 .registerModule(JavaTimeModule())
@@ -41,7 +57,7 @@ class SanityKlient(
     }
 
     suspend fun hentOpplysningTekstIder(brevBlokkIder: List<String>): List<String> {
-        logger.info { "Henter opplysning fra Sanity med url: $sanityUrl" }
+        log.info { "Henter opplysning fra Sanity med url: $sanityUrl" }
         val brevblokkDTOer =
             httpKlient.get("$sanityUrl") {
                 url {

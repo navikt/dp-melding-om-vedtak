@@ -7,8 +7,14 @@ import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.jackson.jackson
+import mu.KotlinLogging
 
-internal fun lagHttpKlient(engine: HttpClientEngine): HttpClient {
+private val log = KotlinLogging.logger {}
+
+internal fun lagHttpKlient(
+    engine: HttpClientEngine,
+    block: io.ktor.client.HttpClientConfig<*>.() -> Unit = {},
+): HttpClient {
     return HttpClient(engine) {
         expectSuccess = true
         install(ContentNegotiation) {
@@ -18,5 +24,6 @@ internal fun lagHttpKlient(engine: HttpClientEngine): HttpClient {
                 configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             }
         }
+        block()
     }
 }
