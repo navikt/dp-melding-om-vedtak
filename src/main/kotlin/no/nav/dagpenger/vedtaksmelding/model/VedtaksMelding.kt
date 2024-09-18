@@ -4,7 +4,7 @@ import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.Mediator
 
 private val logger = KotlinLogging.logger {}
-private val sikkerlogg = KotlinLogging.logger("tjenestekall")
+private val sikkerlogger = KotlinLogging.logger("tjenestekall")
 
 class VedtaksMelding(private val behandling: Behandling, private val mediator: Mediator) {
     companion object {
@@ -36,8 +36,8 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
             val alleBlokker = (blokker + FASTE_BLOKKER).toList()
             return alleBlokker
         } catch (e: Exception) {
+            sikkerlogger.error { "Ugyldig vedtak for behandling ${behandling.id}: ${e.message}. Hele behandlingen: $behandling." }
             logger.error { "Ugyldig vedtak for behandling ${behandling.id}: ${e.message}" }
-            sikkerlogg.error { "Ugyldig vedtak for behandling ${behandling}: ${e.message}" }
             throw UgyldigVedtakException(behandling.id)
         }
     }
