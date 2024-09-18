@@ -4,7 +4,7 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-class Behandling(
+data class Behandling(
     val id: String,
     val tilstand: String,
     val opplysninger: Set<Opplysning>,
