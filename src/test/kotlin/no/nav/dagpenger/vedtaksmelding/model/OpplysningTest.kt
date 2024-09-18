@@ -7,13 +7,6 @@ class OpplysningTest {
     @Test
     fun `skal mappe opplysning navn til id`() {
         Opplysning(
-            navn = "Krav på dagpenger",
-            verdi = "true",
-            datatype = "boolean",
-            opplysningId = "test",
-        ).opplysningTekstId shouldBe "opplysning.krav-paa-dagpenger"
-
-        Opplysning(
             navn = "Krav til minsteinntekt",
             verdi = "true",
             datatype = "boolean",

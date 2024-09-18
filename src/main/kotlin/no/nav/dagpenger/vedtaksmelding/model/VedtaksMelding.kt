@@ -26,11 +26,8 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
         try {
             val blokker = mutableListOf<String>()
 
-            if (kravPåDagpenger.verdi == "false") {
-                blokker.add("brev.blokk.vedtak-avslag")
-            }
-
             if (oppfyllerMinsteinntekt.verdi == "false") {
+                blokker.add("brev.blokk.vedtak-avslag")
                 blokker.add("brev.blokk.begrunnelse-avslag-minsteinntekt")
             }
             val alleBlokker = (blokker + FASTE_BLOKKER).toList()
@@ -40,10 +37,6 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
             logger.error { "Ugyldig vedtak for behandling ${behandling.id}: ${e.message}" }
             throw UgyldigVedtakException(behandling.id)
         }
-    }
-
-    private val kravPåDagpenger: Opplysning by lazy {
-        behandling.opplysninger.first { it.opplysningTekstId == "opplysning.krav-paa-dagpenger" }
     }
 
     private val oppfyllerMinsteinntekt: Opplysning by lazy {

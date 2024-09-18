@@ -10,7 +10,6 @@ data class Opplysning(
     companion object {
         private fun mapping(navn: String): String {
             return when (navn) {
-                "Krav på dagpenger" -> "opplysning.krav-paa-dagpenger"
                 "Krav til minsteinntekt" -> return "opplysning.krav-til-minsteinntekt"
                 "Søknadsdato" -> return "opplysning.soknadsdato"
                 "Siste avsluttende kalendermåned" -> return "opplysning.siste-avsluttende-kalendermaaned"
