@@ -24,18 +24,12 @@ class VedtaksMeldingTest {
 
     @Test
     fun `Rikig vedtaksmelding for innvilgelse `() {
-        val kravPåDagpenger: Opplysning =
-            lagOpplysning(
-                id = "opplysning.krav-paa-dagpenger",
-                verdi = "true",
-            )
-
         val minsteinntekt: Opplysning =
             lagOpplysning(
                 id = "opplysning.krav-til-minsteinntekt",
                 verdi = "true",
             )
-        val opplysninger = setOf(kravPåDagpenger, minsteinntekt)
+        val opplysninger = setOf(minsteinntekt)
 
         val mediator =
             mockk<Mediator>().also {
@@ -71,18 +65,12 @@ class VedtaksMeldingTest {
 
     @Test
     fun `Rikig vedtaksmelding for avslag på minsteinntekt`() {
-        val kravPåDagpenger: Opplysning =
-            lagOpplysning(
-                id = "opplysning.krav-paa-dagpenger",
-                verdi = "false",
-            )
-
         val minsteinntekt: Opplysning =
             lagOpplysning(
                 id = "opplysning.krav-til-minsteinntekt",
                 verdi = "false",
             )
-        val opplysninger = setOf(kravPåDagpenger, minsteinntekt)
+        val opplysninger = setOf(minsteinntekt)
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-avslag",
@@ -93,7 +81,6 @@ class VedtaksMeldingTest {
             mockk<Mediator>().also {
                 coEvery { it.hentOpplysningTekstIder(forventedeBrevblokkIder) } returns
                     listOf(
-                        kravPåDagpenger.opplysningTekstId,
                         minsteinntekt.opplysningTekstId,
                     )
             }
@@ -105,7 +92,7 @@ class VedtaksMeldingTest {
             ).let { behandling ->
                 VedtaksMelding(behandling, mediator).let { vedtaksMelding ->
                     vedtaksMelding.hentBrevBlokkIder() shouldBe forventedeBrevblokkIder
-                    vedtaksMelding.hentOpplysninger() shouldBe listOf(kravPåDagpenger, minsteinntekt)
+                    vedtaksMelding.hentOpplysninger() shouldBe listOf(minsteinntekt)
                 }
             }
         }

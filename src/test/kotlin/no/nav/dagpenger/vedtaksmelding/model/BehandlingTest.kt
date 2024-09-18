@@ -10,13 +10,6 @@ class BehandlingTest {
         val opplysninger =
             setOf(
                 Opplysning(
-                    opplysningTekstId = "opplysning.krav-paa-dagpenger",
-                    navn = "Krav på dagpenger",
-                    verdi = "true",
-                    datatype = "boolean",
-                    opplysningId = "test",
-                ),
-                Opplysning(
                     opplysningTekstId = "opplysning.krav-til-minsteinntekt",
                     navn = "Krav til minsteinntekt",
                     verdi = "true",
