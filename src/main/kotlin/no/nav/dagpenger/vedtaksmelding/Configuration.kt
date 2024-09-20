@@ -16,8 +16,7 @@ object Configuration {
                 "GRUPPE_SAKSBEHANDLER" to "SaksbehandlerADGruppe",
                 "DP_BEHANDLING_API_SCOPE" to "api://dev-gcp.teamdagpenger.dp-behandling/.default",
                 "DP_BEHANDLING_API_URL" to "http://dp-behandling/behandling",
-                // TODO: SANITY_API_URL sin postfix /development må endres til /prod i produksjon
-                "SANITY_API_URL" to "https://rt6o382n.apicdn.sanity.io/v2021-10-21/data/query/development",
+                "SANITY_API_URL" to "https://rt6o382n.apicdn.sanity.io/v2022-03-07/data/query/production",
             ),
         )
 
