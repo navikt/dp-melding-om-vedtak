@@ -12,6 +12,7 @@ data class Opplysning(
             return when (navn) {
                 "Krav til minsteinntekt" -> return "opplysning.krav-til-minsteinntekt"
                 "Søknadsdato" -> return "opplysning.soknadsdato"
+                "Søknadstidspunkt" -> return "opplysning.soknadstidspunkt"
                 "Siste avsluttende kalendermåned" -> return "opplysning.siste-avsluttende-kalendermaaned"
                 "Inntektskrav for siste 12 mnd" -> return "opplysning.inntektskrav-for-siste-12-mnd"
                 "Inntektskrav for siste 36 mnd" -> return "opplysning.inntektskrav-for-siste-36-mnd"
