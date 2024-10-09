@@ -29,7 +29,12 @@ class VedtaksMeldingTest {
                 id = "opplysning.krav-til-minsteinntekt",
                 verdi = "true",
             )
-        val opplysninger = setOf(minsteinntekt)
+        val soknadsdato: Opplysning =
+            lagOpplysning(
+                id = "opplysning.soknadsdato",
+                verdi = "2021-01-01",
+            )
+        val opplysninger = setOf(minsteinntekt, soknadsdato)
 
         val mediator =
             mockk<Mediator>().also {
@@ -43,7 +48,7 @@ class VedtaksMeldingTest {
             ).let { behandling ->
                 VedtaksMelding(behandling, mediator).let { vedtaksMelding ->
                     vedtaksMelding.hentBrevBlokkIder() shouldBe VedtaksMelding.FASTE_BLOKKER
-                    vedtaksMelding.hentOpplysninger() shouldBe emptyList()
+                    vedtaksMelding.hentOpplysninger() shouldBe listOf(soknadsdato)
                 }
             }
         }
@@ -70,7 +75,12 @@ class VedtaksMeldingTest {
                 id = "opplysning.krav-til-minsteinntekt",
                 verdi = "false",
             )
-        val opplysninger = setOf(minsteinntekt)
+        val soknadsdato: Opplysning =
+            lagOpplysning(
+                id = "opplysning.soknadsdato",
+                verdi = "2021-01-01",
+            )
+        val opplysninger = setOf(minsteinntekt, soknadsdato)
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-avslag",
@@ -92,7 +102,7 @@ class VedtaksMeldingTest {
             ).let { behandling ->
                 VedtaksMelding(behandling, mediator).let { vedtaksMelding ->
                     vedtaksMelding.hentBrevBlokkIder() shouldBe forventedeBrevblokkIder
-                    vedtaksMelding.hentOpplysninger() shouldBe listOf(minsteinntekt)
+                    vedtaksMelding.hentOpplysninger() shouldBe listOf(minsteinntekt, soknadsdato)
                 }
             }
         }
