@@ -14,10 +14,12 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
                 "brev.blokk.rett-til-aa-klage",
                 "brev.blokk.rett-til-innsyn",
             )
+
+        private val søknadsDatoTeksId = "opplysning.soknadsdato"
     }
 
     suspend fun hentOpplysninger(): List<Opplysning> {
-        val opplysningstekstIder = mediator.hentOpplysningTekstIder(hentBrevBlokkIder())
+        val opplysningstekstIder = mediator.hentOpplysningTekstIder(hentBrevBlokkIder()) + søknadsDatoTeksId
         logger.info { "Skal hente opplysninger basert på følgende tekstider: $opplysningstekstIder" }
         return opplysningstekstIder.map { behandling.hentOpplysning(it) }
     }
