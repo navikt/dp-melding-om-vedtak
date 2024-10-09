@@ -7,12 +7,15 @@ import io.ktor.server.auth.authenticate
 import io.ktor.server.response.respond
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
+import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDTO
 import no.nav.dagpenger.saksbehandling.api.models.OpplysningDTO
 import no.nav.dagpenger.vedtaksmelding.apiconfig.apiConfig
 import no.nav.dagpenger.vedtaksmelding.apiconfig.jwt
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import java.util.UUID
+
+private val sikkerlogger = KotlinLogging.logger("tjenestekall")
 
 fun Application.meldingOmVedtakApi(mediator: Mediator) {
     apiConfig()
@@ -35,6 +38,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                                 )
                             },
                     )
+                sikkerlogger.info { "Melding om vedtak for behandlingId: $behandlingId: $meldingOmVedtakDTO" }
                 call.respond(meldingOmVedtakDTO)
             }
         }
