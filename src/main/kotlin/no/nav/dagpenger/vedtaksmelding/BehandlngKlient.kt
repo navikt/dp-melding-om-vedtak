@@ -55,18 +55,16 @@ internal class BehandlngHttpKlient(
     }
 }
 
-
-//"id" : "0192241a-845a-723f-b557-e382e527e7e2",
-//"navn" : "Søknadsdato",
-//"verdi" : "2021-05-06",
-//"status" : "Faktum",
-//"datatype" : "dato",
-//"redigerbar" : false,
-//"tekstId" : "opplysning.soknadsdato",
-//"gyldigFraOgMed" : null,
-//"gyldigTilOgMed" : null,
-//"kilde" : {
-
+// "id" : "0192241a-845a-723f-b557-e382e527e7e2",
+// "navn" : "Søknadsdato",
+// "verdi" : "2021-05-06",
+// "status" : "Faktum",
+// "datatype" : "dato",
+// "redigerbar" : false,
+// "tekstId" : "opplysning.soknadsdato",
+// "gyldigFraOgMed" : null,
+// "gyldigTilOgMed" : null,
+// "kilde" : {
 
 private data class BehandlingDTO(
     val behandlingId: String,
