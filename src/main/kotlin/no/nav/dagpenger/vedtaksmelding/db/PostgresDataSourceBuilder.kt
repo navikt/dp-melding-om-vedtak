@@ -19,6 +19,7 @@ internal object PostgresDataSourceBuilder {
             jdbcUrl = getOrThrow(DB_URL_KEY)
             username = getOrThrow(DB_USERNAME_KEY)
             password = getOrThrow(DB_PASSWORD_KEY)
+            driverClassName = org.postgresql.Driver::class.java.name
             maximumPoolSize = 10
             minimumIdle = 1
             idleTimeout = 10001
