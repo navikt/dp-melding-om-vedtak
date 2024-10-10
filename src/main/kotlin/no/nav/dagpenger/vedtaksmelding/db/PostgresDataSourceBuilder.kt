@@ -25,7 +25,7 @@ internal object PostgresDataSourceBuilder {
             connectionTimeout = 1000
             maxLifetime = 30001
             if (System.getenv().containsKey("NAIS_CLUSTER_NAME")) {
-                addDataSourceProperty("sslCert", getOrThrow("DB_SSL_CERT"))
+                addDataSourceProperty("sslCert", getOrThrow("DB_SSLCERT"))
                 addDataSourceProperty("sslKey", getOrThrow("DB_SSLKEY_PK8"))
                 addDataSourceProperty("sslMode", getOrThrow("DB_SSLMODE"))
                 addDataSourceProperty("sslRootCert", getOrThrow("DB_SSLROOTCERT"))
