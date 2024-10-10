@@ -11,7 +11,7 @@ private val logger = KotlinLogging.logger {}
 
 fun main() {
     logger.info { "Starter opp dp-melding-om-vedtak" }
-    runMigration()
+    //runMigration()
     val behandlingKlient =
         BehandlngHttpKlient(
             dpBehandlingApiUrl = Configuration.dbBehandlingApiUrl,
