@@ -24,6 +24,12 @@ internal object PostgresDataSourceBuilder {
             idleTimeout = 10001
             connectionTimeout = 1000
             maxLifetime = 30001
+            if (System.getenv().containsKey("NAIS_CLUSTER_NAME")) {
+                addDataSourceProperty("sslCert", getOrThrow("DB_SSL_CERT"))
+                addDataSourceProperty("sslKey", getOrThrow("DB_SSLKEY_PK8"))
+                addDataSourceProperty("sslMode", getOrThrow("DB_SSLMODE"))
+                addDataSourceProperty("sslRootCert", getOrThrow("DB_SSLROOTCERT"))
+            }
         }
     }
 
