@@ -5,3 +5,9 @@ azure:
 
 wonderwalled: false
 DP_BEHANDLING_API_SCOPE: "api://prod-gcp.teamdagpenger.dp-behandling/.default"
+
+db:
+  highAvailability: true
+  pointInTimeRecovery: true
+  tier: db-custom-2-7680
+  type: POSTGRES_16

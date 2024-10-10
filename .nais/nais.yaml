@@ -6,7 +6,7 @@ metadata:
   labels:
     team: teamdagpenger
 spec:
-  image: {{ image }}
+  image: { { image } }
   port: 8080
   prometheus:
     enabled: true
@@ -26,12 +26,12 @@ spec:
     inbound:
       rules:
         - application: dp-saksbehandling-frontend
-        {{#if wonderwalled}}
-        - application: wonderwalled-azure
-          namespace: aura
-        - application: azure-token-generator
-          namespace: aura
-        {{/if}}
+        { { #if wonderwalled}}
+            - application: wonderwalled-azure
+                namespace: aura
+                - application: azure-token-generator
+                  namespace: aura
+                {{/if } }
     outbound:
       external:
         - host: rt6o382n.api.sanity.io
@@ -42,15 +42,35 @@ spec:
     - name: JDK_JAVA_OPTIONS
       value: -XX:+UseParallelGC -XX:MaxRAMPercentage=50.0 -XX:ActiveProcessorCount=4 -XX:+PrintFlagsFinal
     - name: GRUPPE_SAKSBEHANDLER
-      value: {{azure.grupper.saksbehandler}}
+      value: {{ azure.grupper.saksbehandler }}
     - name: DP_BEHANDLING_API_SCOPE
-      value: {{DP_BEHANDLING_API_SCOPE}}
+      value: {{ DP_BEHANDLING_API_SCOPE }}
   azure:
     application:
       enabled: true
-      tenant: {{azure.tenant}}
+      tenant: {{ azure.tenant }}
       claims:
         groups:
-          - id: {{azure.grupper.saksbehandler}}
+          - id: {{ azure.grupper.saksbehandler }}
         extra:
           - NAVident
+  gcp:
+    sqlInstances:
+      - collation: nb_NO.UTF8
+        databases:
+          - envVarPrefix: DB
+            name: vedtaksmelding
+        diskAutoresize: true
+        diskType: SSD
+        highAvailability: {{ db.highAvailability }}
+        insights:
+          enabled: true
+          queryStringLength: 4500
+          recordApplicationTags: true
+          recordClientAddress: true
+        maintenance:
+          day: 1
+          hour: 4
+        pointInTimeRecovery: {{ db.pointInTimeRecovery }}
+        tier: {{ db.tier }}
+        type: POSTGRES_16
