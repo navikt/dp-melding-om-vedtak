@@ -8,7 +8,7 @@ $$ LANGUAGE plpgsql;
 
 CREATE TABLE IF NOT EXISTS fritekst_v1
 (
-    id                    UUID PRIMARY KEY,
+    id                    SERIAL PRIMARY KEY,
     behandling_id         UUID                        NOT NULL UNIQUE,
     fritekst              TEXT,
     registrert_tidspunkt  TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
