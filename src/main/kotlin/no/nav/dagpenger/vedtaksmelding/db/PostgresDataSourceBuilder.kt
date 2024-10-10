@@ -3,8 +3,11 @@ package no.nav.dagpenger.vedtaksmelding.db
 import ch.qos.logback.core.util.OptionHelper.getEnv
 import ch.qos.logback.core.util.OptionHelper.getSystemProperty
 import com.zaxxer.hikari.HikariDataSource
+import mu.KotlinLogging
 import org.flywaydb.core.Flyway
 import org.flywaydb.core.api.configuration.FluentConfiguration
+
+private val logger = KotlinLogging.logger {}
 
 // Understands how to create a data source from environment variables
 internal object PostgresDataSourceBuilder {
@@ -16,7 +19,11 @@ internal object PostgresDataSourceBuilder {
 
     val dataSource by lazy {
         HikariDataSource().apply {
-            jdbcUrl = getOrThrow(DB_URL_KEY).ensurePrefix("jdbc:postgresql://").stripCredentials()
+            val url =
+                getOrThrow(DB_URL_KEY).also {
+                    logger.info { "DB_URL: $it" }
+                }
+            jdbcUrl = url.ensurePrefix("jdbc:postgresql://").stripCredentials()
             username = getOrThrow(DB_USERNAME_KEY)
             password = getOrThrow(DB_PASSWORD_KEY)
             maximumPoolSize = 10
