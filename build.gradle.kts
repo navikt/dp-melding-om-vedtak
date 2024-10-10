@@ -17,6 +17,7 @@ dependencies {
     implementation("io.ktor:ktor-server-swagger:${libs.versions.ktor.get()}")
     implementation(libs.jackson.datatype.jsr310)
     implementation(libs.dp.biblioteker.oauth2.klient)
+    implementation(libs.bundles.postgres)
 
     implementation(libs.ktor.client.cio)
     implementation(libs.ktor.client.content.negotiation)
@@ -26,6 +27,7 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.mock.oauth2.server)
     testImplementation(libs.bundles.kotest.assertions)
+    testImplementation(libs.bundles.postgres.test)
     testImplementation("io.ktor:ktor-client-mock:${libs.versions.ktor.get()}")
 
     testImplementation("io.kubernetes:client-java:21.0.1")
