@@ -6,7 +6,7 @@ metadata:
   labels:
     team: teamdagpenger
 spec:
-  image: { { image } }
+  image: {{ image }}
   port: 8080
   prometheus:
     enabled: true
@@ -26,12 +26,12 @@ spec:
     inbound:
       rules:
         - application: dp-saksbehandling-frontend
-        {{ #if wonderwalled }}
+        {{#if wonderwalled}}
         - application: wonderwalled-azure
           namespace: aura
         - application: azure-token-generator
           namespace: aura
-        {{ /if }}
+        {{/if}}
     outbound:
       external:
         - host: rt6o382n.api.sanity.io
