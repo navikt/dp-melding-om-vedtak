@@ -16,10 +16,9 @@ internal object PostgresDataSourceBuilder {
 
     val dataSource by lazy {
         HikariDataSource().apply {
-            jdbcUrl = getOrThrow(DB_URL_KEY)
+            jdbcUrl = getOrThrow(DB_URL_KEY).ensurePrefix("jdbc:postgresql://").stripCredentials()
             username = getOrThrow(DB_USERNAME_KEY)
             password = getOrThrow(DB_PASSWORD_KEY)
-            driverClassName = org.postgresql.Driver::class.java.name
             maximumPoolSize = 10
             minimumIdle = 1
             idleTimeout = 10001
@@ -27,6 +26,15 @@ internal object PostgresDataSourceBuilder {
             maxLifetime = 30001
         }
     }
+
+    private fun String.stripCredentials() = this.replace(Regex("://.*:.*@"), "://")
+
+    private fun String.ensurePrefix(prefix: String) =
+        if (this.startsWith(prefix)) {
+            this
+        } else {
+            prefix + this.substringAfter("//")
+        }
 
     private fun flyWayBuilder() = Flyway.configure().connectRetries(10)
 
