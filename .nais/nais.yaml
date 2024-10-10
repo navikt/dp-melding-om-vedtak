@@ -59,7 +59,7 @@ spec:
       - collation: nb_NO.UTF8
         databases:
           - envVarPrefix: DB
-            name: vedtaksmelding
+            name: vedtaksmelding_v1
         diskAutoresize: true
         diskType: SSD
         highAvailability: {{ db.highAvailability }}
