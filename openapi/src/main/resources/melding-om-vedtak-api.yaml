@@ -25,7 +25,33 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/MeldingOmVedtak'
-
+  /melding-om-vedtak/{behandlingId}/{brevblokkId}/utvidet-beskrivelse:
+    put:
+      summary: Lagrer utvidet beskrivelse for en gitt brevblokk i meldingen om vedtak
+      parameters:
+        - in: path
+          name: behandlingId
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: path
+          name: brevblokkId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: Utvidet beskrivelse som skal inngå i vedtaksmeldingen
+      responses:
+        '204':
+          description: Utvidet beskrivelse for brevblokk er lagret
+        '404':
+          description: Behandlingen finnes ikke
 
 components:
   schemas:
