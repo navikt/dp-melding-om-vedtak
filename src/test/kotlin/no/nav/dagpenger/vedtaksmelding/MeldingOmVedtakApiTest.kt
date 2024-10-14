@@ -6,13 +6,16 @@ import io.kotest.matchers.string.shouldContain
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
 import io.ktor.client.request.header
+import io.ktor.client.request.put
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
 import io.ktor.server.testing.testApplication
+import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.just
 import io.mockk.mockk
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
@@ -100,6 +103,28 @@ class MeldingOmVedtakApiTest {
         }
         coVerify(exactly = 1) {
             mediator.hentVedtaksmelding(behandlingId, saksbehandler)
+        }
+    }
+
+    @Test
+    fun `Skal lagre utvidet beskrivelse for en gitt brevblokk for en behandling`() {
+        val brevblokkId = "brevblokkId"
+        val mediator =
+            mockk<Mediator>().also {
+                coEvery {
+                    it.lagreUtvidetBeskrivelse(any(), any(), any())
+                } just Runs
+            }
+        testApplication {
+            application {
+                meldingOmVedtakApi(mediator)
+            }
+
+            client.put("/melding-om-vedtak/$behandlingId/$brevblokkId/utvidet-beskrivelse") {
+                autentisert(token = saksbehandlerToken)
+            }.let { response ->
+                response.status shouldBe HttpStatusCode.NoContent
+            }
         }
     }
 

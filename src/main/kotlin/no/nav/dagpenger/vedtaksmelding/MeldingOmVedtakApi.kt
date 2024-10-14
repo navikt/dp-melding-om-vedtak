@@ -1,11 +1,13 @@
 package no.nav.dagpenger.vedtaksmelding
 
+import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.call
 import io.ktor.server.auth.authenticate
 import io.ktor.server.response.respond
 import io.ktor.server.routing.get
+import io.ktor.server.routing.put
 import io.ktor.server.routing.routing
 import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDTO
@@ -40,6 +42,13 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                     )
                 sikkerlogger.info { "Melding om vedtak for behandlingId: $behandlingId: $meldingOmVedtakDTO" }
                 call.respond(meldingOmVedtakDTO)
+            }
+            put("/melding-om-vedtak/{behandlingId}/{brevblokkId}/utvidet-beskrivelse") {
+                val behandlingId = call.parseUUID()
+                val brevblokkId = call.parameters["brevblokkId"].toString()
+                val utvidetBeskrivelse = "Hardkodet ræl"
+                mediator.lagreUtvidetBeskrivelse(behandlingId, brevblokkId, utvidetBeskrivelse)
+                call.respond(HttpStatusCode.NoContent)
             }
         }
     }
