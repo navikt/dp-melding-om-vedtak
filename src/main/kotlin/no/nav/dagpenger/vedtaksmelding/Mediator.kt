@@ -1,7 +1,9 @@
 package no.nav.dagpenger.vedtaksmelding
 
 import mu.KotlinLogging
+import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
+import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.VedtaksMelding
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
 import java.util.UUID
@@ -11,6 +13,7 @@ private val logger = KotlinLogging.logger {}
 class Mediator(
     private val behandlingKlient: BehandlingKlient,
     private val sanityKlient: SanityKlient,
+    private val vedtaksmeldingRepository: VedtaksmeldingRepository,
 ) {
     suspend fun hentVedtaksmelding(
         behandlingId: UUID,
@@ -27,11 +30,7 @@ class Mediator(
         return sanityKlient.hentOpplysningTekstIder(brevbklokkIder)
     }
 
-    fun lagreUtvidetBeskrivelse(
-        behandlingId: UUID,
-        brevblokkId: String,
-        utvidetBeskrivelse: String,
-    ) {
-        // TODO: Implementer greia
+    fun lagreUtvidetBeskrivelse(utvidetBeskrivelse: UtvidetBeskrivelse) {
+        vedtaksmeldingRepository.lagre(utvidetBeskrivelse)
     }
 }
