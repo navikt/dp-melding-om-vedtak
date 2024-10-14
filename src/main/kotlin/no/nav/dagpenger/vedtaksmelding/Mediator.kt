@@ -26,4 +26,12 @@ class Mediator(
     suspend fun hentOpplysningTekstIder(brevbklokkIder: List<String>): List<String> {
         return sanityKlient.hentOpplysningTekstIder(brevbklokkIder)
     }
+
+    fun lagreUtvidetBeskrivelse(
+        behandlingId: UUID,
+        brevblokkId: String,
+        utvidetBeskrivelse: String,
+    ) {
+        // TODO: Implementer greia
+    }
 }
