@@ -112,7 +112,7 @@ class MeldingOmVedtakApiTest {
         val mediator =
             mockk<Mediator>().also {
                 coEvery {
-                    it.lagreUtvidetBeskrivelse(any(), any(), any())
+                    it.lagreUtvidetBeskrivelse(any())
                 } just Runs
             }
         testApplication {
@@ -135,12 +135,10 @@ class MeldingOmVedtakApiTest {
                 meldingOmVedtakApi(mockk())
             }
 
-            client.get("/melding-om-vedtak/${UUID.randomUUID()}").let { response ->
-                response.status shouldBe HttpStatusCode.Unauthorized
-            }
+            client.get("/melding-om-vedtak/${UUID.randomUUID()}").status shouldBe HttpStatusCode.Unauthorized
         }
 
-    fun HttpRequestBuilder.autentisert(token: String) {
+    private fun HttpRequestBuilder.autentisert(token: String) {
         header(HttpHeaders.Authorization, "Bearer $token")
     }
 }

@@ -15,6 +15,7 @@ import no.nav.dagpenger.saksbehandling.api.models.OpplysningDTO
 import no.nav.dagpenger.vedtaksmelding.apiconfig.apiConfig
 import no.nav.dagpenger.vedtaksmelding.apiconfig.jwt
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
+import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import java.util.UUID
 
 private val sikkerlogger = KotlinLogging.logger("tjenestekall")
@@ -46,8 +47,14 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
             put("/melding-om-vedtak/{behandlingId}/{brevblokkId}/utvidet-beskrivelse") {
                 val behandlingId = call.parseUUID()
                 val brevblokkId = call.parameters["brevblokkId"].toString()
-                val utvidetBeskrivelse = "Hardkodet ræl"
-                mediator.lagreUtvidetBeskrivelse(behandlingId, brevblokkId, utvidetBeskrivelse)
+                val tekst = "Hardkodet ræl"
+                val utvidetBeskrivelse =
+                    UtvidetBeskrivelse(
+                        behandlingId = behandlingId,
+                        brevblokkId = brevblokkId,
+                        tekst = tekst,
+                    )
+                mediator.lagreUtvidetBeskrivelse(utvidetBeskrivelse)
                 call.respond(HttpStatusCode.NoContent)
             }
         }
