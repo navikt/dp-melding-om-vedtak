@@ -28,6 +28,13 @@ class PostgresVedtaksmeldingRepositoryTest {
                     brevblokkId = brevblokkId,
                 )
             utvidetBeskrivelseFraDB shouldBe utvidetBeskrivelse
+            repository.lagre(utvidetBeskrivelse.copy(tekst = "Oppdatert tekst"))
+            val oppdatertUtvidetBeskrivelse =
+                repository.hent(
+                    behandlingId = behandlingId,
+                    brevblokkId = brevblokkId,
+                )
+            oppdatertUtvidetBeskrivelse.tekst shouldBe "Oppdatert tekst"
         }
     }
 }
