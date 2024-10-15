@@ -35,6 +35,6 @@ class Mediator(
     }
 
     fun hentUtvidedeBeskrivelser(behandlingId: UUID): List<UtvidetBeskrivelse> {
-        TODO("Not yet implemented")
+        return vedtaksmeldingRepository.hentUtvidedeBeskrivelserFor(behandlingId)
     }
 }
