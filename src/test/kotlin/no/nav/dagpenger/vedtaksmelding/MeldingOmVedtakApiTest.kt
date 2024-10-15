@@ -15,13 +15,16 @@ import io.ktor.server.testing.testApplication
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
+import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.VedtaksMelding
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
+import java.time.LocalDateTime
 import java.util.UUID
 
 class MeldingOmVedtakApiTest {
@@ -57,14 +60,32 @@ class MeldingOmVedtakApiTest {
                 opplysningId = "test",
             )
         val opplysninger = listOf(opplysning1, opplysning2)
+        val utvidedeBeskrivelser =
+            listOf(
+                UtvidetBeskrivelse(
+                    behandlingId = behandlingId,
+                    brevblokkId = "A",
+                    tekst = "Utvidet beskrivelse for brevblokk A",
+                    sistEndretTidspunkt = LocalDateTime.MAX,
+                ),
+                UtvidetBeskrivelse(
+                    behandlingId = behandlingId,
+                    brevblokkId = "B",
+                    tekst = "Utvidet beskrivelse for brevblokk B",
+                    sistEndretTidspunkt = LocalDateTime.MIN,
+                ),
+            )
         val vedtak =
             mockk<VedtaksMelding>().also {
                 coEvery { it.hentBrevBlokkIder() } returns brevBlokker
                 coEvery { it.hentOpplysninger() } returns opplysninger
+                every { it.hentUtvidedeBeskrivelser() } returns utvidedeBeskrivelser
             }
         val mediator =
             mockk<Mediator>().also {
-                coEvery { it.hentVedtaksmelding(behandlingId, saksbehandler) } returns vedtak
+                coEvery {
+                    it.hentVedtaksmelding(behandlingId, saksbehandler)
+                } returns vedtak
             }
         testApplication {
             application {
@@ -79,25 +100,38 @@ class MeldingOmVedtakApiTest {
                 response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
                     //language=json
                     """
-                                          {
-                                          "brevblokkIder": [
-                                            "A",
-                                            "B",
-                                            "C"
-                                          ],
-                                          "opplysninger": [
-                                            {
-                                              "tekstId": "opplysning.krav-paa-dagpenger",
-                                              "verdi": "true",
-                                              "datatype": "boolean"
-                                            },
-                                            {
-                                              "tekstId": "opplysning.krav-til-minsteinntekt",
-                                              "verdi": "true",
-                                              "datatype": "boolean"
-                                            }
-                                          ]
+                    {
+                      "brevblokkIder": [
+                        "A",
+                        "B",
+                        "C"
+                      ],
+                      "opplysninger": [
+                        {
+                          "tekstId": "opplysning.krav-paa-dagpenger",
+                          "verdi": "true",
+                          "datatype": "boolean"
+                        },
+                        {
+                          "tekstId": "opplysning.krav-til-minsteinntekt",
+                          "verdi": "true",
+                          "datatype": "boolean"
+                        }
+                      ],
+                      "utvidedeBeskrivelser": [
+                        {
+                          "brevblokkId": "A",
+                          "tekst": "Utvidet beskrivelse for brevblokk A",
+                          "sistEndretTidspunkt": "+999999999-12-31T23:59:59.999999999"
+                        },
+                        {
+                          "brevblokkId": "B",
+                          "tekst": "Utvidet beskrivelse for brevblokk B",
+                          "sistEndretTidspunkt": "-999999999-01-01T00:00:00"
+                        }
+                      ]
                     }
+
                     """.trimIndent()
             }
         }

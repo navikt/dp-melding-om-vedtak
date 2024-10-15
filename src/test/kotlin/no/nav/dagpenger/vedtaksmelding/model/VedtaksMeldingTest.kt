@@ -6,7 +6,9 @@ import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.Mediator
+import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
+import java.util.UUID
 
 class VedtaksMeldingTest {
     private fun lagOpplysning(
@@ -37,7 +39,7 @@ class VedtaksMeldingTest {
             }
         runBlocking {
             Behandling(
-                id = "019145eb-6fbb-769f-b1b1-d2450b383a98",
+                id = UUID.fromString("019145eb-6fbb-769f-b1b1-d2450b383a98"),
                 tilstand = "Tilstand",
                 opplysninger = opplysninger,
             ).let { behandling ->
@@ -54,7 +56,7 @@ class VedtaksMeldingTest {
         shouldThrow<UgyldigVedtakException> {
             VedtaksMelding(
                 Behandling(
-                    id = "x",
+                    id = UUIDv7.ny(),
                     tilstand = "y",
                     opplysninger = setOf(),
                 ),
@@ -86,7 +88,7 @@ class VedtaksMeldingTest {
             }
         runBlocking {
             Behandling(
-                id = "019145eb-6fbb-769f-b1b1-d2450b383a98",
+                id = UUID.fromString("019145eb-6fbb-769f-b1b1-d2450b383a98"),
                 tilstand = "Tilstand",
                 opplysninger = opplysninger,
             ).let { behandling ->

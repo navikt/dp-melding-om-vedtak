@@ -12,6 +12,7 @@ import io.ktor.server.routing.routing
 import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDTO
 import no.nav.dagpenger.saksbehandling.api.models.OpplysningDTO
+import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
 import no.nav.dagpenger.vedtaksmelding.apiconfig.apiConfig
 import no.nav.dagpenger.vedtaksmelding.apiconfig.jwt
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
@@ -28,7 +29,6 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                 val behandlingId = call.parseUUID()
                 val saksbehandler = call.parseSaksbehandler()
                 val vedtaksmelding = mediator.hentVedtaksmelding(behandlingId, saksbehandler)
-
                 val meldingOmVedtakDTO =
                     MeldingOmVedtakDTO(
                         brevblokkIder = vedtaksmelding.hentBrevBlokkIder(),
@@ -38,6 +38,14 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                                     tekstId = it.opplysningTekstId,
                                     verdi = it.verdi,
                                     datatype = it.datatype,
+                                )
+                            },
+                        utvidedeBeskrivelser =
+                            vedtaksmelding.hentUtvidedeBeskrivelser().map {
+                                UtvidetBeskrivelseDTO(
+                                    brevblokkId = it.brevblokkId,
+                                    tekst = it.tekst,
+                                    sistEndretTidspunkt = it.sistEndretTidspunkt,
                                 )
                             },
                     )

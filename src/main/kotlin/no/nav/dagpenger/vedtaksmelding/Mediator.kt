@@ -33,4 +33,8 @@ class Mediator(
     fun lagreUtvidetBeskrivelse(utvidetBeskrivelse: UtvidetBeskrivelse) {
         vedtaksmeldingRepository.lagre(utvidetBeskrivelse)
     }
+
+    fun hentUtvidedeBeskrivelser(behandlingId: UUID): List<UtvidetBeskrivelse> {
+        TODO("Not yet implemented")
+    }
 }

@@ -1,11 +1,12 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
 import mu.KotlinLogging
+import java.util.UUID
 
 private val logger = KotlinLogging.logger {}
 
 data class Behandling(
-    val id: String,
+    val id: UUID,
     val tilstand: String,
     val opplysninger: Set<Opplysning>,
 ) {
