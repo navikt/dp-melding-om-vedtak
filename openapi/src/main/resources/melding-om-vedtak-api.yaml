@@ -66,6 +66,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Opplysning'
+        utvidedeBeskrivelser:
+          type: array
+          items:
+            $ref: '#/components/schemas/UtvidetBeskrivelse'
+
+    UtvidetBeskrivelse:
+      type: object
+      properties:
+        brevblokkId:
+          type: string
+        tekst:
+          type: string
+        sistEndretTidspunkt:
+          type: string
+          format: date-time
 
     Opplysning:
       type: object
