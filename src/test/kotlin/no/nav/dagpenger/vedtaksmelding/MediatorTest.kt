@@ -35,7 +35,7 @@ class MediatorTest {
         )
     private val behandling =
         Behandling(
-            id = behandlingId.toString(),
+            id = behandlingId,
             tilstand = "tilstand",
             opplysninger = opplysninger,
         )

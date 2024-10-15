@@ -36,7 +36,7 @@ internal class BehandlingKlientTest {
         runBlocking {
             klient.hentBehandling(behandling = behandlingId, saksbehandler = Saksbehandler("tulleToken")).getOrThrow()
                 .let { behandling ->
-                    behandling.id shouldBe behandlingId.toString()
+                    behandling.id shouldBe behandlingId
                     behandling.tilstand shouldBe "ForslagTilVedtak"
                     behandling.opplysninger.let { opplysninger ->
                         opplysninger.size shouldBeGreaterThan 0
