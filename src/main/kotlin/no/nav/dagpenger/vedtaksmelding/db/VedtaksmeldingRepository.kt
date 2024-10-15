@@ -15,4 +15,6 @@ interface VedtaksmeldingRepository {
         behandlingId: UUID,
         brevblokkId: String,
     ): UtvidetBeskrivelse
+
+    fun hentUtvidedeBeskrivelserFor(behandlingId: UUID): List<UtvidetBeskrivelse>
 }
