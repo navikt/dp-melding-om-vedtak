@@ -6,6 +6,7 @@ import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.VedtaksMelding
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
+import java.time.LocalDateTime
 import java.util.UUID
 
 private val logger = KotlinLogging.logger {}
@@ -30,8 +31,8 @@ class Mediator(
         return sanityKlient.hentOpplysningTekstIder(brevbklokkIder)
     }
 
-    fun lagreUtvidetBeskrivelse(utvidetBeskrivelse: UtvidetBeskrivelse) {
-        vedtaksmeldingRepository.lagre(utvidetBeskrivelse)
+    fun lagreUtvidetBeskrivelse(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime {
+        return vedtaksmeldingRepository.lagre(utvidetBeskrivelse)
     }
 
     fun hentUtvidedeBeskrivelser(behandlingId: UUID): List<UtvidetBeskrivelse> {

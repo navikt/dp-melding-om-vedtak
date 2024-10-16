@@ -48,13 +48,28 @@ paths:
               type: string
               description: Utvidet beskrivelse som skal inngå i vedtaksmeldingen
       responses:
-        '204':
-          description: Utvidet beskrivelse for brevblokk er lagret
+        '200':
+          description: Utvidet beskrivelse for brevblokk er lagret og returnerer sistEndretTidspunkt
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtvidetBeskrivelseSistEndretTidspunkt'
+        '400':
+          description: ContentType må være text/plain
         '404':
           description: Behandlingen finnes ikke
 
+
 components:
   schemas:
+    UtvidetBeskrivelseSistEndretTidspunkt:
+      type: object
+      properties:
+        sistEndretTidspunkt:
+          type: string
+          format: date-time
+          description: Tidspunkt utvidet beskrivelse sist ble endret
+
     MeldingOmVedtak:
       type: object
       properties:
