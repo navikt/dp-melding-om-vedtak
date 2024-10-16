@@ -68,6 +68,11 @@ fun Application.apiConfig() {
                     call.respond(HttpStatusCode.Unauthorized, cause.message ?: "Unauthorized")
                 }
 
+                is IllegalArgumentException -> {
+                    log.error { "Bad request: ${cause.message}" }
+                    call.respond(HttpStatusCode.BadRequest, cause.message ?: "Bad request")
+                }
+
                 else -> {
                     log.error(cause) { "Uhåndtert feil: Se sikkerlogg for detaljer" }
                     sikkerlogg.error(cause) { "Uhåndtert feil: ${cause.message}" }

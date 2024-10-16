@@ -1,14 +1,17 @@
 package no.nav.dagpenger.vedtaksmelding
 
+import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.call
 import io.ktor.server.auth.authenticate
+import io.ktor.server.request.receiveText
 import io.ktor.server.response.respond
 import io.ktor.server.routing.get
 import io.ktor.server.routing.put
 import io.ktor.server.routing.routing
+import io.ktor.util.pipeline.PipelineContext
 import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDTO
 import no.nav.dagpenger.saksbehandling.api.models.OpplysningDTO
@@ -53,14 +56,16 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                 call.respond(meldingOmVedtakDTO)
             }
             put("/melding-om-vedtak/{behandlingId}/{brevblokkId}/utvidet-beskrivelse") {
+                requirePlainText()
+
                 val behandlingId = call.parseUUID()
                 val brevblokkId = call.parameters["brevblokkId"].toString()
-                val tekst = "Hardkodet ræl"
+                val utvidetBeskrivelseTekst = call.receiveText()
                 val utvidetBeskrivelse =
                     UtvidetBeskrivelse(
                         behandlingId = behandlingId,
                         brevblokkId = brevblokkId,
-                        tekst = tekst,
+                        tekst = utvidetBeskrivelseTekst,
                     )
                 mediator.lagreUtvidetBeskrivelse(utvidetBeskrivelse)
                 call.respond(HttpStatusCode.NoContent)
@@ -75,4 +80,10 @@ private fun ApplicationCall.parseUUID(): UUID {
     return this.parameters["behandlingId"]?.let {
         UUID.fromString(it)
     } ?: throw IllegalArgumentException("")
+}
+
+private fun PipelineContext<Unit, ApplicationCall>.requirePlainText() {
+    require(call.request.headers["Content-Type"]!!.contains(ContentType.Text.Plain.toString())) {
+        "Content-Type må være ${ContentType.Text.Plain}, men var ${call.request.headers["Content-Type"]}"
+    }
 }

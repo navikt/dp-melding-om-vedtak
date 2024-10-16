@@ -7,7 +7,9 @@ import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.put
+import io.ktor.client.request.setBody
 import io.ktor.client.statement.bodyAsText
+import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
@@ -18,6 +20,7 @@ import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
+import io.mockk.slot
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
@@ -143,10 +146,12 @@ class MeldingOmVedtakApiTest {
     @Test
     fun `Skal lagre utvidet beskrivelse for en gitt brevblokk for en behandling`() {
         val brevblokkId = "brevblokkId"
+        val utvidetBeskrivelseTekst = "En fritekst av noe slag"
+        val utvidetBeskrivelseCapturingSlot = slot<UtvidetBeskrivelse>()
         val mediator =
             mockk<Mediator>().also {
                 coEvery {
-                    it.lagreUtvidetBeskrivelse(any())
+                    it.lagreUtvidetBeskrivelse(capture(utvidetBeskrivelseCapturingSlot))
                 } just Runs
             }
         testApplication {
@@ -156,10 +161,18 @@ class MeldingOmVedtakApiTest {
 
             client.put("/melding-om-vedtak/$behandlingId/$brevblokkId/utvidet-beskrivelse") {
                 autentisert(token = saksbehandlerToken)
+                header(HttpHeaders.ContentType, ContentType.Text.Plain)
+                setBody(utvidetBeskrivelseTekst)
             }.let { response ->
                 response.status shouldBe HttpStatusCode.NoContent
             }
         }
+        utvidetBeskrivelseCapturingSlot.captured shouldBe
+            UtvidetBeskrivelse(
+                behandlingId = behandlingId,
+                brevblokkId = brevblokkId,
+                tekst = utvidetBeskrivelseTekst,
+            )
     }
 
     @Test
