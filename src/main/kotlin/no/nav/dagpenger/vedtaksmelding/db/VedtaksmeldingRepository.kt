@@ -1,10 +1,11 @@
 package no.nav.dagpenger.vedtaksmelding.db
 
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
+import java.time.LocalDateTime
 import java.util.UUID
 
 interface VedtaksmeldingRepository {
-    fun lagre(utvidetBeskrivelse: UtvidetBeskrivelse)
+    fun lagre(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime
 
     fun finn(
         behandlingId: UUID,

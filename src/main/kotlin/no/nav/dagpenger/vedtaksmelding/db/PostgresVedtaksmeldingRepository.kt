@@ -4,12 +4,13 @@ import kotliquery.TransactionalSession
 import kotliquery.queryOf
 import kotliquery.sessionOf
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
+import java.time.LocalDateTime
 import java.util.UUID
 import javax.sql.DataSource
 
 class PostgresVedtaksmeldingRepository(private val dataSource: DataSource) : VedtaksmeldingRepository {
-    override fun lagre(utvidetBeskrivelse: UtvidetBeskrivelse) {
-        sessionOf(dataSource).use { session ->
+    override fun lagre(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime {
+        return sessionOf(dataSource).use { session ->
             session.transaction { tx ->
                 tx.lagre(utvidetBeskrivelse)
             }
@@ -89,8 +90,8 @@ class PostgresVedtaksmeldingRepository(private val dataSource: DataSource) : Ved
     }
 }
 
-private fun TransactionalSession.lagre(utvidetBeskrivelse: UtvidetBeskrivelse) {
-    run(
+private fun TransactionalSession.lagre(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime {
+    return run(
         queryOf(
             //language=PostgreSQL
             statement =
@@ -98,8 +99,9 @@ private fun TransactionalSession.lagre(utvidetBeskrivelse: UtvidetBeskrivelse) {
                 INSERT INTO utvidet_beskrivelse_v1
                     (behandling_id, brevblokk_id, tekst)
                 VALUES
-                    (:behandling_id, :brevblokk_id, :tekst) 
+                    (:behandling_id, :brevblokk_id, :tekst)
                 ON CONFLICT (behandling_id, brevblokk_id) DO UPDATE SET tekst = :tekst
+                RETURNING endret_tidspunkt
                 """.trimIndent(),
             paramMap =
                 mapOf(
@@ -107,8 +109,13 @@ private fun TransactionalSession.lagre(utvidetBeskrivelse: UtvidetBeskrivelse) {
                     "brevblokk_id" to utvidetBeskrivelse.brevblokkId,
                     "tekst" to utvidetBeskrivelse.tekst,
                 ),
-        ).asUpdate,
+        ).map { row -> row.localDateTime("endret_tidspunkt") }.asSingle,
+    ) ?: throw KanIkkeLagreUtvidetBeskrivelseException(
+        "Kunne ikke lagre utvidet beskrivelse for behandlingId: " +
+            "${utvidetBeskrivelse.behandlingId} og brevblokkId: ${utvidetBeskrivelse.brevblokkId}",
     )
 }
 
 class DataNotFoundException(message: String) : RuntimeException(message)
+
+class KanIkkeLagreUtvidetBeskrivelseException(message: String) : RuntimeException(message)
