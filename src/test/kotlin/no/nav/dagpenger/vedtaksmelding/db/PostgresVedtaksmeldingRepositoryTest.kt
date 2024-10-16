@@ -1,11 +1,13 @@
 package no.nav.dagpenger.vedtaksmelding.db
 
+import io.kotest.matchers.date.shouldBeAfter
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import no.nav.dagpenger.vedtaksmelding.db.Postgres.withMigratedDb
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
+import java.time.LocalDateTime
 
 class PostgresVedtaksmeldingRepositoryTest {
     @Test
@@ -36,6 +38,25 @@ class PostgresVedtaksmeldingRepositoryTest {
                     brevblokkId = brevblokkId,
                 )
             oppdatertUtvidetBeskrivelse.tekst shouldBe "Oppdatert tekst"
+        }
+    }
+
+    @Test
+    fun `Lagring av utvidet beskrivelse skal returnere sistEndretTidspunkt`() {
+        val behandlingId = UUIDv7.ny()
+        val brevblokkId = "brevblokk1"
+        val tekst = "Dette er en fin tekst"
+        val utvidetBeskrivelse =
+            UtvidetBeskrivelse(
+                behandlingId = behandlingId,
+                brevblokkId = brevblokkId,
+                tekst = tekst,
+            )
+        withMigratedDb { datasource ->
+            val repository = PostgresVedtaksmeldingRepository(datasource)
+            val sistEndretTidspunkt = repository.lagre(utvidetBeskrivelse)
+            sistEndretTidspunkt shouldNotBe null
+            sistEndretTidspunkt shouldBeAfter LocalDateTime.now().minusSeconds(1)
         }
     }
 
