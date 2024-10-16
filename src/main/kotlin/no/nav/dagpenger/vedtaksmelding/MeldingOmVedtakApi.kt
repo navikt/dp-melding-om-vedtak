@@ -16,6 +16,7 @@ import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDTO
 import no.nav.dagpenger.saksbehandling.api.models.OpplysningDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
+import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseSistEndretTidspunktDTO
 import no.nav.dagpenger.vedtaksmelding.apiconfig.apiConfig
 import no.nav.dagpenger.vedtaksmelding.apiconfig.jwt
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
@@ -67,8 +68,8 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                         brevblokkId = brevblokkId,
                         tekst = utvidetBeskrivelseTekst,
                     )
-                mediator.lagreUtvidetBeskrivelse(utvidetBeskrivelse)
-                call.respond(HttpStatusCode.NoContent)
+                val sistEndretTidspunkt = mediator.lagreUtvidetBeskrivelse(utvidetBeskrivelse)
+                call.respond(HttpStatusCode.OK, UtvidetBeskrivelseSistEndretTidspunktDTO(sistEndretTidspunkt))
             }
         }
     }

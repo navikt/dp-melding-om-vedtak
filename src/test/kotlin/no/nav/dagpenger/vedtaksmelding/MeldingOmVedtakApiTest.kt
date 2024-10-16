@@ -1,5 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding
 
+import io.kotest.assertions.json.shouldEqualJson
 import io.kotest.assertions.json.shouldEqualSpecifiedJsonIgnoringOrder
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
@@ -14,11 +15,9 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
 import io.ktor.server.testing.testApplication
-import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
-import io.mockk.just
 import io.mockk.mockk
 import io.mockk.slot
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
@@ -152,7 +151,7 @@ class MeldingOmVedtakApiTest {
             mockk<Mediator>().also {
                 coEvery {
                     it.lagreUtvidetBeskrivelse(capture(utvidetBeskrivelseCapturingSlot))
-                } just Runs
+                } returns LocalDateTime.MAX
             }
         testApplication {
             application {
@@ -164,7 +163,8 @@ class MeldingOmVedtakApiTest {
                 header(HttpHeaders.ContentType, ContentType.Text.Plain)
                 setBody(utvidetBeskrivelseTekst)
             }.let { response ->
-                response.status shouldBe HttpStatusCode.NoContent
+                response.status shouldBe HttpStatusCode.OK
+                response.bodyAsText() shouldEqualJson """{"sistEndretTidspunkt" : "+999999999-12-31T23:59:59.999999999"}"""
             }
         }
         utvidetBeskrivelseCapturingSlot.captured shouldBe
