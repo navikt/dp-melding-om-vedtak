@@ -13,8 +13,8 @@ import io.ktor.serialization.jackson.jackson
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.auth.Authentication
-import io.ktor.server.plugins.calllogging.CallLogging
-import io.ktor.server.plugins.calllogging.processingTimeMillis
+import io.ktor.server.plugins.callloging.CallLogging
+import io.ktor.server.plugins.callloging.processingTimeMillis
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.statuspages.StatusPages
 import io.ktor.server.request.document

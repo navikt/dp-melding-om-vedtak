@@ -20,7 +20,7 @@ internal class BehandlingKlientTest {
     fun `Test av request og parsing av respons`() {
         val behandlingId = UUID.fromString("019145eb-6fbb-769f-b1b1-d2450b383a98")
         val dpBehandlingApiUrl = "https://dp-behandling.intern.dev.nav.no/behandling"
-        val responseJson = resourseRetriever.getResource("/json/behandling.json")!!.readText()
+        val responseJson = resourseRetriever.getResource("/json/behandling.json").readText()
         val mockEngine =
             MockEngine { request ->
                 request.headers["Authorization"] shouldBe "Bearer tulleToken"
