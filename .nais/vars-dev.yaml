@@ -6,6 +6,10 @@ azure:
 wonderwalled: true
 DP_BEHANDLING_API_SCOPE: "api://dev-gcp.teamdagpenger.dp-behandling/.default"
 
+ingresses: |
+  ingresses:
+    - https://dp-melding-om-vedtak.intern.dev.nav.no
+
 db:
   highAvailability: false
   pointInTimeRecovery: false
