@@ -8,10 +8,10 @@ import io.ktor.server.application.call
 import io.ktor.server.auth.authenticate
 import io.ktor.server.request.receiveText
 import io.ktor.server.response.respond
+import io.ktor.server.routing.RoutingContext
 import io.ktor.server.routing.get
 import io.ktor.server.routing.put
 import io.ktor.server.routing.routing
-import io.ktor.util.pipeline.PipelineContext
 import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDTO
 import no.nav.dagpenger.saksbehandling.api.models.OpplysningDTO
@@ -83,7 +83,7 @@ private fun ApplicationCall.parseUUID(): UUID {
     } ?: throw IllegalArgumentException("")
 }
 
-private fun PipelineContext<Unit, ApplicationCall>.requirePlainText() {
+private fun RoutingContext.requirePlainText() {
     require(call.request.headers["Content-Type"]!!.contains(ContentType.Text.Plain.toString())) {
         "Content-Type må være ${ContentType.Text.Plain}, men var ${call.request.headers["Content-Type"]}"
     }
