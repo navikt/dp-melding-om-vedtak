@@ -10,7 +10,7 @@ import org.flywaydb.core.api.configuration.FluentConfiguration
 internal object PostgresDataSourceBuilder {
     const val DB_USERNAME_KEY = "DB_USERNAME"
     const val DB_PASSWORD_KEY = "DB_PASSWORD"
-    const val DB_URL_KEY = "DB_URL"
+    const val DB_URL_KEY = "DB_JDBC_URL"
 
     private fun getOrThrow(key: String): String = getEnv(key) ?: getSystemProperty(key)
 
@@ -24,14 +24,17 @@ internal object PostgresDataSourceBuilder {
             idleTimeout = 10001
             connectionTimeout = 1000
             maxLifetime = 30001
-            if (System.getenv().containsKey("NAIS_CLUSTER_NAME")) {
-                addDataSourceProperty("sslCert", getOrThrow("DB_SSLCERT"))
-                addDataSourceProperty("sslKey", getOrThrow("DB_SSLKEY_PK8"))
-                addDataSourceProperty("sslMode", getOrThrow("DB_SSLMODE"))
-                addDataSourceProperty("sslRootCert", getOrThrow("DB_SSLROOTCERT"))
-            }
         }
     }
+
+    private fun String.stripCredentials() = this.replace(Regex("://.*:.*@"), "://")
+
+    private fun String.ensurePrefix(prefix: String) =
+        if (this.startsWith(prefix)) {
+            this
+        } else {
+            prefix + this.substringAfter("//")
+        }
 
     private fun flyWayBuilder() = Flyway.configure().connectRetries(10)
 
@@ -57,12 +60,3 @@ internal object PostgresDataSourceBuilder {
             .migrations
             .size
 }
-
-private fun String.stripCredentials() = this.replace(Regex("://.*:.*@"), "://")
-
-private fun String.ensurePrefix(prefix: String) =
-    if (this.startsWith(prefix)) {
-        this
-    } else {
-        prefix + this.substringAfter("//")
-    }

@@ -5,9 +5,11 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
+import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Behandling
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
+import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
@@ -33,19 +35,24 @@ class MediatorTest {
         )
     private val behandling =
         Behandling(
-            id = behandlingId.toString(),
+            id = behandlingId,
             tilstand = "tilstand",
             opplysninger = opplysninger,
         )
 
     @Test
-    fun `skal sende ett eller annet vedta`() {
+    fun `skal sende ett eller annet vedtak`() {
         val behandlingKlient =
             mockk<BehandlingKlient>().also {
                 coEvery { it.hentBehandling(behandlingId, saksbehandler) } returns Result.success(behandling)
             }
 
-        val mediator = Mediator(behandlingKlient, mockk())
+        val mediator =
+            Mediator(
+                behandlingKlient = behandlingKlient,
+                sanityKlient = mockk<SanityKlient>(),
+                vedtaksmeldingRepository = mockk<VedtaksmeldingRepository>(relaxed = true),
+            )
         runBlocking {
             mediator.hentVedtaksmelding(
                 behandlingId = behandlingId,
@@ -66,6 +73,7 @@ class MediatorTest {
                     coEvery { it.hentBehandling(any(), any()) } throws RuntimeException("Noe gikk galt")
                 },
                 mockk(),
+                vedtaksmeldingRepository = mockk<VedtaksmeldingRepository>(relaxed = true),
             )
         runBlocking {
             shouldThrow<RuntimeException> {
@@ -76,4 +84,24 @@ class MediatorTest {
             }
         }
     }
+
+//    @Test
+//    fun `Skal lagre utvidet beskrivelse og hente vedtaksmelding med riktige utvidede beskrivelser`() {
+//        val utvidetBeskrivelse =
+//            UtvidetBeskrivelse(
+//                behandlingId = UUIDv7.ny(),
+//                brevblokkId = "brevblokk",
+//                tekst = "Mikke Mus er kul!",
+//            )
+//        withMigratedDb { dataSource ->
+//            val mediator =
+//                Mediator(
+//                    behandlingKlient = mockk<BehandlingKlient>(),
+//                    sanityKlient = mockk<SanityKlient>(),
+//                    vedtaksmeldingRepository = PostgresVedtaksmeldingRepository(dataSource),
+//                )
+//
+//            mediator.lagreUtvidetBeskrivelse(utvidetBeskrivelse)
+//        }
+//    }
 }
