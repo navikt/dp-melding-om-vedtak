@@ -138,12 +138,7 @@ class VedtaksMeldingTest {
             ) + VedtaksMelding.FASTE_BLOKKER
 
         val mediator =
-            mockk<Mediator>().also {
-                coEvery { it.hentOpplysningTekstIder(forventedeBrevblokkIder) } returns
-                    listOf(
-                        // TODO legg innn alle opplysningen som er i brevblokkene
-                    )
-            }
+            mockk<Mediator>()
         runBlocking {
             Behandling(
                 id = "019145eb-6fbb-769f-b1b1-d2450b383a98",
