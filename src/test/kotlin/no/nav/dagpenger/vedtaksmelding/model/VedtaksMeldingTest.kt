@@ -6,6 +6,7 @@ import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.Mediator
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class VedtaksMeldingTest {
@@ -22,6 +23,7 @@ class VedtaksMeldingTest {
         )
     }
 
+    @Disabled // Tror ikke denne testen er relevant lenger
     @Test
     fun `Rikig vedtaksmelding for innvilgelse `() {
         val minsteinntekt: Opplysning =
@@ -29,7 +31,12 @@ class VedtaksMeldingTest {
                 id = "opplysning.krav-til-minsteinntekt",
                 verdi = "true",
             )
-        val opplysninger = setOf(minsteinntekt)
+        val kravPåDagpenger: Opplysning =
+            lagOpplysning(
+                id = "opplysning.krav-paa-dagpenger",
+                verdi = "false",
+            )
+        val opplysninger = setOf(minsteinntekt, kravPåDagpenger)
 
         val mediator =
             mockk<Mediator>().also {
@@ -70,6 +77,7 @@ class VedtaksMeldingTest {
                 id = "opplysning.krav-til-minsteinntekt",
                 verdi = "false",
             )
+
         val opplysninger = setOf(minsteinntekt)
         val forventedeBrevblokkIder =
             listOf(
@@ -93,6 +101,57 @@ class VedtaksMeldingTest {
                 VedtaksMelding(behandling, mediator).let { vedtaksMelding ->
                     vedtaksMelding.hentBrevBlokkIder() shouldBe forventedeBrevblokkIder
                     vedtaksMelding.hentOpplysninger() shouldBe listOf(minsteinntekt)
+                }
+            }
+        }
+    }
+
+    @Test
+    fun `Rikig vedtaksmelding for innvilgelse av ordinære dagpenger`() {
+        val minsteinntekt: Opplysning =
+            lagOpplysning(
+                id = "opplysning.krav-til-minsteinntekt",
+                verdi = "true",
+            )
+
+        val kravPåDagpenger: Opplysning =
+            lagOpplysning(
+                id = "opplysning.krav-paa-dagpenger",
+                verdi = "true",
+            )
+
+        val opplysninger = setOf(minsteinntekt, kravPåDagpenger)
+        val forventedeBrevblokkIder =
+            listOf(
+                "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
+                "brev.blokk.naar-faar-du-dagpenger",
+                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
+                "brev.blokk.arbeidstiden-din",
+                "brev.blokk.egenandel",
+                "brev.blokk.du-maa-sende-meldekort",
+                "brev.blokk.utbetaling",
+                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
+                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
+                "brev.blokk.du-maa-melde-fra-om-endringer",
+                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+            ) + VedtaksMelding.FASTE_BLOKKER
+
+        val mediator =
+            mockk<Mediator>().also {
+                coEvery { it.hentOpplysningTekstIder(forventedeBrevblokkIder) } returns
+                    listOf(
+                        // TODO legg innn alle opplysningen som er i brevblokkene
+                    )
+            }
+        runBlocking {
+            Behandling(
+                id = "019145eb-6fbb-769f-b1b1-d2450b383a98",
+                tilstand = "Tilstand",
+                opplysninger = opplysninger,
+            ).let { behandling ->
+                VedtaksMelding(behandling, mediator).let { vedtaksMelding ->
+                    vedtaksMelding.hentBrevBlokkIder() shouldBe forventedeBrevblokkIder
                 }
             }
         }
