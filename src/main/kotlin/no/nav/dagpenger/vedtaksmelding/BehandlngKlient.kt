@@ -38,7 +38,7 @@ internal class BehandlngHttpKlient(
                 accept(ContentType.Application.Json)
             }.body<BehandlingDTO>().let { behandlingDTO ->
                 Behandling(
-                    id = behandlingDTO.behandlingId,
+                    id = UUID.fromString(behandlingDTO.behandlingId),
                     tilstand = behandlingDTO.tilstand,
                     opplysninger =
                         behandlingDTO.opplysning.map { opplysningDTO ->

@@ -3,6 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.model
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import java.util.UUID
 
 class BehandlingTest {
     @Test
@@ -20,7 +21,7 @@ class BehandlingTest {
 
         val behandling =
             Behandling(
-                id = "019145eb-6fbb-769f-b1b1-d2450b383a98",
+                id = UUID.fromString("019145eb-6fbb-769f-b1b1-d2450b383a98"),
                 tilstand = "Tilstand",
                 opplysninger = opplysninger,
             )

@@ -2,6 +2,7 @@ package no.nav.dagpenger.vedtaksmelding.model
 
 import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.Mediator
+import java.util.UUID
 
 private val logger = KotlinLogging.logger {}
 private val sikkerlogger = KotlinLogging.logger("tjenestekall")
@@ -10,6 +11,7 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
     companion object {
         val FASTE_BLOKKER =
             listOf(
+                "brev.blokk.hjelp-oss-forbedre-brev",
                 "brev.blokk.sporsmaal",
                 "brev.blokk.rett-til-aa-klage",
                 "brev.blokk.rett-til-innsyn",
@@ -20,6 +22,10 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
         val opplysningstekstIder = mediator.hentOpplysningTekstIder(hentBrevBlokkIder())
         logger.info { "Skal hente opplysninger basert på følgende tekstider: $opplysningstekstIder" }
         return opplysningstekstIder.map { behandling.hentOpplysning(it) }
+    }
+
+    fun hentUtvidedeBeskrivelser(): List<UtvidetBeskrivelse> {
+        return mediator.hentUtvidedeBeskrivelser(behandling.id)
     }
 
     fun hentBrevBlokkIder(): List<String> {
@@ -71,7 +77,7 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
     }
 }
 
-internal class UgyldigVedtakException(private val behandlingId: String) : RuntimeException() {
+internal class UgyldigVedtakException(private val behandlingId: UUID) : RuntimeException() {
     override val message: String
         get() = "Ugyldig vedtak for behandling $behandlingId"
 }

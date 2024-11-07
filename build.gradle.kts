@@ -16,7 +16,7 @@ dependencies {
     implementation(libs.ktor.server.cio)
     implementation("io.ktor:ktor-server-swagger:${libs.versions.ktor.get()}")
     implementation(libs.jackson.datatype.jsr310)
-    implementation(libs.dp.biblioteker.oauth2.klient)
+    implementation("no.nav.dagpenger:oauth2-klient:2024.10.24-13.47.d2fb89767416")
     implementation(libs.bundles.postgres)
 
     implementation(libs.ktor.client.cio)

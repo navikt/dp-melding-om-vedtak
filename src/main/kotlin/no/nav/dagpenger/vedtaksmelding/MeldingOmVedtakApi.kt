@@ -1,18 +1,26 @@
 package no.nav.dagpenger.vedtaksmelding
 
+import io.ktor.http.ContentType
+import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.call
 import io.ktor.server.auth.authenticate
+import io.ktor.server.request.receiveText
 import io.ktor.server.response.respond
+import io.ktor.server.routing.RoutingContext
 import io.ktor.server.routing.get
+import io.ktor.server.routing.put
 import io.ktor.server.routing.routing
 import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDTO
 import no.nav.dagpenger.saksbehandling.api.models.OpplysningDTO
+import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
+import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseSistEndretTidspunktDTO
 import no.nav.dagpenger.vedtaksmelding.apiconfig.apiConfig
 import no.nav.dagpenger.vedtaksmelding.apiconfig.jwt
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
+import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import java.util.UUID
 
 private val sikkerlogger = KotlinLogging.logger("tjenestekall")
@@ -25,7 +33,6 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                 val behandlingId = call.parseUUID()
                 val saksbehandler = call.parseSaksbehandler()
                 val vedtaksmelding = mediator.hentVedtaksmelding(behandlingId, saksbehandler)
-
                 val meldingOmVedtakDTO =
                     MeldingOmVedtakDTO(
                         brevblokkIder = vedtaksmelding.hentBrevBlokkIder(),
@@ -37,9 +44,32 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                                     datatype = it.datatype,
                                 )
                             },
+                        utvidedeBeskrivelser =
+                            vedtaksmelding.hentUtvidedeBeskrivelser().map {
+                                UtvidetBeskrivelseDTO(
+                                    brevblokkId = it.brevblokkId,
+                                    tekst = it.tekst,
+                                    sistEndretTidspunkt = it.sistEndretTidspunkt,
+                                )
+                            },
                     )
                 sikkerlogger.info { "Melding om vedtak for behandlingId: $behandlingId: $meldingOmVedtakDTO" }
                 call.respond(meldingOmVedtakDTO)
+            }
+            put("/melding-om-vedtak/{behandlingId}/{brevblokkId}/utvidet-beskrivelse") {
+                requirePlainText()
+
+                val behandlingId = call.parseUUID()
+                val brevblokkId = call.parameters["brevblokkId"].toString()
+                val utvidetBeskrivelseTekst = call.receiveText()
+                val utvidetBeskrivelse =
+                    UtvidetBeskrivelse(
+                        behandlingId = behandlingId,
+                        brevblokkId = brevblokkId,
+                        tekst = utvidetBeskrivelseTekst,
+                    )
+                val sistEndretTidspunkt = mediator.lagreUtvidetBeskrivelse(utvidetBeskrivelse)
+                call.respond(HttpStatusCode.OK, UtvidetBeskrivelseSistEndretTidspunktDTO(sistEndretTidspunkt))
             }
         }
     }
@@ -51,4 +81,10 @@ private fun ApplicationCall.parseUUID(): UUID {
     return this.parameters["behandlingId"]?.let {
         UUID.fromString(it)
     } ?: throw IllegalArgumentException("")
+}
+
+private fun RoutingContext.requirePlainText() {
+    require(call.request.headers["Content-Type"]!!.contains(ContentType.Text.Plain.toString())) {
+        "Content-Type må være ${ContentType.Text.Plain}, men var ${call.request.headers["Content-Type"]}"
+    }
 }
