@@ -25,7 +25,7 @@ class VedtaksMeldingTest {
     }
 
     @Test
-    fun `Rikig vedtaksmelding for innvilgelse `() {
+    fun `Returner kun faste blokker dersom ingen opplysninger trigger spesifikke brevblokker `() {
         val minsteinntekt: Opplysning =
             lagOpplysning(
                 id = "opplysning.krav-til-minsteinntekt",
@@ -52,13 +52,13 @@ class VedtaksMeldingTest {
     }
 
     @Test
-    fun `Skal kaste exception når vi ikke finner krav på dagpenger`() {
+    fun `Skal kaste exception når vi ikke finner opplysninger vi forventer at alltid følger med behandlingen`() {
         shouldThrow<UgyldigVedtakException> {
             VedtaksMelding(
                 Behandling(
                     id = UUIDv7.ny(),
                     tilstand = "y",
-                    opplysninger = setOf(),
+                    opplysninger = emptySet(),
                 ),
                 mockk(relaxed = true),
             ).hentBrevBlokkIder()
