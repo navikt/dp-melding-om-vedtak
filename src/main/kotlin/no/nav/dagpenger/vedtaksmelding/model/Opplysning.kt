@@ -18,6 +18,16 @@ data class Opplysning(
                 "Inntektskrav for siste 36 mnd" -> return "opplysning.inntektskrav-for-siste-36-mnd"
                 "Arbeidsinntekt siste 12 mnd" -> return "opplysning.arbeidsinntekt-siste-12-mnd"
                 "Arbeidsinntekt siste 36 mnd" -> return "opplysning.arbeidsinntekt-siste-36-mnd"
+                "Antall G for krav til 12 mnd arbeidsinntekt" -> return "opplysning.antall-g-for-krav-til-12-mnd-arbeidsinntekt"
+                "Antall G for krav til 36 mnd arbeidsinntekt" -> return "opplysning.antall-g-for-krav-til-36-mnd-arbeidsinntekt"
+                "Fastsatt arbeidstid per uke før tap" -> return "opplysning.fastsatt-arbeidstid-per-uke-foer-tap"
+                "Gjennomsnittlig arbeidsinntekt siste 36 måneder" -> return "opplysning.gjennomsnittlig-arbeidsinntekt-siste-36-maaneder"
+                "Brukt beregningsregel" -> return "opplysning.brukt-beregningsregel"
+                "Avrundet dagsats med barnetillegg" -> return "opplysning.avrundet-dagsats-med-barnetillegg"
+                "Ukessats" -> return "opplysning.ukessats"
+                "Antall stønadsuker" -> return "opplysning.antall-stonadsuker"
+                "Egenandel" -> return "opplysning.egenandel"
+                "Grunnlag siste 12 mnd." -> return "opplysning.grunnlag-siste-12-mnd."
                 else -> return "ukjent.opplysning.$navn"
             }
         }
