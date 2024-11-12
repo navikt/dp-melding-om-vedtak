@@ -31,6 +31,7 @@ data class Opplysning(
                 "Grunnlag siste 12 mnd." -> return "opplysning.grunnlag-siste-12-mnd."
                 "Fastsatt arbeidstid per uke før tap" -> return "opplysning.fastsatt-arbeidstid-per-uke-for-tap"
                 "Prøvingsdato" -> return "opplysning.provingsdato"
+                "Første måned av opptjeningsperiode" -> return "opplysning.forste-maaned-av-opptjeningsperiode"
                 else -> return "ukjent.opplysning.$navn"
             }
         }
