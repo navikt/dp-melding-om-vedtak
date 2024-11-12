@@ -24,6 +24,7 @@ data class Opplysning(
                 "Gjennomsnittlig arbeidsinntekt siste 36 måneder" -> return "opplysning.gjennomsnittlig-arbeidsinntekt-siste-36-maaneder"
                 "Brukt beregningsregel" -> return "opplysning.brukt-beregningsregel"
                 "Avrundet dagsats med barnetillegg" -> return "opplysning.avrundet-dagsats-med-barnetillegg"
+                "Avrundet dagsats uten barnetillegg" -> return "opplysning.avrundet-dagsats-uten-barnetillegg"
                 "Ukessats" -> return "opplysning.ukessats"
                 "Antall stønadsuker" -> return "opplysning.antall-stonadsuker"
                 "Egenandel" -> return "opplysning.egenandel"
