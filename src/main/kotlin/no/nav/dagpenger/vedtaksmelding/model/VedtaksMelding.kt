@@ -36,6 +36,22 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
                 blokker.add("brev.blokk.vedtak-avslag")
                 blokker.add("brev.blokk.begrunnelse-avslag-minsteinntekt")
             }
+
+            if (oppfyllerKravTilDagpenger.verdi == "true") {
+                blokker.add("brev.blokk.vedtak-innvilgelse")
+                blokker.add("brev.blokk.hvor-lenge-kan-du-faa-dagpenger")
+                blokker.add("brev.blokk.naar-faar-du-dagpenger")
+                blokker.add("brev.blokk.slik-har-vi-beregnet-dagpengene-dine")
+                blokker.add("brev.blokk.arbeidstiden-din")
+                blokker.add("brev.blokk.egenandel")
+                blokker.add("brev.blokk.du-maa-sende-meldekort")
+                blokker.add("brev.blokk.utbetaling")
+                blokker.add("brev.blokk.husk-aa-sjekke-skattekortet-ditt")
+                blokker.add("brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du")
+                blokker.add("brev.blokk.du-maa-melde-fra-om-endringer")
+                blokker.add("brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger")
+            }
+
             val alleBlokker = (blokker + FASTE_BLOKKER).toList()
             return alleBlokker
         } catch (e: Exception) {
@@ -47,6 +63,17 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
 
     private val oppfyllerMinsteinntekt: Opplysning by lazy {
         behandling.opplysninger.first { it.opplysningTekstId == "opplysning.krav-til-minsteinntekt" }
+    }
+
+    private val oppfyllerKravTilDagpenger: Opplysning by lazy {
+        behandling.opplysninger.find { it.opplysningTekstId == "opplysning.krav-paa-dagpenger" }
+            ?: Opplysning(
+                opplysningTekstId = "opplysning.krav-paa-dagpenger",
+                navn = "Krav på dagpenger",
+                verdi = "false",
+                datatype = "boolsk",
+                opplysningId = "opplysning manglet defaulter til false",
+            )
     }
 }
 
