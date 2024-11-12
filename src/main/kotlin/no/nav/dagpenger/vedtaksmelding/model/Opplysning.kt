@@ -11,6 +11,7 @@ data class Opplysning(
         private fun mapping(navn: String): String {
             return when (navn) {
                 "Krav til minsteinntekt" -> return "opplysning.krav-til-minsteinntekt"
+                "Krav på dagpenger" -> return "opplysning.krav-paa-dagpenger"
                 "Søknadsdato" -> return "opplysning.soknadsdato"
                 "Søknadstidspunkt" -> return "opplysning.soknadstidspunkt"
                 "Siste avsluttende kalendermåned" -> return "opplysning.siste-avsluttende-kalendermaaned"
