@@ -30,6 +30,7 @@ data class Opplysning(
                 "Antall stønadsuker" -> return "opplysning.antall-stonadsuker"
                 "Egenandel" -> return "opplysning.egenandel"
                 "Grunnlag siste 12 mnd." -> return "opplysning.grunnlag-siste-12-mnd."
+                "Fastsatt arbeidstid per uke for tap" -> return "opplysning.fastsatt-arbeidstid-per-uke-for-tap"
                 else -> return "ukjent.opplysning.$navn"
             }
         }
