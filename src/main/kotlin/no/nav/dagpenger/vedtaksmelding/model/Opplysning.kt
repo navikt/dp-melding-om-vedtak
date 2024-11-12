@@ -21,7 +21,6 @@ data class Opplysning(
                 "Arbeidsinntekt siste 36 mnd" -> return "opplysning.arbeidsinntekt-siste-36-mnd"
                 "Antall G for krav til 12 mnd arbeidsinntekt" -> return "opplysning.antall-g-for-krav-til-12-mnd-arbeidsinntekt"
                 "Antall G for krav til 36 mnd arbeidsinntekt" -> return "opplysning.antall-g-for-krav-til-36-mnd-arbeidsinntekt"
-                "Fastsatt arbeidstid per uke før tap" -> return "opplysning.fastsatt-arbeidstid-per-uke-foer-tap"
                 "Gjennomsnittlig arbeidsinntekt siste 36 måneder" -> return "opplysning.gjennomsnittlig-arbeidsinntekt-siste-36-maaneder"
                 "Brukt beregningsregel" -> return "opplysning.brukt-beregningsregel"
                 "Avrundet dagsats med barnetillegg" -> return "opplysning.avrundet-dagsats-med-barnetillegg"
