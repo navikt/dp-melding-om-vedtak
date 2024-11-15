@@ -114,13 +114,63 @@ class VedtaksMeldingTest {
                 verdi = "true",
             )
 
-        val opplysninger = setOf(minsteinntekt, kravPåDagpenger)
+        val antallBarn: Opplysning = lagOpplysning(id = "opplysning.antall-barn", verdi = "0")
+
+        val opplysninger = setOf(minsteinntekt, kravPåDagpenger, antallBarn)
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.naar-faar-du-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
+                "brev.blokk.arbeidstiden-din",
+                "brev.blokk.egenandel",
+                "brev.blokk.du-maa-sende-meldekort",
+                "brev.blokk.utbetaling",
+                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
+                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
+                "brev.blokk.du-maa-melde-fra-om-endringer",
+                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+            ) + VedtaksMelding.FASTE_BLOKKER
+
+        val mediator =
+            mockk<Mediator>()
+        runBlocking {
+            Behandling(
+                id = UUID.fromString("019145eb-6fbb-769f-b1b1-d2450b383a98"),
+                tilstand = "Tilstand",
+                opplysninger = opplysninger,
+            ).let { behandling ->
+                VedtaksMelding(behandling, mediator).let { vedtaksMelding ->
+                    vedtaksMelding.hentBrevBlokkIder() shouldBe forventedeBrevblokkIder
+                }
+            }
+        }
+    }
+
+    @Test
+    fun `Rikig vedtaksmelding for innvilgelse av ordinære dagpenger for person med barn`() {
+        val minsteinntekt: Opplysning =
+            lagOpplysning(
+                id = "opplysning.krav-til-minsteinntekt",
+                verdi = "true",
+            )
+
+        val kravPåDagpenger: Opplysning =
+            lagOpplysning(
+                id = "opplysning.krav-paa-dagpenger",
+                verdi = "true",
+            )
+
+        val antallBarn: Opplysning = lagOpplysning(id = "opplysning.antall-barn", verdi = "1")
+
+        val opplysninger = setOf(minsteinntekt, kravPåDagpenger, antallBarn)
+        val forventedeBrevblokkIder =
+            listOf(
+                "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
+                "brev.blokk.naar-faar-du-dagpenger",
+                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine-barn",
                 "brev.blokk.arbeidstiden-din",
                 "brev.blokk.egenandel",
                 "brev.blokk.du-maa-sende-meldekort",
