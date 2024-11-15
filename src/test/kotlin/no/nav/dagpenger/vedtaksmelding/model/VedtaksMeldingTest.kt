@@ -114,7 +114,7 @@ class VedtaksMeldingTest {
                 verdi = "true",
             )
 
-        val antallBarn: Opplysning = lagOpplysning(id = "opplysning.antall-barn", verdi = "0")
+        val antallBarn: Opplysning = lagOpplysning(id = "opplysning.antall-barn-som-gir-rett-til-barnetillegg", verdi = "0")
 
         val opplysninger = setOf(minsteinntekt, kravPåDagpenger, antallBarn)
         val forventedeBrevblokkIder =
@@ -162,7 +162,7 @@ class VedtaksMeldingTest {
                 verdi = "true",
             )
 
-        val antallBarn: Opplysning = lagOpplysning(id = "opplysning.antall-barn", verdi = "1")
+        val antallBarn: Opplysning = lagOpplysning(id = "opplysning.antall-barn-som-gir-rett-til-barnetillegg", verdi = "1")
 
         val opplysninger = setOf(minsteinntekt, kravPåDagpenger, antallBarn)
         val forventedeBrevblokkIder =
