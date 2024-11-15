@@ -32,7 +32,7 @@ data class Opplysning(
                 "Fastsatt arbeidstid per uke før tap" -> "opplysning.fastsatt-arbeidstid-per-uke-for-tap"
                 "Prøvingsdato" -> "opplysning.provingsdato"
                 "Første måned av opptjeningsperiode" -> "opplysning.forste-maaned-av-opptjeningsperiode"
-                "Antall barn" -> "opplysning.antall-barn"
+                "Antall barn som gir rett til barnetillegg" -> "opplysning.antall-barn"
                 else -> "ukjent.opplysning.$navn"
             }
         }
