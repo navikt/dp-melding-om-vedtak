@@ -59,9 +59,9 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
             val alleBlokker = (blokker + FASTE_BLOKKER).toList()
             return alleBlokker
         } catch (e: Exception) {
-            sikkerlogger.error { "Ugyldig vedtak for behandling ${behandling.id}: ${e.message}. Hele behandlingen: $behandling." }
-            logger.error { "Ugyldig vedtak for behandling ${behandling.id}: ${e.message}" }
-            throw UgyldigVedtakException(behandling.id)
+            sikkerlogger.error(e) { "Ugyldig vedtak for behandling ${behandling.id}: ${e.message}. Hele behandlingen: $behandling." }
+            logger.error(e) { "Ugyldig vedtak for behandling ${behandling.id}: ${e.message}" }
+            throw UgyldigVedtakException(behandling.id, e)
         }
     }
 
@@ -85,7 +85,7 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
     }
 }
 
-internal class UgyldigVedtakException(private val behandlingId: UUID) : RuntimeException() {
+internal class UgyldigVedtakException(private val behandlingId: UUID, e: Exception) : RuntimeException(e) {
     override val message: String
         get() = "Ugyldig vedtak for behandling $behandlingId"
 }
