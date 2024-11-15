@@ -121,7 +121,6 @@ class VedtaksMeldingTest {
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                "brev.blokk.naar-faar-du-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
                 "brev.blokk.arbeidstiden-din",
                 "brev.blokk.egenandel",
@@ -169,7 +168,6 @@ class VedtaksMeldingTest {
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                "brev.blokk.naar-faar-du-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine-barn",
                 "brev.blokk.arbeidstiden-din",
                 "brev.blokk.egenandel",
