@@ -81,7 +81,7 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
     }
 
     private val antallBarn: Opplysning by lazy {
-        behandling.opplysninger.first { it.opplysningTekstId == "opplysning.antall-barn" }
+        behandling.opplysninger.first { it.opplysningTekstId == "opplysning.antall-barn-som-gir-rett-til-barnetillegg" }
     }
 }
 
