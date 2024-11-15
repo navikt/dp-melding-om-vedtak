@@ -40,7 +40,6 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
             if (oppfyllerKravTilDagpenger.verdi == "true") {
                 blokker.add("brev.blokk.vedtak-innvilgelse")
                 blokker.add("brev.blokk.hvor-lenge-kan-du-faa-dagpenger")
-                blokker.add("brev.blokk.naar-faar-du-dagpenger")
                 if (antallBarn.verdi.toInt() > 0) {
                     blokker.add("brev.blokk.slik-har-vi-beregnet-dagpengene-dine-barn")
                 } else {
