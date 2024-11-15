@@ -41,7 +41,11 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
                 blokker.add("brev.blokk.vedtak-innvilgelse")
                 blokker.add("brev.blokk.hvor-lenge-kan-du-faa-dagpenger")
                 blokker.add("brev.blokk.naar-faar-du-dagpenger")
-                blokker.add("brev.blokk.slik-har-vi-beregnet-dagpengene-dine")
+                if (antallBarn.verdi.toInt() > 0) {
+                    blokker.add("brev.blokk.slik-har-vi-beregnet-dagpengene-dine-barn")
+                } else {
+                    blokker.add("brev.blokk.slik-har-vi-beregnet-dagpengene-dine")
+                }
                 blokker.add("brev.blokk.arbeidstiden-din")
                 blokker.add("brev.blokk.egenandel")
                 blokker.add("brev.blokk.du-maa-sende-meldekort")
@@ -74,6 +78,10 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
                 datatype = "boolsk",
                 opplysningId = "opplysning manglet defaulter til false",
             )
+    }
+
+    private val antallBarn: Opplysning by lazy {
+        behandling.opplysninger.first { it.opplysningTekstId == "opplysning.antall-barn" }
     }
 }
 
