@@ -13,8 +13,8 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
             listOf(
                 "brev.blokk.hjelp-oss-forbedre-brev",
                 "brev.blokk.sporsmaal",
-                "brev.blokk.rett-til-aa-klage",
                 "brev.blokk.rett-til-innsyn",
+                "brev.blokk.rett-til-aa-klage",
             )
     }
 
