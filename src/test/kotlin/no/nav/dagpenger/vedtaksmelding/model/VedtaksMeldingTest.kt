@@ -122,6 +122,7 @@ class VedtaksMeldingTest {
                 "brev.blokk.vedtak-innvilgelse",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
+                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine-2",
                 "brev.blokk.arbeidstiden-din",
                 "brev.blokk.egenandel",
                 "brev.blokk.du-maa-sende-meldekort",
