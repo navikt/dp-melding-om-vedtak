@@ -44,6 +44,7 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
                     blokker.add("brev.blokk.slik-har-vi-beregnet-dagpengene-dine-barn")
                 } else {
                     blokker.add("brev.blokk.slik-har-vi-beregnet-dagpengene-dine")
+                    blokker.add("brev.blokk.slik-har-vi-beregnet-dagpengene-dine-2")
                 }
                 blokker.add("brev.blokk.arbeidstiden-din")
                 blokker.add("brev.blokk.egenandel")
