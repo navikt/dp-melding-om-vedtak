@@ -8,8 +8,8 @@ data class Opplysning(
     private val opplysningId: String,
 ) {
     companion object {
-        private fun mapping(navn: String): String {
-            return when (navn) {
+        private fun mapping(navn: String): String =
+            when (navn) {
                 "Krav til minsteinntekt" -> "opplysning.krav-til-minsteinntekt"
                 "Krav på dagpenger" -> "opplysning.krav-paa-dagpenger"
                 "Søknadsdato" -> "opplysning.soknadsdato"
@@ -23,9 +23,9 @@ data class Opplysning(
                 "Antall G for krav til 36 mnd arbeidsinntekt" -> "opplysning.antall-g-for-krav-til-36-mnd-arbeidsinntekt"
                 "Gjennomsnittlig arbeidsinntekt siste 36 måneder" -> "opplysning.gjennomsnittlig-arbeidsinntekt-siste-36-maaneder"
                 "Brukt beregningsregel" -> "opplysning.brukt-beregningsregel"
-                "Avrundet dagsats med barnetillegg" -> "opplysning.avrundet-dagsats-med-barnetillegg"
-                "Avrundet dagsats uten barnetillegg" -> "opplysning.avrundet-dagsats-uten-barnetillegg"
-                "Ukessats" -> "opplysning.ukessats"
+                "Dagsats med barnetillegg etter samordning og 90% regel" -> "opplysning.avrundet-dagsats-med-barnetillegg"
+                "Samordnet dagsats uten barnetillegg" -> "opplysning.avrundet-dagsats-uten-barnetillegg"
+                "Ukessats med barnetillegg etter samordning" -> "opplysning.ukessats"
                 "Antall stønadsuker" -> "opplysning.antall-stonadsuker"
                 "Egenandel" -> "opplysning.egenandel"
                 "Grunnlag siste 12 mnd." -> "opplysning.grunnlag-siste-12-mnd."
@@ -33,11 +33,11 @@ data class Opplysning(
                 "Prøvingsdato" -> "opplysning.provingsdato"
                 "Første måned av opptjeningsperiode" -> "opplysning.forste-maaned-av-opptjeningsperiode"
                 "Antall barn som gir rett til barnetillegg" -> "opplysning.antall-barn-som-gir-rett-til-barnetillegg"
-                "Barnetillegg i kroner" -> "opplysning.barnetillegg-i-kroner"
+                "Sum av barnetillegg" -> "opplysning.barnetillegg-i-kroner"
                 "Grunnlag" -> "opplysning.grunnlag"
+                "Andel av dagsats med barnetillegg som overstiger maks andel av dagpengegrunnlaget" -> "opplysning.90-regel-brukt"
                 else -> "ukjent.opplysning.$navn"
             }
-        }
     }
 
     constructor(
