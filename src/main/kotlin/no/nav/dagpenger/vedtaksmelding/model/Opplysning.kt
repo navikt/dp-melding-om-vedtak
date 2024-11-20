@@ -33,7 +33,7 @@ data class Opplysning(
                 "Prøvingsdato" -> "opplysning.provingsdato"
                 "Første måned av opptjeningsperiode" -> "opplysning.forste-maaned-av-opptjeningsperiode"
                 "Antall barn som gir rett til barnetillegg" -> "opplysning.antall-barn-som-gir-rett-til-barnetillegg"
-                "Barnetillegg i kroner" -> "opplysning.barnetillegg-i-kroner"
+                "Sum av barnetillegg" -> "opplysning.barnetillegg-i-kroner"
                 "Grunnlag" -> "opplysning.grunnlag"
                 else -> "ukjent.opplysning.$navn"
             }
