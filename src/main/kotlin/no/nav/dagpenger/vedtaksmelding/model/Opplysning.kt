@@ -24,7 +24,7 @@ data class Opplysning(
                 "Gjennomsnittlig arbeidsinntekt siste 36 måneder" -> "opplysning.gjennomsnittlig-arbeidsinntekt-siste-36-maaneder"
                 "Brukt beregningsregel" -> "opplysning.brukt-beregningsregel"
                 "Dagsats med barnetillegg etter samordning og 90% regel" -> "opplysning.avrundet-dagsats-med-barnetillegg"
-                "Andel av dagsats med barnetilegg avkortet til maks andel av dagpengegrunnlaget" -> "opplysning.avrundet-dagsats-uten-barnetillegg"
+                "Samordnet dagsats uten barnetillegg" -> "opplysning.avrundet-dagsats-uten-barnetillegg"
                 "Ukessats med barnetillegg etter samordning" -> "opplysning.ukessats"
                 "Antall stønadsuker" -> "opplysning.antall-stonadsuker"
                 "Egenandel" -> "opplysning.egenandel"
