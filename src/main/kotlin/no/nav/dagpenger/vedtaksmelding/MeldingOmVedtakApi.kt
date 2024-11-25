@@ -4,7 +4,6 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
-import io.ktor.server.application.call
 import io.ktor.server.auth.authenticate
 import io.ktor.server.request.receiveText
 import io.ktor.server.response.respond
@@ -13,6 +12,7 @@ import io.ktor.server.routing.get
 import io.ktor.server.routing.put
 import io.ktor.server.routing.routing
 import mu.KotlinLogging
+import mu.withLoggingContext
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDTO
 import no.nav.dagpenger.saksbehandling.api.models.OpplysningDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
@@ -31,45 +31,49 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
         authenticate("azureAd") {
             get("/melding-om-vedtak/{behandlingId}") {
                 val behandlingId = call.parseUUID()
-                val saksbehandler = call.parseSaksbehandler()
-                val vedtaksmelding = mediator.hentVedtaksmelding(behandlingId, saksbehandler)
-                val meldingOmVedtakDTO =
-                    MeldingOmVedtakDTO(
-                        brevblokkIder = vedtaksmelding.hentBrevBlokkIder(),
-                        opplysninger =
-                            vedtaksmelding.hentOpplysninger().map {
-                                OpplysningDTO(
-                                    tekstId = it.opplysningTekstId,
-                                    verdi = it.verdi,
-                                    datatype = it.datatype,
-                                )
-                            },
-                        utvidedeBeskrivelser =
-                            vedtaksmelding.hentUtvidedeBeskrivelser().map {
-                                UtvidetBeskrivelseDTO(
-                                    brevblokkId = it.brevblokkId,
-                                    tekst = it.tekst,
-                                    sistEndretTidspunkt = it.sistEndretTidspunkt,
-                                )
-                            },
-                    )
-                sikkerlogger.info { "Melding om vedtak for behandlingId: $behandlingId: $meldingOmVedtakDTO" }
-                call.respond(meldingOmVedtakDTO)
+                withLoggingContext("behandlingId" to behandlingId.toString()) {
+                    val saksbehandler = call.parseSaksbehandler()
+                    val vedtaksmelding = mediator.hentVedtaksmelding(behandlingId, saksbehandler)
+                    val meldingOmVedtakDTO =
+                        MeldingOmVedtakDTO(
+                            brevblokkIder = vedtaksmelding.hentBrevBlokkIder(),
+                            opplysninger =
+                                vedtaksmelding.hentOpplysninger().map {
+                                    OpplysningDTO(
+                                        tekstId = it.opplysningTekstId,
+                                        verdi = it.verdi,
+                                        datatype = it.datatype,
+                                    )
+                                },
+                            utvidedeBeskrivelser =
+                                vedtaksmelding.hentUtvidedeBeskrivelser().map {
+                                    UtvidetBeskrivelseDTO(
+                                        brevblokkId = it.brevblokkId,
+                                        tekst = it.tekst,
+                                        sistEndretTidspunkt = it.sistEndretTidspunkt,
+                                    )
+                                },
+                        )
+                    sikkerlogger.info { "Melding om vedtak for behandlingId: $behandlingId: $meldingOmVedtakDTO" }
+                    call.respond(meldingOmVedtakDTO)
+                }
             }
             put("/melding-om-vedtak/{behandlingId}/{brevblokkId}/utvidet-beskrivelse") {
                 requirePlainText()
 
                 val behandlingId = call.parseUUID()
                 val brevblokkId = call.parameters["brevblokkId"].toString()
-                val utvidetBeskrivelseTekst = call.receiveText()
-                val utvidetBeskrivelse =
-                    UtvidetBeskrivelse(
-                        behandlingId = behandlingId,
-                        brevblokkId = brevblokkId,
-                        tekst = utvidetBeskrivelseTekst,
-                    )
-                val sistEndretTidspunkt = mediator.lagreUtvidetBeskrivelse(utvidetBeskrivelse)
-                call.respond(HttpStatusCode.OK, UtvidetBeskrivelseSistEndretTidspunktDTO(sistEndretTidspunkt))
+                withLoggingContext("behandlingId" to behandlingId.toString(), "brevblokkId" to brevblokkId) {
+                    val utvidetBeskrivelseTekst = call.receiveText()
+                    val utvidetBeskrivelse =
+                        UtvidetBeskrivelse(
+                            behandlingId = behandlingId,
+                            brevblokkId = brevblokkId,
+                            tekst = utvidetBeskrivelseTekst,
+                        )
+                    val sistEndretTidspunkt = mediator.lagreUtvidetBeskrivelse(utvidetBeskrivelse)
+                    call.respond(HttpStatusCode.OK, UtvidetBeskrivelseSistEndretTidspunktDTO(sistEndretTidspunkt))
+                }
             }
         }
     }
