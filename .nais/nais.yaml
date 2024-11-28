@@ -41,11 +41,15 @@ spec:
           namespace: teamdagpenger
   env:
     - name: JDK_JAVA_OPTIONS
-      value: -XX:+UseParallelGC -XX:MaxRAMPercentage=50.0 -XX:ActiveProcessorCount=4 -XX:+PrintFlagsFinal
+      value: -XX:+UseParallelGC -XX:ActiveProcessorCount=4
     - name: GRUPPE_SAKSBEHANDLER
       value: {{ azure.grupper.saksbehandler }}
     - name: DP_BEHANDLING_API_SCOPE
       value: {{ DP_BEHANDLING_API_SCOPE }}
+  observability:
+    autoInstrumentation:
+      enabled: true
+      runtime: java
   azure:
     application:
       enabled: true
