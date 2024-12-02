@@ -12,6 +12,8 @@ import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.Behandling
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
+import java.time.LocalDate
+import java.time.Month
 import java.util.UUID
 
 private val logger = KotlinLogging.logger {}
@@ -37,6 +39,89 @@ internal class BehandlngHttpKlient(
                 header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(saksbehandler.token)}")
                 accept(ContentType.Application.Json)
             }.body<BehandlingDTO>().let { behandlingDTO ->
+                val mutableOpplysninger: MutableSet<Opplysning> =
+                    behandlingDTO.opplysning.map { opplysningDTO ->
+                        Opplysning(
+                            navn = opplysningDTO.navn,
+                            verdi = opplysningDTO.verdi,
+                            datatype = opplysningDTO.datatype,
+                            opplysningId = opplysningDTO.id,
+                        )
+                    }.toMutableSet()
+
+                val førsteMånedAvOpptjeningsperiode: LocalDate? =
+                    mutableOpplysninger.singleOrNull {
+                        it.opplysningTekstId == "opplysning.forste-maaned-av-opptjeningsperiode"
+                    }?.let { opplysning ->
+                        LocalDate.parse(opplysning.verdi)
+                    }
+                val sisteAvsluttendeKalendermåned: LocalDate? =
+                    mutableOpplysninger.singleOrNull {
+                        it.opplysningTekstId == "opplysning.siste-avsluttende-kalendermaaned"
+                    }?.let { opplysning ->
+                        LocalDate.parse(opplysning.verdi)
+                    }
+
+                if (førsteMånedAvOpptjeningsperiode != null) {
+                    mutableOpplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.inntektsperiode-1-forste-maaned-aar",
+                            navn = "opplysning.inntektsperiode-1-forste-maaned-aar",
+                            verdi = førsteMånedAvOpptjeningsperiode.norskMånedOgÅr(),
+                            datatype = "tekst",
+                            opplysningId = "utledet",
+                        ),
+                    )
+                    mutableOpplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.inntektsperiode-2-forste-maaned-aar",
+                            navn = "opplysning.inntektsperiode-2-forste-maaned-aar",
+                            verdi = førsteMånedAvOpptjeningsperiode.plusYears(1).norskMånedOgÅr(),
+                            datatype = "tekst",
+                            opplysningId = "utledet",
+                        ),
+                    )
+                    mutableOpplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.inntektsperiode-3-forste-maaned-aar",
+                            navn = "opplysning.inntektsperiode-3-forste-maaned-aar",
+                            verdi = førsteMånedAvOpptjeningsperiode.plusYears(2).norskMånedOgÅr(),
+                            datatype = "tekst",
+                            opplysningId = "utledet",
+                        ),
+                    )
+                }
+
+                if (sisteAvsluttendeKalendermåned != null) {
+                    mutableOpplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.inntektsperiode-1-siste-maaned-aar",
+                            navn = "opplysning.inntektsperiode-1-siste-maaned-aar",
+                            verdi = sisteAvsluttendeKalendermåned.minusYears(2).norskMånedOgÅr(),
+                            datatype = "tekst",
+                            opplysningId = "utledet",
+                        ),
+                    )
+                    mutableOpplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.inntektsperiode-2-siste-maaned-aar",
+                            navn = "opplysning.inntektsperiode-2-siste-maaned-aar",
+                            verdi = sisteAvsluttendeKalendermåned.minusYears(1).norskMånedOgÅr(),
+                            datatype = "tekst",
+                            opplysningId = "utledet",
+                        ),
+                    )
+                    mutableOpplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.inntektsperiode-3-siste-maaned-aar",
+                            navn = "opplysning.inntektsperiode-3-siste-maaned-aar",
+                            verdi = sisteAvsluttendeKalendermåned.norskMånedOgÅr(),
+                            datatype = "tekst",
+                            opplysningId = "utledet",
+                        ),
+                    )
+                }
+
                 Behandling(
                     id = UUID.fromString(behandlingDTO.behandlingId),
                     tilstand = behandlingDTO.tilstand,
@@ -48,7 +133,7 @@ internal class BehandlngHttpKlient(
                                 datatype = opplysningDTO.datatype,
                                 opplysningId = opplysningDTO.id,
                             )
-                        }.toSet(),
+                        }.toSet() + mutableOpplysninger.toSet(),
                 )
             }
         }.onFailure { logger.error(it) { "Kall til dp-behandling feilet ${it.message}" } }
@@ -67,3 +152,19 @@ private data class BehandlingDTO(
         val datatype: String,
     )
 }
+
+private fun LocalDate.norskMånedOgÅr() =
+    when (this.month) {
+        Month.JANUARY -> "januar ${this.year}"
+        Month.FEBRUARY -> "februar ${this.year}"
+        Month.MARCH -> "mars ${this.year}"
+        Month.APRIL -> "april ${this.year}"
+        Month.MAY -> "mai ${this.year}"
+        Month.JUNE -> "juni ${this.year}"
+        Month.JULY -> "juli ${this.year}"
+        Month.AUGUST -> "august ${this.year}"
+        Month.SEPTEMBER -> "september ${this.year}"
+        Month.OCTOBER -> "oktober ${this.year}"
+        Month.NOVEMBER -> "november ${this.year}"
+        Month.DECEMBER -> "desember ${this.year}"
+    }
