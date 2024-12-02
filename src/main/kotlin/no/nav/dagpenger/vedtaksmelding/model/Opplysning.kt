@@ -39,7 +39,9 @@ data class Opplysning(
                 "Antall barn som gir rett til barnetillegg" -> "opplysning.antall-barn-som-gir-rett-til-barnetillegg"
                 "Sum av barnetillegg" -> "opplysning.barnetillegg-i-kroner"
                 "Grunnlag" -> "opplysning.grunnlag"
-                "Andel av dagsats med barnetillegg som overstiger maks andel av dagpengegrunnlaget" -> "opplysning.90-regel-brukt"
+                "Har samordnet" -> "opplysning.har-samordnet"
+                "Andel av dagsats med barnetillegg som overstiger maks andel av dagpengegrunnlaget",
+                -> "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget"
                 else -> "ukjent.opplysning.$navn"
             }
     }
