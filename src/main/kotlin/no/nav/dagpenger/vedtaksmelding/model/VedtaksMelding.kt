@@ -90,7 +90,7 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
     }
 
     private val utførtSammordning: Boolean by lazy {
-        behandling.opplysninger.first { it.opplysningTekstId == "opplysning.har-samordnet" }.verdi.toBoolean()
+        behandling.opplysninger.find { it.opplysningTekstId == "opplysning.har-samordnet" }?.verdi.toBoolean()
     }
 
     private val nittiProsentRegelBrukt: Boolean by lazy {
