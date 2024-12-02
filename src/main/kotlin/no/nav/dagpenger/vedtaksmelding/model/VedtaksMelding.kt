@@ -40,12 +40,17 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
             if (oppfyllerKravTilDagpenger.verdi == "true") {
                 blokker.add("brev.blokk.vedtak-innvilgelse")
                 blokker.add("brev.blokk.hvor-lenge-kan-du-faa-dagpenger")
+                blokker.add("brev.blokk.slik-har-vi-beregnet-dagpengene-dine")
                 if (antallBarn.verdi.toInt() > 0) {
-                    blokker.add("brev.blokk.slik-har-vi-beregnet-dagpengene-dine-barn")
-                } else {
-                    blokker.add("brev.blokk.slik-har-vi-beregnet-dagpengene-dine")
-                    blokker.add("brev.blokk.slik-har-vi-beregnet-dagpengene-dine-2")
+                    blokker.add("brev.blokk.barnetillegg")
                 }
+                if (nittiProsentRegelBrukt) {
+                    blokker.add("brev.blokk.nittiprosentregel")
+                }
+                if (utførtSammordning) {
+                    blokker.add("brev.blokk.samordning")
+                }
+                blokker.add("brev.blokk.grunnlag")
                 blokker.add("brev.blokk.arbeidstiden-din")
                 blokker.add("brev.blokk.egenandel")
                 blokker.add("brev.blokk.du-maa-sende-meldekort")
@@ -82,6 +87,17 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
 
     private val antallBarn: Opplysning by lazy {
         behandling.opplysninger.first { it.opplysningTekstId == "opplysning.antall-barn-som-gir-rett-til-barnetillegg" }
+    }
+
+    private val utførtSammordning: Boolean by lazy {
+        behandling.opplysninger.first { it.opplysningTekstId == "opplysning.har-samordnet" }.verdi.toBoolean()
+    }
+
+    private val nittiProsentRegelBrukt: Boolean by lazy {
+        behandling.opplysninger.any {
+            it.opplysningTekstId == "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget" &&
+                it.verdi.toInt() > 0
+        }
     }
 }
 
