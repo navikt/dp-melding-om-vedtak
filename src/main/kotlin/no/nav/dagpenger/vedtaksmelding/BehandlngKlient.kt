@@ -71,7 +71,7 @@ internal class BehandlngHttpKlient(
                 if (førsteMånedAvOpptjeningsperiode != null) {
                     mutableOpplysninger.add(
                         Opplysning(
-                            opplysningTekstId = "opplysning.inntektsperiode-1-forste-maaned-aar",
+                            opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-1",
                             navn = "opplysning.inntektsperiode-1-forste-maaned-aar",
                             verdi = førsteMånedAvOpptjeningsperiode.norskMånedOgÅr(),
                             datatype = "tekst",
@@ -80,7 +80,7 @@ internal class BehandlngHttpKlient(
                     )
                     mutableOpplysninger.add(
                         Opplysning(
-                            opplysningTekstId = "opplysning.inntektsperiode-2-forste-maaned-aar",
+                            opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-2",
                             navn = "opplysning.inntektsperiode-2-forste-maaned-aar",
                             verdi = førsteMånedAvOpptjeningsperiode.plusYears(1).norskMånedOgÅr(),
                             datatype = "tekst",
@@ -89,7 +89,7 @@ internal class BehandlngHttpKlient(
                     )
                     mutableOpplysninger.add(
                         Opplysning(
-                            opplysningTekstId = "opplysning.inntektsperiode-3-forste-maaned-aar",
+                            opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-3",
                             navn = "opplysning.inntektsperiode-3-forste-maaned-aar",
                             verdi = førsteMånedAvOpptjeningsperiode.plusYears(2).norskMånedOgÅr(),
                             datatype = "tekst",
@@ -101,7 +101,7 @@ internal class BehandlngHttpKlient(
                 if (sisteAvsluttendeKalendermåned != null) {
                     mutableOpplysninger.add(
                         Opplysning(
-                            opplysningTekstId = "opplysning.inntektsperiode-1-siste-maaned-aar",
+                            opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-1",
                             navn = "opplysning.inntektsperiode-1-siste-maaned-aar",
                             verdi = sisteAvsluttendeKalendermåned.minusYears(2).norskMånedOgÅr(),
                             datatype = "tekst",
@@ -110,7 +110,7 @@ internal class BehandlngHttpKlient(
                     )
                     mutableOpplysninger.add(
                         Opplysning(
-                            opplysningTekstId = "opplysning.inntektsperiode-2-siste-maaned-aar",
+                            opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-2",
                             navn = "opplysning.inntektsperiode-2-siste-maaned-aar",
                             verdi = sisteAvsluttendeKalendermåned.minusYears(1).norskMånedOgÅr(),
                             datatype = "tekst",
@@ -119,7 +119,7 @@ internal class BehandlngHttpKlient(
                     )
                     mutableOpplysninger.add(
                         Opplysning(
-                            opplysningTekstId = "opplysning.inntektsperiode-3-siste-maaned-aar",
+                            opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-3",
                             navn = "opplysning.inntektsperiode-3-siste-maaned-aar",
                             verdi = sisteAvsluttendeKalendermåned.norskMånedOgÅr(),
                             datatype = "tekst",
