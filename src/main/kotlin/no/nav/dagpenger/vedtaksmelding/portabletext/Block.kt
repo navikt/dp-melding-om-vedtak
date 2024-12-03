@@ -3,6 +3,7 @@
 package no.nav.dagpenger.vedtaksmelding.portabletext
 
 import com.fasterxml.jackson.annotation.JsonInclude
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.DeserializationFeature
@@ -13,6 +14,9 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import no.nav.dagpenger.vedtaksmelding.portabletext.Child.Type.OPPLYSNING_REFERENCE
+import no.nav.dagpenger.vedtaksmelding.portabletext.Child.Type.SPAN
+import no.nav.dagpenger.vedtaksmelding.portabletext.MarkDef.Type.LINK
 
 data class BrevBlokk(
     val _type: String,
@@ -24,23 +28,30 @@ data class BrevBlokk(
 
 data class Block(
     val _type: String,
-    @JsonDeserialize(using = ListChildDeserializer::class)
+    @JsonDeserialize(using = Child.ListChildDeserializer::class)
     val children: List<Child>,
-    @JsonDeserialize(using = ListMarkDefDeserializer::class)
+    @JsonDeserialize(using = MarkDef.ListMarkDefDeserializer::class)
     val markDefs: List<MarkDef>,
     val style: String,
     val _key: String,
 )
 
 sealed interface Child {
-    val _type: String
+    enum class Type {
+        @JsonProperty("span")
+        SPAN,
+        @JsonProperty("opplysningReference")
+        OPPLYSNING_REFERENCE,
+    }
+
+    val _type: Type
 
     data class Span(
         val text: String,
         val marks: List<String>,
         val _key: String,
     ) : Child {
-        override val _type: String = "span"
+        override val _type = SPAN
     }
 
     data class OpplysningReference(
@@ -48,7 +59,7 @@ sealed interface Child {
         val _ref: String,
         val behandlingOpplysning: BehandlingOpplysning,
     ) : Child {
-        override val _type: String = "opplysningReference"
+        override val _type = OPPLYSNING_REFERENCE
 
         data class BehandlingOpplysning(
             val textId: String,
@@ -57,59 +68,53 @@ sealed interface Child {
             val _type: String = "behandlingOpplysning"
         }
     }
-}
 
-sealed interface MarkDef {
-    val _type: String
-    val _key: String
+    object ListChildDeserializer : JsonDeserializer<List<Child>>() {
+        override fun deserialize(
+            p: JsonParser,
+            ctxt: DeserializationContext,
+        ): List<Child> {
+            return p.readValueAsTree<JsonNode>().map {
+                when (val type = p.codec.treeToValue(it.get("_type"), Child.Type::class.java)) {
+                    SPAN -> {
+                        p.codec.treeToValue(it, Child.Span::class.java)
+                    }
 
-    data class Link(
-        override val _key: String,
-        val href: String,
-    ) : MarkDef {
-        override val _type: String = "link"
-    }
-}
-
-object ListChildDeserializer : JsonDeserializer<List<Child>>() {
-    override fun deserialize(
-        p: JsonParser,
-        ctxt: DeserializationContext,
-    ): List<Child> {
-        return p.readValueAsTree<JsonNode>().map {
-            when (val type = it.get("_type").asText()) {
-                "span" -> {
-                    p.codec.treeToValue(it, Child.Span::class.java)
-                }
-
-                "opplysningReference" -> {
-                    p.codec.treeToValue(it, Child.OpplysningReference::class.java)
-                }
-
-                else -> {
-                    throw IllegalArgumentException("Unknown type $type")
+                    OPPLYSNING_REFERENCE -> {
+                        p.codec.treeToValue(it, Child.OpplysningReference::class.java)
+                    }
                 }
             }
         }
     }
 }
 
-object ListMarkDefDeserializer : JsonDeserializer<List<MarkDef>>() {
-    override fun deserialize(
-        p: JsonParser,
-        ctxt: DeserializationContext,
-    ): List<MarkDef> {
-        return p.readValueAsTree<JsonNode>().map {
-            val get =
-                try {
-                    it.get("_type").asText()
-                } catch (e: Exception) {
-                    println(e)
-                    throw e
+sealed interface MarkDef {
+    val _type: Type
+    val _key: String
+
+    enum class Type {
+        @JsonProperty("link")
+        LINK,
+    }
+
+    data class Link(
+        override val _key: String,
+        val href: String,
+    ) : MarkDef {
+        override val _type: Type = LINK
+    }
+
+    object ListMarkDefDeserializer : JsonDeserializer<List<MarkDef>>() {
+        override fun deserialize(
+            p: JsonParser,
+            ctxt: DeserializationContext,
+        ): List<MarkDef> {
+            return p.readValueAsTree<JsonNode>().map {
+                when (p.codec.treeToValue(it.get("_type"), Type::class.java)) {
+                    LINK -> p.codec.treeToValue(it, Link::class.java)
+                    else -> throw IllegalArgumentException("Unknown type")
                 }
-            when (get) {
-                "link" -> p.codec.treeToValue(it, MarkDef.Link::class.java)
-                else -> throw IllegalArgumentException("Unknown type")
             }
         }
     }

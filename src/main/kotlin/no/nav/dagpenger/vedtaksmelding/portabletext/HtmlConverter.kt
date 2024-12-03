@@ -12,7 +12,7 @@ object HtmlConverter {
             body {
                 brevBlokker.forEach { brevBlokk ->
                     brevBlokk.innhold.forEach { innhold ->
-                        innhold.children.filter { child -> child._type == "span" }.forEach { child ->
+                        innhold.children.filter { child -> child._type == Child.Type.SPAN }.forEach { child ->
                             child as Child.Span
                             span {
                                 +child.text

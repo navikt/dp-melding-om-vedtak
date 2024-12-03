@@ -42,7 +42,7 @@ data class Opplysning(
                 "Har samordnet" -> "opplysning.har-samordnet"
                 "Andel av dagsats med barnetillegg som overstiger maks andel av dagpengegrunnlaget",
                 -> "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget"
-                "Andel av dagsats med barnetillegg avkortet til maks andel av dagpengegrunnlaget"
+                "Andel av dagsats med barnetillegg avkortet til maks andel av dagpengegrunnlaget",
                 -> "opplysning.andel-av-dagsats-med-barnetillegg-avkortet-til-maks-andel-av-dagpengegrunnlaget"
                 "Sykepenger dagsats" -> "opplysning.sykepenger-dagsats"
                 "Pleiepenger dagsats" -> "opplysning.pleiepenger-dagsats"
