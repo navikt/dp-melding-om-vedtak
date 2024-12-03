@@ -42,9 +42,9 @@ data class Opplysning(
                 "Har samordnet" -> "opplysning.har-samordnet"
                 "Andel av dagsats med barnetillegg som overstiger maks andel av dagpengegrunnlaget",
                 -> "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget"
-                "Utbetalt arbeidsinntekt periode 1" -> "oppysning.utbetalt-arbeidsinntekt-periode-1"
-                "Utbetalt arbeidsinntekt periode 2" -> "oppysning.utbetalt-arbeidsinntekt-periode-2"
-                "Utbetalt arbeidsinntekt periode 3" -> "oppysning.utbetalt-arbeidsinntekt-periode-3"
+                "Utbetalt arbeidsinntekt periode 1" -> "opplysning.utbetalt-arbeidsinntekt-periode-1"
+                "Utbetalt arbeidsinntekt periode 2" -> "opplysning.utbetalt-arbeidsinntekt-periode-2"
+                "Utbetalt arbeidsinntekt periode 3" -> "opplysning.utbetalt-arbeidsinntekt-periode-3"
                 "6 ganger grunnbeløp" -> "opplysning.6-ganger-grunnbelop"
                 else -> "ukjent.opplysning.$navn"
             }
