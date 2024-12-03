@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.cio.CIO
@@ -12,8 +13,14 @@ import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
+import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
+import no.nav.dagpenger.vedtaksmelding.apiconfig.objectMapper
 import no.nav.dagpenger.vedtaksmelding.lagHttpKlient
+import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
+import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter.toHtml
+import no.nav.dagpenger.vedtaksmelding.portabletext.hubba
+import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient.Companion.query
 
 private val log = KotlinLogging.logger { }
 
@@ -40,14 +47,18 @@ class SanityKlient(
                 .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 
-        private val query = """*[_type == "brevBlokk"]{
-                              textId,
+        val query = """*[_type == "brevBlokk"]{
+                              ...,  
                               innhold[]{
+                                ... ,
                                 _type == "block" => {
+                                  ... ,
                                   children[]{
+                                    ... ,
                                     _type == "opplysningReference" => {
+                                      ... ,
                                       "behandlingOpplysning": @->{
-                                        textId, type
+                                        ...,
                                       }
                                     }
                                   }
@@ -74,5 +85,26 @@ class SanityKlient(
             }
 
         return behandlingOpplysningDTOer.map { it.textId }
+    }
+}
+
+fun main() {
+    runBlocking {
+        lagHttpKlient(CIO.create { }).get("https://rt6o382n.api.sanity.io/v2022-03-07/data/query/production") {
+            url {
+                parameters.append("query", query)
+            }
+        }.let {
+            val message = it.bodyAsText()
+            hubba.readTree(message).let { jsonNode ->
+                val hubba =
+                    jsonNode["result"].let { result ->
+                        objectMapper.readValue<List<BrevBlokk>>(result.toString())
+                    }
+                println(hubba)
+                val message1 = toHtml(hubba)
+                println(message1)
+            }
+        }
     }
 }
