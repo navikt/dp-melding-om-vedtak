@@ -24,6 +24,29 @@ class VedtaksMeldingTest {
         )
     }
 
+    val minsteinntekt: Opplysning =
+        lagOpplysning(
+            id = "opplysning.krav-til-minsteinntekt",
+            verdi = "true",
+        )
+
+    val kravPåDagpengerTrue: Opplysning =
+        lagOpplysning(
+            id = "opplysning.krav-paa-dagpenger",
+            verdi = "true",
+        )
+
+    val utførtSammordningFalse: Opplysning =
+        lagOpplysning(id = "opplysning.har-samordnet", verdi = "false")
+
+    val nittiProsentRegelIkkeBrukt: Opplysning =
+        lagOpplysning(
+            id = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget",
+            verdi = 0.toString(),
+        )
+
+    val ingenBarn: Opplysning = lagOpplysning(id = "opplysning.antall-barn-som-gir-rett-til-barnetillegg", verdi = "0")
+
     @Test
     fun `Returner kun faste blokker dersom ingen opplysninger trigger spesifikke brevblokker `() {
         val minsteinntekt: Opplysning =
@@ -66,7 +89,7 @@ class VedtaksMeldingTest {
     }
 
     @Test
-    fun `Rikig vedtaksmelding for avslag på minsteinntekt`() {
+    fun `Rikig brevblokker for avslag på minsteinntekt`() {
         val minsteinntekt: Opplysning =
             lagOpplysning(
                 id = "opplysning.krav-til-minsteinntekt",
@@ -101,28 +124,14 @@ class VedtaksMeldingTest {
     }
 
     @Test
-    fun `Rikig vedtaksmelding for innvilgelse av ordinære dagpenger`() {
-        val minsteinntekt: Opplysning =
-            lagOpplysning(
-                id = "opplysning.krav-til-minsteinntekt",
-                verdi = "true",
-            )
-
-        val kravPåDagpenger: Opplysning =
-            lagOpplysning(
-                id = "opplysning.krav-paa-dagpenger",
-                verdi = "true",
-            )
-
-        val antallBarn: Opplysning = lagOpplysning(id = "opplysning.antall-barn-som-gir-rett-til-barnetillegg", verdi = "0")
-
-        val opplysninger = setOf(minsteinntekt, kravPåDagpenger, antallBarn)
+    fun `Rikig brevblokker for innvilgelse av ordinære dagpenger uten barn, samordning eller 90 % regel`() {
+        val opplysninger = setOf(minsteinntekt, kravPåDagpengerTrue, ingenBarn, utførtSammordningFalse, nittiProsentRegelIkkeBrukt)
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine-2",
+                "brev.blokk.grunnlag",
                 "brev.blokk.arbeidstiden-din",
                 "brev.blokk.egenandel",
                 "brev.blokk.du-maa-sende-meldekort",
@@ -149,27 +158,98 @@ class VedtaksMeldingTest {
     }
 
     @Test
-    fun `Rikig vedtaksmelding for innvilgelse av ordinære dagpenger for person med barn`() {
-        val minsteinntekt: Opplysning =
-            lagOpplysning(
-                id = "opplysning.krav-til-minsteinntekt",
-                verdi = "true",
-            )
-
-        val kravPåDagpenger: Opplysning =
-            lagOpplysning(
-                id = "opplysning.krav-paa-dagpenger",
-                verdi = "true",
-            )
-
+    fun `Rikig brevblokker for innvilgelse av ordinære dagpenger for person med barn`() {
         val antallBarn: Opplysning = lagOpplysning(id = "opplysning.antall-barn-som-gir-rett-til-barnetillegg", verdi = "1")
 
-        val opplysninger = setOf(minsteinntekt, kravPåDagpenger, antallBarn)
+        val opplysninger = setOf(minsteinntekt, kravPåDagpengerTrue, antallBarn, utførtSammordningFalse, nittiProsentRegelIkkeBrukt)
+
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine-barn",
+                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
+                "brev.blokk.barnetillegg",
+                "brev.blokk.grunnlag",
+                "brev.blokk.arbeidstiden-din",
+                "brev.blokk.egenandel",
+                "brev.blokk.du-maa-sende-meldekort",
+                "brev.blokk.utbetaling",
+                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
+                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
+                "brev.blokk.du-maa-melde-fra-om-endringer",
+                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+            ) + VedtaksMelding.FASTE_BLOKKER
+
+        val mediator =
+            mockk<Mediator>()
+        runBlocking {
+            Behandling(
+                id = UUID.fromString("019145eb-6fbb-769f-b1b1-d2450b383a98"),
+                tilstand = "Tilstand",
+                opplysninger = opplysninger,
+            ).let { behandling ->
+                VedtaksMelding(behandling, mediator).let { vedtaksMelding ->
+                    vedtaksMelding.hentBrevBlokkIder() shouldBe forventedeBrevblokkIder
+                }
+            }
+        }
+    }
+
+    @Test
+    fun `Rikig brevblokker for innvilgelse av ordinære dagpenger for person med samordning`() {
+        val utførtSammordningTrue: Opplysning = lagOpplysning(id = "opplysning.har-samordnet", verdi = "true")
+
+        val opplysninger = setOf(minsteinntekt, kravPåDagpengerTrue, ingenBarn, utførtSammordningTrue, nittiProsentRegelIkkeBrukt)
+
+        val forventedeBrevblokkIder =
+            listOf(
+                "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
+                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
+                "brev.blokk.samordning",
+                "brev.blokk.grunnlag",
+                "brev.blokk.arbeidstiden-din",
+                "brev.blokk.egenandel",
+                "brev.blokk.du-maa-sende-meldekort",
+                "brev.blokk.utbetaling",
+                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
+                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
+                "brev.blokk.du-maa-melde-fra-om-endringer",
+                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+            ) + VedtaksMelding.FASTE_BLOKKER
+
+        val mediator =
+            mockk<Mediator>()
+        runBlocking {
+            Behandling(
+                id = UUID.fromString("019145eb-6fbb-769f-b1b1-d2450b383a98"),
+                tilstand = "Tilstand",
+                opplysninger = opplysninger,
+            ).let { behandling ->
+                VedtaksMelding(behandling, mediator).let { vedtaksMelding ->
+                    vedtaksMelding.hentBrevBlokkIder() shouldBe forventedeBrevblokkIder
+                }
+            }
+        }
+    }
+
+    @Test
+    fun `Rikig brevblokker for innvilgelse av ordinære dagpenger for person med nittiProsentRegel`() {
+        val nittiProsentRegelBrukt: Opplysning =
+            lagOpplysning(
+                id = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget",
+                verdi = 10.toString(),
+            )
+
+        val opplysninger = setOf(minsteinntekt, kravPåDagpengerTrue, ingenBarn, utførtSammordningFalse, nittiProsentRegelBrukt)
+
+        val forventedeBrevblokkIder =
+            listOf(
+                "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
+                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
+                "brev.blokk.nittiprosentregel",
+                "brev.blokk.grunnlag",
                 "brev.blokk.arbeidstiden-din",
                 "brev.blokk.egenandel",
                 "brev.blokk.du-maa-sende-meldekort",

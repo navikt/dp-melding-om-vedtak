@@ -39,7 +39,22 @@ data class Opplysning(
                 "Antall barn som gir rett til barnetillegg" -> "opplysning.antall-barn-som-gir-rett-til-barnetillegg"
                 "Sum av barnetillegg" -> "opplysning.barnetillegg-i-kroner"
                 "Grunnlag" -> "opplysning.grunnlag"
-                "Andel av dagsats med barnetillegg som overstiger maks andel av dagpengegrunnlaget" -> "opplysning.90-regel-brukt"
+                "Har samordnet" -> "opplysning.har-samordnet"
+                "Andel av dagsats med barnetillegg som overstiger maks andel av dagpengegrunnlaget",
+                -> "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget"
+                "Andel av dagsats med barnetillegg avkortet til maks andel av dagpengegrunnlaget"
+                -> "opplysning.andel-av-dagsats-med-barnetillegg-avkortet-til-maks-andel-av-dagpengegrunnlaget"
+                "Sykepenger dagsats" -> "opplysning.sykepenger-dagsats"
+                "Pleiepenger dagsats" -> "opplysning.pleiepenger-dagsats"
+                "Omsorgspenger dagsats" -> "opplysning.omsorgspenger-dagsats"
+                "Opplæringspenger dagsats" -> "opplysning.opplaringspenger-dagsats"
+                "Uføre dagsats" -> "opplysning.ufore-dagsats"
+                "Foreldrepenger dagsats" -> "opplysning.foreldrepenger-dagsats"
+                "Svangerskapspenger dagsats" -> "opplysning.svangerskapspenger-dagsats"
+                "Utbetalt arbeidsinntekt periode 1" -> "oppysning.utbetalt-arbeidsinntekt-periode-1"
+                "Utbetalt arbeidsinntekt periode 2" -> "oppysning.utbetalt-arbeidsinntekt-periode-2"
+                "Utbetalt arbeidsinntekt periode 3" -> "oppysning.utbetalt-arbeidsinntekt-periode-3"
+                "6 ganger grunnbeløp" -> "opplysning.6-ganger-grunnbelop"
                 else -> "ukjent.opplysning.$navn"
             }
     }
