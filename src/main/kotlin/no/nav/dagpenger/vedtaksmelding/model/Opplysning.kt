@@ -22,7 +22,8 @@ data class Opplysning(
                 "Antall G for krav til 36 mnd arbeidsinntekt" -> "opplysning.antall-g-for-krav-til-36-mnd-arbeidsinntekt"
                 "Gjennomsnittlig arbeidsinntekt siste 36 måneder" -> "opplysning.gjennomsnittlig-arbeidsinntekt-siste-36-maaneder"
                 "Brukt beregningsregel" -> "opplysning.brukt-beregningsregel"
-                "Dagsats med barnetillegg etter samordning og 90% regel" -> "opplysning.avrundet-dagsats-med-barnetillegg"
+                "Dagsats med barnetillegg etter samordning og 90% regel" ->
+                    "opplysning.dagsats-med-barnetillegg-etter-samordning-og-90-prosent-regel"
                 // utdatert opplysning må være med pga eldre behandlinger i prod
                 "Avrundet dagsats med barnetillegg" -> "opplysning.avrundet-dagsats-med-barnetillegg"
                 "Samordnet dagsats uten barnetillegg" -> "opplysning.avrundet-dagsats-uten-barnetillegg"
@@ -40,8 +41,8 @@ data class Opplysning(
                 "Sum av barnetillegg" -> "opplysning.barnetillegg-i-kroner"
                 "Grunnlag" -> "opplysning.grunnlag"
                 "Har samordnet" -> "opplysning.har-samordnet"
-                "Andel av dagsats med barnetillegg som overstiger maks andel av dagpengegrunnlaget",
-                -> "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget"
+                "Andel av dagsats med barnetillegg som overstiger maks andel av dagpengegrunnlaget" ->
+                    "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget"
                 "Utbetalt arbeidsinntekt periode 1" -> "opplysning.utbetalt-arbeidsinntekt-periode-1"
                 "Utbetalt arbeidsinntekt periode 2" -> "opplysning.utbetalt-arbeidsinntekt-periode-2"
                 "Utbetalt arbeidsinntekt periode 3" -> "opplysning.utbetalt-arbeidsinntekt-periode-3"
