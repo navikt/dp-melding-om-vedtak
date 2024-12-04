@@ -6,6 +6,7 @@ import io.ktor.client.engine.cio.CIO
 import io.ktor.client.request.accept
 import io.ktor.client.request.get
 import io.ktor.client.request.header
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import mu.KotlinLogging
@@ -23,6 +24,11 @@ interface BehandlingKlient {
         behandling: UUID,
         saksbehandler: Saksbehandler,
     ): Result<Behandling>
+
+    suspend fun hentVedtak(
+        behandling: UUID,
+        saksbehandler: Saksbehandler,
+    ): Result<String>
 }
 
 internal class BehandlngHttpKlient(
@@ -137,6 +143,18 @@ internal class BehandlngHttpKlient(
                 )
             }
         }.onFailure { logger.error(it) { "Kall til dp-behandling feilet ${it.message}" } }
+    }
+
+    override suspend fun hentVedtak(
+        behandling: UUID,
+        saksbehandler: Saksbehandler,
+    ): Result<String> {
+        return httpClient.get(urlString = "$dpBehandlingApiUrl/$behandling/vedtak") {
+            header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(saksbehandler.token)}")
+            accept(ContentType.Application.Json)
+        }.bodyAsText().let { vedtak ->
+            Result.success(vedtak)
+        }
     }
 }
 

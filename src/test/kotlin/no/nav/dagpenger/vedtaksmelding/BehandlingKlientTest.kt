@@ -9,7 +9,6 @@ import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.k8.setAzureAuthEnv
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.util.UUID
 
@@ -108,9 +107,8 @@ internal class BehandlingKlientTest {
     }
 
     @Test
-    @Disabled
     fun `brukes for å hente ut en behandling manuelt, må ha saksbehandler token`() {
-        val behandlingId = UUID.fromString("019145eb-6fbb-769f-b1b1-d2450b383a98")
+        val behandlingId = UUID.fromString("01937743-812d-7a69-b492-d25eb9768c68")
 
         // saksbhehandler token, hentes fra azure-token-generator f,eks
         @Suppress("ktlint:standard:max-line-length")
@@ -129,9 +127,16 @@ internal class BehandlingKlientTest {
                     tokenProvider = tokenProvider,
                 )
             runBlocking {
-                val behandling =
-                    klient.hentBehandling(behandling = behandlingId, saksbehandler = Saksbehandler(token))
-                println(behandling)
+//                val behandling =
+//                    klient.hentBehandling(behandling = behandlingId, saksbehandler = Saksbehandler(token))
+//                println(behandling)
+
+                klient.hentVedtak(behandling = behandlingId, saksbehandler = Saksbehandler(token))
+                    .onFailure { println(it) }
+                    .getOrThrow()
+                    .let { vedtak ->
+                        println(vedtak)
+                    }
             }
         }
     }

@@ -40,6 +40,7 @@ sealed interface Child {
     enum class Type {
         @JsonProperty("span")
         SPAN,
+
         @JsonProperty("opplysningReference")
         OPPLYSNING_REFERENCE,
     }
