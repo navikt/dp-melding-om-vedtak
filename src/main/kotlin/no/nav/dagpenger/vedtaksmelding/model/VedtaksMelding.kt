@@ -96,7 +96,7 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
     private val nittiProsentRegelBrukt: Boolean by lazy {
         behandling.opplysninger.any {
             it.opplysningTekstId == "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget" &&
-                it.verdi.toInt() > 0
+                it.verdi.toDouble() > 0.0
         }
     }
 }
