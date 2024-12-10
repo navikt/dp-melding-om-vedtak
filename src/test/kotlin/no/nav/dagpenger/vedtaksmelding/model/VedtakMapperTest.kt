@@ -183,6 +183,138 @@ class VedtakMapperTest {
     }
 
     @Test
+    fun `Hent opplysning utbetalt arbeidsinntekt periode 1`() {
+        vedtakMapper.hentUtbetaltArbeidsinntektPeriode1() shouldBe
+            Opplysning2(
+                opplysningTekstId = "oppysning.utbetalt-arbeidsinntekt-periode-1",
+                verdi = "500000",
+                datatype = Opplysning2.Datatype.FLYTTALL,
+                enhet = Opplysning2.Enhet.KRONER,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning utbetalt arbeidsinntekt periode 2`() {
+        vedtakMapper.hentUtbetaltArbeidsinntektPeriode2() shouldBe
+            Opplysning2(
+                opplysningTekstId = "oppysning.utbetalt-arbeidsinntekt-periode-2",
+                verdi = "600000",
+                datatype = Opplysning2.Datatype.FLYTTALL,
+                enhet = Opplysning2.Enhet.KRONER,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning utbetalt arbeidsinntekt periode 3`() {
+        vedtakMapper.hentUtbetaltArbeidsinntektPeriode3() shouldBe
+            Opplysning2(
+                opplysningTekstId = "oppysning.utbetalt-arbeidsinntekt-periode-3",
+                verdi = "600000",
+                datatype = Opplysning2.Datatype.FLYTTALL,
+                enhet = Opplysning2.Enhet.KRONER,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning har samordnet`() {
+        vedtakMapper.hentHarSamordnet() shouldBe
+            Opplysning2(
+                opplysningTekstId = "opplysning.har-samordnet",
+                verdi = "true",
+                datatype = Opplysning2.Datatype.BOOLSK,
+                enhet = Opplysning2.Enhet.ENHETSLØS,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning andel av dagsats med barnetillegg som overstiger maks andel av dagpengegrunnlaget`() {
+        vedtakMapper.hentAndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget() shouldBe
+            Opplysning2(
+                opplysningTekstId = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget",
+                verdi = "0",
+                datatype = Opplysning2.Datatype.FLYTTALL,
+                enhet = Opplysning2.Enhet.KRONER,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning andel av dagsats med barnetillegg avkortet til maks andel av dagpengegrunnlaget`() {
+        vedtakMapper.hentAndelAvDagsatsMedBarnetilleggAvkortetTilMaksAndelAvDagpengegrunnlaget() shouldBe
+            Opplysning2(
+                opplysningTekstId = "opplysning.andel-av-dagsats-med-barnetillegg-avkortet-til-maks-andel-av-dagpengegrunnlaget",
+                verdi = "1476",
+                datatype = Opplysning2.Datatype.FLYTTALL,
+                enhet = Opplysning2.Enhet.KRONER,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning antall barn som gir rett til barnetillegg`() {
+        vedtakMapper.hentAntallBarnSomGirRettTilBarnetillegg() shouldBe
+            Opplysning2(
+                opplysningTekstId = "opplysning.antall-barn-som-gir-rett-til-barnetillegg",
+                verdi = "1",
+                datatype = Opplysning2.Datatype.HELTALL,
+                enhet = Opplysning2.Enhet.BARN,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning barnetillegg i kroner`() {
+        vedtakMapper.hentBarnetilleggIKroner() shouldBe
+            Opplysning2(
+                opplysningTekstId = "opplysning.barnetillegg-i-kroner",
+                verdi = "36",
+                datatype = Opplysning2.Datatype.FLYTTALL,
+                enhet = Opplysning2.Enhet.KRONER,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning fastsatt arbeidstid per uke før tap`() {
+        vedtakMapper.hentFastsattArbeidstidPerUkeForTap() shouldBe
+            Opplysning2(
+                opplysningTekstId = "opplysning.fastsatt-arbeidstid-per-uke-for-tap",
+                verdi = "37.5",
+                datatype = Opplysning2.Datatype.FLYTTALL,
+                enhet = Opplysning2.Enhet.TIMER,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning første måned av opptjeningsperiode`() {
+        vedtakMapper.hentForsteMaanedAvOpptjeningsperiode() shouldBe
+            Opplysning2(
+                opplysningTekstId = "opplysning.forste-maaned-av-opptjeningsperiode",
+                verdi = "2021-11-01",
+                datatype = Opplysning2.Datatype.DATO,
+                enhet = Opplysning2.Enhet.ENHETSLØS,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning siste avsluttende kalendermåned`() {
+        vedtakMapper.hentSisteAvsluttendeKalendermaaned() shouldBe
+            Opplysning2(
+                opplysningTekstId = "opplysning.siste-avsluttende-kalendermaaned",
+                verdi = "2024-10-31",
+                datatype = Opplysning2.Datatype.DATO,
+                enhet = Opplysning2.Enhet.ENHETSLØS,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning dagsats med barnetillegg etter samordning og 90% regel`() {
+        vedtakMapper.hentDagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel() shouldBe
+            Opplysning2(
+                opplysningTekstId = "opplysning.avrundet-dagsats-med-barnetillegg",
+                verdi = "1312",
+                datatype = Opplysning2.Datatype.FLYTTALL,
+                enhet = Opplysning2.Enhet.KRONER,
+            )
+    }
+
+    @Test
     fun `Hent grunn lag siste 12 månede `() {
         vedtakMapper.hentGrunnlagSiste12Måneder() shouldBe
             Opplysning2(

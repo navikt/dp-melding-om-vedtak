@@ -12,6 +12,7 @@ import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.H
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.TEKST
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.ENHETSLØS
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.KRONER
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.TIMER
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.UKER
 
 class VedtakMapper(vedtakJson: String) {
@@ -51,6 +52,15 @@ class VedtakMapper(vedtakJson: String) {
             verdi = vedtak["virkningsdato"].asText(),
             datatype = DATO,
             enhet = ENHETSLØS,
+        )
+    }
+
+    fun hentFastsattArbeidstidPerUkeForTap(): Opplysning2 {
+        return Opplysning2(
+            opplysningTekstId = "opplysning.fastsatt-arbeidstid-per-uke-for-tap",
+            verdi = vedtak["fastsatt"]["fastsattVanligArbeidstid"]["vanligArbeidstidPerUke"].asText(),
+            datatype = FLYTTALL,
+            enhet = TIMER,
         )
     }
 
@@ -162,6 +172,105 @@ class VedtakMapper(vedtakJson: String) {
         )
     }
 
+    fun hentUtbetaltArbeidsinntektPeriode1(): Opplysning2 {
+        return Opplysning2(
+            opplysningTekstId = "oppysning.utbetalt-arbeidsinntekt-periode-1",
+            verdi = hentOpplysning("Utbetalt arbeidsinntekt periode 1"),
+            datatype = FLYTTALL,
+            enhet = KRONER,
+        )
+    }
+
+    fun hentUtbetaltArbeidsinntektPeriode2(): Opplysning2 {
+        return Opplysning2(
+            opplysningTekstId = "oppysning.utbetalt-arbeidsinntekt-periode-2",
+            verdi = hentOpplysning("Utbetalt arbeidsinntekt periode 2"),
+            datatype = FLYTTALL,
+            enhet = KRONER,
+        )
+    }
+
+    fun hentUtbetaltArbeidsinntektPeriode3(): Opplysning2 {
+        return Opplysning2(
+            opplysningTekstId = "oppysning.utbetalt-arbeidsinntekt-periode-3",
+            verdi = hentOpplysning("Utbetalt arbeidsinntekt periode 3"),
+            datatype = FLYTTALL,
+            enhet = KRONER,
+        )
+    }
+
+    fun hentHarSamordnet(): Opplysning2 {
+        return Opplysning2(
+            opplysningTekstId = "opplysning.har-samordnet",
+            verdi = hentOpplysning("Har samordnet"),
+            datatype = Opplysning2.Datatype.BOOLSK,
+            enhet = Opplysning2.Enhet.ENHETSLØS,
+        )
+    }
+
+    fun hentAndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(): Opplysning2 {
+        return Opplysning2(
+            opplysningTekstId = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget",
+            verdi = hentOpplysning("Andel av dagsats med barnetillegg som overstiger maks andel av dagpengegrunnlaget"),
+            datatype = Opplysning2.Datatype.FLYTTALL,
+            enhet = Opplysning2.Enhet.KRONER,
+        )
+    }
+
+    fun hentAndelAvDagsatsMedBarnetilleggAvkortetTilMaksAndelAvDagpengegrunnlaget(): Opplysning2 {
+        return Opplysning2(
+            opplysningTekstId = "opplysning.andel-av-dagsats-med-barnetillegg-avkortet-til-maks-andel-av-dagpengegrunnlaget",
+            verdi = hentOpplysning("Andel av dagsats med barnetillegg avkortet til maks andel av dagpengegrunnlaget"),
+            datatype = Opplysning2.Datatype.FLYTTALL,
+            enhet = Opplysning2.Enhet.KRONER,
+        )
+    }
+
+    fun hentAntallBarnSomGirRettTilBarnetillegg(): Opplysning2 {
+        return Opplysning2(
+            opplysningTekstId = "opplysning.antall-barn-som-gir-rett-til-barnetillegg",
+            verdi = hentOpplysning("Antall barn som gir rett til barnetillegg"),
+            datatype = Opplysning2.Datatype.HELTALL,
+            enhet = Opplysning2.Enhet.BARN,
+        )
+    }
+
+    fun hentBarnetilleggIKroner(): Opplysning2 {
+        return Opplysning2(
+            opplysningTekstId = "opplysning.barnetillegg-i-kroner",
+            verdi = hentOpplysning("Sum av barnetillegg"),
+            datatype = Opplysning2.Datatype.FLYTTALL,
+            enhet = Opplysning2.Enhet.KRONER,
+        )
+    }
+
+    fun hentForsteMaanedAvOpptjeningsperiode(): Opplysning2 {
+        return Opplysning2(
+            opplysningTekstId = "opplysning.forste-maaned-av-opptjeningsperiode",
+            verdi = hentOpplysning("Første måned av opptjeningsperiode"),
+            datatype = Opplysning2.Datatype.DATO,
+            enhet = Opplysning2.Enhet.ENHETSLØS,
+        )
+    }
+
+    fun hentSisteAvsluttendeKalendermaaned(): Opplysning2 {
+        return Opplysning2(
+            opplysningTekstId = "opplysning.siste-avsluttende-kalendermaaned",
+            verdi = hentOpplysning("Siste avsluttende kalendermåned"),
+            datatype = Opplysning2.Datatype.DATO,
+            enhet = Opplysning2.Enhet.ENHETSLØS,
+        )
+    }
+
+    fun hentDagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel(): Opplysning2 {
+        return Opplysning2(
+            opplysningTekstId = "opplysning.avrundet-dagsats-med-barnetillegg",
+            verdi = hentOpplysning("Dagsats med barnetillegg etter samordning og 90% regel"),
+            datatype = Opplysning2.Datatype.FLYTTALL,
+            enhet = Opplysning2.Enhet.KRONER,
+        )
+    }
+
     private fun hentOpplysning(opplysningsnavn: String): String {
         val node =
             vedtak["opplysninger"].find {
@@ -198,6 +307,8 @@ class VedtakMapper(vedtakJson: String) {
             DAGER,
             ENHETSLØS,
             UKER,
+            BARN,
+            TIMER,
         }
     }
 
