@@ -22,7 +22,10 @@ import io.ktor.server.request.httpMethod
 import io.ktor.server.request.path
 import io.ktor.server.response.respond
 import mu.KotlinLogging
+import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
+import no.nav.dagpenger.vedtaksmelding.model.FantIkkeOpplysning
 import org.slf4j.event.Level
+import java.net.URI
 
 private val sikkerlogg = KotlinLogging.logger("tjenestekall")
 private val log = KotlinLogging.logger {}
@@ -65,18 +68,57 @@ fun Application.apiConfig() {
                 is IllegalAccessException -> {
                     log.warn { "Unauthorized: ${cause.message}" }
                     sikkerlogg.warn { "Unauthorized, se sikkerlogg for detaljer: ${cause.stackTrace}" }
-                    call.respond(HttpStatusCode.Unauthorized, cause.message ?: "Unauthorized")
+
+                    val problem =
+                        HttpProblemDTO(
+                            title = "Unauthorized",
+                            detail = cause.message,
+                            status = HttpStatusCode.Unauthorized.value,
+                            instance = call.request.path(),
+                            type = URI.create("dagpenger.nav.no/saksbehandling:problem:unauthorized").toString(),
+                        )
+                    call.respond(HttpStatusCode.Unauthorized, problem)
                 }
 
                 is IllegalArgumentException -> {
+                    // TODO: Detaljer ut exception, kanskje kast egendefinert? Rydding må til
                     log.error { "Bad request: ${cause.message}" }
-                    call.respond(HttpStatusCode.BadRequest, cause.message ?: "Bad request")
+                    val problem =
+                        HttpProblemDTO(
+                            title = "Bad request",
+                            detail = cause.message,
+                            status = HttpStatusCode.BadRequest.value,
+                            instance = call.request.path(),
+                            type = URI.create("dagpenger.nav.no/saksbehandling:problem:bad-request").toString(),
+                        )
+                    call.respond(HttpStatusCode.BadRequest, problem)
+                }
+
+                is FantIkkeOpplysning -> {
+                    log.error(cause) { "Fant ikke opplysning." }
+                    val problem =
+                        HttpProblemDTO(
+                            title = "Fant ikke opplysning",
+                            detail = cause.message,
+                            status = HttpStatusCode.InternalServerError.value,
+                            instance = call.request.path(),
+                            type = URI.create("dagpenger.nav.no/saksbehandling:problem:fant-ikke-opplysning").toString(),
+                        )
+                    call.respond(HttpStatusCode.InternalServerError, problem)
                 }
 
                 else -> {
                     log.error(cause) { "Uhåndtert feil: Se sikkerlogg for detaljer" }
                     sikkerlogg.error(cause) { "Uhåndtert feil: ${cause.message}" }
-                    call.respond(HttpStatusCode.InternalServerError)
+                    val problem =
+                        HttpProblemDTO(
+                            title = "Uhåndtert feil",
+                            detail = cause.message,
+                            status = HttpStatusCode.InternalServerError.value,
+                            instance = call.request.path(),
+                            type = URI.create("dagpenger.nav.no/saksbehandling:problem:uhåndtert-feil").toString(),
+                        )
+                    call.respond(HttpStatusCode.InternalServerError, problem)
                 }
             }
         }

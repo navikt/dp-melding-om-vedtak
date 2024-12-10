@@ -34,7 +34,7 @@ class BehandlingTest {
                 datatype = "boolean",
                 opplysningId = "test",
             )
-        shouldThrow<NoSuchElementException> {
+        shouldThrow<FantIkkeOpplysning> {
             behandling.hentOpplysning("tull")
         }
     }
