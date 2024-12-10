@@ -25,6 +25,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/MeldingOmVedtak'
+        '404':
+          description: Behandlingen finnes ikke
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpProblem'
   /melding-om-vedtak/{behandlingId}/{brevblokkId}/utvidet-beskrivelse:
     put:
       summary: Lagrer utvidet beskrivelse for en gitt brevblokk i meldingen om vedtak
@@ -56,8 +62,16 @@ paths:
                 $ref: '#/components/schemas/UtvidetBeskrivelseSistEndretTidspunkt'
         '400':
           description: ContentType må være text/plain
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpProblem'
         '404':
           description: Behandlingen finnes ikke
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpProblem'
 
 
 components:
@@ -105,4 +119,19 @@ components:
         verdi:
             type: string
         datatype:
+          type: string
+
+    HttpProblem:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
           type: string
