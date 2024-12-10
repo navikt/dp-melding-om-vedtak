@@ -6,13 +6,14 @@ import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.B
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.DATO
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.FLYTTALL
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.HELTALL
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.TEKST
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.ENHETSLØS
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.KRONER
 import org.junit.jupiter.api.Test
 
 class VedtakMapperTest {
     // "Krav til minsteinntekt" -> "opplysning.krav-til-minsteinntekt"
-
+    // "Krav på dagpenger" -> "opplysning.krav-paa-dagpenger"
     private val resourseRetriever = object {}.javaClass
     private val vedtakMapper = VedtakMapper(resourseRetriever.getResource("/json/vedtak.json").readText())
 
@@ -123,6 +124,61 @@ class VedtakMapperTest {
                 verdi = "614871.2733389170",
                 datatype = FLYTTALL,
                 enhet = KRONER,
+            )
+    }
+
+    @Test
+    fun `skal hente brukt beregningsregel`() {
+        vedtakMapper.hentBruktBeregningsregel() shouldBe
+            Opplysning2(
+                opplysningTekstId = "opplysning.brukt-beregningsregel",
+                verdi = "Gjennomsnittlig arbeidsinntekt siste 36 måneder",
+                datatype = TEKST,
+                enhet = ENHETSLØS,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning samordnet dagsats uten barnetillegg`() {
+        vedtakMapper.hentSamordnetDagsatsUtenBarnetillegg() shouldBe
+            Opplysning2(
+                opplysningTekstId = "opplysning.samordnet-dagsats-uten-barnetillegg",
+                verdi = "1276",
+                datatype = Opplysning2.Datatype.HELTALL,
+                enhet = Opplysning2.Enhet.KRONER,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning ukessats med barnetillegg etter samordning`() {
+        vedtakMapper.hentUkessatsMedBarnetillegg() shouldBe
+            Opplysning2(
+                opplysningTekstId = "opplysning.ukessats",
+                verdi = "6560",
+                datatype = Opplysning2.Datatype.HELTALL,
+                enhet = Opplysning2.Enhet.KRONER,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning antall stønadsuker`() {
+        vedtakMapper.hentAntallStonadsuker() shouldBe
+            Opplysning2(
+                opplysningTekstId = "opplysning.antall-stonadsuker",
+                verdi = "104",
+                datatype = Opplysning2.Datatype.HELTALL,
+                enhet = Opplysning2.Enhet.UKER,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning egenandel`() {
+        vedtakMapper.hentEgenandel() shouldBe
+            Opplysning2(
+                opplysningTekstId = "opplysning.egenandel",
+                verdi = "3936",
+                datatype = Opplysning2.Datatype.HELTALL,
+                enhet = Opplysning2.Enhet.KRONER,
             )
     }
 }

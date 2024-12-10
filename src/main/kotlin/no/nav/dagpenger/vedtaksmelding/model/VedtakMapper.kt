@@ -5,7 +5,14 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.BOOLSK
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.DATO
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.FLYTTALL
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.HELTALL
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.TEKST
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.ENHETSLØS
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.KRONER
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.UKER
 
 class VedtakMapper(vedtakJson: String) {
     private val vedtak: JsonNode
@@ -24,8 +31,8 @@ class VedtakMapper(vedtakJson: String) {
             verdi =
                 vedtak["vilkår"].any { it["navn"].asText() == "Krav til minsteinntekt" && it["status"].asText() == "Oppfylt" }
                     .toString(),
-            datatype = Opplysning2.Datatype.BOOLSK,
-            enhet = Opplysning2.Enhet.ENHETSLØS,
+            datatype = BOOLSK,
+            enhet = ENHETSLØS,
         )
     }
 
@@ -33,8 +40,8 @@ class VedtakMapper(vedtakJson: String) {
         return Opplysning2(
             opplysningTekstId = "opplysning.grunnlag",
             verdi = vedtak["fastsatt"]["grunnlag"]["grunnlag"].asText(),
-            datatype = Opplysning2.Datatype.HELTALL,
-            enhet = Opplysning2.Enhet.KRONER,
+            datatype = HELTALL,
+            enhet = KRONER,
         )
     }
 
@@ -42,8 +49,8 @@ class VedtakMapper(vedtakJson: String) {
         return Opplysning2(
             opplysningTekstId = "opplysning.provingsdato",
             verdi = vedtak["virkningsdato"].asText(),
-            datatype = Opplysning2.Datatype.DATO,
-            enhet = Opplysning2.Enhet.ENHETSLØS,
+            datatype = DATO,
+            enhet = ENHETSLØS,
         )
     }
 
@@ -51,8 +58,8 @@ class VedtakMapper(vedtakJson: String) {
         return Opplysning2(
             opplysningTekstId = "opplysning.inntektskrav-for-siste-12-mnd",
             verdi = hentOpplysning("Inntektskrav for siste 12 mnd"),
-            datatype = Opplysning2.Datatype.HELTALL,
-            enhet = Opplysning2.Enhet.KRONER,
+            datatype = HELTALL,
+            enhet = KRONER,
         )
     }
 
@@ -60,8 +67,8 @@ class VedtakMapper(vedtakJson: String) {
         return Opplysning2(
             opplysningTekstId = "opplysning.inntektskrav-for-siste-36-mnd",
             verdi = hentOpplysning("Inntektskrav for siste 36 mnd"),
-            datatype = Opplysning2.Datatype.HELTALL,
-            enhet = Opplysning2.Enhet.KRONER,
+            datatype = HELTALL,
+            enhet = KRONER,
         )
     }
 
@@ -69,8 +76,8 @@ class VedtakMapper(vedtakJson: String) {
         return Opplysning2(
             opplysningTekstId = "opplysning.arbeidsinntekt-siste-36-mnd",
             verdi = hentOpplysning("Arbeidsinntekt siste 36 mnd"),
-            datatype = Opplysning2.Datatype.HELTALL,
-            enhet = Opplysning2.Enhet.KRONER,
+            datatype = HELTALL,
+            enhet = KRONER,
         )
     }
 
@@ -78,8 +85,8 @@ class VedtakMapper(vedtakJson: String) {
         return Opplysning2(
             opplysningTekstId = "opplysning.arbeidsinntekt-siste-12-mnd",
             verdi = hentOpplysning("Arbeidsinntekt siste 12 mnd"),
-            datatype = Opplysning2.Datatype.HELTALL,
-            enhet = Opplysning2.Enhet.KRONER,
+            datatype = HELTALL,
+            enhet = KRONER,
         )
     }
 
@@ -88,7 +95,7 @@ class VedtakMapper(vedtakJson: String) {
             opplysningTekstId = "opplysning.antall-g-for-krav-til-12-mnd-arbeidsinntekt",
             verdi = hentOpplysning("Antall G for krav til 12 mnd arbeidsinntekt"),
             datatype = FLYTTALL,
-            enhet = Opplysning2.Enhet.ENHETSLØS,
+            enhet = ENHETSLØS,
         )
     }
 
@@ -96,8 +103,8 @@ class VedtakMapper(vedtakJson: String) {
         return Opplysning2(
             opplysningTekstId = "opplysning.antall-g-for-krav-til-36-mnd-arbeidsinntekt",
             verdi = hentOpplysning("Antall G for krav til 36 mnd arbeidsinntekt"),
-            datatype = Opplysning2.Datatype.FLYTTALL,
-            enhet = Opplysning2.Enhet.ENHETSLØS,
+            datatype = FLYTTALL,
+            enhet = ENHETSLØS,
         )
     }
 
@@ -105,15 +112,62 @@ class VedtakMapper(vedtakJson: String) {
         return Opplysning2(
             opplysningTekstId = "opplysning.gjennomsnittlig-arbeidsinntekt-siste-36-maaneder",
             verdi = hentOpplysning("Gjennomsnittlig arbeidsinntekt siste 36 måneder"),
-            datatype = Opplysning2.Datatype.FLYTTALL,
-            enhet = Opplysning2.Enhet.KRONER,
+            datatype = FLYTTALL,
+            enhet = KRONER,
+        )
+    }
+
+    fun hentBruktBeregningsregel(): Any {
+        return Opplysning2(
+            opplysningTekstId = "opplysning.brukt-beregningsregel",
+            verdi = hentOpplysning("Brukt beregningsregel"),
+            datatype = TEKST,
+            enhet = ENHETSLØS,
+        )
+    }
+
+    fun hentSamordnetDagsatsUtenBarnetillegg(): Any {
+        return Opplysning2(
+            opplysningTekstId = "opplysning.samordnet-dagsats-uten-barnetillegg",
+            verdi = hentOpplysning("Samordnet dagsats uten barnetillegg"),
+            datatype = HELTALL,
+            enhet = KRONER,
+        )
+    }
+
+    fun hentUkessatsMedBarnetillegg(): Any {
+        return Opplysning2(
+            opplysningTekstId = "opplysning.ukessats",
+            verdi = hentOpplysning("Ukessats med barnetillegg etter samordning"),
+            datatype = HELTALL,
+            enhet = KRONER,
+        )
+    }
+
+    fun hentAntallStonadsuker(): Any {
+        return Opplysning2(
+            opplysningTekstId = "opplysning.antall-stonadsuker",
+            verdi = hentOpplysning("Antall stønadsuker"),
+            datatype = HELTALL,
+            enhet = UKER,
+        )
+    }
+
+    fun hentEgenandel(): Any {
+        return Opplysning2(
+            opplysningTekstId = "opplysning.egenandel",
+            verdi = hentOpplysning("Egenandel"),
+            datatype = HELTALL,
+            enhet = KRONER,
         )
     }
 
     private fun hentOpplysning(opplysningsnavn: String): String {
-        return vedtak["opplysninger"].find {
-            it["navn"].asText() == opplysningsnavn
-        }?.get("verdi")?.asText() ?: throw OpplysningIkkeFunnet("$opplysningsnavn ikke funnet")
+        val node =
+            vedtak["opplysninger"].find {
+                it["navn"].asText() == opplysningsnavn
+            }
+        return node?.get("verdi")?.asText() ?: throw OpplysningIkkeFunnet("$opplysningsnavn ikke funnet")
     }
 
     data class Opplysning2(
@@ -134,6 +188,7 @@ class VedtakMapper(vedtakJson: String) {
             KRONER,
             DAGER,
             ENHETSLØS,
+            UKER,
         }
     }
 
