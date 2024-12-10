@@ -117,7 +117,7 @@ class VedtakMapper(vedtakJson: String) {
         )
     }
 
-    fun hentBruktBeregningsregel(): Any {
+    fun hentBruktBeregningsregel(): Opplysning2 {
         return Opplysning2(
             opplysningTekstId = "opplysning.brukt-beregningsregel",
             verdi = hentOpplysning("Brukt beregningsregel"),
@@ -126,7 +126,7 @@ class VedtakMapper(vedtakJson: String) {
         )
     }
 
-    fun hentSamordnetDagsatsUtenBarnetillegg(): Any {
+    fun hentSamordnetDagsatsUtenBarnetillegg(): Opplysning2 {
         return Opplysning2(
             opplysningTekstId = "opplysning.samordnet-dagsats-uten-barnetillegg",
             verdi = hentOpplysning("Samordnet dagsats uten barnetillegg"),
@@ -135,7 +135,7 @@ class VedtakMapper(vedtakJson: String) {
         )
     }
 
-    fun hentUkessatsMedBarnetillegg(): Any {
+    fun hentUkessatsMedBarnetillegg(): Opplysning2 {
         return Opplysning2(
             opplysningTekstId = "opplysning.ukessats",
             verdi = hentOpplysning("Ukessats med barnetillegg etter samordning"),
@@ -144,7 +144,7 @@ class VedtakMapper(vedtakJson: String) {
         )
     }
 
-    fun hentAntallStonadsuker(): Any {
+    fun hentAntallStonadsuker(): Opplysning2 {
         return Opplysning2(
             opplysningTekstId = "opplysning.antall-stonadsuker",
             verdi = hentOpplysning("Antall stønadsuker"),
@@ -153,7 +153,7 @@ class VedtakMapper(vedtakJson: String) {
         )
     }
 
-    fun hentEgenandel(): Any {
+    fun hentEgenandel(): Opplysning2 {
         return Opplysning2(
             opplysningTekstId = "opplysning.egenandel",
             verdi = hentOpplysning("Egenandel"),
@@ -168,6 +168,15 @@ class VedtakMapper(vedtakJson: String) {
                 it["navn"].asText() == opplysningsnavn
             }
         return node?.get("verdi")?.asText() ?: throw OpplysningIkkeFunnet("$opplysningsnavn ikke funnet")
+    }
+
+    fun hentGrunnlagSiste12Måneder(): Any {
+        return Opplysning2(
+            opplysningTekstId = "opplysning.grunnlag-siste-12-mnd.",
+            verdi = hentOpplysning("Grunnlag siste 12 mnd."),
+            datatype = FLYTTALL,
+            enhet = KRONER,
+        )
     }
 
     data class Opplysning2(

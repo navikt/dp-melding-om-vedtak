@@ -181,4 +181,15 @@ class VedtakMapperTest {
                 enhet = Opplysning2.Enhet.KRONER,
             )
     }
+
+    @Test
+    fun `Hent grunn lag siste 12 månede `() {
+        vedtakMapper.hentGrunnlagSiste12Måneder() shouldBe
+            Opplysning2(
+                opplysningTekstId = "opplysning.grunnlag-siste-12-mnd.",
+                verdi = "513677.2888214466",
+                datatype = Opplysning2.Datatype.FLYTTALL,
+                enhet = Opplysning2.Enhet.KRONER,
+            )
+    }
 }
