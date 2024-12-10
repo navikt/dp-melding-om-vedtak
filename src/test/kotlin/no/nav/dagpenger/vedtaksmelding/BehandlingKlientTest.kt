@@ -9,6 +9,7 @@ import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.k8.setAzureAuthEnv
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.util.UUID
 
@@ -106,6 +107,7 @@ internal class BehandlingKlientTest {
         }
     }
 
+    @Disabled
     @Test
     fun `brukes for å hente ut en behandling manuelt, må ha saksbehandler token`() {
         val behandlingId = UUID.fromString("01937743-812d-7a69-b492-d25eb9768c68")
