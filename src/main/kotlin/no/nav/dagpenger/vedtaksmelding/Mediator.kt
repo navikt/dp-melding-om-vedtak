@@ -5,6 +5,7 @@ import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.VedtaksMelding
+import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
 import java.time.LocalDateTime
 import java.util.UUID
@@ -29,6 +30,10 @@ class Mediator(
 
     suspend fun hentOpplysningTekstIder(brevbklokkIder: List<String>): List<String> {
         return sanityKlient.hentOpplysningTekstIder(brevbklokkIder)
+    }
+
+    suspend fun hentBrevBlokker(brevbklokkIder: List<String>): List<BrevBlokk> {
+        return sanityKlient.hentBrevBlokker().filter { brevbklokkIder.contains(it.textId) }
     }
 
     fun lagreUtvidetBeskrivelse(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime {

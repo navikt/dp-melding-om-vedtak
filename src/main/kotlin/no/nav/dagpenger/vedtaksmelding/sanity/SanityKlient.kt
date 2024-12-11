@@ -7,6 +7,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
+import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
@@ -85,6 +86,15 @@ class SanityKlient(
             }
 
         return behandlingOpplysningDTOer.map { it.textId }
+    }
+
+    suspend fun hentBrevBlokker(): List<BrevBlokk> {
+        log.info { "Henter brevblokker fra Sanity med url: $sanityUrl" }
+        return httpKlient.get("$sanityUrl") {
+            url {
+                parameters.append("query", query)
+            }
+        }.body()
     }
 }
 
