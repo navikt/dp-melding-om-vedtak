@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.BOOLSK
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.DATO
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.FLYTTALL
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.HELTALL
@@ -15,10 +14,15 @@ import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.KRON
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.TIMER
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.UKER
 
-data class brevKriterier(
+data class Vilkår(
     val navn: String,
-    val verdi: Boolean,
-)
+    val status: Status,
+){
+    enum class Status {
+        OPPFYLT,
+        IKKE_OPPFYLT,
+    }
+}
 
 class VedtakMapper(vedtakJson: String) {
     private val vedtak: JsonNode
@@ -31,31 +35,31 @@ class VedtakMapper(vedtakJson: String) {
         vedtak = objectMapper.readTree(vedtakJson)
     }
 
-    fun hentBrevKriterier(): Set<brevKriterier> {
-        val innvilgelse =
-            brevKriterier(
-                navn = "Innvilgelse",
-                verdi = vedtak["fastsatt"]["utfall"].asBoolean(),
-            )
-        val avslagMinsteinntekt =
-            brevKriterier(
-                navn = "Avslag minsteinntekt",
-                verdi = vedtak["vilkår"].any { it["navn"].asText() == "Krav til minsteinntekt" && it["status"].asText() == "Ikke oppfylt" },
-            )
-
-        return setOf(innvilgelse, avslagMinsteinntekt)
+    enum class Utfall {
+        INNVILGET,
+        AVSLÅTT,
     }
 
-    fun hentOppfyllerKravTilMinsteinntekt(): Opplysning2 {
-        return Opplysning2(
-            opplysningTekstId = "opplysning.krav-til-minsteinntekt",
-            verdi =
-                vedtak["vilkår"].any { it["navn"].asText() == "Krav til minsteinntekt" && it["status"].asText() == "Oppfylt" }
-                    .toString(),
-            datatype = BOOLSK,
-            enhet = ENHETSLØS,
+
+
+    val utfall: Utfall = vedtak["fastsatt"]["utfall"].asBoolean().let { utfall ->
+        when (utfall) {
+            true -> Utfall.INNVILGET
+            false -> Utfall.AVSLÅTT
+        }
+    }
+
+    val vilkår: Set<Vilkår> = vedtak["vilkår"].map { vilkårNode ->
+        Vilkår(
+            navn = vilkårNode["navn"].asText(),
+            status = vilkårNode["status"].asText().let {
+                when (it) {
+                    "Oppfylt" -> Vilkår.Status.OPPFYLT
+                    else -> Vilkår.Status.IKKE_OPPFYLT
+                }
+            },
         )
-    }
+    }.toSet()
 
     fun hentOpplysningGrunnlag(): Opplysning2 {
         return Opplysning2(

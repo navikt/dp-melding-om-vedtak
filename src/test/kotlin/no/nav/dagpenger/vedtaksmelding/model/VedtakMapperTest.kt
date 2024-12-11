@@ -19,7 +19,7 @@ class VedtakMapperTest {
 
     @Test
     fun `hent brevKriterier`() {
-        vedtakMapper.hentBrevKriterier() shouldBe
+        vedtakMapper.hentVilkår() shouldBe
             setOf(
                 brevKriterier("Innvilgelse", true),
                 brevKriterier("AvslagMinsteinntekt", false),
