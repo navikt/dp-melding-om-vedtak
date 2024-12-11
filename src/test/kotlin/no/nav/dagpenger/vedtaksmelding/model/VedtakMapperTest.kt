@@ -18,6 +18,15 @@ class VedtakMapperTest {
     private val vedtakMapper = VedtakMapper(resourseRetriever.getResource("/json/vedtak.json").readText())
 
     @Test
+    fun `hent brevKriterier`() {
+        vedtakMapper.hentBrevKriterier() shouldBe
+            setOf(
+                brevKriterier("Innvilgelse", true),
+                brevKriterier("AvslagMinsteinntekt", false),
+            )
+    }
+
+    @Test
     fun `hent opplysning krav-til-minsteinntekt`() {
         vedtakMapper.hentOppfyllerKravTilMinsteinntekt() shouldBe
             Opplysning2(

@@ -15,6 +15,11 @@ import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.KRON
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.TIMER
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.UKER
 
+data class brevKriterier(
+    val navn: String,
+    val verdi: Boolean,
+)
+
 class VedtakMapper(vedtakJson: String) {
     private val vedtak: JsonNode
     private val objectMapper: ObjectMapper =
@@ -24,6 +29,21 @@ class VedtakMapper(vedtakJson: String) {
 
     init {
         vedtak = objectMapper.readTree(vedtakJson)
+    }
+
+    fun hentBrevKriterier(): Set<brevKriterier> {
+        val innvilgelse =
+            brevKriterier(
+                navn = "Innvilgelse",
+                verdi = vedtak["fastsatt"]["utfall"].asBoolean(),
+            )
+        val avslagMinsteinntekt =
+            brevKriterier(
+                navn = "Avslag minsteinntekt",
+                verdi = vedtak["vilkår"].any { it["navn"].asText() == "Krav til minsteinntekt" && it["status"].asText() == "Ikke oppfylt" },
+            )
+
+        return setOf(innvilgelse, avslagMinsteinntekt)
     }
 
     fun hentOppfyllerKravTilMinsteinntekt(): Opplysning2 {
