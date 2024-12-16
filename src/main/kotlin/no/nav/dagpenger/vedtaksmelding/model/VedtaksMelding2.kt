@@ -1,10 +1,9 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
 import no.nav.dagpenger.vedtaksmelding.Mediator
-import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 
 sealed class VedtaksMelding2(
-    protected open val vedtak: VedtakMapper,
+    protected open val vedtak: Vedtak,
     protected open val mediator: Mediator,
 ) {
     val FASTE_BLOKKER =
@@ -24,7 +23,7 @@ sealed class VedtaksMelding2(
 }
 
 data class AvslagMinsteInntekt(
-    override val vedtak: VedtakMapper,
+    override val vedtak: Vedtak,
     override val mediator: Mediator,
 ) : VedtaksMelding2(vedtak, mediator) {
     fun Set<Vilkår>.avslagMinsteinntekt(): Boolean {
@@ -32,22 +31,22 @@ data class AvslagMinsteInntekt(
     }
     override val brevBlokkIder: Set<String> =
         setOf("brev.blokk.vedtak-avslag", "brev.blokk.begrunnelse-avslag-minsteinntekt")
-    override val isApplicable: Boolean = vedtak.utfall == VedtakMapper.Utfall.AVSLÅTT && vedtak.vilkår.avslagMinsteinntekt()
+    override val isApplicable: Boolean = vedtak.utfall == Vedtak.Utfall.AVSLÅTT && vedtak.vilkår.avslagMinsteinntekt()
 }
 
 
 data class Innvilgelse(
-    override val vedtak: VedtakMapper,
+    override val vedtak: Vedtak,
     override val mediator: Mediator,
 ) : VedtaksMelding2(vedtak, mediator) {
     override val brevBlokkIder: Set<String> =
         setOf("brev.blokk.vedtak-avslag", "brev.blokk.begrunnelse-avslag-minsteinntekt")
-    override val isApplicable: Boolean = vedtak.utfall == VedtakMapper.Utfall.INNVILGET
+    override val isApplicable: Boolean = vedtak.utfall == Vedtak.Utfall.INNVILGET
 }
 
 
 fun main() {
-    val vedtak = VedtakMapper("")
+    val vedtak = Vedtak("")
     val mediator = Mediator()
     val vedtaksMelding = listOf(AvslagMinsteInntekt(vedtak, mediator),
         Innvilgelse(vedtak, mediator)

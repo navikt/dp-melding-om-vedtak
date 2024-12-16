@@ -5,14 +5,14 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.DATO
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.FLYTTALL
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.HELTALL
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.TEKST
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.ENHETSLØS
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.KRONER
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.TIMER
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.UKER
+import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Datatype.DATO
+import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Datatype.FLYTTALL
+import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Datatype.HELTALL
+import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Datatype.TEKST
+import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Enhet.ENHETSLØS
+import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Enhet.KRONER
+import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Enhet.TIMER
+import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Enhet.UKER
 
 data class Vilkår(
     val navn: String,
@@ -24,7 +24,7 @@ data class Vilkår(
     }
 }
 
-class VedtakMapper(vedtakJson: String) {
+class Vedtak(vedtakJson: String) {
     private val vedtak: JsonNode
     private val objectMapper: ObjectMapper =
         jacksonObjectMapper()

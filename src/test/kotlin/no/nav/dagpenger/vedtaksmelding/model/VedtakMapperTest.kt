@@ -1,21 +1,21 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.BOOLSK
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.DATO
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.FLYTTALL
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.HELTALL
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.TEKST
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.ENHETSLØS
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.KRONER
+import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2
+import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Datatype.BOOLSK
+import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Datatype.DATO
+import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Datatype.FLYTTALL
+import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Datatype.HELTALL
+import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Datatype.TEKST
+import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Enhet.ENHETSLØS
+import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Enhet.KRONER
 import org.junit.jupiter.api.Test
 
 class VedtakMapperTest {
     // "Krav til minsteinntekt" -> "opplysning.krav-til-minsteinntekt"
     // "Krav på dagpenger" -> "opplysning.krav-paa-dagpenger"
     private val resourseRetriever = object {}.javaClass
-    private val vedtakMapper = VedtakMapper(resourseRetriever.getResource("/json/vedtak.json").readText())
+    private val vedtakMapper = Vedtak(resourseRetriever.getResource("/json/vedtak.json").readText())
 
     @Test
     fun `hent brevKriterier`() {
