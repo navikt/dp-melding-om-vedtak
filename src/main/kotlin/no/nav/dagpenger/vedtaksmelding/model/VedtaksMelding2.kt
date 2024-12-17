@@ -6,7 +6,7 @@ sealed class VedtaksMelding2(
     protected open val vedtak: Vedtak,
     protected open val mediator: Mediator,
 ) {
-    val FASTE_BLOKKER =
+    val fasteBlokker =
         listOf(
             "brev.blokk.sporsmaal",
             "brev.blokk.rett-til-innsyn",
@@ -19,7 +19,6 @@ sealed class VedtaksMelding2(
     suspend fun doStuff() {
         val opplysningstekstIder = mediator.hentOpplysningTekstIder(brevBlokkIder.toList())
     }
-
 }
 
 data class AvslagMinsteInntekt(
@@ -29,11 +28,11 @@ data class AvslagMinsteInntekt(
     fun Set<Vilkår>.avslagMinsteinntekt(): Boolean {
         return this.any { it.navn == "Krav til minsteinntekt" && it.status == Vilkår.Status.IKKE_OPPFYLT }
     }
+
     override val brevBlokkIder: Set<String> =
         setOf("brev.blokk.vedtak-avslag", "brev.blokk.begrunnelse-avslag-minsteinntekt")
     override val isApplicable: Boolean = vedtak.utfall == Vedtak.Utfall.AVSLÅTT && vedtak.vilkår.avslagMinsteinntekt()
 }
-
 
 data class Innvilgelse(
     override val vedtak: Vedtak,
@@ -43,23 +42,3 @@ data class Innvilgelse(
         setOf("brev.blokk.vedtak-avslag", "brev.blokk.begrunnelse-avslag-minsteinntekt")
     override val isApplicable: Boolean = vedtak.utfall == Vedtak.Utfall.INNVILGET
 }
-
-
-fun main() {
-    val vedtak = Vedtak("")
-    val mediator = Mediator()
-    val vedtaksMelding = listOf(AvslagMinsteInntekt(vedtak, mediator),
-        Innvilgelse(vedtak, mediator)
-    ).single{
-        it.isApplicable
-    }
-    vedtaksMelding.lagHtml()
-
-
-}
-
-
-
-
-
-
