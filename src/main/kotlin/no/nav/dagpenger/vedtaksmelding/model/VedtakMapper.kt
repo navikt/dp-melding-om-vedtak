@@ -21,6 +21,8 @@ import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.TIMER
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.UKER
 import no.nav.dagpenger.vedtaksmelding.model.Utfall.AVSLÅTT
 import no.nav.dagpenger.vedtaksmelding.model.Utfall.INNVILGET
+import java.time.LocalDate
+import java.time.Month
 
 class VedtakMapper(vedtakJson: String) {
     private val vedtak: JsonNode
@@ -37,7 +39,7 @@ class VedtakMapper(vedtakJson: String) {
         return Vedtak(
             utfall = utfall,
             vilkår = vilkår,
-            opplysninger = opplysninger,
+            opplysninger = vedtakOpplysninger + inntjeningsperiodeOpplysninger,
         )
     }
 
@@ -63,7 +65,7 @@ class VedtakMapper(vedtakJson: String) {
             )
         }.toSet()
 
-    private val opplysninger: Set<Opplysning2> =
+    private val vedtakOpplysninger: Set<Opplysning2> =
         setOf(
             vedtak.finnOpplysningAt(
                 opplysningTekstId = "opplysning.grunnlag",
@@ -221,6 +223,93 @@ class VedtakMapper(vedtakJson: String) {
                 enhet = KRONER,
             ),
         )
+
+    private val inntjeningsperiodeOpplysninger = vedtakOpplysninger.finnInntjeningsPeriode()
+
+    private fun Set<Opplysning2>.finnInntjeningsPeriode(): Set<Opplysning2> {
+        val opptjeningsperiodeOpplysninger = mutableSetOf<Opplysning2>()
+
+        val opptjeningsperiodeStart: LocalDate? =
+            this.singleOrNull {
+                it.opplysningTekstId == "opplysning.forste-maaned-av-opptjeningsperiode"
+            }?.let { opplysning ->
+                LocalDate.parse(opplysning.verdi)
+            }
+        val opptjeningsperiodeSlutt: LocalDate? =
+            this.singleOrNull {
+                it.opplysningTekstId == "opplysning.siste-avsluttende-kalendermaaned"
+            }?.let { opplysning ->
+                LocalDate.parse(opplysning.verdi)
+            }
+
+        if (opptjeningsperiodeStart != null && opptjeningsperiodeSlutt != null) {
+            opptjeningsperiodeOpplysninger.add(
+                Opplysning2(
+                    opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-1",
+                    verdi = opptjeningsperiodeStart.norskMånedOgÅr(),
+                    datatype = TEKST,
+                    enhet = ENHETSLØS,
+                ),
+            )
+            opptjeningsperiodeOpplysninger.add(
+                Opplysning2(
+                    opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-2",
+                    verdi = opptjeningsperiodeStart.plusYears(1).norskMånedOgÅr(),
+                    datatype = TEKST,
+                    enhet = ENHETSLØS,
+                ),
+            )
+            opptjeningsperiodeOpplysninger.add(
+                Opplysning2(
+                    opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-3",
+                    verdi = opptjeningsperiodeStart.plusYears(2).norskMånedOgÅr(),
+                    datatype = TEKST,
+                    enhet = ENHETSLØS,
+                ),
+            )
+            opptjeningsperiodeOpplysninger.add(
+                Opplysning2(
+                    opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-1",
+                    verdi = opptjeningsperiodeSlutt.minusYears(2).norskMånedOgÅr(),
+                    datatype = TEKST,
+                    enhet = ENHETSLØS,
+                ),
+            )
+            opptjeningsperiodeOpplysninger.add(
+                Opplysning2(
+                    opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-2",
+                    verdi = opptjeningsperiodeSlutt.minusYears(1).norskMånedOgÅr(),
+                    datatype = TEKST,
+                    enhet = ENHETSLØS,
+                ),
+            )
+            opptjeningsperiodeOpplysninger.add(
+                Opplysning2(
+                    opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-3",
+                    verdi = opptjeningsperiodeSlutt.norskMånedOgÅr(),
+                    datatype = TEKST,
+                    enhet = ENHETSLØS,
+                ),
+            )
+        }
+        return opptjeningsperiodeOpplysninger
+    }
+
+    private fun LocalDate.norskMånedOgÅr() =
+        when (this.month) {
+            Month.JANUARY -> "januar ${this.year}"
+            Month.FEBRUARY -> "februar ${this.year}"
+            Month.MARCH -> "mars ${this.year}"
+            Month.APRIL -> "april ${this.year}"
+            Month.MAY -> "mai ${this.year}"
+            Month.JUNE -> "juni ${this.year}"
+            Month.JULY -> "juli ${this.year}"
+            Month.AUGUST -> "august ${this.year}"
+            Month.SEPTEMBER -> "september ${this.year}"
+            Month.OCTOBER -> "oktober ${this.year}"
+            Month.NOVEMBER -> "november ${this.year}"
+            Month.DECEMBER -> "desember ${this.year}"
+        }
 
     private fun JsonNode.finnOpplysningMedNavn(
         opplysningTekstId: String,

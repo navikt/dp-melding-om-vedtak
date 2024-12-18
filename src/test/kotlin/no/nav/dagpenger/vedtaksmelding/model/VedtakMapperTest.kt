@@ -326,4 +326,33 @@ class VedtakMapperTest {
                 enhet = KRONER,
             )
     }
+
+    @Test
+    fun `Hent inntjeningsperiodeOpplysninger`() {
+        vedtak.opplysninger.filter { it.opplysningTekstId.contains("opplysning.forste-maaned-aar-for-inntektsperiode") }.let {
+                opplysninger ->
+            opplysninger.size shouldBe 3
+            opplysninger.forEach { opplysning ->
+                opplysning.datatype shouldBe TEKST
+                opplysning.enhet shouldBe ENHETSLØS
+            }
+
+            opplysninger[0].verdi shouldBe "november 2021"
+            opplysninger[1].verdi shouldBe "november 2022"
+            opplysninger[2].verdi shouldBe "november 2023"
+        }
+
+        vedtak.opplysninger.filter { it.opplysningTekstId.contains("opplysning.siste-maaned-aar-for-inntektsperiode") }.let {
+                opplysninger ->
+            opplysninger.size shouldBe 3
+            opplysninger.forEach { opplysning ->
+                opplysning.datatype shouldBe TEKST
+                opplysning.enhet shouldBe ENHETSLØS
+            }
+
+            opplysninger[0].verdi shouldBe "oktober 2022"
+            opplysninger[1].verdi shouldBe "oktober 2023"
+            opplysninger[2].verdi shouldBe "oktober 2024"
+        }
+    }
 }
