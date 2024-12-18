@@ -1,6 +1,8 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.TEKST
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.ENHETSLØS
 
 data class Vedtak(
@@ -31,7 +33,7 @@ data class Opplysning2(
     val opplysningTekstId: String,
     val verdi: String,
     val datatype: Datatype,
-    val enhet: Enhet,
+    val enhet: Enhet = ENHETSLØS,
 ) {
     companion object {
         val NULL_OPPLYSNING =
