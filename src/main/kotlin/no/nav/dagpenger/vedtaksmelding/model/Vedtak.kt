@@ -225,14 +225,6 @@ class Vedtak(vedtakJson: String) {
             ),
         )
 
-    private fun hentOpplysning(opplysningsnavn: String): String {
-        val node =
-            vedtak["opplysninger"].find {
-                it["navn"].asText() == opplysningsnavn
-            }
-        return node?.get("verdi")?.asText() ?: throw OpplysningIkkeFunnet("$opplysningsnavn ikke funnet")
-    }
-
     private fun JsonNode.finnOpplysningMedNavn(
         opplysningTekstId: String,
         navn: String,
