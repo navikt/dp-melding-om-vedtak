@@ -33,7 +33,15 @@ class VedtakMapper(vedtakJson: String) {
         vedtak = objectMapper.readTree(vedtakJson)
     }
 
-    val utfall: Utfall =
+    fun vedtak(): Vedtak {
+        return Vedtak(
+            utfall = utfall,
+            vilkår = vilkår,
+            opplysninger = opplysninger,
+        )
+    }
+
+    private val utfall: Utfall =
         vedtak["fastsatt"]["utfall"].asBoolean().let { utfall ->
             when (utfall) {
                 true -> INNVILGET
@@ -41,7 +49,7 @@ class VedtakMapper(vedtakJson: String) {
             }
         }
 
-    val vilkår: Set<Vilkår> =
+    private val vilkår: Set<Vilkår> =
         vedtak["vilkår"].map { vilkårNode ->
             Vilkår(
                 navn = vilkårNode["navn"].asText(),
@@ -55,7 +63,7 @@ class VedtakMapper(vedtakJson: String) {
             )
         }.toSet()
 
-    val opplysninger: Set<Opplysning2> =
+    private val opplysninger: Set<Opplysning2> =
         setOf(
             vedtak.finnOpplysningAt(
                 opplysningTekstId = "opplysning.grunnlag",
@@ -250,9 +258,4 @@ class VedtakMapper(vedtakJson: String) {
             }
         }
     }
-
-    fun finnOpplysning(opplysningTekstId: String): Opplysning2? =
-        this.opplysninger.singleOrNull { it.opplysningTekstId == opplysningTekstId }
-
-    class OpplysningIkkeFunnet(message: String) : RuntimeException(message)
 }
