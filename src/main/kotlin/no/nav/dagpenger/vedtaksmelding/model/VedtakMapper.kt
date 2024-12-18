@@ -6,17 +6,17 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.MissingNode
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Companion.NULL_OPPLYSNING
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Datatype.DATO
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Datatype.FLYTTALL
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Datatype.HELTALL
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Datatype.TEKST
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Enhet
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Enhet.BARN
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Enhet.ENHETSLØS
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Enhet.KRONER
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Enhet.TIMER
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak.Opplysning2.Enhet.UKER
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Companion.NULL_OPPLYSNING
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.DATO
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.FLYTTALL
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.HELTALL
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.TEKST
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.BARN
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.ENHETSLØS
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.KRONER
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.TIMER
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.UKER
 
 data class Vilkår(
     val navn: String,
@@ -28,7 +28,7 @@ data class Vilkår(
     }
 }
 
-class Vedtak(vedtakJson: String) {
+class VedtakMapper(vedtakJson: String) {
     private val vedtak: JsonNode
     private val objectMapper: ObjectMapper =
         jacksonObjectMapper()
@@ -228,7 +228,7 @@ class Vedtak(vedtakJson: String) {
     private fun JsonNode.finnOpplysningMedNavn(
         opplysningTekstId: String,
         navn: String,
-        datatype: Vedtak.Opplysning2.Datatype,
+        datatype: VedtakMapper.Opplysning2.Datatype,
         enhet: Enhet = ENHETSLØS,
     ): Opplysning2 {
         return this.finnOpplysningAt(opplysningTekstId, "/opplysninger", datatype, enhet) { node ->
@@ -239,10 +239,10 @@ class Vedtak(vedtakJson: String) {
     private fun JsonNode.finnOpplysningAt(
         opplysningTekstId: String,
         jsonPointer: String,
-        datatype: Vedtak.Opplysning2.Datatype,
+        datatype: VedtakMapper.Opplysning2.Datatype,
         enhet: Enhet = ENHETSLØS,
         predicate: (JsonNode) -> String? = { node -> node.asText() },
-    ): Vedtak.Opplysning2 {
+    ): VedtakMapper.Opplysning2 {
         return this.at(jsonPointer).let {
             when (it) {
                 is MissingNode -> NULL_OPPLYSNING
@@ -250,7 +250,7 @@ class Vedtak(vedtakJson: String) {
                     when (val verdi = predicate(it)) {
                         null -> NULL_OPPLYSNING
                         else ->
-                            Vedtak.Opplysning2(
+                            VedtakMapper.Opplysning2(
                                 opplysningTekstId = opplysningTekstId,
                                 verdi = verdi,
                                 datatype = datatype,
