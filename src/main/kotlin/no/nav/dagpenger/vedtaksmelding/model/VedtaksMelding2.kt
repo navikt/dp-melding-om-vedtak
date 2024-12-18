@@ -20,6 +20,30 @@ sealed class VedtaksMelding2(
     suspend fun doStuff() {
         val opplysningstekstIder = mediator.hentOpplysningTekstIder(brevBlokkIder.toList())
     }
+
+    companion object {
+        fun byggVedtaksMelding(
+            vedtak: Vedtak,
+            mediator: Mediator,
+        ): VedtaksMelding2 {
+            return try {
+                setOf(AvslagMinsteInntekt(vedtak, mediator), Innvilgelse(vedtak, mediator)).single {
+                    it.isApplicable
+                }
+            } catch (e: Exception) {
+                when (e) {
+                    is NoSuchElementException -> throw UkjentVedtakException("Kunne ikke bygge vedtaksmelding utifra vedtak: $vedtak")
+                    is IllegalArgumentException -> throw UkjentVedtakException(
+                        "Vedtak er gyldig for flere vedtaksmeldinger. Dette er ikke lovlig: $vedtak",
+                    )
+
+                    else -> throw e
+                }
+            }
+        }
+    }
+
+    class UkjentVedtakException(message: String) : RuntimeException(message)
 }
 
 data class AvslagMinsteInntekt(
