@@ -19,6 +19,7 @@ import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseSistEndretTidspunktDTO
 import no.nav.dagpenger.vedtaksmelding.apiconfig.apiConfig
 import no.nav.dagpenger.vedtaksmelding.apiconfig.jwt
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import java.util.UUID
@@ -33,20 +34,20 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                 val behandlingId = call.parseUUID()
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
                     val saksbehandler = call.parseSaksbehandler()
-                    val vedtaksmelding = mediator.hentVedtaksmelding(behandlingId, saksbehandler)
+                    val vedtaksmelding = mediator.hentVedtaksmelding2(behandlingId, saksbehandler)
                     val meldingOmVedtakDTO =
                         MeldingOmVedtakDTO(
-                            brevblokkIder = vedtaksmelding.hentBrevBlokkIder(),
+                            brevblokkIder = vedtaksmelding.brevBlokkIder(),
                             opplysninger =
                                 vedtaksmelding.hentOpplysninger().map {
                                     OpplysningDTO(
                                         tekstId = it.opplysningTekstId,
                                         verdi = it.verdi,
-                                        datatype = it.datatype,
+                                        datatype = it.mapDatatype(),
                                     )
                                 },
                             utvidedeBeskrivelser =
-                                vedtaksmelding.hentUtvidedeBeskrivelser().map {
+                                vedtaksmelding.hentUtvidedeBeskrivelser(behandlingId).map {
                                     UtvidetBeskrivelseDTO(
                                         brevblokkId = it.brevblokkId,
                                         tekst = it.tekst,
@@ -90,5 +91,26 @@ private fun ApplicationCall.parseUUID(): UUID {
 private fun RoutingContext.requirePlainText() {
     require(call.request.headers["Content-Type"]!!.contains(ContentType.Text.Plain.toString())) {
         "Content-Type må være ${ContentType.Text.Plain}, men var ${call.request.headers["Content-Type"]}"
+    }
+}
+
+private fun Opplysning2.mapDatatype(): String {
+    return when (this.datatype) {
+        Opplysning2.Datatype.TEKST -> "tekst"
+        Opplysning2.Datatype.HELTALL -> {
+            when (this.enhet) {
+                Opplysning2.Enhet.KRONER -> "penger"
+                Opplysning2.Enhet.BARN -> "barn"
+                else -> "heltall"
+            }
+        }
+        Opplysning2.Datatype.FLYTTALL -> {
+            when (this.enhet) {
+                Opplysning2.Enhet.KRONER -> "penger"
+                else -> "desimaltall"
+            }
+        }
+        Opplysning2.Datatype.DATO -> "dato"
+        Opplysning2.Datatype.BOOLSK -> "boolsk"
     }
 }

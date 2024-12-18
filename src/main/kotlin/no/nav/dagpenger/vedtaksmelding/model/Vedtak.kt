@@ -12,7 +12,13 @@ data class Vedtak(
 ) {
     fun finnOpplysning(opplysningTekstId: String): Opplysning2? =
         this.opplysninger.singleOrNull { it.opplysningTekstId == opplysningTekstId }
+
+    fun hentOpplysning(opplysningTekstId: String): Opplysning2 =
+        finnOpplysning(opplysningTekstId)
+            ?: throw OpplysningIkkeFunnet("Opplysning med tekstId $opplysningTekstId mangler")
 }
+
+class OpplysningIkkeFunnet(message: String) : RuntimeException(message)
 
 data class Vilkår(
     val navn: String,

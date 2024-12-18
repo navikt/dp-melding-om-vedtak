@@ -5,6 +5,7 @@ import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.VedtaksMelding
+import no.nav.dagpenger.vedtaksmelding.model.VedtaksMelding2
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
 import java.time.LocalDateTime
@@ -17,6 +18,18 @@ class Mediator(
     private val sanityKlient: SanityKlient,
     private val vedtaksmeldingRepository: VedtaksmeldingRepository,
 ) {
+    suspend fun hentVedtaksmelding2(
+        behandlingId: UUID,
+        saksbehandler: Saksbehandler,
+    ): VedtaksMelding2 {
+        return behandlingKlient.hentVedtak(
+            behandlingId = behandlingId,
+            saksbehandler = saksbehandler,
+        ).onFailure { throwable ->
+            logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
+        }.map { VedtaksMelding2.byggVedtaksMelding(it, this) }.getOrThrow()
+    }
+
     suspend fun hentVedtaksmelding(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,

@@ -1,7 +1,11 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
+import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.Mediator
 import no.nav.dagpenger.vedtaksmelding.model.Vilkår.Status.IKKE_OPPFYLT
+import java.util.UUID
+
+private val logger = KotlinLogging.logger {}
 
 sealed class VedtaksMelding2(
     protected open val vedtak: Vedtak,
@@ -12,6 +16,16 @@ sealed class VedtaksMelding2(
 
     fun brevBlokkIder(): List<String> {
         return brevBlokkIder + fasteBlokker
+    }
+
+    suspend fun hentOpplysninger(): List<Opplysning2> {
+        val opplysningstekstIder = mediator.hentOpplysningTekstIder(brevBlokkIder())
+        logger.info { "Skal hente opplysninger basert på følgende tekstider: $opplysningstekstIder" }
+        return opplysningstekstIder.map { opplysningstekstId -> vedtak.hentOpplysning(opplysningstekstId) }
+    }
+
+    fun hentUtvidedeBeskrivelser(behandlingId: UUID): List<UtvidetBeskrivelse> {
+        return mediator.hentUtvidedeBeskrivelser(behandlingId)
     }
 
     suspend fun doStuff() {

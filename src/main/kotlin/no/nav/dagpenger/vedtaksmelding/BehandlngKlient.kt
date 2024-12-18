@@ -13,6 +13,8 @@ import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.Behandling
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
+import no.nav.dagpenger.vedtaksmelding.model.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import java.time.LocalDate
 import java.time.Month
 import java.util.UUID
@@ -25,10 +27,15 @@ interface BehandlingKlient {
         saksbehandler: Saksbehandler,
     ): Result<Behandling>
 
-    suspend fun hentVedtak(
-        behandling: UUID,
+    suspend fun hentVedtakJson(
+        behandlingId: UUID,
         saksbehandler: Saksbehandler,
     ): Result<String>
+
+    suspend fun hentVedtak(
+        behandlingId: UUID,
+        saksbehandler: Saksbehandler,
+    ): Result<Vedtak>
 }
 
 internal class BehandlngHttpKlient(
@@ -145,16 +152,23 @@ internal class BehandlngHttpKlient(
         }.onFailure { logger.error(it) { "Kall til dp-behandling feilet ${it.message}" } }
     }
 
-    override suspend fun hentVedtak(
-        behandling: UUID,
+    override suspend fun hentVedtakJson(
+        behandlingId: UUID,
         saksbehandler: Saksbehandler,
     ): Result<String> {
-        return httpClient.get(urlString = "$dpBehandlingApiUrl/$behandling/vedtak") {
+        return httpClient.get(urlString = "$dpBehandlingApiUrl/$behandlingId/vedtak") {
             header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(saksbehandler.token)}")
             accept(ContentType.Application.Json)
         }.bodyAsText().let { vedtak ->
             Result.success(vedtak)
         }
+    }
+
+    override suspend fun hentVedtak(
+        behandlingId: UUID,
+        saksbehandler: Saksbehandler,
+    ): Result<Vedtak> {
+        return hentVedtakJson(behandlingId, saksbehandler).map { VedtakMapper(it).vedtak() }
     }
 }
 

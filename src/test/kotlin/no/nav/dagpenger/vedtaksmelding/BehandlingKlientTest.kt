@@ -133,7 +133,7 @@ internal class BehandlingKlientTest {
 //                    klient.hentBehandling(behandling = behandlingId, saksbehandler = Saksbehandler(token))
 //                println(behandling)
 
-                klient.hentVedtak(behandling = behandlingId, saksbehandler = Saksbehandler(token))
+                klient.hentVedtakJson(behandlingId = behandlingId, saksbehandler = Saksbehandler(token))
                     .onFailure { println(it) }
                     .getOrThrow()
                     .let { vedtak ->
