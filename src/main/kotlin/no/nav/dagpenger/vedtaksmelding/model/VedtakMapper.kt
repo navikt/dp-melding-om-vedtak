@@ -6,27 +6,21 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.MissingNode
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Companion.NULL_OPPLYSNING
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.DATO
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.FLYTTALL
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.HELTALL
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.TEKST
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.BARN
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.ENHETSLØS
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.KRONER
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.TIMER
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.UKER
-
-data class Vilkår(
-    val navn: String,
-    val status: Status,
-) {
-    enum class Status {
-        OPPFYLT,
-        IKKE_OPPFYLT,
-    }
-}
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Companion.NULL_OPPLYSNING
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.BOOLSK
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.DATO
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.FLYTTALL
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.HELTALL
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.TEKST
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.BARN
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.ENHETSLØS
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.KRONER
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.TIMER
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.UKER
+import no.nav.dagpenger.vedtaksmelding.model.Utfall.AVSLÅTT
+import no.nav.dagpenger.vedtaksmelding.model.Utfall.INNVILGET
 
 class VedtakMapper(vedtakJson: String) {
     private val vedtak: JsonNode
@@ -39,16 +33,11 @@ class VedtakMapper(vedtakJson: String) {
         vedtak = objectMapper.readTree(vedtakJson)
     }
 
-    enum class Utfall {
-        INNVILGET,
-        AVSLÅTT,
-    }
-
     val utfall: Utfall =
         vedtak["fastsatt"]["utfall"].asBoolean().let { utfall ->
             when (utfall) {
-                true -> Utfall.INNVILGET
-                false -> Utfall.AVSLÅTT
+                true -> INNVILGET
+                false -> AVSLÅTT
             }
         }
 
@@ -181,7 +170,7 @@ class VedtakMapper(vedtakJson: String) {
             vedtak.finnOpplysningMedNavn(
                 opplysningTekstId = "opplysning.har-samordnet",
                 navn = "Har samordnet",
-                datatype = Opplysning2.Datatype.BOOLSK,
+                datatype = BOOLSK,
             ),
             vedtak.finnOpplysningMedNavn(
                 opplysningTekstId = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget",
@@ -228,7 +217,7 @@ class VedtakMapper(vedtakJson: String) {
     private fun JsonNode.finnOpplysningMedNavn(
         opplysningTekstId: String,
         navn: String,
-        datatype: VedtakMapper.Opplysning2.Datatype,
+        datatype: Datatype,
         enhet: Enhet = ENHETSLØS,
     ): Opplysning2 {
         return this.finnOpplysningAt(opplysningTekstId, "/opplysninger", datatype, enhet) { node ->
@@ -239,10 +228,10 @@ class VedtakMapper(vedtakJson: String) {
     private fun JsonNode.finnOpplysningAt(
         opplysningTekstId: String,
         jsonPointer: String,
-        datatype: VedtakMapper.Opplysning2.Datatype,
+        datatype: Datatype,
         enhet: Enhet = ENHETSLØS,
         predicate: (JsonNode) -> String? = { node -> node.asText() },
-    ): VedtakMapper.Opplysning2 {
+    ): Opplysning2 {
         return this.at(jsonPointer).let {
             when (it) {
                 is MissingNode -> NULL_OPPLYSNING
@@ -250,7 +239,7 @@ class VedtakMapper(vedtakJson: String) {
                     when (val verdi = predicate(it)) {
                         null -> NULL_OPPLYSNING
                         else ->
-                            VedtakMapper.Opplysning2(
+                            Opplysning2(
                                 opplysningTekstId = opplysningTekstId,
                                 verdi = verdi,
                                 datatype = datatype,
@@ -264,40 +253,6 @@ class VedtakMapper(vedtakJson: String) {
 
     fun finnOpplysning(opplysningTekstId: String): Opplysning2? =
         this.opplysninger.singleOrNull { it.opplysningTekstId == opplysningTekstId }
-
-    data class Opplysning2(
-        val opplysningTekstId: String,
-        val verdi: String,
-        val datatype: Datatype,
-        val enhet: Enhet,
-    ) {
-        companion object {
-            val NULL_OPPLYSNING =
-                Opplysning2(
-                    opplysningTekstId = "ukjent.opplysning",
-                    verdi = "ukjent",
-                    datatype = TEKST,
-                    enhet = ENHETSLØS,
-                )
-        }
-
-        enum class Datatype {
-            TEKST,
-            HELTALL,
-            FLYTTALL,
-            DATO,
-            BOOLSK,
-        }
-
-        enum class Enhet {
-            KRONER,
-            DAGER,
-            ENHETSLØS,
-            UKER,
-            BARN,
-            TIMER,
-        }
-    }
 
     class OpplysningIkkeFunnet(message: String) : RuntimeException(message)
 }

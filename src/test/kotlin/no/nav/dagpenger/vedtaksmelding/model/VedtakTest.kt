@@ -1,13 +1,17 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.DATO
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.FLYTTALL
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.HELTALL
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Datatype.TEKST
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.ENHETSLØS
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper.Opplysning2.Enhet.KRONER
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.BOOLSK
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.DATO
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.FLYTTALL
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.HELTALL
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.TEKST
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.BARN
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.ENHETSLØS
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.KRONER
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.TIMER
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.UKER
+import no.nav.dagpenger.vedtaksmelding.model.Utfall.INNVILGET
 import org.junit.jupiter.api.Test
 
 class VedtakTest {
@@ -18,7 +22,7 @@ class VedtakTest {
 
     @Test
     fun `Hent utfall`() {
-        vedtakMapper.utfall shouldBe VedtakMapper.Utfall.INNVILGET
+        vedtakMapper.utfall shouldBe INNVILGET
     }
 
     @Test
@@ -54,8 +58,8 @@ class VedtakTest {
             Opplysning2(
                 opplysningTekstId = "opplysning.fastsatt-arbeidstid-per-uke-for-tap",
                 verdi = "37.5",
-                datatype = Opplysning2.Datatype.FLYTTALL,
-                enhet = Opplysning2.Enhet.TIMER,
+                datatype = FLYTTALL,
+                enhet = TIMER,
             )
     }
 
@@ -65,8 +69,8 @@ class VedtakTest {
             Opplysning2(
                 opplysningTekstId = "opplysning.avrundet-dagsats-med-barnetillegg",
                 verdi = "1312",
-                datatype = Opplysning2.Datatype.FLYTTALL,
-                enhet = Opplysning2.Enhet.KRONER,
+                datatype = FLYTTALL,
+                enhet = KRONER,
             )
     }
 
@@ -164,8 +168,8 @@ class VedtakTest {
             Opplysning2(
                 opplysningTekstId = "opplysning.samordnet-dagsats-uten-barnetillegg",
                 verdi = "1276",
-                datatype = Opplysning2.Datatype.HELTALL,
-                enhet = Opplysning2.Enhet.KRONER,
+                datatype = HELTALL,
+                enhet = KRONER,
             )
     }
 
@@ -175,8 +179,8 @@ class VedtakTest {
             Opplysning2(
                 opplysningTekstId = "opplysning.ukessats",
                 verdi = "6560",
-                datatype = Opplysning2.Datatype.HELTALL,
-                enhet = Opplysning2.Enhet.KRONER,
+                datatype = HELTALL,
+                enhet = KRONER,
             )
     }
 
@@ -186,8 +190,8 @@ class VedtakTest {
             Opplysning2(
                 opplysningTekstId = "opplysning.antall-stonadsuker",
                 verdi = "104",
-                datatype = Opplysning2.Datatype.HELTALL,
-                enhet = Opplysning2.Enhet.UKER,
+                datatype = HELTALL,
+                enhet = UKER,
             )
     }
 
@@ -197,8 +201,8 @@ class VedtakTest {
             Opplysning2(
                 opplysningTekstId = "opplysning.egenandel",
                 verdi = "3936",
-                datatype = Opplysning2.Datatype.HELTALL,
-                enhet = Opplysning2.Enhet.KRONER,
+                datatype = HELTALL,
+                enhet = KRONER,
             )
     }
 
@@ -208,8 +212,8 @@ class VedtakTest {
             Opplysning2(
                 opplysningTekstId = "oppysning.utbetalt-arbeidsinntekt-periode-1",
                 verdi = "500000",
-                datatype = Opplysning2.Datatype.FLYTTALL,
-                enhet = Opplysning2.Enhet.KRONER,
+                datatype = FLYTTALL,
+                enhet = KRONER,
             )
     }
 
@@ -219,8 +223,8 @@ class VedtakTest {
             Opplysning2(
                 opplysningTekstId = "oppysning.utbetalt-arbeidsinntekt-periode-2",
                 verdi = "600000",
-                datatype = Opplysning2.Datatype.FLYTTALL,
-                enhet = Opplysning2.Enhet.KRONER,
+                datatype = FLYTTALL,
+                enhet = KRONER,
             )
     }
 
@@ -230,8 +234,8 @@ class VedtakTest {
             Opplysning2(
                 opplysningTekstId = "oppysning.utbetalt-arbeidsinntekt-periode-3",
                 verdi = "600000",
-                datatype = Opplysning2.Datatype.FLYTTALL,
-                enhet = Opplysning2.Enhet.KRONER,
+                datatype = FLYTTALL,
+                enhet = KRONER,
             )
     }
 
@@ -241,8 +245,8 @@ class VedtakTest {
             Opplysning2(
                 opplysningTekstId = "opplysning.har-samordnet",
                 verdi = "true",
-                datatype = Opplysning2.Datatype.BOOLSK,
-                enhet = Opplysning2.Enhet.ENHETSLØS,
+                datatype = BOOLSK,
+                enhet = ENHETSLØS,
             )
     }
 
@@ -252,8 +256,8 @@ class VedtakTest {
             Opplysning2(
                 opplysningTekstId = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget",
                 verdi = "0",
-                datatype = Opplysning2.Datatype.FLYTTALL,
-                enhet = Opplysning2.Enhet.KRONER,
+                datatype = FLYTTALL,
+                enhet = KRONER,
             )
     }
 
@@ -263,8 +267,8 @@ class VedtakTest {
             Opplysning2(
                 opplysningTekstId = "opplysning.andel-av-dagsats-med-barnetillegg-avkortet-til-maks-andel-av-dagpengegrunnlaget",
                 verdi = "1476",
-                datatype = Opplysning2.Datatype.FLYTTALL,
-                enhet = Opplysning2.Enhet.KRONER,
+                datatype = FLYTTALL,
+                enhet = KRONER,
             )
     }
 
@@ -274,8 +278,8 @@ class VedtakTest {
             Opplysning2(
                 opplysningTekstId = "opplysning.antall-barn-som-gir-rett-til-barnetillegg",
                 verdi = "1",
-                datatype = Opplysning2.Datatype.HELTALL,
-                enhet = Opplysning2.Enhet.BARN,
+                datatype = HELTALL,
+                enhet = BARN,
             )
     }
 
@@ -285,8 +289,8 @@ class VedtakTest {
             Opplysning2(
                 opplysningTekstId = "opplysning.barnetillegg-i-kroner",
                 verdi = "36",
-                datatype = Opplysning2.Datatype.FLYTTALL,
-                enhet = Opplysning2.Enhet.KRONER,
+                datatype = FLYTTALL,
+                enhet = KRONER,
             )
     }
 
@@ -296,8 +300,8 @@ class VedtakTest {
             Opplysning2(
                 opplysningTekstId = "opplysning.forste-maaned-av-opptjeningsperiode",
                 verdi = "2021-11-01",
-                datatype = Opplysning2.Datatype.DATO,
-                enhet = Opplysning2.Enhet.ENHETSLØS,
+                datatype = DATO,
+                enhet = ENHETSLØS,
             )
     }
 
@@ -307,8 +311,8 @@ class VedtakTest {
             Opplysning2(
                 opplysningTekstId = "opplysning.siste-avsluttende-kalendermaaned",
                 verdi = "2024-10-31",
-                datatype = Opplysning2.Datatype.DATO,
-                enhet = Opplysning2.Enhet.ENHETSLØS,
+                datatype = DATO,
+                enhet = ENHETSLØS,
             )
     }
 
@@ -318,8 +322,8 @@ class VedtakTest {
             Opplysning2(
                 opplysningTekstId = "opplysning.grunnlag-siste-12-mnd",
                 verdi = "513677.2888214466",
-                datatype = Opplysning2.Datatype.FLYTTALL,
-                enhet = Opplysning2.Enhet.KRONER,
+                datatype = FLYTTALL,
+                enhet = KRONER,
             )
     }
 }
