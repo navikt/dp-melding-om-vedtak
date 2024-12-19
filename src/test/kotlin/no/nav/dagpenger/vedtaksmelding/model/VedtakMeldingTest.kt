@@ -5,7 +5,7 @@ import io.kotest.matchers.types.shouldBeInstanceOf
 import io.mockk.mockk
 import org.junit.jupiter.api.Test
 
-class VedtaksmeldingTest {
+class VedtakMeldingTest {
     @Test
     fun `Skal lage riktig vedtaksmelding`() {
         Vedtaksmelding.byggVedtaksmelding(
