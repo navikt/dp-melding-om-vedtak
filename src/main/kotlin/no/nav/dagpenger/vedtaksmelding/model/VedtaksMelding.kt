@@ -31,16 +31,16 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
         try {
             val blokker = mutableListOf<String>()
 
-            if (oppfyllerMinsteinntekt.verdi == "false") {
+            if (oppfyllerMinsteinntekt?.verdi == "false") {
                 blokker.add("brev.blokk.vedtak-avslag")
                 blokker.add("brev.blokk.begrunnelse-avslag-minsteinntekt")
             }
 
-            if (oppfyllerKravTilDagpenger.verdi == "true") {
+            if (oppfyllerKravTilDagpenger?.verdi == "true") {
                 blokker.add("brev.blokk.vedtak-innvilgelse")
                 blokker.add("brev.blokk.hvor-lenge-kan-du-faa-dagpenger")
                 blokker.add("brev.blokk.slik-har-vi-beregnet-dagpengene-dine")
-                if (antallBarn.verdi.toInt() > 0) {
+                if (antallBarn != null && antallBarn.verdi.toInt() > 0) {
                     blokker.add("brev.blokk.barnetillegg")
                 }
                 if (nittiProsentRegelBrukt) {
@@ -69,35 +69,31 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
         }
     }
 
-    private val oppfyllerMinsteinntekt: Opplysning by lazy {
-        behandling.opplysninger.first { it.opplysningTekstId == "opplysning.krav-til-minsteinntekt" }
-    }
+    private val oppfyllerMinsteinntekt: Opplysning? =
+        behandling.opplysninger.firstOrNull {
+            it.opplysningTekstId == "opplysning.krav-til-minsteinntekt"
+        }
 
-    private val oppfyllerKravTilDagpenger: Opplysning by lazy {
-        behandling.opplysninger.find { it.opplysningTekstId == "opplysning.krav-paa-dagpenger" }
-            ?: Opplysning(
-                opplysningTekstId = "opplysning.krav-paa-dagpenger",
-                navn = "Krav på dagpenger",
-                verdi = "false",
-                datatype = "boolsk",
-                opplysningId = "opplysning manglet defaulter til false",
-            )
-    }
+    private val oppfyllerKravTilDagpenger: Opplysning? =
+        behandling.opplysninger.find {
+            it.opplysningTekstId == "opplysning.krav-paa-dagpenger"
+        }
 
-    private val antallBarn: Opplysning by lazy {
-        behandling.opplysninger.first { it.opplysningTekstId == "opplysning.antall-barn-som-gir-rett-til-barnetillegg" }
-    }
+    private val antallBarn: Opplysning? =
+        behandling.opplysninger.firstOrNull {
+            it.opplysningTekstId == "opplysning.antall-barn-som-gir-rett-til-barnetillegg"
+        }
 
-    private val utførtSammordning: Boolean by lazy {
-        behandling.opplysninger.find { it.opplysningTekstId == "opplysning.har-samordnet" }?.verdi.toBoolean()
-    }
+    private val utførtSammordning: Boolean =
+        behandling.opplysninger.find {
+            it.opplysningTekstId == "opplysning.har-samordnet"
+        }?.verdi.toBoolean()
 
-    private val nittiProsentRegelBrukt: Boolean by lazy {
+    private val nittiProsentRegelBrukt: Boolean =
         behandling.opplysninger.any {
             it.opplysningTekstId == "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget" &&
                 it.verdi.toDouble() > 0.0
         }
-    }
 }
 
 internal class UgyldigVedtakException(private val behandlingId: UUID, e: Exception) : RuntimeException(e) {
