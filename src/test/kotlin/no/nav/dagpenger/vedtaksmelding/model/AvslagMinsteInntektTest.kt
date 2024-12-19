@@ -13,7 +13,7 @@ class AvslagMinsteInntektTest {
         )
 
     @Test
-    fun `Riktige avslags kriterier`() {
+    fun `Riktige kriterier for avslag på minsteinntekt`() {
         shouldThrow<IllegalArgumentException> {
             AvslagMinsteInntekt(
                 vedtak =
@@ -40,7 +40,7 @@ class AvslagMinsteInntektTest {
     }
 
     @Test
-    fun `Rikig brevblokker for avslag på minsteinntekt`() {
+    fun `Rikige brevblokker for avslag på minsteinntekt`() {
         AvslagMinsteInntekt(
             vedtak =
                 Vedtak(

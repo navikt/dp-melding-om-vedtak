@@ -141,9 +141,7 @@ class VedtaksMeldingOldTest {
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
             ) + VedtaksMeldingOld.FASTE_BLOKKER
-
-        val mediator =
-            mockk<Mediator>()
+        val mediator = mockk<Mediator>()
         runBlocking {
             Behandling(
                 id = UUID.fromString("019145eb-6fbb-769f-b1b1-d2450b383a98"),
