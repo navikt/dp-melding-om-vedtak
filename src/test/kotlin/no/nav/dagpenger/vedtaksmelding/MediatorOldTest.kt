@@ -54,7 +54,7 @@ class MediatorOldTest {
                 vedtaksmeldingRepository = mockk<VedtaksmeldingRepository>(relaxed = true),
             )
         runBlocking {
-            mediator.hentVedtaksmelding(
+            mediator.hentVedtaksmeldingOld(
                 behandlingId = behandlingId,
                 saksbehandler = saksbehandler,
             )
@@ -77,7 +77,7 @@ class MediatorOldTest {
             )
         runBlocking {
             shouldThrow<RuntimeException> {
-                mediator.hentVedtaksmelding(
+                mediator.hentVedtaksmeldingOld(
                     behandlingId = behandlingId,
                     saksbehandler = saksbehandler,
                 )

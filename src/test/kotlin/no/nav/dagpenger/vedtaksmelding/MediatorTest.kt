@@ -7,10 +7,7 @@ import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Behandling
-import no.nav.dagpenger.vedtaksmelding.model.BehandlingNy
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.BOOLSK
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.ENHETSLØS
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningOld
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
@@ -21,21 +18,23 @@ class MediatorTest {
     private val saksbehandler = Saksbehandler("tulleToken")
     private val opplysninger =
         setOf(
-            Opplysning(
+            OpplysningOld(
                 opplysningTekstId = "opplysning.krav-til-minsteinntekt",
+                navn = "curae",
                 verdi = "true",
-                datatype = BOOLSK,
-                enhet = ENHETSLØS,
+                datatype = "bolsk",
+                opplysningId = "aliquet",
             ),
-            Opplysning(
+            OpplysningOld(
                 opplysningTekstId = "opplysning.krav-paa-dagpenger",
+                navn = "curae",
                 verdi = "true",
-                datatype = BOOLSK,
-                enhet = ENHETSLØS,
+                datatype = "bolsk",
+                opplysningId = "aliquet",
             ),
         )
     private val behandling =
-        BehandlingNy(
+        Behandling(
             id = behandlingId,
             tilstand = "tilstand",
             opplysninger = opplysninger,
@@ -55,7 +54,7 @@ class MediatorTest {
                 vedtaksmeldingRepository = mockk<VedtaksmeldingRepository>(relaxed = true),
             )
         runBlocking {
-            mediator.hentVedtaksmelding(
+            mediator.hentVedtaksmeldingOld(
                 behandlingId = behandlingId,
                 saksbehandler = saksbehandler,
             )
@@ -78,7 +77,7 @@ class MediatorTest {
             )
         runBlocking {
             shouldThrow<RuntimeException> {
-                mediator.hentVedtaksmelding(
+                mediator.hentVedtaksmeldingOld(
                     behandlingId = behandlingId,
                     saksbehandler = saksbehandler,
                 )

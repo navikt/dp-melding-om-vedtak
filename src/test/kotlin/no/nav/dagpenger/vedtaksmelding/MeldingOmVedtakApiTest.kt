@@ -86,7 +86,7 @@ class MeldingOmVedtakApiTest {
         val mediator =
             mockk<Mediator>().also {
                 coEvery {
-                    it.hentVedtaksmelding2(behandlingId, saksbehandler)
+                    it.hentVedtaksmelding(behandlingId, saksbehandler)
                 } returns vedtaksmelding
             }
         testApplication {
@@ -138,7 +138,7 @@ class MeldingOmVedtakApiTest {
             }
         }
         coVerify(exactly = 1) {
-            mediator.hentVedtaksmelding2(behandlingId, saksbehandler)
+            mediator.hentVedtaksmelding(behandlingId, saksbehandler)
         }
     }
 

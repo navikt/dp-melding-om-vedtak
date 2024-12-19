@@ -34,7 +34,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                 val behandlingId = call.parseUUID()
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
                     val saksbehandler = call.parseSaksbehandler()
-                    val vedtaksmelding = mediator.hentVedtaksmelding2(behandlingId, saksbehandler)
+                    val vedtaksmelding = mediator.hentVedtaksmelding(behandlingId, saksbehandler)
                     val meldingOmVedtakDTO =
                         MeldingOmVedtakDTO(
                             brevblokkIder = vedtaksmelding.brevBlokkIder(),

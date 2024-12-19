@@ -18,7 +18,7 @@ class Mediator(
     private val sanityKlient: SanityKlient,
     private val vedtaksmeldingRepository: VedtaksmeldingRepository,
 ) {
-    suspend fun hentVedtaksmelding2(
+    suspend fun hentVedtaksmelding(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
     ): Vedtaksmelding {
@@ -30,7 +30,7 @@ class Mediator(
         }.map { Vedtaksmelding.byggVedtaksmelding(it, this) }.getOrThrow()
     }
 
-    suspend fun hentVedtaksmelding(
+    suspend fun hentVedtaksmeldingOld(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
     ): VedtaksMeldingOld {
