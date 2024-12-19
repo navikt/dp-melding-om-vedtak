@@ -7,7 +7,7 @@ import java.util.UUID
 private val logger = KotlinLogging.logger {}
 private val sikkerlogger = KotlinLogging.logger("tjenestekall")
 
-class VedtaksMelding(private val behandling: Behandling, private val mediator: Mediator) {
+class VedtaksMeldingOld(private val behandling: Behandling, private val mediator: Mediator) {
     companion object {
         val FASTE_BLOKKER =
             listOf(
@@ -17,7 +17,7 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
             )
     }
 
-    suspend fun hentOpplysninger(): List<Opplysning> {
+    suspend fun hentOpplysninger(): List<OpplysningOld> {
         val opplysningstekstIder = mediator.hentOpplysningTekstIder(hentBrevBlokkIder())
         logger.info { "Skal hente opplysninger basert på følgende tekstider: $opplysningstekstIder" }
         return opplysningstekstIder.map { behandling.hentOpplysning(it) }
@@ -69,13 +69,13 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
         }
     }
 
-    private val oppfyllerMinsteinntekt: Opplysning by lazy {
+    private val oppfyllerMinsteinntekt: OpplysningOld by lazy {
         behandling.opplysninger.first { it.opplysningTekstId == "opplysning.krav-til-minsteinntekt" }
     }
 
-    private val oppfyllerKravTilDagpenger: Opplysning by lazy {
+    private val oppfyllerKravTilDagpenger: OpplysningOld by lazy {
         behandling.opplysninger.find { it.opplysningTekstId == "opplysning.krav-paa-dagpenger" }
-            ?: Opplysning(
+            ?: OpplysningOld(
                 opplysningTekstId = "opplysning.krav-paa-dagpenger",
                 navn = "Krav på dagpenger",
                 verdi = "false",
@@ -84,7 +84,7 @@ class VedtaksMelding(private val behandling: Behandling, private val mediator: M
             )
     }
 
-    private val antallBarn: Opplysning by lazy {
+    private val antallBarn: OpplysningOld by lazy {
         behandling.opplysninger.first { it.opplysningTekstId == "opplysning.antall-barn-som-gir-rett-til-barnetillegg" }
     }
 

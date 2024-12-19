@@ -6,19 +6,19 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.MissingNode
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Companion.NULL_OPPLYSNING
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.BOOLSK
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.DATO
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.FLYTTALL
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.HELTALL
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.TEKST
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.BARN
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.ENHETSLØS
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.KRONER
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.TIMER
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.UKER
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Companion.NULL_OPPLYSNING
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.BOOLSK
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.DATO
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.FLYTTALL
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.HELTALL
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.TEKST
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.BARN
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.ENHETSLØS
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.KRONER
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.TIMER
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.UKER
 import no.nav.dagpenger.vedtaksmelding.model.Utfall.AVSLÅTT
 import no.nav.dagpenger.vedtaksmelding.model.Utfall.INNVILGET
 import java.time.LocalDate
@@ -65,7 +65,7 @@ class VedtakMapper(vedtakJson: String) {
             )
         }.toSet()
 
-    private val vedtakOpplysninger: Set<Opplysning2> =
+    private val vedtakOpplysninger: Set<Opplysning> =
         setOf(
             vedtak.finnOpplysningAt(
                 opplysningTekstId = "opplysning.grunnlag",
@@ -226,8 +226,8 @@ class VedtakMapper(vedtakJson: String) {
 
     private val inntjeningsperiodeOpplysninger = vedtakOpplysninger.finnInntjeningsPeriode()
 
-    private fun Set<Opplysning2>.finnInntjeningsPeriode(): Set<Opplysning2> {
-        val opptjeningsperiodeOpplysninger = mutableSetOf<Opplysning2>()
+    private fun Set<Opplysning>.finnInntjeningsPeriode(): Set<Opplysning> {
+        val opptjeningsperiodeOpplysninger = mutableSetOf<Opplysning>()
 
         val opptjeningsperiodeStart: LocalDate? =
             this.singleOrNull {
@@ -244,7 +244,7 @@ class VedtakMapper(vedtakJson: String) {
 
         if (opptjeningsperiodeStart != null && opptjeningsperiodeSlutt != null) {
             opptjeningsperiodeOpplysninger.add(
-                Opplysning2(
+                Opplysning(
                     opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-1",
                     verdi = opptjeningsperiodeStart.norskMånedOgÅr(),
                     datatype = TEKST,
@@ -252,7 +252,7 @@ class VedtakMapper(vedtakJson: String) {
                 ),
             )
             opptjeningsperiodeOpplysninger.add(
-                Opplysning2(
+                Opplysning(
                     opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-2",
                     verdi = opptjeningsperiodeStart.plusYears(1).norskMånedOgÅr(),
                     datatype = TEKST,
@@ -260,7 +260,7 @@ class VedtakMapper(vedtakJson: String) {
                 ),
             )
             opptjeningsperiodeOpplysninger.add(
-                Opplysning2(
+                Opplysning(
                     opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-3",
                     verdi = opptjeningsperiodeStart.plusYears(2).norskMånedOgÅr(),
                     datatype = TEKST,
@@ -268,7 +268,7 @@ class VedtakMapper(vedtakJson: String) {
                 ),
             )
             opptjeningsperiodeOpplysninger.add(
-                Opplysning2(
+                Opplysning(
                     opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-1",
                     verdi = opptjeningsperiodeSlutt.minusYears(2).norskMånedOgÅr(),
                     datatype = TEKST,
@@ -276,7 +276,7 @@ class VedtakMapper(vedtakJson: String) {
                 ),
             )
             opptjeningsperiodeOpplysninger.add(
-                Opplysning2(
+                Opplysning(
                     opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-2",
                     verdi = opptjeningsperiodeSlutt.minusYears(1).norskMånedOgÅr(),
                     datatype = TEKST,
@@ -284,7 +284,7 @@ class VedtakMapper(vedtakJson: String) {
                 ),
             )
             opptjeningsperiodeOpplysninger.add(
-                Opplysning2(
+                Opplysning(
                     opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-3",
                     verdi = opptjeningsperiodeSlutt.norskMånedOgÅr(),
                     datatype = TEKST,
@@ -316,7 +316,7 @@ class VedtakMapper(vedtakJson: String) {
         navn: String,
         datatype: Datatype,
         enhet: Enhet = ENHETSLØS,
-    ): Opplysning2 {
+    ): Opplysning {
         return this.finnOpplysningAt(opplysningTekstId, "/opplysninger", datatype, enhet) { node ->
             node.find { it["navn"].asText() == navn }?.findValue("verdi")?.asText()
         }
@@ -328,7 +328,7 @@ class VedtakMapper(vedtakJson: String) {
         datatype: Datatype,
         enhet: Enhet = ENHETSLØS,
         predicate: (JsonNode) -> String? = { node -> node.asText() },
-    ): Opplysning2 {
+    ): Opplysning {
         return this.at(jsonPointer).let {
             when (it) {
                 is MissingNode -> NULL_OPPLYSNING
@@ -336,7 +336,7 @@ class VedtakMapper(vedtakJson: String) {
                     when (val verdi = predicate(it)) {
                         null -> NULL_OPPLYSNING
                         else ->
-                            Opplysning2(
+                            Opplysning(
                                 opplysningTekstId = opplysningTekstId,
                                 verdi = verdi,
                                 datatype = datatype,

@@ -8,9 +8,9 @@ private val logger = KotlinLogging.logger {}
 data class Behandling(
     val id: UUID,
     val tilstand: String,
-    val opplysninger: Set<Opplysning>,
+    val opplysninger: Set<OpplysningOld>,
 ) {
-    fun hentOpplysning(opplysningTekstId: String): Opplysning {
+    fun hentOpplysning(opplysningTekstId: String): OpplysningOld {
         val opplysninger = opplysninger.singleOrNull { it.opplysningTekstId == opplysningTekstId }
         if (opplysninger == null) {
             logger.error { "Fant ikke opplysning for opplysningtekstId: $opplysningTekstId" }

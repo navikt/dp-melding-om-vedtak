@@ -1,6 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
-data class Opplysning(
+data class OpplysningOld(
     val opplysningTekstId: String,
     val navn: String,
     val verdi: String,

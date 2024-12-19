@@ -10,7 +10,7 @@ class BehandlingTest {
     fun `hent ut navn, dataType, verdi og behandlingsId fra behandling`() {
         val opplysninger =
             setOf(
-                Opplysning(
+                OpplysningOld(
                     opplysningTekstId = "opplysning.krav-til-minsteinntekt",
                     navn = "Krav til minsteinntekt",
                     verdi = "true",
@@ -27,7 +27,7 @@ class BehandlingTest {
             )
 
         behandling.hentOpplysning("opplysning.krav-til-minsteinntekt") shouldBe
-            Opplysning(
+            OpplysningOld(
                 opplysningTekstId = "opplysning.krav-til-minsteinntekt",
                 navn = "Krav til minsteinntekt",
                 verdi = "true",

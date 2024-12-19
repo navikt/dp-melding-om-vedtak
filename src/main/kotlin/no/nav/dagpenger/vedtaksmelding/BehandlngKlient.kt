@@ -11,7 +11,7 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.Behandling
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningOld
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
@@ -52,9 +52,9 @@ internal class BehandlngHttpKlient(
                 header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(saksbehandler.token)}")
                 accept(ContentType.Application.Json)
             }.body<BehandlingDTO>().let { behandlingDTO ->
-                val mutableOpplysninger: MutableSet<Opplysning> =
+                val mutableOpplysninger: MutableSet<OpplysningOld> =
                     behandlingDTO.opplysning.map { opplysningDTO ->
-                        Opplysning(
+                        OpplysningOld(
                             navn = opplysningDTO.navn,
                             verdi = opplysningDTO.verdi,
                             datatype = opplysningDTO.datatype,
@@ -77,7 +77,7 @@ internal class BehandlngHttpKlient(
 
                 if (førsteMånedAvOpptjeningsperiode != null) {
                     mutableOpplysninger.add(
-                        Opplysning(
+                        OpplysningOld(
                             opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-1",
                             navn = "opplysning.inntektsperiode-1-forste-maaned-aar",
                             verdi = førsteMånedAvOpptjeningsperiode.norskMånedOgÅr(),
@@ -86,7 +86,7 @@ internal class BehandlngHttpKlient(
                         ),
                     )
                     mutableOpplysninger.add(
-                        Opplysning(
+                        OpplysningOld(
                             opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-2",
                             navn = "opplysning.inntektsperiode-2-forste-maaned-aar",
                             verdi = førsteMånedAvOpptjeningsperiode.plusYears(1).norskMånedOgÅr(),
@@ -95,7 +95,7 @@ internal class BehandlngHttpKlient(
                         ),
                     )
                     mutableOpplysninger.add(
-                        Opplysning(
+                        OpplysningOld(
                             opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-3",
                             navn = "opplysning.inntektsperiode-3-forste-maaned-aar",
                             verdi = førsteMånedAvOpptjeningsperiode.plusYears(2).norskMånedOgÅr(),
@@ -107,7 +107,7 @@ internal class BehandlngHttpKlient(
 
                 if (sisteAvsluttendeKalendermåned != null) {
                     mutableOpplysninger.add(
-                        Opplysning(
+                        OpplysningOld(
                             opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-1",
                             navn = "opplysning.inntektsperiode-1-siste-maaned-aar",
                             verdi = sisteAvsluttendeKalendermåned.minusYears(2).norskMånedOgÅr(),
@@ -116,7 +116,7 @@ internal class BehandlngHttpKlient(
                         ),
                     )
                     mutableOpplysninger.add(
-                        Opplysning(
+                        OpplysningOld(
                             opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-2",
                             navn = "opplysning.inntektsperiode-2-siste-maaned-aar",
                             verdi = sisteAvsluttendeKalendermåned.minusYears(1).norskMånedOgÅr(),
@@ -125,7 +125,7 @@ internal class BehandlngHttpKlient(
                         ),
                     )
                     mutableOpplysninger.add(
-                        Opplysning(
+                        OpplysningOld(
                             opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-3",
                             navn = "opplysning.inntektsperiode-3-siste-maaned-aar",
                             verdi = sisteAvsluttendeKalendermåned.norskMånedOgÅr(),
@@ -140,7 +140,7 @@ internal class BehandlngHttpKlient(
                     tilstand = behandlingDTO.tilstand,
                     opplysninger =
                         behandlingDTO.opplysning.map { opplysningDTO ->
-                            Opplysning(
+                            OpplysningOld(
                                 navn = opplysningDTO.navn,
                                 verdi = opplysningDTO.verdi,
                                 datatype = opplysningDTO.datatype,

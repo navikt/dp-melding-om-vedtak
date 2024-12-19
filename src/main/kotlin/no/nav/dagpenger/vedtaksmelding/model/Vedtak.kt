@@ -1,19 +1,17 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.TEKST
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.ENHETSLØS
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.TEKST
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.ENHETSLØS
 
 data class Vedtak(
     val vilkår: Set<Vilkår> = emptySet(),
     val utfall: Utfall,
-    val opplysninger: Set<Opplysning2> = emptySet(),
+    val opplysninger: Set<Opplysning> = emptySet(),
 ) {
-    fun finnOpplysning(opplysningTekstId: String): Opplysning2? =
+    fun finnOpplysning(opplysningTekstId: String): Opplysning? =
         this.opplysninger.singleOrNull { it.opplysningTekstId == opplysningTekstId }
 
-    fun hentOpplysning(opplysningTekstId: String): Opplysning2 =
+    fun hentOpplysning(opplysningTekstId: String): Opplysning =
         finnOpplysning(opplysningTekstId)
             ?: throw OpplysningIkkeFunnet("Opplysning med tekstId $opplysningTekstId mangler")
 }
@@ -35,7 +33,7 @@ enum class Utfall {
     AVSLÅTT,
 }
 
-data class Opplysning2(
+data class Opplysning(
     val opplysningTekstId: String,
     val verdi: String,
     val datatype: Datatype,
@@ -43,7 +41,7 @@ data class Opplysning2(
 ) {
     companion object {
         val NULL_OPPLYSNING =
-            Opplysning2(
+            Opplysning(
                 opplysningTekstId = "ukjent.opplysning",
                 verdi = "ukjent",
                 datatype = TEKST,

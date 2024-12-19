@@ -53,6 +53,6 @@ class AvslagMinsteInntektTest {
             listOf(
                 "brev.blokk.vedtak-avslag",
                 "brev.blokk.begrunnelse-avslag-minsteinntekt",
-            ) + VedtaksMelding2.fasteBlokker
+            ) + Vedtaksmelding.fasteBlokker
     }
 }

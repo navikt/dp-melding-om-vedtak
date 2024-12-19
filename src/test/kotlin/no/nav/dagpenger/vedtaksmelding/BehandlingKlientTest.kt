@@ -7,7 +7,7 @@ import io.ktor.client.engine.mock.respond
 import io.ktor.http.headersOf
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.k8.setAzureAuthEnv
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningOld
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -22,7 +22,7 @@ internal class BehandlingKlientTest {
         val dpBehandlingApiUrl = "https://dp-behandling.intern.dev.nav.no/behandling"
         val responseJson = resourseRetriever.getResource("/json/behandling.json").readText()
         val inntektsperiode1FørsteMånedÅr =
-            Opplysning(
+            OpplysningOld(
                 opplysningTekstId = "opplysning.inntektsperiode-1-forste-maaned-aar",
                 navn = "opplysning.inntektsperiode-1-forste-maaned-aar",
                 verdi = "oktober 2021",
@@ -30,7 +30,7 @@ internal class BehandlingKlientTest {
                 opplysningId = "utledet",
             )
         val inntektsperiode2FørsteMånedÅr =
-            Opplysning(
+            OpplysningOld(
                 opplysningTekstId = "opplysning.inntektsperiode-2-forste-maaned-aar",
                 navn = "opplysning.inntektsperiode-2-forste-maaned-aar",
                 verdi = "oktober 2022",
@@ -38,7 +38,7 @@ internal class BehandlingKlientTest {
                 opplysningId = "utledet",
             )
         val inntektsperiode3FørsteMånedÅr =
-            Opplysning(
+            OpplysningOld(
                 opplysningTekstId = "opplysning.inntektsperiode-3-forste-maaned-aar",
                 navn = "opplysning.inntektsperiode-3-forste-maaned-aar",
                 verdi = "oktober 2023",
@@ -46,7 +46,7 @@ internal class BehandlingKlientTest {
                 opplysningId = "utledet",
             )
         val inntektsperiode1SisteMånedÅr =
-            Opplysning(
+            OpplysningOld(
                 opplysningTekstId = "opplysning.inntektsperiode-1-siste-maaned-aar",
                 navn = "opplysning.inntektsperiode-1-siste-maaned-aar",
                 verdi = "september 2022",
@@ -54,7 +54,7 @@ internal class BehandlingKlientTest {
                 opplysningId = "utledet",
             )
         val inntektsperiode2SisteMånedÅr =
-            Opplysning(
+            OpplysningOld(
                 opplysningTekstId = "opplysning.inntektsperiode-2-siste-maaned-aar",
                 navn = "opplysning.inntektsperiode-2-siste-maaned-aar",
                 verdi = "september 2023",
@@ -62,7 +62,7 @@ internal class BehandlingKlientTest {
                 opplysningId = "utledet",
             )
         val inntektsperiode3SisteMånedÅr =
-            Opplysning(
+            OpplysningOld(
                 opplysningTekstId = "opplysning.inntektsperiode-3-siste-maaned-aar",
                 navn = "opplysning.inntektsperiode-3-siste-maaned-aar",
                 verdi = "september 2024",
@@ -89,7 +89,7 @@ internal class BehandlingKlientTest {
                     behandling.opplysninger.let { opplysninger ->
                         opplysninger.size shouldBeGreaterThan 0
                         opplysninger.first { it.navn == "fagsakId" } shouldBe
-                            Opplysning(
+                            OpplysningOld(
                                 opplysningTekstId = "ukjent.opplysning.fagsakId",
                                 navn = "fagsakId",
                                 verdi = "15117125",

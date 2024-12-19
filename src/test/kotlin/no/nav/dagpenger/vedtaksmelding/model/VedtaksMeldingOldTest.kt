@@ -10,12 +10,12 @@ import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 import java.util.UUID
 
-class VedtaksMeldingTest {
+class VedtaksMeldingOldTest {
     private fun lagOpplysning(
         id: String,
         verdi: String,
-    ): Opplysning {
-        return Opplysning(
+    ): OpplysningOld {
+        return OpplysningOld(
             opplysningTekstId = id,
             navn = "test",
             verdi = verdi,
@@ -24,32 +24,32 @@ class VedtaksMeldingTest {
         )
     }
 
-    val minsteinntekt: Opplysning =
+    val minsteinntekt: OpplysningOld =
         lagOpplysning(
             id = "opplysning.krav-til-minsteinntekt",
             verdi = "true",
         )
 
-    val kravPåDagpengerTrue: Opplysning =
+    val kravPåDagpengerTrue: OpplysningOld =
         lagOpplysning(
             id = "opplysning.krav-paa-dagpenger",
             verdi = "true",
         )
 
-    val utførtSammordningFalse: Opplysning =
+    val utførtSammordningFalse: OpplysningOld =
         lagOpplysning(id = "opplysning.har-samordnet", verdi = "false")
 
-    val nittiProsentRegelIkkeBrukt: Opplysning =
+    val nittiProsentRegelIkkeBrukt: OpplysningOld =
         lagOpplysning(
             id = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget",
             verdi = 0.toString(),
         )
 
-    val ingenBarn: Opplysning = lagOpplysning(id = "opplysning.antall-barn-som-gir-rett-til-barnetillegg", verdi = "0")
+    val ingenBarn: OpplysningOld = lagOpplysning(id = "opplysning.antall-barn-som-gir-rett-til-barnetillegg", verdi = "0")
 
     @Test
     fun `Returner kun faste blokker dersom ingen opplysninger trigger spesifikke brevblokker `() {
-        val minsteinntekt: Opplysning =
+        val minsteinntekt: OpplysningOld =
             lagOpplysning(
                 id = "opplysning.krav-til-minsteinntekt",
                 verdi = "true",
@@ -58,7 +58,7 @@ class VedtaksMeldingTest {
 
         val mediator =
             mockk<Mediator>().also {
-                coEvery { it.hentOpplysningTekstIder(VedtaksMelding.FASTE_BLOKKER.toList()) } returns emptyList()
+                coEvery { it.hentOpplysningTekstIder(VedtaksMeldingOld.FASTE_BLOKKER.toList()) } returns emptyList()
             }
         runBlocking {
             Behandling(
@@ -66,8 +66,8 @@ class VedtaksMeldingTest {
                 tilstand = "Tilstand",
                 opplysninger = opplysninger,
             ).let { behandling ->
-                VedtaksMelding(behandling, mediator).let { vedtaksMelding ->
-                    vedtaksMelding.hentBrevBlokkIder() shouldBe VedtaksMelding.FASTE_BLOKKER
+                VedtaksMeldingOld(behandling, mediator).let { vedtaksMelding ->
+                    vedtaksMelding.hentBrevBlokkIder() shouldBe VedtaksMeldingOld.FASTE_BLOKKER
                     vedtaksMelding.hentOpplysninger() shouldBe emptyList()
                 }
             }
@@ -77,7 +77,7 @@ class VedtaksMeldingTest {
     @Test
     fun `Skal kaste exception når vi ikke finner opplysninger vi forventer at alltid følger med behandlingen`() {
         shouldThrow<UgyldigVedtakException> {
-            VedtaksMelding(
+            VedtaksMeldingOld(
                 Behandling(
                     id = UUIDv7.ny(),
                     tilstand = "y",
@@ -90,7 +90,7 @@ class VedtaksMeldingTest {
 
     @Test
     fun `Rikig brevblokker for avslag på minsteinntekt`() {
-        val minsteinntekt: Opplysning =
+        val minsteinntekt: OpplysningOld =
             lagOpplysning(
                 id = "opplysning.krav-til-minsteinntekt",
                 verdi = "false",
@@ -100,7 +100,7 @@ class VedtaksMeldingTest {
             listOf(
                 "brev.blokk.vedtak-avslag",
                 "brev.blokk.begrunnelse-avslag-minsteinntekt",
-            ) + VedtaksMelding.FASTE_BLOKKER
+            ) + VedtaksMeldingOld.FASTE_BLOKKER
 
         val mediator =
             mockk<Mediator>().also {
@@ -115,7 +115,7 @@ class VedtaksMeldingTest {
                 tilstand = "Tilstand",
                 opplysninger = opplysninger,
             ).let { behandling ->
-                VedtaksMelding(behandling, mediator).let { vedtaksMelding ->
+                VedtaksMeldingOld(behandling, mediator).let { vedtaksMelding ->
                     vedtaksMelding.hentBrevBlokkIder() shouldBe forventedeBrevblokkIder
                     vedtaksMelding.hentOpplysninger() shouldBe listOf(minsteinntekt)
                 }
@@ -140,7 +140,7 @@ class VedtaksMeldingTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + VedtaksMelding.FASTE_BLOKKER
+            ) + VedtaksMeldingOld.FASTE_BLOKKER
 
         val mediator =
             mockk<Mediator>()
@@ -150,7 +150,7 @@ class VedtaksMeldingTest {
                 tilstand = "Tilstand",
                 opplysninger = opplysninger,
             ).let { behandling ->
-                VedtaksMelding(behandling, mediator).let { vedtaksMelding ->
+                VedtaksMeldingOld(behandling, mediator).let { vedtaksMelding ->
                     vedtaksMelding.hentBrevBlokkIder() shouldBe forventedeBrevblokkIder
                 }
             }
@@ -159,7 +159,7 @@ class VedtaksMeldingTest {
 
     @Test
     fun `Rikig brevblokker for innvilgelse av ordinære dagpenger for person med barn`() {
-        val antallBarn: Opplysning = lagOpplysning(id = "opplysning.antall-barn-som-gir-rett-til-barnetillegg", verdi = "1")
+        val antallBarn: OpplysningOld = lagOpplysning(id = "opplysning.antall-barn-som-gir-rett-til-barnetillegg", verdi = "1")
 
         val opplysninger = setOf(minsteinntekt, kravPåDagpengerTrue, antallBarn, utførtSammordningFalse, nittiProsentRegelIkkeBrukt)
 
@@ -178,7 +178,7 @@ class VedtaksMeldingTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + VedtaksMelding.FASTE_BLOKKER
+            ) + VedtaksMeldingOld.FASTE_BLOKKER
 
         val mediator =
             mockk<Mediator>()
@@ -188,7 +188,7 @@ class VedtaksMeldingTest {
                 tilstand = "Tilstand",
                 opplysninger = opplysninger,
             ).let { behandling ->
-                VedtaksMelding(behandling, mediator).let { vedtaksMelding ->
+                VedtaksMeldingOld(behandling, mediator).let { vedtaksMelding ->
                     vedtaksMelding.hentBrevBlokkIder() shouldBe forventedeBrevblokkIder
                 }
             }
@@ -197,7 +197,7 @@ class VedtaksMeldingTest {
 
     @Test
     fun `Rikig brevblokker for innvilgelse av ordinære dagpenger for person med samordning`() {
-        val utførtSammordningTrue: Opplysning = lagOpplysning(id = "opplysning.har-samordnet", verdi = "true")
+        val utførtSammordningTrue: OpplysningOld = lagOpplysning(id = "opplysning.har-samordnet", verdi = "true")
 
         val opplysninger = setOf(minsteinntekt, kravPåDagpengerTrue, ingenBarn, utførtSammordningTrue, nittiProsentRegelIkkeBrukt)
 
@@ -216,7 +216,7 @@ class VedtaksMeldingTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + VedtaksMelding.FASTE_BLOKKER
+            ) + VedtaksMeldingOld.FASTE_BLOKKER
 
         val mediator =
             mockk<Mediator>()
@@ -226,7 +226,7 @@ class VedtaksMeldingTest {
                 tilstand = "Tilstand",
                 opplysninger = opplysninger,
             ).let { behandling ->
-                VedtaksMelding(behandling, mediator).let { vedtaksMelding ->
+                VedtaksMeldingOld(behandling, mediator).let { vedtaksMelding ->
                     vedtaksMelding.hentBrevBlokkIder() shouldBe forventedeBrevblokkIder
                 }
             }
@@ -235,7 +235,7 @@ class VedtaksMeldingTest {
 
     @Test
     fun `Rikig brevblokker for innvilgelse av ordinære dagpenger for person med nittiProsentRegel`() {
-        val nittiProsentRegelBrukt: Opplysning =
+        val nittiProsentRegelBrukt: OpplysningOld =
             lagOpplysning(
                 id = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget",
                 verdi = 10.toString(),
@@ -258,7 +258,7 @@ class VedtaksMeldingTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + VedtaksMelding.FASTE_BLOKKER
+            ) + VedtaksMeldingOld.FASTE_BLOKKER
 
         val mediator =
             mockk<Mediator>()
@@ -268,7 +268,7 @@ class VedtaksMeldingTest {
                 tilstand = "Tilstand",
                 opplysninger = opplysninger,
             ).let { behandling ->
-                VedtaksMelding(behandling, mediator).let { vedtaksMelding ->
+                VedtaksMeldingOld(behandling, mediator).let { vedtaksMelding ->
                     vedtaksMelding.hentBrevBlokkIder() shouldBe forventedeBrevblokkIder
                 }
             }

@@ -7,7 +7,7 @@ import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Behandling
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningOld
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
@@ -18,14 +18,14 @@ class MediatorTest {
     private val saksbehandler = Saksbehandler("tulleToken")
     private val opplysninger =
         setOf(
-            Opplysning(
+            OpplysningOld(
                 opplysningTekstId = "opplysning.krav-til-minsteinntekt",
                 navn = "curae",
                 verdi = "true",
                 datatype = "bolsk",
                 opplysningId = "aliquet",
             ),
-            Opplysning(
+            OpplysningOld(
                 opplysningTekstId = "opplysning.krav-paa-dagpenger",
                 navn = "curae",
                 verdi = "true",

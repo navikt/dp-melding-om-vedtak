@@ -7,7 +7,7 @@ import java.util.UUID
 
 private val logger = KotlinLogging.logger {}
 
-sealed class VedtaksMelding2(
+sealed class Vedtaksmelding(
     protected open val vedtak: Vedtak,
     protected open val mediator: Mediator,
 ) {
@@ -18,7 +18,7 @@ sealed class VedtaksMelding2(
         return brevBlokkIder + fasteBlokker
     }
 
-    suspend fun hentOpplysninger(): List<Opplysning2> {
+    suspend fun hentOpplysninger(): List<Opplysning> {
         val opplysningstekstIder = mediator.hentOpplysningTekstIder(brevBlokkIder())
         logger.info { "Skal hente opplysninger basert på følgende tekstider: $opplysningstekstIder" }
         return opplysningstekstIder.map { opplysningstekstId -> vedtak.hentOpplysning(opplysningstekstId) }
@@ -40,12 +40,12 @@ sealed class VedtaksMelding2(
                 "brev.blokk.rett-til-aa-klage",
             )
 
-        fun byggVedtaksMelding(
+        fun byggVedtaksmelding(
             vedtak: Vedtak,
             mediator: Mediator,
-        ): VedtaksMelding2 {
+        ): Vedtaksmelding {
             val of =
-                mutableSetOf<VedtaksMelding2>().also {
+                mutableSetOf<Vedtaksmelding>().also {
                     try {
                         it.add(AvslagMinsteInntekt(vedtak, mediator))
                     } catch (e: Exception) {
@@ -79,7 +79,7 @@ sealed class VedtaksMelding2(
 data class AvslagMinsteInntekt(
     override val vedtak: Vedtak,
     override val mediator: Mediator,
-) : VedtaksMelding2(vedtak, mediator) {
+) : Vedtaksmelding(vedtak, mediator) {
     override val isApplicable: Boolean = vedtak.utfall == Utfall.AVSLÅTT && vedtak.vilkår.avslagMinsteinntekt()
     override val brevBlokkIder: List<String> =
         listOf("brev.blokk.vedtak-avslag", "brev.blokk.begrunnelse-avslag-minsteinntekt")
@@ -96,7 +96,7 @@ data class AvslagMinsteInntekt(
 data class Innvilgelse(
     override val vedtak: Vedtak,
     override val mediator: Mediator,
-) : VedtaksMelding2(vedtak, mediator) {
+) : Vedtaksmelding(vedtak, mediator) {
     override val isApplicable: Boolean = vedtak.utfall == Utfall.INNVILGET
 
     init {

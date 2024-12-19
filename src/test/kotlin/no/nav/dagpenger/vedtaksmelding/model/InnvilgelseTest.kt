@@ -4,16 +4,16 @@ import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import io.mockk.mockk
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.BOOLSK
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.FLYTTALL
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Datatype.HELTALL
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.BARN
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2.Enhet.KRONER
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.BOOLSK
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.FLYTTALL
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.HELTALL
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.BARN
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.KRONER
 import org.junit.jupiter.api.Test
 
 class InnvilgelseTest {
     private fun nittiprosentRegelOpplysning(verdi: String = "10") =
-        Opplysning2(
+        Opplysning(
             opplysningTekstId =
                 "opplysning.andel-av-dagsats-med-barne" +
                     "tillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget",
@@ -23,14 +23,14 @@ class InnvilgelseTest {
         )
 
     private fun samordnetOpplysning(verdi: String = "true") =
-        Opplysning2(
+        Opplysning(
             opplysningTekstId = "opplysning.har-samordnet",
             verdi = verdi,
             datatype = BOOLSK,
         )
 
     private fun barnetilleggOpplysning(verdi: String = "1") =
-        Opplysning2(
+        Opplysning(
             opplysningTekstId = "opplysning.antall-barn-som-gir-rett-til-barnetillegg",
             verdi = verdi,
             datatype = HELTALL,
@@ -80,7 +80,7 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + VedtaksMelding2.fasteBlokker
+            ) + Vedtaksmelding.fasteBlokker
 
         Innvilgelse(
             vedtak =
@@ -110,7 +110,7 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + VedtaksMelding2.fasteBlokker
+            ) + Vedtaksmelding.fasteBlokker
 
         Innvilgelse(
             vedtak =
@@ -156,7 +156,7 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + VedtaksMelding2.fasteBlokker
+            ) + Vedtaksmelding.fasteBlokker
 
         Innvilgelse(
             vedtak =
@@ -202,7 +202,7 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + VedtaksMelding2.fasteBlokker
+            ) + Vedtaksmelding.fasteBlokker
 
         Innvilgelse(
             vedtak =
@@ -263,7 +263,7 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + VedtaksMelding2.fasteBlokker
+            ) + Vedtaksmelding.fasteBlokker
 
         Innvilgelse(
             vedtak =

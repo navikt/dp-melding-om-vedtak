@@ -19,7 +19,7 @@ import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseSistEndretTidspunktDTO
 import no.nav.dagpenger.vedtaksmelding.apiconfig.apiConfig
 import no.nav.dagpenger.vedtaksmelding.apiconfig.jwt
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning2
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import java.util.UUID
@@ -94,23 +94,23 @@ private fun RoutingContext.requirePlainText() {
     }
 }
 
-private fun Opplysning2.mapDatatype(): String {
+private fun Opplysning.mapDatatype(): String {
     return when (this.datatype) {
-        Opplysning2.Datatype.TEKST -> "tekst"
-        Opplysning2.Datatype.HELTALL -> {
+        Opplysning.Datatype.TEKST -> "tekst"
+        Opplysning.Datatype.HELTALL -> {
             when (this.enhet) {
-                Opplysning2.Enhet.KRONER -> "penger"
-                Opplysning2.Enhet.BARN -> "barn"
+                Opplysning.Enhet.KRONER -> "penger"
+                Opplysning.Enhet.BARN -> "barn"
                 else -> "heltall"
             }
         }
-        Opplysning2.Datatype.FLYTTALL -> {
+        Opplysning.Datatype.FLYTTALL -> {
             when (this.enhet) {
-                Opplysning2.Enhet.KRONER -> "penger"
+                Opplysning.Enhet.KRONER -> "penger"
                 else -> "desimaltall"
             }
         }
-        Opplysning2.Datatype.DATO -> "dato"
-        Opplysning2.Datatype.BOOLSK -> "boolsk"
+        Opplysning.Datatype.DATO -> "dato"
+        Opplysning.Datatype.BOOLSK -> "boolean"
     }
 }
