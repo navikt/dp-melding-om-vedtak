@@ -74,6 +74,12 @@ class VedtakMapper(vedtakJson: String) {
                 enhet = KRONER,
             ),
             vedtak.finnOpplysningAt(
+                opplysningTekstId = "opplysning.dagsats-med-barnetillegg-etter-samordning-og-90-prosent-regel",
+                jsonPointer = "/fastsatt/sats/dagsatsMedBarnetillegg",
+                datatype = HELTALL,
+                enhet = KRONER,
+            ),
+            vedtak.finnOpplysningAt(
                 opplysningTekstId = "opplysning.provingsdato",
                 jsonPointer = "/virkningsdato",
                 datatype = DATO,
@@ -83,12 +89,6 @@ class VedtakMapper(vedtakJson: String) {
                 jsonPointer = "/fastsatt/fastsattVanligArbeidstid/vanligArbeidstidPerUke",
                 datatype = FLYTTALL,
                 enhet = TIMER,
-            ),
-            vedtak.finnOpplysningAt(
-                opplysningTekstId = "opplysning.avrundet-dagsats-med-barnetillegg",
-                jsonPointer = "/fastsatt/sats/dagsatsMedBarnetillegg",
-                datatype = FLYTTALL,
-                enhet = KRONER,
             ),
             vedtak.finnOpplysningMedNavn(
                 opplysningTekstId = "opplysning.inntektskrav-for-siste-12-mnd",
@@ -136,23 +136,17 @@ class VedtakMapper(vedtakJson: String) {
                 datatype = TEKST,
             ),
             vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.samordnet-dagsats-uten-barnetillegg",
-                navn = "Samordnet dagsats uten barnetillegg",
-                datatype = HELTALL,
-                enhet = KRONER,
-            ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.ukessats",
-                navn = "Ukessats med barnetillegg etter samordning",
-                datatype = HELTALL,
-                enhet = KRONER,
-            ),
-            vedtak.finnOpplysningMedNavn(
                 opplysningTekstId = "opplysning.antall-stonadsuker",
                 navn = "Antall stønadsuker",
                 datatype = HELTALL,
                 enhet = UKER,
             ),
+//            vedtak.finnOpplysningAt(
+//                opplysningTekstId = "opplysning.egenandel",
+//                jsonPointer = "/fastsatt/kvoter/",
+//                datatype = HELTALL,
+//                enhet = KRONER,
+//            ),
             vedtak.finnOpplysningMedNavn(
                 opplysningTekstId = "opplysning.egenandel",
                 navn = "Egenandel",

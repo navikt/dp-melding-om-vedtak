@@ -42,7 +42,7 @@ class VedtakMapperTest {
     }
 
     @Test
-    fun `Hent opplysnings provingsdato som egentlig er virkningsdato`() {
+    fun `Hent opplysning provingsdato som egentlig er virkningsdato`() {
         vedtak.finnOpplysning("opplysning.provingsdato") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.provingsdato",
@@ -65,11 +65,11 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning dagsats med barnetillegg etter samordning og 90% regel`() {
-        vedtak.finnOpplysning("opplysning.avrundet-dagsats-med-barnetillegg") shouldBe
+        vedtak.finnOpplysning("opplysning.dagsats-med-barnetillegg-etter-samordning-og-90-prosent-regel") shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.avrundet-dagsats-med-barnetillegg",
+                opplysningTekstId = "opplysning.dagsats-med-barnetillegg-etter-samordning-og-90-prosent-regel",
                 verdi = "1312",
-                datatype = FLYTTALL,
+                datatype = HELTALL,
                 enhet = KRONER,
             )
     }
@@ -159,28 +159,6 @@ class VedtakMapperTest {
                 verdi = "Gjennomsnittlig arbeidsinntekt siste 36 måneder",
                 datatype = TEKST,
                 enhet = ENHETSLØS,
-            )
-    }
-
-    @Test
-    fun `Hent opplysning samordnet dagsats uten barnetillegg`() {
-        vedtak.finnOpplysning("opplysning.samordnet-dagsats-uten-barnetillegg") shouldBe
-            Opplysning(
-                opplysningTekstId = "opplysning.samordnet-dagsats-uten-barnetillegg",
-                verdi = "1276",
-                datatype = HELTALL,
-                enhet = KRONER,
-            )
-    }
-
-    @Test
-    fun `Hent opplysning ukessats med barnetillegg etter samordning`() {
-        vedtak.finnOpplysning("opplysning.ukessats") shouldBe
-            Opplysning(
-                opplysningTekstId = "opplysning.ukessats",
-                verdi = "6560",
-                datatype = HELTALL,
-                enhet = KRONER,
             )
     }
 
@@ -317,7 +295,7 @@ class VedtakMapperTest {
     }
 
     @Test
-    fun `Hent grunn lag siste 12 månede `() {
+    fun `Hent opplysning grunnlag siste 12 måneder`() {
         vedtak.finnOpplysning("opplysning.grunnlag-siste-12-mnd") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.grunnlag-siste-12-mnd",
@@ -328,7 +306,7 @@ class VedtakMapperTest {
     }
 
     @Test
-    fun `Hent inntjeningsperiodeOpplysninger`() {
+    fun `Hent inntjeningsperiode opplysninger`() {
         vedtak.opplysninger.filter { it.opplysningTekstId.contains("opplysning.forste-maaned-aar-for-inntektsperiode") }.let {
                 opplysninger ->
             opplysninger.size shouldBe 3

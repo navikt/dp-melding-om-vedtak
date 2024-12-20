@@ -24,12 +24,6 @@ data class OpplysningOld(
                 "Brukt beregningsregel" -> "opplysning.brukt-beregningsregel"
                 "Dagsats med barnetillegg etter samordning og 90% regel" ->
                     "opplysning.dagsats-med-barnetillegg-etter-samordning-og-90-prosent-regel"
-                // utdatert opplysning må være med pga eldre behandlinger i prod
-                "Avrundet dagsats med barnetillegg" -> "opplysning.avrundet-dagsats-med-barnetillegg"
-                "Samordnet dagsats uten barnetillegg" -> "opplysning.avrundet-dagsats-uten-barnetillegg"
-                // utdatert opplysning må være med pga eldre behandlinger i prod
-                "Avrundet dagsats uten barnetillegg" -> "opplysning.avrundet-dagsats-uten-barnetillegg"
-                "Ukessats med barnetillegg etter samordning" -> "opplysning.ukessats"
                 "Antall stønadsuker" -> "opplysning.antall-stonadsuker"
                 "Egenandel" -> "opplysning.egenandel"
                 "Grunnlag siste 12 mnd." -> "opplysning.grunnlag-siste-12-mnd."
