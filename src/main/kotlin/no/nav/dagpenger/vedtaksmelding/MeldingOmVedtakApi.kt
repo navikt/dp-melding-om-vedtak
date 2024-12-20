@@ -25,6 +25,7 @@ import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import java.util.UUID
 
 private val sikkerlogger = KotlinLogging.logger("tjenestekall")
+private val logger = KotlinLogging.logger {}
 
 fun Application.meldingOmVedtakApi(mediator: Mediator) {
     apiConfig()
@@ -34,28 +35,34 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                 val behandlingId = call.parseUUID()
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
                     val saksbehandler = call.parseSaksbehandler()
-                    val vedtaksmelding = mediator.hentVedtaksmelding(behandlingId, saksbehandler).getOrThrow()
-                    val meldingOmVedtakDTO =
-                        MeldingOmVedtakDTO(
-                            brevblokkIder = vedtaksmelding.brevBlokkIder(),
-                            opplysninger =
-                                vedtaksmelding.hentOpplysninger().map {
-                                    OpplysningDTO(
-                                        tekstId = it.opplysningTekstId,
-                                        verdi = it.verdi,
-                                        datatype = it.mapDatatype(),
-                                    )
-                                },
-                            utvidedeBeskrivelser =
-                                vedtaksmelding.hentUtvidedeBeskrivelser(behandlingId).map {
-                                    UtvidetBeskrivelseDTO(
-                                        brevblokkId = it.brevblokkId,
-                                        tekst = it.tekst,
-                                        sistEndretTidspunkt = it.sistEndretTidspunkt,
-                                    )
-                                },
-                        )
-                    sikkerlogger.info { "Melding om vedtak for behandlingId: $behandlingId: $meldingOmVedtakDTO" }
+                    val meldingOmVedtakDTO: MeldingOmVedtakDTO =
+                        mediator.hentVedtaksmelding(behandlingId, saksbehandler).map { vedtaksmelding ->
+                            MeldingOmVedtakDTO(
+                                brevblokkIder = vedtaksmelding.brevBlokkIder(),
+                                opplysninger =
+                                    vedtaksmelding.hentOpplysninger().map {
+                                        OpplysningDTO(
+                                            tekstId = it.opplysningTekstId,
+                                            verdi = it.verdi,
+                                            datatype = it.mapDatatype(),
+                                        )
+                                    },
+                                utvidedeBeskrivelser =
+                                    vedtaksmelding.hentUtvidedeBeskrivelser(behandlingId).map {
+                                        UtvidetBeskrivelseDTO(
+                                            brevblokkId = it.brevblokkId,
+                                            tekst = it.tekst,
+                                            sistEndretTidspunkt = it.sistEndretTidspunkt,
+                                        )
+                                    },
+                            )
+                        }.onSuccess {
+                            sikkerlogger.info { "Melding om vedtak: $it" }
+                        }.onFailure { t ->
+                            logger.error(t) { "Feil ved henting av melding om vedtak" }
+                        }.getOrElse {
+                            MeldingOmVedtakDTO(emptyList(), emptyList(), emptyList())
+                        }
                     call.respond(meldingOmVedtakDTO)
                 }
             }

@@ -176,6 +176,28 @@ class MeldingOmVedtakApiTest {
     }
 
     @Test
+    fun `Returnerer en tom MeldingOmVedtakDTO dersom underliggende systemer feiler`() {
+        testApplication {
+            application {
+                meldingOmVedtakApi(
+                    mockk<Mediator>().also {
+                        coEvery { it.hentVedtaksmelding(behandlingId, saksbehandler) } returns
+                            Result.failure(
+                                RuntimeException("Noe gikk galt"),
+                            )
+                    },
+                )
+            }
+            client.get("/melding-om-vedtak/$behandlingId") {
+                autentisert(token = saksbehandlerToken)
+            }.let { response ->
+                response.status shouldBe HttpStatusCode.OK
+                response.bodyAsText() shouldEqualJson """{"brevblokkIder" : [], "opplysninger" : [], "utvidedeBeskrivelser" : []}"""
+            }
+        }
+    }
+
+    @Test
     fun `returner 401 hvis token ikke inneholder sakbehandler AD gruppe`() =
         testApplication {
             application {
