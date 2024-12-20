@@ -44,15 +44,15 @@ class VedtakMapper(vedtakJson: String) {
     }
 
     private val utfall: Utfall =
-        vedtak["fastsatt"]["utfall"].asBoolean().let { utfall ->
+        vedtak.get("fastsatt")?.get("utfall")?.asBoolean()?.let { utfall ->
             when (utfall) {
                 true -> INNVILGET
                 false -> AVSLÅTT
             }
-        }
+        } ?: throw UtfallMangler("Utfall mangler i path: /fastsatt/utfall")
 
     private val vilkår: Set<Vilkår> =
-        vedtak["vilkår"].map { vilkårNode ->
+        vedtak.get("vilkår")?.map { vilkårNode ->
             Vilkår(
                 navn = vilkårNode["navn"].asText(),
                 status =
@@ -63,7 +63,7 @@ class VedtakMapper(vedtakJson: String) {
                         }
                     },
             )
-        }.toSet()
+        }?.toSet() ?: throw VilkårMangler("Vilkår mangler i path: /vilkår")
 
     private val vedtakOpplysninger: Set<Opplysning> =
         setOf(
@@ -146,7 +146,10 @@ class VedtakMapper(vedtakJson: String) {
 //                jsonPointer = "/fastsatt/kvoter/",
 //                datatype = HELTALL,
 //                enhet = KRONER,
-//            ),
+//            ) {hubba ->
+//                hubba.
+//
+//            },
             vedtak.finnOpplysningMedNavn(
                 opplysningTekstId = "opplysning.egenandel",
                 navn = "Egenandel",
@@ -342,3 +345,7 @@ class VedtakMapper(vedtakJson: String) {
         }
     }
 }
+
+class VilkårMangler(message: String) : RuntimeException(message)
+
+class UtfallMangler(message: String) : RuntimeException(message)

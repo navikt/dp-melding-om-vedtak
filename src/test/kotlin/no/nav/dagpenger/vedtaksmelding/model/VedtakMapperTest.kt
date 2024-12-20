@@ -1,5 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
+import io.kotest.assertions.throwables.shouldNotThrowAny
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.BOOLSK
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.DATO
@@ -331,6 +333,48 @@ class VedtakMapperTest {
             opplysninger[0].verdi shouldBe "oktober 2022"
             opplysninger[1].verdi shouldBe "oktober 2023"
             opplysninger[2].verdi shouldBe "oktober 2024"
+        }
+    }
+
+    @Test
+    fun `Skal håndtere at opplysning ikke finnes`() {
+        shouldNotThrowAny {
+            VedtakMapper(
+                """
+            {
+                "fastsatt": {
+                    "utfall": true
+                },
+                "vilkår": []
+            }
+            """,
+            ).vedtak()
+        }
+    }
+
+    @Test
+    fun `Skal kaste exception dersom utfall eller vilkår mangler`() {
+        shouldThrow<UtfallMangler> {
+            VedtakMapper(
+                """
+            {
+                "fastsatt": {
+                    },
+                "vilkår": []
+            }
+            """,
+            ).vedtak()
+        }
+        shouldThrow<VilkårMangler> {
+            VedtakMapper(
+                """
+            {
+                "fastsatt": {
+                    "utfall": false
+                }
+            }
+            """,
+            ).vedtak()
         }
     }
 }
