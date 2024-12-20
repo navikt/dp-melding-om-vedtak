@@ -87,7 +87,7 @@ class MeldingOmVedtakApiTest {
             mockk<Mediator>().also {
                 coEvery {
                     it.hentVedtaksmelding(behandlingId, saksbehandler)
-                } returns vedtaksmelding
+                } returns Result.success(vedtaksmelding)
             }
         testApplication {
             application {

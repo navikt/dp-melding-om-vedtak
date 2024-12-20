@@ -34,7 +34,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                 val behandlingId = call.parseUUID()
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
                     val saksbehandler = call.parseSaksbehandler()
-                    val vedtaksmelding = mediator.hentVedtaksmelding(behandlingId, saksbehandler)
+                    val vedtaksmelding = mediator.hentVedtaksmelding(behandlingId, saksbehandler).getOrThrow()
                     val meldingOmVedtakDTO =
                         MeldingOmVedtakDTO(
                             brevblokkIder = vedtaksmelding.brevBlokkIder(),
@@ -104,12 +104,14 @@ private fun Opplysning.mapDatatype(): String {
                 else -> "heltall"
             }
         }
+
         Opplysning.Datatype.FLYTTALL -> {
             when (this.enhet) {
                 Opplysning.Enhet.KRONER -> "penger"
                 else -> "desimaltall"
             }
         }
+
         Opplysning.Datatype.DATO -> "dato"
         Opplysning.Datatype.BOOLSK -> "boolean"
     }

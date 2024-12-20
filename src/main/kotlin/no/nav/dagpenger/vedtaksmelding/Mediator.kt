@@ -20,13 +20,13 @@ class Mediator(
     suspend fun hentVedtaksmelding(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
-    ): Vedtaksmelding {
+    ): Result<Vedtaksmelding> {
         return behandlingKlient.hentVedtak(
             behandlingId = behandlingId,
             saksbehandler = saksbehandler,
         ).onFailure { throwable ->
             logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
-        }.map { Vedtaksmelding.byggVedtaksmelding(it, this) }.getOrThrow()
+        }.map { Vedtaksmelding.byggVedtaksmelding(it, this) }
     }
 
     suspend fun hentOpplysningTekstIder(brevbklokkIder: List<String>): List<String> {

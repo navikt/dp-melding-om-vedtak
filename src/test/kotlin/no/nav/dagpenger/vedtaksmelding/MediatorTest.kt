@@ -44,7 +44,7 @@ class MediatorTest {
             mediator.hentVedtaksmelding(
                 behandlingId = behandlingId,
                 saksbehandler = saksbehandler,
-            ).shouldBeInstanceOf<AvslagMinsteInntekt>()
+            ).getOrThrow().shouldBeInstanceOf<AvslagMinsteInntekt>()
         }
 
         coVerify(exactly = 1) {
@@ -67,7 +67,7 @@ class MediatorTest {
                 mediator.hentVedtaksmelding(
                     behandlingId = behandlingId,
                     saksbehandler = saksbehandler,
-                )
+                ).getOrThrow()
             }
         }
     }
