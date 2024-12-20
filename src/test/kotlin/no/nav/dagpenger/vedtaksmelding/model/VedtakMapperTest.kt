@@ -337,7 +337,7 @@ class VedtakMapperTest {
     }
 
     @Test
-    fun `Skal håndtere at opplysning ikke finnes`() {
+    fun `Skal håndtere at opplysning og kvoter ikke finnes`() {
         shouldNotThrowAny {
             VedtakMapper(
                 """

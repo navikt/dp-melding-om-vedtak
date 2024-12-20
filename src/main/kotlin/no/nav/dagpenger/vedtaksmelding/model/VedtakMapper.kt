@@ -136,27 +136,6 @@ class VedtakMapper(vedtakJson: String) {
                 datatype = TEKST,
             ),
             vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.antall-stonadsuker",
-                navn = "Antall stønadsuker",
-                datatype = HELTALL,
-                enhet = UKER,
-            ),
-//            vedtak.finnOpplysningAt(
-//                opplysningTekstId = "opplysning.egenandel",
-//                jsonPointer = "/fastsatt/kvoter/",
-//                datatype = HELTALL,
-//                enhet = KRONER,
-//            ) {hubba ->
-//                hubba.
-//
-//            },
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.egenandel",
-                navn = "Egenandel",
-                datatype = HELTALL,
-                enhet = KRONER,
-            ),
-            vedtak.finnOpplysningMedNavn(
                 opplysningTekstId = "oppysning.utbetalt-arbeidsinntekt-periode-1",
                 navn = "Utbetalt arbeidsinntekt periode 1",
                 datatype = FLYTTALL,
@@ -219,7 +198,7 @@ class VedtakMapper(vedtakJson: String) {
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
-        )
+        ) + vedtak.lagOpplysningerFraKvoter()
 
     private val inntjeningsperiodeOpplysninger = vedtakOpplysninger.finnInntjeningsPeriode()
 
@@ -317,6 +296,35 @@ class VedtakMapper(vedtakJson: String) {
         return this.finnOpplysningAt(opplysningTekstId, "/opplysninger", datatype, enhet) { node ->
             node.find { it["navn"].asText() == navn }?.findValue("verdi")?.asText()
         }
+    }
+
+    private fun JsonNode.lagOpplysningerFraKvoter(): Set<Opplysning> {
+        return this.at("/fastsatt/kvoter").let { kvoter ->
+            when (kvoter) {
+                is MissingNode -> emptySet<Opplysning>()
+                else -> {
+                    kvoter.map { kvote ->
+                        when (kvote["navn"].asText()) {
+                            "Dagpengeperiode" ->
+                                Opplysning(
+                                    opplysningTekstId = "opplysning.antall-stonadsuker",
+                                    verdi = kvote["verdi"].asText(),
+                                    datatype = HELTALL,
+                                    enhet = UKER,
+                                )
+                            "Egenandel" ->
+                                Opplysning(
+                                    opplysningTekstId = "opplysning.egenandel",
+                                    verdi = kvote["verdi"].asText(),
+                                    datatype = HELTALL,
+                                    enhet = KRONER,
+                                )
+                            else -> NULL_OPPLYSNING
+                        }
+                    }
+                }
+            }
+        }.toSet()
     }
 
     private fun JsonNode.finnOpplysningAt(
