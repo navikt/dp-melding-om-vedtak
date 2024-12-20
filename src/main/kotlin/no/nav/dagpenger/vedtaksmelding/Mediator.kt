@@ -4,7 +4,6 @@ import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
-import no.nav.dagpenger.vedtaksmelding.model.VedtaksMeldingOld
 import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
@@ -28,17 +27,6 @@ class Mediator(
         ).onFailure { throwable ->
             logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
         }.map { Vedtaksmelding.byggVedtaksmelding(it, this) }.getOrThrow()
-    }
-
-    suspend fun hentVedtaksmeldingOld(
-        behandlingId: UUID,
-        saksbehandler: Saksbehandler,
-    ): VedtaksMeldingOld {
-        val behandling =
-            behandlingKlient.hentBehandling(behandlingId, saksbehandler).onFailure { throwable ->
-                logger.error { "Fikk ikke hentet opplysninger for $behandlingId: $throwable" }
-            }.getOrThrow()
-        return VedtaksMeldingOld(behandling, this)
     }
 
     suspend fun hentOpplysningTekstIder(brevbklokkIder: List<String>): List<String> {

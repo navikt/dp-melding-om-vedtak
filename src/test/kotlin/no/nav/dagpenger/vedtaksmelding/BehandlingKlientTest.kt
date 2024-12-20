@@ -1,13 +1,12 @@
 package no.nav.dagpenger.vedtaksmelding
 
-import io.kotest.matchers.ints.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
+import io.ktor.client.request.request
 import io.ktor.http.headersOf
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.k8.setAzureAuthEnv
-import no.nav.dagpenger.vedtaksmelding.model.OpplysningOld
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -17,93 +16,28 @@ internal class BehandlingKlientTest {
     private val resourseRetriever = object {}.javaClass
 
     @Test
-    fun `Test av request og parsing av respons`() {
-        val behandlingId = UUID.fromString("0192c344-8223-7884-b951-d8f64a0744ae")
-        val dpBehandlingApiUrl = "https://dp-behandling.intern.dev.nav.no/behandling"
-        val responseJson = resourseRetriever.getResource("/json/behandling.json").readText()
-        val inntektsperiode1FørsteMånedÅr =
-            OpplysningOld(
-                opplysningTekstId = "opplysning.inntektsperiode-1-forste-maaned-aar",
-                navn = "opplysning.inntektsperiode-1-forste-maaned-aar",
-                verdi = "oktober 2021",
-                datatype = "tekst",
-                opplysningId = "utledet",
-            )
-        val inntektsperiode2FørsteMånedÅr =
-            OpplysningOld(
-                opplysningTekstId = "opplysning.inntektsperiode-2-forste-maaned-aar",
-                navn = "opplysning.inntektsperiode-2-forste-maaned-aar",
-                verdi = "oktober 2022",
-                datatype = "tekst",
-                opplysningId = "utledet",
-            )
-        val inntektsperiode3FørsteMånedÅr =
-            OpplysningOld(
-                opplysningTekstId = "opplysning.inntektsperiode-3-forste-maaned-aar",
-                navn = "opplysning.inntektsperiode-3-forste-maaned-aar",
-                verdi = "oktober 2023",
-                datatype = "tekst",
-                opplysningId = "utledet",
-            )
-        val inntektsperiode1SisteMånedÅr =
-            OpplysningOld(
-                opplysningTekstId = "opplysning.inntektsperiode-1-siste-maaned-aar",
-                navn = "opplysning.inntektsperiode-1-siste-maaned-aar",
-                verdi = "september 2022",
-                datatype = "tekst",
-                opplysningId = "utledet",
-            )
-        val inntektsperiode2SisteMånedÅr =
-            OpplysningOld(
-                opplysningTekstId = "opplysning.inntektsperiode-2-siste-maaned-aar",
-                navn = "opplysning.inntektsperiode-2-siste-maaned-aar",
-                verdi = "september 2023",
-                datatype = "tekst",
-                opplysningId = "utledet",
-            )
-        val inntektsperiode3SisteMånedÅr =
-            OpplysningOld(
-                opplysningTekstId = "opplysning.inntektsperiode-3-siste-maaned-aar",
-                navn = "opplysning.inntektsperiode-3-siste-maaned-aar",
-                verdi = "september 2024",
-                datatype = "tekst",
-                opplysningId = "utledet",
-            )
-        val mockEngine =
-            MockEngine { request ->
-                request.headers["Authorization"] shouldBe "Bearer tulleToken"
-                request.url.toString() shouldBe "$dpBehandlingApiUrl/$behandlingId"
-                respond(responseJson, headers = headersOf("Content-Type", "application/json"))
-            }
-        val klient =
+    fun `Skal kalle behandling endepunkt med riktig headers og parse response`() {
+        val behandlingId = UUID.fromString("01937743-812d-7a69-b492-d25eb9768c68")
+        val vedtakJson = resourseRetriever.getResource("/json/vedtak.json")!!.readText()
+
+        val behandlingKlient =
             BehandlngHttpKlient(
-                dpBehandlingApiUrl = dpBehandlingApiUrl,
-                tokenProvider = { "tulleToken" },
-                httpClient = lagHttpKlient(engine = mockEngine),
+                dpBehandlingApiUrl = "http://localhost",
+                tokenProvider = { "token" },
+                httpClient =
+                    lagHttpKlient(
+                        MockEngine { request ->
+                            request.url.encodedPath shouldBe "/$behandlingId/vedtak"
+                            request.headers["Authorization"] shouldBe "Bearer token"
+                            respond(
+                                content = vedtakJson,
+                                headers = headersOf("Content-Type" to listOf("application/json")),
+                            )
+                        },
+                    ),
             )
         runBlocking {
-            klient.hentBehandling(behandling = behandlingId, saksbehandler = Saksbehandler("tulleToken")).getOrThrow()
-                .let { behandling ->
-                    behandling.id shouldBe behandlingId
-                    behandling.tilstand shouldBe "ForslagTilVedtak"
-                    behandling.opplysninger.let { opplysninger ->
-                        opplysninger.size shouldBeGreaterThan 0
-                        opplysninger.first { it.navn == "fagsakId" } shouldBe
-                            OpplysningOld(
-                                opplysningTekstId = "ukjent.opplysning.fagsakId",
-                                navn = "fagsakId",
-                                verdi = "15117125",
-                                datatype = "heltall",
-                                opplysningId = "0192c344-8223-7884-b951-d8f64a0744a9",
-                            )
-                        opplysninger.contains(inntektsperiode1FørsteMånedÅr)
-                        opplysninger.contains(inntektsperiode2FørsteMånedÅr)
-                        opplysninger.contains(inntektsperiode3FørsteMånedÅr)
-                        opplysninger.contains(inntektsperiode1SisteMånedÅr)
-                        opplysninger.contains(inntektsperiode2SisteMånedÅr)
-                        opplysninger.contains(inntektsperiode3SisteMånedÅr)
-                    }
-                }
+            behandlingKlient.hentVedtak(behandlingId, Saksbehandler("token")).isSuccess shouldBe true
         }
     }
 
@@ -133,7 +67,7 @@ internal class BehandlingKlientTest {
 //                    klient.hentBehandling(behandling = behandlingId, saksbehandler = Saksbehandler(token))
 //                println(behandling)
 
-                klient.hentVedtakJson(behandlingId = behandlingId, saksbehandler = Saksbehandler(token))
+                klient.hentVedtak(behandlingId = behandlingId, saksbehandler = Saksbehandler(token))
                     .onFailure { println(it) }
                     .getOrThrow()
                     .let { vedtak ->
