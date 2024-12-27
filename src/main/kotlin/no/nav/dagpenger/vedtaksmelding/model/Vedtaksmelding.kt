@@ -44,22 +44,13 @@ sealed class Vedtaksmelding(
             vedtak: Vedtak,
             mediator: Mediator,
         ): Vedtaksmelding {
-            val of =
-                mutableSetOf<Vedtaksmelding>().also {
-                    try {
-                        it.add(AvslagMinsteInntekt(vedtak, mediator))
-                    } catch (e: Exception) {
-                        // NOOP
-                    }
-                    try {
-                        it.add(Innvilgelse(vedtak, mediator))
-                    } catch (e: Exception) {
-                        // NOOP
-                    }
-                }
-
             return try {
-                of.single { it.isApplicable }
+                mutableSetOf<Result<Vedtaksmelding>>().apply {
+                    add(kotlin.runCatching { AvslagMinsteInntekt(vedtak, mediator) })
+                    add(kotlin.runCatching { Innvilgelse(vedtak, mediator) })
+                }
+                    .single { it.isSuccess }
+                    .getOrThrow()
             } catch (e: Exception) {
                 when (e) {
                     is NoSuchElementException -> throw UkjentVedtakException("Kunne ikke bygge vedtaksmelding utifra vedtak: $vedtak")
