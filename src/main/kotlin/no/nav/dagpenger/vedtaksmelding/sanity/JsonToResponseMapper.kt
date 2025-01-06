@@ -28,10 +28,13 @@ private fun JsonNode.mapBehandlingOpplysning(): List<BehandlingOpplysningDTO> {
     return this["children"].mapNotNull { childNode ->
         val behandlingOpplysningNode = childNode["behandlingOpplysning"]
         behandlingOpplysningNode?.let {
-            logger.info { "Mapping behandlingOpplysning $it" }
+            val type = it.get("type")?.asText()
+            if (type == null) {
+                logger.warn { "BehandlingOpplysning mangler type: $it" }
+            }
             BehandlingOpplysningDTO(
                 textId = it["textId"].asText(),
-                type = it.get("type")?.asText(),
+                type = type,
             )
         }
     }
