@@ -53,9 +53,10 @@ sealed class Vedtaksmelding(
                     .getOrThrow()
             } catch (e: Exception) {
                 when (e) {
-                    is NoSuchElementException -> throw UkjentVedtakException("Kunne ikke bygge vedtaksmelding utifra vedtak: $vedtak")
+                    is NoSuchElementException -> throw UkjentVedtakException("Kunne ikke bygge vedtaksmelding utifra vedtak: $vedtak", e)
                     is IllegalArgumentException -> throw UkjentVedtakException(
                         "Vedtak er gyldig for flere vedtaksmeldinger. Dette er ikke lovlig: $vedtak",
+                        e,
                     )
 
                     else -> throw e
@@ -64,7 +65,7 @@ sealed class Vedtaksmelding(
         }
     }
 
-    class UkjentVedtakException(message: String) : RuntimeException(message)
+    class UkjentVedtakException(override val message: String, override val cause: Throwable? = null) : RuntimeException(message, cause)
 }
 
 data class AvslagMinsteInntekt(
