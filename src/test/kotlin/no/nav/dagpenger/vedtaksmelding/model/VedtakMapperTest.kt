@@ -188,9 +188,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning utbetalt arbeidsinntekt periode 1`() {
-        vedtak.finnOpplysning("oppysning.utbetalt-arbeidsinntekt-periode-1") shouldBe
+        vedtak.finnOpplysning("opplysning.utbetalt-arbeidsinntekt-periode-1") shouldBe
             Opplysning(
-                opplysningTekstId = "oppysning.utbetalt-arbeidsinntekt-periode-1",
+                opplysningTekstId = "opplysning.utbetalt-arbeidsinntekt-periode-1",
                 verdi = "500000",
                 datatype = FLYTTALL,
                 enhet = KRONER,
@@ -199,9 +199,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning utbetalt arbeidsinntekt periode 2`() {
-        vedtak.finnOpplysning("oppysning.utbetalt-arbeidsinntekt-periode-2") shouldBe
+        vedtak.finnOpplysning("opplysning.utbetalt-arbeidsinntekt-periode-2") shouldBe
             Opplysning(
-                opplysningTekstId = "oppysning.utbetalt-arbeidsinntekt-periode-2",
+                opplysningTekstId = "opplysning.utbetalt-arbeidsinntekt-periode-2",
                 verdi = "600000",
                 datatype = FLYTTALL,
                 enhet = KRONER,
@@ -210,9 +210,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning utbetalt arbeidsinntekt periode 3`() {
-        vedtak.finnOpplysning("oppysning.utbetalt-arbeidsinntekt-periode-3") shouldBe
+        vedtak.finnOpplysning("opplysning.utbetalt-arbeidsinntekt-periode-3") shouldBe
             Opplysning(
-                opplysningTekstId = "oppysning.utbetalt-arbeidsinntekt-periode-3",
+                opplysningTekstId = "opplysning.utbetalt-arbeidsinntekt-periode-3",
                 verdi = "600000",
                 datatype = FLYTTALL,
                 enhet = KRONER,
