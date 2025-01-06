@@ -308,6 +308,17 @@ class VedtakMapperTest {
     }
 
     @Test
+    fun `Hent opplysning 6 ganger grunnbelop`() {
+        vedtak.finnOpplysning("opplysning.6-ganger-grunnbelop") shouldBe
+            Opplysning(
+                opplysningTekstId = "opplysning.6-ganger-grunnbelop",
+                verdi = "744168",
+                datatype = HELTALL,
+                enhet = KRONER,
+            )
+    }
+
+    @Test
     fun `Hent inntjeningsperiode opplysninger`() {
         vedtak.opplysninger.filter { it.opplysningTekstId.contains("opplysning.forste-maaned-aar-for-inntektsperiode") }.let {
                 opplysninger ->

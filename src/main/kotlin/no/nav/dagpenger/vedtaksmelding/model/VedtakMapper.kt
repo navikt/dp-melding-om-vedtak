@@ -198,6 +198,12 @@ class VedtakMapper(vedtakJson: String) {
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
+            vedtak.finnOpplysningMedNavn(
+                opplysningTekstId = "opplysning.6-ganger-grunnbelop",
+                navn = "6 ganger grunnbeløp",
+                datatype = HELTALL,
+                enhet = KRONER,
+            ),
         ) + vedtak.lagOpplysningerFraKvoter()
 
     private val inntjeningsperiodeOpplysninger = vedtakOpplysninger.finnInntjeningsPeriode()
