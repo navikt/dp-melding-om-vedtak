@@ -13,5 +13,5 @@ data class BrevBlokkDTO(
 
 data class BehandlingOpplysningDTO(
     val textId: String,
-    val type: String,
+    val type: String?,
 )

@@ -31,7 +31,7 @@ private fun JsonNode.mapBehandlingOpplysning(): List<BehandlingOpplysningDTO> {
             logger.info { "Mapping behandlingOpplysning $it" }
             BehandlingOpplysningDTO(
                 textId = it["textId"].asText(),
-                type = it["type"].asText(),
+                type = it.get("type")?.asText(),
             )
         }
     }
