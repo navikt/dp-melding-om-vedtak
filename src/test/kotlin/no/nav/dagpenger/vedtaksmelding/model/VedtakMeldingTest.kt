@@ -14,7 +14,7 @@ class VedtakMeldingTest {
                     vilkår =
                         setOf(
                             Vilkår(
-                                navn = "Krav til minsteinntekt",
+                                navn = "Oppfyller kravet til minsteinntekt eller verneplikt",
                                 status = Vilkår.Status.IKKE_OPPFYLT,
                             ),
                         ),

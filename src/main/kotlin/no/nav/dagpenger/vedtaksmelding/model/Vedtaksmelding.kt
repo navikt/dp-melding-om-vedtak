@@ -80,7 +80,7 @@ data class AvslagMinsteInntekt(
     }
 
     fun Set<Vilkår>.avslagMinsteinntekt(): Boolean {
-        return this.any { it.navn == "Krav til minsteinntekt" && it.status == IKKE_OPPFYLT }
+        return this.any { it.navn == "Oppfyller kravet til minsteinntekt eller verneplikt" && it.status == IKKE_OPPFYLT }
     }
 }
 

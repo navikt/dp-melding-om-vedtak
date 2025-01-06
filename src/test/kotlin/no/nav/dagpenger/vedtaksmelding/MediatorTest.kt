@@ -24,7 +24,7 @@ class MediatorTest {
     fun `skal sende ett eller annet vedtak`() {
         val vedtak =
             Vedtak(
-                vilkår = setOf(Vilkår("Krav til minsteinntekt", Vilkår.Status.IKKE_OPPFYLT)),
+                vilkår = setOf(Vilkår("Oppfyller kravet til minsteinntekt eller verneplikt", Vilkår.Status.IKKE_OPPFYLT)),
                 utfall = Utfall.AVSLÅTT,
                 opplysninger = emptySet(),
             )

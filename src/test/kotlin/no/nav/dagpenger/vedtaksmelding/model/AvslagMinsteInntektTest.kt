@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 class AvslagMinsteInntektTest {
     private val avslagMinsteInntektKriter =
         Vilkår(
-            navn = "Krav til minsteinntekt",
+            navn = "Oppfyller kravet til minsteinntekt eller verneplikt",
             status = Vilkår.Status.IKKE_OPPFYLT,
         )
 
