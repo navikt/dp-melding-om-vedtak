@@ -72,6 +72,7 @@ class SanityKlient(
                     parameters.append("query", query)
                 }
             }.bodyAsText().let { responseBody ->
+                log.info { "Sanity response: $responseBody" }
                 objectMapper.readTree(responseBody)
             }.mapJsonToResponseDTO().result
 
