@@ -8,10 +8,13 @@ import io.ktor.client.request.header
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
+import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import java.util.UUID
+
+private val sikkerlogg = KotlinLogging.logger("tjenestekall")
 
 interface BehandlingKlient {
     suspend fun hentVedtak(
@@ -33,6 +36,7 @@ internal class BehandlngHttpKlient(
             header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(saksbehandler.token)}")
             accept(ContentType.Application.Json)
         }.bodyAsText().let { vedtak ->
+            sikkerlogg.info { "Hentet vedtak for behandling $behandlingId: $vedtak" }
             Result.success(vedtak)
         }
     }
