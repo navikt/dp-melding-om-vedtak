@@ -136,19 +136,19 @@ class VedtakMapper(vedtakJson: String) {
                 datatype = TEKST,
             ),
             vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "oppysning.utbetalt-arbeidsinntekt-periode-1",
+                opplysningTekstId = "opplysning.utbetalt-arbeidsinntekt-periode-1",
                 navn = "Utbetalt arbeidsinntekt periode 1",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
             vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "oppysning.utbetalt-arbeidsinntekt-periode-2",
+                opplysningTekstId = "opplysning.utbetalt-arbeidsinntekt-periode-2",
                 navn = "Utbetalt arbeidsinntekt periode 2",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
             vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "oppysning.utbetalt-arbeidsinntekt-periode-3",
+                opplysningTekstId = "opplysning.utbetalt-arbeidsinntekt-periode-3",
                 navn = "Utbetalt arbeidsinntekt periode 3",
                 datatype = FLYTTALL,
                 enhet = KRONER,
