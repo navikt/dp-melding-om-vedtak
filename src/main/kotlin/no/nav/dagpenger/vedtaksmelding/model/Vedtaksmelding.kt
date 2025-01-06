@@ -52,6 +52,7 @@ sealed class Vedtaksmelding(
                     .single { it.isSuccess }
                     .getOrThrow()
             } catch (e: Exception) {
+                logger.error(e) { "Feil ved oppbygging vedtaksmelding" }
                 when (e) {
                     is NoSuchElementException -> throw UkjentVedtakException("Kunne ikke bygge vedtaksmelding utifra vedtak: $vedtak", e)
                     is IllegalArgumentException -> throw UkjentVedtakException(
