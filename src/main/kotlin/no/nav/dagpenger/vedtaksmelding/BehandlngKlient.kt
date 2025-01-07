@@ -6,7 +6,6 @@ import io.ktor.client.engine.cio.CIO
 import io.ktor.client.request.accept
 import io.ktor.client.request.get
 import io.ktor.client.request.header
-import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import mu.KotlinLogging
@@ -31,16 +30,6 @@ internal class BehandlngHttpKlient(
     private val tokenProvider: (String) -> String,
     private val httpClient: HttpClient = lagHttpKlient(engine = CIO.create { }),
 ) : BehandlingKlient {
-    suspend fun hubba(
-        behandling: UUID,
-        saksbehandler: Saksbehandler,
-    ): String {
-        return httpClient.get(urlString = "$dpBehandlingApiUrl/$behandling") {
-            header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(saksbehandler.token)}")
-            accept(ContentType.Application.Json)
-        }.bodyAsText()
-    }
-
     override suspend fun hentBehandling(
         behandling: UUID,
         saksbehandler: Saksbehandler,
