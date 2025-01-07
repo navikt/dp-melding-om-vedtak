@@ -83,9 +83,9 @@ internal class BehandlingKlientTest {
                     tokenProvider = tokenProvider,
                 )
             runBlocking {
-                val behandling =
-                    klient.hubba(behandling = behandlingId, saksbehandler = Saksbehandler(token))
-                println(behandling)
+                println(
+                    klient.hentBehandling(behandling = behandlingId, saksbehandler = Saksbehandler(token)).getOrThrow(),
+                )
             }
         }
     }
