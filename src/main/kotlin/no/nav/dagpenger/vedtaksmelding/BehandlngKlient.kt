@@ -6,6 +6,7 @@ import io.ktor.client.engine.cio.CIO
 import io.ktor.client.request.accept
 import io.ktor.client.request.get
 import io.ktor.client.request.header
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import mu.KotlinLogging
@@ -30,6 +31,16 @@ internal class BehandlngHttpKlient(
     private val tokenProvider: (String) -> String,
     private val httpClient: HttpClient = lagHttpKlient(engine = CIO.create { }),
 ) : BehandlingKlient {
+    suspend fun hubba(
+        behandling: UUID,
+        saksbehandler: Saksbehandler,
+    ): String {
+        return httpClient.get(urlString = "$dpBehandlingApiUrl/$behandling") {
+            header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(saksbehandler.token)}")
+            accept(ContentType.Application.Json)
+        }.bodyAsText()
+    }
+
     override suspend fun hentBehandling(
         behandling: UUID,
         saksbehandler: Saksbehandler,
@@ -67,7 +78,7 @@ internal class BehandlngHttpKlient(
                         Opplysning(
                             opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-1",
                             navn = "opplysning.inntektsperiode-1-forste-maaned-aar",
-                            verdi = førsteMånedAvOpptjeningsperiode.norskMånedOgÅr(),
+                            verdi = førsteMånedAvOpptjeningsperiode.plusYears(2).norskMånedOgÅr(),
                             datatype = "tekst",
                             opplysningId = "utledet",
                         ),
@@ -81,11 +92,12 @@ internal class BehandlngHttpKlient(
                             opplysningId = "utledet",
                         ),
                     )
+
                     mutableOpplysninger.add(
                         Opplysning(
                             opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-3",
                             navn = "opplysning.inntektsperiode-3-forste-maaned-aar",
-                            verdi = førsteMånedAvOpptjeningsperiode.plusYears(2).norskMånedOgÅr(),
+                            verdi = førsteMånedAvOpptjeningsperiode.norskMånedOgÅr(),
                             datatype = "tekst",
                             opplysningId = "utledet",
                         ),
@@ -97,7 +109,7 @@ internal class BehandlngHttpKlient(
                         Opplysning(
                             opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-1",
                             navn = "opplysning.inntektsperiode-1-siste-maaned-aar",
-                            verdi = sisteAvsluttendeKalendermåned.minusYears(2).norskMånedOgÅr(),
+                            verdi = sisteAvsluttendeKalendermåned.norskMånedOgÅr(),
                             datatype = "tekst",
                             opplysningId = "utledet",
                         ),
@@ -115,7 +127,7 @@ internal class BehandlngHttpKlient(
                         Opplysning(
                             opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-3",
                             navn = "opplysning.inntektsperiode-3-siste-maaned-aar",
-                            verdi = sisteAvsluttendeKalendermåned.norskMånedOgÅr(),
+                            verdi = sisteAvsluttendeKalendermåned.minusYears(2).norskMånedOgÅr(),
                             datatype = "tekst",
                             opplysningId = "utledet",
                         ),

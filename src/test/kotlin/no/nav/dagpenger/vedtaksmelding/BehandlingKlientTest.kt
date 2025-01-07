@@ -21,54 +21,7 @@ internal class BehandlingKlientTest {
         val behandlingId = UUID.fromString("0192c344-8223-7884-b951-d8f64a0744ae")
         val dpBehandlingApiUrl = "https://dp-behandling.intern.dev.nav.no/behandling"
         val responseJson = resourseRetriever.getResource("/json/behandling.json").readText()
-        val inntektsperiode1FørsteMånedÅr =
-            Opplysning(
-                opplysningTekstId = "opplysning.inntektsperiode-1-forste-maaned-aar",
-                navn = "opplysning.inntektsperiode-1-forste-maaned-aar",
-                verdi = "oktober 2021",
-                datatype = "tekst",
-                opplysningId = "utledet",
-            )
-        val inntektsperiode2FørsteMånedÅr =
-            Opplysning(
-                opplysningTekstId = "opplysning.inntektsperiode-2-forste-maaned-aar",
-                navn = "opplysning.inntektsperiode-2-forste-maaned-aar",
-                verdi = "oktober 2022",
-                datatype = "tekst",
-                opplysningId = "utledet",
-            )
-        val inntektsperiode3FørsteMånedÅr =
-            Opplysning(
-                opplysningTekstId = "opplysning.inntektsperiode-3-forste-maaned-aar",
-                navn = "opplysning.inntektsperiode-3-forste-maaned-aar",
-                verdi = "oktober 2023",
-                datatype = "tekst",
-                opplysningId = "utledet",
-            )
-        val inntektsperiode1SisteMånedÅr =
-            Opplysning(
-                opplysningTekstId = "opplysning.inntektsperiode-1-siste-maaned-aar",
-                navn = "opplysning.inntektsperiode-1-siste-maaned-aar",
-                verdi = "september 2022",
-                datatype = "tekst",
-                opplysningId = "utledet",
-            )
-        val inntektsperiode2SisteMånedÅr =
-            Opplysning(
-                opplysningTekstId = "opplysning.inntektsperiode-2-siste-maaned-aar",
-                navn = "opplysning.inntektsperiode-2-siste-maaned-aar",
-                verdi = "september 2023",
-                datatype = "tekst",
-                opplysningId = "utledet",
-            )
-        val inntektsperiode3SisteMånedÅr =
-            Opplysning(
-                opplysningTekstId = "opplysning.inntektsperiode-3-siste-maaned-aar",
-                navn = "opplysning.inntektsperiode-3-siste-maaned-aar",
-                verdi = "september 2024",
-                datatype = "tekst",
-                opplysningId = "utledet",
-            )
+
         val mockEngine =
             MockEngine { request ->
                 request.headers["Authorization"] shouldBe "Bearer tulleToken"
@@ -96,12 +49,13 @@ internal class BehandlingKlientTest {
                                 datatype = "heltall",
                                 opplysningId = "0192c344-8223-7884-b951-d8f64a0744a9",
                             )
-                        opplysninger.contains(inntektsperiode1FørsteMånedÅr)
-                        opplysninger.contains(inntektsperiode2FørsteMånedÅr)
-                        opplysninger.contains(inntektsperiode3FørsteMånedÅr)
-                        opplysninger.contains(inntektsperiode1SisteMånedÅr)
-                        opplysninger.contains(inntektsperiode2SisteMånedÅr)
-                        opplysninger.contains(inntektsperiode3SisteMånedÅr)
+
+                        opplysninger.single { it.navn == "opplysning.inntektsperiode-1-siste-maaned-aar" }.verdi shouldBe "september 2024"
+                        opplysninger.single { it.navn == "opplysning.inntektsperiode-1-forste-maaned-aar" }.verdi shouldBe "oktober 2023"
+                        opplysninger.single { it.navn == "opplysning.inntektsperiode-2-siste-maaned-aar" }.verdi shouldBe "september 2023"
+                        opplysninger.single { it.navn == "opplysning.inntektsperiode-2-forste-maaned-aar" }.verdi shouldBe "oktober 2022"
+                        opplysninger.single { it.navn == "opplysning.inntektsperiode-3-siste-maaned-aar" }.verdi shouldBe "september 2022"
+                        opplysninger.single { it.navn == "opplysning.inntektsperiode-3-forste-maaned-aar" }.verdi shouldBe "oktober 2021"
                     }
                 }
         }
@@ -110,7 +64,7 @@ internal class BehandlingKlientTest {
     @Test
     @Disabled
     fun `brukes for å hente ut en behandling manuelt, må ha saksbehandler token`() {
-        val behandlingId = UUID.fromString("019145eb-6fbb-769f-b1b1-d2450b383a98")
+        val behandlingId = UUID.fromString("")
 
         // saksbhehandler token, hentes fra azure-token-generator f,eks
         @Suppress("ktlint:standard:max-line-length")
@@ -130,7 +84,7 @@ internal class BehandlingKlientTest {
                 )
             runBlocking {
                 val behandling =
-                    klient.hentBehandling(behandling = behandlingId, saksbehandler = Saksbehandler(token))
+                    klient.hubba(behandling = behandlingId, saksbehandler = Saksbehandler(token))
                 println(behandling)
             }
         }
