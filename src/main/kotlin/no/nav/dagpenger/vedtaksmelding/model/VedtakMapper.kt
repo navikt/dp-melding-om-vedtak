@@ -228,7 +228,7 @@ class VedtakMapper(vedtakJson: String) {
             opptjeningsperiodeOpplysninger.add(
                 Opplysning(
                     opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-1",
-                    verdi = opptjeningsperiodeStart.norskMånedOgÅr(),
+                    verdi = opptjeningsperiodeStart.plusYears(2).norskMånedOgÅr(),
                     datatype = TEKST,
                     enhet = ENHETSLØS,
                 ),
@@ -244,15 +244,16 @@ class VedtakMapper(vedtakJson: String) {
             opptjeningsperiodeOpplysninger.add(
                 Opplysning(
                     opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-3",
-                    verdi = opptjeningsperiodeStart.plusYears(2).norskMånedOgÅr(),
+                    verdi = opptjeningsperiodeStart.norskMånedOgÅr(),
                     datatype = TEKST,
                     enhet = ENHETSLØS,
                 ),
             )
+
             opptjeningsperiodeOpplysninger.add(
                 Opplysning(
                     opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-1",
-                    verdi = opptjeningsperiodeSlutt.minusYears(2).norskMånedOgÅr(),
+                    verdi = opptjeningsperiodeSlutt.norskMånedOgÅr(),
                     datatype = TEKST,
                     enhet = ENHETSLØS,
                 ),
@@ -268,7 +269,7 @@ class VedtakMapper(vedtakJson: String) {
             opptjeningsperiodeOpplysninger.add(
                 Opplysning(
                     opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-3",
-                    verdi = opptjeningsperiodeSlutt.norskMånedOgÅr(),
+                    verdi = opptjeningsperiodeSlutt.minusYears(2).norskMånedOgÅr(),
                     datatype = TEKST,
                     enhet = ENHETSLØS,
                 ),
