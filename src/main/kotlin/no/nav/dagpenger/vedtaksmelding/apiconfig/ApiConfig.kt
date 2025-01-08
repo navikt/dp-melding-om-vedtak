@@ -23,7 +23,6 @@ import io.ktor.server.request.path
 import io.ktor.server.response.respond
 import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
-import no.nav.dagpenger.vedtaksmelding.model.FantIkkeOpplysning
 import org.slf4j.event.Level
 import java.net.URI
 
@@ -92,19 +91,6 @@ fun Application.apiConfig() {
                             type = URI.create("dagpenger.nav.no/saksbehandling:problem:bad-request").toString(),
                         )
                     call.respond(HttpStatusCode.BadRequest, problem)
-                }
-
-                is FantIkkeOpplysning -> {
-                    log.error(cause) { "Fant ikke opplysning." }
-                    val problem =
-                        HttpProblemDTO(
-                            title = "Fant ikke opplysning",
-                            detail = cause.message,
-                            status = HttpStatusCode.InternalServerError.value,
-                            instance = call.request.path(),
-                            type = URI.create("dagpenger.nav.no/saksbehandling:problem:fant-ikke-opplysning").toString(),
-                        )
-                    call.respond(HttpStatusCode.InternalServerError, problem)
                 }
 
                 else -> {

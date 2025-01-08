@@ -6,6 +6,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
+import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
@@ -13,7 +14,10 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 import mu.KotlinLogging
+import no.nav.dagpenger.vedtaksmelding.apiconfig.objectMapper
 import no.nav.dagpenger.vedtaksmelding.lagHttpKlient
+import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
+import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient.Companion.query
 
 private val log = KotlinLogging.logger { }
 
@@ -40,14 +44,18 @@ class SanityKlient(
                 .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 
-        private val query = """*[_type == "brevBlokk"]{
-                              textId,
+        val query = """*[_type == "brevBlokk"]{
+                              ...,  
                               innhold[]{
+                                ... ,
                                 _type == "block" => {
+                                  ... ,
                                   children[]{
+                                    ... ,
                                     _type == "opplysningReference" => {
+                                      ... ,
                                       "behandlingOpplysning": @->{
-                                        textId, type
+                                        ...,
                                       }
                                     }
                                   }
@@ -64,6 +72,7 @@ class SanityKlient(
                     parameters.append("query", query)
                 }
             }.bodyAsText().let { responseBody ->
+                log.info { "Sanity response: $responseBody" }
                 objectMapper.readTree(responseBody)
             }.mapJsonToResponseDTO().result
 
@@ -74,5 +83,14 @@ class SanityKlient(
             }
 
         return behandlingOpplysningDTOer.map { it.textId }
+    }
+
+    suspend fun hentBrevBlokker(): List<BrevBlokk> {
+        log.info { "Henter brevblokker fra Sanity med url: $sanityUrl" }
+        return httpKlient.get("$sanityUrl") {
+            url {
+                parameters.append("query", query)
+            }
+        }.body()
     }
 }

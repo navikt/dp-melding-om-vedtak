@@ -21,9 +21,11 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.slot
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.BOOLSK
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.ENHETSLØS
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
-import no.nav.dagpenger.vedtaksmelding.model.VedtaksMelding
+import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
@@ -48,18 +50,16 @@ class MeldingOmVedtakApiTest {
         val opplysning1 =
             Opplysning(
                 opplysningTekstId = "opplysning.krav-paa-dagpenger",
-                navn = "Krav på dagpenger",
                 verdi = "true",
-                datatype = "boolean",
-                opplysningId = "test",
+                datatype = BOOLSK,
+                enhet = ENHETSLØS,
             )
         val opplysning2 =
             Opplysning(
                 opplysningTekstId = "opplysning.krav-til-minsteinntekt",
-                navn = "Krav til minsteinntekt",
                 verdi = "true",
-                datatype = "boolean",
-                opplysningId = "test",
+                datatype = BOOLSK,
+                enhet = ENHETSLØS,
             )
         val opplysninger = listOf(opplysning1, opplysning2)
         val utvidedeBeskrivelser =
@@ -77,17 +77,17 @@ class MeldingOmVedtakApiTest {
                     sistEndretTidspunkt = LocalDateTime.MIN,
                 ),
             )
-        val vedtak =
-            mockk<VedtaksMelding>().also {
-                coEvery { it.hentBrevBlokkIder() } returns brevBlokker
+        val vedtaksmelding =
+            mockk<Vedtaksmelding>().also {
+                coEvery { it.brevBlokkIder() } returns brevBlokker
                 coEvery { it.hentOpplysninger() } returns opplysninger
-                every { it.hentUtvidedeBeskrivelser() } returns utvidedeBeskrivelser
+                every { it.hentUtvidedeBeskrivelser(behandlingId) } returns utvidedeBeskrivelser
             }
         val mediator =
             mockk<Mediator>().also {
                 coEvery {
                     it.hentVedtaksmelding(behandlingId, saksbehandler)
-                } returns vedtak
+                } returns Result.success(vedtaksmelding)
             }
         testApplication {
             application {
@@ -173,6 +173,28 @@ class MeldingOmVedtakApiTest {
                 brevblokkId = brevblokkId,
                 tekst = utvidetBeskrivelseTekst,
             )
+    }
+
+    @Test
+    fun `Returnerer en tom MeldingOmVedtakDTO dersom underliggende systemer feiler`() {
+        testApplication {
+            application {
+                meldingOmVedtakApi(
+                    mockk<Mediator>().also {
+                        coEvery { it.hentVedtaksmelding(behandlingId, saksbehandler) } returns
+                            Result.failure(
+                                RuntimeException("Noe gikk galt"),
+                            )
+                    },
+                )
+            }
+            client.get("/melding-om-vedtak/$behandlingId") {
+                autentisert(token = saksbehandlerToken)
+            }.let { response ->
+                response.status shouldBe HttpStatusCode.OK
+                response.bodyAsText() shouldEqualJson """{"brevblokkIder" : [], "opplysninger" : [], "utvidedeBeskrivelser" : []}"""
+            }
+        }
     }
 
     @Test

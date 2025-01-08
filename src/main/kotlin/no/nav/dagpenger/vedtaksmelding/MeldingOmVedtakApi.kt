@@ -19,11 +19,13 @@ import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseSistEndretTidspunktDTO
 import no.nav.dagpenger.vedtaksmelding.apiconfig.apiConfig
 import no.nav.dagpenger.vedtaksmelding.apiconfig.jwt
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import java.util.UUID
 
 private val sikkerlogger = KotlinLogging.logger("tjenestekall")
+private val logger = KotlinLogging.logger {}
 
 fun Application.meldingOmVedtakApi(mediator: Mediator) {
     apiConfig()
@@ -33,28 +35,34 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                 val behandlingId = call.parseUUID()
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
                     val saksbehandler = call.parseSaksbehandler()
-                    val vedtaksmelding = mediator.hentVedtaksmelding(behandlingId, saksbehandler)
-                    val meldingOmVedtakDTO =
-                        MeldingOmVedtakDTO(
-                            brevblokkIder = vedtaksmelding.hentBrevBlokkIder(),
-                            opplysninger =
-                                vedtaksmelding.hentOpplysninger().map {
-                                    OpplysningDTO(
-                                        tekstId = it.opplysningTekstId,
-                                        verdi = it.verdi,
-                                        datatype = it.datatype,
-                                    )
-                                },
-                            utvidedeBeskrivelser =
-                                vedtaksmelding.hentUtvidedeBeskrivelser().map {
-                                    UtvidetBeskrivelseDTO(
-                                        brevblokkId = it.brevblokkId,
-                                        tekst = it.tekst,
-                                        sistEndretTidspunkt = it.sistEndretTidspunkt,
-                                    )
-                                },
-                        )
-                    sikkerlogger.info { "Melding om vedtak for behandlingId: $behandlingId: $meldingOmVedtakDTO" }
+                    val meldingOmVedtakDTO: MeldingOmVedtakDTO =
+                        mediator.hentVedtaksmelding(behandlingId, saksbehandler).map { vedtaksmelding ->
+                            MeldingOmVedtakDTO(
+                                brevblokkIder = vedtaksmelding.brevBlokkIder(),
+                                opplysninger =
+                                    vedtaksmelding.hentOpplysninger().map {
+                                        OpplysningDTO(
+                                            tekstId = it.opplysningTekstId,
+                                            verdi = it.verdi,
+                                            datatype = it.mapDatatype(),
+                                        )
+                                    },
+                                utvidedeBeskrivelser =
+                                    vedtaksmelding.hentUtvidedeBeskrivelser(behandlingId).map {
+                                        UtvidetBeskrivelseDTO(
+                                            brevblokkId = it.brevblokkId,
+                                            tekst = it.tekst,
+                                            sistEndretTidspunkt = it.sistEndretTidspunkt,
+                                        )
+                                    },
+                            )
+                        }.onSuccess {
+                            sikkerlogger.info { "Melding om vedtak: $it" }
+                        }.onFailure { t ->
+                            logger.error(t) { "Feil ved henting av melding om vedtak" }
+                        }.getOrElse {
+                            MeldingOmVedtakDTO(emptyList(), emptyList(), emptyList())
+                        }
                     call.respond(meldingOmVedtakDTO)
                 }
             }
@@ -90,5 +98,28 @@ private fun ApplicationCall.parseUUID(): UUID {
 private fun RoutingContext.requirePlainText() {
     require(call.request.headers["Content-Type"]!!.contains(ContentType.Text.Plain.toString())) {
         "Content-Type må være ${ContentType.Text.Plain}, men var ${call.request.headers["Content-Type"]}"
+    }
+}
+
+private fun Opplysning.mapDatatype(): String {
+    return when (this.datatype) {
+        Opplysning.Datatype.TEKST -> "tekst"
+        Opplysning.Datatype.HELTALL -> {
+            when (this.enhet) {
+                Opplysning.Enhet.KRONER -> "penger"
+                Opplysning.Enhet.BARN -> "barn"
+                else -> "heltall"
+            }
+        }
+
+        Opplysning.Datatype.FLYTTALL -> {
+            when (this.enhet) {
+                Opplysning.Enhet.KRONER -> "penger"
+                else -> "desimaltall"
+            }
+        }
+
+        Opplysning.Datatype.DATO -> "dato"
+        Opplysning.Datatype.BOOLSK -> "boolean"
     }
 }
