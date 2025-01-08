@@ -176,7 +176,7 @@ class MeldingOmVedtakApiTest {
     }
 
     @Test
-    fun `Returnerer en tom MeldingOmVedtakDTO dersom underliggende systemer feiler`() {
+    fun `Returnerer en default MeldingOmVedtakDTO dersom underliggende systemer feiler`() {
         testApplication {
             application {
                 meldingOmVedtakApi(
@@ -192,7 +192,8 @@ class MeldingOmVedtakApiTest {
                 autentisert(token = saksbehandlerToken)
             }.let { response ->
                 response.status shouldBe HttpStatusCode.OK
-                response.bodyAsText() shouldEqualJson """{"brevblokkIder" : [], "opplysninger" : [], "utvidedeBeskrivelser" : []}"""
+                response.bodyAsText() shouldEqualJson
+                    """{"brevblokkIder" : ["brev.blokk.rett-til-aa-klage"], "opplysninger" : [], "utvidedeBeskrivelser" : []}"""
             }
         }
     }
