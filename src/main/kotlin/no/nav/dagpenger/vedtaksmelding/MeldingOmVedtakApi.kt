@@ -64,7 +64,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                             }.onFailure { t ->
                                 logger.error(t) { "Feil ved henting av melding om vedtak" }
                             }.getOrElse {
-                                MeldingOmVedtakDTO(emptyList(), emptyList(), emptyList())
+                                MeldingOmVedtakDTO(listOf("brev.blokk.rett-til-aa-klage"), emptyList(), emptyList())
                             }
                     call.respond(meldingOmVedtakDTO)
                 }
