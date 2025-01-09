@@ -46,7 +46,7 @@ sealed class Vedtaksmelding(
         ): Vedtaksmelding {
             return try {
                 mutableSetOf<Result<Vedtaksmelding>>().apply {
-                    add(kotlin.runCatching { AvslagMinsteInntekt(vedtak, mediator) })
+                    add(kotlin.runCatching { Avslag(vedtak, mediator) })
                     add(kotlin.runCatching { Innvilgelse(vedtak, mediator) })
                 }
                     .single { it.isSuccess }
@@ -79,6 +79,37 @@ data class AvslagMinsteInntekt(
 
     init {
         require(this.isApplicable) { "Vedtak oppfyller ikke avslagskriterier" }
+    }
+
+    fun Set<Vilkår>.avslagMinsteinntekt(): Boolean {
+        return this.any { it.navn == "Oppfyller kravet til minsteinntekt eller verneplikt" && it.status == IKKE_OPPFYLT }
+    }
+}
+
+data class Avslag(
+    override val vedtak: Vedtak,
+    override val mediator: Mediator,
+) : Vedtaksmelding(vedtak, mediator) {
+    override val isApplicable: Boolean = vedtak.utfall == Utfall.AVSLÅTT && vedtak.vilkår.avslagMinsteinntekt()
+
+    init {
+        require(this.isApplicable) { "Vedtak oppfyller ikke avslagsskriterier" }
+    }
+
+    val pre =
+        listOf(
+            "brev.blokk.vedtak-avslag",
+        )
+    override val brevBlokkIder: List<String>
+        get() {
+            return pre + avslagMinsteInntekt()
+        }
+
+    private fun avslagMinsteInntekt(): List<String> {
+        return vedtak.vilkår.find { it.navn == "Oppfyller kravet til minsteinntekt eller verneplikt" && it.status == IKKE_OPPFYLT }
+            ?.let {
+                listOf("brev.blokk.begrunnelse-avslag-minsteinntekt")
+            } ?: emptyList()
     }
 
     fun Set<Vilkår>.avslagMinsteinntekt(): Boolean {
