@@ -34,6 +34,7 @@ data class Block(
     val markDefs: List<MarkDef>,
     val style: String,
     val _key: String,
+    val listItem: String?,
 )
 
 sealed interface Child {
