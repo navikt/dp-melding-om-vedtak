@@ -69,27 +69,11 @@ sealed class Vedtaksmelding(
     class UkjentVedtakException(override val message: String, override val cause: Throwable? = null) : RuntimeException(message, cause)
 }
 
-data class AvslagMinsteInntekt(
-    override val vedtak: Vedtak,
-    override val mediator: Mediator,
-) : Vedtaksmelding(vedtak, mediator) {
-    override val isApplicable: Boolean = vedtak.utfall == Utfall.AVSLÅTT && vedtak.vilkår.avslagMinsteinntekt()
-    override val brevBlokkIder: List<String> =
-        listOf("brev.blokk.vedtak-avslag", "brev.blokk.begrunnelse-avslag-minsteinntekt")
-
-    init {
-        require(this.isApplicable) { "Vedtak oppfyller ikke avslagskriterier" }
-    }
-
-    fun Set<Vilkår>.avslagMinsteinntekt(): Boolean {
-        return this.any { it.navn == "Oppfyller kravet til minsteinntekt eller verneplikt" && it.status == IKKE_OPPFYLT }
-    }
-}
-
 data class Avslag(
     override val vedtak: Vedtak,
     override val mediator: Mediator,
 ) : Vedtaksmelding(vedtak, mediator) {
+    // her garanterer vi at kun avslagsgrunner med brevstøtte gir isApplicable = true
     override val isApplicable: Boolean = vedtak.utfall == Utfall.AVSLÅTT && vedtak.vilkår.avslagMinsteinntekt()
 
     init {
