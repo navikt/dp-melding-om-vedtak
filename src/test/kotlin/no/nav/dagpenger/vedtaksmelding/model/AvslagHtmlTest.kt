@@ -7,6 +7,8 @@ import no.nav.dagpenger.vedtaksmelding.Mediator
 import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
 import org.junit.jupiter.api.Test
+import java.nio.file.Files
+import java.nio.file.Paths
 
 class AvslagHtmlTest {
     private val resourseRetriever = object {}.javaClass
@@ -29,7 +31,16 @@ class AvslagHtmlTest {
         runBlocking {
             avslag.hentOpplysninger()
             val brevBlokker = avslag.hentBrevBlokker()
-            println(HtmlConverter.toHtml(brevBlokker, avslag.hentOpplysninger()))
+            writeStringToFile(content = HtmlConverter.toHtml(brevBlokker, avslag.hentOpplysninger()))
         }
+    }
+
+    fun writeStringToFile(
+        filePath: String = "build/temp/hubba.html",
+        content: String,
+    ) {
+        val path = Paths.get(filePath)
+        Files.createDirectories(path.parent)
+        Files.writeString(path, content)
     }
 }
