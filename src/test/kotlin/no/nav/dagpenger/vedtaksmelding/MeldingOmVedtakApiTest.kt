@@ -231,10 +231,7 @@ class MeldingOmVedtakApiTest {
             }
             """.trimIndent()
 
-        val mediator =
-            mockk<Mediator>().also {
-                coEvery { it.hentVedtaksHtml(behandlingId) } returns "<html><body>Test HTML</body></html>"
-            }
+        val mediator = Mediator(mockk(), mockk(), mockk())
 
         testApplication {
             application {
@@ -249,10 +246,6 @@ class MeldingOmVedtakApiTest {
                 response.status shouldBe HttpStatusCode.OK
                 response.bodyAsText() shouldBe "<html><body>Test HTML</body></html>"
             }
-        }
-
-        coVerify(exactly = 1) {
-            mediator.hentVedtaksHtml(behandlingId)
         }
     }
 
