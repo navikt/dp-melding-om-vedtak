@@ -44,4 +44,8 @@ class Mediator(
     fun hentUtvidedeBeskrivelser(behandlingId: UUID): List<UtvidetBeskrivelse> {
         return vedtaksmeldingRepository.hentUtvidedeBeskrivelserFor(behandlingId)
     }
+
+    fun hentVedtaksHtml(behandlingId: UUID): String {
+        TODO()
+    }
 }

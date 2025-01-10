@@ -9,6 +9,7 @@ import io.ktor.server.request.receiveText
 import io.ktor.server.response.respond
 import io.ktor.server.routing.RoutingContext
 import io.ktor.server.routing.get
+import io.ktor.server.routing.post
 import io.ktor.server.routing.put
 import io.ktor.server.routing.routing
 import mu.KotlinLogging
@@ -67,6 +68,18 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                                 MeldingOmVedtakDTO(listOf("brev.blokk.rett-til-aa-klage"), emptyList(), emptyList())
                             }
                     call.respond(meldingOmVedtakDTO)
+                }
+            }
+            post("/melding-om-vedtak/{behandlingId}/html") {
+                val behandlingId = call.parseUUID()
+                withLoggingContext("behandlingId" to behandlingId.toString()) {
+                    kotlin.runCatching {
+                        val vedtaksHtml = mediator.hentVedtaksHtml(behandlingId)
+                        call.respond(vedtaksHtml)
+                    }.onFailure { t ->
+                        logger.error(t) { "Feil ved henting av vedtaks html" }
+                        call.respond(HttpStatusCode.InternalServerError)
+                    }
                 }
             }
             put("/melding-om-vedtak/{behandlingId}/{brevblokkId}/utvidet-beskrivelse") {
