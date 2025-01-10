@@ -21,7 +21,7 @@ class VedtakMeldingTest {
                     utfall = Utfall.AVSLÅTT,
                 ),
             mediator = mockk(),
-        ).shouldBeInstanceOf<AvslagMinsteInntekt>()
+        ).shouldBeInstanceOf<Avslag>()
 
         Vedtaksmelding.byggVedtaksmelding(
             vedtak =

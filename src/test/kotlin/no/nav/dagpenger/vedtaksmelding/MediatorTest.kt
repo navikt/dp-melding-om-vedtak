@@ -7,7 +7,7 @@ import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
-import no.nav.dagpenger.vedtaksmelding.model.AvslagMinsteInntekt
+import no.nav.dagpenger.vedtaksmelding.model.Avslag
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.Vedtak
@@ -44,7 +44,7 @@ class MediatorTest {
             mediator.hentVedtaksmelding(
                 behandlingId = behandlingId,
                 saksbehandler = saksbehandler,
-            ).getOrThrow().shouldBeInstanceOf<AvslagMinsteInntekt>()
+            ).getOrThrow().shouldBeInstanceOf<Avslag>()
         }
 
         coVerify(exactly = 1) {
