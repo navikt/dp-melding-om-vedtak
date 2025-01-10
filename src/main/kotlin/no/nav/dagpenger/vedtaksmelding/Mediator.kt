@@ -46,6 +46,6 @@ class Mediator(
     }
 
     fun hentVedtaksHtml(behandlingId: UUID): String {
-        TODO()
+        return """<html><body>Test HTML</body></html>"""
     }
 }
