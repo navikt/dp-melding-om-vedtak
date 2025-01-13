@@ -131,6 +131,12 @@ class VedtakMapper(vedtakJson: String) {
                 enhet = KRONER,
             ),
             vedtak.finnOpplysningMedNavn(
+                opplysningTekstId = "opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt",
+                navn = "Antall G som gis som grunnlag ved verneplikt",
+                datatype = FLYTTALL,
+                enhet = KRONER,
+            ),
+            vedtak.finnOpplysningMedNavn(
                 opplysningTekstId = "opplysning.brukt-beregningsregel",
                 navn = "Brukt beregningsregel",
                 datatype = TEKST,
