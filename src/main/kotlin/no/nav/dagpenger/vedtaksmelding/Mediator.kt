@@ -7,6 +7,7 @@ import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
+import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
 import java.time.LocalDateTime
 import java.util.UUID
@@ -46,10 +47,13 @@ class Mediator(
         return vedtaksmeldingRepository.hentUtvidedeBeskrivelserFor(behandlingId)
     }
 
-    fun hentVedtaksHtml(
+    suspend fun hentVedtaksHtml(
         behandlingId: UUID,
+        behandler: Saksbehandler,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): String {
-        return """<html><body>Test HTML ${meldingOmVedtakData.fornavn}</body></html>"""
+        return hentVedtaksmelding(behandlingId, behandler).map { vedtak ->
+            HtmlConverter.toHtml(vedtak.hentBrevBlokker(), vedtak.hentOpplysninger())
+        }.getOrThrow()
     }
 }

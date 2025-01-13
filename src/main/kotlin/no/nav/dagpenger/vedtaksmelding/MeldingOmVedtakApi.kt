@@ -74,10 +74,16 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
             }
             post("/melding-om-vedtak/{behandlingId}/html") {
                 val behandlingId = call.parseUUID()
+                val behandler = call.parseSaksbehandler()
                 val meldingOmVedtakData = call.receive<MeldingOmVedtakDataDTO>()
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
                     kotlin.runCatching {
-                        val vedtaksHtml = mediator.hentVedtaksHtml(behandlingId, meldingOmVedtakData = meldingOmVedtakData)
+                        val vedtaksHtml =
+                            mediator.hentVedtaksHtml(
+                                behandlingId = behandlingId,
+                                behandler = behandler,
+                                meldingOmVedtakData = meldingOmVedtakData,
+                            )
                         call.respond(vedtaksHtml)
                     }.onFailure { t ->
                         logger.error(t) { "Feil ved henting av vedtaks html" }
