@@ -205,26 +205,23 @@ class MeldingOmVedtakApiTest {
         val requestBody =
             """
             {
-                "navn": "Test Navn",
+                "fornavn": "Test ForNavn",
+                "etternavn": "Test EtterNavn",
                 "fodselsnummer": "12345678901",
                 "sakId": "sak123",
                 "saksbehandler": {
-                    "ident": "saksbehandler1",
                     "fornavn": "Ola",
                     "etternavn": "Nordmann",
                     "enhet": {
                         "navn": "Enhet Navn",
-                        "enhetNr": "1234",
                         "postadresse": "Postadresse 123"
                     }
                 },
                 "beslutter": {
-                    "ident": "beslutter1",
                     "fornavn": "Kari",
                     "etternavn": "Nordmann",
                     "enhet": {
                         "navn": "Enhet Navn",
-                        "enhetNr": "1234",
                         "postadresse": "Postadresse 123"
                     }
                 }
@@ -244,7 +241,7 @@ class MeldingOmVedtakApiTest {
                 setBody(requestBody)
             }.let { response ->
                 response.status shouldBe HttpStatusCode.OK
-                response.bodyAsText() shouldBe "<html><body>Test HTML Test Navn</body></html>"
+                response.bodyAsText() shouldBe "<html><body>Test HTML Test ForNavn</body></html>"
             }
         }
     }

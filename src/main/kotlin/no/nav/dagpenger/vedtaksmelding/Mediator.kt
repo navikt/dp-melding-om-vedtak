@@ -50,6 +50,6 @@ class Mediator(
         behandlingId: UUID,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): String {
-        return """<html><body>Test HTML ${meldingOmVedtakData.navn}</body></html>"""
+        return """<html><body>Test HTML ${meldingOmVedtakData.fornavn}</body></html>"""
     }
 }
