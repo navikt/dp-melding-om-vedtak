@@ -154,6 +154,17 @@ class VedtakMapperTest {
     }
 
     @Test
+    fun `skal hente antall G som gis som grunnlag ved bruk av vernepliktregel`() {
+        vedtak.finnOpplysning("opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt") shouldBe
+            Opplysning(
+                opplysningTekstId = "opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt",
+                verdi = "3.0",
+                datatype = FLYTTALL,
+                enhet = KRONER,
+            )
+    }
+
+    @Test
     fun `skal hente brukt beregningsregel`() {
         vedtak.finnOpplysning("opplysning.brukt-beregningsregel") shouldBe
             Opplysning(
