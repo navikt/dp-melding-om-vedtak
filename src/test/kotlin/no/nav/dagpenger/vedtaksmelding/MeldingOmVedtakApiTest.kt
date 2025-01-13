@@ -21,6 +21,9 @@ import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.slot
+import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
+import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
+import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.BOOLSK
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.ENHETSLØS
@@ -228,8 +231,42 @@ class MeldingOmVedtakApiTest {
             }
             """.trimIndent()
 
-        val mediator = Mediator(mockk(), mockk(), mockk())
-
+        val mediator =
+            mockk<Mediator>().also {
+                coEvery {
+                    it.hentVedtaksHtml(
+                        behandlingId,
+                        Saksbehandler(saksbehandlerToken),
+                        meldingOmVedtakData =
+                            MeldingOmVedtakDataDTO(
+                                fornavn = "Test ForNavn",
+                                etternavn = "Test EtterNavn",
+                                fodselsnummer = "12345678901",
+                                sakId = "sak123",
+                                saksbehandler =
+                                    BehandlerDTO(
+                                        fornavn = "Ola",
+                                        etternavn = "Nordmann",
+                                        enhet =
+                                            BehandlerEnhetDTO(
+                                                navn = "Enhet Navn",
+                                                postadresse = "Postadresse 123",
+                                            ),
+                                    ),
+                                beslutter =
+                                    BehandlerDTO(
+                                        fornavn = "Kari",
+                                        etternavn = "Nordmann",
+                                        enhet =
+                                            BehandlerEnhetDTO(
+                                                navn = "Enhet Navn",
+                                                postadresse = "Postadresse 123",
+                                            ),
+                                    ),
+                            ),
+                    )
+                } returns "<html><body>Test HTML Test ForNavn</body></html>"
+            }
         testApplication {
             application {
                 meldingOmVedtakApi(mediator)
