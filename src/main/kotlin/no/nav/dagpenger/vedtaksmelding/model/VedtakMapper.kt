@@ -210,7 +210,7 @@ class VedtakMapper(vedtakJson: String) {
                 datatype = HELTALL,
                 enhet = KRONER,
             ),
-        ) + vedtak.lagOpplysningerFraKvoter()
+        ) + vedtak.lagOpplysningerFraKvoter() + vedtak.lagInnvilgetMedVernepliktOpplysning()
 
     private val inntjeningsperiodeOpplysninger = vedtakOpplysninger.finnInntjeningsPeriode()
 
@@ -311,10 +311,32 @@ class VedtakMapper(vedtakJson: String) {
         }
     }
 
+    private fun JsonNode.lagInnvilgetMedVernepliktOpplysning(): Set<Opplysning> {
+        return this.at("/fastsatt/kvoter").let { kvoter ->
+            when (kvoter) {
+                is MissingNode -> emptySet()
+                else -> {
+                    kvoter.map { kvote ->
+                        when (kvote["navn"].asText()) {
+                            "Verneplikt" -> {
+                                Opplysning(
+                                    opplysningTekstId = "opplysning.er-innvilget-med-verneplikt",
+                                    verdi = true.toString(),
+                                    datatype = BOOLSK,
+                                )
+                            }
+                            else -> NULL_OPPLYSNING
+                        }
+                    }
+                }
+            }
+        }.toSet()
+    }
+
     private fun JsonNode.lagOpplysningerFraKvoter(): Set<Opplysning> {
         return this.at("/fastsatt/kvoter").let { kvoter ->
             when (kvoter) {
-                is MissingNode -> emptySet<Opplysning>()
+                is MissingNode -> emptySet()
                 else -> {
                     kvoter.map { kvote ->
                         when (kvote["navn"].asText()) {
@@ -332,6 +354,14 @@ class VedtakMapper(vedtakJson: String) {
                                     datatype = HELTALL,
                                     enhet = KRONER,
                                 )
+                            "Verneplikt" -> {
+                                Opplysning(
+                                    opplysningTekstId = "opplysning.antall-stonadsuker",
+                                    verdi = kvote["verdi"].asText(),
+                                    datatype = HELTALL,
+                                    enhet = UKER,
+                                )
+                            }
                             else -> NULL_OPPLYSNING
                         }
                     }

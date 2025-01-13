@@ -17,9 +17,12 @@ import no.nav.dagpenger.vedtaksmelding.model.Utfall.INNVILGET
 import org.junit.jupiter.api.Test
 
 class VedtakMapperTest {
-    private val resourseRetriever = object {}.javaClass
+    private val resourceRetriever = object {}.javaClass
     private val vedtak =
-        resourseRetriever.getResource("/json/vedtak.json")?.let { VedtakMapper(it.readText()).vedtak() }
+        resourceRetriever.getResource("/json/vedtak.json")?.let { VedtakMapper(it.readText()).vedtak() }
+            ?: throw RuntimeException("Fant ikke ressurs")
+    private val vedtakVerneplikt =
+        resourceRetriever.getResource("/json/vedtak-verneplikt.json")?.let { VedtakMapper(it.readText()).vedtak() }
             ?: throw RuntimeException("Fant ikke ressurs")
 
     @Test
@@ -155,12 +158,29 @@ class VedtakMapperTest {
 
     @Test
     fun `skal hente antall G som gis som grunnlag ved bruk av vernepliktregel`() {
-        vedtak.finnOpplysning("opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt") shouldBe
+        vedtakVerneplikt.finnOpplysning("opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt",
                 verdi = "3.0",
                 datatype = FLYTTALL,
                 enhet = KRONER,
+            )
+    }
+
+    @Test
+    fun `skal hente opplysning om innvilgelse av verneplikt og riktig antall stonadsuker`() {
+        vedtakVerneplikt.finnOpplysning("opplysning.antall-stonadsuker") shouldBe
+            Opplysning(
+                opplysningTekstId = "opplysning.antall-stonadsuker",
+                verdi = "26",
+                datatype = HELTALL,
+                enhet = UKER,
+            )
+        vedtakVerneplikt.finnOpplysning("opplysning.er-innvilget-med-verneplikt") shouldBe
+            Opplysning(
+                opplysningTekstId = "opplysning.er-innvilget-med-verneplikt",
+                verdi = true.toString(),
+                datatype = BOOLSK,
             )
     }
 
