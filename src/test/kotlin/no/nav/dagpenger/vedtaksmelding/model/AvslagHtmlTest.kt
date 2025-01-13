@@ -19,7 +19,7 @@ class AvslagHtmlTest {
     @Test
     fun hubba() {
         val avslag =
-            AvslagMinsteInntekt(
+            Avslag(
                 vedtak = vedtak,
                 mediator =
                     Mediator(
