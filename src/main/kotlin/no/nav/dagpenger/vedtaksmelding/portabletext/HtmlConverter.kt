@@ -5,6 +5,7 @@ import kotlinx.html.FlowOrPhrasingContent
 import kotlinx.html.HTMLTag
 import kotlinx.html.HtmlBlockInlineTag
 import kotlinx.html.TagConsumer
+import kotlinx.html.UL
 import kotlinx.html.attributesMapOf
 import kotlinx.html.body
 import kotlinx.html.div
@@ -35,6 +36,25 @@ object HtmlConverter {
         opplysninger: List<Opplysning>,
     ): String {
         val mapping: Map<String, Opplysning> = opplysninger.associateBy { it.opplysningTekstId }
+
+        fun groupBlocks(blocks: List<Block>): List<List<Block>> {
+            val groupedBlocks = mutableListOf<MutableList<Block>>()
+            var currentGroup = mutableListOf<Block>()
+
+            for (block in blocks) {
+                if (block.listItem == null) {
+                    groupedBlocks.add(currentGroup)
+                    groupedBlocks.add(mutableListOf(block))
+                    currentGroup = mutableListOf()
+                }
+
+                if (block.listItem != null) {
+                    currentGroup.add(block)
+                }
+            }
+            groupedBlocks.add(currentGroup)
+            return groupedBlocks.filter { it.isNotEmpty() }
+        }
 
         return createHTML(prettyPrint = true, xhtmlCompatible = true).html {
             head {
@@ -68,6 +88,7 @@ object HtmlConverter {
                             p(classes = "melding-om-vedtak-saksnummer-dato-right") { +"17. oktober 2024" } // todo hente dato
                         }
                     }
+
                     brevBlokker.forEachIndexed { index, brevBlokk ->
                         div(
                             classes =
@@ -77,21 +98,24 @@ object HtmlConverter {
                                     "melding-om-vedtak-tekst-blokk"
                                 },
                         ) {
-                            brevBlokk.innhold.forEachIndexed { index, block ->
-                                wrap(block) { children ->
-                                    children.forEach { child: Child ->
-                                        when (child) {
-                                            is Child.Span -> {
-                                                +child.text
-                                            }
+                            val groupedBlocks = groupBlocks(brevBlokk.innhold)
+                            groupedBlocks.forEachIndexed { _, blocks ->
+                                maybeWrapList(blocks) { block: Block ->
+                                    wrapHeadings(block) { children ->
+                                        children.forEach { child: Child ->
+                                            when (child) {
+                                                is Child.Span -> {
+                                                    +child.text
+                                                }
 
-                                            is Child.OpplysningReference -> {
-                                                val textId = child.behandlingOpplysning.textId
-                                                val opplysning =
-                                                    mapping[textId]
-                                                        ?: throw RuntimeException("Opplysning ikke funnet $textId")
-                                                span("melding-om-vedtak-opplysning-verdi") {
-                                                    +opplysning.verdi
+                                                is Child.OpplysningReference -> {
+                                                    val textId = child.behandlingOpplysning.textId
+                                                    val opplysning =
+                                                        mapping[textId]
+                                                            ?: throw RuntimeException("Opplysning ikke funnet $textId")
+                                                    span("melding-om-vedtak-opplysning-verdi") {
+                                                        +opplysning.verdi
+                                                    }
                                                 }
                                             }
                                         }
@@ -100,63 +124,88 @@ object HtmlConverter {
                             }
                         }
                     }
-                }
-            }
-        }
-    }
-
-    fun FlowContent.wrap(
-        block: Block,
-        b: FlowContent.(children: List<Child>) -> Unit = {},
-    ) {
-        when (block.style) {
-            "h1" -> {
-                h1 { ul(block, b) }
-            }
-
-            "h2" -> {
-                h2 { ul(block, b) }
-            }
-
-            "h3" -> {
-                h3 { ul(block, b) }
-            }
-
-            "h4" -> {
-                h4 { ul(block, b) }
-            }
-
-            else -> {
-                p { ul(block, b) }
-            }
-        }
-    }
-
-    fun FlowContent.ul(
-        block: Block,
-        b: FlowContent.(children: List<Child>) -> Unit = {},
-    ) {
-        when (block.listItem != null) {
-            true -> {
-                ul {
-                    when (block.listItem) {
-                        "bullet" -> {
-                            li {
-                                b(block.children)
-                            }
-                        }
-
-                        else -> {
-                            ol {
-                                b(block.children)
-                            }
-                        }
+                    div(classes = "melding-om-vedtak-signatur-container") {
+                        p { +"Dette er en test" }
                     }
                 }
             }
+        }
+    }
 
-            false -> {
+    private fun FlowContent.maybeWrapList(
+        blocks: List<Block>,
+        b: FlowContent.(block: Block) -> Unit,
+    ) {
+        when (blocks.size) {
+            0 -> {
+                // do nothing
+            }
+
+            1 -> {
+                b(blocks.single())
+            }
+
+            else -> {
+                // is a list
+                ul {
+                    blocks.forEach { block ->
+                        wrapListElement(block, b)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun FlowContent.wrapHeadings(
+        block: Block,
+        b: FlowContent.(children: List<Child>) -> Unit = {},
+    ) {
+        when {
+            block.isListItem() -> {
                 b(block.children)
+            }
+
+            else -> {
+                when (block.style) {
+                    "h1" -> {
+                        h1 { b(block.children) }
+                    }
+
+                    "h2" -> {
+                        h2 { b(block.children) }
+                    }
+
+                    "h3" -> {
+                        h3 { b(block.children) }
+                    }
+
+                    "h4" -> {
+                        h4 { b(block.children) }
+                    }
+
+                    else -> {
+                        p { b(block.children) }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun UL.wrapListElement(
+        block: Block,
+        b: FlowContent.(block: Block) -> Unit = {},
+    ) {
+        when (block.listItem) {
+            "bullet" -> {
+                li {
+                    b(block)
+                }
+            }
+
+            else -> {
+                ol {
+                    b(block)
+                }
             }
         }
     }

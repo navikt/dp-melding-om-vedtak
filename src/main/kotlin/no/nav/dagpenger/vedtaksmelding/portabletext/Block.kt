@@ -35,7 +35,9 @@ data class Block(
     val style: String,
     val _key: String,
     val listItem: String?,
-)
+) {
+    fun isListItem() = listItem != null
+}
 
 sealed interface Child {
     enum class Type {
