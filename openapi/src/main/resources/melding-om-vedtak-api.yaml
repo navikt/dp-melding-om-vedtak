@@ -49,23 +49,8 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                navn:
-                  type: string
-                fodselsnummer:
-                  type: string
-                sakId:
-                  type: string
-                saksbehandler:
-                  $ref: '#/components/schemas/Behandler'
-                beslutter:
-                  $ref: '#/components/schemas/Behandler'
-              required:
-                - navn
-                - fodselsnummer
-                - sakId
-                - saksbehandler
+              $ref: '#/components/schemas/MeldingOmVedtakData'
+
       responses:
         '200':
           description: OK
@@ -169,6 +154,25 @@ components:
             type: string
         datatype:
           type: string
+
+    MeldingOmVedtakData:
+      type: object
+      properties:
+        navn:
+          type: string
+        fodselsnummer:
+          type: string
+        sakId:
+          type: string
+        saksbehandler:
+          $ref: '#/components/schemas/Behandler'
+        beslutter:
+          $ref: '#/components/schemas/Behandler'
+      required:
+        - navn
+        - fodselsnummer
+        - sakId
+        - saksbehandler
 
     Behandler:
       type: object

@@ -5,6 +5,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.auth.authenticate
+import io.ktor.server.request.receive
 import io.ktor.server.request.receiveText
 import io.ktor.server.response.respond
 import io.ktor.server.routing.RoutingContext
@@ -15,6 +16,7 @@ import io.ktor.server.routing.routing
 import mu.KotlinLogging
 import mu.withLoggingContext
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDTO
+import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.saksbehandling.api.models.OpplysningDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseSistEndretTidspunktDTO
@@ -72,9 +74,10 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
             }
             post("/melding-om-vedtak/{behandlingId}/html") {
                 val behandlingId = call.parseUUID()
+                val meldingOmVedtakData = call.receive<MeldingOmVedtakDataDTO>()
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
                     kotlin.runCatching {
-                        val vedtaksHtml = mediator.hentVedtaksHtml(behandlingId)
+                        val vedtaksHtml = mediator.hentVedtaksHtml(behandlingId, meldingOmVedtakData = meldingOmVedtakData)
                         call.respond(vedtaksHtml)
                     }.onFailure { t ->
                         logger.error(t) { "Feil ved henting av vedtaks html" }

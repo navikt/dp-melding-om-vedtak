@@ -244,7 +244,36 @@ class MeldingOmVedtakApiTest {
                 setBody(requestBody)
             }.let { response ->
                 response.status shouldBe HttpStatusCode.OK
-                response.bodyAsText() shouldBe "<html><body>Test HTML</body></html>"
+                response.bodyAsText() shouldBe "<html><body>Test HTML Test Navn</body></html>"
+            }
+        }
+    }
+
+    @Test
+    fun `Skal feile hvis requestbody ikke er riktig ved bruk av melding-om-vedtak {behandlingId} html`() {
+        val behandlingId = UUID.randomUUID()
+        val requestBody =
+            """
+            {
+                "navn": "Test Navn",
+                "fodselsnummer": "12345678901",
+               
+            }
+            """.trimIndent()
+
+        val mediator = Mediator(mockk(), mockk(), mockk())
+
+        testApplication {
+            application {
+                meldingOmVedtakApi(mediator)
+            }
+
+            client.post("/melding-om-vedtak/$behandlingId/html") {
+                autentisert(token = saksbehandlerToken)
+                header(HttpHeaders.ContentType, ContentType.Application.Json)
+                setBody(requestBody)
+            }.let { response ->
+                response.status shouldBe HttpStatusCode.InternalServerError
             }
         }
     }
