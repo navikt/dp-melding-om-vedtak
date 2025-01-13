@@ -221,7 +221,7 @@
     {
       "id": "01937743-83ce-707d-9497-879cdabdaa05",
       "navn": "Avtjent verneplikt",
-      "verdi": "true",
+      "verdi": "false",
       "status": "Faktum",
       "datatype": "boolsk",
       "redigerbar": false,
@@ -1216,26 +1216,6 @@
         },
         "opplysninger": [
           "01937743-83d4-7ca0-9a8c-b8a66207c990"
-        ]
-      }
-    },
-    {
-      "id": "01944f92-9ec8-7e02-9e2d-a94058b6c151",
-      "navn": "Antall G som gis som grunnlag ved verneplikt",
-      "verdi": "3.0",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": false,
-      "tekstId": null,
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "01944f92-9919-7d05-82d7-3ae7c502d874"
         ]
       }
     },
