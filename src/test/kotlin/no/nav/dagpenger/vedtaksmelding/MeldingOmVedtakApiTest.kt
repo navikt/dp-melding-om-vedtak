@@ -7,6 +7,7 @@ import io.kotest.matchers.string.shouldContain
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
 import io.ktor.client.request.header
+import io.ktor.client.request.post
 import io.ktor.client.request.put
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.bodyAsText
@@ -199,14 +200,83 @@ class MeldingOmVedtakApiTest {
     }
 
     @Test
-    fun `returner 401 hvis token ikke inneholder sakbehandler AD gruppe`() =
+    fun `Skal returnere en html ved bruk av melding-om-vedtak {behandlingId} html`() {
+        val behandlingId = UUID.randomUUID()
+        val requestBody =
+            """
+            {
+                "navn": "Test Navn",
+                "fodselsnummer": "12345678901",
+                "sakId": "sak123",
+                "saksbehandler": {
+                    "ident": "saksbehandler1",
+                    "fornavn": "Ola",
+                    "etternavn": "Nordmann",
+                    "enhet": {
+                        "navn": "Enhet Navn",
+                        "enhetNr": "1234",
+                        "postadresse": "Postadresse 123"
+                    }
+                },
+                "beslutter": {
+                    "ident": "beslutter1",
+                    "fornavn": "Kari",
+                    "etternavn": "Nordmann",
+                    "enhet": {
+                        "navn": "Enhet Navn",
+                        "enhetNr": "1234",
+                        "postadresse": "Postadresse 123"
+                    }
+                }
+            }
+            """.trimIndent()
+
+        val mediator = Mediator(mockk(), mockk(), mockk())
+
         testApplication {
             application {
-                meldingOmVedtakApi(mockk())
+                meldingOmVedtakApi(mediator)
             }
 
-            client.get("/melding-om-vedtak/${UUID.randomUUID()}").status shouldBe HttpStatusCode.Unauthorized
+            client.post("/melding-om-vedtak/$behandlingId/html") {
+                autentisert(token = saksbehandlerToken)
+                header(HttpHeaders.ContentType, ContentType.Application.Json)
+                setBody(requestBody)
+            }.let { response ->
+                response.status shouldBe HttpStatusCode.OK
+                response.bodyAsText() shouldBe "<html><body>Test HTML Test Navn</body></html>"
+            }
         }
+    }
+
+    @Test
+    fun `Skal feile hvis requestbody ikke er riktig ved bruk av melding-om-vedtak {behandlingId} html`() {
+        val behandlingId = UUID.randomUUID()
+        val requestBody =
+            """
+            {
+                "navn": "Test Navn",
+                "fodselsnummer": "12345678901",
+               
+            }
+            """.trimIndent()
+
+        val mediator = Mediator(mockk(), mockk(), mockk())
+
+        testApplication {
+            application {
+                meldingOmVedtakApi(mediator)
+            }
+
+            client.post("/melding-om-vedtak/$behandlingId/html") {
+                autentisert(token = saksbehandlerToken)
+                header(HttpHeaders.ContentType, ContentType.Application.Json)
+                setBody(requestBody)
+            }.let { response ->
+                response.status shouldBe HttpStatusCode.InternalServerError
+            }
+        }
+    }
 
     private fun HttpRequestBuilder.autentisert(token: String) {
         header(HttpHeaders.Authorization, "Bearer $token")

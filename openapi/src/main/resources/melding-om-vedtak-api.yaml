@@ -31,6 +31,40 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/HttpProblem'
+
+  /melding-om-vedtak/{behandlingId}/html:
+    post:
+      summary: Hent HTML for en gitt behandlingId
+      description: Henter HTML for en gitt behandlingId
+      parameters:
+        - name: behandlingId
+          in: path
+          description: id for behandling
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeldingOmVedtakData'
+
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                type: string
+        '404':
+          description: Behandlingen finnes ikke
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpProblem'
+
   /melding-om-vedtak/{behandlingId}/{brevblokkId}/utvidet-beskrivelse:
     put:
       summary: Lagrer utvidet beskrivelse for en gitt brevblokk i meldingen om vedtak
@@ -120,6 +154,52 @@ components:
             type: string
         datatype:
           type: string
+
+    MeldingOmVedtakData:
+      type: object
+      properties:
+        navn:
+          type: string
+        fodselsnummer:
+          type: string
+        sakId:
+          type: string
+        saksbehandler:
+          $ref: '#/components/schemas/Behandler'
+        beslutter:
+          $ref: '#/components/schemas/Behandler'
+      required:
+        - navn
+        - fodselsnummer
+        - sakId
+        - saksbehandler
+
+    Behandler:
+      type: object
+      properties:
+        ident:
+          type: string
+        fornavn:
+          type: string
+        etternavn:
+          type: string
+        enhet:
+          type: object
+          properties:
+            navn:
+              type: string
+            enhetNr:
+              type: string
+            postadresse:
+              type: string
+          required:
+            - navn
+            - enhetNr
+            - postadresse
+      required:
+        - ident
+        - fornavn
+        - etternavn
 
     HttpProblem:
       type: object

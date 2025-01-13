@@ -15,7 +15,7 @@ class AvslagMinsteInntektTest {
     @Test
     fun `Riktige kriterier for avslag på minsteinntekt`() {
         shouldThrow<IllegalArgumentException> {
-            AvslagMinsteInntekt(
+            Avslag(
                 vedtak =
                     Vedtak(
                         vilkår = emptySet(),
@@ -27,7 +27,7 @@ class AvslagMinsteInntektTest {
         }
 
         shouldThrow<IllegalArgumentException> {
-            AvslagMinsteInntekt(
+            Avslag(
                 vedtak =
                     Vedtak(
                         vilkår = setOf(avslagMinsteInntektKriter),
@@ -41,7 +41,7 @@ class AvslagMinsteInntektTest {
 
     @Test
     fun `Rikige brevblokker for avslag på minsteinntekt`() {
-        AvslagMinsteInntekt(
+        Avslag(
             vedtak =
                 Vedtak(
                     vilkår = setOf(avslagMinsteInntektKriter),

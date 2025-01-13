@@ -1,6 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding
 
 import mu.KotlinLogging
+import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
@@ -43,5 +44,12 @@ class Mediator(
 
     fun hentUtvidedeBeskrivelser(behandlingId: UUID): List<UtvidetBeskrivelse> {
         return vedtaksmeldingRepository.hentUtvidedeBeskrivelserFor(behandlingId)
+    }
+
+    fun hentVedtaksHtml(
+        behandlingId: UUID,
+        meldingOmVedtakData: MeldingOmVedtakDataDTO,
+    ): String {
+        return """<html><body>Test HTML ${meldingOmVedtakData.navn}</body></html>"""
     }
 }
