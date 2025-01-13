@@ -94,6 +94,35 @@ class InnvilgelseTest {
     }
 
     @Test
+    fun `Rikig brevblokker for innvilgelse av dagpenger etter verneplikt - uten barn, samordning eller 90 % regel`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
+                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
+                "brev.blokk.grunnlag-for-verneplikt",
+                "brev.blokk.arbeidstiden-din",
+                "brev.blokk.egenandel",
+                "brev.blokk.du-maa-sende-meldekort",
+                "brev.blokk.utbetaling",
+                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
+                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
+                "brev.blokk.du-maa-melde-fra-om-endringer",
+                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+            ) + Vedtaksmelding.fasteBlokker
+
+        Innvilgelse(
+            vedtak =
+                Vedtak(
+                    vilkår = emptySet(),
+                    utfall = Utfall.INNVILGET,
+                    opplysninger = setOf(Opplysning("opplysning.er-innvilget-med-verneplikt", "true", BOOLSK)),
+                ),
+            mediator = mockk(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
     fun `Rikig brevblokker for innvilgelse av ordinære dagpenger for person med barn`() {
         val forventedeBrevblokkIder =
             listOf(
