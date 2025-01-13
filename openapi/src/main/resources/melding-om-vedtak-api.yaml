@@ -158,7 +158,11 @@ components:
     MeldingOmVedtakData:
       type: object
       properties:
-        navn:
+        fornavn:
+          type: string
+        mellomnavn:
+          type: string
+        etternavn:
           type: string
         fodselsnummer:
           type: string
@@ -169,7 +173,8 @@ components:
         beslutter:
           $ref: '#/components/schemas/Behandler'
       required:
-        - navn
+        - fornavn
+        - etternavn
         - fodselsnummer
         - sakId
         - saksbehandler
@@ -177,8 +182,6 @@ components:
     Behandler:
       type: object
       properties:
-        ident:
-          type: string
         fornavn:
           type: string
         etternavn:
@@ -188,16 +191,12 @@ components:
           properties:
             navn:
               type: string
-            enhetNr:
-              type: string
             postadresse:
               type: string
           required:
             - navn
-            - enhetNr
             - postadresse
       required:
-        - ident
         - fornavn
         - etternavn
 
