@@ -122,7 +122,6 @@ data class Innvilgelse(
 
             val post =
                 listOf(
-                    "brev.blokk.grunnlag",
                     "brev.blokk.arbeidstiden-din",
                     "brev.blokk.egenandel",
                     "brev.blokk.du-maa-sende-meldekort",
@@ -133,7 +132,7 @@ data class Innvilgelse(
                     "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
                 )
 
-            return pre + barnetillegg() + nittiProsentRegel() + samordnet() + post
+            return pre + barnetillegg() + nittiProsentRegel() + samordnet() + grunnlag() + post
         }
 
     private fun nittiProsentRegel(): List<String> {
@@ -161,5 +160,12 @@ data class Innvilgelse(
             ?.let {
                 listOf("brev.blokk.barnetillegg")
             } ?: emptyList()
+    }
+
+    private fun grunnlag(): List<String> {
+        return vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.er-innvilget-med-verneplikt" && it.verdi == "true" }
+            ?.let {
+                listOf("brev.blokk.grunnlag-for-verneplikt")
+            } ?: listOf("brev.blokk.grunnlag")
     }
 }
