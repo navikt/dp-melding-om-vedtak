@@ -8,6 +8,8 @@ import kotlinx.html.TagConsumer
 import kotlinx.html.UL
 import kotlinx.html.attributesMapOf
 import kotlinx.html.body
+import kotlinx.html.br
+import kotlinx.html.classes
 import kotlinx.html.div
 import kotlinx.html.h1
 import kotlinx.html.h2
@@ -27,11 +29,20 @@ import kotlinx.html.title
 import kotlinx.html.ul
 import kotlinx.html.unsafe
 import kotlinx.html.visit
+import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 
 @Suppress("ktlint:standard:max-line-length")
 object HtmlConverter {
+    fun MeldingOmVedtakDataDTO.hentNavn(): String {
+        return listOf(fornavn, mellomnavn, etternavn).filterNotNull().filter { it.isNotBlank() }.joinToString(" ")
+    }
+
+    fun BehandlerDTO.navn(): String {
+        return listOf(fornavn, etternavn).filter { it.isNotBlank() }.joinToString(" ")
+    }
+
     fun toHtml(
         brevBlokker: List<BrevBlokk>,
         opplysninger: List<Opplysning>,
@@ -83,7 +94,7 @@ object HtmlConverter {
                                 attributes["fill"] = "#C30000"
                             }
                         }
-                        p { +"Navn: ${meldingOmVedtakData.fornavn} ${meldingOmVedtakData.mellomnavn} ${meldingOmVedtakData.etternavn}" }
+                        p { +"Navn: ${meldingOmVedtakData.hentNavn()}" }
                         p { +"Fødseslnummer: ${meldingOmVedtakData.fodselsnummer}" }
                         div(classes = "melding-om-vedtak-saksnummer-dato") {
                             p(classes = "melding-om-vedtak-saksnummer-dato-left") { +"Saksid: ${meldingOmVedtakData.sakId}" } //
@@ -127,7 +138,25 @@ object HtmlConverter {
                         }
                     }
                     div(classes = "melding-om-vedtak-signatur-container") {
-                        p { +"Dette er en test" }
+                        p { +"Med vennlig hilsen" }
+                        meldingOmVedtakData.beslutter?.let { beslutter ->
+                            p(classes = "melding-om-vedtak-signatur") {
+                                +beslutter.navn()
+                                br { }
+                                +"Beslutter"
+                                br { }
+                                +beslutter.enhet.navn
+                                br { }
+                            }
+                        }
+                        p(classes = "melding-om-vedtak-signatur") {
+                            +meldingOmVedtakData.saksbehandler.navn()
+                            br { }
+                            +"Saksbehandler"
+                            br { }
+                            +meldingOmVedtakData.saksbehandler.enhet.navn
+                            br { }
+                        }
                     }
                 }
             }

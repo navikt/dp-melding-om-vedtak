@@ -199,6 +199,7 @@ components:
       required:
         - fornavn
         - etternavn
+        - enhet
 
     HttpProblem:
       type: object
