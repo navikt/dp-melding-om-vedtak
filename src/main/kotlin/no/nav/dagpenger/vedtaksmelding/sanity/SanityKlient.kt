@@ -13,11 +13,11 @@ import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
+import io.ktor.serialization.Configuration
+import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
-import no.nav.dagpenger.vedtaksmelding.apiconfig.objectMapper
 import no.nav.dagpenger.vedtaksmelding.lagHttpKlient
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
-import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient.Companion.query
 
 private val log = KotlinLogging.logger { }
 
@@ -85,12 +85,32 @@ class SanityKlient(
         return behandlingOpplysningDTOer.map { it.textId }
     }
 
+    suspend fun hentBrevBlokkerJson(): String {
+        log.info { "Henter brevblokker fra Sanity med url: $sanityUrl" }
+        return httpKlient.get("$sanityUrl") {
+            url {
+                parameters.append("query", query)
+            }
+        }.bodyAsText()
+    }
+
     suspend fun hentBrevBlokker(): List<BrevBlokk> {
         log.info { "Henter brevblokker fra Sanity med url: $sanityUrl" }
         return httpKlient.get("$sanityUrl") {
             url {
                 parameters.append("query", query)
             }
-        }.body()
+        }.body<ResultDTO>().result
+    }
+}
+
+data class ResultDTO(
+    val result: List<BrevBlokk>,
+)
+
+fun main() {
+    val sanityKlient = SanityKlient(no.nav.dagpenger.vedtaksmelding.Configuration.sanityApiUrl)
+    runBlocking {
+        println(sanityKlient.hentBrevBlokkerJson())
     }
 }

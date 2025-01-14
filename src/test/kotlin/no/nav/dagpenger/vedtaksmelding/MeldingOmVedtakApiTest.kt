@@ -21,6 +21,9 @@ import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.slot
+import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
+import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
+import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.BOOLSK
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.ENHETSLØS
@@ -228,8 +231,57 @@ class MeldingOmVedtakApiTest {
             }
             """.trimIndent()
 
-        val mediator = Mediator(mockk(), mockk(), mockk())
-
+        val mediator =
+            mockk<Mediator>().also {
+                coEvery {
+                    it.hentVedtaksHtml(
+                        behandlingId,
+                        Saksbehandler(saksbehandlerToken),
+                        meldingOmVedtakData =
+                            MeldingOmVedtakDataDTO(
+                                fornavn = "Test ForNavn",
+                                etternavn = "Test EtterNavn",
+                                fodselsnummer = "12345678901",
+                                sakId = "sak123",
+                                saksbehandler =
+                                    BehandlerDTO(
+                                        fornavn = "Ola",
+                                        etternavn = "Nordmann",
+                                        enhet =
+                                            BehandlerEnhetDTO(
+                                                navn = "Enhet Navn",
+                                                postadresse = "Postadresse 123",
+                                            ),
+                                    ),
+                                beslutter =
+                                    BehandlerDTO(
+                                        fornavn = "Kari",
+                                        etternavn = "Nordmann",
+                                        enhet =
+                                            BehandlerEnhetDTO(
+                                                navn = "Enhet Navn",
+                                                postadresse = "Postadresse 123",
+                                            ),
+                                    ),
+                            ),
+                    )
+                } returns "<html><body>Test HTML Test ForNavn</body></html>"
+                coEvery { it.hentUtvidedeBeskrivelser(behandlingId) } returns
+                    listOf(
+                        UtvidetBeskrivelse(
+                            behandlingId = behandlingId,
+                            brevblokkId = "brev.blokk.rett-til-aa-klage",
+                            tekst = "hallo",
+                            sistEndretTidspunkt = LocalDateTime.MAX,
+                        ),
+                        UtvidetBeskrivelse(
+                            behandlingId = behandlingId,
+                            brevblokkId = "brev.blokk.rett-til-aa-random",
+                            tekst = "random test",
+                            sistEndretTidspunkt = LocalDateTime.MAX,
+                        ),
+                    )
+            }
         testApplication {
             application {
                 meldingOmVedtakApi(mediator)
@@ -241,7 +293,25 @@ class MeldingOmVedtakApiTest {
                 setBody(requestBody)
             }.let { response ->
                 response.status shouldBe HttpStatusCode.OK
-                response.bodyAsText() shouldBe "<html><body>Test HTML Test ForNavn</body></html>"
+                response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
+                    //language=JSON
+                    """
+                    {
+                      "utvidedeBeskrivelser": [
+                         {
+                           "brevblokkId": "brev.blokk.rett-til-aa-klage",
+                           "tekst": "hallo",
+                           "sistEndretTidspunkt": "+999999999-12-31T23:59:59.999999999"
+                         },
+                         {
+                           "brevblokkId": "brev.blokk.rett-til-aa-random",
+                           "tekst": "random test",
+                           "sistEndretTidspunkt": "+999999999-12-31T23:59:59.999999999"
+                         }
+                       ],
+                     "html" : "<html><body>Test HTML Test ForNavn</body></html>"
+                    } 
+                    """.trimIndent()
             }
         }
     }
