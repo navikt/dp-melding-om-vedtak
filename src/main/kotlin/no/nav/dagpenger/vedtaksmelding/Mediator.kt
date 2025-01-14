@@ -35,9 +35,9 @@ class Mediator(
         return sanityKlient.hentOpplysningTekstIder(brevbklokkIder)
     }
 
-    suspend fun hentBrevBlokker(brevbklokkIder: List<String>): List<BrevBlokk> {
+    suspend fun hentBrevBlokker(brevblokkIder: List<String>): List<BrevBlokk> {
         val brevblokkInnhold = sanityKlient.hentBrevBlokker().associateBy { it.textId }
-        return brevbklokkIder.map { brevblokkInnhold[it] ?: throw RuntimeException("Fant ikke brevblokk med id $it") }
+        return brevblokkIder.map { brevblokkInnhold[it] ?: throw RuntimeException("Fant ikke brevblokk med id $it") }
     }
 
     fun lagreUtvidetBeskrivelse(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime {
@@ -48,7 +48,7 @@ class Mediator(
         return vedtaksmeldingRepository.hentUtvidedeBeskrivelserFor(behandlingId)
     }
 
-    suspend fun hentVedtaksHtml(
+    suspend fun hentVedtakHtml(
         behandlingId: UUID,
         behandler: Saksbehandler,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,

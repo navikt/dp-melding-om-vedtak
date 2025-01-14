@@ -48,7 +48,6 @@ sealed class Vedtaksmelding(
         ): Vedtaksmelding {
             return try {
                 sikkerlogger.info { "Vedtak: $vedtak" }
-                println("*** Vedtak: $vedtak")
                 mutableSetOf<Result<Vedtaksmelding>>().apply {
                     add(kotlin.runCatching { Avslag(vedtak, mediator) })
                     add(kotlin.runCatching { Innvilgelse(vedtak, mediator) })
@@ -56,15 +55,15 @@ sealed class Vedtaksmelding(
                     .single { it.isSuccess }
                     .getOrThrow()
             } catch (e: Exception) {
-                logger.error(e) { "Feil ved oppbygging vedtaksmelding" }
+                logger.error(e) { "Feil ved oppbygging av vedtaksmelding" }
                 when (e) {
                     is NoSuchElementException -> throw UkjentVedtakException(
-                        "Kunne ikke bygge vedtaksmelding utifra vedtak: $vedtak",
+                        "Kunne ikke bygge vedtaksmelding fra vedtak: $vedtak",
                         e,
                     )
 
                     is IllegalArgumentException -> throw UkjentVedtakException(
-                        "Vedtak er gyldig for flere vedtaksmeldinger. Dette er ikke lovlig: $vedtak",
+                        "Vedtak er gyldig for flere vedtaksmeldinger. Dette er ikke tillatt: $vedtak",
                         e,
                     )
 
@@ -211,6 +210,8 @@ data class Innvilgelse(
         } else {
             grunnlagBlokker.add("brev.blokk.grunnlag")
         }
+        logger.info { "Henter blokker for grunnlag: $grunnlagBlokker" }
+        println("Henter blokker for grunnlag: $grunnlagBlokker")
         return grunnlagBlokker.toList()
     }
 }

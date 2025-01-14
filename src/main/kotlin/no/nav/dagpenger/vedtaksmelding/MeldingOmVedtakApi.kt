@@ -80,7 +80,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
                     kotlin.runCatching {
                         val vedtaksHtml =
-                            mediator.hentVedtaksHtml(
+                            mediator.hentVedtakHtml(
                                 behandlingId = behandlingId,
                                 behandler = behandler,
                                 meldingOmVedtakData = meldingOmVedtakData,

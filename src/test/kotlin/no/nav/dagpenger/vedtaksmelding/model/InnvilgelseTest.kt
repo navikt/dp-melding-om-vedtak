@@ -95,7 +95,7 @@ class InnvilgelseTest {
     }
 
     @Test
-    fun `Rikig brevblokker for innvilgelse av dagpenger etter verneplikt`() {
+    fun `Rikige brevblokker for innvilgelse av dagpenger med vernepliktgrunnlag`() {
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
@@ -124,7 +124,7 @@ class InnvilgelseTest {
     }
 
     @Test
-    fun `Rikig brevblokker for innvilgelse av dagpenger etter verneplikt når bruker også oppfyller inntektskravet`() {
+    fun `Rikige brevblokker for innvilgelse av dagpenger med vernepliktgrunnlag når bruker også oppfyller inntektskravet`() {
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
@@ -310,7 +310,7 @@ class InnvilgelseTest {
     }
 
     @Test
-    fun `Rikig brevblokker rekkefølge for innvilgelse med barnetillegg,nittiprosent regel og samordning`() {
+    fun `Rikig brevblokker rekkefølge for innvilgelse med barnetillegg, nittiprosent regel og samordning`() {
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
