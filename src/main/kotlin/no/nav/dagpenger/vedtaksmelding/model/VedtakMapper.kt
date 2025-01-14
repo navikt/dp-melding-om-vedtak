@@ -160,6 +160,17 @@ class VedtakMapper(vedtakJson: String) {
                 enhet = KRONER,
             ),
             vedtak.finnOpplysningMedNavn(
+                opplysningTekstId = "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger",
+                navn = "Antall stønadsuker som gis ved ordinære dagpenger",
+                datatype = HELTALL,
+                enhet = UKER,
+            ),
+            vedtak.finnOpplysningMedNavn(
+                opplysningTekstId = "opplysning.krav-til-minsteinntekt",
+                navn = "Krav til minsteinntekt",
+                datatype = BOOLSK,
+            ),
+            vedtak.finnOpplysningMedNavn(
                 opplysningTekstId = "opplysning.har-samordnet",
                 navn = "Har samordnet",
                 datatype = BOOLSK,
