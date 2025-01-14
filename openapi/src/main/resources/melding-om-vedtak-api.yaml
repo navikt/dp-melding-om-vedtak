@@ -55,9 +55,9 @@ paths:
         '200':
           description: OK
           content:
-            text/html:
+            application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/MeldingOmVedtakResponse'
         '404':
           description: Behandlingen finnes ikke
           content:
@@ -134,6 +134,19 @@ components:
           items:
             $ref: '#/components/schemas/UtvidetBeskrivelse'
 
+    MeldingOmVedtakResponse:
+      type: object
+      properties:
+        html:
+          type: string
+          description: HTML for melding om vedtak
+        utvidedeBeskrivelser:
+          type: array
+          items:
+            $ref: '#/components/schemas/UtvidetBeskrivelse'
+
+
+
     UtvidetBeskrivelse:
       type: object
       properties:
@@ -199,6 +212,7 @@ components:
       required:
         - fornavn
         - etternavn
+        - enhet
 
     HttpProblem:
       type: object

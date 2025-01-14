@@ -3,6 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.model
 import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.Mediator
 import no.nav.dagpenger.vedtaksmelding.model.Vilkår.Status.IKKE_OPPFYLT
+import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import java.util.UUID
 
 private val logger = KotlinLogging.logger {}
@@ -16,6 +17,10 @@ sealed class Vedtaksmelding(
 
     fun brevBlokkIder(): List<String> {
         return brevBlokkIder + fasteBlokker
+    }
+
+    suspend fun hentBrevBlokker(): List<BrevBlokk> {
+        return mediator.hentBrevBlokker(brevBlokkIder())
     }
 
     suspend fun hentOpplysninger(): List<Opplysning> {
@@ -50,7 +55,11 @@ sealed class Vedtaksmelding(
             } catch (e: Exception) {
                 logger.error(e) { "Feil ved oppbygging vedtaksmelding" }
                 when (e) {
-                    is NoSuchElementException -> throw UkjentVedtakException("Kunne ikke bygge vedtaksmelding utifra vedtak: $vedtak", e)
+                    is NoSuchElementException -> throw UkjentVedtakException(
+                        "Kunne ikke bygge vedtaksmelding utifra vedtak: $vedtak",
+                        e,
+                    )
+
                     is IllegalArgumentException -> throw UkjentVedtakException(
                         "Vedtak er gyldig for flere vedtaksmeldinger. Dette er ikke lovlig: $vedtak",
                         e,
@@ -62,7 +71,8 @@ sealed class Vedtaksmelding(
         }
     }
 
-    class UkjentVedtakException(override val message: String, override val cause: Throwable? = null) : RuntimeException(message, cause)
+    class UkjentVedtakException(override val message: String, override val cause: Throwable? = null) :
+        RuntimeException(message, cause)
 }
 
 data class Avslag(

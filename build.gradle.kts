@@ -25,6 +25,7 @@ dependencies {
 
     val kotlinxHtmlVersion = "0.11.0"
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinxHtmlVersion")
+    implementation("io.github.allangomes:kotlinwind-css:0.0.4")
 
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.mockk)
