@@ -53,7 +53,7 @@ class Mediator(
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): String {
         return hentVedtaksmelding(behandlingId, behandler).map { vedtak ->
-            HtmlConverter.toHtml(vedtak.hentBrevBlokker(), vedtak.hentOpplysninger())
+            HtmlConverter.toHtml(vedtak.hentBrevBlokker(), vedtak.hentOpplysninger(), meldingOmVedtakData)
         }.getOrThrow()
     }
 }

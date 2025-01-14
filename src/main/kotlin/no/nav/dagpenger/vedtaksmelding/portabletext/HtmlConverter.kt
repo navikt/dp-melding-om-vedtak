@@ -27,6 +27,7 @@ import kotlinx.html.title
 import kotlinx.html.ul
 import kotlinx.html.unsafe
 import kotlinx.html.visit
+import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 
 @Suppress("ktlint:standard:max-line-length")
@@ -34,6 +35,7 @@ object HtmlConverter {
     fun toHtml(
         brevBlokker: List<BrevBlokk>,
         opplysninger: List<Opplysning>,
+        meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): String {
         val mapping: Map<String, Opplysning> = opplysninger.associateBy { it.opplysningTekstId }
 
@@ -81,10 +83,10 @@ object HtmlConverter {
                                 attributes["fill"] = "#C30000"
                             }
                         }
-                        p { +"Navn: Donald Duck" } // todo hente navn
-                        p { +"Fødseslnummer: 12345 Duck" } // todo hente fødselsnummer
+                        p { +"Navn: ${meldingOmVedtakData.fornavn} ${meldingOmVedtakData.mellomnavn} ${meldingOmVedtakData.etternavn}" }
+                        p { +"Fødseslnummer: ${meldingOmVedtakData.fodselsnummer}" }
                         div(classes = "melding-om-vedtak-saksnummer-dato") {
-                            p(classes = "melding-om-vedtak-saksnummer-dato-left") { +"Saksid: 15015847" } // todo hente saksnummer
+                            p(classes = "melding-om-vedtak-saksnummer-dato-left") { +"Saksid: ${meldingOmVedtakData.sakId}" } //
                             p(classes = "melding-om-vedtak-saksnummer-dato-right") { +"17. oktober 2024" } // todo hente dato
                         }
                     }
