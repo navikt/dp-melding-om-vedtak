@@ -135,9 +135,15 @@ object HtmlConverter {
                                     }
                                 }
                             }
+                            if (brevBlokk.utvidetBeskrivelse) {
+                                div {
+                                    attributes["data-utvidet-beskrivelse-id"] = brevBlokk.textId
+                                    attributes["bubba"] = brevBlokk.title
+                                }
+                            }
                         }
                     }
-                    div(classes = "melding-om-vedtak-signatur-container") {
+                    div {
                         p { +"Med vennlig hilsen" }
                         meldingOmVedtakData.beslutter?.let { beslutter ->
                             p(classes = "melding-om-vedtak-signatur") {
