@@ -12,7 +12,7 @@ sealed class Vedtaksmelding(
     protected open val mediator: Mediator,
 ) {
     protected abstract val brevBlokkIder: List<String>
-    abstract val isApplicable: Boolean
+    abstract val harBrevstøtte: Boolean
 
     fun brevBlokkIder(): List<String> {
         return brevBlokkIder + fasteBlokker
@@ -26,10 +26,6 @@ sealed class Vedtaksmelding(
 
     fun hentUtvidedeBeskrivelser(behandlingId: UUID): List<UtvidetBeskrivelse> {
         return mediator.hentUtvidedeBeskrivelser(behandlingId)
-    }
-
-    suspend fun doStuff() {
-        val opplysningstekstIder = mediator.hentOpplysningTekstIder(brevBlokkIder.toList())
     }
 
     companion object {
@@ -73,31 +69,56 @@ data class Avslag(
     override val vedtak: Vedtak,
     override val mediator: Mediator,
 ) : Vedtaksmelding(vedtak, mediator) {
-    // her garanterer vi at kun avslagsgrunner med brevstøtte gir isApplicable = true
-    override val isApplicable: Boolean = vedtak.utfall == Utfall.AVSLÅTT && vedtak.vilkår.avslagMinsteinntekt()
+    override val harBrevstøtte: Boolean =
+        vedtak.utfall == Utfall.AVSLÅTT &&
+            (vedtak.vilkår.avslagMinsteinntekt() || vedtak.vilkår.reellArbeidssøker())
 
     init {
-        require(this.isApplicable) { "Vedtak oppfyller ikke avslagsskriterier" }
+        require(this.harBrevstøtte) { "Vedtak oppfyller ikke avslagskriterier" }
     }
 
-    val pre =
+    private val pre =
         listOf(
             "brev.blokk.vedtak-avslag",
         )
     override val brevBlokkIder: List<String>
         get() {
-            return pre + avslagMinsteInntekt()
+            return pre + avslagMinsteInntekt() + avslagReellArbeidssøker()
         }
 
     private fun avslagMinsteInntekt(): List<String> {
-        return vedtak.vilkår.find { it.navn == "Oppfyller kravet til minsteinntekt eller verneplikt" && it.status == IKKE_OPPFYLT }
+        return vedtak.vilkår.find {
+            it.navn == "Oppfyller kravet til minsteinntekt eller verneplikt" && it.status == IKKE_OPPFYLT
+        }
             ?.let {
                 listOf("brev.blokk.begrunnelse-avslag-minsteinntekt")
             } ?: emptyList()
     }
 
-    fun Set<Vilkår>.avslagMinsteinntekt(): Boolean {
+    private fun avslagReellArbeidssøker(): List<String> {
+        val grunnerTilAvslag = mutableListOf<String>()
+
+        vedtak.vilkår.find {
+            it.navn == "Oppfyller kravet til heltid- og deltidsarbeid" && it.status == IKKE_OPPFYLT
+        }?.let {
+            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-heltid-deltid")
+        }
+
+        vedtak.vilkår.find {
+            it.navn == "Oppfyller kravet til mobilitet" && it.status == IKKE_OPPFYLT
+        }?.let {
+            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-arbeid-i-hele-norge")
+        }
+
+        return grunnerTilAvslag.toList()
+    }
+
+    private fun Set<Vilkår>.avslagMinsteinntekt(): Boolean {
         return this.any { it.navn == "Oppfyller kravet til minsteinntekt eller verneplikt" && it.status == IKKE_OPPFYLT }
+    }
+
+    private fun Set<Vilkår>.reellArbeidssøker(): Boolean {
+        return this.any { it.navn == "Krav til arbeidssøker" && it.status == IKKE_OPPFYLT }
     }
 }
 
@@ -105,10 +126,10 @@ data class Innvilgelse(
     override val vedtak: Vedtak,
     override val mediator: Mediator,
 ) : Vedtaksmelding(vedtak, mediator) {
-    override val isApplicable: Boolean = vedtak.utfall == Utfall.INNVILGET
+    override val harBrevstøtte: Boolean = vedtak.utfall == Utfall.INNVILGET
 
     init {
-        require(this.isApplicable) { "Vedtak oppfyller ikke innvilgelseskriterier" }
+        require(this.harBrevstøtte) { "Vedtak oppfyller ikke innvilgelseskriterier" }
     }
 
     override val brevBlokkIder: List<String>
