@@ -266,6 +266,21 @@ class MeldingOmVedtakApiTest {
                             ),
                     )
                 } returns "<html><body>Test HTML Test ForNavn</body></html>"
+                coEvery { it.hentUtvidedeBeskrivelser(behandlingId) } returns
+                    listOf(
+                        UtvidetBeskrivelse(
+                            behandlingId = behandlingId,
+                            brevblokkId = "brev.blokk.rett-til-aa-klage",
+                            tekst = "hallo",
+                            sistEndretTidspunkt = LocalDateTime.MAX,
+                        ),
+                        UtvidetBeskrivelse(
+                            behandlingId = behandlingId,
+                            brevblokkId = "brev.blokk.rett-til-aa-random",
+                            tekst = "random test",
+                            sistEndretTidspunkt = LocalDateTime.MAX,
+                        ),
+                    )
             }
         testApplication {
             application {
@@ -278,7 +293,25 @@ class MeldingOmVedtakApiTest {
                 setBody(requestBody)
             }.let { response ->
                 response.status shouldBe HttpStatusCode.OK
-                response.bodyAsText() shouldBe "<html><body>Test HTML Test ForNavn</body></html>"
+                response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
+                    //language=JSON
+                    """
+                    {
+                      "utvidedeBeskrivelser": [
+                         {
+                           "brevblokkId": "brev.blokk.rett-til-aa-klage",
+                           "tekst": "hallo",
+                           "sistEndretTidspunkt": "+999999999-12-31T23:59:59.999999999"
+                         },
+                         {
+                           "brevblokkId": "brev.blokk.rett-til-aa-random",
+                           "tekst": "random test",
+                           "sistEndretTidspunkt": "+999999999-12-31T23:59:59.999999999"
+                         }
+                       ],
+                     "html" : "<html><body>Test HTML Test ForNavn</body></html>"
+                    } 
+                    """.trimIndent()
             }
         }
     }

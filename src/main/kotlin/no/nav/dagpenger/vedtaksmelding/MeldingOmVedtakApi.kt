@@ -17,6 +17,7 @@ import mu.KotlinLogging
 import mu.withLoggingContext
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
+import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakResponseDTO
 import no.nav.dagpenger.saksbehandling.api.models.OpplysningDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseSistEndretTidspunktDTO
@@ -84,7 +85,21 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                                 behandler = behandler,
                                 meldingOmVedtakData = meldingOmVedtakData,
                             )
-                        call.respond(vedtaksHtml)
+                        val utvidetBeskrivelser = mediator.hentUtvidedeBeskrivelser(behandlingId)
+                        val meldingOmVedtakResponseDTO =
+                            MeldingOmVedtakResponseDTO(
+                                utvidedeBeskrivelser =
+                                    utvidetBeskrivelser.map {
+                                        UtvidetBeskrivelseDTO(
+                                            brevblokkId = it.brevblokkId,
+                                            tekst = it.tekst,
+                                            sistEndretTidspunkt = it.sistEndretTidspunkt,
+                                        )
+                                    },
+                                html = vedtaksHtml,
+                            )
+
+                        call.respond(meldingOmVedtakResponseDTO)
                     }.onFailure { t ->
                         logger.error(t) { "Feil ved henting av vedtaks html" }
                         call.respond(HttpStatusCode.InternalServerError)
