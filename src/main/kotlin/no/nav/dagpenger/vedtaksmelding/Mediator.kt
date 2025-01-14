@@ -36,7 +36,8 @@ class Mediator(
     }
 
     suspend fun hentBrevBlokker(brevbklokkIder: List<String>): List<BrevBlokk> {
-        return sanityKlient.hentBrevBlokker().filter { brevbklokkIder.contains(it.textId) }
+        val brevblokkInnhold = sanityKlient.hentBrevBlokker().associateBy { it.textId }
+        return brevbklokkIder.map { brevblokkInnhold[it] ?: throw RuntimeException("Fant ikke brevblokk med id $it") }
     }
 
     fun lagreUtvidetBeskrivelse(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime {
