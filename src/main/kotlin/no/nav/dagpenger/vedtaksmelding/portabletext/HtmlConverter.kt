@@ -6,6 +6,7 @@ import kotlinx.html.HTMLTag
 import kotlinx.html.HtmlBlockInlineTag
 import kotlinx.html.TagConsumer
 import kotlinx.html.UL
+import kotlinx.html.a
 import kotlinx.html.attributesMapOf
 import kotlinx.html.body
 import kotlinx.html.br
@@ -114,13 +115,30 @@ object HtmlConverter {
                                 },
                         ) {
                             val groupedBlocks = groupBlocks(brevBlokk.innhold)
+
                             groupedBlocks.forEachIndexed { _, blocks ->
                                 maybeWrapList(blocks) { block: Block ->
+
                                     wrapHeadings(block) { children ->
+                                        val marks = block.markDefs.associateBy { it._key }
                                         children.forEach { child: Child ->
                                             when (child) {
                                                 is Child.Span -> {
-                                                    +child.text
+                                                    if (child.marks.size == 1) {
+                                                        val mark: MarkDef =
+                                                            marks[child.marks[0]]
+                                                                ?: throw RuntimeException("Mark not found for ${child.marks[0]}")
+                                                        when (mark) {
+                                                            is MarkDef.Link -> {
+                                                                a {
+                                                                    attributes["href"] = mark.href
+                                                                    +child.text
+                                                                }
+                                                            }
+                                                        }
+                                                    } else {
+                                                        +child.text
+                                                    }
                                                 }
 
                                                 is Child.OpplysningReference -> {
@@ -129,7 +147,7 @@ object HtmlConverter {
                                                         mapping[textId]
                                                             ?: throw RuntimeException("Opplysning ikke funnet $textId")
                                                     span("melding-om-vedtak-opplysning-verdi") {
-                                                        +opplysning.verdi
+                                                        +opplysning.verdiMedEnhet()
                                                     }
                                                 }
                                             }
