@@ -1,4 +1,5 @@
 package no.nav.dagpenger.vedtaksmelding.model
+import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.DATO
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.TEKST
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.ENHETSLØS
@@ -6,6 +7,8 @@ import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.KRONER
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+
+private val sikkerlogg = KotlinLogging.logger("tjenestekall")
 
 data class Vedtak(
     val vilkår: Set<Vilkår> = emptySet(),
@@ -15,9 +18,14 @@ data class Vedtak(
     fun finnOpplysning(opplysningTekstId: String): Opplysning? =
         this.opplysninger.singleOrNull { it.opplysningTekstId == opplysningTekstId }
 
-    fun hentOpplysning(opplysningTekstId: String): Opplysning =
-        finnOpplysning(opplysningTekstId)
-            ?: throw OpplysningIkkeFunnet("Opplysning med tekstId $opplysningTekstId mangler")
+    fun hentOpplysning(opplysningTekstId: String): Opplysning {
+        sikkerlogg.info { "Finn opplysning for $opplysningTekstId" }
+        val opplysning =
+            finnOpplysning(opplysningTekstId)
+                ?: throw OpplysningIkkeFunnet("Opplysning med tekstId $opplysningTekstId mangler")
+        sikkerlogg.info { "Opplysning for $opplysningTekstId: $opplysning" }
+        return opplysning
+    }
 }
 
 class OpplysningIkkeFunnet(message: String) : RuntimeException(message)

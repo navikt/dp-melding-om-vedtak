@@ -210,8 +210,6 @@ data class Innvilgelse(
         } else {
             grunnlagBlokker.add("brev.blokk.grunnlag")
         }
-        logger.info { "Henter blokker for grunnlag: $grunnlagBlokker" }
-        println("Henter blokker for grunnlag: $grunnlagBlokker")
         return grunnlagBlokker.toList()
     }
 }
