@@ -17,6 +17,7 @@ import kotlinx.html.h3
 import kotlinx.html.h4
 import kotlinx.html.head
 import kotlinx.html.html
+import kotlinx.html.lang
 import kotlinx.html.li
 import kotlinx.html.meta
 import kotlinx.html.ol
@@ -70,6 +71,7 @@ object HtmlConverter {
         }
 
         return createHTML(prettyPrint = true, xhtmlCompatible = true).html {
+            lang = "no"
             head {
                 meta { charset = "UTF-8" }
                 title { +"Vedtak fra NAV" } // todo hente tittel
