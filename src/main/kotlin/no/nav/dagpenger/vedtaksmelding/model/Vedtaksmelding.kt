@@ -7,6 +7,7 @@ import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import java.util.UUID
 
 private val logger = KotlinLogging.logger {}
+private val sikkerlogger = KotlinLogging.logger("tjenestekall")
 
 sealed class Vedtaksmelding(
     protected open val vedtak: Vedtak,
@@ -46,6 +47,8 @@ sealed class Vedtaksmelding(
             mediator: Mediator,
         ): Vedtaksmelding {
             return try {
+                sikkerlogger.info { "Vedtak: $vedtak" }
+                println("*** Vedtak: $vedtak")
                 mutableSetOf<Result<Vedtaksmelding>>().apply {
                     add(kotlin.runCatching { Avslag(vedtak, mediator) })
                     add(kotlin.runCatching { Innvilgelse(vedtak, mediator) })
