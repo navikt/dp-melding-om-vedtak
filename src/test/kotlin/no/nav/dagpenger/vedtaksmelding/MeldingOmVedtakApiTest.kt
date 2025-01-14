@@ -53,14 +53,14 @@ class MeldingOmVedtakApiTest {
         val brevBlokker = listOf("A", "B", "C")
         val opplysning1 =
             Opplysning(
-                opplysningTekstId = "opplysning.krav-paa-dagpenger",
+                opplysningTekstId = "opplysning.opplysning-1",
                 verdi = "true",
                 datatype = BOOLSK,
                 enhet = ENHETSLØS,
             )
         val opplysning2 =
             Opplysning(
-                opplysningTekstId = "opplysning.krav-til-minsteinntekt",
+                opplysningTekstId = "opplysning.opplysning-2",
                 verdi = "true",
                 datatype = BOOLSK,
                 enhet = ENHETSLØS,
@@ -114,12 +114,12 @@ class MeldingOmVedtakApiTest {
                       ],
                       "opplysninger": [
                         {
-                          "tekstId": "opplysning.krav-paa-dagpenger",
+                          "tekstId": "opplysning.opplysning-1",
                           "verdi": "true",
                           "datatype": "boolean"
                         },
                         {
-                          "tekstId": "opplysning.krav-til-minsteinntekt",
+                          "tekstId": "opplysning.opplysning-2",
                           "verdi": "true",
                           "datatype": "boolean"
                         }

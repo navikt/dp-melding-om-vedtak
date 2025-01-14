@@ -350,6 +350,27 @@ class VedtakMapperTest {
     }
 
     @Test
+    fun `Hent opplysning Krav til minsteinntekt`() {
+        vedtakVerneplikt.finnOpplysning("opplysning.krav-til-minsteinntekt") shouldBe
+            Opplysning(
+                opplysningTekstId = "opplysning.krav-til-minsteinntekt",
+                verdi = "true",
+                datatype = BOOLSK,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning Antall stønadsuker som gis ved ordinære dagpenger`() {
+        vedtakVerneplikt.finnOpplysning("opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger") shouldBe
+            Opplysning(
+                opplysningTekstId = "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger",
+                verdi = "52",
+                datatype = HELTALL,
+                enhet = UKER,
+            )
+    }
+
+    @Test
     fun `Hent inntjeningsperiode opplysninger`() {
         vedtak.opplysninger.single {
             it.opplysningTekstId == "opplysning.forste-maaned-aar-for-inntektsperiode-1"

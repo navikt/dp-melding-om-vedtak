@@ -194,9 +194,20 @@ data class Innvilgelse(
     }
 
     private fun grunnlag(): List<String> {
-        return vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.er-innvilget-med-verneplikt" && it.verdi == "true" }
-            ?.let {
-                listOf("brev.blokk.grunnlag-for-verneplikt")
-            } ?: listOf("brev.blokk.grunnlag")
+        val grunnlagBlokker = mutableListOf<String>()
+        val erInnvilgetMedVerneplikt =
+            vedtak.opplysninger.any { it.opplysningTekstId == "opplysning.er-innvilget-med-verneplikt" && it.verdi == "true" }
+        val kravTilMinsteinntektErOppfylt =
+            vedtak.opplysninger.any { it.opplysningTekstId == "opplysning.krav-til-minsteinntekt" && it.verdi == "true" }
+
+        if (erInnvilgetMedVerneplikt) {
+            grunnlagBlokker.add("brev.blokk.grunnlag-for-verneplikt")
+            if (kravTilMinsteinntektErOppfylt) {
+                grunnlagBlokker.add("brev.blokk.verneplikt-gunstigere-enn-inntekt")
+            }
+        } else {
+            grunnlagBlokker.add("brev.blokk.grunnlag")
+        }
+        return grunnlagBlokker.toList()
     }
 }
