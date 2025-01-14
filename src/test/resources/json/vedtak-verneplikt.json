@@ -872,7 +872,7 @@
     {
       "id": "01944f92-9ec6-7520-b80a-bd74cb3a1b2c",
       "navn": "Arbeidsinntekt siste 12 mnd",
-      "verdi": "0",
+      "verdi": "200000",
       "status": "Faktum",
       "datatype": "penger",
       "redigerbar": false,
@@ -912,7 +912,7 @@
     {
       "id": "01944f92-9ec6-7520-b80a-bd74cb3a1b35",
       "navn": "Arbeidsinntekt er over kravet for siste 12 mnd",
-      "verdi": "false",
+      "verdi": "true",
       "status": "Faktum",
       "datatype": "boolsk",
       "redigerbar": false,
@@ -954,7 +954,7 @@
     {
       "id": "01944f92-9ec6-7520-b80a-bd74cb3a1b3e",
       "navn": "Krav til minsteinntekt",
-      "verdi": "false",
+      "verdi": "true",
       "status": "Faktum",
       "datatype": "boolsk",
       "redigerbar": false,
@@ -4175,7 +4175,7 @@
     {
       "id": "01944f92-a245-7380-a72c-6004a594f03d",
       "navn": "Antall stønadsuker som gis ved ordinære dagpenger",
-      "verdi": "0",
+      "verdi": "52",
       "status": "Faktum",
       "datatype": "heltall",
       "redigerbar": false,
