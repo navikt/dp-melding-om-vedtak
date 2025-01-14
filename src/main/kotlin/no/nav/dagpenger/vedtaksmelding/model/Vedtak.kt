@@ -1,7 +1,11 @@
 package no.nav.dagpenger.vedtaksmelding.model
-
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.DATO
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.TEKST
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.ENHETSLØS
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.KRONER
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 data class Vedtak(
     val vilkår: Set<Vilkår> = emptySet(),
@@ -47,6 +51,31 @@ data class Opplysning(
                 datatype = TEKST,
                 enhet = ENHETSLØS,
             )
+    }
+
+    fun formatering(): String {
+        return when (this.datatype) {
+            DATO -> formatDate(this.verdi)
+            else -> this.verdi
+        }
+    }
+
+    fun enhet(): String {
+        return when (this.enhet) {
+            KRONER -> " kroner"
+            else -> ""
+        }
+    }
+
+    fun verdiMedEnhet(): String {
+        return "${this.formatering()}${this.enhet()}"
+    }
+
+    fun formatDate(dateString: String): String {
+        val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val outputFormatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy", Locale("no"))
+        val date = LocalDate.parse(dateString, inputFormatter)
+        return date.format(outputFormatter)
     }
 
     enum class Datatype {
