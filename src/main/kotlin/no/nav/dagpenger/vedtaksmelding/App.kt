@@ -20,7 +20,7 @@ fun main() {
         .getOrElse { exitProcess(1) }
 
     val behandlingKlient =
-        BehandlngHttpKlient(
+        BehandlingHttpKlient(
             dpBehandlingApiUrl = Configuration.dbBehandlingApiUrl,
             tokenProvider = Configuration.dpBehandlingOboExchanger,
         )
