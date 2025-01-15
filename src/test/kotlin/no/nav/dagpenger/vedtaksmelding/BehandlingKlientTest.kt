@@ -3,7 +3,6 @@ package no.nav.dagpenger.vedtaksmelding
 import io.kotest.matchers.shouldBe
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
-import io.ktor.client.request.request
 import io.ktor.http.headersOf
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.k8.setAzureAuthEnv
@@ -21,7 +20,7 @@ internal class BehandlingKlientTest {
         val vedtakJson = resourseRetriever.getResource("/json/vedtak.json")!!.readText()
 
         val behandlingKlient =
-            BehandlngHttpKlient(
+            BehandlingHttpKlient(
                 dpBehandlingApiUrl = "http://localhost",
                 tokenProvider = { "token" },
                 httpClient =
@@ -58,7 +57,7 @@ internal class BehandlingKlientTest {
         ) {
             val tokenProvider = Configuration.dpBehandlingOboExchanger
             val klient =
-                BehandlngHttpKlient(
+                BehandlingHttpKlient(
                     dpBehandlingApiUrl = "https://dp-behandling.intern.dev.nav.no/behandling",
                     tokenProvider = tokenProvider,
                 )

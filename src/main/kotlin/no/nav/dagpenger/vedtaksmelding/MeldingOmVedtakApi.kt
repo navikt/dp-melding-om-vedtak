@@ -38,6 +38,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
             get("/melding-om-vedtak/{behandlingId}") {
                 val behandlingId = call.parseUUID()
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
+                    logger.info { "Test" }
                     val saksbehandler = call.parseSaksbehandler()
                     val meldingOmVedtakDTO: MeldingOmVedtakDTO =
                         runCatching {
