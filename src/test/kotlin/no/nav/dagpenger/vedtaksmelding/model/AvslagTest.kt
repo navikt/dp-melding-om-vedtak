@@ -31,6 +31,18 @@ class AvslagTest {
             status = Vilkår.Status.IKKE_OPPFYLT,
         )
 
+    private val arbeidsførIkkeOppfylt =
+        Vilkår(
+            navn = "Oppfyller kravet til å være arbeidsfør",
+            status = Vilkår.Status.IKKE_OPPFYLT,
+        )
+
+    private val ethvertArbeidIkkeOppfylt =
+        Vilkår(
+            navn = "Oppfyller kravet til å ta ethvert arbeid",
+            status = Vilkår.Status.IKKE_OPPFYLT,
+        )
+
     @Test
     fun `Rikige brevblokker for avslag på minsteinntekt`() {
         Avslag(
@@ -50,7 +62,7 @@ class AvslagTest {
     }
 
     @Test
-    fun `Riktige brevblokker for avslag reell arbeidssøker - vilje til både heltid og deltid`() {
+    fun `Riktige brevblokker for avslag reell arbeidssøker - vilje til å jobbe både heltid og deltid`() {
         Avslag(
             vedtak =
                 Vedtak(
@@ -86,6 +98,42 @@ class AvslagTest {
     }
 
     @Test
+    fun `Riktige brevblokker for avslag reell arbeidssøker - arbeidsfør`() {
+        Avslag(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = setOf(reellArbeidssøkerIkkeOppfylt, arbeidsførIkkeOppfylt),
+                    utfall = Utfall.AVSLÅTT,
+                    opplysninger = emptySet(),
+                ),
+            mediator = mockk(),
+        ).brevBlokkIder() shouldBe
+            listOf(
+                "brev.blokk.vedtak-avslag",
+                "brev.blokk.avslag-reell-arbeidssoker-arbeidsfor",
+            ) + Vedtaksmelding.fasteBlokker
+    }
+
+    @Test
+    fun `Riktige brevblokker for avslag reell arbeidssøker - vilje til å ta ethvert arbeid`() {
+        Avslag(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = setOf(reellArbeidssøkerIkkeOppfylt, ethvertArbeidIkkeOppfylt),
+                    utfall = Utfall.AVSLÅTT,
+                    opplysninger = emptySet(),
+                ),
+            mediator = mockk(),
+        ).brevBlokkIder() shouldBe
+            listOf(
+                "brev.blokk.vedtak-avslag",
+                "brev.blokk.avslag-reell-arbeidssoker-ethvert-arbeid",
+            ) + Vedtaksmelding.fasteBlokker
+    }
+
+    @Test
     fun `Manglende kriterier for brevstøtte`() {
         shouldThrow<IllegalArgumentException> {
             Avslag(
@@ -114,31 +162,3 @@ class AvslagTest {
         }
     }
 }
-
-/*
-*
-    {
-      "navn": "Oppfyller kravet til mobilitet",
-      "status": "IkkeOppfylt",
-      "vurderingstidspunkt": "2025-01-14T08:47:45.360187",
-      "hjemmel": "folketrygdloven § 4-5"
-    },
-    {
-      "navn": "Oppfyller kravet til å være arbeidsfør",
-      "status": "Oppfylt",
-      "vurderingstidspunkt": "2025-01-14T08:47:45.3602",
-      "hjemmel": "folketrygdloven § 4-5"
-    },
-    {
-      "navn": "Oppfyller kravet til å ta ethvert arbeid",
-      "status": "IkkeOppfylt",
-      "vurderingstidspunkt": "2025-01-14T08:47:45.360213",
-      "hjemmel": "folketrygdloven § 4-5"
-    },
-    {
-      "navn": "Krav til arbeidssøker",
-      "status": "IkkeOppfylt",
-      "vurderingstidspunkt": "2025-01-14T08:47:45.367496",
-      "hjemmel": "folketrygdloven § 4-5"
-    },
-* */
