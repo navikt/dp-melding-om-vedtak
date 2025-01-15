@@ -120,6 +120,18 @@ data class Avslag(
             grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-arbeid-i-hele-norge")
         }
 
+        vedtak.vilkår.find {
+            it.navn == "Oppfyller kravet til å være arbeidsfør" && it.status == IKKE_OPPFYLT
+        }?.let {
+            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-arbeidsfor")
+        }
+
+        vedtak.vilkår.find {
+            it.navn == "Oppfyller kravet til å ta ethvert arbeid" && it.status == IKKE_OPPFYLT
+        }?.let {
+            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-ethvert-arbeid")
+        }
+
         return grunnerTilAvslag.toList()
     }
 
