@@ -35,19 +35,14 @@ internal class BehandlingHttpKlient(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
     ): Result<String> {
-        return withContext(Dispatchers.IO) {
-            withLoggingContext("behandlingId" to behandlingId.toString()) {
-                return@withContext httpClient.get(urlString = "$dpBehandlingApiUrl/$behandlingId/vedtak") {
-                    header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(saksbehandler.token)}")
-                    accept(ContentType.Application.Json)
-                }.bodyAsText().let { vedtak ->
-                    sikkerlogg.info { "Hentet vedtak: $vedtak" }
-                    Result.success(vedtak)
-                }
-            }
+        return httpClient.get(urlString = "$dpBehandlingApiUrl/$behandlingId/vedtak") {
+            header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(saksbehandler.token)}")
+            accept(ContentType.Application.Json)
+        }.bodyAsText().let { vedtak ->
+            sikkerlogg.info { "Hentet vedtak for behandling $behandlingId: $vedtak" }
+            Result.success(vedtak)
         }
     }
-
     override suspend fun hentVedtak(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
