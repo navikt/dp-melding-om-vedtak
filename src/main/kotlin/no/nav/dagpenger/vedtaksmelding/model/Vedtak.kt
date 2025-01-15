@@ -7,6 +7,9 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 import java.util.UUID
+import mu.KotlinLogging
+
+private val sikkerlogg = KotlinLogging.logger("tjenestekall")
 
 data class Vedtak(
     val behandlingId: UUID,
@@ -17,9 +20,14 @@ data class Vedtak(
     fun finnOpplysning(opplysningTekstId: String): Opplysning? =
         this.opplysninger.singleOrNull { it.opplysningTekstId == opplysningTekstId }
 
-    fun hentOpplysning(opplysningTekstId: String): Opplysning =
-        finnOpplysning(opplysningTekstId)
-            ?: throw OpplysningIkkeFunnet("Opplysning med tekstId $opplysningTekstId mangler")
+    fun hentOpplysning(opplysningTekstId: String): Opplysning {
+        sikkerlogg.info { "Finn opplysning for $opplysningTekstId" }
+        val opplysning =
+            finnOpplysning(opplysningTekstId)
+                ?: throw OpplysningIkkeFunnet("Opplysning med tekstId $opplysningTekstId mangler")
+        sikkerlogg.info { "Opplysning for $opplysningTekstId: $opplysning" }
+        return opplysning
+    }
 }
 
 class OpplysningIkkeFunnet(message: String) : RuntimeException(message)
