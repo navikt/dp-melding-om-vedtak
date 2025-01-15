@@ -8,7 +8,10 @@ import io.ktor.client.request.header
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import mu.KotlinLogging
+import mu.withLoggingContext
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
@@ -23,7 +26,7 @@ interface BehandlingKlient {
     ): Result<Vedtak>
 }
 
-internal class BehandlngHttpKlient(
+internal class BehandlingHttpKlient(
     private val dpBehandlingApiUrl: String,
     private val tokenProvider: (String) -> String,
     private val httpClient: HttpClient = lagHttpKlient(engine = CIO.create { }),
@@ -32,12 +35,16 @@ internal class BehandlngHttpKlient(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
     ): Result<String> {
-        return httpClient.get(urlString = "$dpBehandlingApiUrl/$behandlingId/vedtak") {
-            header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(saksbehandler.token)}")
-            accept(ContentType.Application.Json)
-        }.bodyAsText().let { vedtak ->
-            sikkerlogg.info { "Hentet vedtak for behandling $behandlingId: $vedtak" }
-            Result.success(vedtak)
+        return withContext(Dispatchers.IO) {
+            withLoggingContext("behandlingId" to behandlingId.toString()) {
+                return@withContext httpClient.get(urlString = "$dpBehandlingApiUrl/$behandlingId/vedtak") {
+                    header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(saksbehandler.token)}")
+                    accept(ContentType.Application.Json)
+                }.bodyAsText().let { vedtak ->
+                    sikkerlogg.info { "Hentet vedtak: $vedtak" }
+                    Result.success(vedtak)
+                }
+            }
         }
     }
 
