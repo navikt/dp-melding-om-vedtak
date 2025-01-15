@@ -117,8 +117,9 @@ object HtmlConverter {
                             val groupedBlocks = groupBlocks(brevBlokk.innhold)
 
                             groupedBlocks.forEachIndexed { _, blocks ->
-                                maybeWrapList(blocks) { block: Block ->
 
+                                attributes["data-brevblokk-id"] = brevBlokk.textId
+                                maybeWrapList(blocks) { block: Block ->
                                     wrapHeadings(block) { children ->
                                         val marks = block.markDefs.associateBy { it._key }
                                         children.forEach { child: Child ->
