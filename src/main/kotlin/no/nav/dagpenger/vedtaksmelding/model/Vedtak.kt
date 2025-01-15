@@ -1,4 +1,5 @@
 package no.nav.dagpenger.vedtaksmelding.model
+import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.DATO
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.TEKST
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.ENHETSLØS
@@ -7,7 +8,6 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 import java.util.UUID
-import mu.KotlinLogging
 
 private val sikkerlogg = KotlinLogging.logger("tjenestekall")
 
