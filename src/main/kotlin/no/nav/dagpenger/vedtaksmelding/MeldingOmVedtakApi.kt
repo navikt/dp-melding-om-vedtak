@@ -66,7 +66,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                             .onSuccess {
                                 sikkerlogger.info { "Melding om vedtak: $it" }
                             }.onFailure { t ->
-                                logger.error(t) { "Feil ved henting av melding om vedtak" }
+                                logger.error(t) { "Feil ved henting av melding om vedtak for behandling $behandlingId" }
                             }.getOrElse {
                                 MeldingOmVedtakDTO(listOf("brev.blokk.rett-til-aa-klage"), emptyList(), emptyList())
                             }
