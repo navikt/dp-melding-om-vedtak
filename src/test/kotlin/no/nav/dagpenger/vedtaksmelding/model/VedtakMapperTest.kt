@@ -399,6 +399,7 @@ class VedtakMapperTest {
             VedtakMapper(
                 """
             {
+                "behandlingId": "01944f92-9828-770f-874d-534fd69b17c1",
                 "fastsatt": {
                     "utfall": true
                 },
@@ -415,6 +416,7 @@ class VedtakMapperTest {
             VedtakMapper(
                 """
             {
+                "behandlingId": "01944f92-9828-770f-874d-534fd69b17c1",
                 "fastsatt": {
                     },
                 "vilkår": []
@@ -426,6 +428,7 @@ class VedtakMapperTest {
             VedtakMapper(
                 """
             {
+                "behandlingId": "01944f92-9828-770f-874d-534fd69b17c1",
                 "fastsatt": {
                     "utfall": false
                 }
