@@ -35,6 +35,7 @@ dependencies {
     testImplementation("io.ktor:ktor-client-mock:${libs.versions.ktor.get()}")
 
     testImplementation("io.kubernetes:client-java:21.0.1")
+    testImplementation("org.jsoup:jsoup:1.14.3")
 }
 
 application {
