@@ -10,9 +10,12 @@ import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.HELTALL
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.BARN
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.KRONER
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.UKER
+import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
 class InnvilgelseTest {
+    private val behandlingId = UUIDv7.ny()
+
     private fun nittiprosentRegelOpplysning(verdi: String = "10") =
         Opplysning(
             opplysningTekstId =
@@ -44,6 +47,7 @@ class InnvilgelseTest {
             Innvilgelse(
                 vedtak =
                     Vedtak(
+                        behandlingId = behandlingId,
                         vilkår = emptySet(),
                         utfall = Utfall.AVSLÅTT,
                         opplysninger = emptySet(),
@@ -56,6 +60,7 @@ class InnvilgelseTest {
             Innvilgelse(
                 vedtak =
                     Vedtak(
+                        behandlingId = behandlingId,
                         vilkår = emptySet(),
                         utfall = Utfall.INNVILGET,
                         opplysninger = emptySet(),
@@ -86,6 +91,7 @@ class InnvilgelseTest {
         Innvilgelse(
             vedtak =
                 Vedtak(
+                    behandlingId = behandlingId,
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                     opplysninger = emptySet(),
@@ -115,6 +121,7 @@ class InnvilgelseTest {
         Innvilgelse(
             vedtak =
                 Vedtak(
+                    behandlingId = behandlingId,
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                     opplysninger = setOf(Opplysning("opplysning.er-innvilget-med-verneplikt", "true", BOOLSK)),
@@ -145,6 +152,7 @@ class InnvilgelseTest {
         Innvilgelse(
             vedtak =
                 Vedtak(
+                    behandlingId = behandlingId,
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                     opplysninger =
@@ -180,6 +188,7 @@ class InnvilgelseTest {
         Innvilgelse(
             vedtak =
                 Vedtak(
+                    behandlingId = behandlingId,
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                     opplysninger =
@@ -193,6 +202,7 @@ class InnvilgelseTest {
         Innvilgelse(
             vedtak =
                 Vedtak(
+                    behandlingId = behandlingId,
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                     opplysninger =
@@ -226,6 +236,7 @@ class InnvilgelseTest {
         Innvilgelse(
             vedtak =
                 Vedtak(
+                    behandlingId = behandlingId,
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                     opplysninger =
@@ -239,6 +250,7 @@ class InnvilgelseTest {
         Innvilgelse(
             vedtak =
                 Vedtak(
+                    behandlingId = behandlingId,
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                     opplysninger =
@@ -272,6 +284,7 @@ class InnvilgelseTest {
         Innvilgelse(
             vedtak =
                 Vedtak(
+                    behandlingId = behandlingId,
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                     opplysninger =
@@ -285,6 +298,7 @@ class InnvilgelseTest {
         Innvilgelse(
             vedtak =
                 Vedtak(
+                    behandlingId = behandlingId,
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                     opplysninger =
@@ -298,6 +312,7 @@ class InnvilgelseTest {
         Innvilgelse(
             vedtak =
                 Vedtak(
+                    behandlingId = behandlingId,
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                     opplysninger =
@@ -333,6 +348,7 @@ class InnvilgelseTest {
         Innvilgelse(
             vedtak =
                 Vedtak(
+                    behandlingId = behandlingId,
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                     opplysninger =
