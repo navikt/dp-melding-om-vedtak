@@ -94,6 +94,7 @@ class AvslagTest {
             listOf(
                 "brev.blokk.vedtak-avslag",
                 "brev.blokk.avslag-reell-arbeidssoker-arbeid-i-hele-norge",
+                "brev.blokk.avslag-reell-arbeidssoker-arbeid-i-hele-norge-hjemmel",
             ) + Vedtaksmelding.fasteBlokker
     }
 
