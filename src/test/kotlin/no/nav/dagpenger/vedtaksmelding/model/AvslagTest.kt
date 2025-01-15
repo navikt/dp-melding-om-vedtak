@@ -3,9 +3,11 @@ package no.nav.dagpenger.vedtaksmelding.model
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import io.mockk.mockk
+import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
 class AvslagTest {
+    private val behandlingId = UUIDv7.ny()
     private val minsteInntektIkkeOppfylt =
         Vilkår(
             navn = "Oppfyller kravet til minsteinntekt eller verneplikt",
@@ -34,6 +36,7 @@ class AvslagTest {
         Avslag(
             vedtak =
                 Vedtak(
+                    behandlingId = behandlingId,
                     vilkår = setOf(minsteInntektIkkeOppfylt),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
@@ -51,6 +54,7 @@ class AvslagTest {
         Avslag(
             vedtak =
                 Vedtak(
+                    behandlingId = behandlingId,
                     vilkår = setOf(reellArbeidssøkerIkkeOppfylt, heltidDeltidIkkeOppfylt),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
@@ -68,6 +72,7 @@ class AvslagTest {
         Avslag(
             vedtak =
                 Vedtak(
+                    behandlingId = behandlingId,
                     vilkår = setOf(reellArbeidssøkerIkkeOppfylt, mobilitetIkkeOppfylt),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
@@ -86,6 +91,7 @@ class AvslagTest {
             Avslag(
                 vedtak =
                     Vedtak(
+                        behandlingId = behandlingId,
                         vilkår = emptySet(),
                         utfall = Utfall.AVSLÅTT,
                         opplysninger = emptySet(),
@@ -98,6 +104,7 @@ class AvslagTest {
             Avslag(
                 vedtak =
                     Vedtak(
+                        behandlingId = behandlingId,
                         vilkår = setOf(minsteInntektIkkeOppfylt),
                         utfall = Utfall.INNVILGET,
                         opplysninger = emptySet(),

@@ -6,8 +6,10 @@ import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.KRONER
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+import java.util.UUID
 
 data class Vedtak(
+    val behandlingId: UUID,
     val vilkår: Set<Vilkår> = emptySet(),
     val utfall: Utfall,
     val opplysninger: Set<Opplysning> = emptySet(),

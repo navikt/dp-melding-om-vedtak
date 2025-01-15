@@ -23,6 +23,7 @@ import no.nav.dagpenger.vedtaksmelding.model.Utfall.AVSLÅTT
 import no.nav.dagpenger.vedtaksmelding.model.Utfall.INNVILGET
 import java.time.LocalDate
 import java.time.Month
+import java.util.UUID
 
 class VedtakMapper(vedtakJson: String) {
     private val vedtak: JsonNode
@@ -37,11 +38,16 @@ class VedtakMapper(vedtakJson: String) {
 
     fun vedtak(): Vedtak {
         return Vedtak(
+            behandlingId = behandlingId,
             utfall = utfall,
             vilkår = vilkår,
             opplysninger = vedtakOpplysninger + inntjeningsperiodeOpplysninger,
         )
     }
+
+    private val behandlingId =
+        UUID.fromString(vedtak.get("behandlingId").asText())
+            ?: throw IllegalArgumentException("behandlingId mangler")
 
     private val utfall: Utfall =
         vedtak.get("fastsatt")?.get("utfall")?.asBoolean()?.let { utfall ->
