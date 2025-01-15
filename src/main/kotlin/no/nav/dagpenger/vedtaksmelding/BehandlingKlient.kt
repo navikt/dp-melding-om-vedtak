@@ -8,10 +8,7 @@ import io.ktor.client.request.header
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import mu.KotlinLogging
-import mu.withLoggingContext
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
@@ -43,6 +40,7 @@ internal class BehandlingHttpKlient(
             Result.success(vedtak)
         }
     }
+
     override suspend fun hentVedtak(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
