@@ -118,6 +118,7 @@ data class Avslag(
             it.navn == "Oppfyller kravet til mobilitet" && it.status == IKKE_OPPFYLT
         }?.let {
             grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-arbeid-i-hele-norge")
+            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-arbeid-i-hele-norge-hjemmel")
         }
 
         vedtak.vilkår.find {
