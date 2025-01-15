@@ -158,7 +158,6 @@ object HtmlConverter {
                             if (brevBlokk.utvidetBeskrivelse) {
                                 div {
                                     attributes["data-utvidet-beskrivelse-id"] = brevBlokk.textId
-                                    attributes["bubba"] = brevBlokk.title
                                 }
                             }
                         }
