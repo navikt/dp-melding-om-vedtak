@@ -128,12 +128,14 @@ class MeldingOmVedtakApiTest {
                         {
                           "brevblokkId": "A",
                           "tekst": "Utvidet beskrivelse for brevblokk A",
-                          "sistEndretTidspunkt": "+999999999-12-31T23:59:59.999999999"
+                          "sistEndretTidspunkt": "+999999999-12-31T23:59:59.999999999",
+                          "tittel": "Ukjent tittel"
                         },
                         {
                           "brevblokkId": "B",
                           "tekst": "Utvidet beskrivelse for brevblokk B",
-                          "sistEndretTidspunkt": "-999999999-01-01T00:00:00"
+                          "sistEndretTidspunkt": "-999999999-01-01T00:00:00",
+                          "tittel": "Ukjent tittel"
                         }
                       ]
                     }
