@@ -21,9 +21,6 @@ class VedtakMapperTest {
     private val vedtak =
         resourceRetriever.getResource("/json/vedtak.json")?.let { VedtakMapper(it.readText()).vedtak() }
             ?: throw RuntimeException("Fant ikke ressurs")
-    private val vedtakVerneplikt =
-        resourceRetriever.getResource("/json/vedtak-verneplikt.json")?.let { VedtakMapper(it.readText()).vedtak() }
-            ?: throw RuntimeException("Fant ikke ressurs")
 
     @Test
     fun `Hent utfall`() {
@@ -153,34 +150,6 @@ class VedtakMapperTest {
                 verdi = "614871.2733389170",
                 datatype = FLYTTALL,
                 enhet = KRONER,
-            )
-    }
-
-    @Test
-    fun `skal hente antall G som gis som grunnlag ved bruk av vernepliktregel`() {
-        vedtakVerneplikt.finnOpplysning("opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt") shouldBe
-            Opplysning(
-                opplysningTekstId = "opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt",
-                verdi = "3.0",
-                datatype = FLYTTALL,
-                enhet = KRONER,
-            )
-    }
-
-    @Test
-    fun `skal hente opplysning om innvilgelse av verneplikt og riktig antall stonadsuker`() {
-        vedtakVerneplikt.finnOpplysning("opplysning.antall-stonadsuker") shouldBe
-            Opplysning(
-                opplysningTekstId = "opplysning.antall-stonadsuker",
-                verdi = "26",
-                datatype = HELTALL,
-                enhet = UKER,
-            )
-        vedtakVerneplikt.finnOpplysning("opplysning.er-innvilget-med-verneplikt") shouldBe
-            Opplysning(
-                opplysningTekstId = "opplysning.er-innvilget-med-verneplikt",
-                verdi = true.toString(),
-                datatype = BOOLSK,
             )
     }
 
@@ -351,22 +320,11 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning Krav til minsteinntekt`() {
-        vedtakVerneplikt.finnOpplysning("opplysning.krav-til-minsteinntekt") shouldBe
+        vedtak.finnOpplysning("opplysning.krav-til-minsteinntekt") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.krav-til-minsteinntekt",
                 verdi = "true",
                 datatype = BOOLSK,
-            )
-    }
-
-    @Test
-    fun `Hent opplysning Antall stønadsuker som gis ved ordinære dagpenger`() {
-        vedtakVerneplikt.finnOpplysning("opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger") shouldBe
-            Opplysning(
-                opplysningTekstId = "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger",
-                verdi = "52",
-                datatype = HELTALL,
-                enhet = UKER,
             )
     }
 
