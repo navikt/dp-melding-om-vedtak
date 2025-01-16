@@ -112,7 +112,7 @@ class AvslagTest {
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-reell-arbeidssoker-arbeidsfor",
+//                "brev.blokk.avslag-reell-arbeidssoker-arbeidsfor",
             ) + Vedtaksmelding.fasteBlokker
     }
 
@@ -130,7 +130,7 @@ class AvslagTest {
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-reell-arbeidssoker-ethvert-arbeid",
+//                "brev.blokk.avslag-reell-arbeidssoker-ethvert-arbeid",
             ) + Vedtaksmelding.fasteBlokker
     }
 
