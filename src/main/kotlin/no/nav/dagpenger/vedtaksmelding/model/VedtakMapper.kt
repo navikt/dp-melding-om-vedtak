@@ -342,12 +342,30 @@ class VedtakMapper(vedtakJson: String) {
                                     datatype = BOOLSK,
                                 )
                             }
+
                             else -> NULL_OPPLYSNING
                         }
                     }
                 }
             }
         }.toSet()
+    }
+
+    private fun JsonNode.lagEgenandelOpplysning(): Opplysning {
+        this.at("/fastsatt/kvoter").let { kvoter ->
+            kvoter.forEach { kvote ->
+                return if (kvote["navn"].asText() == "Egenandel") {
+                    Opplysning(
+                        opplysningTekstId = "opplysning.egenandel",
+                        verdi = kvote["verdi"].asText(),
+                        datatype = HELTALL,
+                        enhet = UKER,
+                    )
+                } else {
+                    NULL_OPPLYSNING
+                }
+            }
+        }
     }
 
     private fun JsonNode.lagOpplysningerFraKvoter(): Set<Opplysning> {
@@ -364,6 +382,7 @@ class VedtakMapper(vedtakJson: String) {
                                     datatype = HELTALL,
                                     enhet = UKER,
                                 )
+
                             "Egenandel" ->
                                 Opplysning(
                                     opplysningTekstId = "opplysning.egenandel",
@@ -371,6 +390,7 @@ class VedtakMapper(vedtakJson: String) {
                                     datatype = HELTALL,
                                     enhet = KRONER,
                                 )
+
                             "Verneplikt" -> {
                                 Opplysning(
                                     opplysningTekstId = "opplysning.antall-stonadsuker",
@@ -379,6 +399,7 @@ class VedtakMapper(vedtakJson: String) {
                                     enhet = UKER,
                                 )
                             }
+
                             else -> NULL_OPPLYSNING
                         }
                     }
