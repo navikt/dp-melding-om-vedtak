@@ -351,62 +351,73 @@ class VedtakMapper(vedtakJson: String) {
         }.toSet()
     }
 
-    private fun JsonNode.lagEgenandelOpplysning(): Opplysning {
-        this.at("/fastsatt/kvoter").let { kvoter ->
-            kvoter.forEach { kvote ->
-                return if (kvote["navn"].asText() == "Egenandel") {
-                    Opplysning(
-                        opplysningTekstId = "opplysning.egenandel",
-                        verdi = kvote["verdi"].asText(),
-                        datatype = HELTALL,
-                        enhet = UKER,
-                    )
-                } else {
-                    NULL_OPPLYSNING
-                }
-            }
-        }
-    }
+//    private fun JsonNode.lagEgenandelOpplysning(): Opplysning {
+//        this.at("/fastsatt/kvoter").let { kvoter ->
+//            kvoter. { kvote ->
+//                kvote["navn"].asText() == "Egenandel" {
+//                    Opplysning(
+//                        opplysningTekstId = "opplysning.egenandel",
+//                        verdi = kvote["verdi"].asText(),
+//                        datatype = HELTALL,
+//                        enhet = UKER,
+//                    )
+//                }
+//            }
+//        }
+//        return NULL_OPPLYSNING
+//    }
 
     private fun JsonNode.lagOpplysningerFraKvoter(): Set<Opplysning> {
-        return this.at("/fastsatt/kvoter").let { kvoter ->
+        val opplysninger = mutableSetOf<Opplysning>()
+        this.at("/fastsatt/kvoter").let { kvoter ->
             when (kvoter) {
                 is MissingNode -> emptySet()
                 else -> {
                     kvoter.map { kvote ->
                         when (kvote["navn"].asText()) {
-                            "Dagpengeperiode" ->
-                                Opplysning(
-                                    opplysningTekstId = "opplysning.antall-stonadsuker",
-                                    verdi = kvote["verdi"].asText(),
-                                    datatype = HELTALL,
-                                    enhet = UKER,
-                                )
-
-                            "Egenandel" ->
-                                Opplysning(
-                                    opplysningTekstId = "opplysning.egenandel",
-                                    verdi = kvote["verdi"].asText(),
-                                    datatype = HELTALL,
-                                    enhet = KRONER,
-                                )
-
-                            "Verneplikt" -> {
-                                Opplysning(
-                                    opplysningTekstId = "opplysning.antall-stonadsuker",
-                                    verdi = kvote["verdi"].asText(),
-                                    datatype = HELTALL,
-                                    enhet = UKER,
-                                )
+                            "Dagpengeperiode" -> {
+                                if (!opplysninger.any { it.opplysningTekstId == "opplysning.antall-stonadsuker" }) {
+                                    opplysninger.add(lagAntallStønadsukerOpplysning(kvote))
+                                } else {
+                                    null
+                                }
                             }
 
-                            else -> NULL_OPPLYSNING
+                            "Egenandel" ->
+                                lagEgenandelOpplysning(kvote)
+
+                            "Verneplikt" -> {
+                                if (opplysninger.any { it.opplysningTekstId == "opplysning.antall-stonadsuker" }) {
+                                    opplysninger.remove(opplysninger.find { it.opplysningTekstId == "opplysning.antall-stonadsuker" })
+                                }
+                                opplysninger.add(lagAntallStønadsukerOpplysning(kvote))
+                            }
+                            else -> null
                         }
                     }
                 }
             }
-        }.toSet()
+        }
+        return opplysninger.toSet()
     }
+
+    private fun lagAntallStønadsukerOpplysning(kvote: JsonNode): Opplysning {
+        Opplysning(
+            opplysningTekstId = "opplysning.antall-stonadsuker",
+            verdi = kvote["verdi"].asText(),
+            datatype = HELTALL,
+            enhet = UKER,
+        )
+        return NULL_OPPLYSNING
+    }
+
+    private fun lagEgenandelOpplysning(kvote: JsonNode) =
+        Opplysning(
+            opplysningTekstId = "opplysning.egenandel",
+            verdi = kvote["verdi"].asText(),
+            datatype = HELTALL,
+            enhet = KRONER,
+        )
 
     private fun JsonNode.finnOpplysningAt(
         opplysningTekstId: String,
