@@ -1,15 +1,20 @@
-package no.nav.dagpenger.vedtaksmelding.model
+package no.nav.dagpenger.vedtaksmelding.model.innvilgelse
 
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import io.mockk.mockk
+import no.nav.dagpenger.vedtaksmelding.model.Innvilgelse
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.BOOLSK
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.FLYTTALL
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.HELTALL
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.BARN
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.KRONER
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.UKER
+import no.nav.dagpenger.vedtaksmelding.model.Utfall
+import no.nav.dagpenger.vedtaksmelding.model.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
