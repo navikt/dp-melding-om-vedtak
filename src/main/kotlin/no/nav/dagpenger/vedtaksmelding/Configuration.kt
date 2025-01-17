@@ -20,11 +20,11 @@ object Configuration {
             ),
         )
 
-    val properties by lazy {
+    private val properties by lazy {
         ConfigurationProperties.systemProperties() overriding EnvironmentVariables() overriding defaultProperties
     }
 
-    val azureAdClient: CachedOauth2Client by lazy {
+    private val azureAdClient: CachedOauth2Client by lazy {
         val azureAdConfig = OAuth2Config.AzureAd(properties)
         CachedOauth2Client(
             tokenEndpointUrl = azureAdConfig.tokenEndpointUrl,
@@ -37,7 +37,7 @@ object Configuration {
     val dpBehandlingOboExchanger: (String) -> String by lazy {
         val scope = properties[Key("DP_BEHANDLING_API_SCOPE", stringType)]
         { token: String ->
-            val accessToken = azureAdClient.onBehalfOf(token, scope).accessToken
+            val accessToken = azureAdClient.onBehalfOf(token, scope).access_token
             requireNotNull(accessToken) { "Failed to get access token" }
             accessToken
         }
