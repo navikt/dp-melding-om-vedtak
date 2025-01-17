@@ -157,6 +157,11 @@ components:
         sistEndretTidspunkt:
           type: string
           format: date-time
+        tittel:
+          type: string
+      required:
+        - brevblokkId
+        - tittel
 
     Opplysning:
       type: object

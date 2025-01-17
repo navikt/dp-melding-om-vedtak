@@ -58,6 +58,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                                                 brevblokkId = it.brevblokkId,
                                                 tekst = it.tekst,
                                                 sistEndretTidspunkt = it.sistEndretTidspunkt,
+                                                tittel = it.tittel,
                                             )
                                         },
                                 )
@@ -85,7 +86,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                                 behandler = behandler,
                                 meldingOmVedtakData = meldingOmVedtakData,
                             )
-                        val utvidetBeskrivelser = mediator.hentUtvidedeBeskrivelser(behandlingId)
+                        val utvidetBeskrivelser = mediator.hentUtvidedeBeskrivelser(behandlingId, saksbehandler = behandler)
                         val meldingOmVedtakResponseDTO =
                             MeldingOmVedtakResponseDTO(
                                 utvidedeBeskrivelser =
@@ -94,6 +95,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                                             brevblokkId = it.brevblokkId,
                                             tekst = it.tekst,
                                             sistEndretTidspunkt = it.sistEndretTidspunkt,
+                                            tittel = it.tittel,
                                         )
                                     },
                                 html = vedtaksHtml,
