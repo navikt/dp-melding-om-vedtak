@@ -383,15 +383,16 @@ class VedtakMapper(vedtakJson: String) {
                                 }
                             }
 
-                            "Egenandel" ->
-                                lagEgenandelOpplysning(kvote)
+                            "Egenandel" -> opplysninger.add(lagEgenandelOpplysning(kvote))
 
                             "Verneplikt" -> {
                                 if (opplysninger.any { it.opplysningTekstId == "opplysning.antall-stonadsuker" }) {
                                     opplysninger.remove(opplysninger.find { it.opplysningTekstId == "opplysning.antall-stonadsuker" })
                                 }
                                 opplysninger.add(lagAntallStønadsukerOpplysning(kvote))
+                                println("opplysninger: $opplysninger")
                             }
+
                             else -> null
                         }
                     }
@@ -401,15 +402,13 @@ class VedtakMapper(vedtakJson: String) {
         return opplysninger.toSet()
     }
 
-    private fun lagAntallStønadsukerOpplysning(kvote: JsonNode): Opplysning {
+    private fun lagAntallStønadsukerOpplysning(kvote: JsonNode) =
         Opplysning(
             opplysningTekstId = "opplysning.antall-stonadsuker",
             verdi = kvote["verdi"].asText(),
             datatype = HELTALL,
             enhet = UKER,
         )
-        return NULL_OPPLYSNING
-    }
 
     private fun lagEgenandelOpplysning(kvote: JsonNode) =
         Opplysning(
