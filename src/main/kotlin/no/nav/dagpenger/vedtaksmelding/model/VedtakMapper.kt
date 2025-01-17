@@ -227,7 +227,7 @@ class VedtakMapper(vedtakJson: String) {
                 datatype = HELTALL,
                 enhet = KRONER,
             ),
-        ) + vedtak.lagOpplysningerFraKvoter() + vedtak.lagInnvilgetMedVernepliktOpplysning()
+        ) + vedtak.lagOpplysningerFraKvoter()
 
     private val inntjeningsperiodeOpplysninger = vedtakOpplysninger.finnInntjeningsPeriode()
 
@@ -328,95 +328,67 @@ class VedtakMapper(vedtakJson: String) {
         }
     }
 
-    private fun JsonNode.lagInnvilgetMedVernepliktOpplysning(): Set<Opplysning> {
-        return this.at("/fastsatt/kvoter").let { kvoter ->
-            when (kvoter) {
-                is MissingNode -> emptySet()
-                else -> {
-                    kvoter.map { kvote ->
-                        when (kvote["navn"].asText()) {
-                            "Verneplikt" -> {
-                                Opplysning(
-                                    opplysningTekstId = "opplysning.er-innvilget-med-verneplikt",
-                                    verdi = true.toString(),
-                                    datatype = BOOLSK,
-                                )
-                            }
-
-                            else -> NULL_OPPLYSNING
-                        }
-                    }
-                }
-            }
-        }.toSet()
-    }
-
-//    private fun JsonNode.lagEgenandelOpplysning(): Opplysning {
-//        this.at("/fastsatt/kvoter").let { kvoter ->
-//            kvoter. { kvote ->
-//                kvote["navn"].asText() == "Egenandel" {
-//                    Opplysning(
-//                        opplysningTekstId = "opplysning.egenandel",
-//                        verdi = kvote["verdi"].asText(),
-//                        datatype = HELTALL,
-//                        enhet = UKER,
-//                    )
-//                }
-//            }
-//        }
-//        return NULL_OPPLYSNING
-//    }
-
     private fun JsonNode.lagOpplysningerFraKvoter(): Set<Opplysning> {
         val opplysninger = mutableSetOf<Opplysning>()
-        this.at("/fastsatt/kvoter").let { kvoter ->
-            when (kvoter) {
-                is MissingNode -> emptySet()
-                else -> {
-                    kvoter.map { kvote ->
-                        when (kvote["navn"].asText()) {
-                            "Dagpengeperiode" -> {
-                                if (!opplysninger.any { it.opplysningTekstId == "opplysning.antall-stonadsuker" }) {
-                                    opplysninger.add(lagAntallStønadsukerOpplysning(kvote))
-                                } else {
-                                    null
-                                }
-                            }
+        val kvoter = this.at("/fastsatt/kvoter")
 
-                            "Egenandel" -> opplysninger.add(lagEgenandelOpplysning(kvote))
+        if (kvoter is MissingNode) return emptySet()
 
-                            "Verneplikt" -> {
-                                if (opplysninger.any { it.opplysningTekstId == "opplysning.antall-stonadsuker" }) {
-                                    opplysninger.remove(opplysninger.find { it.opplysningTekstId == "opplysning.antall-stonadsuker" })
-                                }
-                                opplysninger.add(lagAntallStønadsukerOpplysning(kvote))
-                                println("opplysninger: $opplysninger")
-                            }
-
-                            else -> null
-                        }
-                    }
+        kvoter.forEach { kvote ->
+            when (kvote["navn"].asText()) {
+                "Dagpengeperiode" -> bestemStønadsukerOpplysning(opplysninger, kvote)
+                "Verneplikt" -> {
+                    bestemStønadsukerOpplysning(opplysninger, kvote)
+                    opplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.er-innvilget-med-verneplikt",
+                            verdi = true.toString(),
+                            datatype = BOOLSK,
+                        ),
+                    )
                 }
+                "Egenandel" ->
+                    opplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.egenandel",
+                            verdi = kvote["verdi"].asText(),
+                            datatype = HELTALL,
+                            enhet = KRONER,
+                        ),
+                    )
             }
         }
-        return opplysninger.toSet()
+
+        return opplysninger
     }
 
-    private fun lagAntallStønadsukerOpplysning(kvote: JsonNode) =
-        Opplysning(
-            opplysningTekstId = "opplysning.antall-stonadsuker",
-            verdi = kvote["verdi"].asText(),
-            datatype = HELTALL,
-            enhet = UKER,
-        )
+    private fun bestemStønadsukerOpplysning(
+        opplysninger: MutableSet<Opplysning>,
+        kvote: JsonNode,
+    ) {
+        val antallStønadsukerTekstId = "opplysning.antall-stonadsuker"
+        val stønadsukerOpplysning =
+            Opplysning(
+                opplysningTekstId = antallStønadsukerTekstId,
+                verdi = kvote["verdi"].asText(),
+                datatype = HELTALL,
+                enhet = UKER,
+            )
 
-    private fun lagEgenandelOpplysning(kvote: JsonNode) =
-        Opplysning(
-            opplysningTekstId = "opplysning.egenandel",
-            verdi = kvote["verdi"].asText(),
-            datatype = HELTALL,
-            enhet = KRONER,
-        )
+        when (kvote["navn"].asText()) {
+            // Ikke optimalt, men dersom Verneplikt og Dagpengeperiode finnes i kvoter, så tar Verneplikt presedens.
+            // Dette burde endres i vedtaksAPIet siden vi tolker regelverk her, og det er ikke vår oppgave.
+            "Dagpengeperiode" -> {
+                if (opplysninger.none { it.opplysningTekstId == antallStønadsukerTekstId }) {
+                    opplysninger.add(stønadsukerOpplysning)
+                }
+            }
+            "Verneplikt" -> {
+                opplysninger.removeIf { it.opplysningTekstId == antallStønadsukerTekstId }
+                opplysninger.add(stønadsukerOpplysning)
+            }
+        }
+    }
 
     private fun JsonNode.finnOpplysningAt(
         opplysningTekstId: String,
