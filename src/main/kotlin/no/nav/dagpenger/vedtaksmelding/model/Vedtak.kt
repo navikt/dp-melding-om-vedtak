@@ -1,4 +1,5 @@
 package no.nav.dagpenger.vedtaksmelding.model
+
 import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.DATO
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.TEKST
