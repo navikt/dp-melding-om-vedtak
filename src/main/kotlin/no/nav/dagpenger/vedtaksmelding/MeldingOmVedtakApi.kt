@@ -86,7 +86,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                                 behandler = behandler,
                                 meldingOmVedtakData = meldingOmVedtakData,
                             )
-                        val utvidetBeskrivelser = mediator.hentUtvidedeBeskrivelser(behandlingId)
+                        val utvidetBeskrivelser = mediator.hentUtvidedeBeskrivelser(behandlingId, saksbehandler = behandler)
                         val meldingOmVedtakResponseDTO =
                             MeldingOmVedtakResponseDTO(
                                 utvidedeBeskrivelser =
