@@ -18,7 +18,6 @@ import io.ktor.http.contentType
 import io.ktor.server.testing.testApplication
 import io.mockk.coEvery
 import io.mockk.coVerify
-import io.mockk.every
 import io.mockk.mockk
 import io.mockk.slot
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
@@ -85,7 +84,7 @@ class MeldingOmVedtakApiTest {
             mockk<Vedtaksmelding>().also {
                 coEvery { it.brevBlokkIder() } returns brevBlokker
                 coEvery { it.hentOpplysninger() } returns opplysninger
-                every { it.hentUtvidedeBeskrivelser(behandlingId) } returns utvidedeBeskrivelser
+                coEvery { it.hentUtvidedeBeskrivelser(behandlingId) } returns utvidedeBeskrivelser
             }
         val mediator =
             mockk<Mediator>().also {
@@ -128,12 +127,14 @@ class MeldingOmVedtakApiTest {
                         {
                           "brevblokkId": "A",
                           "tekst": "Utvidet beskrivelse for brevblokk A",
-                          "sistEndretTidspunkt": "+999999999-12-31T23:59:59.999999999"
+                          "sistEndretTidspunkt": "+999999999-12-31T23:59:59.999999999",
+                          "tittel": "Ukjent tittel"
                         },
                         {
                           "brevblokkId": "B",
                           "tekst": "Utvidet beskrivelse for brevblokk B",
-                          "sistEndretTidspunkt": "-999999999-01-01T00:00:00"
+                          "sistEndretTidspunkt": "-999999999-01-01T00:00:00",
+                          "tittel": "Ukjent tittel"
                         }
                       ]
                     }
@@ -266,7 +267,7 @@ class MeldingOmVedtakApiTest {
                             ),
                     )
                 } returns "<html><body>Test HTML Test ForNavn</body></html>"
-                coEvery { it.hentUtvidedeBeskrivelser(behandlingId) } returns
+                coEvery { it.hentUtvidedeBeskrivelser(behandlingId, saksbehandler) } returns
                     listOf(
                         UtvidetBeskrivelse(
                             behandlingId = behandlingId,
