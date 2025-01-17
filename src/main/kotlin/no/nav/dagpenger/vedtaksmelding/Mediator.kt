@@ -48,6 +48,24 @@ class Mediator(
         return vedtaksmeldingRepository.hentUtvidedeBeskrivelserFor(behandlingId)
     }
 
+    suspend fun hentUtvidedeBeskrivelser(
+        behandlingId: UUID,
+        saksbehandler: Saksbehandler,
+    ): List<UtvidetBeskrivelse> {
+        val tekstmapping = vedtaksmeldingRepository.hentUtvidedeBeskrivelserFor(behandlingId).associateBy { it.brevblokkId }
+        return hentVedtaksmelding(behandlingId, saksbehandler).map { vedtaksmelding ->
+            vedtaksmelding.hentBrevBlokker().filter { it.utvidetBeskrivelse }.map {
+                UtvidetBeskrivelse(
+                    behandlingId = behandlingId,
+                    brevblokkId = it.textId,
+                    tekst = tekstmapping[it.textId]?.tekst,
+                    sistEndretTidspunkt = LocalDateTime.now(),
+                    tittel = it.title,
+                )
+            }
+        }.getOrThrow()
+    }
+
     suspend fun hentVedtaksHtml(
         behandlingId: UUID,
         behandler: Saksbehandler,
