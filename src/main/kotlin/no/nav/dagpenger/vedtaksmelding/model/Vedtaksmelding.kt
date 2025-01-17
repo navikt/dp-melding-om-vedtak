@@ -112,13 +112,14 @@ data class Avslag(
             it.navn == "Oppfyller kravet til heltid- og deltidsarbeid" && it.status == IKKE_OPPFYLT
         }?.let {
             grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-heltid-deltid")
+            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-4-5-c")
         }
 
         vedtak.vilkår.find {
             it.navn == "Oppfyller kravet til mobilitet" && it.status == IKKE_OPPFYLT
         }?.let {
             grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-arbeid-i-hele-norge")
-            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-arbeid-i-hele-norge-hjemmel")
+            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-4-5-b")
         }
 
 //        vedtak.vilkår.find {
