@@ -56,12 +56,12 @@ sealed class Vedtaksmelding(
                 logger.error(e) { "Feil ved oppbygging av vedtaksmelding. BehandlingId ${vedtak.behandlingId}" }
                 when (e) {
                     is NoSuchElementException -> throw UkjentVedtakException(
-                        "Kunne ikke bygge vedtaksmelding ut fra vedtak: $vedtak",
+                        "Kunne ikke bygge vedtaksmelding ut fra vedtak: $vedtak. Feil: ${e.message}",
                         e,
                     )
 
                     is IllegalArgumentException -> throw UkjentVedtakException(
-                        "Alvorlig feil: Vedtak er gyldig for flere type vedtaksmeldinger: $vedtak",
+                        "Alvorlig feil: Vedtak er gyldig for flere type vedtaksmeldinger: $vedtak. Feil: ${e.message}",
                         e,
                     )
 
