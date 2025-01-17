@@ -107,16 +107,3 @@ class SanityKlient(
 data class ResultDTO(
     val result: List<BrevBlokk>,
 )
-
-fun main() {
-    val sanityKlient = SanityKlient(no.nav.dagpenger.vedtaksmelding.Configuration.sanityApiUrl)
-    runBlocking {
-        println(
-            sanityKlient.hentBrevBlokker().filter {
-                it.utvidetBeskrivelse == true
-            }.map {
-                it.textId to it.title
-            },
-        )
-    }
-}
