@@ -13,8 +13,6 @@ import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
-import io.ktor.serialization.Configuration
-import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.lagHttpKlient
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
