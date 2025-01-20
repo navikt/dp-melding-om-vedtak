@@ -43,6 +43,12 @@ class AvslagTest {
             status = Vilkår.Status.IKKE_OPPFYLT,
         )
 
+    private val registrertArbeidssøkerIkkeOppfylt =
+        Vilkår(
+            navn = "Registrert som arbeidssøker på søknadstidspunktet",
+            status = Vilkår.Status.IKKE_OPPFYLT,
+        )
+
     @Test
     fun `Rikige brevblokker for avslag på minsteinntekt`() {
         Avslag(
@@ -139,6 +145,55 @@ class AvslagTest {
                 "brev.blokk.vedtak-avslag",
                 "brev.blokk.avslag-reell-arbeidssoker-overskrift",
                 "brev.blokk.avslag-reell-arb-soker-ethvert-arbeid",
+                "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
+            ) + Vedtaksmelding.fasteBlokker
+    }
+
+    @Test
+    fun `Riktige brevblokker for avslag reell arbeidssøker - registrert arbeidssøker`() {
+        Avslag(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = setOf(reellArbeidssøkerIkkeOppfylt, registrertArbeidssøkerIkkeOppfylt),
+                    utfall = Utfall.AVSLÅTT,
+                    opplysninger = emptySet(),
+                ),
+            mediator = mockk(),
+        ).brevBlokkIder() shouldBe
+            listOf(
+                "brev.blokk.vedtak-avslag",
+                "brev.blokk.avslag-reell-arbeidssoker-overskrift",
+                "brev.blokk.avslag-reell-arbeidssoker-registrert-arbeidssoker",
+                "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
+            ) + Vedtaksmelding.fasteBlokker
+    }
+
+    @Test
+    fun `Riktige brevblokker for avslag reell arbeidssøker - alle delvilkår ikke oppfylt`() {
+        Avslag(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår =
+                        setOf(
+                            reellArbeidssøkerIkkeOppfylt, heltidDeltidIkkeOppfylt, mobilitetIkkeOppfylt,
+                            arbeidsførIkkeOppfylt, ethvertArbeidIkkeOppfylt, registrertArbeidssøkerIkkeOppfylt,
+                        ),
+                    utfall = Utfall.AVSLÅTT,
+                    opplysninger = emptySet(),
+                ),
+            mediator = mockk(),
+        ).brevBlokkIder() shouldBe
+            listOf(
+                "brev.blokk.vedtak-avslag",
+                "brev.blokk.avslag-reell-arbeidssoker-overskrift",
+                "brev.blokk.avslag-reell-arb-soker-heltid-deltid",
+                "brev.blokk.avslag-reell-arb-soker-arbeid-i-hele-norge",
+                "brev.blokk.avslag-reell-arb-soker-unntak-heltid-deltid-hele-norge",
+                "brev.blokk.avslag-reell-arb-soker-arbeidsfor",
+                "brev.blokk.avslag-reell-arb-soker-ethvert-arbeid",
+                "brev.blokk.avslag-reell-arbeidssoker-registrert-arbeidssoker",
                 "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
             ) + Vedtaksmelding.fasteBlokker
     }

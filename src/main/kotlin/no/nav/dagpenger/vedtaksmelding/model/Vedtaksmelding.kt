@@ -135,6 +135,12 @@ data class Avslag(
             grunnerTilAvslag.add("brev.blokk.avslag-reell-arb-soker-ethvert-arbeid")
         }
 
+        vedtak.vilkår.find {
+            it.navn == "Registrert som arbeidssøker på søknadstidspunktet" && it.status == IKKE_OPPFYLT
+        }?.let {
+            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-registrert-arbeidssoker")
+        }
+
         if (grunnerTilAvslag.size > 1) {
             grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-hjemmel")
         } else {
