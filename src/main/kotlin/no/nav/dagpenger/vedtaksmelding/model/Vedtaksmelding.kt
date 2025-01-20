@@ -106,33 +106,37 @@ data class Avslag(
     }
 
     private fun avslagReellArbeidssøker(): List<String> {
-        val grunnerTilAvslag = mutableListOf<String>()
+        val grunnerTilAvslag = mutableListOf("brev.blokk.avslag-reell-arbeidssoker-overskrift")
 
         vedtak.vilkår.find {
             it.navn == "Oppfyller kravet til heltid- og deltidsarbeid" && it.status == IKKE_OPPFYLT
         }?.let {
             grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-heltid-deltid")
-            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-4-5-c")
         }
 
         vedtak.vilkår.find {
             it.navn == "Oppfyller kravet til mobilitet" && it.status == IKKE_OPPFYLT
         }?.let {
             grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-arbeid-i-hele-norge")
-            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-4-5-b")
         }
 
-//        vedtak.vilkår.find {
-//            it.navn == "Oppfyller kravet til å være arbeidsfør" && it.status == IKKE_OPPFYLT
-//        }?.let {
-//            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-arbeidsfor")
-//        }
-//
-//        vedtak.vilkår.find {
-//            it.navn == "Oppfyller kravet til å ta ethvert arbeid" && it.status == IKKE_OPPFYLT
-//        }?.let {
-//            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-ethvert-arbeid")
-//        }
+        vedtak.vilkår.find {
+            it.navn == "Oppfyller kravet til å være arbeidsfør" && it.status == IKKE_OPPFYLT
+        }?.let {
+            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-arbeidsfor")
+        }
+
+        vedtak.vilkår.find {
+            it.navn == "Oppfyller kravet til å ta ethvert arbeid" && it.status == IKKE_OPPFYLT
+        }?.let {
+            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-ethvert-arbeid")
+        }
+
+        if (grunnerTilAvslag.size > 1) {
+            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-hjemmel")
+        } else {
+            grunnerTilAvslag.removeFirst()
+        }
 
         return grunnerTilAvslag.toList()
     }
