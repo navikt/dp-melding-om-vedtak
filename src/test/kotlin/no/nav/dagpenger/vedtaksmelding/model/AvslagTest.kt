@@ -75,8 +75,10 @@ class AvslagTest {
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-reell-arbeidssoker-heltid-deltid",
-                "brev.blokk.avslag-reell-arbeidssoker-4-5-c",
+                "brev.blokk.avslag-reell-arbeidssoker-overskrift",
+                "brev.blokk.avslag-reell-arb-soker-heltid-deltid",
+                "brev.blokk.avslag-reell-arb-soker-unntak-heltid-deltid-hele-norge",
+                "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
             ) + Vedtaksmelding.fasteBlokker
     }
 
@@ -94,8 +96,10 @@ class AvslagTest {
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-reell-arbeidssoker-arbeid-i-hele-norge",
-                "brev.blokk.avslag-reell-arbeidssoker-4-5-b",
+                "brev.blokk.avslag-reell-arbeidssoker-overskrift",
+                "brev.blokk.avslag-reell-arb-soker-arbeid-i-hele-norge",
+                "brev.blokk.avslag-reell-arb-soker-unntak-heltid-deltid-hele-norge",
+                "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
             ) + Vedtaksmelding.fasteBlokker
     }
 
@@ -113,7 +117,9 @@ class AvslagTest {
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
-//                "brev.blokk.avslag-reell-arbeidssoker-arbeidsfor",
+                "brev.blokk.avslag-reell-arbeidssoker-overskrift",
+                "brev.blokk.avslag-reell-arb-soker-arbeidsfor",
+                "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
             ) + Vedtaksmelding.fasteBlokker
     }
 
@@ -131,7 +137,9 @@ class AvslagTest {
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
-//                "brev.blokk.avslag-reell-arbeidssoker-ethvert-arbeid",
+                "brev.blokk.avslag-reell-arbeidssoker-overskrift",
+                "brev.blokk.avslag-reell-arb-soker-ethvert-arbeid",
+                "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
             ) + Vedtaksmelding.fasteBlokker
     }
 
