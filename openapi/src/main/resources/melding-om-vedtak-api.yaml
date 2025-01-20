@@ -204,11 +204,15 @@ components:
           type: string
         etternavn:
           type: string
+        ident:
+            type: string
         enhet:
           type: object
           properties:
             navn:
               type: string
+            enhetNr:
+                type: string
             postadresse:
               type: string
           required:
