@@ -97,7 +97,7 @@ data class Avslag(
         )
     override val brevBlokkIder: List<String>
         get() {
-            return pre + avslagMinsteInntekt() + avslagReellArbeidssøker()
+            return pre + avslagMinsteInntekt() + avslagReellArbeidssøker() + avslagTaptArbeidstid()
         }
 
     private fun avslagMinsteInntekt(): List<String> {
@@ -106,6 +106,15 @@ data class Avslag(
         }
             ?.let {
                 listOf("brev.blokk.begrunnelse-avslag-minsteinntekt")
+            } ?: emptyList()
+    }
+
+    private fun avslagTaptArbeidstid(): List<String> {
+        return vedtak.vilkår.find {
+            it.navn == "Tap av arbeidstid er minst terskel" && it.status == IKKE_OPPFYLT
+        }
+            ?.let {
+                listOf("brev.blokk.avslag-tapt-arbeidstid")
             } ?: emptyList()
     }
 
