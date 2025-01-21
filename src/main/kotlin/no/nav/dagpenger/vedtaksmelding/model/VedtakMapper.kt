@@ -302,6 +302,7 @@ class VedtakMapper(vedtakJson: String) {
         return opplysninger
     }
 
+
     private val inntjeningsperiodeOpplysninger = vedtakOpplysninger.finnInntjeningsPeriode()
 
     private fun Set<Opplysning>.finnInntjeningsPeriode(): Set<Opplysning> {

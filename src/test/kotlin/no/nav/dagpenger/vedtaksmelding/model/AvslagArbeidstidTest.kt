@@ -30,13 +30,13 @@ class AvslagArbeidstidTest {
         avslagArbeidstidVedtak.finnOpplysning("opplysning.krav-til-prosentvis-tap-av-arbeidstid") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.krav-til-prosentvis-tap-av-arbeidstid",
-                verdi = "50.0",
+                verdi = "50",
                 datatype = FLYTTALL,
             )
         avslagArbeidstidVedtak.finnOpplysning("opplysning.prosentvis-tapt-arbeidstid") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.prosentvis-tapt-arbeidstid",
-                verdi = "46.67",
+                verdi = "46.7",
                 datatype = FLYTTALL,
             )
     }
