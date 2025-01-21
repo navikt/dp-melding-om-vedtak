@@ -157,7 +157,7 @@ object HtmlConverter {
                                 }
                             }
                             if (brevBlokk.utvidetBeskrivelse) {
-                                div {
+                                p {
                                     attributes["data-utvidet-beskrivelse-id"] = brevBlokk.textId
                                 }
                             }
