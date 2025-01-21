@@ -582,6 +582,7 @@ class VedtakMapper(vedtakJson: String) {
                         else ->
                             Opplysning(
                                 opplysningTekstId = opplysningTekstId,
+                                verdi = verdi,
                                 datatype = datatype,
                                 enhet = enhet,
                                 verdi =
