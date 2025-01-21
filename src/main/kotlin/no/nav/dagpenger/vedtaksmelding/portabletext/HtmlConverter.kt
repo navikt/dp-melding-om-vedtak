@@ -78,7 +78,7 @@ object HtmlConverter {
                 title { +"Vedtak fra NAV" } // todo hente tittel
                 style {
                     unsafe {
-                        raw(css())
+                        raw(css(meldingOmVedtakData.sakId))
                     }
                 }
             }

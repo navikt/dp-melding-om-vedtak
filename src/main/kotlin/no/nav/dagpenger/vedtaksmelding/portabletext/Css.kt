@@ -1,6 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.portabletext
 
-fun css(): String {
+fun css(saksId: String): String {
     //language=CSS
     return """
          .melding-om-vedtak {
@@ -108,7 +108,7 @@ fun css(): String {
              }
 
              @bottom-left {
-                 content: 'Saksid: TODO';
+                 content: 'Saksid: $saksId';
                  font-family: 'Source Sans 3', serif;
                  font-size: 9pt;
                  padding-bottom: 26px;
