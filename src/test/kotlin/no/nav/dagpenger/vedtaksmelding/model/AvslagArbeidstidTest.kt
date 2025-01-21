@@ -5,6 +5,7 @@ import io.kotest.matchers.shouldBe
 import io.mockk.mockk
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.FLYTTALL
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.TIMER
+import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
 class AvslagArbeidstidTest {
@@ -38,6 +39,31 @@ class AvslagArbeidstidTest {
                 verdi = "46.67",
                 datatype = FLYTTALL,
             )
+    }
+
+    @Test
+    fun `Riktige brevblokker for avslag reell arbeidssøker - vilje til å jobbe både heltid og deltid`() {
+        val behandlingId = UUIDv7.ny()
+        val arbidstidIkkeOppfylt =
+            Vilkår(
+                navn = "Tap av arbeidstid er minst terskel",
+                status = Vilkår.Status.IKKE_OPPFYLT,
+            )
+
+        Avslag(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = setOf(arbidstidIkkeOppfylt),
+                    utfall = Utfall.AVSLÅTT,
+                    opplysninger = emptySet(),
+                ),
+            mediator = mockk(),
+        ).brevBlokkIder() shouldBe
+            listOf(
+                "brev.blokk.vedtak-avslag",
+                "brev.blokk.avslag-tapt-arbeidstid",
+            ) + Vedtaksmelding.fasteBlokker
     }
 
     @Test
