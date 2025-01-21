@@ -200,7 +200,7 @@ class AvslagTest {
 
     @Test
     fun `Manglende kriterier for brevstøtte`() {
-        shouldThrow<IllegalArgumentException> {
+        shouldThrow<Vedtaksmelding.ManglerBrevstøtte> {
             Avslag(
                 vedtak =
                     Vedtak(
@@ -213,7 +213,7 @@ class AvslagTest {
             )
         }
 
-        shouldThrow<IllegalArgumentException> {
+        shouldThrow<Vedtaksmelding.ManglerBrevstøtte> {
             Avslag(
                 vedtak =
                     Vedtak(

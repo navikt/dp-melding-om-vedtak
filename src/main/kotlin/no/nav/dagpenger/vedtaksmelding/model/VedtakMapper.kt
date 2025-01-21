@@ -23,6 +23,7 @@ import no.nav.dagpenger.vedtaksmelding.model.Utfall.AVSLÅTT
 import no.nav.dagpenger.vedtaksmelding.model.Utfall.INNVILGET
 import java.time.LocalDate
 import java.time.Month
+import java.util.Locale
 import java.util.UUID
 
 class VedtakMapper(vedtakJson: String) {
@@ -41,7 +42,7 @@ class VedtakMapper(vedtakJson: String) {
             behandlingId = behandlingId,
             utfall = utfall,
             vilkår = vilkår,
-            opplysninger = vedtakOpplysninger + inntjeningsperiodeOpplysninger,
+            opplysninger = vedtakOpplysninger + inntjeningsperiodeOpplysninger + prosentvisTaptArbeidstidOpplysninger,
         )
     }
 
@@ -91,10 +92,21 @@ class VedtakMapper(vedtakJson: String) {
                 datatype = DATO,
             ),
             vedtak.finnOpplysningAt(
+                opplysningTekstId = "opplysning.fastsatt-ny-arbeidstid-per-uke",
+                jsonPointer = "/fastsatt/fastsattVanligArbeidstid/nyArbeidstidPerUke",
+                datatype = FLYTTALL,
+                enhet = TIMER,
+            ),
+            vedtak.finnOpplysningAt(
                 opplysningTekstId = "opplysning.fastsatt-arbeidstid-per-uke-for-tap",
                 jsonPointer = "/fastsatt/fastsattVanligArbeidstid/vanligArbeidstidPerUke",
                 datatype = FLYTTALL,
                 enhet = TIMER,
+            ),
+            vedtak.finnOpplysningMedNavn(
+                opplysningTekstId = "opplysning.krav-til-prosentvis-tap-av-arbeidstid",
+                navn = "Krav til prosentvis tap av arbeidstid",
+                datatype = FLYTTALL,
             ),
             vedtak.finnOpplysningMedNavn(
                 opplysningTekstId = "opplysning.inntektskrav-for-siste-12-mnd",
@@ -229,6 +241,35 @@ class VedtakMapper(vedtakJson: String) {
             ),
         ) + vedtak.lagOpplysningerFraKvoter()
 
+    private val prosentvisTaptArbeidstidOpplysninger = vedtakOpplysninger.finnProsentvisTaptArbeidstid()
+
+    private fun Set<Opplysning>.finnProsentvisTaptArbeidstid(): Set<Opplysning> {
+        val opplysninger = mutableSetOf<Opplysning>()
+        val fastsattVanligArbeidsid: Double? =
+            this.singleOrNull {
+                it.opplysningTekstId == "opplysning.fastsatt-arbeidstid-per-uke-for-tap"
+            }?.let { opplysning ->
+                opplysning.verdi.toDouble()
+            }
+        val fastsattNyArbeidstid: Double? =
+            this.singleOrNull {
+                it.opplysningTekstId == "opplysning.fastsatt-ny-arbeidstid-per-uke"
+            }?.let { opplysning ->
+                opplysning.verdi.toDouble()
+            }
+        if (fastsattVanligArbeidsid != null && fastsattNyArbeidstid != null) {
+            val prosentvisTaptArbeidstid = ((fastsattVanligArbeidsid - fastsattNyArbeidstid) / fastsattVanligArbeidsid) * 100
+            opplysninger.add(
+                Opplysning(
+                    opplysningTekstId = "opplysning.prosentvis-tapt-arbeidstid",
+                    verdi = String.format(Locale.US, "%.2f", prosentvisTaptArbeidstid),
+                    datatype = FLYTTALL,
+                ),
+            )
+        }
+        return opplysninger
+    }
+
     private val inntjeningsperiodeOpplysninger = vedtakOpplysninger.finnInntjeningsPeriode()
 
     private fun Set<Opplysning>.finnInntjeningsPeriode(): Set<Opplysning> {
@@ -347,6 +388,7 @@ class VedtakMapper(vedtakJson: String) {
                         ),
                     )
                 }
+
                 "Egenandel" ->
                     opplysninger.add(
                         Opplysning(
@@ -383,6 +425,7 @@ class VedtakMapper(vedtakJson: String) {
                     opplysninger.add(stønadsukerOpplysning)
                 }
             }
+
             "Verneplikt" -> {
                 opplysninger.removeIf { it.opplysningTekstId == antallStønadsukerTekstId }
                 opplysninger.add(stønadsukerOpplysning)
