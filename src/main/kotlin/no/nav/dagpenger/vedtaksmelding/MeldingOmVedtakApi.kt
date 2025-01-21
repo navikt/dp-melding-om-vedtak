@@ -56,7 +56,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                                         vedtaksmelding.hentUtvidedeBeskrivelser(behandlingId).map {
                                             UtvidetBeskrivelseDTO(
                                                 brevblokkId = it.brevblokkId,
-                                                tekst = it.tekst,
+                                                tekst = it.tekst ?: "",
                                                 sistEndretTidspunkt = it.sistEndretTidspunkt,
                                                 tittel = it.tittel,
                                             )
@@ -93,7 +93,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                                     utvidetBeskrivelser.map {
                                         UtvidetBeskrivelseDTO(
                                             brevblokkId = it.brevblokkId,
-                                            tekst = it.tekst,
+                                            tekst = it.tekst ?: "",
                                             sistEndretTidspunkt = it.sistEndretTidspunkt,
                                             tittel = it.tittel,
                                         )

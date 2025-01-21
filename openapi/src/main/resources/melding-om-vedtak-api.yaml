@@ -161,6 +161,7 @@ components:
           type: string
       required:
         - brevblokkId
+        - tekst
         - tittel
 
     Opplysning:
