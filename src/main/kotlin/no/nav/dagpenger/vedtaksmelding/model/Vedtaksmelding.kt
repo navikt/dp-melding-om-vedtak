@@ -73,6 +73,8 @@ sealed class Vedtaksmelding(
 
     class UkjentVedtakException(override val message: String, override val cause: Throwable? = null) :
         RuntimeException(message, cause)
+
+    class ManglerBrevstøtte(override val message: String) : RuntimeException(message)
 }
 
 data class Avslag(
@@ -81,10 +83,12 @@ data class Avslag(
 ) : Vedtaksmelding(vedtak, mediator) {
     override val harBrevstøtte: Boolean =
         vedtak.utfall == Utfall.AVSLÅTT &&
-            (vedtak.vilkår.avslagMinsteinntekt() || vedtak.vilkår.reellArbeidssøker())
+            (vedtak.vilkår.avslagMinsteinntekt() || vedtak.vilkår.reellArbeidssøker() || vedtak.vilkår.avslagArbeidstid())
 
     init {
-        require(this.harBrevstøtte) { "Vedtak oppfyller ikke avslagskriterier" }
+        require(this.harBrevstøtte) {
+            throw ManglerBrevstøtte("Vedtak for behandling: ${this.vedtak.behandlingId} mangler brevstøtte")
+        }
     }
 
     private val pre =
@@ -93,7 +97,7 @@ data class Avslag(
         )
     override val brevBlokkIder: List<String>
         get() {
-            return pre + avslagMinsteInntekt() + avslagReellArbeidssøker()
+            return pre + avslagMinsteInntekt() + avslagReellArbeidssøker() + avslagTaptArbeidstid()
         }
 
     private fun avslagMinsteInntekt(): List<String> {
@@ -102,6 +106,15 @@ data class Avslag(
         }
             ?.let {
                 listOf("brev.blokk.begrunnelse-avslag-minsteinntekt")
+            } ?: emptyList()
+    }
+
+    private fun avslagTaptArbeidstid(): List<String> {
+        return vedtak.vilkår.find {
+            it.navn == "Tap av arbeidstid er minst terskel" && it.status == IKKE_OPPFYLT
+        }
+            ?.let {
+                listOf("brev.blokk.avslag-tapt-arbeidstid")
             } ?: emptyList()
     }
 
@@ -154,10 +167,14 @@ data class Avslag(
         return this.any { it.navn == "Oppfyller kravet til minsteinntekt eller verneplikt" && it.status == IKKE_OPPFYLT }
     }
 
+    private fun Set<Vilkår>.avslagArbeidstid(): Boolean {
+        return this.any { it.navn == "Tap av arbeidstid er minst terskel" && it.status == IKKE_OPPFYLT }
+    }
+
     private fun Set<Vilkår>.reellArbeidssøker(): Boolean {
         return this.any {
-            (it.navn == "Krav til arbeidssøker" || it.navn == "Registrert som arbeidssøker på søknadstidspunktet") &&
-                it.status == IKKE_OPPFYLT
+            it.status == IKKE_OPPFYLT &&
+                (it.navn == "Krav til arbeidssøker" || it.navn == "Registrert som arbeidssøker på søknadstidspunktet")
         }
     }
 }
