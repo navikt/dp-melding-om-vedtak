@@ -22,7 +22,7 @@ class VernepliktTest {
         vedtakVerneplikt.finnOpplysning("opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt",
-                verdi = "3.0",
+                verdi = "3",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )

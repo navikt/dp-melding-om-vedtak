@@ -262,12 +262,20 @@ class VedtakMapper(vedtakJson: String) {
             opplysninger.add(
                 Opplysning(
                     opplysningTekstId = "opplysning.prosentvis-tapt-arbeidstid",
-                    verdi = String.format(Locale.US, "%.2f", prosentvisTaptArbeidstid),
+                    verdi = formaterDesimaltall(prosentvisTaptArbeidstid),
                     datatype = FLYTTALL,
                 ),
             )
         }
         return opplysninger
+    }
+
+    private fun formaterDesimaltall(
+        desimaltall: Double,
+        antallDesimaler: Int = 1,
+    ) = when {
+        desimaltall % 1 == 0.0 -> String.format("%.0f", desimaltall)
+        else -> String.format(Locale.US, "%.${antallDesimaler}f", desimaltall)
     }
 
     private val inntjeningsperiodeOpplysninger = vedtakOpplysninger.finnInntjeningsPeriode()
@@ -449,9 +457,18 @@ class VedtakMapper(vedtakJson: String) {
                         else ->
                             Opplysning(
                                 opplysningTekstId = opplysningTekstId,
-                                verdi = verdi,
                                 datatype = datatype,
                                 enhet = enhet,
+                                verdi =
+                                    when (datatype) {
+                                        FLYTTALL -> {
+                                            when (enhet) {
+                                                KRONER -> formaterDesimaltall(verdi.toDouble(), antallDesimaler = 2)
+                                                else -> formaterDesimaltall(verdi.toDouble(), antallDesimaler = 1)
+                                            }
+                                        }
+                                        else -> verdi
+                                    },
                             )
                     }
                 }
