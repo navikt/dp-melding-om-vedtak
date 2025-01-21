@@ -34,6 +34,9 @@ import kotlinx.html.visit
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 @Suppress("ktlint:standard:max-line-length")
 object HtmlConverter {
@@ -51,6 +54,7 @@ object HtmlConverter {
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): String {
         val mapping: Map<String, Opplysning> = opplysninger.associateBy { it.opplysningTekstId }
+        val currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.of("no", "NO")))
 
         fun groupBlocks(blocks: List<Block>): List<List<Block>> {
             val groupedBlocks = mutableListOf<MutableList<Block>>()
@@ -101,7 +105,7 @@ object HtmlConverter {
                         p { +"Fødseslnummer: ${meldingOmVedtakData.fodselsnummer}" }
                         div(classes = "melding-om-vedtak-saksnummer-dato") {
                             p(classes = "melding-om-vedtak-saksnummer-dato-left") { +"Saksid: ${meldingOmVedtakData.sakId}" } //
-                            p(classes = "melding-om-vedtak-saksnummer-dato-right") { +"17. oktober 2024" } // todo hente dato
+                            p(classes = "melding-om-vedtak-saksnummer-dato-right") { +currentDate } // todo hente dato
                         }
                     }
 
