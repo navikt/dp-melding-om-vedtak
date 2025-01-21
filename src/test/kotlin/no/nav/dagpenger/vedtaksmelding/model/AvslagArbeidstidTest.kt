@@ -3,37 +3,40 @@ package no.nav.dagpenger.vedtaksmelding.model
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
 import io.mockk.mockk
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.BOOLSK
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.HELTALL
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.UKER
-import org.junit.jupiter.api.Disabled
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.FLYTTALL
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.TIMER
 import org.junit.jupiter.api.Test
 
 class AvslagArbeidstidTest {
     private val avslagArbeidstidVedtak = VedtakMapper(json).vedtak()
 
     @Test
-    @Disabled
     fun `Hent relevate opplysninger ved avslag tapt arbeidstid`() {
-        avslagArbeidstidVedtak.finnOpplysning("opplysning.er-innvilget-med-verneplikt") shouldBe
+        avslagArbeidstidVedtak.finnOpplysning("opplysning.fastsatt-arbeidstid-per-uke-for-tap") shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.er-innvilget-med-verneplikt",
-                verdi = true.toString(),
-                datatype = BOOLSK,
+                opplysningTekstId = "opplysning.fastsatt-arbeidstid-per-uke-for-tap",
+                verdi = "37.5",
+                datatype = FLYTTALL,
+                enhet = TIMER,
             )
-        avslagArbeidstidVedtak.finnOpplysning("opplysning.antall-stonadsuker") shouldBe
+        avslagArbeidstidVedtak.finnOpplysning("opplysning.fastsatt-ny-arbeidstid-per-uke") shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.antall-stonadsuker",
-                verdi = "26",
-                datatype = HELTALL,
-                enhet = UKER,
+                opplysningTekstId = "opplysning.fastsatt-ny-arbeidstid-per-uke",
+                verdi = "20",
+                datatype = FLYTTALL,
+                enhet = TIMER,
             )
-        avslagArbeidstidVedtak.finnOpplysning("opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger") shouldBe
+        avslagArbeidstidVedtak.finnOpplysning("opplysning.krav-til-prosentvis-tap-av-arbeidstid") shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger",
-                verdi = "104",
-                datatype = HELTALL,
-                enhet = UKER,
+                opplysningTekstId = "opplysning.krav-til-prosentvis-tap-av-arbeidstid",
+                verdi = "50.0",
+                datatype = FLYTTALL,
+            )
+        avslagArbeidstidVedtak.finnOpplysning("opplysning.prosentvis-tapt-arbeidstid") shouldBe
+            Opplysning(
+                opplysningTekstId = "opplysning.prosentvis-tapt-arbeidstid",
+                verdi = "46.67",
+                datatype = FLYTTALL,
             )
     }
 
