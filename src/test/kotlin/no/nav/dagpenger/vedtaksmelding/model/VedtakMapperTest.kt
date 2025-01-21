@@ -136,7 +136,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.antall-g-for-krav-til-36-mnd-arbeidsinntekt") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.antall-g-for-krav-til-36-mnd-arbeidsinntekt",
-                verdi = "3.0",
+                verdi = "3",
                 datatype = FLYTTALL,
                 enhet = ENHETSLØS,
             )
@@ -147,7 +147,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.gjennomsnittlig-arbeidsinntekt-siste-36-maaneder") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.gjennomsnittlig-arbeidsinntekt-siste-36-maaneder",
-                verdi = "614871.2733389170",
+                verdi = "614871.27",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -301,7 +301,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.grunnlag-siste-12-mnd") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.grunnlag-siste-12-mnd",
-                verdi = "513677.2888214466",
+                verdi = "513677.29",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
