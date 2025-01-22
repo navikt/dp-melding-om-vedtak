@@ -239,7 +239,7 @@ class VedtakMapper(vedtakJson: String) {
                 datatype = HELTALL,
                 enhet = KRONER,
             ),
-        ) + vedtak.lagOpplysningerFraKvoter()
+        ) + vedtak.lagOpplysningerFraKvoter() + vedtak.lagOpplysningerForSamordning()
 
     private val prosentvisTaptArbeidstidOpplysninger = vedtakOpplysninger.finnProsentvisTaptArbeidstid()
 
@@ -375,6 +375,81 @@ class VedtakMapper(vedtakJson: String) {
         return this.finnOpplysningAt(opplysningTekstId, "/opplysninger", datatype, enhet) { node ->
             node.find { it["navn"].asText() == navn }?.findValue("verdi")?.asText()
         }
+    }
+
+    private fun JsonNode.lagOpplysningerForSamordning(): Set<Opplysning> {
+        val opplysninger = mutableSetOf<Opplysning>()
+        val samordnedeYtelser = this.at("/fastsatt/samordning")
+
+        if (samordnedeYtelser is MissingNode) return emptySet()
+        samordnedeYtelser.forEach { samordnetYtelse ->
+            when (samordnetYtelse["type"].asText()) {
+                "Sykepenger dagsats" ->
+                    opplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.sykepenger-dagsats",
+                            verdi = samordnetYtelse["beløp"].asText(),
+                            datatype = FLYTTALL,
+                            enhet = KRONER,
+                        ),
+                    )
+                "Pleiepenger dagsats" ->
+                    opplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.pleiepenger-dagsats",
+                            verdi = samordnetYtelse["beløp"].asText(),
+                            datatype = FLYTTALL,
+                            enhet = KRONER,
+                        ),
+                    )
+                "Omsorgspenger dagsats" ->
+                    opplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.omsorgspenger-dagsats",
+                            verdi = samordnetYtelse["beløp"].asText(),
+                            datatype = FLYTTALL,
+                            enhet = KRONER,
+                        ),
+                    )
+                "Opplæringspenger dagsats" ->
+                    opplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.opplaeringspenger-dagsats",
+                            verdi = samordnetYtelse["beløp"].asText(),
+                            datatype = FLYTTALL,
+                            enhet = KRONER,
+                        ),
+                    )
+                "Uføre dagsats" ->
+                    opplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.ufore-dagsats",
+                            verdi = samordnetYtelse["beløp"].asText(),
+                            datatype = FLYTTALL,
+                            enhet = KRONER,
+                        ),
+                    )
+                "Foreldrepenger dagsats" ->
+                    opplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.foreldrepenger-dagsats",
+                            verdi = samordnetYtelse["beløp"].asText(),
+                            datatype = FLYTTALL,
+                            enhet = KRONER,
+                        ),
+                    )
+                "Svangerskapspenger dagsats" ->
+                    opplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.svangerskapspenger-dagsats",
+                            verdi = samordnetYtelse["beløp"].asText(),
+                            datatype = FLYTTALL,
+                            enhet = KRONER,
+                        ),
+                    )
+            }
+        }
+        return opplysninger
     }
 
     private fun JsonNode.lagOpplysningerFraKvoter(): Set<Opplysning> {
