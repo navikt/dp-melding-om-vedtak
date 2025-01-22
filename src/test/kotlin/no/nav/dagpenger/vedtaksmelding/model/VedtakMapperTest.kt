@@ -187,6 +187,83 @@ class VedtakMapperTest {
     }
 
     @Test
+    fun `Hent opplysning for samordnet ytelse sykepenger`() {
+        vedtak.finnOpplysning("opplysning.sykepenger-dagsats") shouldBe
+            Opplysning(
+                opplysningTekstId = "opplysning.sykepenger-dagsats",
+                verdi = "50",
+                datatype = FLYTTALL,
+                enhet = KRONER,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning for samordnet ytelse pleiepenger`() {
+        vedtak.finnOpplysning("opplysning.pleiepenger-dagsats") shouldBe
+            Opplysning(
+                opplysningTekstId = "opplysning.pleiepenger-dagsats",
+                verdi = "100",
+                datatype = FLYTTALL,
+                enhet = KRONER,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning for samordnet ytelse omsorgspenger`() {
+        vedtak.finnOpplysning("opplysning.omsorgspenger-dagsats") shouldBe
+            Opplysning(
+                opplysningTekstId = "opplysning.omsorgspenger-dagsats",
+                verdi = "150",
+                datatype = FLYTTALL,
+                enhet = KRONER,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning for samordnet ytelse opplæringspenger`() {
+        vedtak.finnOpplysning("opplysning.opplaeringspenger-dagsats") shouldBe
+            Opplysning(
+                opplysningTekstId = "opplysning.opplaeringspenger-dagsats",
+                verdi = "180",
+                datatype = FLYTTALL,
+                enhet = KRONER,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning for samordnet ytelse uføre`() {
+        vedtak.finnOpplysning("opplysning.ufore-dagsats") shouldBe
+            Opplysning(
+                opplysningTekstId = "opplysning.ufore-dagsats",
+                verdi = "200",
+                datatype = FLYTTALL,
+                enhet = KRONER,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning for samordnet ytelse foreldrepenger`() {
+        vedtak.finnOpplysning("opplysning.foreldrepenger-dagsats") shouldBe
+            Opplysning(
+                opplysningTekstId = "opplysning.foreldrepenger-dagsats",
+                verdi = "210",
+                datatype = FLYTTALL,
+                enhet = KRONER,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning for samordnet ytelse svangerskapspenger`() {
+        vedtak.finnOpplysning("opplysning.svangerskapspenger-dagsats") shouldBe
+            Opplysning(
+                opplysningTekstId = "opplysning.svangerskapspenger-dagsats",
+                verdi = "230",
+                datatype = FLYTTALL,
+                enhet = KRONER,
+            )
+    }
+
+    @Test
     fun `Hent opplysning utbetalt arbeidsinntekt periode 1`() {
         vedtak.finnOpplysning("opplysning.utbetalt-arbeidsinntekt-periode-1") shouldBe
             Opplysning(
@@ -352,7 +429,7 @@ class VedtakMapperTest {
     }
 
     @Test
-    fun `Skal håndtere at opplysning og kvoter ikke finnes`() {
+    fun `Skal håndtere at opplysning, kvoter og samordning ikke finnes`() {
         shouldNotThrowAny {
             VedtakMapper(
                 """
