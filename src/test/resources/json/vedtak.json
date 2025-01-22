@@ -95,8 +95,38 @@
     "samordning": [
       {
         "type": "Sykepenger dagsats",
+        "beløp": 50,
+        "grad": 10
+      },
+      {
+        "type": "Pleiepenger dagsats",
+        "beløp": 100,
+        "grad": 15
+      },
+      {
+        "type": "Omsorgspenger dagsats",
+        "beløp": 150,
+        "grad": 15
+      },
+      {
+        "type": "Opplæringspenger dagsats",
+        "beløp": 180,
+        "grad": 15
+      },
+      {
+        "type": "Uføre dagsats",
         "beløp": 200,
-        "grad": 50
+        "grad": 20
+      },
+      {
+        "type": "Foreldrepenger dagsats",
+        "beløp": 210,
+        "grad": 25
+      },
+      {
+        "type": "Svangerskapspenger dagsats",
+        "beløp": 230,
+        "grad": 15
       }
     ],
     "kvoter": [
