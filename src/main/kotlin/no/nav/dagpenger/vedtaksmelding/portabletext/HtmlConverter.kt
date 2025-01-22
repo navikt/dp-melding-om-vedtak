@@ -102,7 +102,7 @@ object HtmlConverter {
                             }
                         }
                         p { +"Navn: ${meldingOmVedtakData.hentNavn()}" }
-                        p { +"Fødseslnummer: ${meldingOmVedtakData.fodselsnummer}" }
+                        p { +"Fødselsnummer: ${meldingOmVedtakData.fodselsnummer}" }
                         div(classes = "melding-om-vedtak-saksnummer-dato") {
                             p(classes = "melding-om-vedtak-saksnummer-dato-left") { +"Saksid: ${meldingOmVedtakData.sakId}" } //
                             p(classes = "melding-om-vedtak-saksnummer-dato-right") { +currentDate } // todo hente dato
