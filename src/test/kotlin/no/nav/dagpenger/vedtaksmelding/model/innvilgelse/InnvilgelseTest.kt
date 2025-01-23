@@ -38,6 +38,13 @@ class InnvilgelseTest {
             datatype = BOOLSK,
         )
 
+    private fun samordnetSykepengerDagsats(dagsats: Int = 0) =
+        Opplysning(
+            opplysningTekstId = "opplysning.sykepenger-dagsats",
+            verdi = dagsats.toString(),
+            datatype = BOOLSK,
+        )
+
     private fun barnetilleggOpplysning(verdi: String = "1") =
         Opplysning(
             opplysningTekstId = "opplysning.antall-barn-som-gir-rett-til-barnetillegg",
@@ -227,6 +234,7 @@ class InnvilgelseTest {
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
                 "brev.blokk.samordning",
+                "brev.blokk.samordning-sykepenger",
                 "brev.blokk.grunnlag",
                 "brev.blokk.arbeidstiden-din",
                 "brev.blokk.egenandel",
@@ -246,7 +254,7 @@ class InnvilgelseTest {
                     utfall = Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            samordnetOpplysning(),
+                            samordnetOpplysning(), samordnetSykepengerDagsats(100),
                         ),
                 ),
             mediator = mockk(),
