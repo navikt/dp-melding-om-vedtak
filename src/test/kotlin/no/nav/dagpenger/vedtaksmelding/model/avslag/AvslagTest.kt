@@ -1,8 +1,13 @@
-package no.nav.dagpenger.vedtaksmelding.model
+package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import io.mockk.mockk
+import no.nav.dagpenger.vedtaksmelding.model.Avslag
+import no.nav.dagpenger.vedtaksmelding.model.Utfall
+import no.nav.dagpenger.vedtaksmelding.model.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
+import no.nav.dagpenger.vedtaksmelding.model.Vilkår
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
