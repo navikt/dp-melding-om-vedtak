@@ -118,6 +118,7 @@ class VedtakHtmlTest {
             htmlInnhold brevblokkRekkefølgeShouldBe
                 listOf(
                     "brev.blokk.vedtak-innvilgelse",
+                    "brev.blokk.begrunnelse-innvilgelsesdato",
                     "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                     "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
                     "brev.blokk.grunnlag",
