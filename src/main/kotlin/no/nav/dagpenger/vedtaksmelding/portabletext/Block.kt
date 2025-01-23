@@ -123,13 +123,3 @@ sealed interface MarkDef {
         }
     }
 }
-
-internal val hubba: ObjectMapper
-    get() {
-        return jacksonObjectMapper()
-            .registerModule(JavaTimeModule())
-            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-            .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-            .setSerializationInclusion(JsonInclude.Include.NON_NULL)
-            .enable(SerializationFeature.INDENT_OUTPUT)
-    }
