@@ -194,6 +194,7 @@ data class Innvilgelse(
             val pre =
                 listOf(
                     "brev.blokk.vedtak-innvilgelse",
+                    "brev.blokk.begrunnelse-innvilgelsesdato",
                     "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                     "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
                 )
