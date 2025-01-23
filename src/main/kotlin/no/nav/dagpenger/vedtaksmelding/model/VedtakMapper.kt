@@ -189,11 +189,6 @@ class VedtakMapper(vedtakJson: String) {
                 datatype = BOOLSK,
             ),
             vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.har-samordnet",
-                navn = "Har samordnet",
-                datatype = BOOLSK,
-            ),
-            vedtak.finnOpplysningMedNavn(
                 opplysningTekstId = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget",
                 navn = "Andel av dagsats med barnetillegg som overstiger maks andel av dagpengegrunnlaget",
                 datatype = FLYTTALL,
@@ -382,6 +377,8 @@ class VedtakMapper(vedtakJson: String) {
         val samordnedeYtelser = this.at("/fastsatt/samordning")
 
         if (samordnedeYtelser is MissingNode) return emptySet()
+        val samordnetOpplysning = harSamordnet(samordnedeYtelser)
+        opplysninger.add(samordnetOpplysning)
         samordnedeYtelser.forEach { samordnetYtelse ->
             when (samordnetYtelse["type"].asText()) {
                 "Sykepenger dagsats" ->
@@ -393,6 +390,7 @@ class VedtakMapper(vedtakJson: String) {
                             enhet = KRONER,
                         ),
                     )
+
                 "Pleiepenger dagsats" ->
                     opplysninger.add(
                         Opplysning(
@@ -402,6 +400,7 @@ class VedtakMapper(vedtakJson: String) {
                             enhet = KRONER,
                         ),
                     )
+
                 "Omsorgspenger dagsats" ->
                     opplysninger.add(
                         Opplysning(
@@ -411,6 +410,7 @@ class VedtakMapper(vedtakJson: String) {
                             enhet = KRONER,
                         ),
                     )
+
                 "Opplæringspenger dagsats" ->
                     opplysninger.add(
                         Opplysning(
@@ -420,6 +420,7 @@ class VedtakMapper(vedtakJson: String) {
                             enhet = KRONER,
                         ),
                     )
+
                 "Uføre dagsats" ->
                     opplysninger.add(
                         Opplysning(
@@ -429,6 +430,7 @@ class VedtakMapper(vedtakJson: String) {
                             enhet = KRONER,
                         ),
                     )
+
                 "Foreldrepenger dagsats" ->
                     opplysninger.add(
                         Opplysning(
@@ -438,6 +440,7 @@ class VedtakMapper(vedtakJson: String) {
                             enhet = KRONER,
                         ),
                     )
+
                 "Svangerskapspenger dagsats" ->
                     opplysninger.add(
                         Opplysning(
@@ -450,6 +453,24 @@ class VedtakMapper(vedtakJson: String) {
             }
         }
         return opplysninger
+    }
+
+    private fun harSamordnet(samordnedeYtelser: JsonNode): Opplysning {
+        return when (samordnedeYtelser.size()) {
+            0 ->
+                Opplysning(
+                    opplysningTekstId = "opplysning.har-samordnet",
+                    verdi = false.toString(),
+                    datatype = BOOLSK,
+                )
+
+            else ->
+                Opplysning(
+                    opplysningTekstId = "opplysning.har-samordnet",
+                    verdi = true.toString(),
+                    datatype = BOOLSK,
+                )
+        }
     }
 
     private fun JsonNode.lagOpplysningerFraKvoter(): Set<Opplysning> {
@@ -542,6 +563,7 @@ class VedtakMapper(vedtakJson: String) {
                                                 else -> formaterDesimaltall(verdi.toDouble(), antallDesimaler = 1)
                                             }
                                         }
+
                                         else -> verdi
                                     },
                             )
