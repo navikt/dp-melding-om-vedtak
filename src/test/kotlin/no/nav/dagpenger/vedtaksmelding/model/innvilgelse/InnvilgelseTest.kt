@@ -38,6 +38,15 @@ class InnvilgelseTest {
             datatype = BOOLSK,
         )
 
+    private fun samordnetYtelseDagsats(
+        opplysningTekstId: String,
+        dagsats: Int = 100,
+    ) = Opplysning(
+        opplysningTekstId = opplysningTekstId,
+        verdi = dagsats.toString(),
+        datatype = BOOLSK,
+    )
+
     private fun barnetilleggOpplysning(verdi: String = "1") =
         Opplysning(
             opplysningTekstId = "opplysning.antall-barn-som-gir-rett-til-barnetillegg",
@@ -167,7 +176,12 @@ class InnvilgelseTest {
                         setOf(
                             Opplysning("opplysning.er-innvilget-med-verneplikt", "true", BOOLSK),
                             Opplysning("opplysning.krav-til-minsteinntekt", "true", BOOLSK),
-                            Opplysning("opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger", "52", HELTALL, UKER),
+                            Opplysning(
+                                "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger",
+                                "52",
+                                HELTALL,
+                                UKER,
+                            ),
                         ),
                 ),
             mediator = mockk(),
@@ -224,7 +238,7 @@ class InnvilgelseTest {
     }
 
     @Test
-    fun `Rikig brevblokker for innvilgelse av ordinære dagpenger for person med samordning`() {
+    fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak med samordning av sykepenger`() {
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
@@ -232,6 +246,258 @@ class InnvilgelseTest {
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
                 "brev.blokk.samordning",
+                "brev.blokk.samordning-sykepenger",
+                "brev.blokk.grunnlag",
+                "brev.blokk.arbeidstiden-din",
+                "brev.blokk.egenandel",
+                "brev.blokk.du-maa-sende-meldekort",
+                "brev.blokk.utbetaling",
+                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
+                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
+                "brev.blokk.du-maa-melde-fra-om-endringer",
+                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+            ) + Vedtaksmelding.fasteBlokker
+
+        Innvilgelse(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = emptySet(),
+                    utfall = Utfall.INNVILGET,
+                    opplysninger =
+                        setOf(
+                            samordnetOpplysning(), samordnetYtelseDagsats("opplysning.sykepenger-dagsats"),
+                        ),
+                ),
+            mediator = mockk(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak med samordning av pleiepenger`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
+                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
+                "brev.blokk.samordning",
+                "brev.blokk.samordning-pleiepenger",
+                "brev.blokk.grunnlag",
+                "brev.blokk.arbeidstiden-din",
+                "brev.blokk.egenandel",
+                "brev.blokk.du-maa-sende-meldekort",
+                "brev.blokk.utbetaling",
+                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
+                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
+                "brev.blokk.du-maa-melde-fra-om-endringer",
+                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+            ) + Vedtaksmelding.fasteBlokker
+
+        Innvilgelse(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = emptySet(),
+                    utfall = Utfall.INNVILGET,
+                    opplysninger =
+                        setOf(
+                            samordnetOpplysning(), samordnetYtelseDagsats("opplysning.pleiepenger-dagsats"),
+                        ),
+                ),
+            mediator = mockk(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak med samordning av omsorgspenger`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
+                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
+                "brev.blokk.samordning",
+                "brev.blokk.samordning-omsorgspenger",
+                "brev.blokk.grunnlag",
+                "brev.blokk.arbeidstiden-din",
+                "brev.blokk.egenandel",
+                "brev.blokk.du-maa-sende-meldekort",
+                "brev.blokk.utbetaling",
+                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
+                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
+                "brev.blokk.du-maa-melde-fra-om-endringer",
+                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+            ) + Vedtaksmelding.fasteBlokker
+
+        Innvilgelse(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = emptySet(),
+                    utfall = Utfall.INNVILGET,
+                    opplysninger =
+                        setOf(
+                            samordnetOpplysning(), samordnetYtelseDagsats("opplysning.omsorgspenger-dagsats"),
+                        ),
+                ),
+            mediator = mockk(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak med samordning av opplæringspenger`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
+                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
+                "brev.blokk.samordning",
+                "brev.blokk.samordning-opplaeringspenger",
+                "brev.blokk.grunnlag",
+                "brev.blokk.arbeidstiden-din",
+                "brev.blokk.egenandel",
+                "brev.blokk.du-maa-sende-meldekort",
+                "brev.blokk.utbetaling",
+                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
+                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
+                "brev.blokk.du-maa-melde-fra-om-endringer",
+                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+            ) + Vedtaksmelding.fasteBlokker
+
+        Innvilgelse(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = emptySet(),
+                    utfall = Utfall.INNVILGET,
+                    opplysninger =
+                        setOf(
+                            samordnetOpplysning(), samordnetYtelseDagsats("opplysning.opplaeringspenger-dagsats"),
+                        ),
+                ),
+            mediator = mockk(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak med samordning av uføre`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
+                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
+                "brev.blokk.samordning",
+                "brev.blokk.samordning-ufore",
+                "brev.blokk.grunnlag",
+                "brev.blokk.arbeidstiden-din",
+                "brev.blokk.egenandel",
+                "brev.blokk.du-maa-sende-meldekort",
+                "brev.blokk.utbetaling",
+                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
+                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
+                "brev.blokk.du-maa-melde-fra-om-endringer",
+                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+            ) + Vedtaksmelding.fasteBlokker
+
+        Innvilgelse(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = emptySet(),
+                    utfall = Utfall.INNVILGET,
+                    opplysninger =
+                        setOf(
+                            samordnetOpplysning(), samordnetYtelseDagsats("opplysning.ufore-dagsats"),
+                        ),
+                ),
+            mediator = mockk(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak med samordning av foreldrepenger`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
+                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
+                "brev.blokk.samordning",
+                "brev.blokk.samordning-foreldrepenger",
+                "brev.blokk.grunnlag",
+                "brev.blokk.arbeidstiden-din",
+                "brev.blokk.egenandel",
+                "brev.blokk.du-maa-sende-meldekort",
+                "brev.blokk.utbetaling",
+                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
+                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
+                "brev.blokk.du-maa-melde-fra-om-endringer",
+                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+            ) + Vedtaksmelding.fasteBlokker
+
+        Innvilgelse(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = emptySet(),
+                    utfall = Utfall.INNVILGET,
+                    opplysninger =
+                        setOf(
+                            samordnetOpplysning(), samordnetYtelseDagsats("opplysning.foreldrepenger-dagsats"),
+                        ),
+                ),
+            mediator = mockk(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak med samordning av svangerskapspenger`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
+                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
+                "brev.blokk.samordning",
+                "brev.blokk.samordning-svangerskapspenger",
+                "brev.blokk.grunnlag",
+                "brev.blokk.arbeidstiden-din",
+                "brev.blokk.egenandel",
+                "brev.blokk.du-maa-sende-meldekort",
+                "brev.blokk.utbetaling",
+                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
+                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
+                "brev.blokk.du-maa-melde-fra-om-endringer",
+                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+            ) + Vedtaksmelding.fasteBlokker
+
+        Innvilgelse(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = emptySet(),
+                    utfall = Utfall.INNVILGET,
+                    opplysninger =
+                        setOf(
+                            samordnetOpplysning(), samordnetYtelseDagsats("opplysning.svangerskapspenger-dagsats"),
+                        ),
+                ),
+            mediator = mockk(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak med samordning med alle ytelser`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
+                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
+                "brev.blokk.samordning",
+                "brev.blokk.samordning-sykepenger",
+                "brev.blokk.samordning-pleiepenger",
+                "brev.blokk.samordning-omsorgspenger",
+                "brev.blokk.samordning-opplaeringspenger",
+                "brev.blokk.samordning-ufore",
+                "brev.blokk.samordning-foreldrepenger",
+                "brev.blokk.samordning-svangerskapspenger",
                 "brev.blokk.grunnlag",
                 "brev.blokk.arbeidstiden-din",
                 "brev.blokk.egenandel",
@@ -252,10 +518,36 @@ class InnvilgelseTest {
                     opplysninger =
                         setOf(
                             samordnetOpplysning(),
+                            samordnetYtelseDagsats("opplysning.sykepenger-dagsats"),
+                            samordnetYtelseDagsats("opplysning.pleiepenger-dagsats"),
+                            samordnetYtelseDagsats("opplysning.omsorgspenger-dagsats"),
+                            samordnetYtelseDagsats("opplysning.opplaeringspenger-dagsats"),
+                            samordnetYtelseDagsats("opplysning.ufore-dagsats"),
+                            samordnetYtelseDagsats("opplysning.foreldrepenger-dagsats"),
+                            samordnetYtelseDagsats("opplysning.svangerskapspenger-dagsats"),
                         ),
                 ),
             mediator = mockk(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak uten samordning`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
+                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
+                "brev.blokk.grunnlag",
+                "brev.blokk.arbeidstiden-din",
+                "brev.blokk.egenandel",
+                "brev.blokk.du-maa-sende-meldekort",
+                "brev.blokk.utbetaling",
+                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
+                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
+                "brev.blokk.du-maa-melde-fra-om-endringer",
+                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+            ) + Vedtaksmelding.fasteBlokker
 
         Innvilgelse(
             vedtak =
@@ -269,7 +561,7 @@ class InnvilgelseTest {
                         ),
                 ),
             mediator = mockk(),
-        ).brevBlokkIder() shouldBe forventedeBrevblokkIder - "brev.blokk.samordning"
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
 
     @Test

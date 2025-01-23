@@ -189,11 +189,6 @@ class VedtakMapper(vedtakJson: String) {
                 datatype = BOOLSK,
             ),
             vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.har-samordnet",
-                navn = "Har samordnet",
-                datatype = BOOLSK,
-            ),
-            vedtak.finnOpplysningMedNavn(
                 opplysningTekstId = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget",
                 navn = "Andel av dagsats med barnetillegg som overstiger maks andel av dagpengegrunnlaget",
                 datatype = FLYTTALL,
@@ -239,7 +234,7 @@ class VedtakMapper(vedtakJson: String) {
                 datatype = HELTALL,
                 enhet = KRONER,
             ),
-        ) + vedtak.lagOpplysningerFraKvoter()
+        ) + vedtak.lagOpplysningerFraKvoter() + vedtak.lagOpplysningerForSamordning()
 
     private val prosentvisTaptArbeidstidOpplysninger = vedtakOpplysninger.finnProsentvisTaptArbeidstid()
 
@@ -377,6 +372,107 @@ class VedtakMapper(vedtakJson: String) {
         }
     }
 
+    private fun JsonNode.lagOpplysningerForSamordning(): Set<Opplysning> {
+        val opplysninger = mutableSetOf<Opplysning>()
+        val samordnedeYtelser = this.at("/fastsatt/samordning")
+
+        if (samordnedeYtelser is MissingNode) return emptySet()
+        val samordnetOpplysning = harSamordnet(samordnedeYtelser)
+        opplysninger.add(samordnetOpplysning)
+        samordnedeYtelser.forEach { samordnetYtelse ->
+            when (samordnetYtelse["type"].asText()) {
+                "Sykepenger dagsats" ->
+                    opplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.sykepenger-dagsats",
+                            verdi = samordnetYtelse["beløp"].asText(),
+                            datatype = FLYTTALL,
+                            enhet = KRONER,
+                        ),
+                    )
+
+                "Pleiepenger dagsats" ->
+                    opplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.pleiepenger-dagsats",
+                            verdi = samordnetYtelse["beløp"].asText(),
+                            datatype = FLYTTALL,
+                            enhet = KRONER,
+                        ),
+                    )
+
+                "Omsorgspenger dagsats" ->
+                    opplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.omsorgspenger-dagsats",
+                            verdi = samordnetYtelse["beløp"].asText(),
+                            datatype = FLYTTALL,
+                            enhet = KRONER,
+                        ),
+                    )
+
+                "Opplæringspenger dagsats" ->
+                    opplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.opplaeringspenger-dagsats",
+                            verdi = samordnetYtelse["beløp"].asText(),
+                            datatype = FLYTTALL,
+                            enhet = KRONER,
+                        ),
+                    )
+
+                "Uføre dagsats" ->
+                    opplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.ufore-dagsats",
+                            verdi = samordnetYtelse["beløp"].asText(),
+                            datatype = FLYTTALL,
+                            enhet = KRONER,
+                        ),
+                    )
+
+                "Foreldrepenger dagsats" ->
+                    opplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.foreldrepenger-dagsats",
+                            verdi = samordnetYtelse["beløp"].asText(),
+                            datatype = FLYTTALL,
+                            enhet = KRONER,
+                        ),
+                    )
+
+                "Svangerskapspenger dagsats" ->
+                    opplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = "opplysning.svangerskapspenger-dagsats",
+                            verdi = samordnetYtelse["beløp"].asText(),
+                            datatype = FLYTTALL,
+                            enhet = KRONER,
+                        ),
+                    )
+            }
+        }
+        return opplysninger
+    }
+
+    private fun harSamordnet(samordnedeYtelser: JsonNode): Opplysning {
+        return when (samordnedeYtelser.size()) {
+            0 ->
+                Opplysning(
+                    opplysningTekstId = "opplysning.har-samordnet",
+                    verdi = false.toString(),
+                    datatype = BOOLSK,
+                )
+
+            else ->
+                Opplysning(
+                    opplysningTekstId = "opplysning.har-samordnet",
+                    verdi = true.toString(),
+                    datatype = BOOLSK,
+                )
+        }
+    }
+
     private fun JsonNode.lagOpplysningerFraKvoter(): Set<Opplysning> {
         val opplysninger = mutableSetOf<Opplysning>()
         val kvoter = this.at("/fastsatt/kvoter")
@@ -467,6 +563,7 @@ class VedtakMapper(vedtakJson: String) {
                                                 else -> formaterDesimaltall(verdi.toDouble(), antallDesimaler = 1)
                                             }
                                         }
+
                                         else -> verdi
                                     },
                             )
