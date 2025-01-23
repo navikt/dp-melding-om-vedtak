@@ -278,6 +278,7 @@ class InnvilgelseTest {
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.begrunnelse-innvilgelsesdato",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
                 "brev.blokk.samordning",
@@ -313,6 +314,7 @@ class InnvilgelseTest {
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.begrunnelse-innvilgelsesdato",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
                 "brev.blokk.samordning",
@@ -348,6 +350,7 @@ class InnvilgelseTest {
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.begrunnelse-innvilgelsesdato",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
                 "brev.blokk.samordning",
@@ -383,6 +386,7 @@ class InnvilgelseTest {
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.begrunnelse-innvilgelsesdato",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
                 "brev.blokk.samordning",
@@ -418,6 +422,7 @@ class InnvilgelseTest {
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.begrunnelse-innvilgelsesdato",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
                 "brev.blokk.samordning",
@@ -453,6 +458,7 @@ class InnvilgelseTest {
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.begrunnelse-innvilgelsesdato",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
                 "brev.blokk.samordning",
@@ -476,7 +482,8 @@ class InnvilgelseTest {
                     utfall = Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            samordnetOpplysning(), samordnetYtelseDagsats("opplysning.svangerskapspenger-dagsats"),
+                            samordnetOpplysning(),
+                            samordnetYtelseDagsats("opplysning.svangerskapspenger-dagsats"),
                         ),
                 ),
             mediator = mockk(),
@@ -488,6 +495,7 @@ class InnvilgelseTest {
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.begrunnelse-innvilgelsesdato",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
                 "brev.blokk.samordning",
@@ -536,6 +544,7 @@ class InnvilgelseTest {
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.begrunnelse-innvilgelsesdato",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
                 "brev.blokk.grunnlag",
