@@ -54,10 +54,13 @@ class SanityKlient(
     }
 
     suspend fun hentOpplysningTekstIder(brevBlokkIder: List<String>): List<String> {
-        return hentBrevBlokker().asSequence().filter { it.textId in brevBlokkIder }.flatMap { it.innhold }
+        return hentBrevBlokker().asSequence()
+            .filter { it.textId in brevBlokkIder }
+            .flatMap { it.innhold }
             .flatMap { it.children }
             .filterIsInstance<Child.OpplysningReference>()
-            .map { it.behandlingOpplysning.textId }.toList()
+            .map { it.behandlingOpplysning.textId }
+            .toList()
     }
 
     suspend fun hentBrevBlokkerJson(): String {
