@@ -83,7 +83,12 @@ data class Avslag(
 ) : Vedtaksmelding(vedtak, mediator) {
     override val harBrevstøtte: Boolean =
         vedtak.utfall == Utfall.AVSLÅTT &&
-            (vedtak.vilkår.avslagMinsteinntekt() || vedtak.vilkår.reellArbeidssøker() || vedtak.vilkår.avslagArbeidstid())
+            (
+                vedtak.vilkår.avslagMinsteinntekt() ||
+                    vedtak.vilkår.reellArbeidssøker() ||
+                    vedtak.vilkår.avslagArbeidstid() ||
+                    vedtak.vilkår.avslagOppholdUtland()
+            )
 
     init {
         require(this.harBrevstøtte) {
@@ -97,7 +102,7 @@ data class Avslag(
         )
     override val brevBlokkIder: List<String>
         get() {
-            return pre + avslagMinsteInntekt() + avslagReellArbeidssøker() + avslagTaptArbeidstid()
+            return pre + avslagMinsteInntekt() + avslagReellArbeidssøker() + avslagTaptArbeidstid() + avslagOppholdUtland()
         }
 
     private fun avslagMinsteInntekt(): List<String> {
@@ -106,6 +111,18 @@ data class Avslag(
         }
             ?.let {
                 listOf("brev.blokk.begrunnelse-avslag-minsteinntekt")
+            } ?: emptyList()
+    }
+
+    private fun avslagOppholdUtland(): List<String> {
+        return vedtak.vilkår.find {
+            it.navn == "Oppfyller kravet til opphold i Norge" && it.status == IKKE_OPPFYLT
+        }
+            ?.let {
+                listOf(
+                    "brev.blokk.avslag-opphold-utlandet-del-1",
+                    "brev.blokk.avslag-opphold-utlandet-del-2",
+                )
             } ?: emptyList()
     }
 
@@ -169,6 +186,10 @@ data class Avslag(
 
     private fun Set<Vilkår>.avslagArbeidstid(): Boolean {
         return this.any { it.navn == "Tap av arbeidstid er minst terskel" && it.status == IKKE_OPPFYLT }
+    }
+
+    private fun Set<Vilkår>.avslagOppholdUtland(): Boolean {
+        return this.any { it.navn == "Oppfyller kravet til opphold i Norge" && it.status == IKKE_OPPFYLT }
     }
 
     private fun Set<Vilkår>.reellArbeidssøker(): Boolean {
