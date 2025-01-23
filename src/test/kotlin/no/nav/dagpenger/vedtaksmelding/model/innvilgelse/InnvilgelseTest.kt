@@ -570,6 +570,7 @@ class InnvilgelseTest {
                         ),
                 ),
             mediator = mockk(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder - "brev.blokk.samordning" - "brev.blokk.samordning-sykepenger"
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
 
