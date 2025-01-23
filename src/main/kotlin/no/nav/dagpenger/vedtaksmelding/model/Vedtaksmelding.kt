@@ -231,7 +231,7 @@ data class Innvilgelse(
         val sykepengerDagsats =
             vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.sykepenger-dagsats" && it.verdi > "0" }
         val pleiepengerDagsats =
-            vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.peleiepenger-dagsats" && it.verdi > "0" }
+            vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.pleiepenger-dagsats" && it.verdi > "0" }
         val omsorgspengerDagsats =
             vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.omsorgspenger-dagsats" && it.verdi > "0" }
         val opplæringspengerDagsats =
