@@ -231,7 +231,7 @@ class InnvilgelseTest {
     }
 
     @Test
-    fun `Rikig brevblokker for innvilgelse av ordinære dagpenger for person med samordning`() {
+    fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak med samordning`() {
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
@@ -277,7 +277,7 @@ class InnvilgelseTest {
                         ),
                 ),
             mediator = mockk(),
-        ).brevBlokkIder() shouldBe forventedeBrevblokkIder - "brev.blokk.samordning"
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder - "brev.blokk.samordning" - "brev.blokk.samordning-sykepenger"
     }
 
     @Test
