@@ -1,0 +1,5275 @@
+{
+  "query": "*[_type == \"brevBlokk\"]{\n                              ...,  \n                              innhold[]{\n                                ... ,\n                                _type == \"block\" =\u003e {\n                                  ... ,\n                                  children[]{\n                                    ... ,\n                                    _type == \"opplysningReference\" =\u003e {\n                                      ... ,\n                                      \"behandlingOpplysning\": @-\u003e{\n                                        ...,\n                                      }\n                                    }\n                                  }\n                                }\n                                }[innhold[].children[].behandlingOpplysning != {}]\n                              }",
+  "result": [
+    {
+      "innhold": [
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du må være reell arbeidssøker",
+              "_key": "ea6b319181be"
+            }
+          ],
+          "_type": "block",
+          "style": "h3",
+          "_key": "2a9657c22fb0"
+        }
+      ],
+      "utvidetBeskrivelse": false,
+      "_rev": "yegnIH3NwV3D6qTghJV1pP",
+      "language": "nb",
+      "title": "Avslag reell arbeidssøker overskrift",
+      "_createdAt": "2025-01-20T10:22:57Z",
+      "_updatedAt": "2025-01-20T10:24:07Z",
+      "_type": "brevBlokk",
+      "_id": "0a6fa61d-cd2d-46cb-9817-b0cee37ab805",
+      "textId": "brev.blokk.avslag-reell-arbeidssoker-overskrift"
+    },
+    {
+      "title": "Hvis barnetillegg",
+      "_rev": "meVVJ3VGm6OopLJP7OQWbG",
+      "language": "nb",
+      "textId": "brev.blokk.barnetillegg",
+      "innhold": [
+        {
+          "children": [
+            {
+              "marks": [],
+              "text": "Dette inkluderer barnetillegg for  ",
+              "_key": "bc81acc350b90",
+              "_type": "span"
+            },
+            {
+              "_ref": "cfe9e56d-e1dc-4bbb-a573-d12b3cbf9d69",
+              "_type": "opplysningReference",
+              "_key": "b78f3eabf802",
+              "behandlingOpplysning": {
+                "_updatedAt": "2024-11-15T11:37:51Z",
+                "textId": "opplysning.antall-barn-som-gir-rett-til-barnetillegg",
+                "_createdAt": "2024-11-15T11:36:36Z",
+                "_rev": "Fp9agXC7mmaNlqRyUt02IF",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "cfe9e56d-e1dc-4bbb-a573-d12b3cbf9d69",
+                "type": "heltall"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " barn, som er ",
+              "_key": "9596f7e2c9c5"
+            },
+            {
+              "_ref": "2b69825c-a58f-4f52-a290-1e9afdf7b343",
+              "_type": "opplysningReference",
+              "_key": "6cd4160eb509",
+              "behandlingOpplysning": {
+                "_createdAt": "2024-11-15T11:38:11Z",
+                "_rev": "Fp9agXC7mmaNlqRyUt05JS",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "2b69825c-a58f-4f52-a290-1e9afdf7b343",
+                "type": "penger",
+                "_updatedAt": "2024-11-15T11:38:50Z",
+                "textId": "opplysning.barnetillegg-i-kroner"
+              }
+            },
+            {
+              "text": " per dag.",
+              "_key": "ef5af6e1c47c",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "20f9aaef1834",
+          "markDefs": []
+        }
+      ],
+      "_updatedAt": "2024-12-09T09:02:46Z",
+      "_createdAt": "2024-12-02T11:32:30Z",
+      "_type": "brevBlokk",
+      "_id": "126af305-48cc-4a25-8b1d-69cc3d625bde",
+      "utvidetBeskrivelse": false
+    },
+    {
+      "_createdAt": "2025-01-22T12:28:18Z",
+      "innhold": [
+        {
+          "style": "h3",
+          "_key": "2d1d01a1ebb2",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du må oppholde deg i Norge for å få dagpenger",
+              "_key": "c8b813c41a2e0"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_key": "37ae85324295",
+              "_type": "span",
+              "marks": [],
+              "text": "For å ha rett til dagpenger, må du som hovedregel oppholde deg i Norge."
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "37e0a51fe52e"
+        }
+      ],
+      "language": "nb",
+      "_updatedAt": "2025-01-22T12:52:02Z",
+      "_type": "brevBlokk",
+      "title": "Du må oppholde deg i Norge for å få dagpenger",
+      "utvidetBeskrivelse": true,
+      "textId": "brev.blokk.avslag-opphold-utlandet-del-1",
+      "_rev": "NBv5peUca0J8E41fbc8SBD",
+      "_id": "15893c25-7c10-4237-bd32-bd2a8f274535"
+    },
+    {
+      "_type": "brevBlokk",
+      "title": "Husk å sjekke skattekortet ditt",
+      "_updatedAt": "2025-01-22T09:14:20Z",
+      "_rev": "ZzexQeF9kj5B3rg0j5eykT",
+      "innhold": [
+        {
+          "_type": "block",
+          "style": "h2",
+          "_key": "81ee59d39923",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Husk å sjekke skattekortet ditt",
+              "_key": "b31cab92eacf0"
+            }
+          ]
+        },
+        {
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://www.skatteetaten.no/person/",
+              "_key": "877889752823"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du må betale skatt av dagpengene du får fra Nav. Det er lurt å endre skattekortet ditt når du får mindre utbetalt i måneden. Hvis du både jobber og mottar dagpenger, og trekkes etter tabellkort på dagpengene, kan det føre til at vi trekker for lite skatt. Du bør derfor informere Nav om at du ønsker prosenttrekk av dagpengene. Du kan endre skattekortet ditt på ",
+              "_key": "3c8ea52ed3530"
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "877889752823"
+              ],
+              "text": "skatteetaten.no",
+              "_key": "b4dc8dfb12fb"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "abc50db6f630"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "97548d723ef2"
+        },
+        {
+          "style": "normal",
+          "_key": "974aa45786f8",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "f67dd3c9dc31"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "_key": "2f0e464073ae",
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://www.nav.no/skattetrekk",
+              "_key": "518f444eba43"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Les mer om skattetrekk på ",
+              "_key": "03c0426a71ff"
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "518f444eba43"
+              ],
+              "text": "nav.no/skattetrekk",
+              "_key": "243d4d701efa"
+            },
+            {
+              "text": ".",
+              "_key": "be37217014a5",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "_type": "block",
+          "style": "normal"
+        }
+      ],
+      "textId": "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
+      "_id": "15f48462-9555-4b17-a7a5-a4de5032538f",
+      "utvidetBeskrivelse": false,
+      "_createdAt": "2024-11-07T12:09:38Z",
+      "language": "nb"
+    },
+    {
+      "_rev": "8zg1Xoz2U4YsREvqQNhMEX",
+      "_id": "2667fd7d-cea9-4eeb-9df2-f67756e85858",
+      "utvidetBeskrivelse": false,
+      "_updatedAt": "2025-01-22T09:52:43Z",
+      "innhold": [
+        {
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://lovdata.no/lov/1997-02-28-19/%C2%A74-19",
+              "_key": "1716c601eb5d"
+            }
+          ],
+          "children": [
+            {
+              "_key": "1ae07f5fde5c0",
+              "_type": "span",
+              "marks": [],
+              "text": "Du har avtjent verneplikt i minst tre av de siste tolv månedene. Vi har derfor beregnet dagpengene dine ut i fra en inntekt på "
+            },
+            {
+              "_ref": "46b7c71c-3203-4ee9-80ac-b46b36dd33a6",
+              "_type": "opplysningReference",
+              "_key": "43c3d1a2e0a6",
+              "behandlingOpplysning": {
+                "_createdAt": "2024-11-15T11:39:18Z",
+                "_rev": "IFwPN263y0Otrjb8ZPfKTi",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "46b7c71c-3203-4ee9-80ac-b46b36dd33a6",
+                "type": "penger",
+                "_updatedAt": "2024-11-15T11:40:22Z",
+                "textId": "opplysning.grunnlag"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " (",
+              "_key": "2fcf7657ef4d"
+            },
+            {
+              "_key": "e43f7b76df00",
+              "_ref": "9658d809-98e9-4e47-aee3-86bf924d9060",
+              "_type": "opplysningReference",
+              "behandlingOpplysning": {
+                "_rev": "sBbmt3aa2MSf4wtSrvZThz",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "9658d809-98e9-4e47-aee3-86bf924d9060",
+                "type": "desimaltall",
+                "_updatedAt": "2025-01-13T09:50:20Z",
+                "textId": "opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt",
+                "_createdAt": "2025-01-13T09:49:54Z"
+              }
+            },
+            {
+              "_key": "a9a9e675686d",
+              "_type": "span",
+              "marks": [],
+              "text": " G). Dette går fram av "
+            },
+            {
+              "_key": "bede202c711e",
+              "_type": "span",
+              "marks": [
+                "1716c601eb5d"
+              ],
+              "text": "folketrygdloven § 4-19"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "75588264dd3a"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "91892db8a51a"
+        },
+        {
+          "style": "normal",
+          "_key": "5839f354d8fc",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "d2a65968e49f"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Din registrerte inntekt for hver tolvmånedersperiode siste tre år:",
+              "_key": "117a175d8045"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "364d33c41e6a",
+          "markDefs": []
+        },
+        {
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "6837cf96e8d3"
+            },
+            {
+              "_ref": "f3aa13ba-f1ff-4e73-8f3e-435538c961f8",
+              "_type": "opplysningReference",
+              "_key": "06ef589290cd",
+              "behandlingOpplysning": {
+                "_createdAt": "2024-12-03T12:27:11Z",
+                "_rev": "01G9mTgwfBdthBMtc12xrE",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "f3aa13ba-f1ff-4e73-8f3e-435538c961f8",
+                "_updatedAt": "2024-12-03T12:35:57Z",
+                "textId": "opplysning.forste-maaned-aar-for-inntektsperiode-1"
+              }
+            },
+            {
+              "marks": [],
+              "text": " - ",
+              "_key": "91f930acd576",
+              "_type": "span"
+            },
+            {
+              "_ref": "41974c5e-c2f1-47a5-b3a7-56ae52d730b6",
+              "_type": "opplysningReference",
+              "_key": "423fa39e118f",
+              "behandlingOpplysning": {
+                "textId": "opplysning.siste-maaned-aar-for-inntektsperiode-1",
+                "_createdAt": "2024-12-03T12:28:30Z",
+                "_rev": "Wp4YtttetXsIWN6E5E6nYg",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "41974c5e-c2f1-47a5-b3a7-56ae52d730b6",
+                "_updatedAt": "2024-12-03T12:35:15Z"
+              }
+            },
+            {
+              "marks": [],
+              "text": "      Inntekt: ",
+              "_key": "9dcaab108708",
+              "_type": "span"
+            },
+            {
+              "_ref": "675b4554-afe2-4d7b-96b1-a1b847c58c02",
+              "_type": "opplysningReference",
+              "_key": "1d566e6f2802",
+              "behandlingOpplysning": {
+                "type": "penger",
+                "_updatedAt": "2024-12-03T12:46:10Z",
+                "textId": "opplysning.utbetalt-arbeidsinntekt-periode-1",
+                "_createdAt": "2024-12-03T11:59:56Z",
+                "_rev": "01G9mTgwfBdthBMtc13I3q",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "675b4554-afe2-4d7b-96b1-a1b847c58c02"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "17a0e09fcba5"
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "441a29b3aa09"
+        },
+        {
+          "_key": "8abca1349ce8",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "1baa9df5281d"
+            },
+            {
+              "_ref": "c4de1777-1a20-494b-a226-83a9b051aba7",
+              "_type": "opplysningReference",
+              "_key": "47d81e415f70",
+              "behandlingOpplysning": {
+                "_rev": "Wp4YtttetXsIWN6E5E6p9O",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "c4de1777-1a20-494b-a226-83a9b051aba7",
+                "_updatedAt": "2024-12-03T12:35:46Z",
+                "textId": "opplysning.forste-maaned-aar-for-inntektsperiode-2",
+                "_createdAt": "2024-12-03T12:27:30Z"
+              }
+            },
+            {
+              "marks": [],
+              "text": " - ",
+              "_key": "a81fab7907f0",
+              "_type": "span"
+            },
+            {
+              "_ref": "1c7cb408-038c-4bf3-b75c-3073085bda59",
+              "_type": "opplysningReference",
+              "_key": "ae4fe088a0bf",
+              "behandlingOpplysning": {
+                "_updatedAt": "2024-12-03T12:35:04Z",
+                "textId": "opplysning.siste-maaned-aar-for-inntektsperiode-2",
+                "_createdAt": "2024-12-03T12:28:45Z",
+                "_rev": "01G9mTgwfBdthBMtc12wzu",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "1c7cb408-038c-4bf3-b75c-3073085bda59"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "      Inntekt: ",
+              "_key": "c325b20466d5"
+            },
+            {
+              "_ref": "519b1db8-4d00-4344-9fe1-11b6eb05e5b1",
+              "_type": "opplysningReference",
+              "_key": "42c4f27d717f",
+              "behandlingOpplysning": {
+                "_updatedAt": "2024-12-03T12:45:43Z",
+                "textId": "opplysning.utbetalt-arbeidsinntekt-periode-2",
+                "_createdAt": "2024-12-03T12:03:21Z",
+                "_rev": "Wp4YtttetXsIWN6E5E7XjG",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "519b1db8-4d00-4344-9fe1-11b6eb05e5b1",
+                "type": "penger"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "b9815ff2c954"
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "d5466ba836dd"
+            },
+            {
+              "_ref": "59bd9cb0-76e8-46e2-8941-83f20dcf3f57",
+              "_type": "opplysningReference",
+              "_key": "5161beb46ec4",
+              "behandlingOpplysning": {
+                "_rev": "dwoqEidp3Ggk0BqcfugKRr",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "59bd9cb0-76e8-46e2-8941-83f20dcf3f57",
+                "_updatedAt": "2024-12-03T12:35:35Z",
+                "textId": "opplysning.forste-maaned-aar-for-inntektsperiode-3",
+                "_createdAt": "2024-12-03T12:27:56Z"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " - ",
+              "_key": "581562dc73b4"
+            },
+            {
+              "_type": "opplysningReference",
+              "_key": "d78a17af1a93",
+              "_ref": "dc2a3002-f77a-4da6-bda4-484423a4a23e",
+              "behandlingOpplysning": {
+                "textId": "opplysning.siste-maaned-aar-for-inntektsperiode-3",
+                "_createdAt": "2024-12-03T12:29:01Z",
+                "_rev": "dwoqEidp3Ggk0BqcfugGnP",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "dc2a3002-f77a-4da6-bda4-484423a4a23e",
+                "_updatedAt": "2024-12-03T12:34:44Z"
+              }
+            },
+            {
+              "text": "      Inntekt: ",
+              "_key": "539a11600d04",
+              "_type": "span",
+              "marks": []
+            },
+            {
+              "_ref": "fad8b45b-8116-4ee6-a8a1-8ea588a6cd17",
+              "_type": "opplysningReference",
+              "_key": "a520ee5dcc30",
+              "behandlingOpplysning": {
+                "textId": "opplysning.utbetalt-arbeidsinntekt-periode-3",
+                "_createdAt": "2024-12-03T12:02:38Z",
+                "_rev": "01G9mTgwfBdthBMtc13HX6",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "fad8b45b-8116-4ee6-a8a1-8ea588a6cd17",
+                "type": "penger",
+                "_updatedAt": "2024-12-03T12:46:00Z"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "3a2e3cb17286"
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "8d8698d282a4"
+        },
+        {
+          "style": "normal",
+          "_key": "fe8cf2a3657a",
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://www.nav.no/dagpenger#hvem-kan",
+              "_key": "ce2fa367440b"
+            },
+            {
+              "_key": "37208f79dbd7",
+              "_type": "link",
+              "href": "https://www.skatteetaten.no/skjema/mine-inntekter-og-arbeidsforhold/"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du kan se hva som gir rett til dagpenger på ",
+              "_key": "b95df2c6271c"
+            },
+            {
+              "marks": [
+                "ce2fa367440b"
+              ],
+              "text": "nav.no/dagpenger",
+              "_key": "81e8ede23dfa",
+              "_type": "span"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ". Vi har hentet inntektene dine fra Skatteetaten. Du kan sjekke inntekten din på ",
+              "_key": "d5801d79639c"
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "37208f79dbd7"
+              ],
+              "text": "skatteetaten.no/mineinntekter",
+              "_key": "007cb78be56e"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "23a6cf745581"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "909986e9f236",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "4e4ed8d019da"
+            }
+          ]
+        },
+        {
+          "style": "normal",
+          "_key": "42e8ae3aa37f",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Hvis opplysningene ikke stemmer, må du:",
+              "_key": "4f79e689766f"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Kontakte arbeidsgiveren din, slik at de kan rette inntektsopplysningene dine.",
+              "_key": "09225014c53d"
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "adcf2d3a3b07",
+          "listItem": "bullet",
+          "markDefs": []
+        },
+        {
+          "style": "normal",
+          "_key": "7e73b6d6cfa8",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "marks": [],
+              "text": "Ta kontakt med Nav og dokumentere endringene.",
+              "_key": "53df4e29de68",
+              "_type": "span"
+            }
+          ],
+          "level": 1,
+          "_type": "block"
+        }
+      ],
+      "language": "nb",
+      "_type": "brevBlokk",
+      "title": "Hvis verneplikt",
+      "_createdAt": "2024-12-02T13:25:26Z",
+      "textId": "brev.blokk.grunnlag-for-verneplikt"
+    },
+    {
+      "_rev": "znHQMGVDeUWHvH68Y4UCsp",
+      "utvidetBeskrivelse": true,
+      "textId": "brev.blokk.begrunnelse-innvilgelsesdato",
+      "_type": "brevBlokk",
+      "innhold": [
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Hvorfor får du dagpenger fra ",
+              "_key": "66cc748715ee0"
+            },
+            {
+              "_ref": "9d834799-da4d-4a7f-8a21-ca48958bec1e",
+              "_type": "opplysningReference",
+              "_key": "068e43cb5516",
+              "behandlingOpplysning": {
+                "textId": "opplysning.provingsdato",
+                "_createdAt": "2024-11-12T12:03:08Z",
+                "_rev": "kV2ZrhgfcSEGP1GK19ZjUq",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "9d834799-da4d-4a7f-8a21-ca48958bec1e",
+                "type": "dato",
+                "_updatedAt": "2024-11-12T12:03:29Z"
+              }
+            },
+            {
+              "marks": [],
+              "text": "?",
+              "_key": "9d7e02a370c6",
+              "_type": "span"
+            }
+          ],
+          "_type": "block",
+          "style": "h2",
+          "_key": "882b1c0f4c2a",
+          "markDefs": []
+        }
+      ],
+      "_id": "3278f57c-6114-479c-9bcf-2f997705fd26",
+      "_createdAt": "2025-01-23T08:22:23Z",
+      "language": "nb",
+      "title": "Hvorfor får du dagpenger fra innvilgelsesdato?",
+      "_updatedAt": "2025-01-23T08:46:39Z"
+    },
+    {
+      "utvidetBeskrivelse": false,
+      "_updatedAt": "2025-01-22T13:16:53Z",
+      "language": "nb",
+      "_createdAt": "2024-12-02T12:33:05Z",
+      "_rev": "8zg1Xoz2U4YsREvqQPex53",
+      "_id": "3598dcb3-10a7-4aee-a5cc-6c1a15f80f76",
+      "_type": "brevBlokk",
+      "innhold": [
+        {
+          "_key": "11d868574cee",
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://lovdata.no/lov/1997-02-28-19/%C2%A74-25",
+              "_key": "8f9cfe85c84c"
+            },
+            {
+              "href": "https://lovdata.no/lov/1997-02-28-19/%C2%A74-26",
+              "_key": "4ccf42d7f37d",
+              "_type": "link"
+            },
+            {
+              "_type": "link",
+              "href": "https://lovdata.no/lov/1997-02-28-19/%C2%A74-27",
+              "_key": "df96167eb2d2"
+            }
+          ],
+          "children": [
+            {
+              "_key": "c43edc11ed180",
+              "_type": "span",
+              "marks": [],
+              "text": "Du får annen pengestøtte i kombinasjon med dagpenger. Dagpengene er derfor redusert med det beløpet. Dette etter "
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "8f9cfe85c84c"
+              ],
+              "text": "folketrygdloven §§ 4-25",
+              "_key": "03a32ed5b652"
+            },
+            {
+              "_key": "8f5cc734249b",
+              "_type": "span",
+              "marks": [],
+              "text": ", "
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "4ccf42d7f37d"
+              ],
+              "text": "4-26",
+              "_key": "bfc7c88b03e8"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " og ",
+              "_key": "cf8410b5328a"
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "df96167eb2d2"
+              ],
+              "text": "4-27",
+              "_key": "6283e133591b"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "db535986d8be"
+            }
+          ],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du mottar følgende:",
+              "_key": "d7347c2bcc60"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "539aa146448b",
+          "markDefs": []
+        }
+      ],
+      "title": "Hvis samordning",
+      "textId": "brev.blokk.samordning"
+    },
+    {
+      "_rev": "0zPjWAGkHgzUBjxT35VDHP",
+      "_type": "brevBlokk",
+      "_id": "3babceea-0ce4-426b-b01e-af43f3b8c760",
+      "textId": "brev.blokk.grunnlag",
+      "innhold": [
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "ce1965fd7fa4",
+          "markDefs": [],
+          "children": [
+            {
+              "_key": "ae586ed9600f0",
+              "_type": "span",
+              "marks": [],
+              "text": "Vi beregner hvor mye du kan få i dagpenger basert på hva du har hatt i inntekt de siste 12 månedene, eller i gjennomsnitt de siste 36 månedene. Vi velger det alternativet som er best for deg. I ditt tilfelle er det "
+            },
+            {
+              "_type": "opplysningReference",
+              "_key": "57426bb43212",
+              "_ref": "485255c9-5f47-4f91-8739-1bb4bf793c55",
+              "behandlingOpplysning": {
+                "_updatedAt": "2024-11-07T11:48:57Z",
+                "textId": "opplysning.brukt-beregningsregel",
+                "_createdAt": "2024-11-07T11:48:32Z",
+                "_rev": "2ws1FO2hJVQcdmMBE8u8lu",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "485255c9-5f47-4f91-8739-1bb4bf793c55"
+              }
+            },
+            {
+              "marks": [],
+              "text": ".",
+              "_key": "ba974011b4ee",
+              "_type": "span"
+            }
+          ]
+        },
+        {
+          "children": [
+            {
+              "_key": "89c6167ddab9",
+              "_type": "span",
+              "marks": [],
+              "text": "Din registrerte inntekt for hver tolvmånedersperiode siste tre år:"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "cda8bd10dd8e",
+          "markDefs": []
+        },
+        {
+          "style": "normal",
+          "_key": "ed6262b20807",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "text": "",
+              "_key": "b3509383e30e",
+              "_type": "span",
+              "marks": []
+            },
+            {
+              "_ref": "f3aa13ba-f1ff-4e73-8f3e-435538c961f8",
+              "_type": "opplysningReference",
+              "_key": "436ca0a5af54",
+              "behandlingOpplysning": {
+                "_id": "f3aa13ba-f1ff-4e73-8f3e-435538c961f8",
+                "_updatedAt": "2024-12-03T12:35:57Z",
+                "textId": "opplysning.forste-maaned-aar-for-inntektsperiode-1",
+                "_createdAt": "2024-12-03T12:27:11Z",
+                "_rev": "01G9mTgwfBdthBMtc12xrE",
+                "_type": "behandlingOpplysning",
+                "language": "nb"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " - ",
+              "_key": "c69d7784af08"
+            },
+            {
+              "_ref": "41974c5e-c2f1-47a5-b3a7-56ae52d730b6",
+              "_type": "opplysningReference",
+              "_key": "fa97ca07acef",
+              "behandlingOpplysning": {
+                "language": "nb",
+                "_id": "41974c5e-c2f1-47a5-b3a7-56ae52d730b6",
+                "_updatedAt": "2024-12-03T12:35:15Z",
+                "textId": "opplysning.siste-maaned-aar-for-inntektsperiode-1",
+                "_createdAt": "2024-12-03T12:28:30Z",
+                "_rev": "Wp4YtttetXsIWN6E5E6nYg",
+                "_type": "behandlingOpplysning"
+              }
+            },
+            {
+              "marks": [],
+              "text": "      Inntekt: ",
+              "_key": "944bfd955151",
+              "_type": "span"
+            },
+            {
+              "_ref": "675b4554-afe2-4d7b-96b1-a1b847c58c02",
+              "_type": "opplysningReference",
+              "_key": "1628fd3e1492",
+              "behandlingOpplysning": {
+                "language": "nb",
+                "_id": "675b4554-afe2-4d7b-96b1-a1b847c58c02",
+                "type": "penger",
+                "_updatedAt": "2024-12-03T12:46:10Z",
+                "textId": "opplysning.utbetalt-arbeidsinntekt-periode-1",
+                "_createdAt": "2024-12-03T11:59:56Z",
+                "_rev": "01G9mTgwfBdthBMtc13I3q",
+                "_type": "behandlingOpplysning"
+              }
+            },
+            {
+              "marks": [],
+              "text": "",
+              "_key": "4db65da3abd2",
+              "_type": "span"
+            }
+          ],
+          "level": 1,
+          "_type": "block"
+        },
+        {
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "d71de8e61a9f"
+            },
+            {
+              "_key": "31949583ab8d",
+              "_ref": "c4de1777-1a20-494b-a226-83a9b051aba7",
+              "_type": "opplysningReference",
+              "behandlingOpplysning": {
+                "textId": "opplysning.forste-maaned-aar-for-inntektsperiode-2",
+                "_createdAt": "2024-12-03T12:27:30Z",
+                "_rev": "Wp4YtttetXsIWN6E5E6p9O",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "c4de1777-1a20-494b-a226-83a9b051aba7",
+                "_updatedAt": "2024-12-03T12:35:46Z"
+              }
+            },
+            {
+              "_key": "358ea962f7ac",
+              "_type": "span",
+              "marks": [],
+              "text": " - "
+            },
+            {
+              "_key": "c3034145fb84",
+              "_ref": "1c7cb408-038c-4bf3-b75c-3073085bda59",
+              "_type": "opplysningReference",
+              "behandlingOpplysning": {
+                "language": "nb",
+                "_id": "1c7cb408-038c-4bf3-b75c-3073085bda59",
+                "_updatedAt": "2024-12-03T12:35:04Z",
+                "textId": "opplysning.siste-maaned-aar-for-inntektsperiode-2",
+                "_createdAt": "2024-12-03T12:28:45Z",
+                "_rev": "01G9mTgwfBdthBMtc12wzu",
+                "_type": "behandlingOpplysning"
+              }
+            },
+            {
+              "text": "      Inntekt: ",
+              "_key": "d433ef06357b",
+              "_type": "span",
+              "marks": []
+            },
+            {
+              "_key": "29d746479d82",
+              "_ref": "519b1db8-4d00-4344-9fe1-11b6eb05e5b1",
+              "_type": "opplysningReference",
+              "behandlingOpplysning": {
+                "_id": "519b1db8-4d00-4344-9fe1-11b6eb05e5b1",
+                "type": "penger",
+                "_updatedAt": "2024-12-03T12:45:43Z",
+                "textId": "opplysning.utbetalt-arbeidsinntekt-periode-2",
+                "_createdAt": "2024-12-03T12:03:21Z",
+                "_rev": "Wp4YtttetXsIWN6E5E7XjG",
+                "_type": "behandlingOpplysning",
+                "language": "nb"
+              }
+            },
+            {
+              "text": "",
+              "_key": "48f2291a7f95",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "a138241de364"
+        },
+        {
+          "_key": "b5c11704876d",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "9e0b3645c917"
+            },
+            {
+              "_key": "fcc88521d89b",
+              "_ref": "59bd9cb0-76e8-46e2-8941-83f20dcf3f57",
+              "_type": "opplysningReference",
+              "behandlingOpplysning": {
+                "_updatedAt": "2024-12-03T12:35:35Z",
+                "textId": "opplysning.forste-maaned-aar-for-inntektsperiode-3",
+                "_createdAt": "2024-12-03T12:27:56Z",
+                "_rev": "dwoqEidp3Ggk0BqcfugKRr",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "59bd9cb0-76e8-46e2-8941-83f20dcf3f57"
+              }
+            },
+            {
+              "marks": [],
+              "text": " - ",
+              "_key": "90e2bd31388e",
+              "_type": "span"
+            },
+            {
+              "_ref": "dc2a3002-f77a-4da6-bda4-484423a4a23e",
+              "_type": "opplysningReference",
+              "_key": "510eef0343d9",
+              "behandlingOpplysning": {
+                "_id": "dc2a3002-f77a-4da6-bda4-484423a4a23e",
+                "_updatedAt": "2024-12-03T12:34:44Z",
+                "textId": "opplysning.siste-maaned-aar-for-inntektsperiode-3",
+                "_createdAt": "2024-12-03T12:29:01Z",
+                "_rev": "dwoqEidp3Ggk0BqcfugGnP",
+                "_type": "behandlingOpplysning",
+                "language": "nb"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "      Inntekt: ",
+              "_key": "35efd1f189d5"
+            },
+            {
+              "_key": "357a294765a7",
+              "_ref": "fad8b45b-8116-4ee6-a8a1-8ea588a6cd17",
+              "_type": "opplysningReference",
+              "behandlingOpplysning": {
+                "type": "penger",
+                "_updatedAt": "2024-12-03T12:46:00Z",
+                "textId": "opplysning.utbetalt-arbeidsinntekt-periode-3",
+                "_createdAt": "2024-12-03T12:02:38Z",
+                "_rev": "01G9mTgwfBdthBMtc13HX6",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "fad8b45b-8116-4ee6-a8a1-8ea588a6cd17"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "238fb8809766"
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Når vi beregner dagpengene dine, setter vi opp inntekten din tilsvarende årlig justering av grunnbeløpet (G). Inntekt over ",
+              "_key": "6703abf4eae1"
+            },
+            {
+              "_ref": "cd8e036b-081e-425f-8b56-d37c62c350c8",
+              "_type": "opplysningReference",
+              "_key": "62d8a2370d4e",
+              "behandlingOpplysning": {
+                "_createdAt": "2024-12-03T12:04:25Z",
+                "_rev": "dwoqEidp3Ggk0BqcfuYG1t",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "cd8e036b-081e-425f-8b56-d37c62c350c8",
+                "type": "penger",
+                "_updatedAt": "2024-12-03T12:04:41Z",
+                "textId": "opplysning.6-ganger-grunnbelop"
+              }
+            },
+            {
+              "text": " (6 G) per tolvmånedersperiode vil ikke bli regnet med. Inntektsgrunnlaget ditt er beregnet til ",
+              "_key": "5f0a116e1e12",
+              "_type": "span",
+              "marks": []
+            },
+            {
+              "_ref": "46b7c71c-3203-4ee9-80ac-b46b36dd33a6",
+              "_type": "opplysningReference",
+              "_key": "655473c33eb3",
+              "behandlingOpplysning": {
+                "_createdAt": "2024-11-15T11:39:18Z",
+                "_rev": "IFwPN263y0Otrjb8ZPfKTi",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "46b7c71c-3203-4ee9-80ac-b46b36dd33a6",
+                "type": "penger",
+                "_updatedAt": "2024-11-15T11:40:22Z",
+                "textId": "opplysning.grunnlag"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "ed84ec091320"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "167c958eb923",
+          "markDefs": []
+        },
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "b4bcf21160cd"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "7ff53a193959",
+          "markDefs": []
+        },
+        {
+          "style": "normal",
+          "_key": "56f2cafd5399",
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://www.nav.no/dagpenger#hvem-kan",
+              "_key": "81cc36787e92"
+            },
+            {
+              "_type": "link",
+              "href": "https://www.skatteetaten.no/skjema/mine-inntekter-og-arbeidsforhold/",
+              "_key": "97a7cb1ed4b7"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du kan se hva som gir rett til dagpenger på ",
+              "_key": "0093087be362"
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "81cc36787e92"
+              ],
+              "text": "nav.no/dagpenger",
+              "_key": "5c0911607783"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ". Vi har hentet inntektene dine fra Skatteetaten. Du kan sjekke inntekten din på ",
+              "_key": "a7d1ec3f2230"
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "97a7cb1ed4b7"
+              ],
+              "text": "skatteetaten.no/mineinntekter",
+              "_key": "facb8b7a39cb"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "15a2c78d10bc"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "7ed7b49cfa95"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "eab05bcb02d6"
+        },
+        {
+          "style": "normal",
+          "_key": "0605fa2145b0",
+          "markDefs": [],
+          "children": [
+            {
+              "_key": "27e6c261c5a6",
+              "_type": "span",
+              "marks": [],
+              "text": "Hvis opplysningene ikke stemmer, må du:"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "4f73d1d57ddb",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Kontakte arbeidsgiveren din, slik at de kan rette inntektsopplysningene dine.",
+              "_key": "1803ca8652fb"
+            }
+          ],
+          "level": 1
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "17590f1e8679",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Ta kontakt med Nav og dokumentere endringene.",
+              "_key": "4477578c25d8"
+            }
+          ],
+          "level": 1
+        },
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Beregningen er gjort etter ",
+              "_key": "8d904d50e37e"
+            },
+            {
+              "text": "folketrygdloven § 4-11 andre ledd",
+              "_key": "315841bc4ddc",
+              "_type": "span",
+              "marks": [
+                "40460c6c425d"
+              ]
+            },
+            {
+              "marks": [],
+              "text": ".",
+              "_key": "70353282ea2c",
+              "_type": "span"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "fee7fdfa8e79",
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://lovdata.no/lov/1997-02-28-19/%C2%A74-11",
+              "_key": "40460c6c425d"
+            }
+          ]
+        }
+      ],
+      "language": "nb",
+      "title": "Inntektsgrunnlaget",
+      "utvidetBeskrivelse": false,
+      "_updatedAt": "2025-01-23T09:43:38Z",
+      "_createdAt": "2024-12-02T12:57:50Z"
+    },
+    {
+      "innhold": [
+        {
+          "children": [
+            {
+              "marks": [],
+              "text": "Du må være frisk nok",
+              "_key": "0493c7264111",
+              "_type": "span"
+            }
+          ],
+          "_type": "block",
+          "style": "h3",
+          "_key": "614644e59314",
+          "markDefs": []
+        },
+        {
+          "style": "normal",
+          "_key": "4f5f93301adb",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "For å ha rett til dagpenger, må du være frisk nok til å jobbe minst 50 prosent. Vi har fått opplysninger om at du er for syk til å jobbe minst 50 prosent, og du får derfor ikke dagpenger.",
+              "_key": "674f573928170"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "38e70796376e",
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://lovdata.no/lov/1997-02-28-19/§4-5",
+              "_key": "186fd9862459"
+            }
+          ],
+          "children": [
+            {
+              "_key": "2cc0df1176660",
+              "_type": "span",
+              "marks": [],
+              "text": "Vedtaket er gjort etter "
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "186fd9862459"
+              ],
+              "text": "folketrygdloven § 4-5 første ledd",
+              "_key": "ee4d737db600"
+            },
+            {
+              "_key": "82e4d856f59d",
+              "_type": "span",
+              "marks": [],
+              "text": "."
+            }
+          ]
+        }
+      ],
+      "language": "nb",
+      "_id": "444f5710-648b-4ad0-aa63-dc0c95852ff7",
+      "_updatedAt": "2025-01-16T10:00:23Z",
+      "_rev": "pNdFo0jzUh1upuRBKvWvYh",
+      "_type": "brevBlokk",
+      "title": "Arbeidsfør",
+      "_createdAt": "2025-01-13T14:59:44Z",
+      "utvidetBeskrivelse": true,
+      "textId": "brev.blokk.avslag-reell-arbeidssoker-arbeidsfor"
+    },
+    {
+      "textId": "brev.blokk.avslag-tapt-inntekt",
+      "_type": "brevBlokk",
+      "innhold": [
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du må ha mistet inntekt som arbeidstaker",
+              "_key": "3b81b1fb5f660"
+            }
+          ],
+          "_type": "block",
+          "style": "h3",
+          "_key": "48df3ea0df6e",
+          "markDefs": []
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_key": "09d01cb1b5570",
+              "_type": "span",
+              "marks": [],
+              "text": "For å ha rett til dagpenger, må du ha mistet inntekt som arbeidstaker. Du har ikke mistet inntekten, fordi du har krav på lønn fra arbeidsgiveren din. Du får derfor ikke dagpenger."
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "9c907adcb1e4"
+        },
+        {
+          "style": "normal",
+          "_key": "bbedf0c3da95",
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://lovdata.no/lov/1997-02-28-19/§4-3",
+              "_key": "ba7e24df41a7"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Vedtaket er gjort etter ",
+              "_key": "fb58a97a36080"
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "ba7e24df41a7"
+              ],
+              "text": "folketrygdloven § 4-3 første ledd",
+              "_key": "bdc78bdfb056"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "df649237493e"
+            }
+          ],
+          "_type": "block"
+        }
+      ],
+      "language": "nb",
+      "_updatedAt": "2025-01-22T11:31:03Z",
+      "_createdAt": "2025-01-22T11:24:29Z",
+      "_rev": "8zg1Xoz2U4YsREvqQOJr9B",
+      "utvidetBeskrivelse": false,
+      "_id": "4daac18f-dbd8-4bf6-89ca-14c9dbfe1141",
+      "title": "Du må ha mistet inntekt som arbeidstaker"
+    },
+    {
+      "innhold": [
+        {
+          "_key": "463a920841ff",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du må sende meldekort",
+              "_key": "6f97932fcbac0"
+            }
+          ],
+          "_type": "block",
+          "style": "h2"
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "7bde4b2ea0fd",
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://www.nav.no/",
+              "_key": "87d958812955"
+            },
+            {
+              "_type": "link",
+              "href": "https://www.nav.no/meldekort/send-meldekort",
+              "_key": "2222c99bb6fa"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "For å ha rett på dagpenger må du sende meldekort hver 14. dag. Du fyller ut meldekortet digitalt på ",
+              "_key": "afca276590dc0"
+            },
+            {
+              "_key": "a2ff969644af",
+              "_type": "span",
+              "marks": [
+                "2222c99bb6fa"
+              ],
+              "text": "nav.no/meldekort"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ". Logg inn på ",
+              "_key": "87a4cefa8df1"
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "87d958812955"
+              ],
+              "text": "nav.no",
+              "_key": "54303d3fbeb8"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " for å se når du skal sende neste meldekort.",
+              "_key": "b507eb9d9c9c"
+            }
+          ]
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "text": "Hvis du sender meldekortet etter fristen, får du trekk i utbetalingen for neste meldekort. Hvor mye du blir trukket avhenger av hvor mange dager for sent meldekortet ble sendt. Du kan klage på trekk i utbetalingen. Klagefristen er seks uker.",
+              "_key": "7dd01043d47c",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "8785c536624a"
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Har det gått mer enn 20 dager siden siste gang du sendte et meldekort, blir du tatt ut av arbeidssøkerregisteret hos Nav, og dagpengene dine stanser. Da må du registrere deg som arbeidssøker på nytt og sende inn ny søknad om dagpenger.",
+              "_key": "8e404e228066"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "96de194b0626"
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "text": "",
+              "_key": "f9c80ffeeebb",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "6f9ff221f633"
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "b7cce0abbed4",
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://www.nav.no/send-meldekort-dagpenger",
+              "_key": "ac3ae3703f92"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Les mer om meldekort og hva som skal føres på ",
+              "_key": "e1744f4b1e48"
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "ac3ae3703f92"
+              ],
+              "text": "nav.no/send-meldekort-dagpenger",
+              "_key": "6bbd219cb7a5"
+            },
+            {
+              "marks": [],
+              "text": ".",
+              "_key": "4b3406c53a16",
+              "_type": "span"
+            }
+          ]
+        }
+      ],
+      "_id": "4f6b0783-c82b-4779-8bd5-3ddc7e93d8c0",
+      "_rev": "8zg1Xoz2U4YsREvqQNgMSr",
+      "title": "Du må sende meldekort",
+      "_type": "brevBlokk",
+      "_updatedAt": "2025-01-22T09:38:09Z",
+      "_createdAt": "2024-11-07T12:06:07Z",
+      "language": "nb",
+      "utvidetBeskrivelse": false,
+      "textId": "brev.blokk.du-maa-sende-meldekort"
+    },
+    {
+      "language": "nb",
+      "_id": "583c86c9-5650-48b1-8cb3-07577da5e3cc",
+      "_rev": "0zPjWAGkHgzUBjxT351nOt",
+      "innhold": [
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Nav har innvilget søknaden din om dagpenger",
+              "_key": "c71ce5bce5170"
+            }
+          ],
+          "_type": "block",
+          "style": "h1",
+          "_key": "dd3f4733f54d"
+        },
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du får dagpenger fra og med ",
+              "_key": "71d126ceaf3c0"
+            },
+            {
+              "_ref": "9d834799-da4d-4a7f-8a21-ca48958bec1e",
+              "_type": "opplysningReference",
+              "_key": "2fa37577159a",
+              "behandlingOpplysning": {
+                "type": "dato",
+                "_updatedAt": "2024-11-12T12:03:29Z",
+                "textId": "opplysning.provingsdato",
+                "_createdAt": "2024-11-12T12:03:08Z",
+                "_rev": "kV2ZrhgfcSEGP1GK19ZjUq",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "9d834799-da4d-4a7f-8a21-ca48958bec1e"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ". Du kan få dagpenger i en periode på inntil ",
+              "_key": "03ffbb4bbd57"
+            },
+            {
+              "_ref": "1321fc22-8d53-4925-9697-994434229cfa",
+              "_type": "opplysningReference",
+              "_key": "88ce6aa6f44b",
+              "behandlingOpplysning": {
+                "_createdAt": "2024-11-07T10:54:05Z",
+                "_rev": "wSoBK7B07GMaKUnB0FnOpt",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "1321fc22-8d53-4925-9697-994434229cfa",
+                "type": "heltall",
+                "_updatedAt": "2024-11-07T10:54:20Z",
+                "textId": "opplysning.antall-stonadsuker"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " uker.",
+              "_key": "6d26bfb45b91"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "d143d242682d",
+          "markDefs": []
+        },
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "3a3ca1bc6e8e"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "86bcea8c66df",
+          "markDefs": []
+        },
+        {
+          "children": [
+            {
+              "text": "Du får ",
+              "_key": "7a394e45d2ea",
+              "_type": "span",
+              "marks": []
+            },
+            {
+              "_type": "opplysningReference",
+              "_key": "e35f7b9ecf51",
+              "_ref": "3a66cf9a-52ff-44f7-8e3a-53c203b3d8e6",
+              "behandlingOpplysning": {
+                "_updatedAt": "2024-12-03T13:06:19Z",
+                "textId": "opplysning.dagsats-med-barnetillegg-etter-samordning-og-90-prosent-regel",
+                "_createdAt": "2024-12-03T13:06:11Z",
+                "_rev": "Wp4YtttetXsIWN6E5EEAws",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "3a66cf9a-52ff-44f7-8e3a-53c203b3d8e6",
+                "type": "penger"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "  dagen for fem dager i uken.",
+              "_key": "723dcbede861"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "c8f6be811f43",
+          "markDefs": []
+        },
+        {
+          "_key": "8729b8f9c170",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "fa1b1768fbc1"
+            }
+          ],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Nav trekker først en egenandel av dagpengene dine. Egenandelen din er ",
+              "_key": "9bf1076db4c4"
+            },
+            {
+              "_ref": "a964d956-af1e-4a5c-9105-187dc86e55f5",
+              "_type": "opplysningReference",
+              "_key": "cbf0c2058e5d",
+              "behandlingOpplysning": {
+                "language": "nb",
+                "_id": "a964d956-af1e-4a5c-9105-187dc86e55f5",
+                "type": "penger",
+                "_updatedAt": "2024-11-07T10:58:08Z",
+                "textId": "opplysning.egenandel",
+                "_createdAt": "2024-11-07T10:57:58Z",
+                "_rev": "wSoBK7B07GMaKUnB0FnUAr",
+                "_type": "behandlingOpplysning"
+              }
+            },
+            {
+              "marks": [],
+              "text": ", som er tre ganger dagsatsen din.",
+              "_key": "c5a38125a819",
+              "_type": "span"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "3ede91eafb78"
+        },
+        {
+          "style": "normal",
+          "_key": "e99371bedbfa",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "e027e6429c19"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "marks": [],
+              "text": "Du kan lese mer om beregning, utbetaling og egenandel lenger ned i brevet.",
+              "_key": "f8ed121908f9",
+              "_type": "span"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "3e76a2669efb"
+        }
+      ],
+      "title": "Nav har innvilget søknaden din om dagpenger",
+      "textId": "brev.blokk.vedtak-innvilgelse",
+      "_type": "brevBlokk",
+      "_updatedAt": "2025-01-23T08:45:11Z",
+      "_createdAt": "2024-11-07T10:42:24Z",
+      "utvidetBeskrivelse": false
+    },
+    {
+      "_createdAt": "2024-09-13T09:48:37Z",
+      "_rev": "ZzexQeF9kj5B3rg0j5ip9H",
+      "language": "nb",
+      "_updatedAt": "2025-01-22T09:50:58Z",
+      "innhold": [
+        {
+          "style": "h1",
+          "_key": "626df20c8014",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Nav har avslått søknaden din om dagpenger",
+              "_key": "8318515c99aa0"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "style": "normal",
+          "_key": "eb735644efb6",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Vi har avslått søknaden din om dagpenger fra ",
+              "_key": "197d0ad9558c0"
+            },
+            {
+              "_ref": "9d834799-da4d-4a7f-8a21-ca48958bec1e",
+              "_type": "opplysningReference",
+              "_key": "eb212d383e9b",
+              "behandlingOpplysning": {
+                "type": "dato",
+                "_updatedAt": "2024-11-12T12:03:29Z",
+                "textId": "opplysning.provingsdato",
+                "_createdAt": "2024-11-12T12:03:08Z",
+                "_rev": "kV2ZrhgfcSEGP1GK19ZjUq",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "9d834799-da4d-4a7f-8a21-ca48958bec1e"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "cb4bd807ba85"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "style": "normal",
+          "_key": "259b5eb935b5",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "e48d78e4dcfb"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "text": "Begrunnelse",
+              "_key": "fe7ec97b54ab",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "_type": "block",
+          "style": "h2",
+          "_key": "4d778c36581e"
+        }
+      ],
+      "utvidetBeskrivelse": false,
+      "_type": "brevBlokk",
+      "_id": "5858f36c-e0f8-4a41-9fcc-1a08952ea21f",
+      "title": "Vedtaksbrev avslag intro",
+      "textId": "brev.blokk.vedtak-avslag"
+    },
+    {
+      "_createdAt": "2025-01-16T09:39:40Z",
+      "_id": "60877cab-cd23-48b2-b47a-b12a0eb34be5",
+      "title": "Oppholdstillatelsen din må gi deg rett til å ta arbeid på heltid eller deltid",
+      "_type": "brevBlokk",
+      "language": "nb",
+      "_updatedAt": "2025-01-16T11:35:33Z",
+      "textId": "brev.blokk.avslag-reell-arbeidssoker-oppholdstillatelse-heltid-deltid",
+      "_rev": "pNdFo0jzUh1upuRBKwQzFh",
+      "innhold": [
+        {
+          "_type": "block",
+          "style": "h3",
+          "_key": "3f548230d6cd",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Oppholdstillatelsen din må gi deg rett til å ta arbeid på heltid og deltid",
+              "_key": "884311054d90"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "3e09114b8e3c",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "For å ha rett til dagpenger må oppholdstillatelsen din gi deg rett til å ta arbeid både på heltid og deltid. Oppholdstillatelsen din gir deg ikke rett til å ta både heltids- og deltidsarbeid, og du får derfor ikke dagpenger.",
+              "_key": "87fe9d6005660"
+            }
+          ]
+        },
+        {
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://lovdata.no/lov/1997-02-28-19/§4-5",
+              "_key": "62199d9b4d4f"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Vedtaket er gjort etter ",
+              "_key": "c26f0c36b5e10"
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "62199d9b4d4f"
+              ],
+              "text": "folketrygdloven § 4-5 første ledd",
+              "_key": "dd175e0a035f"
+            },
+            {
+              "text": ".",
+              "_key": "b6171108487d",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "d03b3de7d012"
+        }
+      ],
+      "utvidetBeskrivelse": true
+    },
+    {
+      "innhold": [
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "af3a156799ed",
+          "markDefs": [],
+          "children": [
+            {
+              "_key": "b49d043660220",
+              "_type": "span",
+              "marks": [],
+              "text": "Svangerskapspenger: "
+            },
+            {
+              "_type": "opplysningReference",
+              "_key": "3d4df6af8744",
+              "_ref": "05807140-0965-4314-9ca7-ad0c1824414f",
+              "behandlingOpplysning": {
+                "_updatedAt": "2025-01-22T13:23:13Z",
+                "textId": "opplysning.svangerskapspenger-dagsats",
+                "_createdAt": "2025-01-22T13:23:03Z",
+                "_rev": "ZzexQeF9kj5B3rg0j6xoiJ",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "05807140-0965-4314-9ca7-ad0c1824414f",
+                "type": "penger"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " per dag",
+              "_key": "b0e171b80528"
+            }
+          ]
+        }
+      ],
+      "language": "nb",
+      "_id": "62bc70ef-d403-4c63-897a-24f583c8974c",
+      "_updatedAt": "2025-01-22T13:33:53Z",
+      "textId": "brev.blokk.samordning-svangerskapspenger",
+      "_rev": "6AvICLbw9qPRddkqB2npuJ",
+      "utvidetBeskrivelse": false,
+      "_createdAt": "2025-01-22T13:33:03Z",
+      "_type": "brevBlokk",
+      "title": "Samordning svangerskapspenger"
+    },
+    {
+      "utvidetBeskrivelse": false,
+      "textId": "brev.blokk.samordning-opplaeringspenger",
+      "_createdAt": "2025-01-22T13:28:40Z",
+      "innhold": [
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "f8b34b49c39c",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Opplæringspenger: ",
+              "_key": "e81d9b01c1f60"
+            },
+            {
+              "_ref": "35d78017-a2d3-4816-858a-b50006f6e016",
+              "_type": "opplysningReference",
+              "_key": "acdfb760f80b",
+              "behandlingOpplysning": {
+                "_id": "35d78017-a2d3-4816-858a-b50006f6e016",
+                "type": "penger",
+                "_updatedAt": "2025-01-22T13:20:25Z",
+                "textId": "opplysning.opplaeringspenger-dagsats",
+                "_createdAt": "2025-01-22T13:20:00Z",
+                "_rev": "NBv5peUca0J8E41fbcNarH",
+                "_type": "behandlingOpplysning",
+                "language": "nb"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " per dag",
+              "_key": "de991afc0b4e"
+            }
+          ]
+        }
+      ],
+      "title": "Samordning opplæringspenger",
+      "_updatedAt": "2025-01-22T13:29:20Z",
+      "_rev": "znHQMGVDeUWHvH68Xrm0j7",
+      "_type": "brevBlokk",
+      "language": "nb",
+      "_id": "6dfd6c2e-fa60-4f64-8d51-ce798240a02c"
+    },
+    {
+      "textId": "brev.blokk.begrunnelse-avslag-minsteinntekt",
+      "_id": "70a3b4ca-290d-41d5-86f8-df66db1bc8bb",
+      "_createdAt": "2024-09-13T09:53:54Z",
+      "_rev": "qQpkQmFIZ2DSQkhvWtwwL6",
+      "innhold": [
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "text": "Du har hatt for lav inntekt",
+              "_key": "e3bafdbb59860",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "_type": "block",
+          "style": "h3",
+          "_key": "cc3e375d632d"
+        },
+        {
+          "style": "normal",
+          "_key": "936135c991c5",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "For å få dagpenger må du ha hatt arbeidsinntekt på ",
+              "_key": "2f79c83c5864"
+            },
+            {
+              "_ref": "08821f01-2329-4e6b-818f-0fce1f0c5406",
+              "_type": "opplysningReference",
+              "_key": "e3a8422bc69c",
+              "behandlingOpplysning": {
+                "textId": "opplysning.inntektskrav-for-siste-12-mnd",
+                "_createdAt": "2024-09-13T10:08:15Z",
+                "_rev": "Kr5dD2L5cV66ZmRYNvZfRm",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "08821f01-2329-4e6b-818f-0fce1f0c5406",
+                "type": "penger",
+                "_updatedAt": "2024-09-16T10:43:23Z"
+              }
+            },
+            {
+              "marks": [],
+              "text": " de siste 12 månedene, eller ",
+              "_key": "5297b6992350",
+              "_type": "span"
+            },
+            {
+              "_ref": "eb502ed9-93cf-4675-8c5f-e407ac80170a",
+              "_type": "opplysningReference",
+              "_key": "a92ab2cf67cf",
+              "behandlingOpplysning": {
+                "_updatedAt": "2024-09-16T10:43:35Z",
+                "textId": "opplysning.inntektskrav-for-siste-36-mnd",
+                "_createdAt": "2024-09-13T10:08:51Z",
+                "_rev": "vd41e4YzH4Vh3Umcvxt3Ax",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "eb502ed9-93cf-4675-8c5f-e407ac80170a",
+                "type": "penger"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " de siste 36 månedene.",
+              "_key": "7e05cee87207"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "style": "normal",
+          "_key": "bbf6fe536b9e",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "marks": [],
+              "text": "Den registrerte arbeidsinntekten din de siste 12 månedene til og med ",
+              "_key": "113fa7d3ce8b0",
+              "_type": "span"
+            },
+            {
+              "_ref": "acd83808-74f5-4029-a94f-0f9073b478e7",
+              "_type": "opplysningReference",
+              "_key": "852caacf5234",
+              "behandlingOpplysning": {
+                "_id": "acd83808-74f5-4029-a94f-0f9073b478e7",
+                "type": "dato",
+                "_updatedAt": "2024-09-16T10:43:32Z",
+                "textId": "opplysning.siste-avsluttende-kalendermaaned",
+                "_createdAt": "2024-09-13T10:00:46Z",
+                "_rev": "Kr5dD2L5cV66ZmRYNvZj6s",
+                "_type": "behandlingOpplysning",
+                "language": "nb"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " er ",
+              "_key": "5f93801ed576"
+            },
+            {
+              "_ref": "e766361b-a574-46f1-89ba-5def2fbd0cea",
+              "_type": "opplysningReference",
+              "_key": "318b8793be72",
+              "behandlingOpplysning": {
+                "type": "penger",
+                "_updatedAt": "2024-09-17T12:37:15Z",
+                "textId": "opplysning.arbeidsinntekt-siste-12-mnd",
+                "_createdAt": "2024-09-13T10:10:22Z",
+                "_rev": "IKC1lbF6CN9Cuos7Yr5uSw",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "e766361b-a574-46f1-89ba-5def2fbd0cea"
+              }
+            },
+            {
+              "text": ".",
+              "_key": "b5f4ed6cac20",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "level": 1,
+          "_type": "block"
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "48fa2be4b9af",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Den registrerte arbeidsinntekten din de siste 36 månedene til og med ",
+              "_key": "f1b27123e2c90"
+            },
+            {
+              "_ref": "acd83808-74f5-4029-a94f-0f9073b478e7",
+              "_type": "opplysningReference",
+              "_key": "9ec4cdce53da",
+              "behandlingOpplysning": {
+                "language": "nb",
+                "_id": "acd83808-74f5-4029-a94f-0f9073b478e7",
+                "type": "dato",
+                "_updatedAt": "2024-09-16T10:43:32Z",
+                "textId": "opplysning.siste-avsluttende-kalendermaaned",
+                "_createdAt": "2024-09-13T10:00:46Z",
+                "_rev": "Kr5dD2L5cV66ZmRYNvZj6s",
+                "_type": "behandlingOpplysning"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " er ",
+              "_key": "5a2cb1376e4f"
+            },
+            {
+              "_ref": "53cc71be-00f3-43f5-98c7-4e0bebd8ac51",
+              "_type": "opplysningReference",
+              "_key": "3bb3f7959382",
+              "behandlingOpplysning": {
+                "_updatedAt": "2024-09-16T10:43:26Z",
+                "textId": "opplysning.arbeidsinntekt-siste-36-mnd",
+                "_createdAt": "2024-09-13T10:10:48Z",
+                "_rev": "vd41e4YzH4Vh3Umcvxsxy7",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "53cc71be-00f3-43f5-98c7-4e0bebd8ac51",
+                "type": "penger"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "f3c9c6c9d178"
+            }
+          ],
+          "level": 1
+        },
+        {
+          "children": [
+            {
+              "text": "Du kan se hvilke inntekter som gir rett til dagpenger på ",
+              "_key": "20712c1a12600",
+              "_type": "span",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "924a705f7c0f"
+              ],
+              "text": "nav.no/dagpenger",
+              "_key": "e358285bdad8"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ". Vi har hentet arbeidsinntektene dine fra Skatteetaten. Du kan sjekke dem på ",
+              "_key": "3d9b6d03da84"
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "d3c7571903d7"
+              ],
+              "text": "skatteetaten.no/mineinntekter",
+              "_key": "5dfe5fbdf0b1"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "e1112d3d2375"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "aa0caa08672a",
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://www.skatteetaten.no/mineinntekter",
+              "_key": "d3c7571903d7"
+            },
+            {
+              "_type": "link",
+              "href": "https://www.nav.no/dagpenger#hvem-kan",
+              "_key": "924a705f7c0f"
+            }
+          ]
+        },
+        {
+          "children": [
+            {
+              "text": "Hvis opplysningene ikke stemmer, må du:",
+              "_key": "0ac9a41601220",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "4863249a78b1",
+          "markDefs": []
+        },
+        {
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "0db5a7971e1d",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "text": "Kontakte arbeidsgiveren din, slik at de kan rette inntektsopplysningene dine.",
+              "_key": "32212507b5a20",
+              "_type": "span",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "style": "normal",
+          "_key": "5d429f2ddcd6",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_key": "c4e80620c4d8",
+              "_type": "span",
+              "marks": [],
+              "text": "Ta kontakt med Nav og dokumentere endringene."
+            }
+          ],
+          "level": 1,
+          "_type": "block"
+        },
+        {
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://lovdata.no/lov/1997-02-28-19/%C2%A74-4",
+              "_key": "e2da0381e6b2"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Vedtaket er gjort etter ",
+              "_key": "2fb1e5fa5bdc0"
+            },
+            {
+              "_key": "b8384466f664",
+              "_type": "span",
+              "marks": [
+                "e2da0381e6b2"
+              ],
+              "text": "folketrygdloven §4-4"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "454649321c21"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "11f8f7eb4570"
+        }
+      ],
+      "language": "nb",
+      "_type": "brevBlokk",
+      "_updatedAt": "2025-01-16T10:14:05Z",
+      "title": "Begrunnelse krav til inntekt er for lav",
+      "utvidetBeskrivelse": true
+    },
+    {
+      "utvidetBeskrivelse": false,
+      "innhold": [
+        {
+          "_key": "4e90eabf81b0",
+          "markDefs": [],
+          "children": [
+            {
+              "text": "For å ha rett til dagpenger, må du være villig til å ta jobb både på heltid og deltid. Du har opplyst at du ikke vil ta jobb uavhengig av om den er heltid eller deltid.",
+              "_key": "393a888a83e9",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "_type": "block",
+          "style": "normal"
+        }
+      ],
+      "textId": "brev.blokk.avslag-reell-arbeidssoker-heltid-deltid",
+      "_rev": "8zg1Xoz2U4YsREvqQFLD65",
+      "_updatedAt": "2025-01-21T08:22:49Z",
+      "_createdAt": "2025-01-13T15:14:08Z",
+      "_type": "brevBlokk",
+      "language": "nb",
+      "_id": "75fdacad-999b-42e4-8141-3ca3363137d5",
+      "title": "Villig til å ta arbeid på heltid og deltid"
+    },
+    {
+      "textId": "brev.blokk.verneplikt-gunstigere-enn-inntekt",
+      "_rev": "rnb16y4e0BKBgYGF3Coo5F",
+      "utvidetBeskrivelse": false,
+      "_type": "brevBlokk",
+      "innhold": [
+        {
+          "style": "normal",
+          "_key": "e2e0b665ad91",
+          "markDefs": [],
+          "children": [
+            {
+              "_key": "275e8057ba6e0",
+              "_type": "span",
+              "marks": [],
+              "text": "Inntekten du har hatt tidligere gir deg rett til dagpenger i "
+            },
+            {
+              "_ref": "e110e028-5e66-4fce-b832-388ae147fc51",
+              "_type": "opplysningReference",
+              "_key": "3fecbf42d239",
+              "behandlingOpplysning": {
+                "_rev": "6MTNjSA10fN03nTs0BIm1Y",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "e110e028-5e66-4fce-b832-388ae147fc51",
+                "type": "heltall",
+                "_updatedAt": "2025-01-14T12:16:26Z",
+                "textId": "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger",
+                "_createdAt": "2025-01-14T12:16:05Z"
+              }
+            },
+            {
+              "text": " uker, men du ville fått mindre dagpenger enn du får etter reglene som gjelder for vernepliktige. Fordi det er mest gunstig for deg, får du dagpenger i inntil ",
+              "_key": "dbc1a0bd1927",
+              "_type": "span",
+              "marks": []
+            },
+            {
+              "_type": "opplysningReference",
+              "_key": "64fe08281ad1",
+              "_ref": "1321fc22-8d53-4925-9697-994434229cfa",
+              "behandlingOpplysning": {
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "1321fc22-8d53-4925-9697-994434229cfa",
+                "type": "heltall",
+                "_updatedAt": "2024-11-07T10:54:20Z",
+                "textId": "opplysning.antall-stonadsuker",
+                "_createdAt": "2024-11-07T10:54:05Z",
+                "_rev": "wSoBK7B07GMaKUnB0FnOpt"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " uker på grunnlag av at du har avtjent verneplikt.",
+              "_key": "520ded15c8bb"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [
+                "strong"
+              ],
+              "text": "Husk at hvis du fortsatt er arbeidsledig etter ",
+              "_key": "e1586b92d90f"
+            },
+            {
+              "_ref": "1321fc22-8d53-4925-9697-994434229cfa",
+              "_type": "opplysningReference",
+              "_key": "a89c33fafab1",
+              "behandlingOpplysning": {
+                "_rev": "wSoBK7B07GMaKUnB0FnOpt",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "1321fc22-8d53-4925-9697-994434229cfa",
+                "type": "heltall",
+                "_updatedAt": "2024-11-07T10:54:20Z",
+                "textId": "opplysning.antall-stonadsuker",
+                "_createdAt": "2024-11-07T10:54:05Z"
+              }
+            },
+            {
+              "text": " uker, kan du søke om dagpenger basert på inntekten du har hatt tidligere. Du finner søknadsskjema på nav.no.",
+              "_key": "0718f217323f",
+              "_type": "span",
+              "marks": [
+                "strong"
+              ]
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "73864116d4f9",
+          "markDefs": []
+        }
+      ],
+      "_id": "7d9c9b43-5322-4e50-bfd0-82cee18d667a",
+      "title": "Bruker oppfyller både verneplikt og minsteinntekt - verneplikt gir høyere grunnlag",
+      "_updatedAt": "2025-01-17T09:42:24Z",
+      "_createdAt": "2025-01-14T11:59:23Z",
+      "language": "nb"
+    },
+    {
+      "_type": "brevBlokk",
+      "title": "Vil du hjelpe oss å forbedre brev fra Nav?",
+      "_updatedAt": "2024-10-21T12:25:28Z",
+      "_rev": "TzzAQFe4WL6qNhW7Ji0r8H",
+      "_id": "8231fadd-aad6-49c5-8776-043e4545718e",
+      "utvidetBeskrivelse": false,
+      "_createdAt": "2024-10-21T07:49:58Z",
+      "language": "nb",
+      "textId": "brev.blokk.hjelp-oss-forbedre-brev",
+      "innhold": [
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Vil du hjelpe oss å forbedre brev fra Nav?",
+              "_key": "18e607a282910"
+            }
+          ],
+          "_type": "block",
+          "style": "h2",
+          "_key": "a6aee027b876"
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "text": "Spørreundersøkelsen er frivillig og anonym. Undersøkelsen tar 5 minutter å besvare. Du kan svare ved å logge inn på: ",
+              "_key": "bdc6ed0fff7f",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "b9ecceda3772"
+        },
+        {
+          "style": "normal",
+          "_key": "5fb0d0f8c665",
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "http://www.nav.no/delta-dag2",
+              "_key": "e217186909c3"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [
+                "e217186909c3"
+              ],
+              "text": "www.nav.no/delta-dag2",
+              "_key": "5c373274ed840"
+            }
+          ],
+          "_type": "block"
+        }
+      ]
+    },
+    {
+      "utvidetBeskrivelse": true,
+      "_id": "8432110e-e245-49dd-bde6-de94f3a5a5e6",
+      "language": "nb",
+      "_updatedAt": "2024-11-15T10:54:21Z",
+      "textId": "brev.blokk.arbeidstiden-din",
+      "_createdAt": "2024-11-07T12:05:02Z",
+      "title": "Arbeidstiden din",
+      "_rev": "Fp9agXC7mmaNlqRyUsnYvU",
+      "_type": "brevBlokk",
+      "innhold": [
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Arbeidstiden din",
+              "_key": "f1ffa71233e5"
+            }
+          ],
+          "_type": "block",
+          "style": "h2",
+          "_key": "62a5878c86b8"
+        },
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Nav har regnet ut den vanlige arbeidstiden din til å være ",
+              "_key": "4ec35158a152"
+            },
+            {
+              "_ref": "a7c95f0a-250f-4d52-8175-f063bebb5577",
+              "_type": "opplysningReference",
+              "_key": "6b122a039fa7",
+              "behandlingOpplysning": {
+                "textId": "opplysning.fastsatt-arbeidstid-per-uke-for-tap",
+                "_createdAt": "2024-11-07T12:28:13Z",
+                "_rev": "OI72hrfmxc8wN2wnbMk9ZJ",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "a7c95f0a-250f-4d52-8175-f063bebb5577",
+                "type": "desimaltall",
+                "_updatedAt": "2024-11-07T12:28:28Z"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " timer per uke.",
+              "_key": "00b664bcaf08"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "921f1fdee538",
+          "markDefs": []
+        }
+      ]
+    },
+    {
+      "_createdAt": "2025-01-22T13:25:12Z",
+      "title": "Samordning pleiepenger",
+      "textId": "brev.blokk.samordning-pleiepenger",
+      "_type": "brevBlokk",
+      "innhold": [
+        {
+          "style": "normal",
+          "_key": "b740100207e1",
+          "markDefs": [],
+          "children": [
+            {
+              "text": "Pleiepenger: ",
+              "_key": "a2d48712de790",
+              "_type": "span",
+              "marks": []
+            },
+            {
+              "_type": "opplysningReference",
+              "_key": "bdae2264fb8a",
+              "_ref": "2ed5beb3-76c6-4ccd-b632-869b4a585843",
+              "behandlingOpplysning": {
+                "_createdAt": "2025-01-22T13:18:55Z",
+                "_rev": "NBv5peUca0J8E41fbcNWYB",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "2ed5beb3-76c6-4ccd-b632-869b4a585843",
+                "type": "penger",
+                "_updatedAt": "2025-01-22T13:19:08Z",
+                "textId": "opplysning.pleiepenger-dagsats"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " per dag",
+              "_key": "6ce4a65e5c13"
+            }
+          ],
+          "_type": "block"
+        }
+      ],
+      "language": "nb",
+      "_id": "8a0d02ba-185c-46a5-80a6-ba41aeb1fe63",
+      "utvidetBeskrivelse": false,
+      "_updatedAt": "2025-01-22T13:26:48Z",
+      "_rev": "0zPjWAGkHgzUBjxT2oOVYd"
+    },
+    {
+      "title": "Villig til å ta ethvert arbeid",
+      "utvidetBeskrivelse": false,
+      "_updatedAt": "2025-01-21T08:23:34Z",
+      "innhold": [
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "83c360f01ab8",
+          "markDefs": [],
+          "children": [
+            {
+              "text": "For å ha rett til dagpenger, må du være villig til å ta alle typer arbeid med vanlig lønn. Du har opplyst oss om at du ikke vil ta alle typer arbeid med vanlig lønn, derfor har du ikke rett til dagpenger.",
+              "_key": "27d5e94dbeb5",
+              "_type": "span",
+              "marks": []
+            }
+          ]
+        }
+      ],
+      "_createdAt": "2025-01-13T15:12:39Z",
+      "_rev": "8zg1Xoz2U4YsREvqQFLEA9",
+      "_id": "8b988a2a-97b1-48da-9d72-39cd594cdde5",
+      "_type": "brevBlokk",
+      "language": "nb",
+      "textId": "brev.blokk.avslag-reell-arbeidssoker-ethvert-arbeid"
+    },
+    {
+      "textId": "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
+      "_createdAt": "2024-11-07T12:10:48Z",
+      "_type": "brevBlokk",
+      "title": "Vi stanser dagpengene dine automatisk når du: ",
+      "innhold": [
+        {
+          "style": "h2",
+          "_key": "fa3b801560e5",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Vi stanser dagpengene dine automatisk når du:",
+              "_key": "a684b7271b3d0"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "322442557e6b",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "text": "ikke sender meldekort etter at du registrerte deg som arbeidsledig",
+              "_key": "5aa948d8d85b0",
+              "_type": "span",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "359bd86d845e",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_key": "d0621619ca90",
+              "_type": "span",
+              "marks": [],
+              "text": "har jobbet mer enn 50 prosent av den vanlige arbeidstiden din på tre meldekort (60 prosent om du er permittert fra fiskeindustrien)"
+            }
+          ]
+        },
+        {
+          "children": [
+            {
+              "_key": "dae36c02503b",
+              "_type": "span",
+              "marks": [],
+              "text": "slutter å sende meldekort og det er mer enn 20 dager siden du sist sendte meldekort"
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "abade18e2b86",
+          "listItem": "bullet",
+          "markDefs": []
+        },
+        {
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "be98b1b9c955",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "svarer nei på spørsmålet på meldekortet om du fortsatt ønsker å være registrert som arbeidssøker",
+              "_key": "20c3cb3852d0"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "24aa40d315ed",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "er ferdig med perioden du får dagpenger",
+              "_key": "8ed95cd122fd"
+            }
+          ],
+          "level": 1
+        },
+        {
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_key": "1097769a0ed4",
+              "_type": "span",
+              "marks": [],
+              "text": "er ferdig med perioden du får dagpenger som permittert"
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "e8b732e4588f"
+        },
+        {
+          "style": "normal",
+          "_key": "c6864bca1a38",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "fyller 67 år",
+              "_key": "f9c8039db9da"
+            }
+          ],
+          "level": 1,
+          "_type": "block"
+        }
+      ],
+      "language": "nb",
+      "utvidetBeskrivelse": false,
+      "_id": "9a5afb24-1371-4099-bf7a-7f50963ac997",
+      "_rev": "4rii1uCSjXv0pRAsuJw3Y1",
+      "_updatedAt": "2024-11-18T13:03:31Z"
+    },
+    {
+      "_createdAt": "2024-11-07T11:42:03Z",
+      "_id": "9a7e66b5-87a8-49f9-bb28-dc54284da2c5",
+      "textId": "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
+      "_rev": "01G9mTgwfBdthBMtc15m0a",
+      "_type": "brevBlokk",
+      "language": "nb",
+      "title": "Slik har vi beregnet dagpengene dine",
+      "utvidetBeskrivelse": false,
+      "_updatedAt": "2024-12-03T13:06:55Z",
+      "innhold": [
+        {
+          "style": "h2",
+          "_key": "c12de66d60e8",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Slik har vi beregnet dagpengene dine",
+              "_key": "374d4f6c8b080"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "style": "normal",
+          "_key": "dc6b8460b6e5",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du får ",
+              "_key": "7a3617d66213"
+            },
+            {
+              "_key": "f20ce72971b2",
+              "_ref": "3a66cf9a-52ff-44f7-8e3a-53c203b3d8e6",
+              "_type": "opplysningReference",
+              "behandlingOpplysning": {
+                "textId": "opplysning.dagsats-med-barnetillegg-etter-samordning-og-90-prosent-regel",
+                "_createdAt": "2024-12-03T13:06:11Z",
+                "_rev": "Wp4YtttetXsIWN6E5EEAws",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "3a66cf9a-52ff-44f7-8e3a-53c203b3d8e6",
+                "type": "penger",
+                "_updatedAt": "2024-12-03T13:06:19Z"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " per dag for fem dager i uken.",
+              "_key": "896879733b0a"
+            }
+          ],
+          "_type": "block"
+        }
+      ]
+    },
+    {
+      "_id": "9d3d14a0-44de-4f1a-b0c0-94c745a4c5d5",
+      "utvidetBeskrivelse": true,
+      "textId": "brev.blokk.avslag-reell-arbeidssoker-oppholdstillatelse-alle-jobber",
+      "_createdAt": "2025-01-16T09:45:48Z",
+      "title": "Oppholdstillatelsen din må gi deg rett til å ta alle typer arbeid",
+      "_updatedAt": "2025-01-16T09:59:29Z",
+      "language": "nb",
+      "_type": "brevBlokk",
+      "innhold": [
+        {
+          "_type": "block",
+          "style": "h3",
+          "_key": "8434a5817e9f",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Oppholdstillatelsen din må gi deg rett til å ta alle typer arbeid",
+              "_key": "6c1e5948c97b"
+            }
+          ]
+        },
+        {
+          "_key": "24c2f3e9a225",
+          "markDefs": [],
+          "children": [
+            {
+              "_key": "dccf5208a7ab0",
+              "_type": "span",
+              "marks": [],
+              "text": "For å ha rett til dagpenger må oppholdstillatelsen din gi deg rett til å ta alle typer arbeid. Oppholdstillatelsen din gir deg ikke rett til å ta alle typer arbeid, og du får derfor ikke dagpenger."
+            }
+          ],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "markDefs": [
+            {
+              "href": "https://lovdata.no/lov/1997-02-28-19/§4-5",
+              "_key": "3038f91434d2",
+              "_type": "link"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Vedtaket er gjort etter ",
+              "_key": "73bae7afa9ba0"
+            },
+            {
+              "marks": [
+                "3038f91434d2"
+              ],
+              "text": "folketrygdloven § 4-5 første ledd",
+              "_key": "70ad3b613bce",
+              "_type": "span"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "037e7952526e"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "646da8f16b14"
+        }
+      ],
+      "_rev": "qQpkQmFIZ2DSQkhvWtiOdr"
+    },
+    {
+      "title": "Du må gi oss riktige opplysninger",
+      "utvidetBeskrivelse": false,
+      "language": "nb",
+      "textId": "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+      "_rev": "IFwPN263y0Otrjb8ZPelJ3",
+      "_createdAt": "2024-11-07T12:12:31Z",
+      "_type": "brevBlokk",
+      "_id": "9f6aa282-cff9-428f-ada0-2d80634c592a",
+      "innhold": [
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du må gi oss riktige opplysninger",
+              "_key": "8479b7e3f8db0"
+            }
+          ],
+          "_type": "block",
+          "style": "h2",
+          "_key": "98c1e2d1db41"
+        },
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Hvis du gir oss opplysninger som ikke er riktige eller mangelfulle, kan du få et krav om å betale tilbake dagpengene dine. Du kan også miste retten til dagpenger i inntil 26 uker.",
+              "_key": "15ce4f8009bb0"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "43bb8b9cb9de",
+          "markDefs": []
+        }
+      ],
+      "_updatedAt": "2024-11-15T11:24:00Z"
+    },
+    {
+      "title": "Reell arbeidssøker hjemmel",
+      "_updatedAt": "2025-01-17T11:41:53Z",
+      "_createdAt": "2025-01-15T14:06:46Z",
+      "_rev": "rnb16y4e0BKBgYGF3DHYS1",
+      "_type": "brevBlokk",
+      "innhold": [
+        {
+          "style": "normal",
+          "_key": "1eebfa19cdd0",
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://lovdata.no/lov/1997-02-28-19/§4-5",
+              "_key": "c3e82435b249"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Vedtaket er gjort etter ",
+              "_key": "f1abce35396f"
+            },
+            {
+              "marks": [
+                "c3e82435b249"
+              ],
+              "text": "folketrygdloven § 4-5",
+              "_key": "db76fedf8db4",
+              "_type": "span"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "1cc63705a969"
+            }
+          ],
+          "_type": "block"
+        }
+      ],
+      "_id": "a017362e-6231-4f77-98a8-14c127edac2c",
+      "language": "nb",
+      "utvidetBeskrivelse": false,
+      "textId": "brev.blokk.avslag-reell-arbeidssoker-hjemmel"
+    },
+    {
+      "utvidetBeskrivelse": false,
+      "_updatedAt": "2025-01-22T09:37:09Z",
+      "_createdAt": "2024-11-07T12:05:38Z",
+      "title": "Egenandel",
+      "textId": "brev.blokk.egenandel",
+      "_type": "brevBlokk",
+      "_rev": "8zg1Xoz2U4YsREvqQNgJld",
+      "language": "nb",
+      "_id": "a22b87bb-314d-42d0-b322-1faa360deee0",
+      "innhold": [
+        {
+          "_type": "block",
+          "style": "h2",
+          "_key": "95530cb26632",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Egenandel",
+              "_key": "fdc89fdaec2f0"
+            }
+          ]
+        },
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Når du får dagpenger, trekker Nav en egenandel fra den første utbetalingen din. Den tilsvarer tre ganger dagsatsen med eventuelt barnetillegg.",
+              "_key": "9e3d113e58c00"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "2e9de0b06747",
+          "markDefs": []
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Egenandelen din er ",
+              "_key": "0c00492b0d2f"
+            },
+            {
+              "_ref": "a964d956-af1e-4a5c-9105-187dc86e55f5",
+              "_type": "opplysningReference",
+              "_key": "1592191029ac",
+              "behandlingOpplysning": {
+                "_updatedAt": "2024-11-07T10:58:08Z",
+                "textId": "opplysning.egenandel",
+                "_createdAt": "2024-11-07T10:57:58Z",
+                "_rev": "wSoBK7B07GMaKUnB0FnUAr",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "a964d956-af1e-4a5c-9105-187dc86e55f5",
+                "type": "penger"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "a4c9c3218ee3"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "4da108551434"
+        },
+        {
+          "_key": "813e0b557cec",
+          "markDefs": [],
+          "children": [
+            {
+              "marks": [],
+              "text": "",
+              "_key": "8d8ab637fb8b",
+              "_type": "span"
+            }
+          ],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "_key": "ad77951ed81f",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Vi trekker egenandelen fra den første utbetalingen din. Får vi ikke trukket hele egenandelen fra den første utbetalingen, trekker vi resten fra den neste utbetalingen din.",
+              "_key": "25457a4887c7"
+            }
+          ],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "children": [
+            {
+              "text": "Egenandelen trekkes automatisk. I utbetalingsoversikten vil dagsatsen din se lavere ut i perioder hvor egenandel er trukket.",
+              "_key": "dff56eae06be",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "cc5249525327",
+          "markDefs": []
+        },
+        {
+          "style": "normal",
+          "_key": "20401f1e1e16",
+          "markDefs": [],
+          "children": [
+            {
+              "marks": [],
+              "text": "",
+              "_key": "b079a7c6c621",
+              "_type": "span"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://lovdata.no/lov/1997-02-28-19/%C2%A74-9",
+              "_key": "6c4fc6cd948d"
+            }
+          ],
+          "children": [
+            {
+              "text": "Les mer om egenandel i ",
+              "_key": "eb45adee52b7",
+              "_type": "span",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "6c4fc6cd948d"
+              ],
+              "text": "folketrygdloven § 4-9",
+              "_key": "82669de41c48"
+            },
+            {
+              "marks": [],
+              "text": ".",
+              "_key": "31d42d3eabb1",
+              "_type": "span"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "20cb4a60eef2"
+        }
+      ]
+    },
+    {
+      "title": "Du har rett til innsyn",
+      "_updatedAt": "2024-10-21T09:39:34Z",
+      "_createdAt": "2024-09-13T09:57:52Z",
+      "_type": "brevBlokk",
+      "innhold": [
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du har rett til innsyn",
+              "_key": "c68ede2596e2"
+            }
+          ],
+          "_type": "block",
+          "style": "h2",
+          "_key": "be4d77d8c99d",
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "3ad46d65f662",
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://www.nav.no/personvernerklaering",
+              "_key": "b96647fb0f4b"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Kontakt oss om du vil se dokumentene i saken din. Ta kontakt på nav.no/kontakt eller på telefon 55 55 33 33. Du kan lese mer om innsynsretten på ",
+              "_key": "f008206cbb71"
+            },
+            {
+              "marks": [
+                "b96647fb0f4b"
+              ],
+              "text": "nav.no/personvernerklaering",
+              "_key": "fb22bb5da500",
+              "_type": "span"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "fcfefc67581c"
+            }
+          ]
+        },
+        {
+          "style": "normal",
+          "_key": "f32617e94d44",
+          "markDefs": [],
+          "children": [
+            {
+              "_key": "b435bc5a81fb0",
+              "_type": "span",
+              "marks": [],
+              "text": ""
+            }
+          ],
+          "_type": "block"
+        }
+      ],
+      "_id": "a29a9cd3-276b-43cc-9302-92b7103d2170",
+      "_rev": "VabgXi3AWseaCoNFTqe4Jk",
+      "language": "nb",
+      "utvidetBeskrivelse": false,
+      "textId": "brev.blokk.rett-til-innsyn"
+    },
+    {
+      "innhold": [
+        {
+          "style": "normal",
+          "_key": "3012cd397ed9",
+          "markDefs": [],
+          "children": [
+            {
+              "_key": "d63235ab1da0",
+              "_type": "span",
+              "marks": [],
+              "text": "For å ha rett til dagpenger, må du være villig til å jobbe hvor som helst i Norge. Du har opplyst at du ikke vil ta arbeid hvor som helst i Norge."
+            }
+          ],
+          "_type": "block"
+        }
+      ],
+      "title": "Villig til å ta jobb i hele Norge",
+      "utvidetBeskrivelse": false,
+      "_id": "a2b7fb77-b6d8-4f95-9c0f-f0c8e60866ae",
+      "textId": "brev.blokk.avslag-reell-arbeidssoker-arbeid-i-hele-norge",
+      "_type": "brevBlokk",
+      "_updatedAt": "2025-01-21T08:27:45Z",
+      "_createdAt": "2025-01-13T15:09:16Z",
+      "_rev": "8zg1Xoz2U4YsREvqQFLQgP",
+      "language": "nb"
+    },
+    {
+      "_updatedAt": "2025-01-16T09:26:58Z",
+      "textId": "brev.blokk.avslag-reell-arbeidssoker-tiltak",
+      "_rev": "pNdFo0jzUh1upuRBKvMpXu",
+      "_type": "brevBlokk",
+      "_id": "a37d550e-23e9-4a9e-8c71-4441fe5b7d8c",
+      "_createdAt": "2025-01-13T15:18:13Z",
+      "language": "nb",
+      "utvidetBeskrivelse": false,
+      "innhold": [
+        {
+          "_key": "e20c27338091",
+          "markDefs": [],
+          "children": [
+            {
+              "_key": "b200b64b0d6b",
+              "_type": "span",
+              "marks": [],
+              "text": "Du må være villig til å delta på arbeidsmarkedstiltak"
+            }
+          ],
+          "_type": "block",
+          "style": "h3"
+        },
+        {
+          "children": [
+            {
+              "_key": "a00febb13f0d0",
+              "_type": "span",
+              "marks": [],
+              "text": "Du har ikke rett til dagpenger fordi du ikke er villig til å delta på arbeidsmarkedstiltak."
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "f529f285749f",
+          "markDefs": []
+        },
+        {
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://lovdata.no/lov/1997-02-28-19/§4-5",
+              "_key": "cdff05cb9a20"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Vedtaket er gjort etter ",
+              "_key": "8138458b8cb6"
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "cdff05cb9a20"
+              ],
+              "text": "folketrygdloven § 4-5 første ledd bokstav d",
+              "_key": "9cfe417405b6"
+            },
+            {
+              "_key": "b5c3dd42ae9f",
+              "_type": "span",
+              "marks": [],
+              "text": "."
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "0d0e86dfdfc8"
+        }
+      ],
+      "title": "Villig til å delta på tiltak"
+    },
+    {
+      "_createdAt": "2025-01-22T13:27:08Z",
+      "_rev": "znHQMGVDeUWHvH68Xrlt6F",
+      "_type": "brevBlokk",
+      "innhold": [
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "13e29ea6b88b",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Omsorgspenger: ",
+              "_key": "507225510d9d0"
+            },
+            {
+              "_ref": "83cb4ee9-e8e3-4e18-a968-1cb20f71fc92",
+              "_type": "opplysningReference",
+              "_key": "c4ece0afac44",
+              "behandlingOpplysning": {
+                "textId": "opplysning.omsorgspenger-dagsats",
+                "_createdAt": "2025-01-22T13:19:35Z",
+                "_rev": "8zg1Xoz2U4YsREvqQPgVc5",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "83cb4ee9-e8e3-4e18-a968-1cb20f71fc92",
+                "type": "penger",
+                "_updatedAt": "2025-01-22T13:19:48Z"
+              }
+            },
+            {
+              "text": " per dag",
+              "_key": "f5907fed5fe2",
+              "_type": "span",
+              "marks": []
+            }
+          ]
+        }
+      ],
+      "utvidetBeskrivelse": false,
+      "textId": "brev.blokk.samordning-omsorgspenger",
+      "_id": "b0d0e024-5352-43a6-bf65-3e60f6751fd4",
+      "title": "Samordning omsorgspenger",
+      "language": "nb",
+      "_updatedAt": "2025-01-22T13:28:14Z"
+    },
+    {
+      "language": "nb",
+      "utvidetBeskrivelse": true,
+      "_updatedAt": "2025-01-22T09:38:57Z",
+      "_id": "be094e3d-92d9-484c-a17c-b2844cdee1fc",
+      "textId": "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
+      "_rev": "8zg1Xoz2U4YsREvqQNgP1p",
+      "innhold": [
+        {
+          "style": "h2",
+          "_key": "b6fa66e157f8",
+          "markDefs": [],
+          "children": [
+            {
+              "marks": [],
+              "text": "Hvor lenge kan du få dagpenger?",
+              "_key": "9d80a4b551d20",
+              "_type": "span"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du kan få dagpenger i en periode på inntil ",
+              "_key": "bdfcc8c8b3020"
+            },
+            {
+              "_ref": "1321fc22-8d53-4925-9697-994434229cfa",
+              "_type": "opplysningReference",
+              "_key": "18c55d04a5cc",
+              "behandlingOpplysning": {
+                "language": "nb",
+                "_id": "1321fc22-8d53-4925-9697-994434229cfa",
+                "type": "heltall",
+                "_updatedAt": "2024-11-07T10:54:20Z",
+                "textId": "opplysning.antall-stonadsuker",
+                "_createdAt": "2024-11-07T10:54:05Z",
+                "_rev": "wSoBK7B07GMaKUnB0FnOpt",
+                "_type": "behandlingOpplysning"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " uker. Lengden på perioden avhenger av hvor mye du har hatt i inntekt.",
+              "_key": "7caa36cc7eaa"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "2a169a1a949a"
+        },
+        {
+          "children": [
+            {
+              "marks": [],
+              "text": "",
+              "_key": "d88533823ecd",
+              "_type": "span"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "af0664b5b76b",
+          "markDefs": []
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "marks": [],
+              "text": "Dagpengene dine kan stanse før perioden er over. Hvis dagpengene dine stanser, kan du søke på nytt. Du kan lese mer om stans lenger ned i brevet.",
+              "_key": "bef4aa2443db",
+              "_type": "span"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "a13b4182978f"
+        }
+      ],
+      "title": "Hvor lenge kan du få dagpenger?",
+      "_createdAt": "2024-11-07T11:35:04Z",
+      "_type": "brevBlokk"
+    },
+    {
+      "_rev": "0zPjWAGkHgzUBjxT2oQZET",
+      "language": "nb",
+      "innhold": [
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "060b86a3a8e7",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Uføre: ",
+              "_key": "fa4527b6a3f60"
+            },
+            {
+              "_type": "opplysningReference",
+              "_key": "fb97bd8e87c7",
+              "_ref": "c9204214-acd8-4d18-a9b9-ca807add75a1",
+              "behandlingOpplysning": {
+                "_id": "c9204214-acd8-4d18-a9b9-ca807add75a1",
+                "type": "penger",
+                "_updatedAt": "2025-01-22T13:21:15Z",
+                "textId": "opplysning.ufore-dagsats",
+                "_createdAt": "2025-01-22T13:20:40Z",
+                "_rev": "NBv5peUca0J8E41fbcNfOt",
+                "_type": "behandlingOpplysning",
+                "language": "nb"
+              }
+            },
+            {
+              "text": " per dag",
+              "_key": "f16d5a82fd42",
+              "_type": "span",
+              "marks": []
+            }
+          ]
+        }
+      ],
+      "utvidetBeskrivelse": false,
+      "_type": "brevBlokk",
+      "_id": "be47c4a5-6f43-42cd-ade8-932aaaf9ca1c",
+      "title": "Samordning uføre",
+      "_updatedAt": "2025-01-22T13:30:29Z",
+      "textId": "brev.blokk.samordning-ufore",
+      "_createdAt": "2025-01-22T13:29:37Z"
+    },
+    {
+      "_type": "brevBlokk",
+      "_updatedAt": "2025-01-21T08:26:48Z",
+      "_rev": "8zg1Xoz2U4YsREvqQFLOS5",
+      "language": "nb",
+      "_id": "be76c085-15c6-4ded-8e47-3109dc81a893",
+      "textId": "brev.blokk.avslag-reell-arbeidssoker-unntak-heltid-deltid-hele-norge",
+      "_createdAt": "2025-01-21T08:25:12Z",
+      "utvidetBeskrivelse": false,
+      "title": "Unntak fra reglene om heltid/deltid og arbeid i hele Norge",
+      "innhold": [
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "f413a9cf3b97",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du kan få unntak fra dette hvis ett eller flere av disse punktene gjelder for deg:",
+              "_key": "f45bfc9e132d"
+            }
+          ]
+        },
+        {
+          "children": [
+            {
+              "text": "Du har barn under ett år.",
+              "_key": "d1a4044fcad3",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "9825aca61331",
+          "listItem": "bullet",
+          "markDefs": []
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "text": "Du har eneansvar for barn til og med 7. klasse.",
+              "_key": "a21e9c903644",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "3ae2db061351",
+          "listItem": "bullet"
+        },
+        {
+          "_key": "80453d3de5e4",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du har eneansvar for barn under 18 år med spesielle behov.",
+              "_key": "06b0d8e050c5"
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du har fylt 60 år.",
+              "_key": "301680cd7f11"
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "12568980fcab",
+          "listItem": "bullet",
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "c4f68cb9e5b2",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du har redusert helse.",
+              "_key": "25b0a86a78a3"
+            }
+          ],
+          "level": 1
+        },
+        {
+          "style": "normal",
+          "_key": "bba4f9f723bc",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "text": "Du har dokumentert at du har pleieansvar for et nært familiemedlem.",
+              "_key": "6c43a8f3e512",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "level": 1,
+          "_type": "block"
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Vi vurderer at du ikke oppfyller noen av kravene for disse unntakene og du får derfor ikke dagpenger.",
+              "_key": "2fb0b54c3f6a"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "87cba1c097a5"
+        }
+      ]
+    },
+    {
+      "innhold": [
+        {
+          "style": "h3",
+          "_key": "4e57186fa892",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Arbeidstiden din må ha blitt redusert med ",
+              "_key": "570e234272110"
+            },
+            {
+              "_ref": "1ae9a5af-7b8e-41da-a36a-5d7089eb11db",
+              "_type": "opplysningReference",
+              "_key": "19a3e9741996",
+              "behandlingOpplysning": {
+                "language": "nb",
+                "_id": "1ae9a5af-7b8e-41da-a36a-5d7089eb11db",
+                "type": "desimaltall",
+                "_updatedAt": "2025-01-21T11:44:43Z",
+                "textId": "opplysning.krav-til-prosentvis-tap-av-arbeidstid",
+                "_createdAt": "2025-01-21T11:43:58Z",
+                "_rev": "NBv5peUca0J8E41fbMuZfb",
+                "_type": "behandlingOpplysning"
+              }
+            },
+            {
+              "marks": [],
+              "text": " prosent eller mer",
+              "_key": "d243b9ab1bf3",
+              "_type": "span"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_key": "ce38749213f30",
+              "_type": "span",
+              "marks": [],
+              "text": "For å ha rett til dagpenger, må den vanlige arbeidstiden din ha blitt redusert med "
+            },
+            {
+              "_ref": "1ae9a5af-7b8e-41da-a36a-5d7089eb11db",
+              "_type": "opplysningReference",
+              "_key": "37193a836d4b",
+              "behandlingOpplysning": {
+                "language": "nb",
+                "_id": "1ae9a5af-7b8e-41da-a36a-5d7089eb11db",
+                "type": "desimaltall",
+                "_updatedAt": "2025-01-21T11:44:43Z",
+                "textId": "opplysning.krav-til-prosentvis-tap-av-arbeidstid",
+                "_createdAt": "2025-01-21T11:43:58Z",
+                "_rev": "NBv5peUca0J8E41fbMuZfb",
+                "_type": "behandlingOpplysning"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " prosent eller mer. Vanlig arbeidstid er arbeidstiden du hadde før du mistet jobben, eller før arbeidstiden din sist ble redusert.",
+              "_key": "f8b0456e5214"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "ab2643d43a62"
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "94267d14f81c",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "marks": [],
+              "text": "Arbeidstiden din var ",
+              "_key": "50f50cc411910",
+              "_type": "span"
+            },
+            {
+              "_ref": "a7c95f0a-250f-4d52-8175-f063bebb5577",
+              "_type": "opplysningReference",
+              "_key": "1061ec818b62",
+              "behandlingOpplysning": {
+                "_createdAt": "2024-11-07T12:28:13Z",
+                "_rev": "OI72hrfmxc8wN2wnbMk9ZJ",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "a7c95f0a-250f-4d52-8175-f063bebb5577",
+                "type": "desimaltall",
+                "_updatedAt": "2024-11-07T12:28:28Z",
+                "textId": "opplysning.fastsatt-arbeidstid-per-uke-for-tap"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " timer per uke",
+              "_key": "a6c5f1cc040d"
+            }
+          ],
+          "level": 1
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "ca01a2b5d51e",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "marks": [],
+              "text": "Du jobber nå ",
+              "_key": "c3f971a2fabf0",
+              "_type": "span"
+            },
+            {
+              "_ref": "d8666719-44f7-44ff-95a5-01205824c4eb",
+              "_type": "opplysningReference",
+              "_key": "af227058e53e",
+              "behandlingOpplysning": {
+                "_updatedAt": "2025-01-21T11:42:26Z",
+                "textId": "opplysning.fastsatt-ny-arbeidstid-per-uke",
+                "_createdAt": "2025-01-21T11:42:02Z",
+                "_rev": "NBv5peUca0J8E41fbMu46p",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "d8666719-44f7-44ff-95a5-01205824c4eb",
+                "type": "desimaltall"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " timer per uke",
+              "_key": "7df28166b3f1"
+            }
+          ],
+          "level": 1
+        },
+        {
+          "style": "normal",
+          "_key": "e31dee8f1a89",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Arbeidstiden din er redusert med ",
+              "_key": "6ac9a67462d80"
+            },
+            {
+              "_ref": "7554f65a-133b-45c1-a564-fd92ee2830e2",
+              "_type": "opplysningReference",
+              "_key": "462032d56fa4",
+              "behandlingOpplysning": {
+                "_createdAt": "2025-01-21T11:46:10Z",
+                "_rev": "8zg1Xoz2U4YsREvqQGGVzp",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "7554f65a-133b-45c1-a564-fd92ee2830e2",
+                "type": "desimaltall",
+                "_updatedAt": "2025-01-21T11:46:24Z",
+                "textId": "opplysning.prosentvis-tapt-arbeidstid"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " prosent, derfor får du ikke dagpenger.",
+              "_key": "8a80e1293040"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://lovdata.no/lov/1997-02-28-19/§4-3",
+              "_key": "588154ce2db0"
+            },
+            {
+              "_type": "link",
+              "href": "https://lovdata.no/forskrift/1998-09-16-890/§11-1",
+              "_key": "9ed42c9fd0bf"
+            }
+          ],
+          "children": [
+            {
+              "text": "Vedtaket er gjort etter ",
+              "_key": "3b8c2745cab30",
+              "_type": "span",
+              "marks": []
+            },
+            {
+              "text": "folketrygdloven § 4-3 andre ledd",
+              "_key": "4105782db592",
+              "_type": "span",
+              "marks": [
+                "588154ce2db0"
+              ]
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " og ",
+              "_key": "a7a492211850"
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "9ed42c9fd0bf"
+              ],
+              "text": "dagpengeforskriften kapittel 11",
+              "_key": "d8ccdcbdf2c5"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "6b00c11658a6"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "5e71116d19ce"
+        }
+      ],
+      "_id": "beb652d6-005b-450d-b9da-1fb4d6b20c4d",
+      "_updatedAt": "2025-01-21T13:45:48Z",
+      "utvidetBeskrivelse": false,
+      "title": "Tapt arbeidstid under terskel",
+      "_createdAt": "2025-01-21T10:32:31Z",
+      "_rev": "NBv5peUca0J8E41fbPMUlT",
+      "_type": "brevBlokk",
+      "textId": "brev.blokk.avslag-tapt-arbeidstid",
+      "language": "nb"
+    },
+    {
+      "textId": "brev.blokk.avslag-opphold-utlandet-del-2",
+      "innhold": [
+        {
+          "_key": "e7d1ced2e54e",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du oppholder deg ikke i Norge, og får derfor ikke dagpenger.",
+              "_key": "ddcdec1a50310"
+            }
+          ],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "children": [
+            {
+              "_key": "6761f5d4df500",
+              "_type": "span",
+              "marks": [],
+              "text": "Vedtaket er gjort etter folketrygdloven § 4-2, trygdeforordningen nr. 883/2004 artikkel 64 og 65 og dagpengeforskriften kapittel 1. Du kan lese om reglene for unntak i dagpengeforskriften."
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "e1c74f821505",
+          "markDefs": []
+        }
+      ],
+      "language": "nb",
+      "_id": "c3ba523c-0010-41c5-b5df-c9f1f2f79eca",
+      "_type": "brevBlokk",
+      "title": "Du oppholder deg ikke i Norge",
+      "utvidetBeskrivelse": false,
+      "_updatedAt": "2025-01-22T12:44:50Z",
+      "_createdAt": "2025-01-22T12:30:17Z",
+      "_rev": "NBv5peUca0J8E41fbc7LUB"
+    },
+    {
+      "_type": "brevBlokk",
+      "innhold": [
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "c870881ddfa7",
+          "markDefs": [],
+          "children": [
+            {
+              "_key": "f6a34b84ef500",
+              "_type": "span",
+              "marks": [],
+              "text": "Foreldrepenger: "
+            },
+            {
+              "_ref": "db069d8a-5c71-409b-8980-d537f11f0b13",
+              "_type": "opplysningReference",
+              "_key": "2e13adc3324b",
+              "behandlingOpplysning": {
+                "language": "nb",
+                "_id": "db069d8a-5c71-409b-8980-d537f11f0b13",
+                "type": "penger",
+                "_updatedAt": "2025-01-22T13:22:08Z",
+                "textId": "opplysning.foreldrepenger-dagsats",
+                "_createdAt": "2025-01-22T13:21:56Z",
+                "_rev": "NBv5peUca0J8E41fbcNjkt",
+                "_type": "behandlingOpplysning"
+              }
+            },
+            {
+              "_key": "af36fbd7732f",
+              "_type": "span",
+              "marks": [],
+              "text": " per dag"
+            }
+          ]
+        }
+      ],
+      "_createdAt": "2025-01-22T13:31:22Z",
+      "textId": "brev.blokk.samordning-foreldrepenger",
+      "utvidetBeskrivelse": false,
+      "language": "nb",
+      "_id": "ca99308d-1c1f-4636-a88c-642f2c44f46b",
+      "title": "Samordning foreldrepenger",
+      "_updatedAt": "2025-01-22T13:32:32Z",
+      "_rev": "0zPjWAGkHgzUBjxT2oRwQl"
+    },
+    {
+      "_rev": "0PS6Lj1IwdDZq7xRer0OKH",
+      "_createdAt": "2024-12-02T11:43:53Z",
+      "title": "Hvis 90% regel er benyttet ",
+      "textId": "brev.blokk.nittiprosentregel",
+      "_id": "cab54551-c018-40ae-96fd-a0e6866c3c0d",
+      "utvidetBeskrivelse": false,
+      "innhold": [
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "b42ad9ee728d",
+          "markDefs": [
+            {
+              "_key": "054df1ec9671",
+              "_type": "link",
+              "href": "https://lovdata.no/lov/1997-02-28-19/%C2%A74-12"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Hvor mye dagpenger du får, inkludert barnetillegget, kan ikke utgjøre mer enn 90 prosent av årlig beregnet inntekt. Derfor har vi redusert dagpengene dine. Dette går fram av ",
+              "_key": "e435afc298b20"
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "054df1ec9671"
+              ],
+              "text": "folketrygdloven § 4-12",
+              "_key": "8b5329777c30"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "0b804e9e940f"
+            }
+          ]
+        }
+      ],
+      "_updatedAt": "2024-12-02T12:30:41Z",
+      "_type": "brevBlokk",
+      "language": "nb"
+    },
+    {
+      "language": "nb",
+      "_id": "d1790aee-a6af-48f8-9d21-9c523f7456d7",
+      "_createdAt": "2025-01-22T13:17:10Z",
+      "_rev": "8zg1Xoz2U4YsREvqQPgiph",
+      "utvidetBeskrivelse": false,
+      "textId": "brev.blokk.samordning-sykepenger",
+      "innhold": [
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_key": "b2759904b0810",
+              "_type": "span",
+              "marks": [],
+              "text": "Sykepenger: "
+            },
+            {
+              "_ref": "e22d8cb6-05e1-46c3-b378-d3f625cc2f05",
+              "_type": "opplysningReference",
+              "_key": "49dfc7888fb7",
+              "behandlingOpplysning": {
+                "type": "penger",
+                "_updatedAt": "2025-01-22T13:18:31Z",
+                "textId": "opplysning.sykepenger-dagsats",
+                "_createdAt": "2025-01-22T13:18:17Z",
+                "_rev": "NBv5peUca0J8E41fbcNTMl",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "e22d8cb6-05e1-46c3-b378-d3f625cc2f05"
+              }
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " per dag",
+              "_key": "7514fce7f37d"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "52b3029fa864"
+        }
+      ],
+      "_type": "brevBlokk",
+      "title": "Samordning sykepenger",
+      "_updatedAt": "2025-01-22T13:25:06Z"
+    },
+    {
+      "_updatedAt": "2025-01-20T13:21:18Z",
+      "textId": "brev.blokk.avslag-reell-arbeidssoker-registrert-arbeidssoker",
+      "innhold": [
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "For å ha rett til dagpenger, må du være registrert som arbeidssøker. Du har ikke registrert deg som arbeidssøker og du får derfor ikke dagpenger.",
+              "_key": "93fd4edbf7140"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "d094309c804c",
+          "markDefs": []
+        }
+      ],
+      "_type": "brevBlokk",
+      "language": "nb",
+      "utvidetBeskrivelse": false,
+      "_createdAt": "2025-01-20T13:16:08Z",
+      "_rev": "rnb16y4e0BKBgYGF3cft67",
+      "_id": "d8b99c64-c30d-4964-9371-ad7fff1e2407",
+      "title": "Registrert som arbeidssøker"
+    },
+    {
+      "_id": "e571cf39-bb9a-49f3-b8ba-f13e566eff62",
+      "textId": "brev.blokk.utbetaling",
+      "_type": "brevBlokk",
+      "language": "nb",
+      "_updatedAt": "2024-11-18T13:01:05Z",
+      "_createdAt": "2024-11-07T12:08:59Z",
+      "innhold": [
+        {
+          "_key": "50bb9e176c9e",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Utbetaling",
+              "_key": "cfe27fba22bf"
+            }
+          ],
+          "_type": "block",
+          "style": "h2"
+        },
+        {
+          "style": "normal",
+          "_key": "e2dfb674d365",
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://www.nav.no/",
+              "_key": "902b7dc18919"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Har du registrert en bankkonto hos Nav eller Skatteetaten, vil du få utbetalingen på den kontoen. Pengene utbetales vanligvis innen to til tre dager etter at meldekortet ditt er registrert hos Nav. Du kan se alle utbetalingene du har fått ved å logge inn på ",
+              "_key": "8778e08024b00"
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "902b7dc18919"
+              ],
+              "text": "nav.no",
+              "_key": "2a4d25c269e2"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "e291077c6f62"
+            }
+          ],
+          "_type": "block"
+        }
+      ],
+      "title": "Utbetaling",
+      "utvidetBeskrivelse": false,
+      "_rev": "7gZSGKHZnFIlpfSZrj013G"
+    },
+    {
+      "language": "nb",
+      "textId": "hubba.bubba",
+      "_createdAt": "2025-01-22T09:11:03Z",
+      "_rev": "8zg1Xoz2U4YsREvqQNZRi9",
+      "_type": "brevBlokk",
+      "title": "Giao Tester",
+      "innhold": [
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "9064f6525abc",
+          "markDefs": [],
+          "children": [
+            {
+              "text": "Dette er linje 1",
+              "_key": "29d3a07e7c0c",
+              "_type": "span",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "marks": [],
+              "text": "",
+              "_key": "7a91e07947c5",
+              "_type": "span"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "005ba89316bc"
+        },
+        {
+          "style": "normal",
+          "_key": "2bb948965571",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Detter er linje 2",
+              "_key": "88acfec55efa"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "style": "normal",
+          "_key": "89ec97e824ec",
+          "markDefs": [],
+          "children": [
+            {
+              "text": "",
+              "_key": "ccc3a02b1a0c",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "style": "normal",
+          "_key": "9eaa320bb4c1",
+          "markDefs": [],
+          "children": [
+            {
+              "marks": [],
+              "text": "",
+              "_key": "fad0e86a4270",
+              "_type": "span"
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "children": [
+            {
+              "_key": "630cb0853664",
+              "_type": "span",
+              "marks": [],
+              "text": "Dette er linje3"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "fae1fdfd501c",
+          "markDefs": []
+        }
+      ],
+      "utvidetBeskrivelse": false,
+      "_id": "eaa3072f-ba1f-4460-bfca-69d5de6bd1f4",
+      "_updatedAt": "2025-01-22T09:11:39Z"
+    },
+    {
+      "textId": "brev.blokk.3G-til-gunst-for-bruker",
+      "_createdAt": "2024-12-02T13:41:51Z",
+      "_type": "brevBlokk",
+      "utvidetBeskrivelse": false,
+      "_rev": "NBv5peUca0J8E41fbYGZ8p",
+      "innhold": [
+        {
+          "_key": "8b5678cf5515",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Inntekten du har hatt tidligere gir deg rett til dagpenger i \u003copplysning.kort-dagpengeperiode\u003e uker, men du ville fått mindre dagpenger enn du får etter reglene som gjelder for vernepliktige. Fordi det er mest gunstig for deg, får du dagpenger i inntil ",
+              "_key": "730f5807f0ed0"
+            },
+            {
+              "_ref": "1321fc22-8d53-4925-9697-994434229cfa",
+              "_type": "opplysningReference",
+              "_key": "ab69c3b016c3",
+              "behandlingOpplysning": {
+                "textId": "opplysning.antall-stonadsuker",
+                "_createdAt": "2024-11-07T10:54:05Z",
+                "_rev": "wSoBK7B07GMaKUnB0FnOpt",
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "1321fc22-8d53-4925-9697-994434229cfa",
+                "type": "heltall",
+                "_updatedAt": "2024-11-07T10:54:20Z"
+              }
+            },
+            {
+              "marks": [],
+              "text": " uker på grunnlag av at du har avtjent verneplikt.",
+              "_key": "d15324f7af97",
+              "_type": "span"
+            }
+          ],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "_key": "f7f02a98964d",
+          "markDefs": [],
+          "children": [
+            {
+              "marks": [
+                "strong"
+              ],
+              "text": "",
+              "_key": "9bad52651c35",
+              "_type": "span"
+            }
+          ],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "688e4b2b69a6",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [
+                "strong"
+              ],
+              "text": "Husk at hvis du fortsatt er arbeidsledig etter ",
+              "_key": "b62a7098a56d"
+            },
+            {
+              "_ref": "1321fc22-8d53-4925-9697-994434229cfa",
+              "_type": "opplysningReference",
+              "_key": "0d9ba30b2f6e",
+              "behandlingOpplysning": {
+                "_type": "behandlingOpplysning",
+                "language": "nb",
+                "_id": "1321fc22-8d53-4925-9697-994434229cfa",
+                "type": "heltall",
+                "_updatedAt": "2024-11-07T10:54:20Z",
+                "textId": "opplysning.antall-stonadsuker",
+                "_createdAt": "2024-11-07T10:54:05Z",
+                "_rev": "wSoBK7B07GMaKUnB0FnOpt"
+              }
+            },
+            {
+              "text": " uker, kan du søke om dagpenger basert på inntekten du har hatt tidligere. Du finner søknadsskjema på nav.no.",
+              "_key": "a52d19f15fc4",
+              "_type": "span",
+              "marks": [
+                "strong"
+              ]
+            }
+          ]
+        }
+      ],
+      "language": "nb",
+      "_id": "ebc6b563-33ec-450a-a26b-023a855895da",
+      "title": "Hvis vernepliktig med 3 G",
+      "_updatedAt": "2025-01-22T09:34:53Z"
+    },
+    {
+      "textId": "brev.blokk.sporsmaal",
+      "_createdAt": "2024-09-13T09:55:22Z",
+      "_type": "brevBlokk",
+      "_id": "ec76fd2b-baee-4039-81b5-54a26a2e6acc",
+      "_updatedAt": "2024-10-21T09:42:40Z",
+      "_rev": "TzzAQFe4WL6qNhW7JesbkR",
+      "innhold": [
+        {
+          "_type": "block",
+          "style": "h2",
+          "_key": "48ef5c73e7ab",
+          "markDefs": [],
+          "children": [
+            {
+              "text": "Har du spørsmål? ",
+              "_key": "6006bf3003c70",
+              "_type": "span",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "df2fdb062e13",
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://www.nav.no/dagpenger",
+              "_key": "7650a8dc643f"
+            },
+            {
+              "_type": "link",
+              "href": "https://www.nav.no/kontaktoss",
+              "_key": "9883e6a2d122"
+            },
+            {
+              "href": "www.nav.no",
+              "_key": "6deae01a79d9",
+              "_type": "link"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du finner mer informasjon på ",
+              "_key": "0a142bf95e8f0"
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "7650a8dc643f"
+              ],
+              "text": "nav.no/dagpenger",
+              "_key": "45efe0d42a6c"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ". På ",
+              "_key": "a4f3db451dad"
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "9883e6a2d122"
+              ],
+              "text": "nav.no/kontakt",
+              "_key": "266a618b48ef"
+            },
+            {
+              "text": " kan du chatte eller skrive til oss. Hvis du ikke finner svar på ",
+              "_key": "50d8b05a42de",
+              "_type": "span",
+              "marks": []
+            },
+            {
+              "text": "nav.no",
+              "_key": "dc867c9375ac",
+              "_type": "span",
+              "marks": [
+                "6deae01a79d9"
+              ]
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": " kan du ringe oss på telefon 55 55 33 33, hverdager 09.00-15.00.",
+              "_key": "69882b633177"
+            }
+          ]
+        }
+      ],
+      "language": "nb",
+      "title": "Har du spørsmål?",
+      "utvidetBeskrivelse": false
+    },
+    {
+      "_rev": "NBv5peUca0J8E41fbYGi5L",
+      "_type": "brevBlokk",
+      "innhold": [
+        {
+          "_key": "33e413e13a0c",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du har rett til å klage",
+              "_key": "b78e756313370"
+            }
+          ],
+          "_type": "block",
+          "style": "h2"
+        },
+        {
+          "style": "normal",
+          "_key": "c88a84984f81",
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://www.nav.no/klage",
+              "_key": "fcbdd3f02345"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Hvis du mener vedtaket er feil, kan du klage innen seks uker fra den datoen vedtaket har kommet fram til deg. Klagen må være skriftlig. Du finner skjema og informasjon på ",
+              "_key": "1f94832175ef0"
+            },
+            {
+              "marks": [
+                "fcbdd3f02345"
+              ],
+              "text": "nav.no/klage",
+              "_key": "9423cdf6067f",
+              "_type": "span"
+            },
+            {
+              "text": ".",
+              "_key": "280b2eca77b9",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "_type": "block"
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Nav kan veilede deg på telefon om hvordan du sender en klage. Nav-kontoret ditt kan også hjelpe deg med å skrive en klage. Kontakt oss på telefon 55 55 33 33 hvis du trenger hjelp.",
+              "_key": "5b36c01a81b40"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "59e044ee2a5a"
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "3e0cf786fe20",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Hvis du får medhold i klagen, kan du få dekket vesentlige utgifter som har vært nødvendige for å få endret vedtaket, for eksempel hjelp fra advokat. Du kan ha krav på fri rettshjelp etter rettshjelploven. Du kan få mer informasjon om denne ordningen hos advokater, statsforvalteren, eller Nav.",
+              "_key": "ea4577b9c7ab0"
+            }
+          ]
+        },
+        {
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://lovdata.no/lov/1967-02-10/%C2%A736",
+              "_key": "57b28980b547"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du kan lese om saksomkostninger i ",
+              "_key": "c1f5d8fe649f0"
+            },
+            {
+              "text": "forvaltningsloven § 36",
+              "_key": "33e5936d03c0",
+              "_type": "span",
+              "marks": [
+                "57b28980b547"
+              ]
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "6c21c8579b46"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "a2f8a9d0573b"
+        },
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Hvis du sender klage i posten, må du signere klagen.",
+              "_key": "9781e44c6cbf0"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "39ed6469cbff",
+          "markDefs": []
+        },
+        {
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://www.nav.no/klagerettigheter",
+              "_key": "b002f6e1d776"
+            }
+          ],
+          "children": [
+            {
+              "_key": "cb9c7c1a6f410",
+              "_type": "span",
+              "marks": [],
+              "text": "Mer informasjon om klagerettigheter finner du på "
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "b002f6e1d776"
+              ],
+              "text": "nav.no/klagerettigheter",
+              "_key": "26b76ea14698"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "52543cab59be"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "98fcd001631d"
+        },
+        {
+          "_key": "1d2192a7dd6b",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "1889a214fd51"
+            }
+          ],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Hvis du får medhold i klagen din, har du kun rett til dagpenger for de periodene du har sendt inn fullstendige utfylte meldekort til rett tid, og har vært registrert som arbeidssøker.",
+              "_key": "2052b5d9b306"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "2649b3c2f935",
+          "markDefs": []
+        }
+      ],
+      "_id": "f87d857e-b02d-4d3a-bdb9-aab8c6d3eb0f",
+      "utvidetBeskrivelse": false,
+      "_createdAt": "2024-09-13T09:56:32Z",
+      "textId": "brev.blokk.rett-til-aa-klage",
+      "language": "nb",
+      "title": "Du har rett til å klage",
+      "_updatedAt": "2025-01-22T09:36:48Z"
+    },
+    {
+      "textId": "brev.blokk.du-maa-melde-fra-om-endringer",
+      "_rev": "NBv5peUca0J8E41fbYHYiZ",
+      "_createdAt": "2024-11-07T12:11:47Z",
+      "innhold": [
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du må melde fra om endringer",
+              "_key": "09adb3c68bf90"
+            }
+          ],
+          "_type": "block",
+          "style": "h2",
+          "_key": "e01c90efc036"
+        },
+        {
+          "children": [
+            {
+              "_key": "fdad1dece45d0",
+              "_type": "span",
+              "marks": [],
+              "text": "Hvis det skjer en endring i situasjonen din, kan det påvirke dagpengene dine. Derfor er det din plikt å gi beskjed til Nav om endringen, slik at du ikke får for mye eller for lite i dagpenger. Ta kontakt med Nav på "
+            },
+            {
+              "_type": "span",
+              "marks": [
+                "1dc0578aaa15"
+              ],
+              "text": "nav.no/send-beskjed",
+              "_key": "c606303bfd54"
+            },
+            {
+              "_key": "53b68a6b5d59",
+              "_type": "span",
+              "marks": [],
+              "text": ", eller på telefon 55 55 33 33."
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "be194a620f63",
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://www.nav.no/send-beskjed",
+              "_key": "1dc0578aaa15"
+            }
+          ]
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "327bd939104b"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "77297d01116e"
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "71a7026603a6",
+          "markDefs": [],
+          "children": [
+            {
+              "_key": "df77e660b05e",
+              "_type": "span",
+              "marks": [],
+              "text": "Du må gi beskjed til oss hvis du:"
+            }
+          ]
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "begynner eller slutter i arbeid, helt eller delvis",
+              "_key": "15f30504959a"
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "aa15cda29f8b",
+          "listItem": "bullet"
+        },
+        {
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "er permittert og har arbeidet for permitterende arbeidsgiver i mer enn seks uker",
+              "_key": "4b17c8f46496"
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "2439f1272616"
+        },
+        {
+          "style": "normal",
+          "_key": "d4e46dd40e3a",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "blir oppsagt mens du er permittert",
+              "_key": "0d6905a43998"
+            }
+          ],
+          "level": 1,
+          "_type": "block"
+        },
+        {
+          "_key": "b4a3cae41156",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "blir sykmeldt, får endret sykmelding eller blir friskmeldt",
+              "_key": "7a09b38e04ca"
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "6ceb16baab19",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_key": "ea02a2a96b91",
+              "_type": "span",
+              "marks": [],
+              "text": "begynner eller slutter på tiltak"
+            }
+          ],
+          "level": 1
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "e19a3c27c161",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "begynner eller slutter på kurs eller annen utdanning",
+              "_key": "36cba10bef5d"
+            }
+          ],
+          "level": 1
+        },
+        {
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "77ae683bde58",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "skal avvikle ferie eller permisjon",
+              "_key": "4c303db7e014"
+            }
+          ]
+        },
+        {
+          "_key": "a494ae385fe1",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "sitter i varetekt, soner straff, har omvendt voldsalarm eller er under forvaring",
+              "_key": "14c6dfa5ddd5"
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "_key": "3dde8e0b6d0a",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "text": "endrer adresse - dette gjør du på skatteetaten.no/folkeregisteret",
+              "_key": "19c35dfbddee",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "text": "blir innlagt på sykehus eller institusjon",
+              "_key": "cc670e82c73a",
+              "_type": "span",
+              "marks": []
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "e52d7a34e0d6"
+        },
+        {
+          "style": "normal",
+          "_key": "037f246c76d9",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "skal reise eller flytte til utlandet",
+              "_key": "7dadd4bc223d"
+            }
+          ],
+          "level": 1,
+          "_type": "block"
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "mottar pensjon eller annen stønad",
+              "_key": "0fff428028a4"
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "d6681b1c00b9",
+          "listItem": "bullet"
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "b3873b8f2696",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "mottar barnetillegg og barnet skal oppholde seg utenfor EØS, Sveits eller Storbritannia",
+              "_key": "9b075b254c9b"
+            }
+          ],
+          "level": 1
+        },
+        {
+          "markDefs": [],
+          "children": [
+            {
+              "marks": [],
+              "text": "mottar barnetillegg og du får ansvar for flere/færre barn",
+              "_key": "c00e304e4b51",
+              "_type": "span"
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "cff786a7b1bb",
+          "listItem": "bullet"
+        },
+        {
+          "_key": "a02ac85b7c80",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "marks": [],
+              "text": "ikke ønsker arbeidstilbud i en periode",
+              "_key": "5b122324306e",
+              "_type": "span"
+            }
+          ],
+          "level": 1,
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "level": 1,
+          "_type": "block",
+          "style": "normal",
+          "_key": "df8e74cd36ed",
+          "listItem": "bullet",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "har andre opplysninger som kan bety noe for retten til ytelser",
+              "_key": "c03ff4f5727b"
+            }
+          ]
+        },
+        {
+          "markDefs": [
+            {
+              "_type": "link",
+              "href": "https://lovdata.no/lov/1997-02-28-19/%C2%A721-3",
+              "_key": "d0ae2dba30cf"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Du kan lese mer om opplysningsplikten i ",
+              "_key": "1d652c32ad3a"
+            },
+            {
+              "marks": [
+                "d0ae2dba30cf"
+              ],
+              "text": "folketrygdloven § 21-3",
+              "_key": "f6d621f6bf0b",
+              "_type": "span"
+            },
+            {
+              "_type": "span",
+              "marks": [],
+              "text": ".",
+              "_key": "acaeb14cc0dd"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "b4aef916f7de"
+        }
+      ],
+      "title": "Du må melde fra om endringer",
+      "_id": "fb123c1e-5461-478e-bad7-df29ded5bc03",
+      "utvidetBeskrivelse": false,
+      "_updatedAt": "2025-01-22T09:43:40Z",
+      "_type": "brevBlokk",
+      "language": "nb"
+    }
+  ],
+  "syncTags": [
+    "s1:m5FkcQ",
+    "s1:Q0e6wQ",
+    "s1:GSiQYw",
+    "s1:yqFvOA",
+    "s1:ALH8pA",
+    "s1:K/axJA",
+    "s1:5MLopA",
+    "s1:LUfCXg",
+    "s1:0e1ZEw",
+    "s1:T7c3kg",
+    "s1:QNaQ7Q",
+    "s1:ORxsEw",
+    "s1:9RGERg",
+    "s1:Ge2Qcg",
+    "s1:+q/OjQ",
+    "s1:VPfmdg",
+    "s1:8yi/tw",
+    "s1:j8HZ2Q",
+    "s1:pekoBQ",
+    "s1:7k4Jug",
+    "s1:Bvh38w",
+    "s1:+TDaCw",
+    "s1:YxRySg",
+    "s1:RAwzvw",
+    "s1:VXAyXw",
+    "s1:zkpiYw",
+    "s1:dv1tLA",
+    "s1:YyFANw",
+    "s1:nICklQ",
+    "s1:uW3qgg",
+    "s1:gOn08w",
+    "s1:FwFMMQ",
+    "s1:ZdY3ng",
+    "s1:U5ehoQ",
+    "s1:d3KBtw",
+    "s1:Xr1F8Q",
+    "s1:QxfthQ"
+  ],
+  "ms": 51
+}
