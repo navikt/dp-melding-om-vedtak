@@ -2,7 +2,6 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
-import io.mockk.mockk
 import no.nav.dagpenger.vedtaksmelding.model.Avslag
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.FLYTTALL
