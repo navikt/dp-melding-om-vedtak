@@ -64,6 +64,41 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/HttpProblem'
+  /melding-om-vedtak/{behandlingId}/vedtaksmelding:
+    post:
+      summary: Hent vedtaksHTML for en gitt behandlingId
+      description: Henter vedtaksHTML for en gitt behandlingId
+      parameters:
+        - name: behandlingId
+          in: path
+          description: id for behandling
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeldingOmVedtakData'
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  html:
+                    type: string
+                    description: HTML for melding om vedtak
+        '404':
+          description: Behandlingen finnes ikke
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpProblem'
 
   /melding-om-vedtak/{behandlingId}/{brevblokkId}/utvidet-beskrivelse:
     put:
