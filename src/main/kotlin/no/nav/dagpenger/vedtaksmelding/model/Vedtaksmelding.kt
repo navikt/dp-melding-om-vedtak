@@ -4,33 +4,44 @@ import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.Mediator
 import no.nav.dagpenger.vedtaksmelding.model.Vilkår.Status.IKKE_OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
+import no.nav.dagpenger.vedtaksmelding.portabletext.Child
 import java.util.UUID
 
 private val logger = KotlinLogging.logger {}
 
 sealed class Vedtaksmelding(
     protected open val vedtak: Vedtak,
-    protected open val mediator: Mediator,
+    alleBrevblokker: List<BrevBlokk>,
 ) {
     protected abstract val brevBlokkIder: List<String>
     abstract val harBrevstøtte: Boolean
+    private val brevBlokker: List<BrevBlokk> = alleBrevblokker.filter {
+        it.textId in brevBlokkIder
+    }
 
     fun brevBlokkIder(): List<String> {
         return brevBlokkIder + fasteBlokker
     }
 
-    suspend fun hentBrevBlokker(): List<BrevBlokk> {
-        return mediator.hentBrevBlokker(brevBlokkIder())
+    fun hentBrevBlokker(): List<BrevBlokk> {
+        return brevBlokker
     }
 
-    suspend fun hentOpplysninger(): List<Opplysning> {
-        val opplysningstekstIder = mediator.hentOpplysningTekstIder(brevBlokkIder())
-        logger.info { "Skal hente opplysninger basert på følgende tekstider: $opplysningstekstIder" }
-        return opplysningstekstIder.map { opplysningstekstId -> vedtak.hentOpplysning(opplysningstekstId) }
+    fun hentOpplysninger(): List<Opplysning> {
+        return brevBlokker.asSequence()
+            .filter { it.textId in brevBlokkIder() }
+            .flatMap { it.innhold }
+            .flatMap { it.children }
+            .filterIsInstance<Child.OpplysningReference>()
+            .map { it.behandlingOpplysning.textId }
+            .map { vedtak.hentOpplysning(it) }
+            .toList()
     }
 
+    //todo fjerne
     fun hentUtvidedeBeskrivelser(behandlingId: UUID): List<UtvidetBeskrivelse> {
-        return mediator.hentUtvidedeBeskrivelser(behandlingId)
+        TODO("Remove this method")
+//        return mediator.hentUtvidedeBeskrivelser(behandlingId)
     }
 
     companion object {
@@ -43,12 +54,12 @@ sealed class Vedtaksmelding(
 
         fun byggVedtaksmelding(
             vedtak: Vedtak,
-            mediator: Mediator,
+            alleBrevblokker: List<BrevBlokk>
         ): Vedtaksmelding {
             return try {
                 mutableSetOf<Result<Vedtaksmelding>>().apply {
-                    add(kotlin.runCatching { Avslag(vedtak, mediator) })
-                    add(kotlin.runCatching { Innvilgelse(vedtak, mediator) })
+                    add(kotlin.runCatching { Avslag(vedtak, alleBrevblokker) })
+                    add(kotlin.runCatching { Innvilgelse(vedtak, alleBrevblokker) })
                 }
                     .single { it.isSuccess }
                     .getOrThrow()
@@ -79,16 +90,16 @@ sealed class Vedtaksmelding(
 
 data class Avslag(
     override val vedtak: Vedtak,
-    override val mediator: Mediator,
-) : Vedtaksmelding(vedtak, mediator) {
+    private val alleBrevblokker: List<BrevBlokk>,
+) : Vedtaksmelding(vedtak, alleBrevblokker) {
     override val harBrevstøtte: Boolean =
         vedtak.utfall == Utfall.AVSLÅTT &&
-            (
-                vedtak.vilkår.avslagMinsteinntekt() ||
-                    vedtak.vilkår.reellArbeidssøker() ||
-                    vedtak.vilkår.avslagArbeidstid() ||
-                    vedtak.vilkår.avslagOppholdUtland()
-            )
+                (
+                        vedtak.vilkår.avslagMinsteinntekt() ||
+                                vedtak.vilkår.reellArbeidssøker() ||
+                                vedtak.vilkår.avslagArbeidstid() ||
+                                vedtak.vilkår.avslagOppholdUtland()
+                        )
 
     init {
         require(this.harBrevstøtte) {
@@ -195,15 +206,15 @@ data class Avslag(
     private fun Set<Vilkår>.reellArbeidssøker(): Boolean {
         return this.any {
             it.status == IKKE_OPPFYLT &&
-                (it.navn == "Krav til arbeidssøker" || it.navn == "Registrert som arbeidssøker på søknadstidspunktet")
+                    (it.navn == "Krav til arbeidssøker" || it.navn == "Registrert som arbeidssøker på søknadstidspunktet")
         }
     }
 }
 
 data class Innvilgelse(
     override val vedtak: Vedtak,
-    override val mediator: Mediator,
-) : Vedtaksmelding(vedtak, mediator) {
+    private val alleBrevblokker: List<BrevBlokk>,
+) : Vedtaksmelding(vedtak, alleBrevblokker) {
     override val harBrevstøtte: Boolean = vedtak.utfall == Utfall.INNVILGET
 
     init {
@@ -239,7 +250,7 @@ data class Innvilgelse(
         val id = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget"
         return vedtak.opplysninger.find {
             it.opplysningTekstId == id &&
-                it.verdi.toDouble() > 0
+                    it.verdi.toDouble() > 0
         }
             ?.let {
                 listOf("brev.blokk.nittiprosentregel")
