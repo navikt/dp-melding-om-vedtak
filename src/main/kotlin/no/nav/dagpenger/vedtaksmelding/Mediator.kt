@@ -31,6 +31,16 @@ class Mediator(
         }.map { Vedtaksmelding.byggVedtaksmelding(it, this) }
     }
 
+/*    suspend fun hentVedtaksmelding2(
+        behandlingId: UUID,
+        saksbehandler: Saksbehandler,
+    ): Result<Vedtaksmelding> {
+        val vedtak = behandlingKlient.hentVedtak(behandlingId, saksbehandler)
+        val sanityInnhold = sanityKlient.hentBrevBlokkerJson()
+        // lagre sanituInnhold i database
+        // bygg vetakmelding kan ha sanityInnhold som parameter og utvidet beskrivelse som inputtparametere
+    }*/
+
     suspend fun hentOpplysningTekstIder(brevbklokkIder: List<String>): List<String> {
         return sanityKlient.hentOpplysningTekstIder(brevbklokkIder)
     }

@@ -18,4 +18,18 @@ interface VedtaksmeldingRepository {
     ): UtvidetBeskrivelse
 
     fun hentUtvidedeBeskrivelserFor(behandlingId: UUID): List<UtvidetBeskrivelse>
+
+    fun lagreSanityInnhold(
+        behandlingId: UUID,
+        sanityInnhold: String,
+    )
+
+    fun hentSanityInnhold(behandlingId: UUID): String
+
+    fun lagreVedaksmeldingHtml(
+        behandlingId: UUID,
+        vedtaksmeldingHtml: String,
+    )
+
+    fun hentVedaksmeldingHtml(behandlingId: UUID): String
 }

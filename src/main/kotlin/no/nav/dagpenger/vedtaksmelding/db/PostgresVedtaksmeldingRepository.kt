@@ -4,6 +4,7 @@ import kotliquery.TransactionalSession
 import kotliquery.queryOf
 import kotliquery.sessionOf
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
+import org.postgresql.util.PGobject
 import java.time.LocalDateTime
 import java.util.UUID
 import javax.sql.DataSource
@@ -86,6 +87,101 @@ class PostgresVedtaksmeldingRepository(private val dataSource: DataSource) : Ved
                     )
                 }.asList,
             )
+        }
+    }
+
+    override fun lagreSanityInnhold(
+        behandlingId: UUID,
+        sanityInnhold: String,
+    ) {
+        return sessionOf(dataSource).use { session ->
+            session.run(
+                queryOf(
+                    //language=PostgreSQL
+                    statement =
+                        """
+                        INSERT INTO sanity_innhold_v1
+                            (behandling_id, sanity_innhold)
+                        VALUES
+                            (:behandling_id, :sanity_innhold)
+                        ON CONFLICT (behandling_id) DO UPDATE SET sanity_innhold = :sanity_innhold
+                        """.trimIndent(),
+                    paramMap =
+                        mapOf(
+                            "behandling_id" to behandlingId,
+                            "sanity_innhold" to
+                                PGobject().also {
+                                    it.type = "jsonb"
+                                    it.value = sanityInnhold
+                                },
+                        ),
+                ).asUpdate,
+            )
+        }
+    }
+
+    override fun hentSanityInnhold(behandlingId: UUID): String {
+        return sessionOf(dataSource).use { session ->
+            session.run(
+                queryOf(
+                    //language=PostgreSQL
+                    statement =
+                        """
+                        SELECT sanity_innhold
+                        FROM   sanity_innhold_v1
+                        WHERE  behandling_id = :behandling_id
+                        """.trimIndent(),
+                    paramMap =
+                        mapOf(
+                            "behandling_id" to behandlingId,
+                        ),
+                ).map { row -> row.string("sanity_innhold") }.asSingle,
+            ) ?: throw DataNotFoundException("Fant ikke sanity innhold for behandlingId: $behandlingId")
+        }
+    }
+
+    override fun lagreVedaksmeldingHtml(
+        behandlingId: UUID,
+        vedtaksmeldingHtml: String,
+    ) {
+        return sessionOf(dataSource).use { session ->
+            session.run(
+                queryOf(
+                    //language=PostgreSQL
+                    statement =
+                        """
+                        INSERT INTO vedtaksmelding_html_v1
+                            (behandling_id, vedtaksmelding_html)
+                        VALUES
+                            (:behandling_id, :vedtaksmelding_html)
+                        """.trimIndent(),
+                    paramMap =
+                        mapOf(
+                            "behandling_id" to behandlingId,
+                            "vedtaksmelding_html" to vedtaksmeldingHtml,
+                        ),
+                ).asUpdate,
+            )
+        }
+    }
+
+    override fun hentVedaksmeldingHtml(behandlingId: UUID): String {
+        return sessionOf(dataSource).use { session ->
+            session.run(
+                queryOf(
+                    //language=PostgreSQL
+                    statement =
+                        """
+                        SELECT vedtaksmelding_html
+                        FROM   vedtaksmelding_html_v1
+                        WHERE  behandling_id = :behandling_id
+                        """.trimIndent(),
+                    paramMap =
+                        mapOf(
+                            "behandling_id" to behandlingId,
+                        ),
+                ).map { row -> row.string("vedtaksmelding_html") }.asSingle,
+            ) ?: throw DataNotFoundException("Fant ikke vedtaksmelding html for behandlingId: $behandlingId")
         }
     }
 }

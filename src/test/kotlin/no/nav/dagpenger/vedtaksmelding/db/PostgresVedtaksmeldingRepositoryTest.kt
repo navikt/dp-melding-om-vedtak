@@ -1,5 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.db
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.date.shouldBeAfter
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
@@ -124,6 +125,38 @@ class PostgresVedtaksmeldingRepositoryTest {
             utvidetBeskrivelserFraDB[0].tekst shouldBe utvidetBeskrivelse.tekst
             utvidetBeskrivelserFraDB[0].brevblokkId shouldBe utvidetBeskrivelse.brevblokkId
             utvidetBeskrivelserFraDB[0].sistEndretTidspunkt shouldNotBe null
+        }
+    }
+
+    @Test
+    fun `lagre, hente og oppdatere sanity innhold`() {
+        val behandlingId = UUIDv7.ny()
+        val sanityInnhold = """{"key": "value"}"""
+        val sanityInnholdUpdate = """{"key": "value2"}"""
+
+        withMigratedDb { dataSource ->
+            val repository = PostgresVedtaksmeldingRepository(dataSource)
+
+            repository.lagreSanityInnhold(behandlingId, sanityInnhold)
+            repository.hentSanityInnhold(behandlingId) shouldBe sanityInnhold
+
+            repository.lagreSanityInnhold(behandlingId, sanityInnholdUpdate)
+            repository.hentSanityInnhold(behandlingId) shouldBe sanityInnholdUpdate
+        }
+    }
+
+    @Test
+    fun `lagre og hente vedtakshtml`() {
+        val behandlingId = UUIDv7.ny()
+        val vedtaksHtml = "<html><body><h1>Hei</h1></body></html>"
+        val vedtaksHtmlUpdate = "<html><body><h1>Hei2</h1></body></html>"
+
+        withMigratedDb { dataSource ->
+            val repository = PostgresVedtaksmeldingRepository(dataSource)
+
+            repository.lagreVedaksmeldingHtml(behandlingId, vedtaksHtml)
+            repository.hentVedaksmeldingHtml(behandlingId) shouldBe vedtaksHtml
+            shouldThrow<Exception> { repository.lagreVedaksmeldingHtml(behandlingId, vedtaksHtmlUpdate) }
         }
     }
 }
