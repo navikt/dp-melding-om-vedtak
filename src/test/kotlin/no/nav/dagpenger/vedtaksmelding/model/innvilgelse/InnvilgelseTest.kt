@@ -3,7 +3,6 @@ package no.nav.dagpenger.vedtaksmelding.model.innvilgelse
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
-import io.mockk.mockk
 import no.nav.dagpenger.vedtaksmelding.model.Innvilgelse
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.BOOLSK
@@ -66,7 +65,7 @@ class InnvilgelseTest {
                         utfall = Utfall.AVSLÅTT,
                         opplysninger = emptySet(),
                     ),
-                mediator = mockk(),
+                alleBrevblokker = emptyList(),
             )
         }
 
@@ -79,7 +78,7 @@ class InnvilgelseTest {
                         utfall = Utfall.INNVILGET,
                         opplysninger = emptySet(),
                     ),
-                mediator = mockk(),
+                alleBrevblokker = emptyList(),
             )
         }
     }
@@ -111,7 +110,7 @@ class InnvilgelseTest {
                     utfall = Utfall.INNVILGET,
                     opplysninger = emptySet(),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
 
@@ -142,7 +141,7 @@ class InnvilgelseTest {
                     utfall = Utfall.INNVILGET,
                     opplysninger = setOf(Opplysning("opplysning.er-innvilget-med-verneplikt", "true", BOOLSK)),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
 
@@ -184,7 +183,7 @@ class InnvilgelseTest {
                             ),
                         ),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
 
@@ -219,7 +218,7 @@ class InnvilgelseTest {
                             barnetilleggOpplysning(),
                         ),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
 
         Innvilgelse(
@@ -233,7 +232,7 @@ class InnvilgelseTest {
                             barnetilleggOpplysning("0"),
                         ),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder - "brev.blokk.barnetillegg"
     }
 
@@ -269,7 +268,7 @@ class InnvilgelseTest {
                             samordnetOpplysning(), samordnetYtelseDagsats("opplysning.sykepenger-dagsats"),
                         ),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
 
@@ -305,7 +304,7 @@ class InnvilgelseTest {
                             samordnetOpplysning(), samordnetYtelseDagsats("opplysning.pleiepenger-dagsats"),
                         ),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
 
@@ -341,7 +340,7 @@ class InnvilgelseTest {
                             samordnetOpplysning(), samordnetYtelseDagsats("opplysning.omsorgspenger-dagsats"),
                         ),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
 
@@ -377,7 +376,7 @@ class InnvilgelseTest {
                             samordnetOpplysning(), samordnetYtelseDagsats("opplysning.opplaeringspenger-dagsats"),
                         ),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
 
@@ -413,7 +412,7 @@ class InnvilgelseTest {
                             samordnetOpplysning(), samordnetYtelseDagsats("opplysning.ufore-dagsats"),
                         ),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
 
@@ -449,7 +448,7 @@ class InnvilgelseTest {
                             samordnetOpplysning(), samordnetYtelseDagsats("opplysning.foreldrepenger-dagsats"),
                         ),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
 
@@ -486,7 +485,7 @@ class InnvilgelseTest {
                             samordnetYtelseDagsats("opplysning.svangerskapspenger-dagsats"),
                         ),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
 
@@ -535,7 +534,7 @@ class InnvilgelseTest {
                             samordnetYtelseDagsats("opplysning.svangerskapspenger-dagsats"),
                         ),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
 
@@ -569,7 +568,7 @@ class InnvilgelseTest {
                             samordnetOpplysning("false"),
                         ),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
 
@@ -604,7 +603,7 @@ class InnvilgelseTest {
                             nittiprosentRegelOpplysning(),
                         ),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
 
         Innvilgelse(
@@ -618,7 +617,7 @@ class InnvilgelseTest {
                             nittiprosentRegelOpplysning(),
                         ),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
 
         Innvilgelse(
@@ -632,7 +631,7 @@ class InnvilgelseTest {
                             nittiprosentRegelOpplysning("0"),
                         ),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder - "brev.blokk.nittiprosentregel"
     }
 
@@ -667,7 +666,7 @@ class InnvilgelseTest {
                     opplysninger =
                         setOf(nittiprosentRegelOpplysning(), samordnetOpplysning(), barnetilleggOpplysning()),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
 }

@@ -2,7 +2,6 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
-import io.mockk.mockk
 import no.nav.dagpenger.vedtaksmelding.model.Avslag
 import no.nav.dagpenger.vedtaksmelding.model.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.Vedtak
@@ -64,7 +63,7 @@ class AvslagTest {
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
@@ -82,7 +81,7 @@ class AvslagTest {
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
@@ -103,7 +102,7 @@ class AvslagTest {
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
@@ -124,7 +123,7 @@ class AvslagTest {
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
@@ -144,7 +143,7 @@ class AvslagTest {
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
@@ -164,7 +163,7 @@ class AvslagTest {
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
@@ -188,7 +187,7 @@ class AvslagTest {
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
@@ -214,7 +213,7 @@ class AvslagTest {
                         utfall = Utfall.AVSLÅTT,
                         opplysninger = emptySet(),
                     ),
-                mediator = mockk(),
+                alleBrevblokker = emptyList(),
             )
         }
 
@@ -227,7 +226,7 @@ class AvslagTest {
                         utfall = Utfall.INNVILGET,
                         opplysninger = emptySet(),
                     ),
-                mediator = mockk(),
+                alleBrevblokker = emptyList(),
             )
         }
     }

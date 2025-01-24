@@ -84,13 +84,13 @@ class MeldingOmVedtakApiTest {
             mockk<Vedtaksmelding>().also {
                 coEvery { it.brevBlokkIder() } returns brevBlokker
                 coEvery { it.hentOpplysninger() } returns opplysninger
-                coEvery { it.hentUtvidedeBeskrivelser(behandlingId) } returns utvidedeBeskrivelser
             }
         val mediator =
             mockk<Mediator>().also {
                 coEvery {
                     it.hentVedtaksmelding(behandlingId, saksbehandler)
                 } returns Result.success(vedtaksmelding)
+                coEvery { it.hentUtvidedeBeskrivelser(behandlingId) } returns utvidedeBeskrivelser
             }
         testApplication {
             application {
@@ -182,6 +182,21 @@ class MeldingOmVedtakApiTest {
 
     @Test
     fun `Returnerer en default MeldingOmVedtakDTO dersom underliggende systemer feiler`() {
+        val utvidedeBeskrivelser =
+            listOf(
+                UtvidetBeskrivelse(
+                    behandlingId = behandlingId,
+                    brevblokkId = "A",
+                    tekst = "Utvidet beskrivelse for brevblokk A",
+                    sistEndretTidspunkt = LocalDateTime.MAX,
+                ),
+                UtvidetBeskrivelse(
+                    behandlingId = behandlingId,
+                    brevblokkId = "B",
+                    tekst = "Utvidet beskrivelse for brevblokk B",
+                    sistEndretTidspunkt = LocalDateTime.MIN,
+                ),
+            )
         testApplication {
             application {
                 meldingOmVedtakApi(
@@ -190,6 +205,7 @@ class MeldingOmVedtakApiTest {
                             Result.failure(
                                 RuntimeException("Noe gikk galt"),
                             )
+                        coEvery { it.hentUtvidedeBeskrivelser(behandlingId) } returns utvidedeBeskrivelser
                     },
                 )
             }

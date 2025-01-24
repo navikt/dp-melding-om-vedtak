@@ -25,6 +25,7 @@ import java.time.LocalDateTime
 class MediatorTest {
     private val behandlingId = UUIDv7.ny()
     private val saksbehandler = Saksbehandler("tulleToken")
+    private val resourseRetriever = object {}.javaClass
 
     @Test
     fun `skal sende ett eller annet vedtak`() {
@@ -49,7 +50,7 @@ class MediatorTest {
         val mediator =
             Mediator(
                 behandlingKlient = behandlingKlient,
-                sanityKlient = mockk<SanityKlient>(),
+                sanityKlient = SanityKlient(Configuration.sanityApiUrl),
                 vedtaksmeldingRepository = mockk<VedtaksmeldingRepository>(relaxed = true),
             )
 

@@ -1,11 +1,9 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
 import mu.KotlinLogging
-import no.nav.dagpenger.vedtaksmelding.Mediator
 import no.nav.dagpenger.vedtaksmelding.model.Vilkår.Status.IKKE_OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.portabletext.Child
-import java.util.UUID
 
 private val logger = KotlinLogging.logger {}
 
@@ -15,9 +13,13 @@ sealed class Vedtaksmelding(
 ) {
     protected abstract val brevBlokkIder: List<String>
     abstract val harBrevstøtte: Boolean
-    private val brevBlokker: List<BrevBlokk> = alleBrevblokker.filter {
-        it.textId in brevBlokkIder
-    }
+
+    /*private val brevBlokker: List<BrevBlokk> =
+        alleBrevblokker.filter {
+            it.textId in brevBlokkIder
+        }*/
+
+    protected abstract val brevBlokker: List<BrevBlokk>
 
     fun brevBlokkIder(): List<String> {
         return brevBlokkIder + fasteBlokker
@@ -38,11 +40,9 @@ sealed class Vedtaksmelding(
             .toList()
     }
 
-    //todo fjerne
-    fun hentUtvidedeBeskrivelser(behandlingId: UUID): List<UtvidetBeskrivelse> {
-        TODO("Remove this method")
-//        return mediator.hentUtvidedeBeskrivelser(behandlingId)
-    }
+    /*    fun hentUtvidedeBeskrivelser(behandlingId: UUID): List<UtvidetBeskrivelse> {
+            return mediator.hentUtvidedeBeskrivelser(behandlingId)
+        }*/
 
     companion object {
         val fasteBlokker =
@@ -54,7 +54,7 @@ sealed class Vedtaksmelding(
 
         fun byggVedtaksmelding(
             vedtak: Vedtak,
-            alleBrevblokker: List<BrevBlokk>
+            alleBrevblokker: List<BrevBlokk>,
         ): Vedtaksmelding {
             return try {
                 mutableSetOf<Result<Vedtaksmelding>>().apply {
@@ -88,18 +88,18 @@ sealed class Vedtaksmelding(
     class ManglerBrevstøtte(override val message: String) : RuntimeException(message)
 }
 
-data class Avslag(
+class Avslag(
     override val vedtak: Vedtak,
-    private val alleBrevblokker: List<BrevBlokk>,
+    alleBrevblokker: List<BrevBlokk>,
 ) : Vedtaksmelding(vedtak, alleBrevblokker) {
     override val harBrevstøtte: Boolean =
         vedtak.utfall == Utfall.AVSLÅTT &&
-                (
-                        vedtak.vilkår.avslagMinsteinntekt() ||
-                                vedtak.vilkår.reellArbeidssøker() ||
-                                vedtak.vilkår.avslagArbeidstid() ||
-                                vedtak.vilkår.avslagOppholdUtland()
-                        )
+            (
+                vedtak.vilkår.avslagMinsteinntekt() ||
+                    vedtak.vilkår.reellArbeidssøker() ||
+                    vedtak.vilkår.avslagArbeidstid() ||
+                    vedtak.vilkår.avslagOppholdUtland()
+            )
 
     init {
         require(this.harBrevstøtte) {
@@ -115,6 +115,7 @@ data class Avslag(
         get() {
             return pre + avslagMinsteInntekt() + avslagReellArbeidssøker() + avslagTaptArbeidstid() + avslagOppholdUtland()
         }
+    override val brevBlokker: List<BrevBlokk> = brevBlokkIder().mapNotNull { id -> alleBrevblokker.associateBy { it.textId }[id] }
 
     private fun avslagMinsteInntekt(): List<String> {
         return vedtak.vilkår.find {
@@ -206,14 +207,14 @@ data class Avslag(
     private fun Set<Vilkår>.reellArbeidssøker(): Boolean {
         return this.any {
             it.status == IKKE_OPPFYLT &&
-                    (it.navn == "Krav til arbeidssøker" || it.navn == "Registrert som arbeidssøker på søknadstidspunktet")
+                (it.navn == "Krav til arbeidssøker" || it.navn == "Registrert som arbeidssøker på søknadstidspunktet")
         }
     }
 }
 
-data class Innvilgelse(
+class Innvilgelse(
     override val vedtak: Vedtak,
-    private val alleBrevblokker: List<BrevBlokk>,
+    alleBrevblokker: List<BrevBlokk>,
 ) : Vedtaksmelding(vedtak, alleBrevblokker) {
     override val harBrevstøtte: Boolean = vedtak.utfall == Utfall.INNVILGET
 
@@ -246,11 +247,13 @@ data class Innvilgelse(
             return pre + barnetillegg() + nittiProsentRegel() + samordnet() + grunnlag() + post
         }
 
+    override val brevBlokker: List<BrevBlokk> = brevBlokkIder().mapNotNull { id -> alleBrevblokker.associateBy { it.textId }[id] }
+
     private fun nittiProsentRegel(): List<String> {
         val id = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget"
         return vedtak.opplysninger.find {
             it.opplysningTekstId == id &&
-                    it.verdi.toDouble() > 0
+                it.verdi.toDouble() > 0
         }
             ?.let {
                 listOf("brev.blokk.nittiprosentregel")
