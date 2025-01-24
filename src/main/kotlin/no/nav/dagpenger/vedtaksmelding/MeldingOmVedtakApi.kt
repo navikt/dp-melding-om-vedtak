@@ -39,6 +39,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                 val behandlingId = call.parseUUID()
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
                     val saksbehandler = call.parseSaksbehandler()
+                    val utvidetBeskrivelse = mediator.hentUtvidedeBeskrivelser(behandlingId)
                     val meldingOmVedtakDTO: MeldingOmVedtakDTO =
                         runCatching {
                             mediator.hentVedtaksmelding(behandlingId, saksbehandler).map { vedtaksmelding ->
@@ -53,7 +54,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                                             )
                                         },
                                     utvidedeBeskrivelser =
-                                        vedtaksmelding.hentUtvidedeBeskrivelser(behandlingId).map {
+                                        utvidetBeskrivelse.map {
                                             UtvidetBeskrivelseDTO(
                                                 brevblokkId = it.brevblokkId,
                                                 tekst = it.tekst ?: "",

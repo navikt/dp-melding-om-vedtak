@@ -2,7 +2,6 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
-import io.mockk.mockk
 import no.nav.dagpenger.vedtaksmelding.model.Avslag
 import no.nav.dagpenger.vedtaksmelding.model.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.Vedtak
@@ -33,7 +32,7 @@ class AvslagOppholdUtlandTest {
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
@@ -45,7 +44,7 @@ class AvslagOppholdUtlandTest {
     @Test
     fun `Brevstøtte for avslag grunnet opphold i utlandet`() {
         shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
-            Avslag(avslagOppholdNorgeVedtak, mockk())
+            Avslag(avslagOppholdNorgeVedtak, emptyList())
         }
     }
 }

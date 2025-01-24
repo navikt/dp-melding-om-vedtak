@@ -1,13 +1,11 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
 import io.kotest.matchers.shouldBe
-import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration
-import no.nav.dagpenger.vedtaksmelding.Mediator
 import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
 import org.jsoup.Jsoup
@@ -51,20 +49,19 @@ class VedtakHtmlTest {
                         ),
                 ),
         )
+    val sanityKlient = SanityKlient(Configuration.sanityApiUrl)
 
     @Test
     fun `Html av avslag minsteinntekt`() {
-        val avslag =
-            Avslag(
-                vedtak = hentVedtak("/json/avslag.json"),
-                mediator =
-                    Mediator(
-                        behandlingKlient = mockk(),
-                        sanityKlient = SanityKlient(Configuration.sanityApiUrl),
-                        vedtaksmeldingRepository = mockk(),
-                    ),
-            )
         runBlocking {
+            val alleBrevblokker = sanityKlient.hentBrevBlokker()
+            requireNotNull(alleBrevblokker) { "alleBrevblokker should not be null" }
+            val avslag =
+                Avslag(
+                    vedtak = hentVedtak("/json/avslag.json"),
+                    alleBrevblokker = alleBrevblokker,
+                )
+
             avslag.hentOpplysninger()
             val brevBlokker = avslag.hentBrevBlokker()
             val htmlInnhold = HtmlConverter.toHtml(brevBlokker, avslag.hentOpplysninger(), meldingOmVedtakData)
@@ -95,17 +92,12 @@ class VedtakHtmlTest {
 
     @Test
     fun `Html av innvilgelse `() {
-        val innvilgelse =
-            Innvilgelse(
-                vedtak = hentVedtak("/json/innvilgelsesVedtak.json"),
-                mediator =
-                    Mediator(
-                        behandlingKlient = mockk(),
-                        sanityKlient = SanityKlient(Configuration.sanityApiUrl),
-                        vedtaksmeldingRepository = mockk(),
-                    ),
-            )
         runBlocking {
+            val innvilgelse =
+                Innvilgelse(
+                    vedtak = hentVedtak("/json/innvilgelsesVedtak.json"),
+                    alleBrevblokker = sanityKlient.hentBrevBlokker(),
+                )
             innvilgelse.hentOpplysninger()
             val brevBlokker = innvilgelse.hentBrevBlokker()
             val htmlInnhold =
