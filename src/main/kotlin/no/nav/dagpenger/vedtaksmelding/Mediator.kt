@@ -23,12 +23,18 @@ class Mediator(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
     ): Result<Vedtaksmelding> {
+        val sanityInnhold = sanityKlient.hentBrevBlokkerJson()
+        // val sanityInnholdDatabase = vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
+        // val alleBrevblokker = Json.decodeFromString<ResultDTO>(sanityInnhold).result //Todo: dette mikker i testen
+
+        val alleBrevblokker = sanityKlient.hentBrevBlokker()
         return behandlingKlient.hentVedtak(
             behandlingId = behandlingId,
             saksbehandler = saksbehandler,
         ).onFailure { throwable ->
             logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
-        }.map { Vedtaksmelding.byggVedtaksmelding(it, this) }
+        }.map { Vedtaksmelding.byggVedtaksmelding(it, alleBrevblokker) }
+        // bygg vetakmelding kan ha sanityInnhold som parameter og utvidet beskrivelse som inputtparametere
     }
 
 /*    suspend fun hentVedtaksmelding2(
