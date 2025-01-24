@@ -2,18 +2,12 @@
 
 package no.nav.dagpenger.vedtaksmelding.portabletext
 
-import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
-import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.JsonNode
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import no.nav.dagpenger.vedtaksmelding.portabletext.Child.Type.OPPLYSNING_REFERENCE
 import no.nav.dagpenger.vedtaksmelding.portabletext.Child.Type.SPAN
 import no.nav.dagpenger.vedtaksmelding.portabletext.MarkDef.Type.LINK
