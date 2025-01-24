@@ -35,7 +35,7 @@ internal fun lagHttpKlient(
                         sikkerlogg.info { message }
                     }
                 }
-            level = LogLevel.ALL
+            level = LogLevel.INFO
         }
         block()
     }
