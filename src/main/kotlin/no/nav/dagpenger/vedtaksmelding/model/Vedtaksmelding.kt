@@ -247,49 +247,48 @@ data class Innvilgelse(
     }
 
     private fun samordnet(): List<String> {
-        val samordningBlokker = mutableListOf<String>()
-        val harSamordnet =
-            vedtak.opplysninger.any { it.opplysningTekstId == "opplysning.har-samordnet" && it.verdi == "true" }
-        val sykepengerDagsats =
-            vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.sykepenger-dagsats" && it.verdi > "0" }
-        val pleiepengerDagsats =
-            vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.pleiepenger-dagsats" && it.verdi > "0" }
-        val omsorgspengerDagsats =
-            vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.omsorgspenger-dagsats" && it.verdi > "0" }
-        val opplæringspengerDagsats =
-            vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.opplaeringspenger-dagsats" && it.verdi > "0" }
-        val uføreDagsats =
-            vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.ufore-dagsats" && it.verdi > "0" }
-        val foreldrepengerDagsats =
-            vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.foreldrepenger-dagsats" && it.verdi > "0" }
-        val svangerskapspengerDagsats =
-            vedtak.opplysninger.find {
-                it.opplysningTekstId == "opplysning.svangerskapspenger-dagsats" && it.verdi > "0"
-            }
+        if (!vedtak.opplysninger.any { it.opplysningTekstId == "opplysning.har-samordnet" && it.verdi == "true" }) {
+            return emptyList()
+        }
 
-        if (harSamordnet) {
-            samordningBlokker.add("brev.blokk.samordning")
-            if (sykepengerDagsats != null) {
-                samordningBlokker.add("brev.blokk.samordning-sykepenger")
+        val samordnedeYtelser = mutableSetOf<Pair<String, Double>>()
+        vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.sykepenger-dagsats" && it.verdi > "0" }?.let {
+            samordnedeYtelser.add("Sykepenger" to it.verdi.toDouble())
+        }
+        vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.pleiepenger-dagsats" && it.verdi > "0" }?.let {
+            samordnedeYtelser.add("Pleiepenger" to it.verdi.toDouble())
+        }
+        vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.omsorgspenger-dagsats" && it.verdi > "0" }?.let {
+            samordnedeYtelser.add("Omsorgspenger" to it.verdi.toDouble())
+        }
+        vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.opplaeringspenger-dagsats" && it.verdi > "0" }?.let {
+            samordnedeYtelser.add("Opplæringspenger" to it.verdi.toDouble())
+        }
+        vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.ufore-dagsats" && it.verdi > "0" }?.let {
+            samordnedeYtelser.add("Uføre" to it.verdi.toDouble())
+        }
+        vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.foreldrepenger-dagsats" && it.verdi > "0" }?.let {
+            samordnedeYtelser.add("Foreldrepenger" to it.verdi.toDouble())
+        }
+        vedtak.opplysninger.find {
+            it.opplysningTekstId == "opplysning.svangerskapspenger-dagsats" && it.verdi > "0"
+        }?.let {
+            samordnedeYtelser.add("Svangerskapspenger" to it.verdi.toDouble())
+        }
+
+        val samordningBlokker = mutableListOf<String>()
+        if (samordnedeYtelser.size == 1) {
+            when (samordnedeYtelser.first().first) {
+                "Sykepenger" -> samordningBlokker.add("brev.blokk.samordnet-med-sykepenger")
+                "Pleiepenger" -> samordningBlokker.add("brev.blokk.samordnet-med-pleiepenger")
+                "Omsorgspenger" -> samordningBlokker.add("brev.blokk.samordnet-med-omsorgspenger")
+                "Opplæringspenger" -> samordningBlokker.add("brev.blokk.samordnet-med-opplaeringspenger")
+                "Uføre" -> samordningBlokker.add("brev.blokk.samordnet-med-ufore")
+                "Foreldrepenger" -> samordningBlokker.add("brev.blokk.samordnet-med-foreldrepenger")
+                "Svangerskapspenger" -> samordningBlokker.add("brev.blokk.samordnet-med-svangerskapspenger")
             }
-            if (pleiepengerDagsats != null) {
-                samordningBlokker.add("brev.blokk.samordning-pleiepenger")
-            }
-            if (omsorgspengerDagsats != null) {
-                samordningBlokker.add("brev.blokk.samordning-omsorgspenger")
-            }
-            if (opplæringspengerDagsats != null) {
-                samordningBlokker.add("brev.blokk.samordning-opplaeringspenger")
-            }
-            if (uføreDagsats != null) {
-                samordningBlokker.add("brev.blokk.samordning-ufore")
-            }
-            if (foreldrepengerDagsats != null) {
-                samordningBlokker.add("brev.blokk.samordning-foreldrepenger")
-            }
-            if (svangerskapspengerDagsats != null) {
-                samordningBlokker.add("brev.blokk.samordning-svangerskapspenger")
-            }
+        } else {
+            samordningBlokker.add("brev.blokk.samordnet-generisk")
         }
         return samordningBlokker
     }
