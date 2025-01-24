@@ -244,8 +244,7 @@ class InnvilgelseTest {
                 "brev.blokk.begrunnelse-innvilgelsesdato",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.samordning",
-                "brev.blokk.samordning-sykepenger",
+                "brev.blokk.samordnet-med-sykepenger",
                 "brev.blokk.grunnlag",
                 "brev.blokk.arbeidstiden-din",
                 "brev.blokk.egenandel",
@@ -280,8 +279,7 @@ class InnvilgelseTest {
                 "brev.blokk.begrunnelse-innvilgelsesdato",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.samordning",
-                "brev.blokk.samordning-pleiepenger",
+                "brev.blokk.samordnet-med-pleiepenger",
                 "brev.blokk.grunnlag",
                 "brev.blokk.arbeidstiden-din",
                 "brev.blokk.egenandel",
@@ -316,8 +314,7 @@ class InnvilgelseTest {
                 "brev.blokk.begrunnelse-innvilgelsesdato",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.samordning",
-                "brev.blokk.samordning-omsorgspenger",
+                "brev.blokk.samordnet-med-omsorgspenger",
                 "brev.blokk.grunnlag",
                 "brev.blokk.arbeidstiden-din",
                 "brev.blokk.egenandel",
@@ -352,8 +349,7 @@ class InnvilgelseTest {
                 "brev.blokk.begrunnelse-innvilgelsesdato",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.samordning",
-                "brev.blokk.samordning-opplaeringspenger",
+                "brev.blokk.samordnet-med-opplaeringspenger",
                 "brev.blokk.grunnlag",
                 "brev.blokk.arbeidstiden-din",
                 "brev.blokk.egenandel",
@@ -388,8 +384,7 @@ class InnvilgelseTest {
                 "brev.blokk.begrunnelse-innvilgelsesdato",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.samordning",
-                "brev.blokk.samordning-ufore",
+                "brev.blokk.samordnet-med-ufore",
                 "brev.blokk.grunnlag",
                 "brev.blokk.arbeidstiden-din",
                 "brev.blokk.egenandel",
@@ -424,8 +419,7 @@ class InnvilgelseTest {
                 "brev.blokk.begrunnelse-innvilgelsesdato",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.samordning",
-                "brev.blokk.samordning-foreldrepenger",
+                "brev.blokk.samordnet-med-foreldrepenger",
                 "brev.blokk.grunnlag",
                 "brev.blokk.arbeidstiden-din",
                 "brev.blokk.egenandel",
@@ -453,15 +447,14 @@ class InnvilgelseTest {
     }
 
     @Test
-    fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak med samordning av svangerskapspenger`() {
+    fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak som har samordning av svangerskapspenger`() {
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
                 "brev.blokk.begrunnelse-innvilgelsesdato",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.samordning",
-                "brev.blokk.samordning-svangerskapspenger",
+                "brev.blokk.samordnet-med-svangerskapspenger",
                 "brev.blokk.grunnlag",
                 "brev.blokk.arbeidstiden-din",
                 "brev.blokk.egenandel",
@@ -490,21 +483,14 @@ class InnvilgelseTest {
     }
 
     @Test
-    fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak med samordning med alle ytelser`() {
+    fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak som har samordning med flere ytelser`() {
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
                 "brev.blokk.begrunnelse-innvilgelsesdato",
                 "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.samordning",
-                "brev.blokk.samordning-sykepenger",
-                "brev.blokk.samordning-pleiepenger",
-                "brev.blokk.samordning-omsorgspenger",
-                "brev.blokk.samordning-opplaeringspenger",
-                "brev.blokk.samordning-ufore",
-                "brev.blokk.samordning-foreldrepenger",
-                "brev.blokk.samordning-svangerskapspenger",
+                "brev.blokk.samordnet-generisk",
                 "brev.blokk.grunnlag",
                 "brev.blokk.arbeidstiden-din",
                 "brev.blokk.egenandel",
@@ -526,15 +512,43 @@ class InnvilgelseTest {
                         setOf(
                             samordnetOpplysning(),
                             samordnetYtelseDagsats("opplysning.sykepenger-dagsats"),
-                            samordnetYtelseDagsats("opplysning.pleiepenger-dagsats"),
-                            samordnetYtelseDagsats("opplysning.omsorgspenger-dagsats"),
-                            samordnetYtelseDagsats("opplysning.opplaeringspenger-dagsats"),
-                            samordnetYtelseDagsats("opplysning.ufore-dagsats"),
                             samordnetYtelseDagsats("opplysning.foreldrepenger-dagsats"),
                             samordnetYtelseDagsats("opplysning.svangerskapspenger-dagsats"),
                         ),
                 ),
             alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak som har samordning med ukjent ytelse`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                "brev.blokk.vedtak-innvilgelse",
+                "brev.blokk.begrunnelse-innvilgelsesdato",
+                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
+                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
+                "brev.blokk.samordnet-generisk",
+                "brev.blokk.grunnlag",
+                "brev.blokk.arbeidstiden-din",
+                "brev.blokk.egenandel",
+                "brev.blokk.du-maa-sende-meldekort",
+                "brev.blokk.utbetaling",
+                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
+                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
+                "brev.blokk.du-maa-melde-fra-om-endringer",
+                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+            ) + Vedtaksmelding.fasteBlokker
+
+        Innvilgelse(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = emptySet(),
+                    utfall = Utfall.INNVILGET,
+                    opplysninger = setOf(samordnetOpplysning()),
+                ),
+            mediator = mockk(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
 
@@ -636,7 +650,7 @@ class InnvilgelseTest {
     }
 
     @Test
-    fun `Rikig brevblokker rekkefølge for innvilgelse med barnetillegg,nittiprosent regel og samordning`() {
+    fun `Rikig brevblokker rekkefølge for innvilgelse med barnetillegg, nittiprosent regel og samordning`() {
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",
@@ -645,7 +659,7 @@ class InnvilgelseTest {
                 "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
                 "brev.blokk.barnetillegg",
                 "brev.blokk.nittiprosentregel",
-                "brev.blokk.samordning",
+                "brev.blokk.samordnet-generisk",
                 "brev.blokk.grunnlag",
                 "brev.blokk.arbeidstiden-din",
                 "brev.blokk.egenandel",
