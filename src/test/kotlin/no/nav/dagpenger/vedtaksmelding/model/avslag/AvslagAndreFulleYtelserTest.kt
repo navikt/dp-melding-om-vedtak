@@ -39,7 +39,7 @@ class AvslagAndreFulleYtelserTest {
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList()
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
