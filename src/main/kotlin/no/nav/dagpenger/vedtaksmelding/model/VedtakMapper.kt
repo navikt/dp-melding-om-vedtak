@@ -236,35 +236,6 @@ class VedtakMapper(vedtakJson: String) {
             ),
         ) + vedtak.lagOpplysningerFraKvoter() + vedtak.lagOpplysningerForSamordning()
 
-    private val prosentvisTaptArbeidstidOpplysninger = vedtakOpplysninger.finnProsentvisTaptArbeidstid()
-
-    private fun Set<Opplysning>.finnProsentvisTaptArbeidstid(): Set<Opplysning> {
-        val opplysninger = mutableSetOf<Opplysning>()
-        val fastsattVanligArbeidsid: Double? =
-            this.singleOrNull {
-                it.opplysningTekstId == "opplysning.fastsatt-arbeidstid-per-uke-for-tap"
-            }?.let { opplysning ->
-                opplysning.verdi.toDouble()
-            }
-        val fastsattNyArbeidstid: Double? =
-            this.singleOrNull {
-                it.opplysningTekstId == "opplysning.fastsatt-ny-arbeidstid-per-uke"
-            }?.let { opplysning ->
-                opplysning.verdi.toDouble()
-            }
-        if (fastsattVanligArbeidsid != null && fastsattNyArbeidstid != null) {
-            val prosentvisTaptArbeidstid = ((fastsattVanligArbeidsid - fastsattNyArbeidstid) / fastsattVanligArbeidsid) * 100
-            opplysninger.add(
-                Opplysning(
-                    opplysningTekstId = "opplysning.prosentvis-tapt-arbeidstid",
-                    verdi = formaterDesimaltall(prosentvisTaptArbeidstid),
-                    datatype = FLYTTALL,
-                ),
-            )
-        }
-        return opplysninger
-    }
-
     private fun formaterDesimaltall(
         desimaltall: Double,
         antallDesimaler: Int = 1,
@@ -294,7 +265,7 @@ class VedtakMapper(vedtakJson: String) {
             opplysninger.add(
                 Opplysning(
                     opplysningTekstId = "opplysning.prosentvis-tapt-arbeidstid",
-                    verdi = String.format(Locale.US, "%.2f", prosentvisTaptArbeidstid),
+                    verdi = formaterDesimaltall(prosentvisTaptArbeidstid),
                     datatype = FLYTTALL,
                 ),
             )
@@ -582,7 +553,6 @@ class VedtakMapper(vedtakJson: String) {
                         else ->
                             Opplysning(
                                 opplysningTekstId = opplysningTekstId,
-                                verdi = verdi,
                                 datatype = datatype,
                                 enhet = enhet,
                                 verdi =
