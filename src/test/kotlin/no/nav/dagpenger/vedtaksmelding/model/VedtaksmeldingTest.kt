@@ -2,7 +2,6 @@ package no.nav.dagpenger.vedtaksmelding.model
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.types.shouldBeInstanceOf
-import io.mockk.mockk
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
@@ -24,7 +23,7 @@ class VedtaksmeldingTest {
                         ),
                     utfall = Utfall.AVSLÅTT,
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).shouldBeInstanceOf<Avslag>()
 
         Vedtaksmelding.byggVedtaksmelding(
@@ -34,7 +33,7 @@ class VedtaksmeldingTest {
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).shouldBeInstanceOf<Innvilgelse>()
     }
 
@@ -48,7 +47,7 @@ class VedtaksmeldingTest {
                         vilkår = emptySet(),
                         utfall = Utfall.AVSLÅTT,
                     ),
-                mediator = mockk(),
+                alleBrevblokker = emptyList(),
             )
         }
     }

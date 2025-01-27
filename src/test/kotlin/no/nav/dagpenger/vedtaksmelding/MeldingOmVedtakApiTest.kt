@@ -84,13 +84,13 @@ class MeldingOmVedtakApiTest {
             mockk<Vedtaksmelding>().also {
                 coEvery { it.brevBlokkIder() } returns brevBlokker
                 coEvery { it.hentOpplysninger() } returns opplysninger
-                coEvery { it.hentUtvidedeBeskrivelser(behandlingId) } returns utvidedeBeskrivelser
             }
         val mediator =
             mockk<Mediator>().also {
                 coEvery {
                     it.hentVedtaksmelding(behandlingId, saksbehandler)
                 } returns Result.success(vedtaksmelding)
+                coEvery { it.hentUtvidedeBeskrivelser(behandlingId) } returns utvidedeBeskrivelser
             }
         testApplication {
             application {
@@ -182,6 +182,21 @@ class MeldingOmVedtakApiTest {
 
     @Test
     fun `Returnerer en default MeldingOmVedtakDTO dersom underliggende systemer feiler`() {
+        val utvidedeBeskrivelser =
+            listOf(
+                UtvidetBeskrivelse(
+                    behandlingId = behandlingId,
+                    brevblokkId = "A",
+                    tekst = "Utvidet beskrivelse for brevblokk A",
+                    sistEndretTidspunkt = LocalDateTime.MAX,
+                ),
+                UtvidetBeskrivelse(
+                    behandlingId = behandlingId,
+                    brevblokkId = "B",
+                    tekst = "Utvidet beskrivelse for brevblokk B",
+                    sistEndretTidspunkt = LocalDateTime.MIN,
+                ),
+            )
         testApplication {
             application {
                 meldingOmVedtakApi(
@@ -190,6 +205,7 @@ class MeldingOmVedtakApiTest {
                             Result.failure(
                                 RuntimeException("Noe gikk galt"),
                             )
+                        coEvery { it.hentUtvidedeBeskrivelser(behandlingId) } returns utvidedeBeskrivelser
                     },
                 )
             }
@@ -313,6 +329,87 @@ class MeldingOmVedtakApiTest {
                      "html" : "<html><body>Test HTML Test ForNavn</body></html>"
                     } 
                     """.trimIndent()
+            }
+        }
+    }
+
+    @Test
+    fun `Skal returnere en html ved bruk av melding-om-vedtak {behandlingId} vedtakshtml`() {
+        val behandlingId = UUID.randomUUID()
+        val requestBody =
+            """
+            {
+                "fornavn": "Test ForNavn",
+                "etternavn": "Test EtterNavn",
+                "fodselsnummer": "12345678901",
+                "sakId": "sak123",
+                "saksbehandler": {
+                    "fornavn": "Ola",
+                    "etternavn": "Nordmann",
+                    "enhet": {
+                        "navn": "Enhet Navn",
+                        "postadresse": "Postadresse 123"
+                    }
+                },
+                "beslutter": {
+                    "fornavn": "Kari",
+                    "etternavn": "Nordmann",
+                    "enhet": {
+                        "navn": "Enhet Navn",
+                        "postadresse": "Postadresse 123"
+                    }
+                }
+            }
+            """.trimIndent()
+
+        val mediator =
+            mockk<Mediator>().also {
+                coEvery {
+                    it.hentVedtaksHtml(
+                        behandlingId,
+                        Saksbehandler(saksbehandlerToken),
+                        meldingOmVedtakData =
+                            MeldingOmVedtakDataDTO(
+                                fornavn = "Test ForNavn",
+                                etternavn = "Test EtterNavn",
+                                fodselsnummer = "12345678901",
+                                sakId = "sak123",
+                                saksbehandler =
+                                    BehandlerDTO(
+                                        fornavn = "Ola",
+                                        etternavn = "Nordmann",
+                                        enhet =
+                                            BehandlerEnhetDTO(
+                                                navn = "Enhet Navn",
+                                                postadresse = "Postadresse 123",
+                                            ),
+                                    ),
+                                beslutter =
+                                    BehandlerDTO(
+                                        fornavn = "Kari",
+                                        etternavn = "Nordmann",
+                                        enhet =
+                                            BehandlerEnhetDTO(
+                                                navn = "Enhet Navn",
+                                                postadresse = "Postadresse 123",
+                                            ),
+                                    ),
+                            ),
+                    )
+                } returns "<html><body>Test HTML Test ForNavn</body></html>"
+            }
+        testApplication {
+            application {
+                meldingOmVedtakApi(mediator)
+            }
+
+            client.post("/melding-om-vedtak/$behandlingId/vedtaksmelding") {
+                autentisert(token = saksbehandlerToken)
+                header(HttpHeaders.ContentType, ContentType.Application.Json)
+                setBody(requestBody)
+            }.let { response ->
+                response.status shouldBe HttpStatusCode.OK
+                response.bodyAsText() shouldBe "<html><body>Test HTML Test ForNavn</body></html>"
             }
         }
     }

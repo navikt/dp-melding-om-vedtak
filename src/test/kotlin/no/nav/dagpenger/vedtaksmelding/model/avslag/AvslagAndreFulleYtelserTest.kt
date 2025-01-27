@@ -2,7 +2,6 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
-import io.mockk.mockk
 import no.nav.dagpenger.vedtaksmelding.model.Avslag
 import no.nav.dagpenger.vedtaksmelding.model.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.Vedtak
@@ -18,7 +17,10 @@ class AvslagAndreFulleYtelserTest {
     @Test
     fun `Brevstøtte for avslag grunnet for lite tapt arbeidstid`() {
         shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
-            Avslag(avslagAndreFulleYtelser, mockk())
+            Avslag(
+                vedtak = avslagAndreFulleYtelser,
+                alleBrevblokker = emptyList(),
+            )
         }
     }
 
@@ -39,7 +41,7 @@ class AvslagAndreFulleYtelserTest {
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",

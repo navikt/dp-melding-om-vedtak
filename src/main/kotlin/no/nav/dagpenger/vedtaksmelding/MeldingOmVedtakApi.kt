@@ -39,6 +39,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                 val behandlingId = call.parseUUID()
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
                     val saksbehandler = call.parseSaksbehandler()
+                    val utvidetBeskrivelse = mediator.hentUtvidedeBeskrivelser(behandlingId)
                     val meldingOmVedtakDTO: MeldingOmVedtakDTO =
                         runCatching {
                             mediator.hentVedtaksmelding(behandlingId, saksbehandler).map { vedtaksmelding ->
@@ -53,7 +54,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                                             )
                                         },
                                     utvidedeBeskrivelser =
-                                        vedtaksmelding.hentUtvidedeBeskrivelser(behandlingId).map {
+                                        utvidetBeskrivelse.map {
                                             UtvidetBeskrivelseDTO(
                                                 brevblokkId = it.brevblokkId,
                                                 tekst = it.tekst ?: "",
@@ -102,6 +103,25 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                             )
 
                         call.respond(meldingOmVedtakResponseDTO)
+                    }.onFailure { t ->
+                        logger.error(t) { "Feil ved henting av vedtaks html" }
+                        call.respond(HttpStatusCode.InternalServerError)
+                    }
+                }
+            }
+            post("/melding-om-vedtak/{behandlingId}/vedtaksmelding") {
+                val behandlingId = call.parseUUID()
+                val behandler = call.parseSaksbehandler()
+                val meldingOmVedtakData = call.receive<MeldingOmVedtakDataDTO>()
+                withLoggingContext("behandlingId" to behandlingId.toString()) {
+                    kotlin.runCatching {
+                        val vedtaksHtml =
+                            mediator.hentVedtaksHtml(
+                                behandlingId = behandlingId,
+                                behandler = behandler,
+                                meldingOmVedtakData = meldingOmVedtakData,
+                            )
+                        call.respond(vedtaksHtml)
                     }.onFailure { t ->
                         logger.error(t) { "Feil ved henting av vedtaks html" }
                         call.respond(HttpStatusCode.InternalServerError)

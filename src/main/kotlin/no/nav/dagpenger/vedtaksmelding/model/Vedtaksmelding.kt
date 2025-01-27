@@ -1,36 +1,37 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
 import mu.KotlinLogging
-import no.nav.dagpenger.vedtaksmelding.Mediator
 import no.nav.dagpenger.vedtaksmelding.model.Vilkår.Status.IKKE_OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
-import java.util.UUID
+import no.nav.dagpenger.vedtaksmelding.portabletext.Child
 
 private val logger = KotlinLogging.logger {}
 
 sealed class Vedtaksmelding(
     protected open val vedtak: Vedtak,
-    protected open val mediator: Mediator,
 ) {
-    protected abstract val brevBlokkIder: List<String>
     abstract val harBrevstøtte: Boolean
+
+    protected abstract val brevBlokkIder: List<String>
+    protected abstract val brevBlokker: List<BrevBlokk>
 
     fun brevBlokkIder(): List<String> {
         return brevBlokkIder + fasteBlokker
     }
 
-    suspend fun hentBrevBlokker(): List<BrevBlokk> {
-        return mediator.hentBrevBlokker(brevBlokkIder())
+    fun hentBrevBlokker(): List<BrevBlokk> {
+        return brevBlokker
     }
 
-    suspend fun hentOpplysninger(): List<Opplysning> {
-        val opplysningstekstIder = mediator.hentOpplysningTekstIder(brevBlokkIder())
-        logger.info { "Skal hente opplysninger basert på følgende tekstider: $opplysningstekstIder" }
-        return opplysningstekstIder.map { opplysningstekstId -> vedtak.hentOpplysning(opplysningstekstId) }
-    }
-
-    fun hentUtvidedeBeskrivelser(behandlingId: UUID): List<UtvidetBeskrivelse> {
-        return mediator.hentUtvidedeBeskrivelser(behandlingId)
+    fun hentOpplysninger(): List<Opplysning> {
+        return brevBlokker.asSequence()
+            .filter { it.textId in brevBlokkIder() }
+            .flatMap { it.innhold }
+            .flatMap { it.children }
+            .filterIsInstance<Child.OpplysningReference>()
+            .map { it.behandlingOpplysning.textId }
+            .map { vedtak.hentOpplysning(it) }
+            .toList()
     }
 
     companion object {
@@ -43,12 +44,12 @@ sealed class Vedtaksmelding(
 
         fun byggVedtaksmelding(
             vedtak: Vedtak,
-            mediator: Mediator,
+            alleBrevblokker: List<BrevBlokk>,
         ): Vedtaksmelding {
             return try {
                 mutableSetOf<Result<Vedtaksmelding>>().apply {
-                    add(kotlin.runCatching { Avslag(vedtak, mediator) })
-                    add(kotlin.runCatching { Innvilgelse(vedtak, mediator) })
+                    add(kotlin.runCatching { Avslag(vedtak, alleBrevblokker) })
+                    add(kotlin.runCatching { Innvilgelse(vedtak, alleBrevblokker) })
                 }
                     .single { it.isSuccess }
                     .getOrThrow()
@@ -77,10 +78,10 @@ sealed class Vedtaksmelding(
     class ManglerBrevstøtte(override val message: String) : RuntimeException(message)
 }
 
-data class Avslag(
+class Avslag(
     override val vedtak: Vedtak,
-    override val mediator: Mediator,
-) : Vedtaksmelding(vedtak, mediator) {
+    alleBrevblokker: List<BrevBlokk>,
+) : Vedtaksmelding(vedtak) {
     override val harBrevstøtte: Boolean =
         vedtak.utfall == Utfall.AVSLÅTT &&
             (
@@ -109,6 +110,11 @@ data class Avslag(
                 blokkerAvslagTaptArbeidstid() +
                 blokkerAvslagOppholdUtland() +
                 blokkerAndreFulleYtelser()
+        }
+    override val brevBlokker: List<BrevBlokk> =
+        run {
+            val brevBlokkMap = alleBrevblokker.associateBy { it.textId }
+            brevBlokkIder().mapNotNull { id -> brevBlokkMap[id] }
         }
 
     private fun blokkerAvslagMinsteinntekt(): List<String> {
@@ -219,10 +225,10 @@ data class Avslag(
     }
 }
 
-data class Innvilgelse(
+class Innvilgelse(
     override val vedtak: Vedtak,
-    override val mediator: Mediator,
-) : Vedtaksmelding(vedtak, mediator) {
+    alleBrevblokker: List<BrevBlokk>,
+) : Vedtaksmelding(vedtak) {
     override val harBrevstøtte: Boolean = vedtak.utfall == Utfall.INNVILGET
 
     init {
@@ -252,6 +258,11 @@ data class Innvilgelse(
                 )
 
             return pre + barnetillegg() + nittiProsentRegel() + samordnet() + grunnlag() + post
+        }
+    override val brevBlokker: List<BrevBlokk> =
+        run {
+            val brevBlokkMap = alleBrevblokker.associateBy { it.textId }
+            brevBlokkIder().mapNotNull { id -> brevBlokkMap[id] }
         }
 
     private fun nittiProsentRegel(): List<String> {
