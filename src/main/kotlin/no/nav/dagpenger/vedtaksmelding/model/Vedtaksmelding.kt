@@ -85,9 +85,10 @@ data class Avslag(
         vedtak.utfall == Utfall.AVSLÅTT &&
             (
                 vedtak.vilkår.avslagMinsteinntekt() ||
-                    vedtak.vilkår.reellArbeidssøker() ||
+                    vedtak.vilkår.avslagReellArbeidssøker() ||
                     vedtak.vilkår.avslagArbeidstid() ||
-                    vedtak.vilkår.avslagOppholdUtland()
+                    vedtak.vilkår.avslagOppholdUtland() ||
+                    vedtak.vilkår.avslagAndreFulleYtelser()
             )
 
     init {
@@ -102,10 +103,15 @@ data class Avslag(
         )
     override val brevBlokkIder: List<String>
         get() {
-            return pre + avslagMinsteInntekt() + avslagReellArbeidssøker() + avslagTaptArbeidstid() + avslagOppholdUtland()
+            return pre +
+                blokkerAvslagMinsteinntekt() +
+                blokkerAvslagReellArbeidssøker() +
+                blokkerAvslagTaptArbeidstid() +
+                blokkerAvslagOppholdUtland() +
+                blokkerAndreFulleYtelser()
         }
 
-    private fun avslagMinsteInntekt(): List<String> {
+    private fun blokkerAvslagMinsteinntekt(): List<String> {
         return vedtak.vilkår.find {
             it.navn == "Oppfyller kravet til minsteinntekt eller verneplikt" && it.status == IKKE_OPPFYLT
         }
@@ -114,7 +120,7 @@ data class Avslag(
             } ?: emptyList()
     }
 
-    private fun avslagOppholdUtland(): List<String> {
+    private fun blokkerAvslagOppholdUtland(): List<String> {
         return vedtak.vilkår.find {
             it.navn == "Oppfyller kravet til opphold i Norge" && it.status == IKKE_OPPFYLT
         }
@@ -126,7 +132,16 @@ data class Avslag(
             } ?: emptyList()
     }
 
-    private fun avslagTaptArbeidstid(): List<String> {
+    private fun blokkerAndreFulleYtelser(): List<String> {
+        return vedtak.vilkår.find {
+            it.navn == "Mottar ikke andre fulle ytelser" && it.status == IKKE_OPPFYLT
+        }
+            ?.let {
+                listOf("brev.blokk.avslag-andre-fulle-ytelser")
+            } ?: emptyList()
+    }
+
+    private fun blokkerAvslagTaptArbeidstid(): List<String> {
         return vedtak.vilkår.find {
             it.navn == "Tap av arbeidstid er minst terskel" && it.status == IKKE_OPPFYLT
         }
@@ -135,7 +150,7 @@ data class Avslag(
             } ?: emptyList()
     }
 
-    private fun avslagReellArbeidssøker(): List<String> {
+    private fun blokkerAvslagReellArbeidssøker(): List<String> {
         val grunnerTilAvslag = mutableListOf("brev.blokk.avslag-reell-arbeidssoker-overskrift")
 
         vedtak.vilkår.find {
@@ -192,7 +207,11 @@ data class Avslag(
         return this.any { it.navn == "Oppfyller kravet til opphold i Norge" && it.status == IKKE_OPPFYLT }
     }
 
-    private fun Set<Vilkår>.reellArbeidssøker(): Boolean {
+    private fun Set<Vilkår>.avslagAndreFulleYtelser(): Boolean {
+        return this.any { it.navn == "Mottar ikke andre fulle ytelser" && it.status == IKKE_OPPFYLT }
+    }
+
+    private fun Set<Vilkår>.avslagReellArbeidssøker(): Boolean {
         return this.any {
             it.status == IKKE_OPPFYLT &&
                 (it.navn == "Krav til arbeidssøker" || it.navn == "Registrert som arbeidssøker på søknadstidspunktet")
