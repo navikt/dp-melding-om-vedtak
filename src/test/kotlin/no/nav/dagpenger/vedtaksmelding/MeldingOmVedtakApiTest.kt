@@ -368,6 +368,7 @@ class MeldingOmVedtakApiTest {
                     it.hentVedtaksHtml(
                         behandlingId,
                         Saksbehandler(saksbehandlerToken),
+                        enderlig = true,
                         meldingOmVedtakData =
                             MeldingOmVedtakDataDTO(
                                 fornavn = "Test ForNavn",

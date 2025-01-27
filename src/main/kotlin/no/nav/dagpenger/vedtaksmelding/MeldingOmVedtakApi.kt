@@ -120,6 +120,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                                 behandlingId = behandlingId,
                                 behandler = behandler,
                                 meldingOmVedtakData = meldingOmVedtakData,
+                                enderlig = true,
                             )
                         call.respond(vedtaksHtml)
                     }.onFailure { t ->
