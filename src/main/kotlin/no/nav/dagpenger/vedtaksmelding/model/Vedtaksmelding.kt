@@ -259,8 +259,11 @@ class Innvilgelse(
 
             return pre + barnetillegg() + nittiProsentRegel() + samordnet() + grunnlag() + post
         }
-
-    override val brevBlokker: List<BrevBlokk> = brevBlokkIder().mapNotNull { id -> alleBrevblokker.associateBy { it.textId }[id] }
+    override val brevBlokker: List<BrevBlokk> =
+        run {
+            val brevBlokkMap = alleBrevblokker.associateBy { it.textId }
+            brevBlokkIder().mapNotNull { id -> brevBlokkMap[id] }
+        }
 
     private fun nittiProsentRegel(): List<String> {
         val id = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget"
