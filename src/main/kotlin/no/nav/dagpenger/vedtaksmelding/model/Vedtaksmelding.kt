@@ -9,16 +9,10 @@ private val logger = KotlinLogging.logger {}
 
 sealed class Vedtaksmelding(
     protected open val vedtak: Vedtak,
-    alleBrevblokker: List<BrevBlokk>,
 ) {
-    protected abstract val brevBlokkIder: List<String>
     abstract val harBrevstøtte: Boolean
 
-    /*private val brevBlokker: List<BrevBlokk> =
-        alleBrevblokker.filter {
-            it.textId in brevBlokkIder
-        }*/
-
+    protected abstract val brevBlokkIder: List<String>
     protected abstract val brevBlokker: List<BrevBlokk>
 
     fun brevBlokkIder(): List<String> {
@@ -39,10 +33,6 @@ sealed class Vedtaksmelding(
             .map { vedtak.hentOpplysning(it) }
             .toList()
     }
-
-    /*    fun hentUtvidedeBeskrivelser(behandlingId: UUID): List<UtvidetBeskrivelse> {
-            return mediator.hentUtvidedeBeskrivelser(behandlingId)
-        }*/
 
     companion object {
         val fasteBlokker =
@@ -91,7 +81,7 @@ sealed class Vedtaksmelding(
 class Avslag(
     override val vedtak: Vedtak,
     alleBrevblokker: List<BrevBlokk>,
-) : Vedtaksmelding(vedtak, alleBrevblokker) {
+) : Vedtaksmelding(vedtak) {
     override val harBrevstøtte: Boolean =
         vedtak.utfall == Utfall.AVSLÅTT &&
             (
@@ -215,7 +205,7 @@ class Avslag(
 class Innvilgelse(
     override val vedtak: Vedtak,
     alleBrevblokker: List<BrevBlokk>,
-) : Vedtaksmelding(vedtak, alleBrevblokker) {
+) : Vedtaksmelding(vedtak) {
     override val harBrevstøtte: Boolean = vedtak.utfall == Utfall.INNVILGET
 
     init {
