@@ -111,7 +111,11 @@ class Avslag(
                 blokkerAvslagOppholdUtland() +
                 blokkerAndreFulleYtelser()
         }
-    override val brevBlokker: List<BrevBlokk> = brevBlokkIder().mapNotNull { id -> alleBrevblokker.associateBy { it.textId }[id] }
+    override val brevBlokker: List<BrevBlokk> =
+        run {
+            val brevBlokkMap = alleBrevblokker.associateBy { it.textId }
+            brevBlokkIder().mapNotNull { id -> brevBlokkMap[id] }
+        }
 
     private fun blokkerAvslagMinsteinntekt(): List<String> {
         return vedtak.vilkår.find {
