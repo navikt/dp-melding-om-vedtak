@@ -6,7 +6,6 @@ import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
-import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
 import java.time.LocalDateTime
@@ -23,10 +22,6 @@ class Mediator(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
     ): Result<Vedtaksmelding> {
-        val sanityInnhold = sanityKlient.hentBrevBlokkerJson()
-        // val sanityInnholdDatabase = vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
-        // val alleBrevblokker = Json.decodeFromString<ResultDTO>(sanityInnhold).result //Todo: dette mikker i testen
-
         val alleBrevblokker = sanityKlient.hentBrevBlokker()
         return behandlingKlient.hentVedtak(
             behandlingId = behandlingId,
@@ -34,16 +29,6 @@ class Mediator(
         ).onFailure { throwable ->
             logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
         }.map { Vedtaksmelding.byggVedtaksmelding(it, alleBrevblokker) }
-        // bygg vetakmelding kan ha sanityInnhold som parameter og utvidet beskrivelse som inputtparametere
-    }
-
-    suspend fun hentOpplysningTekstIder(brevbklokkIder: List<String>): List<String> {
-        return sanityKlient.hentOpplysningTekstIder(brevbklokkIder)
-    }
-
-    suspend fun hentBrevBlokker(brevbklokkIder: List<String>): List<BrevBlokk> {
-        val brevblokkInnhold = sanityKlient.hentBrevBlokker().associateBy { it.textId }
-        return brevbklokkIder.map { brevblokkInnhold[it] ?: throw RuntimeException("Fant ikke brevblokk med id $it") }
     }
 
     fun lagreUtvidetBeskrivelse(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime {
