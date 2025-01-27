@@ -548,7 +548,7 @@ class InnvilgelseTest {
                     utfall = Utfall.INNVILGET,
                     opplysninger = setOf(samordnetOpplysning()),
                 ),
-            mediator = mockk(),
+            alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
 
