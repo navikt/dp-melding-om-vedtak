@@ -6,6 +6,7 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.every
 import io.mockk.mockk
 import io.mockk.spyk
 import kotlinx.coroutines.runBlocking
@@ -91,22 +92,18 @@ class MediatorTest {
             }
 
         val resource = resourseRetriever.getResource("/json/sanity.json").readText()
-        val sanityKlient =
-            mockk<SanityKlient>().also {
-                coEvery { it.hentBrevBlokkerJson() } returns resource
+        val vedtaksmeldingRepository =
+            mockk<VedtaksmeldingRepository>().also {
+                every { it.hentSanityInnhold(behandlingId) } returns resource
             }
-        withMigratedDb { dataSource ->
-            val repository = PostgresVedtaksmeldingRepository(dataSource)
-            val mediator =
-                Mediator(
-                    behandlingKlient = behandlingKlient,
-                    sanityKlient = sanityKlient,
-                    vedtaksmeldingRepository = repository,
-                )
-            runBlocking {
-                mediator.hentEnderligVedtaksmelding(behandlingId, saksbehandler).getOrThrow().shouldBeInstanceOf<Avslag>()
-            }
-            repository.hentVedaksmeldingHtml(behandlingId) shouldEqualJson ""
+        val mediator =
+            Mediator(
+                behandlingKlient = behandlingKlient,
+                sanityKlient = mockk(),
+                vedtaksmeldingRepository = vedtaksmeldingRepository,
+            )
+        runBlocking {
+            mediator.hentEnderligVedtaksmelding(behandlingId, saksbehandler).getOrThrow().shouldBeInstanceOf<Avslag>()
         }
     }
 

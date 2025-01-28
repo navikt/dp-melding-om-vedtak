@@ -29,48 +29,36 @@ class Mediator(
     ): Result<Vedtaksmelding> {
         val sanityInnhold = sanityKlient.hentBrevBlokkerJson()
         vedtaksmeldingRepository.lagreSanityInnhold(behandlingId, sanityInnhold)
-
-        val alleBrevblokker: List<BrevBlokk> =
-            objectMapper.readValue(
-                sanityInnhold,
-                object : TypeReference<ResultDTO>() {},
-            ).result
-
-        return behandlingKlient.hentVedtak(
-            behandlingId = behandlingId,
-            saksbehandler = saksbehandler,
-        ).onFailure { throwable ->
-            logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
-        }.map { Vedtaksmelding.byggVedtaksmelding(it, alleBrevblokker) }
+        return hentVedtakOgByggVedtaksMelding(behandlingId, saksbehandler) { sanityInnhold }
     }
 
     suspend fun hentEnderligVedtaksmelding(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
     ): Result<Vedtaksmelding> {
-        val sanityInnhold = vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
+        return hentVedtakOgByggVedtaksMelding(behandlingId, saksbehandler) {
+            vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
+        }
+    }
+
+    private suspend fun hentVedtakOgByggVedtaksMelding(
+        behandlingId: UUID,
+        saksbehandler: Saksbehandler,
+        sanitySupplier: suspend () -> String,
+    ): Result<Vedtaksmelding> {
+        val sanityInnhold = sanitySupplier.invoke()
 
         val alleBrevblokker: List<BrevBlokk> =
             objectMapper.readValue(
                 sanityInnhold,
                 object : TypeReference<ResultDTO>() {},
             ).result
-
         return behandlingKlient.hentVedtak(
             behandlingId = behandlingId,
             saksbehandler = saksbehandler,
         ).onFailure { throwable ->
             logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
         }.map { Vedtaksmelding.byggVedtaksmelding(it, alleBrevblokker) }
-    }
-
-    suspend fun hentOpplysningTekstIder(brevbklokkIder: List<String>): List<String> {
-        return sanityKlient.hentOpplysningTekstIder(brevbklokkIder)
-    }
-
-    suspend fun hentBrevBlokker(brevbklokkIder: List<String>): List<BrevBlokk> {
-        val brevblokkInnhold = sanityKlient.hentBrevBlokker().associateBy { it.textId }
-        return brevbklokkIder.map { brevblokkInnhold[it] ?: throw RuntimeException("Fant ikke brevblokk med id $it") }
     }
 
     fun lagreUtvidetBeskrivelse(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime {
