@@ -89,7 +89,8 @@ class Avslag(
                     vedtak.vilkår.avslagReellArbeidssøker() ||
                     vedtak.vilkår.avslagArbeidstid() ||
                     vedtak.vilkår.avslagOppholdUtland() ||
-                    vedtak.vilkår.avslagAndreFulleYtelser()
+                    vedtak.vilkår.avslagAndreFulleYtelser() ||
+                    vedtak.vilkår.avslagUtestengt()
             )
 
     init {
@@ -108,6 +109,7 @@ class Avslag(
                 blokkerAvslagMinsteinntekt() +
                 blokkerAvslagReellArbeidssøker() +
                 blokkerAvslagTaptArbeidstid() +
+                blokkerAvslagUtestengt() +
                 blokkerAvslagOppholdUtland() +
                 blokkerAndreFulleYtelser()
         }
@@ -153,6 +155,15 @@ class Avslag(
         }
             ?.let {
                 listOf("brev.blokk.avslag-tapt-arbeidstid")
+            } ?: emptyList()
+    }
+
+    private fun blokkerAvslagUtestengt(): List<String> {
+        return vedtak.vilkår.find {
+            it.navn == "Oppfyller krav til ikke utestengt" && it.status == IKKE_OPPFYLT
+        }
+            ?.let {
+                listOf("brev.blokk.avslag-utestengt")
             } ?: emptyList()
     }
 
@@ -207,6 +218,10 @@ class Avslag(
 
     private fun Set<Vilkår>.avslagArbeidstid(): Boolean {
         return this.any { it.navn == "Tap av arbeidstid er minst terskel" && it.status == IKKE_OPPFYLT }
+    }
+
+    private fun Set<Vilkår>.avslagUtestengt(): Boolean {
+        return this.any { it.navn == "Oppfyller krav til ikke utestengt" && it.status == IKKE_OPPFYLT }
     }
 
     private fun Set<Vilkår>.avslagOppholdUtland(): Boolean {
