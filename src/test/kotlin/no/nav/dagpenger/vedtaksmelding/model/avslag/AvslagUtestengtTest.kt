@@ -3,9 +3,6 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.Avslag
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.FLYTTALL
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.TIMER
 import no.nav.dagpenger.vedtaksmelding.model.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
@@ -14,45 +11,15 @@ import no.nav.dagpenger.vedtaksmelding.model.Vilkår
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
-class AvslagArbeidstidTest {
-    private val avslagArbeidstidVedtak = VedtakMapper(json).vedtak()
+class AvslagUtestengtTest {
+    private val avslagUtestengtVedtak = VedtakMapper(json).vedtak()
 
     @Test
-    fun `Hent relevate opplysninger ved avslag tapt arbeidstid`() {
-        avslagArbeidstidVedtak.finnOpplysning("opplysning.fastsatt-arbeidstid-per-uke-for-tap") shouldBe
-            Opplysning(
-                opplysningTekstId = "opplysning.fastsatt-arbeidstid-per-uke-for-tap",
-                verdi = "37.5",
-                datatype = FLYTTALL,
-                enhet = TIMER,
-            )
-        avslagArbeidstidVedtak.finnOpplysning("opplysning.fastsatt-ny-arbeidstid-per-uke") shouldBe
-            Opplysning(
-                opplysningTekstId = "opplysning.fastsatt-ny-arbeidstid-per-uke",
-                verdi = "20",
-                datatype = FLYTTALL,
-                enhet = TIMER,
-            )
-        avslagArbeidstidVedtak.finnOpplysning("opplysning.krav-til-prosentvis-tap-av-arbeidstid") shouldBe
-            Opplysning(
-                opplysningTekstId = "opplysning.krav-til-prosentvis-tap-av-arbeidstid",
-                verdi = "50",
-                datatype = FLYTTALL,
-            )
-        avslagArbeidstidVedtak.finnOpplysning("opplysning.prosentvis-tapt-arbeidstid") shouldBe
-            Opplysning(
-                opplysningTekstId = "opplysning.prosentvis-tapt-arbeidstid",
-                verdi = "46.7",
-                datatype = FLYTTALL,
-            )
-    }
-
-    @Test
-    fun `Riktige brevblokker for avslag arbeidstid`() {
+    fun `Riktige brevblokker for avslag utestengt`() {
         val behandlingId = UUIDv7.ny()
-        val arbeidstidIkkeOppfylt =
+        val utestengtVilkår =
             Vilkår(
-                navn = "Tap av arbeidstid er minst terskel",
+                navn = "Oppfyller krav til ikke utestengt",
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
 
@@ -60,7 +27,7 @@ class AvslagArbeidstidTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår = setOf(arbeidstidIkkeOppfylt),
+                    vilkår = setOf(utestengtVilkår),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
@@ -68,14 +35,14 @@ class AvslagArbeidstidTest {
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-tapt-arbeidstid",
+                "brev.blokk.avslag-utestengt",
             ) + Vedtaksmelding.fasteBlokker
     }
 
     @Test
-    fun `Brevstøtte for avslag grunnet for lite tapt arbeidstid`() {
+    fun `Brevstøtte for avslag utestengt`() {
         shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
-            Avslag(avslagArbeidstidVedtak, emptyList())
+            Avslag(avslagUtestengtVedtak, emptyList())
         }
     }
 }
@@ -136,7 +103,7 @@ private val json =
         },
         {
           "navn": "Oppfyller krav til ikke utestengt",
-          "status": "Oppfylt",
+          "status": "IkkeOppfylt",
           "vurderingstidspunkt": "2025-01-21T11:03:11.076481",
           "hjemmel": "folketrygdloven § 4-28"
         },
@@ -190,13 +157,13 @@ private val json =
         },
         {
           "navn": "Tap av arbeidstid er minst terskel",
-          "status": "IkkeOppfylt",
+          "status": "Oppfylt",
           "vurderingstidspunkt": "2025-01-21T11:06:58.171429",
           "hjemmel": "folketrygdloven § 4-3"
         },
         {
           "navn": "Krav til tap av arbeidsinntekt og arbeidstid",
-          "status": "IkkeOppfylt",
+          "status": "Oppfylt",
           "vurderingstidspunkt": "2025-01-21T11:06:58.212861",
           "hjemmel": "folketrygdloven § 4-3"
         }
