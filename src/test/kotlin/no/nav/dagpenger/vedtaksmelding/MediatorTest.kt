@@ -1,5 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding
 
+import io.kotest.assertions.json.shouldEqualJson
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
@@ -8,6 +9,8 @@ import io.mockk.coVerify
 import io.mockk.mockk
 import io.mockk.spyk
 import kotlinx.coroutines.runBlocking
+import no.nav.dagpenger.vedtaksmelding.db.Postgres.withMigratedDb
+import no.nav.dagpenger.vedtaksmelding.db.PostgresVedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Avslag
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
@@ -26,6 +29,86 @@ class MediatorTest {
     private val behandlingId = UUIDv7.ny()
     private val saksbehandler = Saksbehandler("tulleToken")
     private val resourseRetriever = object {}.javaClass
+
+    @Test
+    fun `Returnere rett vedtak ved bruk av hentVedtaksmelding `() {
+        val vedtak =
+            Vedtak(
+                behandlingId = behandlingId,
+                vilkår =
+                    setOf(
+                        Vilkår(
+                            "Oppfyller kravet til minsteinntekt eller verneplikt",
+                            Vilkår.Status.IKKE_OPPFYLT,
+                        ),
+                    ),
+                utfall = Utfall.AVSLÅTT,
+                opplysninger = emptySet(),
+            )
+        val behandlingKlient =
+            mockk<BehandlingKlient>().also {
+                coEvery { it.hentVedtak(behandlingId, saksbehandler) } returns Result.success(vedtak)
+            }
+
+        val resource = resourseRetriever.getResource("/json/sanity.json").readText()
+        val sanityKlient =
+            mockk<SanityKlient>().also {
+                coEvery { it.hentBrevBlokkerJson() } returns resource
+            }
+        withMigratedDb { dataSource ->
+            val repository = PostgresVedtaksmeldingRepository(dataSource)
+            val mediator =
+                Mediator(
+                    behandlingKlient = behandlingKlient,
+                    sanityKlient = sanityKlient,
+                    vedtaksmeldingRepository = repository,
+                )
+            runBlocking {
+                mediator.hentVedtaksmelding(behandlingId, saksbehandler).getOrThrow().shouldBeInstanceOf<Avslag>()
+            }
+            repository.hentSanityInnhold(behandlingId) shouldEqualJson resource
+        }
+    }
+
+    @Test
+    fun `Returnere rett vedtak ved bruk av hentEndeligVedtaksmelding `() {
+        val vedtak =
+            Vedtak(
+                behandlingId = behandlingId,
+                vilkår =
+                    setOf(
+                        Vilkår(
+                            "Oppfyller kravet til minsteinntekt eller verneplikt",
+                            Vilkår.Status.IKKE_OPPFYLT,
+                        ),
+                    ),
+                utfall = Utfall.AVSLÅTT,
+                opplysninger = emptySet(),
+            )
+        val behandlingKlient =
+            mockk<BehandlingKlient>().also {
+                coEvery { it.hentVedtak(behandlingId, saksbehandler) } returns Result.success(vedtak)
+            }
+
+        val resource = resourseRetriever.getResource("/json/sanity.json").readText()
+        val sanityKlient =
+            mockk<SanityKlient>().also {
+                coEvery { it.hentBrevBlokkerJson() } returns resource
+            }
+        withMigratedDb { dataSource ->
+            val repository = PostgresVedtaksmeldingRepository(dataSource)
+            val mediator =
+                Mediator(
+                    behandlingKlient = behandlingKlient,
+                    sanityKlient = sanityKlient,
+                    vedtaksmeldingRepository = repository,
+                )
+            runBlocking {
+                mediator.hentEnderligVedtaksmelding(behandlingId, saksbehandler).getOrThrow().shouldBeInstanceOf<Avslag>()
+            }
+            repository.hentVedaksmeldingHtml(behandlingId) shouldEqualJson ""
+        }
+    }
 
     @Test
     fun `skal sende ett eller annet vedtak`() {

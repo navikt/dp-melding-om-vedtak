@@ -1,11 +1,5 @@
 package no.nav.dagpenger.vedtaksmelding.apiconfig
 
-import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.jackson.JacksonConverter
@@ -23,6 +17,7 @@ import io.ktor.server.request.path
 import io.ktor.server.response.respond
 import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
+import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
 import org.slf4j.event.Level
 import java.net.URI
 
@@ -110,11 +105,3 @@ fun Application.apiConfig() {
         }
     }
 }
-
-internal val objectMapper: ObjectMapper =
-    jacksonObjectMapper()
-        .registerModule(JavaTimeModule())
-        .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-        .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .setSerializationInclusion(JsonInclude.Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)

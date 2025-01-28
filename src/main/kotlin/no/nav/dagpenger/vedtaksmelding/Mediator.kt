@@ -1,14 +1,17 @@
 package no.nav.dagpenger.vedtaksmelding
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.module.kotlin.readValue
 import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
+import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter
+import no.nav.dagpenger.vedtaksmelding.sanity.ResultDTO
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
 import java.time.LocalDateTime
 import java.util.UUID
@@ -23,31 +26,42 @@ class Mediator(
     suspend fun hentVedtaksmelding(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
-        enderlig: Boolean = false,
     ): Result<Vedtaksmelding> {
-        val sanityInnhold =
-            when (enderlig) {
-                true -> vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
-                else -> sanityKlient.hentBrevBlokkerJson()
-            }
-        // val sanityInnhold = sanityKlient.hentBrevBlokkerJson()
+        val sanityInnhold = sanityKlient.hentBrevBlokkerJson()
         vedtaksmeldingRepository.lagreSanityInnhold(behandlingId, sanityInnhold)
-        val objectMapper = jacksonObjectMapper()
-        /*val alleBrevblokker: List<BrevBlokk> =
+
+        val alleBrevblokker: List<BrevBlokk> =
             objectMapper.readValue(
                 sanityInnhold,
                 object : TypeReference<ResultDTO>() {},
-            ).result*/
+            ).result
 
-        // val sanityInnholdDatabase = vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
-        val alleBrevblokker = sanityKlient.hentBrevBlokker() // Todo: denne må erstatttes av JSON konvertert til brevblokker
         return behandlingKlient.hentVedtak(
             behandlingId = behandlingId,
             saksbehandler = saksbehandler,
         ).onFailure { throwable ->
             logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
         }.map { Vedtaksmelding.byggVedtaksmelding(it, alleBrevblokker) }
-        // bygg vetakmelding kan ha sanityInnhold som parameter og utvidet beskrivelse som inputtparametere
+    }
+
+    suspend fun hentEnderligVedtaksmelding(
+        behandlingId: UUID,
+        saksbehandler: Saksbehandler,
+    ): Result<Vedtaksmelding> {
+        val sanityInnhold = vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
+
+        val alleBrevblokker: List<BrevBlokk> =
+            objectMapper.readValue(
+                sanityInnhold,
+                object : TypeReference<ResultDTO>() {},
+            ).result
+
+        return behandlingKlient.hentVedtak(
+            behandlingId = behandlingId,
+            saksbehandler = saksbehandler,
+        ).onFailure { throwable ->
+            logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
+        }.map { Vedtaksmelding.byggVedtaksmelding(it, alleBrevblokker) }
     }
 
     suspend fun hentOpplysningTekstIder(brevbklokkIder: List<String>): List<String> {
@@ -90,15 +104,24 @@ class Mediator(
         behandlingId: UUID,
         behandler: Saksbehandler,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
-        enderlig: Boolean = false,
     ): String {
         val html =
-            hentVedtaksmelding(behandlingId, behandler, enderlig).map { vedtak ->
+            hentVedtaksmelding(behandlingId, behandler).map { vedtak ->
                 HtmlConverter.toHtml(vedtak.hentBrevBlokker(), vedtak.hentOpplysninger(), meldingOmVedtakData)
             }.getOrThrow()
-        if (enderlig) {
-            vedtaksmeldingRepository.lagreVedaksmeldingHtml(behandlingId, html)
-        }
+        return html
+    }
+
+    suspend fun hentEndeligVedtak(
+        behandlingId: UUID,
+        behandler: Saksbehandler,
+        meldingOmVedtakData: MeldingOmVedtakDataDTO,
+    ): String {
+        val html =
+            hentEnderligVedtaksmelding(behandlingId, behandler).map { vedtak ->
+                HtmlConverter.toHtml(vedtak.hentBrevBlokker(), vedtak.hentOpplysninger(), meldingOmVedtakData)
+            }.getOrThrow()
+        vedtaksmeldingRepository.lagreVedaksmeldingHtml(behandlingId, html)
         return html
     }
 }
