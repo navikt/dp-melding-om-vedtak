@@ -116,11 +116,10 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
                     kotlin.runCatching {
                         val vedtaksHtml =
-                            mediator.hentVedtaksHtml(
+                            mediator.hentEndeligVedtak(
                                 behandlingId = behandlingId,
                                 behandler = behandler,
                                 meldingOmVedtakData = meldingOmVedtakData,
-                                enderlig = true,
                             )
                         call.respond(vedtaksHtml)
                     }.onFailure { t ->

@@ -28,6 +28,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinxHtmlVersion")
     implementation("io.github.allangomes:kotlinwind-css:0.0.4")
 
+    testImplementation("io.kotest:kotest-assertions-json:${libs.versions.kotest.get()}")
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.mockk)
     testImplementation(libs.mock.oauth2.server)

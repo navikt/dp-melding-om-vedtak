@@ -365,10 +365,9 @@ class MeldingOmVedtakApiTest {
         val mediator =
             mockk<Mediator>().also {
                 coEvery {
-                    it.hentVedtaksHtml(
+                    it.hentEndeligVedtak(
                         behandlingId,
                         Saksbehandler(saksbehandlerToken),
-                        enderlig = true,
                         meldingOmVedtakData =
                             MeldingOmVedtakDataDTO(
                                 fornavn = "Test ForNavn",
