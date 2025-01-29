@@ -218,6 +218,7 @@ private val json =
       "opplysninger": [
         {
           "id": "01948854-5e53-7bc0-81eb-5e6019c903e1",
+          "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a76b",
           "navn": "Ny arbeidstid per uke",
           "verdi": "20.0",
           "status": "Faktum",
@@ -237,6 +238,7 @@ private val json =
         },
         {
           "id": "01948850-e99d-7037-9851-8b15c4b2ed28",
+          "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a76a",
           "navn": "Fastsatt arbeidstid per uke før tap",
           "verdi": "37.5",
           "status": "Faktum",
@@ -261,6 +263,7 @@ private val json =
         },
         {
           "id": "01948850-e75f-710b-8b4e-527662639a27",
+          "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a762",
           "navn": "Krav til prosentvis tap av arbeidstid",
           "verdi": "50.0",
           "status": "Faktum",

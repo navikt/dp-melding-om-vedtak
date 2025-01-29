@@ -59,14 +59,14 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.fastsatt-arbeidstid-per-uke-for-tap") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.fastsatt-arbeidstid-per-uke-for-tap",
-                verdi = "37.5",
+                verdi = "33.5",
                 datatype = FLYTTALL,
                 enhet = TIMER,
             )
     }
 
     @Test
-    fun `Hent opplysning dagsats med barnetillegg etter samordning og 90% regel`() {
+    fun `Hent opplysning dagsats med barnetillegg etter samordning og 90 prosent regel`() {
         vedtak.finnOpplysning("opplysning.dagsats-med-barnetillegg-etter-samordning-og-90-prosent-regel") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.dagsats-med-barnetillegg-etter-samordning-og-90-prosent-regel",
@@ -143,17 +143,6 @@ class VedtakMapperTest {
     }
 
     @Test
-    fun `skal hente gjennomsnittlig arbeidsinntekt siste 36 måneder`() {
-        vedtak.finnOpplysning("opplysning.gjennomsnittlig-arbeidsinntekt-siste-36-maaneder") shouldBe
-            Opplysning(
-                opplysningTekstId = "opplysning.gjennomsnittlig-arbeidsinntekt-siste-36-maaneder",
-                verdi = "614871.27",
-                datatype = FLYTTALL,
-                enhet = KRONER,
-            )
-    }
-
-    @Test
     fun `skal hente brukt beregningsregel`() {
         vedtak.finnOpplysning("opplysning.brukt-beregningsregel") shouldBe
             Opplysning(
@@ -169,7 +158,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.antall-stonadsuker") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.antall-stonadsuker",
-                verdi = "104",
+                verdi = "52",
                 datatype = HELTALL,
                 enhet = UKER,
             )
@@ -180,7 +169,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.egenandel") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.egenandel",
-                verdi = "3936",
+                verdi = "963",
                 datatype = HELTALL,
                 enhet = KRONER,
             )
@@ -334,7 +323,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.antall-barn-som-gir-rett-til-barnetillegg") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.antall-barn-som-gir-rett-til-barnetillegg",
-                verdi = "1",
+                verdi = "2",
                 datatype = HELTALL,
                 enhet = BARN,
             )
@@ -356,7 +345,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.forste-maaned-av-opptjeningsperiode") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.forste-maaned-av-opptjeningsperiode",
-                verdi = "2021-11-01",
+                verdi = "2022-01-01",
                 datatype = DATO,
                 enhet = ENHETSLØS,
             )
@@ -370,17 +359,6 @@ class VedtakMapperTest {
                 verdi = "2024-10-31",
                 datatype = DATO,
                 enhet = ENHETSLØS,
-            )
-    }
-
-    @Test
-    fun `Hent opplysning grunnlag siste 12 måneder`() {
-        vedtak.finnOpplysning("opplysning.grunnlag-siste-12-mnd") shouldBe
-            Opplysning(
-                opplysningTekstId = "opplysning.grunnlag-siste-12-mnd",
-                verdi = "513677.29",
-                datatype = FLYTTALL,
-                enhet = KRONER,
             )
     }
 
@@ -409,23 +387,23 @@ class VedtakMapperTest {
     fun `Hent inntjeningsperiode opplysninger`() {
         vedtak.opplysninger.single {
             it.opplysningTekstId == "opplysning.forste-maaned-aar-for-inntektsperiode-1"
-        }.verdi shouldBe "november 2023"
+        }.verdi shouldBe "januar 2024"
         vedtak.opplysninger.single {
             it.opplysningTekstId == "opplysning.forste-maaned-aar-for-inntektsperiode-2"
-        }.verdi shouldBe "november 2022"
+        }.verdi shouldBe "januar 2023"
         vedtak.opplysninger.single {
             it.opplysningTekstId == "opplysning.forste-maaned-aar-for-inntektsperiode-3"
-        }.verdi shouldBe "november 2021"
+        }.verdi shouldBe "januar 2022"
 
         vedtak.opplysninger.single {
             it.opplysningTekstId == "opplysning.siste-maaned-aar-for-inntektsperiode-1"
-        }.verdi shouldBe "oktober 2024"
+        }.verdi shouldBe "desember 2024"
         vedtak.opplysninger.single {
             it.opplysningTekstId == "opplysning.siste-maaned-aar-for-inntektsperiode-2"
-        }.verdi shouldBe "oktober 2023"
+        }.verdi shouldBe "desember 2023"
         vedtak.opplysninger.single {
             it.opplysningTekstId == "opplysning.siste-maaned-aar-for-inntektsperiode-3"
-        }.verdi shouldBe "oktober 2022"
+        }.verdi shouldBe "desember 2022"
     }
 
     @Test

@@ -184,72 +184,7 @@ private val avslagOppholdNorgeJson =
         "kvoter": null
       },
       "utbetalinger": [],
-      "opplysninger": [
-        {
-          "id": "01948854-5e53-7bc0-81eb-5e6019c903e1",
-          "navn": "Ny arbeidstid per uke",
-          "verdi": "20.0",
-          "status": "Faktum",
-          "datatype": "desimaltall",
-          "redigerbar": true,
-          "synlig": true,
-          "formål": "Regel",
-          "gyldigFraOgMed": null,
-          "gyldigTilOgMed": null,
-          "kilde": {
-            "type": "Saksbehandler",
-            "registrert": "2025-01-21T11:06:57.90184",
-            "ident": "Z994251",
-            "meldingId": null
-          },
-          "utledetAv": null
-        },
-        {
-          "id": "01948850-e99d-7037-9851-8b15c4b2ed28",
-          "navn": "Fastsatt arbeidstid per uke før tap",
-          "verdi": "37.5",
-          "status": "Faktum",
-          "datatype": "desimaltall",
-          "redigerbar": false,
-          "synlig": true,
-          "formål": "Regel",
-          "gyldigFraOgMed": null,
-          "gyldigTilOgMed": null,
-          "kilde": null,
-          "utledetAv": {
-            "regel": {
-              "navn": "MinstAv"
-            },
-            "opplysninger": [
-              "01948850-e75f-710b-8b4e-527662639a13",
-              "01948850-e764-7663-8f83-0bf956b83249",
-              "01948850-e77c-7209-b7e3-724d67f67801",
-              "01948850-e99a-7a48-b1b5-f67e5c03159b"
-            ]
-          }
-        },
-        {
-          "id": "01948850-e75f-710b-8b4e-527662639a27",
-          "navn": "Krav til prosentvis tap av arbeidstid",
-          "verdi": "50.0",
-          "status": "Faktum",
-          "datatype": "desimaltall",
-          "redigerbar": false,
-          "synlig": true,
-          "formål": "Regel",
-          "gyldigFraOgMed": null,
-          "gyldigTilOgMed": null,
-          "kilde": null,
-          "utledetAv": {
-            "regel": {
-              "navn": "Oppslag"
-            },
-            "opplysninger": [
-              "01948850-df4a-79b7-9bd4-f81f6e629ec1"
-            ]
-          }
-        }
-      ],
+      "opplysninger": [],
       "automatisk": false,
       "gjenstående": {
         "kvoter": null
