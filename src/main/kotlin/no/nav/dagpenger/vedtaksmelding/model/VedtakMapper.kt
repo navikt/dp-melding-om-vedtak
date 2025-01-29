@@ -19,6 +19,7 @@ import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.ENHETSLØS
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.KRONER
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.TIMER
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.UKER
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.KravTilProsentvisTapAvArbeidstid
 import no.nav.dagpenger.vedtaksmelding.model.Utfall.AVSLÅTT
 import no.nav.dagpenger.vedtaksmelding.model.Utfall.INNVILGET
 import java.time.LocalDate
@@ -103,134 +104,111 @@ class VedtakMapper(vedtakJson: String) {
                 datatype = FLYTTALL,
                 enhet = TIMER,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.krav-til-prosentvis-tap-av-arbeidstid",
-                navn = "Krav til prosentvis tap av arbeidstid",
+            vedtak.finnOpplysningFraType(
+                opplysningType = KravTilProsentvisTapAvArbeidstid,
                 datatype = FLYTTALL,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.inntektskrav-for-siste-12-mnd",
-                navn = "Inntektskrav for siste 12 mnd",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.inntektskrav-for-siste-12-mnd",
                 datatype = HELTALL,
                 enhet = KRONER,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.inntektskrav-for-siste-36-mnd",
-                navn = "Inntektskrav for siste 36 mnd",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.inntektskrav-for-siste-36-mnd",
                 datatype = HELTALL,
                 enhet = KRONER,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.arbeidsinntekt-siste-36-mnd",
-                navn = "Arbeidsinntekt siste 36 mnd",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.arbeidsinntekt-siste-36-mnd",
                 datatype = HELTALL,
                 enhet = KRONER,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.arbeidsinntekt-siste-12-mnd",
-                navn = "Arbeidsinntekt siste 12 mnd",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.arbeidsinntekt-siste-12-mnd",
                 datatype = HELTALL,
                 enhet = KRONER,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.antall-g-for-krav-til-12-mnd-arbeidsinntekt",
-                navn = "Antall G for krav til 12 mnd arbeidsinntekt",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.antall-g-for-krav-til-12-mnd-arbeidsinntekt",
                 datatype = FLYTTALL,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.antall-g-for-krav-til-36-mnd-arbeidsinntekt",
-                navn = "Antall G for krav til 36 mnd arbeidsinntekt",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.antall-g-for-krav-til-36-mnd-arbeidsinntekt",
                 datatype = FLYTTALL,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.gjennomsnittlig-arbeidsinntekt-siste-36-maaneder",
-                navn = "Gjennomsnittlig arbeidsinntekt siste 36 måneder",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.gjennomsnittlig-arbeidsinntekt-siste-36-maaneder",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt",
-                navn = "Antall G som gis som grunnlag ved verneplikt",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.brukt-beregningsregel",
-                navn = "Brukt beregningsregel",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.brukt-beregningsregel",
                 datatype = TEKST,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.utbetalt-arbeidsinntekt-periode-1",
-                navn = "Utbetalt arbeidsinntekt periode 1",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.utbetalt-arbeidsinntekt-periode-1",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.utbetalt-arbeidsinntekt-periode-2",
-                navn = "Utbetalt arbeidsinntekt periode 2",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.utbetalt-arbeidsinntekt-periode-2",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.utbetalt-arbeidsinntekt-periode-3",
-                navn = "Utbetalt arbeidsinntekt periode 3",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.utbetalt-arbeidsinntekt-periode-3",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger",
-                navn = "Antall stønadsuker som gis ved ordinære dagpenger",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger",
                 datatype = HELTALL,
                 enhet = UKER,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.krav-til-minsteinntekt",
-                navn = "Krav til minsteinntekt",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.krav-til-minsteinntekt",
                 datatype = BOOLSK,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget",
-                navn = "Andel av dagsats med barnetillegg som overstiger maks andel av dagpengegrunnlaget",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.andel-av-dagsats-med-barnetillegg-avkortet-til-maks-andel-av-dagpengegrunnlaget",
-                navn = "Andel av dagsats med barnetillegg avkortet til maks andel av dagpengegrunnlaget",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.andel-av-dagsats-med-barnetillegg-avkortet-til-maks-andel-av-dagpengegrunnlaget",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.antall-barn-som-gir-rett-til-barnetillegg",
-                navn = "Antall barn som gir rett til barnetillegg",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.antall-barn-som-gir-rett-til-barnetillegg",
                 datatype = HELTALL,
                 enhet = BARN,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.barnetillegg-i-kroner",
-                navn = "Sum av barnetillegg",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.barnetillegg-i-kroner",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.forste-maaned-av-opptjeningsperiode",
-                navn = "Første måned av opptjeningsperiode",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.forste-maaned-av-opptjeningsperiode",
                 datatype = DATO,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.siste-avsluttende-kalendermaaned",
-                navn = "Siste avsluttende kalendermåned",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.siste-avsluttende-kalendermaaned",
                 datatype = DATO,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.grunnlag-siste-12-mnd",
-                navn = "Grunnlag siste 12 mnd.",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.grunnlag-siste-12-mnd",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
-            vedtak.finnOpplysningMedNavn(
-                opplysningTekstId = "opplysning.6-ganger-grunnbelop",
-                navn = "6 ganger grunnbeløp",
+            vedtak.finnOpplysningFraType(
+                opplysningType = "opplysning.6-ganger-grunnbelop",
                 datatype = HELTALL,
                 enhet = KRONER,
             ),
@@ -391,14 +369,18 @@ class VedtakMapper(vedtakJson: String) {
             Month.DECEMBER -> "desember ${this.year}"
         }
 
-    private fun JsonNode.finnOpplysningMedNavn(
-        opplysningTekstId: String,
-        navn: String,
+    private fun JsonNode.finnOpplysningFraType(
+        opplysningType: OpplysningTyper,
         datatype: Datatype,
         enhet: Enhet = ENHETSLØS,
     ): Opplysning {
-        return this.finnOpplysningAt(opplysningTekstId, "/opplysninger", datatype, enhet) { node ->
-            node.find { it["navn"].asText() == navn }?.findValue("verdi")?.asText()
+        return finnOpplysningAt(
+            opplysningTekstId = opplysningType.opplysningTekstId,
+            jsonPointer = "/opplysninger",
+            datatype = datatype,
+            enhet = enhet
+        ) { opplysning ->
+            opplysning.find { it["opplysningTypeId"].asText() == opplysningType.opplysningTypeId.toString() }?.findValue("verdi")?.asText()
         }
     }
 
