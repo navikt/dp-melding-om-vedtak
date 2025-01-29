@@ -152,7 +152,32 @@
       {
         "type": "Pleiepenger dagsats",
         "beløp": 150,
-        "grad": 50
+        "grad": 10
+      },
+      {
+        "type": "Omsorgspenger dagsats",
+        "beløp": 150,
+        "grad": 10
+      },
+      {
+        "type": "Opplæringspenger dagsats",
+        "beløp": 180,
+        "grad": 10
+      },
+      {
+        "type": "Uføre dagsats",
+        "beløp": 200,
+        "grad": 10
+      },
+      {
+        "type": "Foreldrepenger dagsats",
+        "beløp": 210,
+        "grad": 10
+      },
+      {
+        "type": "Svangerskapspenger dagsats",
+        "beløp": 150,
+        "grad": 10
       }
     ],
     "kvoter": [

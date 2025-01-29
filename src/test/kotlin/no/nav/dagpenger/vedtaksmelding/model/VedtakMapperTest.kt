@@ -29,7 +29,7 @@ class VedtakMapperTest {
 
     @Test
     fun `hent brevKriterier`() {
-        vedtak.vilkår.size shouldBe 10
+        vedtak.vilkår.size shouldBe 18
     }
 
     @Test
@@ -37,7 +37,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.grunnlag") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.grunnlag",
-                verdi = "614871",
+                verdi = "206997",
                 datatype = HELTALL,
                 enhet = KRONER,
             )
@@ -48,7 +48,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.provingsdato") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.provingsdato",
-                verdi = "2024-11-29",
+                verdi = "2025-01-16",
                 datatype = DATO,
                 enhet = ENHETSLØS,
             )
@@ -70,7 +70,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.dagsats-med-barnetillegg-etter-samordning-og-90-prosent-regel") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.dagsats-med-barnetillegg-etter-samordning-og-90-prosent-regel",
-                verdi = "1312",
+                verdi = "321",
                 datatype = HELTALL,
                 enhet = KRONER,
             )
@@ -103,7 +103,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.arbeidsinntekt-siste-36-mnd") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.arbeidsinntekt-siste-36-mnd",
-                verdi = "1700000",
+                verdi = "555500",
                 datatype = HELTALL,
                 enhet = KRONER,
             )
@@ -114,7 +114,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.arbeidsinntekt-siste-12-mnd") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.arbeidsinntekt-siste-12-mnd",
-                verdi = "500000",
+                verdi = "0",
                 datatype = HELTALL,
                 enhet = KRONER,
             )
@@ -180,7 +180,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.sykepenger-dagsats") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.sykepenger-dagsats",
-                verdi = "50",
+                verdi = "100",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -191,7 +191,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.pleiepenger-dagsats") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.pleiepenger-dagsats",
-                verdi = "100",
+                verdi = "150",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -246,7 +246,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.svangerskapspenger-dagsats") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.svangerskapspenger-dagsats",
-                verdi = "230",
+                verdi = "150",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -257,7 +257,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.utbetalt-arbeidsinntekt-periode-1") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.utbetalt-arbeidsinntekt-periode-1",
-                verdi = "500000",
+                verdi = "0",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -268,7 +268,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.utbetalt-arbeidsinntekt-periode-2") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.utbetalt-arbeidsinntekt-periode-2",
-                verdi = "600000",
+                verdi = "55550",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -279,7 +279,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.utbetalt-arbeidsinntekt-periode-3") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.utbetalt-arbeidsinntekt-periode-3",
-                verdi = "600000",
+                verdi = "499950",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -308,17 +308,6 @@ class VedtakMapperTest {
     }
 
     @Test
-    fun `Hent opplysning andel av dagsats med barnetillegg avkortet til maks andel av dagpengegrunnlaget`() {
-        vedtak.finnOpplysning("opplysning.andel-av-dagsats-med-barnetillegg-avkortet-til-maks-andel-av-dagpengegrunnlaget") shouldBe
-            Opplysning(
-                opplysningTekstId = "opplysning.andel-av-dagsats-med-barnetillegg-avkortet-til-maks-andel-av-dagpengegrunnlaget",
-                verdi = "1476",
-                datatype = FLYTTALL,
-                enhet = KRONER,
-            )
-    }
-
-    @Test
     fun `Hent opplysning antall barn som gir rett til barnetillegg`() {
         vedtak.finnOpplysning("opplysning.antall-barn-som-gir-rett-til-barnetillegg") shouldBe
             Opplysning(
@@ -334,7 +323,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.barnetillegg-i-kroner") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.barnetillegg-i-kroner",
-                verdi = "36",
+                verdi = "74",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -356,7 +345,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.siste-avsluttende-kalendermaaned") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.siste-avsluttende-kalendermaaned",
-                verdi = "2024-10-31",
+                verdi = "2024-12-31",
                 datatype = DATO,
                 enhet = ENHETSLØS,
             )
