@@ -6,11 +6,14 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import io.mockk.coEvery
 import io.mockk.coVerify
-import io.mockk.every
 import io.mockk.mockk
 import io.mockk.spyk
 import kotlinx.coroutines.runBlocking
+import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
+import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
+import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.db.Postgres.withMigratedDb
+import no.nav.dagpenger.vedtaksmelding.db.PostgresDataSourceBuilder.dataSource
 import no.nav.dagpenger.vedtaksmelding.db.PostgresVedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Avslag
@@ -18,6 +21,7 @@ import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.Vilkår
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
@@ -74,36 +78,45 @@ class MediatorTest {
     @Test
     fun `Returnere rett vedtak ved bruk av hentEndeligVedtaksmelding `() {
         val vedtak =
-            Vedtak(
-                behandlingId = behandlingId,
-                vilkår =
-                    setOf(
-                        Vilkår(
-                            "Oppfyller kravet til minsteinntekt eller verneplikt",
-                            Vilkår.Status.IKKE_OPPFYLT,
-                        ),
+            resourseRetriever.getResource("/json/vedtak.json").readText().let {
+                VedtakMapper(it).vedtak()
+            }
+        val meldingOmVedtakDataDTO =
+            MeldingOmVedtakDataDTO(
+                fornavn = "Ola",
+                etternavn = "Nordmann",
+                fodselsnummer = "12345678901",
+                sakId = "12345678901",
+                saksbehandler =
+                    BehandlerDTO(
+                        fornavn = "Ola",
+                        etternavn = "Nordmann",
+                        ident = "Z999999",
+                        enhet =
+                            BehandlerEnhetDTO(
+                                postadresse = "NAV Test",
+                                navn = "NAV Test",
+                            ),
                     ),
-                utfall = Utfall.AVSLÅTT,
-                opplysninger = emptySet(),
             )
         val behandlingKlient =
             mockk<BehandlingKlient>().also {
                 coEvery { it.hentVedtak(behandlingId, saksbehandler) } returns Result.success(vedtak)
             }
 
-        val resource = resourseRetriever.getResource("/json/sanity.json").readText()
-        val vedtaksmeldingRepository =
-            mockk<VedtaksmeldingRepository>().also {
-                every { it.hentSanityInnhold(behandlingId) } returns resource
+        withMigratedDb {
+            val repository = PostgresVedtaksmeldingRepository(dataSource)
+            repository.lagreSanityInnhold(behandlingId, resourseRetriever.getResource("/json/sanity.json").readText())
+            val mediator =
+                Mediator(
+                    behandlingKlient = behandlingKlient,
+                    sanityKlient = mockk(),
+                    vedtaksmeldingRepository = repository,
+                )
+            runBlocking {
+                val vedtakshtml = mediator.hentEndeligVedtak(behandlingId, saksbehandler, meldingOmVedtakDataDTO)
+                vedtakshtml shouldBe repository.hentVedaksmeldingHtml(behandlingId)
             }
-        val mediator =
-            Mediator(
-                behandlingKlient = behandlingKlient,
-                sanityKlient = mockk(),
-                vedtaksmeldingRepository = vedtaksmeldingRepository,
-            )
-        runBlocking {
-            mediator.hentEnderligVedtaksmelding(behandlingId, saksbehandler).getOrThrow().shouldBeInstanceOf<Avslag>()
         }
     }
 
