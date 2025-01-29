@@ -113,6 +113,7 @@ class VedtakHtmlTest {
                     "brev.blokk.begrunnelse-innvilgelsesdato",
                     "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
                     "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
+                    "brev.blokk.barnetillegg",
                     "brev.blokk.grunnlag",
                     "brev.blokk.arbeidstiden-din",
                     "brev.blokk.egenandel",
