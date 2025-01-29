@@ -36,6 +36,7 @@ class AvslagUtestengtTest {
             listOf(
                 "brev.blokk.vedtak-avslag",
                 "brev.blokk.avslag-utestengt",
+                "brev.blokk.avslag-utestengt-hjemmel",
             ) + Vedtaksmelding.fasteBlokker
     }
 
