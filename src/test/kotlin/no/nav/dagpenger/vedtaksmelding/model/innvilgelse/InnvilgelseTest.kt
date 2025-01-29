@@ -84,7 +84,7 @@ class InnvilgelseTest {
     }
 
     @Test
-    fun `Rikig brevblokker for innvilgelse av ordinære dagpenger uten barn, samordning eller 90 % regel`() {
+    fun `Rikig brevblokker for innvilgelse av ordinære dagpenger uten barn, samordning eller 90 prosent regel`() {
         val forventedeBrevblokkIder =
             listOf(
                 "brev.blokk.vedtak-innvilgelse",

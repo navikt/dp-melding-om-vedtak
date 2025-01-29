@@ -33,7 +33,7 @@ class VernepliktOgInntektTest {
         vedtakVernepliktOgInntekt.finnOpplysning("opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger",
-                verdi = "104",
+                verdi = "52",
                 datatype = HELTALL,
                 enhet = UKER,
             )
