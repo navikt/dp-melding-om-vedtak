@@ -18,8 +18,10 @@ data class Vedtak(
     val utfall: Utfall,
     val opplysninger: Set<Opplysning> = emptySet(),
 ) {
-    fun finnOpplysning(opplysningTekstId: String): Opplysning? =
-        this.opplysninger.singleOrNull { it.opplysningTekstId == opplysningTekstId }
+    fun finnOpplysning(opplysningTekstId: String): Opplysning? {
+        val opplysning = this.opplysninger.singleOrNull { it.opplysningTekstId == opplysningTekstId }
+        return opplysning
+    }
 
     fun hentOpplysning(opplysningTekstId: String): Opplysning {
         sikkerlogg.info { "Finn opplysning for behandlingId $behandlingId, opplysning $opplysningTekstId" }
