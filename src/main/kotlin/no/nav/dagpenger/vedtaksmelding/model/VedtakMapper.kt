@@ -19,7 +19,27 @@ import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.ENHETSLØS
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.KRONER
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.TIMER
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.UKER
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallGForKravTil12MånederArbeidsinntekt
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallGForKravTil36MånederArbeidsinntekt
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallGSomGisSomGrunnlagVedVerneplikt
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallStønadsukerSomGisVedOrdinæreDagpenger
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ArbeidsinntektSiste12Måneder
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ArbeidsinntektSiste36Måneder
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.BarnetilleggIKroner
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.BruktBeregningsregel
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.BruktBeregningsregelGrunnlag
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FørsteMånedAvOpptjeningsperiode
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.InntektskravSiste12Måneder
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.InntektskravSiste36Måneder
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.KravTilMinsteinntekt
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.KravTilProsentvisTapAvArbeidstid
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SeksGangerGrunnbeløp
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SisteMånedAvOpptjeningsperiode
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.UtbetaltArbeidsinntektPeriode1
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.UtbetaltArbeidsinntektPeriode2
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.UtbetaltArbeidsinntektPeriode3
 import no.nav.dagpenger.vedtaksmelding.model.Utfall.AVSLÅTT
 import no.nav.dagpenger.vedtaksmelding.model.Utfall.INNVILGET
 import java.time.LocalDate
@@ -109,106 +129,96 @@ class VedtakMapper(vedtakJson: String) {
                 datatype = FLYTTALL,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.inntektskrav-for-siste-12-mnd",
+                opplysningType = InntektskravSiste12Måneder,
                 datatype = HELTALL,
                 enhet = KRONER,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.inntektskrav-for-siste-36-mnd",
+                opplysningType = InntektskravSiste36Måneder,
                 datatype = HELTALL,
                 enhet = KRONER,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.arbeidsinntekt-siste-36-mnd",
+                opplysningType = ArbeidsinntektSiste12Måneder,
                 datatype = HELTALL,
                 enhet = KRONER,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.arbeidsinntekt-siste-12-mnd",
+                opplysningType = ArbeidsinntektSiste36Måneder,
                 datatype = HELTALL,
                 enhet = KRONER,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.antall-g-for-krav-til-12-mnd-arbeidsinntekt",
+                opplysningType = AntallGForKravTil12MånederArbeidsinntekt,
                 datatype = FLYTTALL,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.antall-g-for-krav-til-36-mnd-arbeidsinntekt",
+                opplysningType = AntallGForKravTil36MånederArbeidsinntekt,
                 datatype = FLYTTALL,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.gjennomsnittlig-arbeidsinntekt-siste-36-maaneder",
-                datatype = FLYTTALL,
-                enhet = KRONER,
-            ),
-            vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt",
+                opplysningType = AntallGSomGisSomGrunnlagVedVerneplikt,
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.brukt-beregningsregel",
+                opplysningType = BruktBeregningsregelGrunnlag,
+                datatype = TEKST,
+            ),
+            // TODO: Slettes når brev er oppdatert
+            vedtak.finnOpplysningFraType(
+                opplysningType = BruktBeregningsregel,
                 datatype = TEKST,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.utbetalt-arbeidsinntekt-periode-1",
+                opplysningType = UtbetaltArbeidsinntektPeriode1,
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.utbetalt-arbeidsinntekt-periode-2",
+                opplysningType = UtbetaltArbeidsinntektPeriode2,
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.utbetalt-arbeidsinntekt-periode-3",
+                opplysningType = UtbetaltArbeidsinntektPeriode3,
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger",
+                opplysningType = AntallStønadsukerSomGisVedOrdinæreDagpenger,
                 datatype = HELTALL,
                 enhet = UKER,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.krav-til-minsteinntekt",
+                opplysningType = KravTilMinsteinntekt,
                 datatype = BOOLSK,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget",
+                opplysningType = AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget,
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.andel-av-dagsats-med-barnetillegg-avkortet-til-maks-andel-av-dagpengegrunnlaget",
-                datatype = FLYTTALL,
-                enhet = KRONER,
-            ),
-            vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.antall-barn-som-gir-rett-til-barnetillegg",
+                opplysningType = AntallBarnSomGirRettTilBarnetillegg,
                 datatype = HELTALL,
                 enhet = BARN,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.barnetillegg-i-kroner",
+                opplysningType = BarnetilleggIKroner,
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.forste-maaned-av-opptjeningsperiode",
+                opplysningType = FørsteMånedAvOpptjeningsperiode,
                 datatype = DATO,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.siste-avsluttende-kalendermaaned",
+                opplysningType = SisteMånedAvOpptjeningsperiode,
                 datatype = DATO,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.grunnlag-siste-12-mnd",
-                datatype = FLYTTALL,
-                enhet = KRONER,
-            ),
-            vedtak.finnOpplysningFraType(
-                opplysningType = "opplysning.6-ganger-grunnbelop",
+                opplysningType = SeksGangerGrunnbeløp,
                 datatype = HELTALL,
                 enhet = KRONER,
             ),
@@ -378,7 +388,7 @@ class VedtakMapper(vedtakJson: String) {
             opplysningTekstId = opplysningType.opplysningTekstId,
             jsonPointer = "/opplysninger",
             datatype = datatype,
-            enhet = enhet
+            enhet = enhet,
         ) { opplysning ->
             opplysning.find { it["opplysningTypeId"].asText() == opplysningType.opplysningTypeId.toString() }?.findValue("verdi")?.asText()
         }
