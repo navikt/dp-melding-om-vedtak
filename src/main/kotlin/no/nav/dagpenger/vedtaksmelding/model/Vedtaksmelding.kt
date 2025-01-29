@@ -163,7 +163,7 @@ class Avslag(
             it.navn == "Oppfyller krav til ikke utestengt" && it.status == IKKE_OPPFYLT
         }
             ?.let {
-                listOf("brev.blokk.avslag-utestengt")
+                listOf("brev.blokk.avslag-utestengt", "brev.blokk.avslag-utestengt-hjemmel")
             } ?: emptyList()
     }
 
