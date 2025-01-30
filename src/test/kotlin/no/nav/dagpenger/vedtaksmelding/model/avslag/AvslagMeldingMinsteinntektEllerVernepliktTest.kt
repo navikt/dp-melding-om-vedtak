@@ -2,22 +2,22 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.Avslag
-import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT_ELLER_VERNEPLIKT
-import no.nav.dagpenger.vedtaksmelding.model.Utfall
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.ManglerBrevstøtte
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
-import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
-import no.nav.dagpenger.vedtaksmelding.model.Vilkår
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT_ELLER_VERNEPLIKT
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.AVSLÅTT
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
-class AvslagMinsteinntektEllerVernepliktTest {
+class AvslagMeldingMinsteinntektEllerVernepliktTest {
     @Test
     fun `Brevstøtte for avslag minsteinntekt eller verneplikt`() {
         val avslagMinsteinntektVedtak = VedtakMapper(json).vedtak()
-        shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
-            Avslag(avslagMinsteinntektVedtak, emptyList())
+        shouldNotThrow<ManglerBrevstøtte> {
+            AvslagMelding(avslagMinsteinntektVedtak, emptyList())
         }
     }
 
@@ -28,12 +28,12 @@ class AvslagMinsteinntektEllerVernepliktTest {
                 navn = MINSTEINNTEKT_ELLER_VERNEPLIKT.navn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
-        Avslag(
+        AvslagMelding(
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     vilkår = setOf(minsteInntektIkkeOppfylt),
-                    utfall = Utfall.AVSLÅTT,
+                    utfall = AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
             alleBrevblokker = emptyList(),
@@ -41,7 +41,7 @@ class AvslagMinsteinntektEllerVernepliktTest {
             listOf(
                 "brev.blokk.vedtak-avslag",
                 "brev.blokk.begrunnelse-avslag-minsteinntekt",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
     }
 }
 

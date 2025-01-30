@@ -2,18 +2,18 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.Avslag
-import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.OPPHOLD_I_NORGE
-import no.nav.dagpenger.vedtaksmelding.model.Utfall
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.ManglerBrevstøtte
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
-import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
-import no.nav.dagpenger.vedtaksmelding.model.Vilkår
-import no.nav.dagpenger.vedtaksmelding.model.Vilkår.Status.IKKE_OPPFYLT
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.OPPHOLD_I_NORGE
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.AVSLÅTT
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår.Status.IKKE_OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
-class AvslagOppholdUtlandTest {
+class AvslagMeldingOppholdUtlandTest {
     private val avslagOppholdNorgeVedtak = VedtakMapper(avslagOppholdNorgeJson).vedtak()
 
     @Test
@@ -25,12 +25,12 @@ class AvslagOppholdUtlandTest {
                 status = IKKE_OPPFYLT,
             )
 
-        Avslag(
+        AvslagMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
                     vilkår = setOf(oppholdNorgeIkkeOppfylt),
-                    utfall = Utfall.AVSLÅTT,
+                    utfall = AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
             alleBrevblokker = emptyList(),
@@ -39,13 +39,13 @@ class AvslagOppholdUtlandTest {
                 "brev.blokk.vedtak-avslag",
                 "brev.blokk.avslag-opphold-utlandet-del-1",
                 "brev.blokk.avslag-opphold-utlandet-del-2",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
     }
 
     @Test
     fun `Brevstøtte for avslag grunnet opphold i utlandet`() {
-        shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
-            Avslag(avslagOppholdNorgeVedtak, emptyList())
+        shouldNotThrow<ManglerBrevstøtte> {
+            AvslagMelding(avslagOppholdNorgeVedtak, emptyList())
         }
     }
 }

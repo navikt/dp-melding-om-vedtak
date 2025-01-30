@@ -2,50 +2,52 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.Avslag
-import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.IKKE_UTESTENGT
-import no.nav.dagpenger.vedtaksmelding.model.Utfall
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.ManglerBrevstøtte
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
-import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
-import no.nav.dagpenger.vedtaksmelding.model.Vilkår
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.IKKE_ANDRE_FULLE_YTELSER
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.AVSLÅTT
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
-class AvslagUtestengtTest {
-    private val avslagUtestengtVedtak = VedtakMapper(json).vedtak()
+class AvslagMeldingAndreFulleYtelserTest {
+    private val avslagAndreFulleYtelser = VedtakMapper(json).vedtak()
 
     @Test
-    fun `Riktige brevblokker for avslag utestengt`() {
+    fun `Brevstøtte for avslag grunnet for lite tapt arbeidstid`() {
+        shouldNotThrow<ManglerBrevstøtte> {
+            AvslagMelding(
+                vedtak = avslagAndreFulleYtelser,
+                alleBrevblokker = emptyList(),
+            )
+        }
+    }
+
+    @Test
+    fun `Riktige brevblokker for avslag andre fulle ytelsr`() {
         val behandlingId = UUIDv7.ny()
-        val utestengtVilkår =
+        val andreFulleYtelserIkkeOppfylt =
             Vilkår(
-                navn = IKKE_UTESTENGT.navn,
+                navn = IKKE_ANDRE_FULLE_YTELSER.navn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
 
-        Avslag(
+        AvslagMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår = setOf(utestengtVilkår),
-                    utfall = Utfall.AVSLÅTT,
+                    vilkår = setOf(andreFulleYtelserIkkeOppfylt),
+                    utfall = AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-utestengt",
-                "brev.blokk.avslag-utestengt-hjemmel",
-            ) + Vedtaksmelding.fasteBlokker
-    }
-
-    @Test
-    fun `Brevstøtte for avslag utestengt`() {
-        shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
-            Avslag(avslagUtestengtVedtak, emptyList())
-        }
+                "brev.blokk.avslag-andre-fulle-ytelser",
+            ) + VedtakMelding.fasteBlokker
     }
 }
 
@@ -62,10 +64,10 @@ private val json =
       "behandletAv": [],
       "vilkår": [
         {
-          "navn": "Oppfyller krav til ikke utestengt",
+          "navn": "Mottar ikke andre fulle ytelser",
           "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.076481",
-          "hjemmel": "folketrygdloven § 4-28"
+          "vurderingstidspunkt": "2025-01-21T11:03:11.071",
+          "hjemmel": "folketrygdloven § 4-24"
         }
       ],
       "fastsatt": {
@@ -74,7 +76,7 @@ private val json =
         "grunnlag": null,
         "fastsattVanligArbeidstid": {
           "vanligArbeidstidPerUke": 37.5,
-          "nyArbeidstidPerUke": 20,
+          "nyArbeidstidPerUke": 0,
           "begrunnelse": null
         },
         "sats": null,

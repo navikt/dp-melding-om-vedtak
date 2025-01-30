@@ -10,7 +10,6 @@ import kotlinx.html.a
 import kotlinx.html.attributesMapOf
 import kotlinx.html.body
 import kotlinx.html.br
-import kotlinx.html.classes
 import kotlinx.html.div
 import kotlinx.html.h1
 import kotlinx.html.h2
@@ -33,7 +32,7 @@ import kotlinx.html.unsafe
 import kotlinx.html.visit
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale

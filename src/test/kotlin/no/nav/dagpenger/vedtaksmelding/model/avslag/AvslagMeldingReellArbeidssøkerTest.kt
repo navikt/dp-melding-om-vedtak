@@ -3,79 +3,80 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.Avslag
-import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER
-import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_ARBEIDSFØR
-import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_ETHVERT_ARBEID
-import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_HELTID_DELTID
-import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_MOBILITET
-import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER
-import no.nav.dagpenger.vedtaksmelding.model.Utfall
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
-import no.nav.dagpenger.vedtaksmelding.model.Vilkår
+import no.nav.dagpenger.vedtaksmelding.model.ManglerBrevstøtte
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_ARBEIDSFØR
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_ETHVERT_ARBEID
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_HELTID_DELTID
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_MOBILITET
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.AVSLÅTT
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår.Status.IKKE_OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
-class AvslagReellArbeidssøkerTest {
+class AvslagMeldingReellArbeidssøkerTest {
     private val behandlingId = UUIDv7.ny()
 
     private val reellArbeidssøkerIkkeOppfylt =
         Vilkår(
             navn = REELL_ARBEIDSSØKER.navn,
-            status = Vilkår.Status.IKKE_OPPFYLT,
+            status = IKKE_OPPFYLT,
         )
     private val heltidDeltidIkkeOppfylt =
         Vilkår(
             navn = REELL_ARBEIDSSØKER_HELTID_DELTID.navn,
-            status = Vilkår.Status.IKKE_OPPFYLT,
+            status = IKKE_OPPFYLT,
         )
 
     private val mobilitetIkkeOppfylt =
         Vilkår(
             navn = REELL_ARBEIDSSØKER_MOBILITET.navn,
-            status = Vilkår.Status.IKKE_OPPFYLT,
+            status = IKKE_OPPFYLT,
         )
 
     private val arbeidsførIkkeOppfylt =
         Vilkår(
             navn = REELL_ARBEIDSSØKER_ARBEIDSFØR.navn,
-            status = Vilkår.Status.IKKE_OPPFYLT,
+            status = IKKE_OPPFYLT,
         )
 
     private val ethvertArbeidIkkeOppfylt =
         Vilkår(
             navn = REELL_ARBEIDSSØKER_ETHVERT_ARBEID.navn,
-            status = Vilkår.Status.IKKE_OPPFYLT,
+            status = IKKE_OPPFYLT,
         )
 
     private val registrertArbeidssøkerIkkeOppfylt =
         Vilkår(
             navn = REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER.navn,
-            status = Vilkår.Status.IKKE_OPPFYLT,
+            status = IKKE_OPPFYLT,
         )
 
     @Test
     fun `Sjekker kriterier for brevstøtte`() {
-        shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
-            Avslag(
+        shouldNotThrow<ManglerBrevstøtte> {
+            AvslagMelding(
                 vedtak =
                     Vedtak(
                         behandlingId = behandlingId,
                         vilkår = setOf(reellArbeidssøkerIkkeOppfylt),
-                        utfall = Utfall.AVSLÅTT,
+                        utfall = AVSLÅTT,
                         opplysninger = emptySet(),
                     ),
                 alleBrevblokker = emptyList(),
             )
         }
-        shouldThrow<Vedtaksmelding.ManglerBrevstøtte> {
-            Avslag(
+        shouldThrow<ManglerBrevstøtte> {
+            AvslagMelding(
                 vedtak =
                     Vedtak(
                         behandlingId = behandlingId,
                         vilkår = emptySet(),
-                        utfall = Utfall.AVSLÅTT,
+                        utfall = AVSLÅTT,
                         opplysninger = emptySet(),
                     ),
                 alleBrevblokker = emptyList(),
@@ -85,12 +86,12 @@ class AvslagReellArbeidssøkerTest {
 
     @Test
     fun `Riktige brevblokker for avslag reell arbeidssøker - vilje til å jobbe både heltid og deltid`() {
-        Avslag(
+        AvslagMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
                     vilkår = setOf(reellArbeidssøkerIkkeOppfylt, heltidDeltidIkkeOppfylt),
-                    utfall = Utfall.AVSLÅTT,
+                    utfall = AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
             alleBrevblokker = emptyList(),
@@ -101,17 +102,17 @@ class AvslagReellArbeidssøkerTest {
                 "brev.blokk.avslag-reell-arbeidssoker-heltid-deltid",
                 "brev.blokk.avslag-reell-arbeidssoker-unntak-heltid-deltid-hele-norge",
                 "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
     }
 
     @Test
     fun `Riktige brevblokker for avslag reell arbeidssøker - vilje til arbeid i hele Norge`() {
-        Avslag(
+        AvslagMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
                     vilkår = setOf(reellArbeidssøkerIkkeOppfylt, mobilitetIkkeOppfylt),
-                    utfall = Utfall.AVSLÅTT,
+                    utfall = AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
             alleBrevblokker = emptyList(),
@@ -122,17 +123,17 @@ class AvslagReellArbeidssøkerTest {
                 "brev.blokk.avslag-reell-arbeidssoker-arbeid-i-hele-norge",
                 "brev.blokk.avslag-reell-arbeidssoker-unntak-heltid-deltid-hele-norge",
                 "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
     }
 
     @Test
     fun `Riktige brevblokker for avslag reell arbeidssøker - arbeidsfør`() {
-        Avslag(
+        AvslagMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
                     vilkår = setOf(reellArbeidssøkerIkkeOppfylt, arbeidsførIkkeOppfylt),
-                    utfall = Utfall.AVSLÅTT,
+                    utfall = AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
             alleBrevblokker = emptyList(),
@@ -142,17 +143,17 @@ class AvslagReellArbeidssøkerTest {
                 "brev.blokk.avslag-reell-arbeidssoker-overskrift",
                 "brev.blokk.avslag-reell-arbeidssoker-arbeidsfor",
                 "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
     }
 
     @Test
     fun `Riktige brevblokker for avslag reell arbeidssøker - vilje til å ta ethvert arbeid`() {
-        Avslag(
+        AvslagMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
                     vilkår = setOf(reellArbeidssøkerIkkeOppfylt, ethvertArbeidIkkeOppfylt),
-                    utfall = Utfall.AVSLÅTT,
+                    utfall = AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
             alleBrevblokker = emptyList(),
@@ -162,17 +163,17 @@ class AvslagReellArbeidssøkerTest {
                 "brev.blokk.avslag-reell-arbeidssoker-overskrift",
                 "brev.blokk.avslag-reell-arbeidssoker-ethvert-arbeid",
                 "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
     }
 
     @Test
     fun `Riktige brevblokker for avslag reell arbeidssøker - registrert arbeidssøker`() {
-        Avslag(
+        AvslagMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
                     vilkår = setOf(reellArbeidssøkerIkkeOppfylt, registrertArbeidssøkerIkkeOppfylt),
-                    utfall = Utfall.AVSLÅTT,
+                    utfall = AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
             alleBrevblokker = emptyList(),
@@ -182,12 +183,12 @@ class AvslagReellArbeidssøkerTest {
                 "brev.blokk.avslag-reell-arbeidssoker-overskrift",
                 "brev.blokk.avslag-reell-arbeidssoker-registrert-arbeidssoker",
                 "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
     }
 
     @Test
     fun `Riktige brevblokker for avslag reell arbeidssøker - alle delvilkår ikke oppfylt`() {
-        Avslag(
+        AvslagMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -196,7 +197,7 @@ class AvslagReellArbeidssøkerTest {
                             reellArbeidssøkerIkkeOppfylt, heltidDeltidIkkeOppfylt, mobilitetIkkeOppfylt,
                             arbeidsførIkkeOppfylt, ethvertArbeidIkkeOppfylt, registrertArbeidssøkerIkkeOppfylt,
                         ),
-                    utfall = Utfall.AVSLÅTT,
+                    utfall = AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
             alleBrevblokker = emptyList(),
@@ -211,6 +212,6 @@ class AvslagReellArbeidssøkerTest {
                 "brev.blokk.avslag-reell-arbeidssoker-ethvert-arbeid",
                 "brev.blokk.avslag-reell-arbeidssoker-registrert-arbeidssoker",
                 "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
     }
 }

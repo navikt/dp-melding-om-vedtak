@@ -8,10 +8,10 @@ data class UtvidetBeskrivelse(
     val brevblokkId: String,
     val tekst: String?,
     val sistEndretTidspunkt: LocalDateTime? = null,
-    val tittel: String = mapping[brevblokkId] ?: "Ukjent tittel",
+    val tittel: String = titler[brevblokkId] ?: "Ukjent tittel",
 ) {
     companion object {
-        val mapping =
+        val titler =
             mapOf(
                 "brev.blokk.avslag-reell-arbeidssoker-arbeidsfor" to "Arbeidsfør",
                 "brev.blokk.vedtak-innvilgelse" to "Nav har innvilget søknaden din om dagpenger",

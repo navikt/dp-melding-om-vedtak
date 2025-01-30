@@ -1,11 +1,11 @@
 package no.nav.dagpenger.vedtaksmelding.model.innvilgelse
 
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.BOOLSK
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.HELTALL
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.UKER
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.BOOLSK
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.UKER
 import org.junit.jupiter.api.Test
 
 class VernepliktOgInntektTest {
