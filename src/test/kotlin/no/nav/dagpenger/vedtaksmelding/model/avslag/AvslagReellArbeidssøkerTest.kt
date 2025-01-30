@@ -1,5 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.model.avslag
 
+import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.Avslag
@@ -10,13 +11,8 @@ import no.nav.dagpenger.vedtaksmelding.model.Vilkår
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
-class AvslagTest {
+class AvslagReellArbeidssøkerTest {
     private val behandlingId = UUIDv7.ny()
-    private val minsteInntektIkkeOppfylt =
-        Vilkår(
-            navn = "Oppfyller kravet til minsteinntekt eller verneplikt",
-            status = Vilkår.Status.IKKE_OPPFYLT,
-        )
 
     private val reellArbeidssøkerIkkeOppfylt =
         Vilkår(
@@ -54,21 +50,41 @@ class AvslagTest {
         )
 
     @Test
-    fun `Rikige brevblokker for avslag på minsteinntekt`() {
-        Avslag(
-            vedtak =
-                Vedtak(
-                    behandlingId = behandlingId,
-                    vilkår = setOf(minsteInntektIkkeOppfylt),
-                    utfall = Utfall.AVSLÅTT,
-                    opplysninger = emptySet(),
-                ),
-            alleBrevblokker = emptyList(),
-        ).brevBlokkIder() shouldBe
-            listOf(
-                "brev.blokk.vedtak-avslag",
-                "brev.blokk.begrunnelse-avslag-minsteinntekt",
-            ) + Vedtaksmelding.fasteBlokker
+    fun `Sjekker kriterier for brevstøtte`() {
+        shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
+            Avslag(
+                vedtak =
+                    Vedtak(
+                        behandlingId = behandlingId,
+                        vilkår = setOf(reellArbeidssøkerIkkeOppfylt),
+                        utfall = Utfall.AVSLÅTT,
+                        opplysninger = emptySet(),
+                    ),
+                alleBrevblokker = emptyList(),
+            )
+            Avslag(
+                vedtak =
+                    Vedtak(
+                        behandlingId = behandlingId,
+                        vilkår = setOf(registrertArbeidssøkerIkkeOppfylt),
+                        utfall = Utfall.AVSLÅTT,
+                        opplysninger = emptySet(),
+                    ),
+                alleBrevblokker = emptyList(),
+            )
+        }
+        shouldThrow<Vedtaksmelding.ManglerBrevstøtte> {
+            Avslag(
+                vedtak =
+                    Vedtak(
+                        behandlingId = behandlingId,
+                        vilkår = emptySet(),
+                        utfall = Utfall.AVSLÅTT,
+                        opplysninger = emptySet(),
+                    ),
+                alleBrevblokker = emptyList(),
+            )
+        }
     }
 
     @Test
@@ -200,34 +216,5 @@ class AvslagTest {
                 "brev.blokk.avslag-reell-arbeidssoker-registrert-arbeidssoker",
                 "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
             ) + Vedtaksmelding.fasteBlokker
-    }
-
-    @Test
-    fun `Manglende kriterier for brevstøtte`() {
-        shouldThrow<Vedtaksmelding.ManglerBrevstøtte> {
-            Avslag(
-                vedtak =
-                    Vedtak(
-                        behandlingId = behandlingId,
-                        vilkår = emptySet(),
-                        utfall = Utfall.AVSLÅTT,
-                        opplysninger = emptySet(),
-                    ),
-                alleBrevblokker = emptyList(),
-            )
-        }
-
-        shouldThrow<Vedtaksmelding.ManglerBrevstøtte> {
-            Avslag(
-                vedtak =
-                    Vedtak(
-                        behandlingId = behandlingId,
-                        vilkår = setOf(minsteInntektIkkeOppfylt),
-                        utfall = Utfall.INNVILGET,
-                        opplysninger = emptySet(),
-                    ),
-                alleBrevblokker = emptyList(),
-            )
-        }
     }
 }
