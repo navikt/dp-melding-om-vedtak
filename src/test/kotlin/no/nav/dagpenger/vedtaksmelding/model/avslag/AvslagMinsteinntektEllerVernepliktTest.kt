@@ -3,6 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.Avslag
+import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT_ELLER_VERNEPLIKT
 import no.nav.dagpenger.vedtaksmelding.model.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
@@ -24,7 +25,7 @@ class AvslagMinsteinntektEllerVernepliktTest {
     fun `Rikige brevblokker for avslag på minsteinntekt`() {
         val minsteInntektIkkeOppfylt =
             Vilkår(
-                navn = "Oppfyller kravet til minsteinntekt eller verneplikt",
+                navn = MINSTEINNTEKT_ELLER_VERNEPLIKT.navn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
         Avslag(

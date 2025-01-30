@@ -2,6 +2,7 @@ package no.nav.dagpenger.vedtaksmelding.model
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.types.shouldBeInstanceOf
+import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT_ELLER_VERNEPLIKT
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
@@ -17,7 +18,7 @@ class VedtaksmeldingTest {
                     vilkår =
                         setOf(
                             Vilkår(
-                                navn = "Oppfyller kravet til minsteinntekt eller verneplikt",
+                                navn = MINSTEINNTEKT_ELLER_VERNEPLIKT.navn,
                                 status = Vilkår.Status.IKKE_OPPFYLT,
                             ),
                         ),

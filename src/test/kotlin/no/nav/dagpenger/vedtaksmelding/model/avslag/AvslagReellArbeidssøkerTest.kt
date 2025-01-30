@@ -4,6 +4,12 @@ import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.Avslag
+import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER
+import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_ARBEIDSFØR
+import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_ETHVERT_ARBEID
+import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_HELTID_DELTID
+import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_MOBILITET
+import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER
 import no.nav.dagpenger.vedtaksmelding.model.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
@@ -16,36 +22,36 @@ class AvslagReellArbeidssøkerTest {
 
     private val reellArbeidssøkerIkkeOppfylt =
         Vilkår(
-            navn = "Krav til arbeidssøker",
+            navn = REELL_ARBEIDSSØKER.navn,
             status = Vilkår.Status.IKKE_OPPFYLT,
         )
     private val heltidDeltidIkkeOppfylt =
         Vilkår(
-            navn = "Oppfyller kravet til heltid- og deltidsarbeid",
+            navn = REELL_ARBEIDSSØKER_HELTID_DELTID.navn,
             status = Vilkår.Status.IKKE_OPPFYLT,
         )
 
     private val mobilitetIkkeOppfylt =
         Vilkår(
-            navn = "Oppfyller kravet til mobilitet",
+            navn = REELL_ARBEIDSSØKER_MOBILITET.navn,
             status = Vilkår.Status.IKKE_OPPFYLT,
         )
 
     private val arbeidsførIkkeOppfylt =
         Vilkår(
-            navn = "Oppfyller kravet til å være arbeidsfør",
+            navn = REELL_ARBEIDSSØKER_ARBEIDSFØR.navn,
             status = Vilkår.Status.IKKE_OPPFYLT,
         )
 
     private val ethvertArbeidIkkeOppfylt =
         Vilkår(
-            navn = "Oppfyller kravet til å ta ethvert arbeid",
+            navn = REELL_ARBEIDSSØKER_ETHVERT_ARBEID.navn,
             status = Vilkår.Status.IKKE_OPPFYLT,
         )
 
     private val registrertArbeidssøkerIkkeOppfylt =
         Vilkår(
-            navn = "Registrert som arbeidssøker på søknadstidspunktet",
+            navn = REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER.navn,
             status = Vilkår.Status.IKKE_OPPFYLT,
         )
 
