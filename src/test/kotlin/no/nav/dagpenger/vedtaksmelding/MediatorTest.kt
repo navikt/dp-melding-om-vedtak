@@ -49,6 +49,7 @@ class MediatorTest {
                     ),
                 utfall = Utfall.AVSLÅTT,
                 opplysninger = emptySet(),
+                fagsakId = "fagsakId test",
             )
         val behandlingKlient =
             mockk<BehandlingKlient>().also {
@@ -134,6 +135,7 @@ class MediatorTest {
                     ),
                 utfall = Utfall.AVSLÅTT,
                 opplysninger = emptySet(),
+                fagsakId = "fagsakId test",
             )
         val behandlingKlient =
             mockk<BehandlingKlient>().also {

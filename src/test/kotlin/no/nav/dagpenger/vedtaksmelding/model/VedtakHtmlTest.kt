@@ -64,7 +64,7 @@ class VedtakHtmlTest {
 
             avslag.hentOpplysninger()
             val brevBlokker = avslag.hentBrevBlokker()
-            val htmlInnhold = HtmlConverter.toHtml(brevBlokker, avslag.hentOpplysninger(), meldingOmVedtakData)
+            val htmlInnhold = HtmlConverter.toHtml(brevBlokker, avslag.hentOpplysninger(), meldingOmVedtakData, "fagsakId test")
 
             htmlInnhold brevblokkRekkefølgeShouldBe
                 listOf(
@@ -105,6 +105,7 @@ class VedtakHtmlTest {
                     brevBlokker = brevBlokker,
                     opplysninger = innvilgelse.hentOpplysninger(),
                     meldingOmVedtakData = meldingOmVedtakData,
+                    fagsakId = "fagsakId test",
                 )
 
             htmlInnhold brevblokkRekkefølgeShouldBe

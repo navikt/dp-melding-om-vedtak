@@ -34,6 +34,10 @@ sealed class Vedtaksmelding(
             .toList()
     }
 
+    fun hentFagsakId(): String {
+        return vedtak.fagsakId
+    }
+
     companion object {
         val fasteBlokker =
             listOf(

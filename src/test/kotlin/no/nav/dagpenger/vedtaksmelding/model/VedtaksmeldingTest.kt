@@ -22,6 +22,7 @@ class VedtaksmeldingTest {
                             ),
                         ),
                     utfall = Utfall.AVSLÅTT,
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).shouldBeInstanceOf<Avslag>()
@@ -32,6 +33,7 @@ class VedtaksmeldingTest {
                     behandlingId = behandlingId,
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).shouldBeInstanceOf<Innvilgelse>()
@@ -46,6 +48,7 @@ class VedtaksmeldingTest {
                         behandlingId = behandlingId,
                         vilkår = emptySet(),
                         utfall = Utfall.AVSLÅTT,
+                        fagsakId = "fagsakId test",
                     ),
                 alleBrevblokker = emptyList(),
             )

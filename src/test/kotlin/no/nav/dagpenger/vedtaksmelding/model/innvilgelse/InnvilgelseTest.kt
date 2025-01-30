@@ -64,6 +64,7 @@ class InnvilgelseTest {
                         vilkår = emptySet(),
                         utfall = Utfall.AVSLÅTT,
                         opplysninger = emptySet(),
+                        fagsakId = "fagsakId test",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -77,6 +78,7 @@ class InnvilgelseTest {
                         vilkår = emptySet(),
                         utfall = Utfall.INNVILGET,
                         opplysninger = emptySet(),
+                        fagsakId = "fagsakId test",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -109,6 +111,7 @@ class InnvilgelseTest {
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                     opplysninger = emptySet(),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -140,6 +143,7 @@ class InnvilgelseTest {
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                     opplysninger = setOf(Opplysning("opplysning.er-innvilget-med-verneplikt", "true", BOOLSK)),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -182,6 +186,7 @@ class InnvilgelseTest {
                                 UKER,
                             ),
                         ),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -217,6 +222,7 @@ class InnvilgelseTest {
                         setOf(
                             barnetilleggOpplysning(),
                         ),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -231,6 +237,7 @@ class InnvilgelseTest {
                         setOf(
                             barnetilleggOpplysning("0"),
                         ),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder - "brev.blokk.barnetillegg"
@@ -266,6 +273,7 @@ class InnvilgelseTest {
                         setOf(
                             samordnetOpplysning(), samordnetYtelseDagsats("opplysning.sykepenger-dagsats"),
                         ),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -301,6 +309,7 @@ class InnvilgelseTest {
                         setOf(
                             samordnetOpplysning(), samordnetYtelseDagsats("opplysning.pleiepenger-dagsats"),
                         ),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -336,6 +345,7 @@ class InnvilgelseTest {
                         setOf(
                             samordnetOpplysning(), samordnetYtelseDagsats("opplysning.omsorgspenger-dagsats"),
                         ),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -371,6 +381,7 @@ class InnvilgelseTest {
                         setOf(
                             samordnetOpplysning(), samordnetYtelseDagsats("opplysning.opplaeringspenger-dagsats"),
                         ),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -406,6 +417,7 @@ class InnvilgelseTest {
                         setOf(
                             samordnetOpplysning(), samordnetYtelseDagsats("opplysning.ufore-dagsats"),
                         ),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -441,6 +453,7 @@ class InnvilgelseTest {
                         setOf(
                             samordnetOpplysning(), samordnetYtelseDagsats("opplysning.foreldrepenger-dagsats"),
                         ),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -477,6 +490,7 @@ class InnvilgelseTest {
                             samordnetOpplysning(),
                             samordnetYtelseDagsats("opplysning.svangerskapspenger-dagsats"),
                         ),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -515,6 +529,7 @@ class InnvilgelseTest {
                             samordnetYtelseDagsats("opplysning.foreldrepenger-dagsats"),
                             samordnetYtelseDagsats("opplysning.svangerskapspenger-dagsats"),
                         ),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -547,6 +562,7 @@ class InnvilgelseTest {
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                     opplysninger = setOf(samordnetOpplysning()),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -581,6 +597,7 @@ class InnvilgelseTest {
                         setOf(
                             samordnetOpplysning("false"),
                         ),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder - "brev.blokk.samordning" - "brev.blokk.samordning-sykepenger"
@@ -616,6 +633,7 @@ class InnvilgelseTest {
                         setOf(
                             nittiprosentRegelOpplysning(),
                         ),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -630,6 +648,7 @@ class InnvilgelseTest {
                         setOf(
                             nittiprosentRegelOpplysning(),
                         ),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -644,6 +663,7 @@ class InnvilgelseTest {
                         setOf(
                             nittiprosentRegelOpplysning("0"),
                         ),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder - "brev.blokk.nittiprosentregel"
@@ -679,6 +699,7 @@ class InnvilgelseTest {
                     utfall = Utfall.INNVILGET,
                     opplysninger =
                         setOf(nittiprosentRegelOpplysning(), samordnetOpplysning(), barnetilleggOpplysning()),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder

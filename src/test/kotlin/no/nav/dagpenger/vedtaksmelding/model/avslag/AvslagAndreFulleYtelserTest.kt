@@ -40,6 +40,7 @@ class AvslagAndreFulleYtelserTest {
                     vilkår = setOf(andreFulleYtelserIkkeOppfylt),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

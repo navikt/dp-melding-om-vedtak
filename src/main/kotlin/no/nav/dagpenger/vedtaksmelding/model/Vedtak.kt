@@ -17,6 +17,7 @@ data class Vedtak(
     val vilkår: Set<Vilkår> = emptySet(),
     val utfall: Utfall,
     val opplysninger: Set<Opplysning> = emptySet(),
+    val fagsakId: String,
 ) {
     fun finnOpplysning(opplysningTekstId: String): Opplysning? {
         val opplysning = this.opplysninger.singleOrNull { it.opplysningTekstId == opplysningTekstId }

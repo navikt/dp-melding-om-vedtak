@@ -424,6 +424,7 @@ class VedtakMapperTest {
                 """
             {
                 "behandlingId": "01944f92-9828-770f-874d-534fd69b17c1",
+                "fagsakId": "fagsakid test",
                 "fastsatt": {
                     "utfall": true
                 },
@@ -435,12 +436,13 @@ class VedtakMapperTest {
     }
 
     @Test
-    fun `Skal kaste exception dersom utfall eller vilkår mangler`() {
+    fun `Skal kaste exception dersom utfall, vilkår eller fagsakId mangler`() {
         shouldThrow<UtfallMangler> {
             VedtakMapper(
                 """
             {
                 "behandlingId": "01944f92-9828-770f-874d-534fd69b17c1",
+                "fagsakId": "fagsakid test",
                 "fastsatt": {
                     },
                 "vilkår": []
@@ -453,9 +455,24 @@ class VedtakMapperTest {
                 """
             {
                 "behandlingId": "01944f92-9828-770f-874d-534fd69b17c1",
+                "fagsakId": "fagsakid test",
                 "fastsatt": {
                     "utfall": false
                 }
+            }
+            """,
+            ).vedtak()
+        }
+
+        shouldThrow<FagsakIdMangler> {
+            VedtakMapper(
+                """
+            {
+                "behandlingId": "01944f92-9828-770f-874d-534fd69b17c1",
+                "fastsatt": {
+                    "utfall": false
+                },
+                "vilkår": []
             }
             """,
             ).vedtak()

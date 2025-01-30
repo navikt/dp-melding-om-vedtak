@@ -52,6 +52,7 @@ object HtmlConverter {
         brevBlokker: List<BrevBlokk>,
         opplysninger: List<Opplysning>,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
+        fagsakId: String,
     ): String {
         val mapping: Map<String, Opplysning> = opplysninger.associateBy { it.opplysningTekstId }
         val currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.of("no", "NO")))
@@ -82,7 +83,7 @@ object HtmlConverter {
                 title { +"Vedtak fra NAV" } // todo hente tittel
                 style {
                     unsafe {
-                        raw(css(meldingOmVedtakData.sakId))
+                        raw(css(fagsakId))
                     }
                 }
             }
@@ -104,8 +105,8 @@ object HtmlConverter {
                         p { +"Navn: ${meldingOmVedtakData.hentNavn()}" }
                         p { +"Fødselsnummer: ${meldingOmVedtakData.fodselsnummer}" }
                         div(classes = "melding-om-vedtak-saksnummer-dato") {
-                            p(classes = "melding-om-vedtak-saksnummer-dato-left") { +"Saksid: ${meldingOmVedtakData.sakId}" } //
-                            p(classes = "melding-om-vedtak-saksnummer-dato-right") { +currentDate } // todo hente dato
+                            p(classes = "melding-om-vedtak-saksnummer-dato-left") { +"Saksid: $fagsakId" } //
+                            p(classes = "melding-om-vedtak-saksnummer-dato-right") { +currentDate } //
                         }
                     }
 

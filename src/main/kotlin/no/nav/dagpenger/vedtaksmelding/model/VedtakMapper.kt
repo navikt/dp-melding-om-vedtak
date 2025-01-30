@@ -61,12 +61,15 @@ class VedtakMapper(vedtakJson: String) {
             utfall = utfall,
             vilkår = vilkår,
             opplysninger = vedtakOpplysninger + inntjeningsperiodeOpplysninger + prosentvisTaptArbeidstidOpplysninger,
+            fagsakId = fagsakId,
         )
     }
 
     private val behandlingId =
         UUID.fromString(vedtak.get("behandlingId").asText())
             ?: throw IllegalArgumentException("behandlingId mangler")
+
+    val fagsakId = vedtak.get("fagsakId")?.asText() ?: throw FagsakIdMangler("FagsakId mangler i path /fagsakId")
 
     private val utfall: Utfall =
         vedtak.get("fastsatt")?.get("utfall")?.asBoolean()?.let { utfall ->
@@ -553,3 +556,5 @@ class VedtakMapper(vedtakJson: String) {
 class VilkårMangler(message: String) : RuntimeException(message)
 
 class UtfallMangler(message: String) : RuntimeException(message)
+
+class FagsakIdMangler(message: String) : RuntimeException(message)
