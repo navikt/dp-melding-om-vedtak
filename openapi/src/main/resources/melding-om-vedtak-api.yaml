@@ -220,8 +220,6 @@ components:
           type: string
         fodselsnummer:
           type: string
-        sakId:
-          type: string
         saksbehandler:
           $ref: '#/components/schemas/Behandler'
         beslutter:
