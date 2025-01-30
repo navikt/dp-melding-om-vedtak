@@ -99,13 +99,11 @@ class Avslag(
         }
     }
 
-    private val pre =
-        listOf(
-            "brev.blokk.vedtak-avslag",
-        )
+    private val innledendeBrevblokker = listOf("brev.blokk.vedtak-avslag")
+
     override val brevBlokkIder: List<String>
         get() {
-            return pre +
+            return innledendeBrevblokker +
                 blokkerAvslagMinsteinntekt() +
                 blokkerAvslagReellArbeidssøker() +
                 blokkerAvslagTaptArbeidstid() +
@@ -213,29 +211,29 @@ class Avslag(
     }
 
     private fun Set<Vilkår>.avslagMinsteinntekt(): Boolean {
-        return this.any { it.navn == "Oppfyller kravet til minsteinntekt eller verneplikt" && it.status == IKKE_OPPFYLT }
+        return this.any { vilkår -> vilkår.navn == "Oppfyller kravet til minsteinntekt eller verneplikt" && vilkår.status == IKKE_OPPFYLT }
     }
 
     private fun Set<Vilkår>.avslagArbeidstid(): Boolean {
-        return this.any { it.navn == "Tap av arbeidstid er minst terskel" && it.status == IKKE_OPPFYLT }
+        return this.any { vilkår -> vilkår.navn == "Tap av arbeidstid er minst terskel" && vilkår.status == IKKE_OPPFYLT }
     }
 
     private fun Set<Vilkår>.avslagUtestengt(): Boolean {
-        return this.any { it.navn == "Oppfyller krav til ikke utestengt" && it.status == IKKE_OPPFYLT }
+        return this.any { vilkår -> vilkår.navn == "Oppfyller krav til ikke utestengt" && vilkår.status == IKKE_OPPFYLT }
     }
 
     private fun Set<Vilkår>.avslagOppholdUtland(): Boolean {
-        return this.any { it.navn == "Oppfyller kravet til opphold i Norge" && it.status == IKKE_OPPFYLT }
+        return this.any { vilkår -> vilkår.navn == "Oppfyller kravet til opphold i Norge" && vilkår.status == IKKE_OPPFYLT }
     }
 
     private fun Set<Vilkår>.avslagAndreFulleYtelser(): Boolean {
-        return this.any { it.navn == "Mottar ikke andre fulle ytelser" && it.status == IKKE_OPPFYLT }
+        return this.any { vilkår -> vilkår.navn == "Mottar ikke andre fulle ytelser" && vilkår.status == IKKE_OPPFYLT }
     }
 
     private fun Set<Vilkår>.avslagReellArbeidssøker(): Boolean {
-        return this.any {
-            it.status == IKKE_OPPFYLT &&
-                (it.navn == "Krav til arbeidssøker" || it.navn == "Registrert som arbeidssøker på søknadstidspunktet")
+        return this.any { vilkår ->
+            vilkår.status == IKKE_OPPFYLT &&
+                (vilkår.navn == "Krav til arbeidssøker" || vilkår.navn == "Registrert som arbeidssøker på søknadstidspunktet")
         }
     }
 }
@@ -252,7 +250,7 @@ class Innvilgelse(
 
     override val brevBlokkIder: List<String>
         get() {
-            val pre =
+            val innledendeBrevblokker =
                 listOf(
                     "brev.blokk.vedtak-innvilgelse",
                     "brev.blokk.begrunnelse-innvilgelsesdato",
@@ -260,7 +258,7 @@ class Innvilgelse(
                     "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
                 )
 
-            val post =
+            val avsluttendeBrevblokker =
                 listOf(
                     "brev.blokk.arbeidstiden-din",
                     "brev.blokk.egenandel",
@@ -272,7 +270,7 @@ class Innvilgelse(
                     "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
                 )
 
-            return pre + barnetillegg() + nittiProsentRegel() + samordnet() + grunnlag() + post
+            return innledendeBrevblokker + barnetillegg() + nittiProsentRegel() + samordnet() + grunnlag() + avsluttendeBrevblokker
         }
     override val brevBlokker: List<BrevBlokk> =
         run {
