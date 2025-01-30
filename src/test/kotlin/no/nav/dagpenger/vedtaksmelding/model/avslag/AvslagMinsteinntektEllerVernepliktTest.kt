@@ -3,33 +3,36 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.Avslag
-import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.OPPHOLD_I_NORGE
+import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT_ELLER_VERNEPLIKT
 import no.nav.dagpenger.vedtaksmelding.model.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.Vilkår
-import no.nav.dagpenger.vedtaksmelding.model.Vilkår.Status.IKKE_OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
-class AvslagOppholdUtlandTest {
-    private val avslagOppholdNorgeVedtak = VedtakMapper(avslagOppholdNorgeJson).vedtak()
+class AvslagMinsteinntektEllerVernepliktTest {
+    @Test
+    fun `Brevstøtte for avslag minsteinntekt eller verneplikt`() {
+        val avslagMinsteinntektVedtak = VedtakMapper(json).vedtak()
+        shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
+            Avslag(avslagMinsteinntektVedtak, emptyList())
+        }
+    }
 
     @Test
-    fun `Riktige brevblokker for avslag opphold utland`() {
-        val behandlingId = UUIDv7.ny()
-        val oppholdNorgeIkkeOppfylt =
+    fun `Rikige brevblokker for avslag på minsteinntekt`() {
+        val minsteInntektIkkeOppfylt =
             Vilkår(
-                navn = OPPHOLD_I_NORGE.navn,
-                status = IKKE_OPPFYLT,
+                navn = MINSTEINNTEKT_ELLER_VERNEPLIKT.navn,
+                status = Vilkår.Status.IKKE_OPPFYLT,
             )
-
         Avslag(
             vedtak =
                 Vedtak(
-                    behandlingId = behandlingId,
-                    vilkår = setOf(oppholdNorgeIkkeOppfylt),
+                    behandlingId = UUIDv7.ny(),
+                    vilkår = setOf(minsteInntektIkkeOppfylt),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
                     fagsakId = "fagsakId test",
@@ -38,21 +41,13 @@ class AvslagOppholdUtlandTest {
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-opphold-utlandet-del-1",
-                "brev.blokk.avslag-opphold-utlandet-del-2",
+                "brev.blokk.begrunnelse-avslag-minsteinntekt",
             ) + Vedtaksmelding.fasteBlokker
-    }
-
-    @Test
-    fun `Brevstøtte for avslag grunnet opphold i utlandet`() {
-        shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
-            Avslag(avslagOppholdNorgeVedtak, emptyList())
-        }
     }
 }
 
 //language=JSON
-private val avslagOppholdNorgeJson =
+private val json =
     """
     {
       "behandlingId": "01948850-dda4-7221-a1f6-4ecab5f70013",
@@ -64,10 +59,10 @@ private val avslagOppholdNorgeJson =
       "behandletAv": [],
       "vilkår": [
         {
-          "navn": "Oppfyller kravet til opphold i Norge",
+          "navn": "Oppfyller kravet til minsteinntekt eller verneplikt",
           "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.079514",
-          "hjemmel": "folketrygdloven § 4-5"
+          "vurderingstidspunkt": "2025-01-21T11:03:11.070006",
+          "hjemmel": "folketrygdloven § 4-4"
         }
       ],
       "fastsatt": {

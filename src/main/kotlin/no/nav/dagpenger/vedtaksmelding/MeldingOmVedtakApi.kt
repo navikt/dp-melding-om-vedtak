@@ -128,6 +128,25 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                     }
                 }
             }
+            post("/melding-om-vedtak/{behandlingId}/vedtaksmelding") {
+                val behandlingId = call.parseUUID()
+                val behandler = call.parseSaksbehandler()
+                val meldingOmVedtakData = call.receive<MeldingOmVedtakDataDTO>()
+                withLoggingContext("behandlingId" to behandlingId.toString()) {
+                    kotlin.runCatching {
+                        val vedtaksHtml =
+                            mediator.hentVedtaksHtml(
+                                behandlingId = behandlingId,
+                                behandler = behandler,
+                                meldingOmVedtakData = meldingOmVedtakData,
+                            )
+                        call.respond(vedtaksHtml)
+                    }.onFailure { t ->
+                        logger.error(t) { "Feil ved henting av vedtaks html" }
+                        call.respond(HttpStatusCode.InternalServerError)
+                    }
+                }
+            }
             put("/melding-om-vedtak/{behandlingId}/{brevblokkId}/utvidet-beskrivelse") {
                 requirePlainText()
 

@@ -17,6 +17,7 @@ import no.nav.dagpenger.vedtaksmelding.db.PostgresDataSourceBuilder.dataSource
 import no.nav.dagpenger.vedtaksmelding.db.PostgresVedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Avslag
+import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT_ELLER_VERNEPLIKT
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
@@ -128,7 +129,7 @@ class MediatorTest {
                 vilkår =
                     setOf(
                         Vilkår(
-                            "Oppfyller kravet til minsteinntekt eller verneplikt",
+                            MINSTEINNTEKT_ELLER_VERNEPLIKT.navn,
                             Vilkår.Status.IKKE_OPPFYLT,
                         ),
                     ),

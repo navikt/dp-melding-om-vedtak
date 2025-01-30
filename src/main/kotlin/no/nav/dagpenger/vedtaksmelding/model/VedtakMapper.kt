@@ -61,7 +61,7 @@ class VedtakMapper(vedtakJson: String) {
             utfall = utfall,
             vilkår = vilkår,
             opplysninger = vedtakOpplysninger + inntjeningsperiodeOpplysninger + prosentvisTaptArbeidstidOpplysninger,
-            fagsakId = fagsakId,
+            fagsakId = "fagsakId test",
         )
     }
 
@@ -211,14 +211,6 @@ class VedtakMapper(vedtakJson: String) {
             ),
         ) + vedtak.lagOpplysningerFraKvoter() + vedtak.lagOpplysningerForSamordning()
 
-    private fun formaterDesimaltall(
-        desimaltall: Double,
-        antallDesimaler: Int = 1,
-    ) = when {
-        desimaltall % 1 == 0.0 -> String.format("%.0f", desimaltall)
-        else -> String.format(Locale.US, "%.${antallDesimaler}f", desimaltall)
-    }
-
     private val prosentvisTaptArbeidstidOpplysninger = vedtakOpplysninger.finnProsentvisTaptArbeidstid()
 
     private fun Set<Opplysning>.finnProsentvisTaptArbeidstid(): Set<Opplysning> {
@@ -246,6 +238,14 @@ class VedtakMapper(vedtakJson: String) {
             )
         }
         return opplysninger
+    }
+
+    private fun formaterDesimaltall(
+        desimaltall: Double,
+        antallDesimaler: Int = 1,
+    ) = when {
+        desimaltall % 1 == 0.0 -> String.format("%.0f", desimaltall)
+        else -> String.format(Locale.US, "%.${antallDesimaler}f", desimaltall)
     }
 
     private val inntjeningsperiodeOpplysninger = vedtakOpplysninger.finnInntjeningsPeriode()
