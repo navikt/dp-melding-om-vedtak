@@ -18,7 +18,7 @@ internal class HtmlE2ETest {
     @Disabled
     @Test
     fun `Lage html`() {
-        val behandlingId = UUID.fromString("0194b656-2e37-7258-a4ad-33af850cb264")
+        val behandlingId = UUID.fromString("0194a6e3-1919-766c-a02b-839319759913")
 
         // dp-melding-om-vedtak token, hentes fra azure-token-generator f,eks
         @Suppress("ktlint:standard:max-line-length")
@@ -45,7 +45,39 @@ internal class HtmlE2ETest {
                             "fornavn": "Test ForNavn",
                             "etternavn": "Test EtterNavn",
                             "fodselsnummer": "12345678901",
-                            "sakId": "sak123",
+                            "saksbehandler": {
+                                "fornavn": "Ola",
+                                "etternavn": "Nordmann",
+                                "enhet": {
+                                    "navn": "Enhet Navn",
+                                    "postadresse": "Postadresse 123"
+                                }
+                            },
+                            "beslutter": {
+                                "fornavn": "Kari",
+                                "etternavn": "Nordmann",
+                                "enhet": {
+                                    "navn": "Enhet Navn",
+                                    "postadresse": "Postadresse 123"
+                                }
+                            }
+                        }
+                        """.trimIndent(),
+                    )
+                }.let { response ->
+                    println(response.bodyAsText())
+                }
+
+                client.post("https://dp-melding-om-vedtak.intern.dev.nav.no/melding-om-vedtak/$behandlingId/vedtaksmelding") {
+                    header(HttpHeaders.Authorization, "Bearer $token")
+                    header(HttpHeaders.ContentType, "application/json")
+                    setBody(
+                        """
+                                    
+                        {
+                            "fornavn": "Test ForNavn",
+                            "etternavn": "Test EtterNavn",
+                            "fodselsnummer": "12345678901",
                             "saksbehandler": {
                                 "fornavn": "Ola",
                                 "etternavn": "Nordmann",
