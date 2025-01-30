@@ -34,6 +34,7 @@ import kotlinx.html.visit
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
+import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -53,6 +54,7 @@ object HtmlConverter {
         opplysninger: List<Opplysning>,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
         fagsakId: String,
+        utvidetBeskrivelse: List<UtvidetBeskrivelse>? = null,
     ): String {
         val mapping: Map<String, Opplysning> = opplysninger.associateBy { it.opplysningTekstId }
         val currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.of("no", "NO")))
@@ -164,6 +166,9 @@ object HtmlConverter {
                             if (brevBlokk.utvidetBeskrivelse) {
                                 p {
                                     attributes["data-utvidet-beskrivelse-id"] = brevBlokk.textId
+                                    utvidetBeskrivelse?.find { it.brevblokkId == brevBlokk.textId }?.tekst?.let {
+                                        +it
+                                    }
                                 }
                             }
                         }

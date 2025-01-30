@@ -100,6 +100,12 @@ class MediatorTest {
                             ),
                     ),
             )
+
+        val resource = resourseRetriever.getResource("/json/sanity.json").readText()
+        val sanityKlient =
+            mockk<SanityKlient>().also {
+                coEvery { it.hentBrevBlokkerJson() } returns resource
+            }
         val behandlingKlient =
             mockk<BehandlingKlient>().also {
                 coEvery { it.hentVedtak(behandlingId, saksbehandler) } returns Result.success(vedtak)
@@ -111,7 +117,7 @@ class MediatorTest {
             val mediator =
                 Mediator(
                     behandlingKlient = behandlingKlient,
-                    sanityKlient = mockk(),
+                    sanityKlient = sanityKlient,
                     vedtaksmeldingRepository = repository,
                 )
             runBlocking {
