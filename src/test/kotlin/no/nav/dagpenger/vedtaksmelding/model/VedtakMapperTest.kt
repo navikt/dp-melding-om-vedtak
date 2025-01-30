@@ -55,13 +55,35 @@ class VedtakMapperTest {
     }
 
     @Test
-    fun `Hent opplysning fastsatt arbeidstid per uke før tap`() {
+    fun `Hent opplysning fastsatt ny arbeidstid per uke før tap`() {
+        vedtak.finnOpplysning("opplysning.fastsatt-ny-arbeidstid-per-uke") shouldBe
+            Opplysning(
+                opplysningTekstId = "opplysning.fastsatt-ny-arbeidstid-per-uke",
+                verdi = "10.1",
+                datatype = FLYTTALL,
+                enhet = TIMER,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning fastsatt vanlig arbeidstid per uke før tap`() {
         vedtak.finnOpplysning("opplysning.fastsatt-arbeidstid-per-uke-for-tap") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.fastsatt-arbeidstid-per-uke-for-tap",
                 verdi = "33.5",
                 datatype = FLYTTALL,
                 enhet = TIMER,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning krav til prosentvis tap av arbeidstid`() {
+        vedtak.finnOpplysning("opplysning.krav-til-prosentvis-tap-av-arbeidstid") shouldBe
+            Opplysning(
+                opplysningTekstId = "opplysning.krav-til-prosentvis-tap-av-arbeidstid",
+                verdi = "50",
+                datatype = FLYTTALL,
+                enhet = ENHETSLØS,
             )
     }
 
@@ -77,7 +99,7 @@ class VedtakMapperTest {
     }
 
     @Test
-    fun `Hent opplysnings-inntekts-krav-siste-12-måneder `() {
+    fun `Hent opplysning inntektskrav siste 12 måneder`() {
         vedtak.finnOpplysning("opplysning.inntektskrav-for-siste-12-mnd") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.inntektskrav-for-siste-12-mnd",
@@ -88,7 +110,7 @@ class VedtakMapperTest {
     }
 
     @Test
-    fun `Hent opplysnings-inntekts-krav-siste-36-måneder `() {
+    fun `Hent opplysning inntektskrav siste 36 måneder`() {
         vedtak.finnOpplysning("opplysning.inntektskrav-for-siste-36-mnd") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.inntektskrav-for-siste-36-mnd",
@@ -99,18 +121,7 @@ class VedtakMapperTest {
     }
 
     @Test
-    fun `Hent opplysning-arbeidsinntekt-siste-36-måneder `() {
-        vedtak.finnOpplysning("opplysning.arbeidsinntekt-siste-36-mnd") shouldBe
-            Opplysning(
-                opplysningTekstId = "opplysning.arbeidsinntekt-siste-36-mnd",
-                verdi = "555500",
-                datatype = HELTALL,
-                enhet = KRONER,
-            )
-    }
-
-    @Test
-    fun `Hent opplysning-arbeidsinntekt-siste-12-måneder `() {
+    fun `Hent opplysning arbeidsinntekt siste 12 måneder`() {
         vedtak.finnOpplysning("opplysning.arbeidsinntekt-siste-12-mnd") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.arbeidsinntekt-siste-12-mnd",
@@ -121,35 +132,46 @@ class VedtakMapperTest {
     }
 
     @Test
-    fun `skal hente antall G for krav til 12 mnd arbeidsinntekt`() {
-        vedtak.finnOpplysning("opplysning.antall-g-for-krav-til-12-mnd-arbeidsinntekt") shouldBe
+    fun `Hent opplysning arbeidsinntekt siste 36 måneder`() {
+        vedtak.finnOpplysning("opplysning.arbeidsinntekt-siste-36-mnd") shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.antall-g-for-krav-til-12-mnd-arbeidsinntekt",
-                verdi = "1.5",
-                datatype = FLYTTALL,
-                enhet = ENHETSLØS,
+                opplysningTekstId = "opplysning.arbeidsinntekt-siste-36-mnd",
+                verdi = "555500",
+                datatype = HELTALL,
+                enhet = KRONER,
             )
     }
 
     @Test
-    fun `skal hente antall G for krav til 36 mnd arbeidsinntekt`() {
-        vedtak.finnOpplysning("opplysning.antall-g-for-krav-til-36-mnd-arbeidsinntekt") shouldBe
+    fun `Hent opplysning om antall G som gis som grunnlag ved verneplikt`() {
+        vedtak.finnOpplysning("opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt") shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.antall-g-for-krav-til-36-mnd-arbeidsinntekt",
+                opplysningTekstId = "opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt",
                 verdi = "3",
                 datatype = FLYTTALL,
-                enhet = ENHETSLØS,
+                enhet = KRONER,
             )
     }
 
     @Test
-    fun `skal hente brukt beregningsregel`() {
-        vedtak.finnOpplysning("opplysning.brukt-beregningsregel") shouldBe
+    fun `Hent opplysning om brukt beregningsregel for grunnlagsberegning`() {
+        vedtak.finnOpplysning("opplysning.brukt-beregningsregel-grunnlag") shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.brukt-beregningsregel",
+                opplysningTekstId = "opplysning.brukt-beregningsregel-grunnlag",
                 verdi = "Gjennomsnittlig arbeidsinntekt siste 36 måneder",
                 datatype = TEKST,
                 enhet = ENHETSLØS,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning om antall stønadsuker som gis ved ordinære dagpenger`() {
+        vedtak.finnOpplysning("opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger") shouldBe
+            Opplysning(
+                opplysningTekstId = "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger",
+                verdi = "52",
+                datatype = HELTALL,
+                enhet = UKER,
             )
     }
 
