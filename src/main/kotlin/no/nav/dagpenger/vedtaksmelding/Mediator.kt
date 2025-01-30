@@ -100,7 +100,6 @@ class Mediator(
                     vedtak.hentOpplysninger(),
                     meldingOmVedtakData,
                     vedtak.hentFagsakId(),
-                    utvidetBeskrivelse = null,
                 )
             }.getOrThrow()
         return html
@@ -111,7 +110,7 @@ class Mediator(
         behandler: Saksbehandler,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): String {
-        val utvidetBeskrivelse = hentUtvidedeBeskrivelser(behandlingId, behandler)
+        val utvidetBeskrivelse = hentUtvidedeBeskrivelser(behandlingId, behandler).toSet()
         val html =
             hentEnderligVedtaksmelding(behandlingId, behandler).map { vedtak ->
                 HtmlConverter.toHtml(

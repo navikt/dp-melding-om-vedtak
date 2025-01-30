@@ -8,12 +8,14 @@ import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration
 import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
+import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.junit.jupiter.api.Test
 import java.nio.file.Files
 import java.nio.file.Paths
+import java.time.LocalDateTime
 
 class VedtakHtmlTest {
     fun hentVedtak(navn: String): Vedtak {
@@ -63,7 +65,23 @@ class VedtakHtmlTest {
 
             avslag.hentOpplysninger()
             val brevBlokker = avslag.hentBrevBlokker()
-            val htmlInnhold = HtmlConverter.toHtml(brevBlokker, avslag.hentOpplysninger(), meldingOmVedtakData, "fagsakId test")
+            val htmlInnhold =
+                HtmlConverter.toHtml(
+                    brevBlokker = brevBlokker,
+                    opplysninger = avslag.hentOpplysninger(),
+                    meldingOmVedtakData = meldingOmVedtakData,
+                    fagsakId = "fagsakId test",
+                    utvidetBeskrivelse =
+                        setOf(
+                            UtvidetBeskrivelse(
+                                behandlingId = UUIDv7.ny(),
+                                brevblokkId = "brev.blokk.begrunnelse-avslag-minsteinntekt",
+                                tekst = "noe saksbehandler har skrevet",
+                                sistEndretTidspunkt = LocalDateTime.now(),
+                                tittel = "Dette er en tittel",
+                            ),
+                        ),
+                )
 
             htmlInnhold brevblokkRekkefølgeShouldBe
                 listOf(
@@ -74,6 +92,8 @@ class VedtakHtmlTest {
                     "brev.blokk.rett-til-aa-klage",
                 )
 
+            htmlInnhold finnUtvidetBeskrivelseTekst "brev.blokk.begrunnelse-avslag-minsteinntekt" shouldBe "noe saksbehandler har skrevet"
+
             writeStringToFile(
                 filePath = "build/temp/avslag-minsteinntekt.html",
                 content = htmlInnhold,
@@ -81,7 +101,13 @@ class VedtakHtmlTest {
         }
     }
 
-    infix fun String.brevblokkRekkefølgeShouldBe(expectedOrder: List<String>) {
+    private infix fun String.finnUtvidetBeskrivelseTekst(utvidetBeskrivelseId: String): String? {
+        return Jsoup.parse(this).select("[data-utvidet-beskrivelse-id]").singleOrNull {
+            it.attr("data-utvidet-beskrivelse-id") == utvidetBeskrivelseId
+        }?.text()
+    }
+
+    private infix fun String.brevblokkRekkefølgeShouldBe(expectedOrder: List<String>) {
         val document: Document = Jsoup.parse(this)
         val elements: List<Element> = document.select("[data-brevblokk-id]")
 
