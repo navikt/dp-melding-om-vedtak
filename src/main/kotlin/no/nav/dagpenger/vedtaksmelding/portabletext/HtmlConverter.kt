@@ -10,7 +10,6 @@ import kotlinx.html.a
 import kotlinx.html.attributesMapOf
 import kotlinx.html.body
 import kotlinx.html.br
-import kotlinx.html.classes
 import kotlinx.html.div
 import kotlinx.html.h1
 import kotlinx.html.h2
@@ -54,7 +53,7 @@ object HtmlConverter {
         opplysninger: List<Opplysning>,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
         fagsakId: String,
-        utvidetBeskrivelse: List<UtvidetBeskrivelse>? = null,
+        utvidetBeskrivelse: Set<UtvidetBeskrivelse> = emptySet(),
     ): String {
         val mapping: Map<String, Opplysning> = opplysninger.associateBy { it.opplysningTekstId }
         val currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.of("no", "NO")))
@@ -166,7 +165,7 @@ object HtmlConverter {
                             if (brevBlokk.utvidetBeskrivelse) {
                                 p {
                                     attributes["data-utvidet-beskrivelse-id"] = brevBlokk.textId
-                                    utvidetBeskrivelse?.find { it.brevblokkId == brevBlokk.textId }?.tekst?.let {
+                                    utvidetBeskrivelse.find { it.brevblokkId == brevBlokk.textId }?.tekst?.let {
                                         +it
                                     }
                                 }
