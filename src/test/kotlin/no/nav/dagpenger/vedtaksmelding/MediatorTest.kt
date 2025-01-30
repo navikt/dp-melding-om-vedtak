@@ -10,6 +10,7 @@ import io.mockk.spyk
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Avslag
+import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT_ELLER_VERNEPLIKT
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
@@ -25,7 +26,6 @@ import java.time.LocalDateTime
 class MediatorTest {
     private val behandlingId = UUIDv7.ny()
     private val saksbehandler = Saksbehandler("tulleToken")
-    private val resourseRetriever = object {}.javaClass
 
     @Test
     fun `skal sende ett eller annet vedtak`() {
@@ -35,7 +35,7 @@ class MediatorTest {
                 vilkår =
                     setOf(
                         Vilkår(
-                            "Oppfyller kravet til minsteinntekt eller verneplikt",
+                            MINSTEINNTEKT_ELLER_VERNEPLIKT.navn,
                             Vilkår.Status.IKKE_OPPFYLT,
                         ),
                     ),

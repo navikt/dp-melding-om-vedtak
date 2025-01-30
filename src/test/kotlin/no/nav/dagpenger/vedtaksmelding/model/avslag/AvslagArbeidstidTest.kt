@@ -3,6 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.Avslag
+import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.TAPT_ARBEIDSTID
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.FLYTTALL
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.TIMER
@@ -52,7 +53,7 @@ class AvslagArbeidstidTest {
         val behandlingId = UUIDv7.ny()
         val arbeidstidIkkeOppfylt =
             Vilkår(
-                navn = "Tap av arbeidstid er minst terskel",
+                navn = TAPT_ARBEIDSTID.navn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
 

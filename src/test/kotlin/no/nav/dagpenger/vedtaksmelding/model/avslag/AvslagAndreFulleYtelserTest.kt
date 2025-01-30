@@ -3,6 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.Avslag
+import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.IKKE_ANDRE_FULLE_YTELSER
 import no.nav.dagpenger.vedtaksmelding.model.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
@@ -29,7 +30,7 @@ class AvslagAndreFulleYtelserTest {
         val behandlingId = UUIDv7.ny()
         val andreFulleYtelserIkkeOppfylt =
             Vilkår(
-                navn = "Mottar ikke andre fulle ytelser",
+                navn = IKKE_ANDRE_FULLE_YTELSER.navn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
 

@@ -3,6 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.Avslag
+import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.IKKE_UTESTENGT
 import no.nav.dagpenger.vedtaksmelding.model.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
@@ -19,7 +20,7 @@ class AvslagUtestengtTest {
         val behandlingId = UUIDv7.ny()
         val utestengtVilkår =
             Vilkår(
-                navn = "Oppfyller krav til ikke utestengt",
+                navn = IKKE_UTESTENGT.navn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
 

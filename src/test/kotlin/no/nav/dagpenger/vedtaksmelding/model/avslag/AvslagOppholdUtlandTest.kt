@@ -3,6 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.Avslag
+import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.OPPHOLD_I_NORGE
 import no.nav.dagpenger.vedtaksmelding.model.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
@@ -20,7 +21,7 @@ class AvslagOppholdUtlandTest {
         val behandlingId = UUIDv7.ny()
         val oppholdNorgeIkkeOppfylt =
             Vilkår(
-                navn = "Oppfyller kravet til opphold i Norge",
+                navn = OPPHOLD_I_NORGE.navn,
                 status = IKKE_OPPFYLT,
             )
 
