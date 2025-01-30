@@ -62,16 +62,6 @@ class AvslagReellArbeidssøkerTest {
                     ),
                 alleBrevblokker = emptyList(),
             )
-            Avslag(
-                vedtak =
-                    Vedtak(
-                        behandlingId = behandlingId,
-                        vilkår = setOf(registrertArbeidssøkerIkkeOppfylt),
-                        utfall = Utfall.AVSLÅTT,
-                        opplysninger = emptySet(),
-                    ),
-                alleBrevblokker = emptyList(),
-            )
         }
         shouldThrow<Vedtaksmelding.ManglerBrevstøtte> {
             Avslag(
