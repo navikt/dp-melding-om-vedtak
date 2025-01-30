@@ -231,10 +231,7 @@ class Avslag(
     }
 
     private fun Set<Vilkår>.avslagReellArbeidssøker(): Boolean {
-        return this.any { vilkår ->
-            vilkår.status == IKKE_OPPFYLT &&
-                (vilkår.navn == "Krav til arbeidssøker" || vilkår.navn == "Registrert som arbeidssøker på søknadstidspunktet")
-        }
+        return this.any { vilkår -> vilkår.navn == "Krav til arbeidssøker" && vilkår.status == IKKE_OPPFYLT }
     }
 }
 
