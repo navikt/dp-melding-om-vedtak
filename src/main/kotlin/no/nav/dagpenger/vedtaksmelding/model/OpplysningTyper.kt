@@ -23,21 +23,9 @@ enum class OpplysningTyper(val opplysningTypeId: UUID, val opplysningTekstId: St
         opplysningTypeId = UUID.fromString("0194881f-9413-77ce-92ec-d29700f04242"),
         opplysningTekstId = "opplysning.arbeidsinntekt-siste-36-mnd",
     ),
-    AntallGForKravTil12MånederArbeidsinntekt(
-        opplysningTypeId = UUID.fromString("0194881f-9413-77ce-92ec-d29700f0423f"),
-        opplysningTekstId = "opplysning.antall-g-for-krav-til-12-mnd-arbeidsinntekt",
-    ),
-    AntallGForKravTil36MånederArbeidsinntekt(
-        opplysningTypeId = UUID.fromString("0194881f-9413-77ce-92ec-d29700f04240"),
-        opplysningTekstId = "opplysning.antall-g-for-krav-til-36-mnd-arbeidsinntekt",
-    ),
     AntallGSomGisSomGrunnlagVedVerneplikt(
         opplysningTypeId = UUID.fromString("0194881f-9421-766c-9dc6-41fe6c9a1dff"),
         opplysningTekstId = "opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt",
-    ),
-    BruktBeregningsregel(
-        opplysningTypeId = UUID.fromString("0194881f-9410-7481-b263-4606fdd10cba"),
-        opplysningTekstId = "opplysning.brukt-beregningsregel",
     ),
     BruktBeregningsregelGrunnlag(
         opplysningTypeId = UUID.fromString("0194881f-9410-7481-b263-4606fdd10cba"),

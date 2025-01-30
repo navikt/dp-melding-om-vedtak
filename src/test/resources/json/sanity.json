@@ -879,7 +879,7 @@
               "_ref": "485255c9-5f47-4f91-8739-1bb4bf793c55",
               "behandlingOpplysning": {
                 "_updatedAt": "2024-11-07T11:48:57Z",
-                "textId": "opplysning.brukt-beregningsregel",
+                "textId": "opplysning.brukt-beregningsregel-grunnlag",
                 "_createdAt": "2024-11-07T11:48:32Z",
                 "_rev": "2ws1FO2hJVQcdmMBE8u8lu",
                 "_type": "behandlingOpplysning",

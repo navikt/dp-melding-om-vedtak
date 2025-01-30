@@ -21,14 +21,11 @@ import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.TIMER
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.UKER
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
-import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallGForKravTil12MånederArbeidsinntekt
-import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallGForKravTil36MånederArbeidsinntekt
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallGSomGisSomGrunnlagVedVerneplikt
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallStønadsukerSomGisVedOrdinæreDagpenger
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ArbeidsinntektSiste12Måneder
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ArbeidsinntektSiste36Måneder
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.BarnetilleggIKroner
-import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.BruktBeregningsregel
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.BruktBeregningsregelGrunnlag
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FørsteMånedAvOpptjeningsperiode
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.InntektskravSiste12Måneder
@@ -149,25 +146,12 @@ class VedtakMapper(vedtakJson: String) {
                 enhet = KRONER,
             ),
             vedtak.finnOpplysningFraType(
-                opplysningType = AntallGForKravTil12MånederArbeidsinntekt,
-                datatype = FLYTTALL,
-            ),
-            vedtak.finnOpplysningFraType(
-                opplysningType = AntallGForKravTil36MånederArbeidsinntekt,
-                datatype = FLYTTALL,
-            ),
-            vedtak.finnOpplysningFraType(
                 opplysningType = AntallGSomGisSomGrunnlagVedVerneplikt,
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ),
             vedtak.finnOpplysningFraType(
                 opplysningType = BruktBeregningsregelGrunnlag,
-                datatype = TEKST,
-            ),
-            // TODO: Slettes når brev er oppdatert
-            vedtak.finnOpplysningFraType(
-                opplysningType = BruktBeregningsregel,
                 datatype = TEKST,
             ),
             vedtak.finnOpplysningFraType(
