@@ -3,6 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.Avslag
+import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.TAPT_ARBEIDSTID
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.FLYTTALL
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.TIMER
@@ -52,7 +53,7 @@ class AvslagArbeidstidTest {
         val behandlingId = UUIDv7.ny()
         val arbeidstidIkkeOppfylt =
             Vilkår(
-                navn = "Tap av arbeidstid er minst terskel",
+                navn = TAPT_ARBEIDSTID.navn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
 
@@ -93,102 +94,6 @@ private val json =
       "virkningsdato": "2025-01-21",
       "behandletAv": [],
       "vilkår": [
-        {
-          "navn": "Rettighetstype",
-          "status": "Oppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:09.002217",
-          "hjemmel": "folketrygdloven kapittel 4"
-        },
-        {
-          "navn": "Oppfyller kravet til alder",
-          "status": "Oppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:09.002468",
-          "hjemmel": "folketrygdloven § 4-23"
-        },
-        {
-          "navn": "Registrert som arbeidssøker på søknadstidspunktet",
-          "status": "Oppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.06828",
-          "hjemmel": "folketrygdloven § 4-5"
-        },
-        {
-          "navn": "Oppfyller kravet til minsteinntekt eller verneplikt",
-          "status": "Oppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.070006",
-          "hjemmel": "folketrygdloven § 4-4"
-        },
-        {
-          "navn": "Mottar ikke andre fulle ytelser",
-          "status": "Oppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.071",
-          "hjemmel": "folketrygdloven § 4-24"
-        },
-        {
-          "navn": "Oppfyller kravet til medlemskap",
-          "status": "Oppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.073808",
-          "hjemmel": "folketrygdloven § 4-2"
-        },
-        {
-          "navn": "Er medlemmet ikke påvirket av streik eller lock-out?",
-          "status": "Oppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.073824",
-          "hjemmel": "folketrygdloven § 4-22"
-        },
-        {
-          "navn": "Oppfyller krav til ikke utestengt",
-          "status": "Oppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.076481",
-          "hjemmel": "folketrygdloven § 4-28"
-        },
-        {
-          "navn": "Oppfyller kravet til opphold i Norge",
-          "status": "Oppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.079514",
-          "hjemmel": "folketrygdloven § 4-5"
-        },
-        {
-          "navn": "Krav til tap av arbeidsinntekt",
-          "status": "Oppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.079531",
-          "hjemmel": "folketrygdloven § 4-3"
-        },
-        {
-          "navn": "Oppfyller kravet til heltid- og deltidsarbeid",
-          "status": "Oppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.645389",
-          "hjemmel": "folketrygdloven § 4-5"
-        },
-        {
-          "navn": "Oppfyller kravet til mobilitet",
-          "status": "Oppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.645404",
-          "hjemmel": "folketrygdloven § 4-5"
-        },
-        {
-          "navn": "Oppfyller kravet til å være arbeidsfør",
-          "status": "Oppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.645413",
-          "hjemmel": "folketrygdloven § 4-5"
-        },
-        {
-          "navn": "Oppfyller kravet til å ta ethvert arbeid",
-          "status": "Oppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.645422",
-          "hjemmel": "folketrygdloven § 4-5"
-        },
-        {
-          "navn": "Krav til arbeidssøker",
-          "status": "Oppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.648061",
-          "hjemmel": "folketrygdloven § 4-5"
-        },
-        {
-          "navn": "Krav til utdanning eller opplæring",
-          "status": "Oppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.650392",
-          "hjemmel": "folketrygdloven § 4-6"
-        },
         {
           "navn": "Tap av arbeidstid er minst terskel",
           "status": "IkkeOppfylt",
