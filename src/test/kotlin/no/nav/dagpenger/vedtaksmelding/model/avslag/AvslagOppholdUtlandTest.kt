@@ -31,6 +31,7 @@ class AvslagOppholdUtlandTest {
                     vilkår = setOf(oppholdNorgeIkkeOppfylt),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

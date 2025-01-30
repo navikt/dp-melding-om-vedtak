@@ -95,7 +95,7 @@ class Mediator(
     ): String {
         val html =
             hentVedtaksmelding(behandlingId, behandler).map { vedtak ->
-                HtmlConverter.toHtml(vedtak.hentBrevBlokker(), vedtak.hentOpplysninger(), meldingOmVedtakData)
+                HtmlConverter.toHtml(vedtak.hentBrevBlokker(), vedtak.hentOpplysninger(), meldingOmVedtakData, vedtak.hentFagsakId())
             }.getOrThrow()
         return html
     }
@@ -107,7 +107,7 @@ class Mediator(
     ): String {
         val html =
             hentEnderligVedtaksmelding(behandlingId, behandler).map { vedtak ->
-                HtmlConverter.toHtml(vedtak.hentBrevBlokker(), vedtak.hentOpplysninger(), meldingOmVedtakData)
+                HtmlConverter.toHtml(vedtak.hentBrevBlokker(), vedtak.hentOpplysninger(), meldingOmVedtakData, vedtak.hentFagsakId())
             }.getOrThrow()
         vedtaksmeldingRepository.lagreVedaksmeldingHtml(behandlingId, html)
         return html
