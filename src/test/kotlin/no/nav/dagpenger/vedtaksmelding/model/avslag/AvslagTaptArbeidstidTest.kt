@@ -15,7 +15,7 @@ import no.nav.dagpenger.vedtaksmelding.model.Vilkår
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
-class AvslagArbeidstidTest {
+class AvslagTaptArbeidstidTest {
     private val avslagArbeidstidVedtak = VedtakMapper(json).vedtak()
 
     @Test
