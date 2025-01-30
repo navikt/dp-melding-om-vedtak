@@ -87,7 +87,6 @@ class MediatorTest {
                 fornavn = "Ola",
                 etternavn = "Nordmann",
                 fodselsnummer = "12345678901",
-                sakId = "12345678901",
                 saksbehandler =
                     BehandlerDTO(
                         fornavn = "Ola",

@@ -32,7 +32,6 @@ class MeldingOmVedtakDataDTOTest {
             fornavn = fornavn,
             etternavn = etternavn,
             fodselsnummer = "12345678901",
-            sakId = "sak123",
             saksbehandler =
                 BehandlerDTO(
                     fornavn = "Ola",
