@@ -11,23 +11,27 @@ import no.nav.dagpenger.vedtaksmelding.model.Vilkår
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
-class AvslagUtestengtTest {
-    private val avslagUtestengtVedtak = VedtakMapper(json).vedtak()
+class AvslagMinsteinntektEllerVernepliktTest {
+    @Test
+    fun `Brevstøtte for avslag minsteinntekt eller verneplikt`() {
+        val avslagMinsteinntektVedtak = VedtakMapper(json).vedtak()
+        shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
+            Avslag(avslagMinsteinntektVedtak, emptyList())
+        }
+    }
 
     @Test
-    fun `Riktige brevblokker for avslag utestengt`() {
-        val behandlingId = UUIDv7.ny()
-        val utestengtVilkår =
+    fun `Rikige brevblokker for avslag på minsteinntekt`() {
+        val minsteInntektIkkeOppfylt =
             Vilkår(
-                navn = "Oppfyller krav til ikke utestengt",
+                navn = "Oppfyller kravet til minsteinntekt eller verneplikt",
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
-
         Avslag(
             vedtak =
                 Vedtak(
-                    behandlingId = behandlingId,
-                    vilkår = setOf(utestengtVilkår),
+                    behandlingId = UUIDv7.ny(),
+                    vilkår = setOf(minsteInntektIkkeOppfylt),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
                 ),
@@ -35,16 +39,8 @@ class AvslagUtestengtTest {
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-utestengt",
-                "brev.blokk.avslag-utestengt-hjemmel",
+                "brev.blokk.begrunnelse-avslag-minsteinntekt",
             ) + Vedtaksmelding.fasteBlokker
-    }
-
-    @Test
-    fun `Brevstøtte for avslag utestengt`() {
-        shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
-            Avslag(avslagUtestengtVedtak, emptyList())
-        }
     }
 }
 
@@ -61,10 +57,10 @@ private val json =
       "behandletAv": [],
       "vilkår": [
         {
-          "navn": "Oppfyller krav til ikke utestengt",
+          "navn": "Oppfyller kravet til minsteinntekt eller verneplikt",
           "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.076481",
-          "hjemmel": "folketrygdloven § 4-28"
+          "vurderingstidspunkt": "2025-01-21T11:03:11.070006",
+          "hjemmel": "folketrygdloven § 4-4"
         }
       ],
       "fastsatt": {
