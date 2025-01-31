@@ -61,7 +61,7 @@ class VedtakMapper(vedtakJson: String) {
             utfall = utfall,
             vilkår = vilkår,
             opplysninger = vedtakOpplysninger + inntjeningsperiodeOpplysninger + prosentvisTaptArbeidstidOpplysninger,
-            fagsakId = "fagsakId test",
+            fagsakId = fagsakId,
         )
     }
 
