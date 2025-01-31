@@ -65,6 +65,8 @@ enum class AvslagVilkårMedBrevstøtte(val navn: String) {
     TAPT_ARBEIDSTID(navn = "Tap av arbeidstid er minst terskel"),
 
     TAPT_ARBEIDSINNTEKT(navn = "Krav til tap av arbeidsinntekt"),
+
+    MEDLEM_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT(navn = "Er medlemmet ikke påvirket av streik eller lock-out?"),
 }
 
 enum class Utfall {
