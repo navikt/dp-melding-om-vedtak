@@ -36,8 +36,13 @@ class Mediator(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
     ): Result<Vedtaksmelding> {
+        val sanityInnhold =
+            requireNotNull(vedtaksmeldingRepository.hentSanityInnhold(behandlingId)) {
+                "Finnes ikke lagret sanityinnhold for behandlingId: $behandlingId, kan derfor ikke lage endelig vedtak"
+            }
+
         return hentVedtakOgByggVedtaksMelding(behandlingId, saksbehandler) {
-            vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
+            sanityInnhold
         }
     }
 

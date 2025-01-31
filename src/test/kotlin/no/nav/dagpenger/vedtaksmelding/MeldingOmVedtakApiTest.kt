@@ -341,7 +341,6 @@ class MeldingOmVedtakApiTest {
                 "fornavn": "Test ForNavn",
                 "etternavn": "Test EtterNavn",
                 "fodselsnummer": "12345678901",
-                "sakId": "sak123",
                 "saksbehandler": {
                     "fornavn": "Ola",
                     "etternavn": "Nordmann",
