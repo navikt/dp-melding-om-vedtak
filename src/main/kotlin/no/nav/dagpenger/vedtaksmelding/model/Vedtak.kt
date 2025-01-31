@@ -63,6 +63,8 @@ enum class AvslagVilkårMedBrevstøtte(val navn: String) {
     MINSTEINNTEKT_ELLER_VERNEPLIKT(navn = "Oppfyller kravet til minsteinntekt eller verneplikt"),
 
     TAPT_ARBEIDSTID(navn = "Tap av arbeidstid er minst terskel"),
+
+    TAPT_ARBEIDSINNTEKT(navn = "Krav til tap av arbeidsinntekt"),
 }
 
 enum class Utfall {
