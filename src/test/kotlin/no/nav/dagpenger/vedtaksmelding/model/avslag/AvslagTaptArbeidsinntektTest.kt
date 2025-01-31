@@ -42,6 +42,7 @@ class AvslagTaptArbeidsinntektTest {
                     vilkår = setOf(taptArbeidsinntektIkkeOppfylt),
                     utfall = AVSLÅTT,
                     opplysninger = emptySet(),
+                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
