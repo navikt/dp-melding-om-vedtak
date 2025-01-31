@@ -3,6 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.model
 import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.IKKE_ANDRE_FULLE_YTELSER
 import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.IKKE_UTESTENGT
+import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.MEDLEM_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT
 import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT_ELLER_VERNEPLIKT
 import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.OPPHOLD_I_NORGE
 import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER
@@ -103,7 +104,8 @@ class Avslag(
                     vedtak.vilkår.avslagTaptArbeidstid() ||
                     vedtak.vilkår.avslagOppholdUtland() ||
                     vedtak.vilkår.avslagAndreFulleYtelser() ||
-                    vedtak.vilkår.avslagUtestengt()
+                    vedtak.vilkår.avslagUtestengt() ||
+                    vedtak.vilkår.avslagStreikEllerLockout()
             )
 
     init {
@@ -123,7 +125,8 @@ class Avslag(
                 blokkerAvslagUtestengt() +
                 blokkerAvslagReellArbeidssøker() +
                 blokkerAvslagOppholdUtland() +
-                blokkerAndreFulleYtelser()
+                blokkerAndreFulleYtelser() +
+                blokkerStreikLockout()
         }
     override val brevBlokker: List<BrevBlokk> =
         run {
@@ -158,6 +161,18 @@ class Avslag(
         }
             ?.let {
                 listOf("brev.blokk.avslag-andre-fulle-ytelser")
+            } ?: emptyList()
+    }
+
+    private fun blokkerStreikLockout(): List<String> {
+        return vedtak.vilkår.find { vilkår ->
+            vilkår.navn == MEDLEM_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT.navn && vilkår.status == IKKE_OPPFYLT
+        }
+            ?.let {
+                listOf(
+                    "brev.blokk.avslag-streik-lockout-del-1",
+                    "brev.blokk.avslag-streik-lockout-del-2",
+                )
             } ?: emptyList()
     }
 
@@ -247,6 +262,10 @@ class Avslag(
 
     private fun Set<Vilkår>.avslagUtestengt(): Boolean {
         return this.any { vilkår -> vilkår.navn == IKKE_UTESTENGT.navn && vilkår.status == IKKE_OPPFYLT }
+    }
+
+    private fun Set<Vilkår>.avslagStreikEllerLockout(): Boolean {
+        return this.any { vilkår -> vilkår.navn == MEDLEM_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT.navn && vilkår.status == IKKE_OPPFYLT }
     }
 
     private fun Set<Vilkår>.avslagOppholdUtland(): Boolean {

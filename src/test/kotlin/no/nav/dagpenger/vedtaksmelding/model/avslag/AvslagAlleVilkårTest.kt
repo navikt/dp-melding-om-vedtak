@@ -33,6 +33,8 @@ class AvslagAlleVilkårTest {
                 "brev.blokk.avslag-opphold-utlandet-del-1",
                 "brev.blokk.avslag-opphold-utlandet-del-2",
                 "brev.blokk.avslag-andre-fulle-ytelser",
+                "brev.blokk.avslag-streik-lockout-del-1",
+                "brev.blokk.avslag-streik-lockout-del-2",
             ) + Vedtaksmelding.fasteBlokker
     }
 }
@@ -126,6 +128,12 @@ private val json =
           "status": "IkkeOppfylt",
           "vurderingstidspunkt": "2025-01-29T10:13:36.592332",
           "hjemmel": "folketrygdloven § 4-3"
+        },
+        {
+          "navn": "Er medlemmet ikke påvirket av streik eller lock-out?",
+          "status": "IkkeOppfylt",
+          "vurderingstidspunkt": "2025-01-27T12:08:17.927976",
+          "hjemmel": "folketrygdloven § 4-22"
         }
       ],
       "fastsatt": {
