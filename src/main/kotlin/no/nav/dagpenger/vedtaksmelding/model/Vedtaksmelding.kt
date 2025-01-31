@@ -11,6 +11,7 @@ import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.REELL_A
 import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_HELTID_DELTID
 import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_MOBILITET
 import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER
+import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.TAPT_ARBEIDSINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.TAPT_ARBEIDSTID
 import no.nav.dagpenger.vedtaksmelding.model.Vilkår.Status.IKKE_OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
@@ -102,7 +103,8 @@ class Avslag(
             (
                 vedtak.vilkår.avslagMinsteinntekt() ||
                     vedtak.vilkår.avslagReellArbeidssøker() ||
-                    vedtak.vilkår.avslagArbeidstid() ||
+                    vedtak.vilkår.avslagTaptArbeidsinntekt() ||
+                    vedtak.vilkår.avslagTaptArbeidstid() ||
                     vedtak.vilkår.avslagOppholdUtland() ||
                     vedtak.vilkår.avslagAndreFulleYtelser() ||
                     vedtak.vilkår.avslagUtestengt()
@@ -120,9 +122,10 @@ class Avslag(
         get() {
             return innledendeBrevblokker +
                 blokkerAvslagMinsteinntekt() +
-                blokkerAvslagReellArbeidssøker() +
+                blokkerAvslagTaptArbeidsinntekt() +
                 blokkerAvslagTaptArbeidstid() +
                 blokkerAvslagUtestengt() +
+                blokkerAvslagReellArbeidssøker() +
                 blokkerAvslagOppholdUtland() +
                 blokkerAndreFulleYtelser()
         }
@@ -168,6 +171,15 @@ class Avslag(
         }
             ?.let {
                 listOf("brev.blokk.avslag-tapt-arbeidstid")
+            } ?: emptyList()
+    }
+
+    private fun blokkerAvslagTaptArbeidsinntekt(): List<String> {
+        return vedtak.vilkår.find { vilkår ->
+            vilkår.navn == TAPT_ARBEIDSINNTEKT.navn && vilkår.status == IKKE_OPPFYLT
+        }
+            ?.let {
+                listOf("brev.blokk.avslag-tapt-arbeidsinntekt")
             } ?: emptyList()
     }
 
@@ -229,8 +241,12 @@ class Avslag(
         return this.any { vilkår -> vilkår.navn == MINSTEINNTEKT_ELLER_VERNEPLIKT.navn && vilkår.status == IKKE_OPPFYLT }
     }
 
-    private fun Set<Vilkår>.avslagArbeidstid(): Boolean {
+    private fun Set<Vilkår>.avslagTaptArbeidstid(): Boolean {
         return this.any { vilkår -> vilkår.navn == TAPT_ARBEIDSTID.navn && vilkår.status == IKKE_OPPFYLT }
+    }
+
+    private fun Set<Vilkår>.avslagTaptArbeidsinntekt(): Boolean {
+        return this.any { vilkår -> vilkår.navn == TAPT_ARBEIDSINNTEKT.navn && vilkår.status == IKKE_OPPFYLT }
     }
 
     private fun Set<Vilkår>.avslagUtestengt(): Boolean {
