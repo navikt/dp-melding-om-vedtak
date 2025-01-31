@@ -1,7 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding
 
 import com.fasterxml.jackson.core.type.TypeReference
-import com.fasterxml.jackson.module.kotlin.readValue
 import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
@@ -36,13 +35,8 @@ class Mediator(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
     ): Result<Vedtaksmelding> {
-        val sanityInnhold =
-            requireNotNull(vedtaksmeldingRepository.hentSanityInnhold(behandlingId)) {
-                "Finnes ikke lagret sanityinnhold for behandlingId: $behandlingId, kan derfor ikke lage endelig vedtak"
-            }
-
         return hentVedtakOgByggVedtaksMelding(behandlingId, saksbehandler) {
-            sanityInnhold
+            vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
         }
     }
 
