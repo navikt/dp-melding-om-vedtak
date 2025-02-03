@@ -251,7 +251,7 @@ class MeldingOmVedtakApiTest {
         val mediator =
             mockk<Mediator>().also {
                 coEvery {
-                    it.hentVedtaksHtml(
+                    it.hentVedtakHtml(
                         behandlingId,
                         Saksbehandler(saksbehandlerToken),
                         meldingOmVedtakData =

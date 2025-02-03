@@ -82,7 +82,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
                     kotlin.runCatching {
                         val vedtaksHtml =
-                            mediator.hentVedtaksHtml(
+                            mediator.hentVedtakHtml(
                                 behandlingId = behandlingId,
                                 behandler = behandler,
                                 meldingOmVedtakData = meldingOmVedtakData,
@@ -104,7 +104,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
 
                         call.respond(meldingOmVedtakResponseDTO)
                     }.onFailure { t ->
-                        logger.error(t) { "Feil ved henting av vedtaks html" }
+                        logger.error(t) { "Feil ved henting av vedtaksmelding som html (hentVedtakHtml)" }
                         call.respond(HttpStatusCode.InternalServerError)
                     }
                 }
@@ -123,7 +123,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                             )
                         call.respond(vedtaksHtml)
                     }.onFailure { t ->
-                        logger.error(t) { "Feil ved henting av vedtaks html" }
+                        logger.error(t) { "Feil ved henting av vedtaksmelding som html (hentEndeligVedtak)" }
                         call.respond(HttpStatusCode.InternalServerError)
                     }
                 }
