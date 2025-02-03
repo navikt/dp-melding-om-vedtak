@@ -3,7 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 enum class AvslagBrevblokker(val brevblokkId: String) {
     AVSLAG_INNLEDNING(brevblokkId = "brev.blokk.vedtak-avslag"),
 
-    BEGRUNNELSE_AVSLAG_MINSTEINNTEKT(brevblokkId = "brev.blokk.begrunnelse-avslag-minsteinntekt"),
+    AVSLAG_MINSTEINNTEKT_BEGRUNNELSE(brevblokkId = "brev.blokk.begrunnelse-avslag-minsteinntekt"),
 
     AVSLAG_OPPHOLD_UTLAND_DEL_1(brevblokkId = "brev.blokk.avslag-opphold-utlandet-del-1"),
     AVSLAG_OPPHOLD_UTLAND_DEL_2(brevblokkId = "brev.blokk.avslag-opphold-utlandet-del-2"),
@@ -22,7 +22,7 @@ enum class AvslagBrevblokker(val brevblokkId: String) {
 
     AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT(brevblokkId = "brev.blokk.avslag-reell-arbeidssoker-overskrift"),
     AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID(brevblokkId = "brev.blokk.avslag-reell-arbeidssoker-heltid-deltid"),
-    AVSLAG_REELL_ARBEIDSSØKER_ARBEID_I_HELE_NORGE(brevblokkId = "brev.blokk.avslag-reell-arbeidssoker-arbeid-i-hele-norge"),
+    AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE(brevblokkId = "brev.blokk.avslag-reell-arbeidssoker-arbeid-i-hele-norge"),
     AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE(
         brevblokkId = "brev.blokk.avslag-reell-arbeidssoker-unntak-heltid-deltid-hele-norge",
     ),

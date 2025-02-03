@@ -5,10 +5,11 @@ import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ANDRE_FULLE_YTELSER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_OPPHOLD_UTLAND_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_OPPHOLD_UTLAND_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEID_I_HELE_NORGE
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL
@@ -21,7 +22,6 @@ import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAP
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT_HJEMMEL
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.BEGRUNNELSE_AVSLAG_MINSTEINNTEKT
 import org.junit.jupiter.api.Test
 
 class AvslagMeldingAlleVilkårTest {
@@ -35,14 +35,14 @@ class AvslagMeldingAlleVilkårTest {
         ).brevBlokkIder() shouldBe
             listOf(
                 AVSLAG_INNLEDNING.brevblokkId,
-                BEGRUNNELSE_AVSLAG_MINSTEINNTEKT.brevblokkId,
+                AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSINNTEKT.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID.brevblokkId,
                 AVSLAG_UTESTENGT.brevblokkId,
                 AVSLAG_UTESTENGT_HJEMMEL.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID.brevblokkId,
-                AVSLAG_REELL_ARBEIDSSØKER_ARBEID_I_HELE_NORGE.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID.brevblokkId,

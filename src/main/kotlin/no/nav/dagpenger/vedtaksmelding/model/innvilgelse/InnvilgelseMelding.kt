@@ -1,6 +1,31 @@
 package no.nav.dagpenger.vedtaksmelding.model.innvilgelse
 
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_EGENANDEL
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG_VERNEPLIKT
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_NITTI_PROSENT_REGEL
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_FORELDREPENGER
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_GENERISK
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_OMSORGSPENGER
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_OPPLÆRINGSPENGER
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_PLEIEPENGER
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_SVANGERSKAPSPENGER
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_SYKEPENGER
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_UFØRE
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SKATTEKORT
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_STANS_ÅRSAKER
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_UTBETALING
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VERNEPLIKT_GUNSTIGEST
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.INNVILGET
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
@@ -21,22 +46,22 @@ class InnvilgelseMelding(
         get() {
             val innledendeBrevblokker =
                 listOf(
-                    "brev.blokk.vedtak-innvilgelse",
-                    "brev.blokk.begrunnelse-innvilgelsesdato",
-                    "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                    "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
+                    INNVILGELSE_INNLEDNING.brevblokkId,
+                    INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                    INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                    INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
                 )
 
             val avsluttendeBrevblokker =
                 listOf(
-                    "brev.blokk.arbeidstiden-din",
-                    "brev.blokk.egenandel",
-                    "brev.blokk.du-maa-sende-meldekort",
-                    "brev.blokk.utbetaling",
-                    "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
-                    "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
-                    "brev.blokk.du-maa-melde-fra-om-endringer",
-                    "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+                    INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                    INNVILGELSE_EGENANDEL.brevblokkId,
+                    INNVILGELSE_MELDEKORT.brevblokkId,
+                    INNVILGELSE_UTBETALING.brevblokkId,
+                    INNVILGELSE_SKATTEKORT.brevblokkId,
+                    INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                    INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                    INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
                 )
 
             return innledendeBrevblokker + barnetillegg() + nittiProsentRegel() + samordnet() + grunnlag() + avsluttendeBrevblokker
@@ -54,7 +79,7 @@ class InnvilgelseMelding(
                 it.verdi.toDouble() > 0
         }
             ?.let {
-                listOf("brev.blokk.nittiprosentregel")
+                listOf(INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId)
             } ?: emptyList()
     }
 
@@ -91,16 +116,16 @@ class InnvilgelseMelding(
         val samordningBlokker = mutableListOf<String>()
         if (samordnedeYtelser.size == 1) {
             when (samordnedeYtelser.first().first) {
-                "Sykepenger" -> samordningBlokker.add("brev.blokk.samordnet-med-sykepenger")
-                "Pleiepenger" -> samordningBlokker.add("brev.blokk.samordnet-med-pleiepenger")
-                "Omsorgspenger" -> samordningBlokker.add("brev.blokk.samordnet-med-omsorgspenger")
-                "Opplæringspenger" -> samordningBlokker.add("brev.blokk.samordnet-med-opplaeringspenger")
-                "Uføre" -> samordningBlokker.add("brev.blokk.samordnet-med-ufore")
-                "Foreldrepenger" -> samordningBlokker.add("brev.blokk.samordnet-med-foreldrepenger")
-                "Svangerskapspenger" -> samordningBlokker.add("brev.blokk.samordnet-med-svangerskapspenger")
+                "Sykepenger" -> samordningBlokker.add(INNVILGELSE_SAMORDNET_SYKEPENGER.brevblokkId)
+                "Pleiepenger" -> samordningBlokker.add(INNVILGELSE_SAMORDNET_PLEIEPENGER.brevblokkId)
+                "Omsorgspenger" -> samordningBlokker.add(INNVILGELSE_SAMORDNET_OMSORGSPENGER.brevblokkId)
+                "Opplæringspenger" -> samordningBlokker.add(INNVILGELSE_SAMORDNET_OPPLÆRINGSPENGER.brevblokkId)
+                "Uføre" -> samordningBlokker.add(INNVILGELSE_SAMORDNET_UFØRE.brevblokkId)
+                "Foreldrepenger" -> samordningBlokker.add(INNVILGELSE_SAMORDNET_FORELDREPENGER.brevblokkId)
+                "Svangerskapspenger" -> samordningBlokker.add(INNVILGELSE_SAMORDNET_SVANGERSKAPSPENGER.brevblokkId)
             }
         } else {
-            samordningBlokker.add("brev.blokk.samordnet-generisk")
+            samordningBlokker.add(INNVILGELSE_SAMORDNET_GENERISK.brevblokkId)
         }
         return samordningBlokker
     }
@@ -110,7 +135,7 @@ class InnvilgelseMelding(
             it.opplysningTekstId == "opplysning.antall-barn-som-gir-rett-til-barnetillegg" && it.verdi.toInt() > 0
         }
             ?.let {
-                listOf("brev.blokk.barnetillegg")
+                listOf(INNVILGELSE_BARNETILLEGG.brevblokkId)
             } ?: emptyList()
     }
 
@@ -122,12 +147,12 @@ class InnvilgelseMelding(
             vedtak.opplysninger.any { it.opplysningTekstId == "opplysning.krav-til-minsteinntekt" && it.verdi == "true" }
 
         if (erInnvilgetMedVerneplikt) {
-            grunnlagBlokker.add("brev.blokk.grunnlag-for-verneplikt")
+            grunnlagBlokker.add(INNVILGELSE_GRUNNLAG_VERNEPLIKT.brevblokkId)
             if (kravTilMinsteinntektErOppfylt) {
-                grunnlagBlokker.add("brev.blokk.verneplikt-gunstigere-enn-inntekt")
+                grunnlagBlokker.add(INNVILGELSE_VERNEPLIKT_GUNSTIGEST.brevblokkId)
             }
         } else {
-            grunnlagBlokker.add("brev.blokk.grunnlag")
+            grunnlagBlokker.add(INNVILGELSE_GRUNNLAG.brevblokkId)
         }
         return grunnlagBlokker.toList()
     }
