@@ -7,7 +7,7 @@ import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
-import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter
 import no.nav.dagpenger.vedtaksmelding.sanity.ResultDTO
@@ -25,7 +25,7 @@ class Mediator(
     suspend fun hentVedtaksmelding(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
-    ): Result<Vedtaksmelding> {
+    ): Result<VedtakMelding> {
         val sanityInnhold = sanityKlient.hentBrevBlokkerJson()
         vedtaksmeldingRepository.lagreSanityInnhold(behandlingId, sanityInnhold)
         return hentVedtakOgByggVedtaksMelding(behandlingId, saksbehandler) { sanityInnhold }
@@ -34,7 +34,7 @@ class Mediator(
     suspend fun hentEnderligVedtaksmelding(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
-    ): Result<Vedtaksmelding> {
+    ): Result<VedtakMelding> {
         return hentVedtakOgByggVedtaksMelding(behandlingId, saksbehandler) {
             vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
         }
@@ -44,7 +44,7 @@ class Mediator(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
         sanitySupplier: suspend () -> String,
-    ): Result<Vedtaksmelding> {
+    ): Result<VedtakMelding> {
         val sanityInnhold = sanitySupplier.invoke()
 
         val alleBrevblokker: List<BrevBlokk> =
@@ -57,7 +57,7 @@ class Mediator(
             saksbehandler = saksbehandler,
         ).onFailure { throwable ->
             logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
-        }.map { Vedtaksmelding.byggVedtaksmelding(it, alleBrevblokker) }
+        }.map { VedtakMelding.byggVedtaksmelding(it, alleBrevblokker) }
     }
 
     fun lagreUtvidetBeskrivelse(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime {

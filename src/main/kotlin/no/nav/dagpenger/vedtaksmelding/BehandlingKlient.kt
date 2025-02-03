@@ -10,8 +10,8 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import java.util.UUID
 
 private val sikkerlogg = KotlinLogging.logger("tjenestekall")

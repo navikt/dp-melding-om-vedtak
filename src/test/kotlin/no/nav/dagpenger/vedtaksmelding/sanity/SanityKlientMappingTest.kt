@@ -44,7 +44,7 @@ class SanityKlientMappingTest {
     }
 
     private fun lageMockEngine(jsonResponse: String = resourseRetriever.getResource("/json/sanity.json")!!.readText()): MockEngine {
-        return MockEngine { request ->
+        return MockEngine { _ ->
             respond(jsonResponse, headers = headersOf("Content-Type" to listOf("application/json")))
         }
     }

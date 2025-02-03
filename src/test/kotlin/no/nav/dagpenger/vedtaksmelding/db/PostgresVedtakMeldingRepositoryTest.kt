@@ -10,7 +10,7 @@ import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
-class PostgresVedtaksmeldingRepositoryTest {
+class PostgresVedtakMeldingRepositoryTest {
     @Test
     fun `Skal kunne lagre utvidet beskrivelse for brevblokk og behandling, samt hente den igjen`() {
         val behandlingId = UUIDv7.ny()

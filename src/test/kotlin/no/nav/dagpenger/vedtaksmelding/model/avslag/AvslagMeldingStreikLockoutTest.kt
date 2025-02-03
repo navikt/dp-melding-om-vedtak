@@ -2,25 +2,24 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.Avslag
-import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.MEDLEM_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT
-import no.nav.dagpenger.vedtaksmelding.model.Utfall.AVSLÅTT
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
-import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
-import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding.ManglerBrevstøtte
-import no.nav.dagpenger.vedtaksmelding.model.Vilkår
-import no.nav.dagpenger.vedtaksmelding.model.Vilkår.Status.IKKE_OPPFYLT
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.ManglerBrevstøtte
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MEDLEM_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.AVSLÅTT
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår.Status.IKKE_OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
-class AvslagStreikLockoutTest {
+class AvslagMeldingStreikLockoutTest {
     private val avslagStreikLockoutVedtak = VedtakMapper(json).vedtak()
 
     @Test
     fun `Brevstøtte for avslag grunnet streik eller lockout`() {
         shouldNotThrow<ManglerBrevstøtte> {
-            Avslag(
+            AvslagMelding(
                 vedtak = avslagStreikLockoutVedtak,
                 alleBrevblokker = emptyList(),
             )
@@ -36,7 +35,7 @@ class AvslagStreikLockoutTest {
                 status = IKKE_OPPFYLT,
             )
 
-        Avslag(
+        AvslagMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -51,7 +50,7 @@ class AvslagStreikLockoutTest {
                 "brev.blokk.vedtak-avslag",
                 "brev.blokk.avslag-streik-lockout-del-1",
                 "brev.blokk.avslag-streik-lockout-del-2",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
     }
 }
 

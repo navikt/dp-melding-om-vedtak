@@ -23,12 +23,12 @@ import io.mockk.slot
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.BOOLSK
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.ENHETSLØS
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
-import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.BOOLSK
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.ENHETSLØS
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
@@ -81,7 +81,7 @@ class MeldingOmVedtakApiTest {
                 ),
             )
         val vedtaksmelding =
-            mockk<Vedtaksmelding>().also {
+            mockk<VedtakMelding>().also {
                 coEvery { it.brevBlokkIder() } returns brevBlokker
                 coEvery { it.hentOpplysninger() } returns opplysninger
             }

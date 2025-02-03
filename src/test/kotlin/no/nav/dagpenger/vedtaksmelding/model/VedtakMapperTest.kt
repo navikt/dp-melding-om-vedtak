@@ -3,17 +3,18 @@ package no.nav.dagpenger.vedtaksmelding.model
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.BOOLSK
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.DATO
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.FLYTTALL
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.HELTALL
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.TEKST
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.BARN
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.ENHETSLØS
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.KRONER
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.TIMER
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.UKER
-import no.nav.dagpenger.vedtaksmelding.model.Utfall.INNVILGET
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.BOOLSK
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.DATO
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.TEKST
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.BARN
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.ENHETSLØS
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.TIMER
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.UKER
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.INNVILGET
 import org.junit.jupiter.api.Test
 
 class VedtakMapperTest {

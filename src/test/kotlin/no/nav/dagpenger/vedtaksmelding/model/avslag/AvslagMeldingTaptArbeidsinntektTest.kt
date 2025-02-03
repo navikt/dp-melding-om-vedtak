@@ -2,35 +2,44 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.Avslag
-import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.OPPHOLD_I_NORGE
-import no.nav.dagpenger.vedtaksmelding.model.Utfall
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
-import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
-import no.nav.dagpenger.vedtaksmelding.model.Vilkår
-import no.nav.dagpenger.vedtaksmelding.model.Vilkår.Status.IKKE_OPPFYLT
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.TAPT_ARBEIDSINNTEKT
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.AVSLÅTT
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår.Status.IKKE_OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
-class AvslagOppholdUtlandTest {
-    private val avslagOppholdNorgeVedtak = VedtakMapper(avslagOppholdNorgeJson).vedtak()
+class AvslagMeldingTaptArbeidsinntektTest {
+    private val avslagTaptArbeidsinntektVedtak = VedtakMapper(json).vedtak()
 
     @Test
-    fun `Riktige brevblokker for avslag opphold utland`() {
+    fun `Brevstøtte for avslag grunnet for lite tapt arbeidstid`() {
+        shouldNotThrow<VedtakMelding.ManglerBrevstøtte> {
+            AvslagMelding(
+                vedtak = avslagTaptArbeidsinntektVedtak,
+                alleBrevblokker = emptyList(),
+            )
+        }
+    }
+
+    @Test
+    fun `Riktige brevblokker for avslag tapt arbeidsinntekt`() {
         val behandlingId = UUIDv7.ny()
-        val oppholdNorgeIkkeOppfylt =
+        val taptArbeidsinntektIkkeOppfylt =
             Vilkår(
-                navn = OPPHOLD_I_NORGE.navn,
+                navn = TAPT_ARBEIDSINNTEKT.navn,
                 status = IKKE_OPPFYLT,
             )
 
-        Avslag(
+        AvslagMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår = setOf(oppholdNorgeIkkeOppfylt),
-                    utfall = Utfall.AVSLÅTT,
+                    vilkår = setOf(taptArbeidsinntektIkkeOppfylt),
+                    utfall = AVSLÅTT,
                     opplysninger = emptySet(),
                     fagsakId = "fagsakId test",
                 ),
@@ -38,21 +47,13 @@ class AvslagOppholdUtlandTest {
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-opphold-utlandet-del-1",
-                "brev.blokk.avslag-opphold-utlandet-del-2",
-            ) + Vedtaksmelding.fasteBlokker
-    }
-
-    @Test
-    fun `Brevstøtte for avslag grunnet opphold i utlandet`() {
-        shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
-            Avslag(avslagOppholdNorgeVedtak, emptyList())
-        }
+                "brev.blokk.avslag-tapt-arbeidsinntekt",
+            ) + VedtakMelding.fasteBlokker
     }
 }
 
 //language=JSON
-private val avslagOppholdNorgeJson =
+private val json =
     """
     {
       "behandlingId": "01948850-dda4-7221-a1f6-4ecab5f70013",
@@ -64,10 +65,10 @@ private val avslagOppholdNorgeJson =
       "behandletAv": [],
       "vilkår": [
         {
-          "navn": "Oppfyller kravet til opphold i Norge",
+          "navn": "Krav til tap av arbeidsinntekt",
           "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.079514",
-          "hjemmel": "folketrygdloven § 4-5"
+          "vurderingstidspunkt": "2025-01-21T11:03:11.071",
+          "hjemmel": "folketrygdloven § 4-3"
         }
       ],
       "fastsatt": {
@@ -76,7 +77,7 @@ private val avslagOppholdNorgeJson =
         "grunnlag": null,
         "fastsattVanligArbeidstid": {
           "vanligArbeidstidPerUke": 37.5,
-          "nyArbeidstidPerUke": 20,
+          "nyArbeidstidPerUke": 0,
           "begrunnelse": null
         },
         "sats": null,
