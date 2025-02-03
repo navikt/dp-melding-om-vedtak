@@ -15,6 +15,8 @@ dependencies {
     implementation(libs.bundles.ktor.server)
     implementation(libs.ktor.server.cio)
     implementation("io.ktor:ktor-server-swagger:${libs.versions.ktor.get()}")
+    implementation(libs.ktor.server.metrics.micrometer)
+    implementation("io.micrometer:micrometer-registry-prometheus:1.14.3")
     implementation(libs.jackson.datatype.jsr310)
     implementation("no.nav.dagpenger:oauth2-klient:2024.12.10-13.49.efde9da2574c")
     implementation(libs.bundles.postgres)
@@ -26,7 +28,6 @@ dependencies {
 
     val kotlinxHtmlVersion = "0.11.0"
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinxHtmlVersion")
-    implementation("io.github.allangomes:kotlinwind-css:0.0.4")
 
     testImplementation("io.kotest:kotest-assertions-json:${libs.versions.kotest.get()}")
     testImplementation(libs.ktor.server.test.host)
