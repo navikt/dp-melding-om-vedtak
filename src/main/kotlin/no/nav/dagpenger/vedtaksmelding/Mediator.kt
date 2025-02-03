@@ -87,7 +87,7 @@ class Mediator(
         }.getOrThrow()
     }
 
-    suspend fun hentVedtaksHtml(
+    suspend fun hentVedtakHtml(
         behandlingId: UUID,
         behandler: Saksbehandler,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
