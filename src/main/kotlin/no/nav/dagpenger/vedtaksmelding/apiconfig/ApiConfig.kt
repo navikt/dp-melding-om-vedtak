@@ -18,6 +18,7 @@ import io.ktor.server.response.respond
 import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
+import no.nav.dagpenger.vedtaksmelding.metrics.metrics
 import org.slf4j.event.Level
 import java.net.URI
 
@@ -25,6 +26,8 @@ private val sikkerlogg = KotlinLogging.logger("tjenestekall")
 private val log = KotlinLogging.logger {}
 
 fun Application.apiConfig() {
+    metrics()
+
     install(Authentication) {
         jwt("azureAd")
     }
