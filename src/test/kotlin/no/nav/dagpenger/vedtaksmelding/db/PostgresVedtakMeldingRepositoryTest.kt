@@ -1,6 +1,5 @@
 package no.nav.dagpenger.vedtaksmelding.db
 
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.date.shouldBeAfter
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
@@ -146,17 +145,18 @@ class PostgresVedtakMeldingRepositoryTest {
     }
 
     @Test
-    fun `lagre og hente vedtakshtml`() {
+    fun `Skal kunne lagre og erstatte vedtakshtml flere ganger`() {
         val behandlingId = UUIDv7.ny()
         val vedtaksHtml = "<html><body><h1>Hei</h1></body></html>"
-        val vedtaksHtmlUpdate = "<html><body><h1>Hei2</h1></body></html>"
+        val vedtaksHtml2 = "<html><body><h1>Hei du!</h1></body></html>"
 
         withMigratedDb { dataSource ->
             val repository = PostgresVedtaksmeldingRepository(dataSource)
 
             repository.lagreVedaksmeldingHtml(behandlingId, vedtaksHtml)
             repository.hentVedaksmeldingHtml(behandlingId) shouldBe vedtaksHtml
-            shouldThrow<Exception> { repository.lagreVedaksmeldingHtml(behandlingId, vedtaksHtmlUpdate) }
+            repository.lagreVedaksmeldingHtml(behandlingId, vedtaksHtml2)
+            repository.hentVedaksmeldingHtml(behandlingId) shouldBe vedtaksHtml2
         }
     }
 }

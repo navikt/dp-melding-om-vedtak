@@ -154,6 +154,7 @@ class PostgresVedtaksmeldingRepository(private val dataSource: DataSource) : Ved
                             (behandling_id, vedtaksmelding_html)
                         VALUES
                             (:behandling_id, :vedtaksmelding_html)
+                        ON CONFLICT (behandling_id) DO UPDATE SET vedtaksmelding_html = :vedtaksmelding_html
                         """.trimIndent(),
                     paramMap =
                         mapOf(
