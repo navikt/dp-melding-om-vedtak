@@ -1,17 +1,16 @@
 package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.Avslag
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
-import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import org.junit.jupiter.api.Test
 
-class AvslagAlleVilkårTest {
+class AvslagMeldingAlleVilkårTest {
     private val avslagAlleVilkårVedtak = VedtakMapper(json).vedtak()
 
     @Test
     fun `Riktige brevblokker i korrekt rekkefølge ved avslag på alle vilkår`() {
-        Avslag(
+        AvslagMelding(
             vedtak = avslagAlleVilkårVedtak,
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -35,7 +34,7 @@ class AvslagAlleVilkårTest {
                 "brev.blokk.avslag-andre-fulle-ytelser",
                 "brev.blokk.avslag-streik-lockout-del-1",
                 "brev.blokk.avslag-streik-lockout-del-2",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
     }
 }
 

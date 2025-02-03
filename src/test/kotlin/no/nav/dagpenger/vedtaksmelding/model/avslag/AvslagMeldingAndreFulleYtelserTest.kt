@@ -2,37 +2,42 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.Avslag
-import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT_ELLER_VERNEPLIKT
-import no.nav.dagpenger.vedtaksmelding.model.Utfall
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
-import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
-import no.nav.dagpenger.vedtaksmelding.model.Vilkår
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.IKKE_ANDRE_FULLE_YTELSER
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
-class AvslagMinsteinntektEllerVernepliktTest {
+class AvslagMeldingAndreFulleYtelserTest {
+    private val avslagAndreFulleYtelser = VedtakMapper(json).vedtak()
+
     @Test
-    fun `Brevstøtte for avslag minsteinntekt eller verneplikt`() {
-        val avslagMinsteinntektVedtak = VedtakMapper(json).vedtak()
-        shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
-            Avslag(avslagMinsteinntektVedtak, emptyList())
+    fun `Brevstøtte for avslag grunnet for lite tapt arbeidstid`() {
+        shouldNotThrow<VedtakMelding.ManglerBrevstøtte> {
+            AvslagMelding(
+                vedtak = avslagAndreFulleYtelser,
+                alleBrevblokker = emptyList(),
+            )
         }
     }
 
     @Test
-    fun `Rikige brevblokker for avslag på minsteinntekt`() {
-        val minsteInntektIkkeOppfylt =
+    fun `Riktige brevblokker for avslag andre fulle ytelser`() {
+        val behandlingId = UUIDv7.ny()
+        val andreFulleYtelserIkkeOppfylt =
             Vilkår(
-                navn = MINSTEINNTEKT_ELLER_VERNEPLIKT.navn,
+                navn = IKKE_ANDRE_FULLE_YTELSER.navn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
-        Avslag(
+
+        AvslagMelding(
             vedtak =
                 Vedtak(
-                    behandlingId = UUIDv7.ny(),
-                    vilkår = setOf(minsteInntektIkkeOppfylt),
+                    behandlingId = behandlingId,
+                    vilkår = setOf(andreFulleYtelserIkkeOppfylt),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
                     fagsakId = "fagsakId test",
@@ -41,8 +46,8 @@ class AvslagMinsteinntektEllerVernepliktTest {
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
-                "brev.blokk.begrunnelse-avslag-minsteinntekt",
-            ) + Vedtaksmelding.fasteBlokker
+                "brev.blokk.avslag-andre-fulle-ytelser",
+            ) + VedtakMelding.fasteBlokker
     }
 }
 
@@ -59,10 +64,10 @@ private val json =
       "behandletAv": [],
       "vilkår": [
         {
-          "navn": "Oppfyller kravet til minsteinntekt eller verneplikt",
+          "navn": "Mottar ikke andre fulle ytelser",
           "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.070006",
-          "hjemmel": "folketrygdloven § 4-4"
+          "vurderingstidspunkt": "2025-01-21T11:03:11.071",
+          "hjemmel": "folketrygdloven § 4-24"
         }
       ],
       "fastsatt": {
@@ -71,7 +76,7 @@ private val json =
         "grunnlag": null,
         "fastsattVanligArbeidstid": {
           "vanligArbeidstidPerUke": 37.5,
-          "nyArbeidstidPerUke": 20,
+          "nyArbeidstidPerUke": 0,
           "begrunnelse": null
         },
         "sats": null,

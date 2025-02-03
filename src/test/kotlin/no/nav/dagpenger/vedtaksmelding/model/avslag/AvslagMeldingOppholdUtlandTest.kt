@@ -2,33 +2,33 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.Avslag
-import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.IKKE_UTESTENGT
-import no.nav.dagpenger.vedtaksmelding.model.Utfall
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
-import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
-import no.nav.dagpenger.vedtaksmelding.model.Vilkår
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.OPPHOLD_I_NORGE
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår.Status.IKKE_OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
-class AvslagUtestengtTest {
-    private val avslagUtestengtVedtak = VedtakMapper(json).vedtak()
+class AvslagMeldingOppholdUtlandTest {
+    private val avslagOppholdNorgeVedtak = VedtakMapper(avslagOppholdNorgeJson).vedtak()
 
     @Test
-    fun `Riktige brevblokker for avslag utestengt`() {
+    fun `Riktige brevblokker for avslag opphold utland`() {
         val behandlingId = UUIDv7.ny()
-        val utestengtVilkår =
+        val oppholdNorgeIkkeOppfylt =
             Vilkår(
-                navn = IKKE_UTESTENGT.navn,
-                status = Vilkår.Status.IKKE_OPPFYLT,
+                navn = OPPHOLD_I_NORGE.navn,
+                status = IKKE_OPPFYLT,
             )
 
-        Avslag(
+        AvslagMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår = setOf(utestengtVilkår),
+                    vilkår = setOf(oppholdNorgeIkkeOppfylt),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
                     fagsakId = "fagsakId test",
@@ -37,21 +37,21 @@ class AvslagUtestengtTest {
         ).brevBlokkIder() shouldBe
             listOf(
                 "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-utestengt",
-                "brev.blokk.avslag-utestengt-hjemmel",
-            ) + Vedtaksmelding.fasteBlokker
+                "brev.blokk.avslag-opphold-utlandet-del-1",
+                "brev.blokk.avslag-opphold-utlandet-del-2",
+            ) + VedtakMelding.fasteBlokker
     }
 
     @Test
-    fun `Brevstøtte for avslag utestengt`() {
-        shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
-            Avslag(avslagUtestengtVedtak, emptyList())
+    fun `Brevstøtte for avslag grunnet opphold i utlandet`() {
+        shouldNotThrow<VedtakMelding.ManglerBrevstøtte> {
+            AvslagMelding(avslagOppholdNorgeVedtak, emptyList())
         }
     }
 }
 
 //language=JSON
-private val json =
+private val avslagOppholdNorgeJson =
     """
     {
       "behandlingId": "01948850-dda4-7221-a1f6-4ecab5f70013",
@@ -63,10 +63,10 @@ private val json =
       "behandletAv": [],
       "vilkår": [
         {
-          "navn": "Oppfyller krav til ikke utestengt",
+          "navn": "Oppfyller kravet til opphold i Norge",
           "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-21T11:03:11.076481",
-          "hjemmel": "folketrygdloven § 4-28"
+          "vurderingstidspunkt": "2025-01-21T11:03:11.079514",
+          "hjemmel": "folketrygdloven § 4-5"
         }
       ],
       "fastsatt": {

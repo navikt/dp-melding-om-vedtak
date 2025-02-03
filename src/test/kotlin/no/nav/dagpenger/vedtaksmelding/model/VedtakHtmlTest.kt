@@ -6,6 +6,9 @@ import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagMelding
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseMelding
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
@@ -57,18 +60,18 @@ class VedtakHtmlTest {
         runBlocking {
             val alleBrevblokker = sanityKlient.hentBrevBlokker()
             requireNotNull(alleBrevblokker) { "alleBrevblokker should not be null" }
-            val avslag =
-                Avslag(
+            val avslagMelding =
+                AvslagMelding(
                     vedtak = hentVedtak("/json/avslag.json"),
                     alleBrevblokker = alleBrevblokker,
                 )
 
-            avslag.hentOpplysninger()
-            val brevBlokker = avslag.hentBrevBlokker()
+            avslagMelding.hentOpplysninger()
+            val brevBlokker = avslagMelding.hentBrevBlokker()
             val htmlInnhold =
                 HtmlConverter.toHtml(
                     brevBlokker = brevBlokker,
-                    opplysninger = avslag.hentOpplysninger(),
+                    opplysninger = avslagMelding.hentOpplysninger(),
                     meldingOmVedtakData = meldingOmVedtakData,
                     fagsakId = "fagsakId test",
                     utvidetBeskrivelse =
@@ -118,17 +121,17 @@ class VedtakHtmlTest {
     @Test
     fun `Html av innvilgelse `() {
         runBlocking {
-            val innvilgelse =
-                Innvilgelse(
+            val innvilgelseMelding =
+                InnvilgelseMelding(
                     vedtak = hentVedtak("/json/innvilgelsesVedtak.json"),
                     alleBrevblokker = sanityKlient.hentBrevBlokker(),
                 )
-            innvilgelse.hentOpplysninger()
-            val brevBlokker = innvilgelse.hentBrevBlokker()
+            innvilgelseMelding.hentOpplysninger()
+            val brevBlokker = innvilgelseMelding.hentBrevBlokker()
             val htmlInnhold =
                 HtmlConverter.toHtml(
                     brevBlokker = brevBlokker,
-                    opplysninger = innvilgelse.hentOpplysninger(),
+                    opplysninger = innvilgelseMelding.hentOpplysninger(),
                     meldingOmVedtakData = meldingOmVedtakData,
                     fagsakId = "fagsakId test",
                 )

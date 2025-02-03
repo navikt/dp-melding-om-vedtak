@@ -3,21 +3,21 @@ package no.nav.dagpenger.vedtaksmelding.model.innvilgelse
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.Innvilgelse
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.BOOLSK
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.FLYTTALL
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.HELTALL
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.BARN
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.KRONER
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.UKER
-import no.nav.dagpenger.vedtaksmelding.model.Utfall
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.ManglerBrevstøtte
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.BOOLSK
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.BARN
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.UKER
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
-class InnvilgelseTest {
+class InnvilgelseMeldingTest {
     private val behandlingId = UUIDv7.ny()
 
     private fun nittiprosentRegelOpplysning(verdi: String = "10") =
@@ -56,8 +56,8 @@ class InnvilgelseTest {
 
     @Test
     fun `kriterier for å lage innvigelse`() {
-        shouldThrow<IllegalArgumentException> {
-            Innvilgelse(
+        shouldThrow<ManglerBrevstøtte> {
+            InnvilgelseMelding(
                 vedtak =
                     Vedtak(
                         behandlingId = behandlingId,
@@ -71,7 +71,7 @@ class InnvilgelseTest {
         }
 
         shouldNotThrowAny {
-            Innvilgelse(
+            InnvilgelseMelding(
                 vedtak =
                     Vedtak(
                         behandlingId = behandlingId,
@@ -102,9 +102,9 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
 
-        Innvilgelse(
+        InnvilgelseMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -134,9 +134,9 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
 
-        Innvilgelse(
+        InnvilgelseMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -167,9 +167,9 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
 
-        Innvilgelse(
+        InnvilgelseMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -210,9 +210,9 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
 
-        Innvilgelse(
+        InnvilgelseMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -227,7 +227,7 @@ class InnvilgelseTest {
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
 
-        Innvilgelse(
+        InnvilgelseMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -261,9 +261,9 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
 
-        Innvilgelse(
+        InnvilgelseMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -297,9 +297,9 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
 
-        Innvilgelse(
+        InnvilgelseMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -333,9 +333,9 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
 
-        Innvilgelse(
+        InnvilgelseMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -369,9 +369,9 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
 
-        Innvilgelse(
+        InnvilgelseMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -405,9 +405,9 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
 
-        Innvilgelse(
+        InnvilgelseMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -441,9 +441,9 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
 
-        Innvilgelse(
+        InnvilgelseMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -477,9 +477,9 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
 
-        Innvilgelse(
+        InnvilgelseMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -514,9 +514,9 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
 
-        Innvilgelse(
+        InnvilgelseMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -553,9 +553,9 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
 
-        Innvilgelse(
+        InnvilgelseMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -585,9 +585,9 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
 
-        Innvilgelse(
+        InnvilgelseMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -621,9 +621,9 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
 
-        Innvilgelse(
+        InnvilgelseMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -638,7 +638,7 @@ class InnvilgelseTest {
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
 
-        Innvilgelse(
+        InnvilgelseMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -653,7 +653,7 @@ class InnvilgelseTest {
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
 
-        Innvilgelse(
+        InnvilgelseMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -689,9 +689,9 @@ class InnvilgelseTest {
                 "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
                 "brev.blokk.du-maa-melde-fra-om-endringer",
                 "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
 
-        Innvilgelse(
+        InnvilgelseMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,

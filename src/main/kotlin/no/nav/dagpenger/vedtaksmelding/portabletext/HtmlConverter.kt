@@ -32,8 +32,8 @@ import kotlinx.html.unsafe
 import kotlinx.html.visit
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale

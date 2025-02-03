@@ -2,20 +2,19 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.Avslag
-import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.TAPT_ARBEIDSTID
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.FLYTTALL
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.TIMER
-import no.nav.dagpenger.vedtaksmelding.model.Utfall
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
-import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
-import no.nav.dagpenger.vedtaksmelding.model.Vilkår
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.TAPT_ARBEIDSTID
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.TIMER
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
-class AvslagTaptArbeidstidTest {
+class AvslagMeldingTaptArbeidstidTest {
     private val avslagArbeidstidVedtak = VedtakMapper(json).vedtak()
 
     @Test
@@ -57,7 +56,7 @@ class AvslagTaptArbeidstidTest {
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
 
-        Avslag(
+        AvslagMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
@@ -71,13 +70,13 @@ class AvslagTaptArbeidstidTest {
             listOf(
                 "brev.blokk.vedtak-avslag",
                 "brev.blokk.avslag-tapt-arbeidstid",
-            ) + Vedtaksmelding.fasteBlokker
+            ) + VedtakMelding.fasteBlokker
     }
 
     @Test
     fun `Brevstøtte for avslag grunnet for lite tapt arbeidstid`() {
-        shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
-            Avslag(avslagArbeidstidVedtak, emptyList())
+        shouldNotThrow<VedtakMelding.ManglerBrevstøtte> {
+            AvslagMelding(avslagArbeidstidVedtak, emptyList())
         }
     }
 }

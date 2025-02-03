@@ -16,15 +16,15 @@ import no.nav.dagpenger.vedtaksmelding.db.Postgres.withMigratedDb
 import no.nav.dagpenger.vedtaksmelding.db.PostgresDataSourceBuilder.dataSource
 import no.nav.dagpenger.vedtaksmelding.db.PostgresVedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
-import no.nav.dagpenger.vedtaksmelding.model.Avslag
-import no.nav.dagpenger.vedtaksmelding.model.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT_ELLER_VERNEPLIKT
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
-import no.nav.dagpenger.vedtaksmelding.model.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
-import no.nav.dagpenger.vedtaksmelding.model.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
-import no.nav.dagpenger.vedtaksmelding.model.Vedtaksmelding
-import no.nav.dagpenger.vedtaksmelding.model.Vilkår
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagMelding
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT_ELLER_VERNEPLIKT
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
@@ -71,7 +71,7 @@ class MediatorTest {
                     vedtaksmeldingRepository = repository,
                 )
             runBlocking {
-                mediator.hentVedtaksmelding(behandlingId, saksbehandler).getOrThrow().shouldBeInstanceOf<Avslag>()
+                mediator.hentVedtaksmelding(behandlingId, saksbehandler).getOrThrow().shouldBeInstanceOf<AvslagMelding>()
             }
             repository.hentSanityInnhold(behandlingId) shouldEqualJson resource
         }
@@ -159,7 +159,7 @@ class MediatorTest {
             mediator.hentVedtaksmelding(
                 behandlingId = behandlingId,
                 saksbehandler = saksbehandler,
-            ).getOrThrow().shouldBeInstanceOf<Avslag>()
+            ).getOrThrow().shouldBeInstanceOf<AvslagMelding>()
         }
 
         coVerify(exactly = 1) {
@@ -217,7 +217,7 @@ class MediatorTest {
             ).also {
                 coEvery { it.hentVedtaksmelding(behandlingId, saksbehandler) } returns
                     Result.success(
-                        mockk<Vedtaksmelding>().also {
+                        mockk<VedtakMelding>().also {
                             coEvery { it.hentBrevBlokker() } returns
                                 listOf(
                                     BrevBlokk(
