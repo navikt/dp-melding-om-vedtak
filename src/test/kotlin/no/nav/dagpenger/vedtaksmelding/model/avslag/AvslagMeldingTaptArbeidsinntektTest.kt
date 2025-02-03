@@ -4,6 +4,8 @@ import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.TAPT_ARBEIDSINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.AVSLÅTT
@@ -46,8 +48,8 @@ class AvslagMeldingTaptArbeidsinntektTest {
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
-                "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-tapt-arbeidsinntekt",
+                AVSLAG_INNLEDNING.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSINNTEKT.brevblokkId,
             ) + VedtakMelding.fasteBlokker
     }
 }

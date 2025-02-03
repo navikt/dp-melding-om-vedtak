@@ -4,6 +4,9 @@ import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_OPPHOLD_UTLAND_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_OPPHOLD_UTLAND_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.OPPHOLD_I_NORGE
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall
@@ -36,9 +39,9 @@ class AvslagMeldingOppholdUtlandTest {
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
-                "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-opphold-utlandet-del-1",
-                "brev.blokk.avslag-opphold-utlandet-del-2",
+                AVSLAG_INNLEDNING.brevblokkId,
+                AVSLAG_OPPHOLD_UTLAND_DEL_1.brevblokkId,
+                AVSLAG_OPPHOLD_UTLAND_DEL_2.brevblokkId,
             ) + VedtakMelding.fasteBlokker
     }
 

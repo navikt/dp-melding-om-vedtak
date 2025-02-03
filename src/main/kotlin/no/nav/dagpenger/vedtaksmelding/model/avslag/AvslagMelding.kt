@@ -1,6 +1,25 @@
 package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ANDRE_FULLE_YTELSER
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_OPPHOLD_UTLAND_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_OPPHOLD_UTLAND_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEID_I_HELE_NORGE
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_REGISTRERT_ARBEIDSSOKER
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_STREIK_LOCKOUT_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_STREIK_LOCKOUT_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSINNTEKT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT_HJEMMEL
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.BEGRUNNELSE_AVSLAG_MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.IKKE_ANDRE_FULLE_YTELSER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.IKKE_UTESTENGT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MEDLEM_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT
@@ -43,7 +62,7 @@ class AvslagMelding(
         }
     }
 
-    private val innledendeBrevblokker = listOf("brev.blokk.vedtak-avslag")
+    private val innledendeBrevblokker = listOf(AVSLAG_INNLEDNING.brevblokkId)
 
     override val brevBlokkIder: List<String>
         get() {
@@ -68,7 +87,7 @@ class AvslagMelding(
             vilkår.navn == MINSTEINNTEKT_ELLER_VERNEPLIKT.navn && vilkår.status == IKKE_OPPFYLT
         }
             ?.let {
-                listOf("brev.blokk.begrunnelse-avslag-minsteinntekt")
+                listOf(BEGRUNNELSE_AVSLAG_MINSTEINNTEKT.brevblokkId)
             } ?: emptyList()
     }
 
@@ -78,8 +97,8 @@ class AvslagMelding(
         }
             ?.let {
                 listOf(
-                    "brev.blokk.avslag-opphold-utlandet-del-1",
-                    "brev.blokk.avslag-opphold-utlandet-del-2",
+                    AVSLAG_OPPHOLD_UTLAND_DEL_1.brevblokkId,
+                    AVSLAG_OPPHOLD_UTLAND_DEL_2.brevblokkId,
                 )
             } ?: emptyList()
     }
@@ -89,7 +108,7 @@ class AvslagMelding(
             vilkår.navn == IKKE_ANDRE_FULLE_YTELSER.navn && vilkår.status == IKKE_OPPFYLT
         }
             ?.let {
-                listOf("brev.blokk.avslag-andre-fulle-ytelser")
+                listOf(AVSLAG_ANDRE_FULLE_YTELSER.brevblokkId)
             } ?: emptyList()
     }
 
@@ -99,8 +118,8 @@ class AvslagMelding(
         }
             ?.let {
                 listOf(
-                    "brev.blokk.avslag-streik-lockout-del-1",
-                    "brev.blokk.avslag-streik-lockout-del-2",
+                    AVSLAG_STREIK_LOCKOUT_DEL_1.brevblokkId,
+                    AVSLAG_STREIK_LOCKOUT_DEL_2.brevblokkId,
                 )
             } ?: emptyList()
     }
@@ -110,7 +129,7 @@ class AvslagMelding(
             vilkår.navn == TAPT_ARBEIDSTID.navn && vilkår.status == IKKE_OPPFYLT
         }
             ?.let {
-                listOf("brev.blokk.avslag-tapt-arbeidstid")
+                listOf(AVSLAG_TAPT_ARBEIDSTID.brevblokkId)
             } ?: emptyList()
     }
 
@@ -119,7 +138,7 @@ class AvslagMelding(
             vilkår.navn == TAPT_ARBEIDSINNTEKT.navn && vilkår.status == IKKE_OPPFYLT
         }
             ?.let {
-                listOf("brev.blokk.avslag-tapt-arbeidsinntekt")
+                listOf(AVSLAG_TAPT_ARBEIDSINNTEKT.brevblokkId)
             } ?: emptyList()
     }
 
@@ -128,48 +147,48 @@ class AvslagMelding(
             vilkår.navn == IKKE_UTESTENGT.navn && vilkår.status == IKKE_OPPFYLT
         }
             ?.let {
-                listOf("brev.blokk.avslag-utestengt", "brev.blokk.avslag-utestengt-hjemmel")
+                listOf(AVSLAG_UTESTENGT.brevblokkId, AVSLAG_UTESTENGT_HJEMMEL.brevblokkId)
             } ?: emptyList()
     }
 
     private fun blokkerAvslagReellArbeidssøker(): List<String> {
-        val grunnerTilAvslag = mutableListOf("brev.blokk.avslag-reell-arbeidssoker-overskrift")
+        val grunnerTilAvslag = mutableListOf(AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId)
 
         vedtak.vilkår.find { vilkår ->
             vilkår.navn == REELL_ARBEIDSSØKER_HELTID_DELTID.navn && vilkår.status == IKKE_OPPFYLT
         }?.let {
-            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-heltid-deltid")
+            grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID.brevblokkId)
         }
 
         vedtak.vilkår.find { vilkår ->
             vilkår.navn == REELL_ARBEIDSSØKER_MOBILITET.navn && vilkår.status == IKKE_OPPFYLT
         }?.let {
-            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-arbeid-i-hele-norge")
+            grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_ARBEID_I_HELE_NORGE.brevblokkId)
         }
 
         if (grunnerTilAvslag.size > 1) {
-            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-unntak-heltid-deltid-hele-norge")
+            grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId)
         }
         vedtak.vilkår.find { vilkår ->
             vilkår.navn == REELL_ARBEIDSSØKER_ARBEIDSFØR.navn && vilkår.status == IKKE_OPPFYLT
         }?.let {
-            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-arbeidsfor")
+            grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR.brevblokkId)
         }
 
         vedtak.vilkår.find { vilkår ->
             vilkår.navn == REELL_ARBEIDSSØKER_ETHVERT_ARBEID.navn && vilkår.status == IKKE_OPPFYLT
         }?.let {
-            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-ethvert-arbeid")
+            grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID.brevblokkId)
         }
 
         vedtak.vilkår.find { vilkår ->
             vilkår.navn == REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER.navn && vilkår.status == IKKE_OPPFYLT
         }?.let {
-            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-registrert-arbeidssoker")
+            grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_REGISTRERT_ARBEIDSSOKER.brevblokkId)
         }
 
         if (grunnerTilAvslag.size > 1) {
-            grunnerTilAvslag.add("brev.blokk.avslag-reell-arbeidssoker-hjemmel")
+            grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId)
         } else {
             grunnerTilAvslag.removeFirst()
         }

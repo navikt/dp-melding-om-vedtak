@@ -3,6 +3,25 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ANDRE_FULLE_YTELSER
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_OPPHOLD_UTLAND_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_OPPHOLD_UTLAND_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEID_I_HELE_NORGE
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_REGISTRERT_ARBEIDSSOKER
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_STREIK_LOCKOUT_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_STREIK_LOCKOUT_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSINNTEKT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT_HJEMMEL
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.BEGRUNNELSE_AVSLAG_MINSTEINNTEKT
 import org.junit.jupiter.api.Test
 
 class AvslagMeldingAlleVilkårTest {
@@ -15,25 +34,25 @@ class AvslagMeldingAlleVilkårTest {
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
-                "brev.blokk.vedtak-avslag",
-                "brev.blokk.begrunnelse-avslag-minsteinntekt",
-                "brev.blokk.avslag-tapt-arbeidsinntekt",
-                "brev.blokk.avslag-tapt-arbeidstid",
-                "brev.blokk.avslag-utestengt",
-                "brev.blokk.avslag-utestengt-hjemmel",
-                "brev.blokk.avslag-reell-arbeidssoker-overskrift",
-                "brev.blokk.avslag-reell-arbeidssoker-heltid-deltid",
-                "brev.blokk.avslag-reell-arbeidssoker-arbeid-i-hele-norge",
-                "brev.blokk.avslag-reell-arbeidssoker-unntak-heltid-deltid-hele-norge",
-                "brev.blokk.avslag-reell-arbeidssoker-arbeidsfor",
-                "brev.blokk.avslag-reell-arbeidssoker-ethvert-arbeid",
-                "brev.blokk.avslag-reell-arbeidssoker-registrert-arbeidssoker",
-                "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
-                "brev.blokk.avslag-opphold-utlandet-del-1",
-                "brev.blokk.avslag-opphold-utlandet-del-2",
-                "brev.blokk.avslag-andre-fulle-ytelser",
-                "brev.blokk.avslag-streik-lockout-del-1",
-                "brev.blokk.avslag-streik-lockout-del-2",
+                AVSLAG_INNLEDNING.brevblokkId,
+                BEGRUNNELSE_AVSLAG_MINSTEINNTEKT.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSINNTEKT.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID.brevblokkId,
+                AVSLAG_UTESTENGT.brevblokkId,
+                AVSLAG_UTESTENGT_HJEMMEL.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_ARBEID_I_HELE_NORGE.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_REGISTRERT_ARBEIDSSOKER.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
+                AVSLAG_OPPHOLD_UTLAND_DEL_1.brevblokkId,
+                AVSLAG_OPPHOLD_UTLAND_DEL_2.brevblokkId,
+                AVSLAG_ANDRE_FULLE_YTELSER.brevblokkId,
+                AVSLAG_STREIK_LOCKOUT_DEL_1.brevblokkId,
+                AVSLAG_STREIK_LOCKOUT_DEL_2.brevblokkId,
             ) + VedtakMelding.fasteBlokker
     }
 }

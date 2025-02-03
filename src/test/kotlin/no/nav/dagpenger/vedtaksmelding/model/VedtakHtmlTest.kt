@@ -6,6 +6,8 @@ import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.BEGRUNNELSE_AVSLAG_MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagMelding
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseMelding
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
@@ -78,7 +80,7 @@ class VedtakHtmlTest {
                         setOf(
                             UtvidetBeskrivelse(
                                 behandlingId = UUIDv7.ny(),
-                                brevblokkId = "brev.blokk.begrunnelse-avslag-minsteinntekt",
+                                brevblokkId = BEGRUNNELSE_AVSLAG_MINSTEINNTEKT.brevblokkId,
                                 tekst = "noe saksbehandler har skrevet",
                                 sistEndretTidspunkt = LocalDateTime.now(),
                                 tittel = "Dette er en tittel",
@@ -88,14 +90,14 @@ class VedtakHtmlTest {
 
             htmlInnhold brevblokkRekkefølgeShouldBe
                 listOf(
-                    "brev.blokk.vedtak-avslag",
-                    "brev.blokk.begrunnelse-avslag-minsteinntekt",
+                    AVSLAG_INNLEDNING.brevblokkId,
+                    BEGRUNNELSE_AVSLAG_MINSTEINNTEKT.brevblokkId,
                     "brev.blokk.sporsmaal",
                     "brev.blokk.rett-til-innsyn",
                     "brev.blokk.rett-til-aa-klage",
                 )
 
-            htmlInnhold finnUtvidetBeskrivelseTekst "brev.blokk.begrunnelse-avslag-minsteinntekt" shouldBe "noe saksbehandler har skrevet"
+            htmlInnhold finnUtvidetBeskrivelseTekst BEGRUNNELSE_AVSLAG_MINSTEINNTEKT.brevblokkId shouldBe "noe saksbehandler har skrevet"
 
             writeStringToFile(
                 filePath = "build/temp/avslag-minsteinntekt.html",
