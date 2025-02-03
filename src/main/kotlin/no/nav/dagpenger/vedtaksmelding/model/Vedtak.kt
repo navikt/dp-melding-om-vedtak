@@ -2,6 +2,7 @@ package no.nav.dagpenger.vedtaksmelding.model
 
 import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.DATO
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.FLYTTALL
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Datatype.TEKST
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.ENHETSLØS
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning.Enhet.KRONER
@@ -114,6 +115,28 @@ data class Opplysning(
         val date = LocalDate.parse(dateString, inputFormatter)
         return date.format(outputFormatter)
     }
+
+    fun formaterVerdi(): String {
+        return when (datatype) {
+            FLYTTALL ->
+                when (enhet) {
+                    KRONER -> formaterDesimaltall(antallDesimaler = 2, desimaltall = verdi.toDouble())
+                    else -> formaterDesimaltall(desimaltall = verdi.toDouble())
+                }
+            else -> verdi
+        }
+    }
+
+    private fun formaterDesimaltall(
+        desimaltall: Double,
+        antallDesimaler: Int = 1,
+    ): String =
+        when {
+            erHeltall(desimaltall) -> desimaltall.toInt().toString()
+            else -> "%.${antallDesimaler}f".format(Locale.US, desimaltall)
+        }
+
+    private fun erHeltall(desimaltall: Double) = desimaltall % 1 == 0.0
 
     enum class Datatype {
         TEKST,
