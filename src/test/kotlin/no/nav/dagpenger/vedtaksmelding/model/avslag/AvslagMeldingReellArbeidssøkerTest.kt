@@ -6,7 +6,7 @@ import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEID_I_HELE_NORGE
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL
@@ -131,7 +131,7 @@ class AvslagMeldingReellArbeidssøkerTest {
             listOf(
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
-                AVSLAG_REELL_ARBEIDSSØKER_ARBEID_I_HELE_NORGE.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
             ) + VedtakMelding.fasteBlokker
@@ -221,7 +221,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID.brevblokkId,
-                AVSLAG_REELL_ARBEIDSSØKER_ARBEID_I_HELE_NORGE.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID.brevblokkId,

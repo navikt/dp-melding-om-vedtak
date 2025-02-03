@@ -5,6 +5,31 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.ManglerBrevstøtte
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_EGENANDEL
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG_VERNEPLIKT
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_NITTI_PROSENT_REGEL
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_FORELDREPENGER
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_GENERISK
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_OMSORGSPENGER
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_OPPLÆRINGSPENGER
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_PLEIEPENGER
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_SVANGERSKAPSPENGER
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_SYKEPENGER
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_UFØRE
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SKATTEKORT
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_STANS_ÅRSAKER
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_UTBETALING
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VERNEPLIKT_GUNSTIGEST
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.BOOLSK
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
@@ -89,19 +114,19 @@ class InnvilgelseMeldingTest {
     fun `Rikig brevblokker for innvilgelse av ordinære dagpenger uten barn, samordning eller 90 prosent regel`() {
         val forventedeBrevblokkIder =
             listOf(
-                "brev.blokk.vedtak-innvilgelse",
-                "brev.blokk.begrunnelse-innvilgelsesdato",
-                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.grunnlag",
-                "brev.blokk.arbeidstiden-din",
-                "brev.blokk.egenandel",
-                "brev.blokk.du-maa-sende-meldekort",
-                "brev.blokk.utbetaling",
-                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
-                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
-                "brev.blokk.du-maa-melde-fra-om-endringer",
-                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
             ) + VedtakMelding.fasteBlokker
 
         InnvilgelseMelding(
@@ -121,19 +146,19 @@ class InnvilgelseMeldingTest {
     fun `Rikig brevblokker for innvilgelse av dagpenger etter verneplikt`() {
         val forventedeBrevblokkIder =
             listOf(
-                "brev.blokk.vedtak-innvilgelse",
-                "brev.blokk.begrunnelse-innvilgelsesdato",
-                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.grunnlag-for-verneplikt",
-                "brev.blokk.arbeidstiden-din",
-                "brev.blokk.egenandel",
-                "brev.blokk.du-maa-sende-meldekort",
-                "brev.blokk.utbetaling",
-                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
-                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
-                "brev.blokk.du-maa-melde-fra-om-endringer",
-                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_GRUNNLAG_VERNEPLIKT.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
             ) + VedtakMelding.fasteBlokker
 
         InnvilgelseMelding(
@@ -153,20 +178,20 @@ class InnvilgelseMeldingTest {
     fun `Rikig brevblokker for innvilgelse av dagpenger etter verneplikt når bruker også oppfyller inntektskravet`() {
         val forventedeBrevblokkIder =
             listOf(
-                "brev.blokk.vedtak-innvilgelse",
-                "brev.blokk.begrunnelse-innvilgelsesdato",
-                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.grunnlag-for-verneplikt",
-                "brev.blokk.verneplikt-gunstigere-enn-inntekt",
-                "brev.blokk.arbeidstiden-din",
-                "brev.blokk.egenandel",
-                "brev.blokk.du-maa-sende-meldekort",
-                "brev.blokk.utbetaling",
-                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
-                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
-                "brev.blokk.du-maa-melde-fra-om-endringer",
-                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_GRUNNLAG_VERNEPLIKT.brevblokkId,
+                INNVILGELSE_VERNEPLIKT_GUNSTIGEST.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
             ) + VedtakMelding.fasteBlokker
 
         InnvilgelseMelding(
@@ -196,20 +221,20 @@ class InnvilgelseMeldingTest {
     fun `Rikig brevblokker for innvilgelse av ordinære dagpenger for person med barn`() {
         val forventedeBrevblokkIder =
             listOf(
-                "brev.blokk.vedtak-innvilgelse",
-                "brev.blokk.begrunnelse-innvilgelsesdato",
-                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.barnetillegg",
-                "brev.blokk.grunnlag",
-                "brev.blokk.arbeidstiden-din",
-                "brev.blokk.egenandel",
-                "brev.blokk.du-maa-sende-meldekort",
-                "brev.blokk.utbetaling",
-                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
-                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
-                "brev.blokk.du-maa-melde-fra-om-endringer",
-                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_BARNETILLEGG.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
             ) + VedtakMelding.fasteBlokker
 
         InnvilgelseMelding(
@@ -240,27 +265,27 @@ class InnvilgelseMeldingTest {
                     fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
-        ).brevBlokkIder() shouldBe forventedeBrevblokkIder - "brev.blokk.barnetillegg"
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder - INNVILGELSE_BARNETILLEGG.brevblokkId
     }
 
     @Test
     fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak med samordning av sykepenger`() {
         val forventedeBrevblokkIder =
             listOf(
-                "brev.blokk.vedtak-innvilgelse",
-                "brev.blokk.begrunnelse-innvilgelsesdato",
-                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.samordnet-med-sykepenger",
-                "brev.blokk.grunnlag",
-                "brev.blokk.arbeidstiden-din",
-                "brev.blokk.egenandel",
-                "brev.blokk.du-maa-sende-meldekort",
-                "brev.blokk.utbetaling",
-                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
-                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
-                "brev.blokk.du-maa-melde-fra-om-endringer",
-                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_SAMORDNET_SYKEPENGER.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
             ) + VedtakMelding.fasteBlokker
 
         InnvilgelseMelding(
@@ -283,20 +308,20 @@ class InnvilgelseMeldingTest {
     fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak med samordning av pleiepenger`() {
         val forventedeBrevblokkIder =
             listOf(
-                "brev.blokk.vedtak-innvilgelse",
-                "brev.blokk.begrunnelse-innvilgelsesdato",
-                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.samordnet-med-pleiepenger",
-                "brev.blokk.grunnlag",
-                "brev.blokk.arbeidstiden-din",
-                "brev.blokk.egenandel",
-                "brev.blokk.du-maa-sende-meldekort",
-                "brev.blokk.utbetaling",
-                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
-                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
-                "brev.blokk.du-maa-melde-fra-om-endringer",
-                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_SAMORDNET_PLEIEPENGER.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
             ) + VedtakMelding.fasteBlokker
 
         InnvilgelseMelding(
@@ -319,20 +344,20 @@ class InnvilgelseMeldingTest {
     fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak med samordning av omsorgspenger`() {
         val forventedeBrevblokkIder =
             listOf(
-                "brev.blokk.vedtak-innvilgelse",
-                "brev.blokk.begrunnelse-innvilgelsesdato",
-                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.samordnet-med-omsorgspenger",
-                "brev.blokk.grunnlag",
-                "brev.blokk.arbeidstiden-din",
-                "brev.blokk.egenandel",
-                "brev.blokk.du-maa-sende-meldekort",
-                "brev.blokk.utbetaling",
-                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
-                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
-                "brev.blokk.du-maa-melde-fra-om-endringer",
-                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_SAMORDNET_OMSORGSPENGER.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
             ) + VedtakMelding.fasteBlokker
 
         InnvilgelseMelding(
@@ -355,20 +380,20 @@ class InnvilgelseMeldingTest {
     fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak med samordning av opplæringspenger`() {
         val forventedeBrevblokkIder =
             listOf(
-                "brev.blokk.vedtak-innvilgelse",
-                "brev.blokk.begrunnelse-innvilgelsesdato",
-                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.samordnet-med-opplaeringspenger",
-                "brev.blokk.grunnlag",
-                "brev.blokk.arbeidstiden-din",
-                "brev.blokk.egenandel",
-                "brev.blokk.du-maa-sende-meldekort",
-                "brev.blokk.utbetaling",
-                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
-                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
-                "brev.blokk.du-maa-melde-fra-om-endringer",
-                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_SAMORDNET_OPPLÆRINGSPENGER.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
             ) + VedtakMelding.fasteBlokker
 
         InnvilgelseMelding(
@@ -391,20 +416,20 @@ class InnvilgelseMeldingTest {
     fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak med samordning av uføre`() {
         val forventedeBrevblokkIder =
             listOf(
-                "brev.blokk.vedtak-innvilgelse",
-                "brev.blokk.begrunnelse-innvilgelsesdato",
-                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.samordnet-med-ufore",
-                "brev.blokk.grunnlag",
-                "brev.blokk.arbeidstiden-din",
-                "brev.blokk.egenandel",
-                "brev.blokk.du-maa-sende-meldekort",
-                "brev.blokk.utbetaling",
-                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
-                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
-                "brev.blokk.du-maa-melde-fra-om-endringer",
-                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_SAMORDNET_UFØRE.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
             ) + VedtakMelding.fasteBlokker
 
         InnvilgelseMelding(
@@ -427,20 +452,20 @@ class InnvilgelseMeldingTest {
     fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak med samordning av foreldrepenger`() {
         val forventedeBrevblokkIder =
             listOf(
-                "brev.blokk.vedtak-innvilgelse",
-                "brev.blokk.begrunnelse-innvilgelsesdato",
-                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.samordnet-med-foreldrepenger",
-                "brev.blokk.grunnlag",
-                "brev.blokk.arbeidstiden-din",
-                "brev.blokk.egenandel",
-                "brev.blokk.du-maa-sende-meldekort",
-                "brev.blokk.utbetaling",
-                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
-                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
-                "brev.blokk.du-maa-melde-fra-om-endringer",
-                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_SAMORDNET_FORELDREPENGER.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
             ) + VedtakMelding.fasteBlokker
 
         InnvilgelseMelding(
@@ -463,20 +488,20 @@ class InnvilgelseMeldingTest {
     fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak som har samordning av svangerskapspenger`() {
         val forventedeBrevblokkIder =
             listOf(
-                "brev.blokk.vedtak-innvilgelse",
-                "brev.blokk.begrunnelse-innvilgelsesdato",
-                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.samordnet-med-svangerskapspenger",
-                "brev.blokk.grunnlag",
-                "brev.blokk.arbeidstiden-din",
-                "brev.blokk.egenandel",
-                "brev.blokk.du-maa-sende-meldekort",
-                "brev.blokk.utbetaling",
-                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
-                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
-                "brev.blokk.du-maa-melde-fra-om-endringer",
-                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_SAMORDNET_SVANGERSKAPSPENGER.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
             ) + VedtakMelding.fasteBlokker
 
         InnvilgelseMelding(
@@ -500,20 +525,20 @@ class InnvilgelseMeldingTest {
     fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak som har samordning med flere ytelser`() {
         val forventedeBrevblokkIder =
             listOf(
-                "brev.blokk.vedtak-innvilgelse",
-                "brev.blokk.begrunnelse-innvilgelsesdato",
-                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.samordnet-generisk",
-                "brev.blokk.grunnlag",
-                "brev.blokk.arbeidstiden-din",
-                "brev.blokk.egenandel",
-                "brev.blokk.du-maa-sende-meldekort",
-                "brev.blokk.utbetaling",
-                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
-                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
-                "brev.blokk.du-maa-melde-fra-om-endringer",
-                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_SAMORDNET_GENERISK.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
             ) + VedtakMelding.fasteBlokker
 
         InnvilgelseMelding(
@@ -539,20 +564,20 @@ class InnvilgelseMeldingTest {
     fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak som har samordning med ukjent ytelse`() {
         val forventedeBrevblokkIder =
             listOf(
-                "brev.blokk.vedtak-innvilgelse",
-                "brev.blokk.begrunnelse-innvilgelsesdato",
-                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.samordnet-generisk",
-                "brev.blokk.grunnlag",
-                "brev.blokk.arbeidstiden-din",
-                "brev.blokk.egenandel",
-                "brev.blokk.du-maa-sende-meldekort",
-                "brev.blokk.utbetaling",
-                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
-                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
-                "brev.blokk.du-maa-melde-fra-om-endringer",
-                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_SAMORDNET_GENERISK.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
             ) + VedtakMelding.fasteBlokker
 
         InnvilgelseMelding(
@@ -572,19 +597,19 @@ class InnvilgelseMeldingTest {
     fun `Rikige brevblokker for innvilgelse av ordinære dagpenger for vedtak uten samordning`() {
         val forventedeBrevblokkIder =
             listOf(
-                "brev.blokk.vedtak-innvilgelse",
-                "brev.blokk.begrunnelse-innvilgelsesdato",
-                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.grunnlag",
-                "brev.blokk.arbeidstiden-din",
-                "brev.blokk.egenandel",
-                "brev.blokk.du-maa-sende-meldekort",
-                "brev.blokk.utbetaling",
-                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
-                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
-                "brev.blokk.du-maa-melde-fra-om-endringer",
-                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
             ) + VedtakMelding.fasteBlokker
 
         InnvilgelseMelding(
@@ -607,20 +632,20 @@ class InnvilgelseMeldingTest {
     fun `Rikig brevblokker for innvilgelse av ordinære dagpenger for person med nittiProsentRegel`() {
         val forventedeBrevblokkIder =
             listOf(
-                "brev.blokk.vedtak-innvilgelse",
-                "brev.blokk.begrunnelse-innvilgelsesdato",
-                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.nittiprosentregel",
-                "brev.blokk.grunnlag",
-                "brev.blokk.arbeidstiden-din",
-                "brev.blokk.egenandel",
-                "brev.blokk.du-maa-sende-meldekort",
-                "brev.blokk.utbetaling",
-                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
-                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
-                "brev.blokk.du-maa-melde-fra-om-endringer",
-                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
             ) + VedtakMelding.fasteBlokker
 
         InnvilgelseMelding(
@@ -666,29 +691,29 @@ class InnvilgelseMeldingTest {
                     fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
-        ).brevBlokkIder() shouldBe forventedeBrevblokkIder - "brev.blokk.nittiprosentregel"
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder - INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId
     }
 
     @Test
     fun `Rikig brevblokker rekkefølge for innvilgelse med barnetillegg, nittiprosent regel og samordning`() {
         val forventedeBrevblokkIder =
             listOf(
-                "brev.blokk.vedtak-innvilgelse",
-                "brev.blokk.begrunnelse-innvilgelsesdato",
-                "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                "brev.blokk.barnetillegg",
-                "brev.blokk.nittiprosentregel",
-                "brev.blokk.samordnet-generisk",
-                "brev.blokk.grunnlag",
-                "brev.blokk.arbeidstiden-din",
-                "brev.blokk.egenandel",
-                "brev.blokk.du-maa-sende-meldekort",
-                "brev.blokk.utbetaling",
-                "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
-                "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
-                "brev.blokk.du-maa-melde-fra-om-endringer",
-                "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_BARNETILLEGG.brevblokkId,
+                INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId,
+                INNVILGELSE_SAMORDNET_GENERISK.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
             ) + VedtakMelding.fasteBlokker
 
         InnvilgelseMelding(

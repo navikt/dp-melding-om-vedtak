@@ -7,6 +7,8 @@ import io.ktor.http.headersOf
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.lagHttpKlient
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT_HJEMMEL
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
 import org.junit.jupiter.api.Test
 
 class SanityKlientMappingTest {
@@ -27,7 +29,7 @@ class SanityKlientMappingTest {
         runBlocking {
             SanityKlient(
                 sanityUrl = "http://locahost/sanity", httpKlient = lagHttpKlient(engine = lageMockEngine()),
-            ).hentOpplysningTekstIder(listOf("brev.blokk.barnetillegg")) shouldBe
+            ).hentOpplysningTekstIder(listOf(INNVILGELSE_BARNETILLEGG.brevblokkId)) shouldBe
                 listOf(
                     "opplysning.antall-barn-som-gir-rett-til-barnetillegg",
                     "opplysning.barnetillegg-i-kroner",
@@ -40,7 +42,7 @@ class SanityKlientMappingTest {
         runBlocking {
             SanityKlient(
                 sanityUrl = "http://locahost/sanity", httpKlient = lagHttpKlient(engine = lageMockEngine()),
-            ).hentOpplysningTekstIder(listOf("brev.blokk.vedtak-innvilget")) shouldBe emptyList()
+            ).hentOpplysningTekstIder(listOf(AVSLAG_UTESTENGT_HJEMMEL.brevblokkId)) shouldBe emptyList()
         }
     }
 

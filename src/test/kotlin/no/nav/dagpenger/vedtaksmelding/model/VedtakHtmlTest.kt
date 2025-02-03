@@ -7,8 +7,22 @@ import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.BEGRUNNELSE_AVSLAG_MINSTEINNTEKT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagMelding
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_EGENANDEL
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SKATTEKORT
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_STANS_ÅRSAKER
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_UTBETALING
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseMelding
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter
@@ -80,7 +94,7 @@ class VedtakHtmlTest {
                         setOf(
                             UtvidetBeskrivelse(
                                 behandlingId = UUIDv7.ny(),
-                                brevblokkId = BEGRUNNELSE_AVSLAG_MINSTEINNTEKT.brevblokkId,
+                                brevblokkId = AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId,
                                 tekst = "noe saksbehandler har skrevet",
                                 sistEndretTidspunkt = LocalDateTime.now(),
                                 tittel = "Dette er en tittel",
@@ -91,13 +105,13 @@ class VedtakHtmlTest {
             htmlInnhold brevblokkRekkefølgeShouldBe
                 listOf(
                     AVSLAG_INNLEDNING.brevblokkId,
-                    BEGRUNNELSE_AVSLAG_MINSTEINNTEKT.brevblokkId,
+                    AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId,
                     "brev.blokk.sporsmaal",
                     "brev.blokk.rett-til-innsyn",
                     "brev.blokk.rett-til-aa-klage",
                 )
 
-            htmlInnhold finnUtvidetBeskrivelseTekst BEGRUNNELSE_AVSLAG_MINSTEINNTEKT.brevblokkId shouldBe "noe saksbehandler har skrevet"
+            htmlInnhold finnUtvidetBeskrivelseTekst AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId shouldBe "noe saksbehandler har skrevet"
 
             writeStringToFile(
                 filePath = "build/temp/avslag-minsteinntekt.html",
@@ -140,20 +154,20 @@ class VedtakHtmlTest {
 
             htmlInnhold brevblokkRekkefølgeShouldBe
                 listOf(
-                    "brev.blokk.vedtak-innvilgelse",
-                    "brev.blokk.begrunnelse-innvilgelsesdato",
-                    "brev.blokk.hvor-lenge-kan-du-faa-dagpenger",
-                    "brev.blokk.slik-har-vi-beregnet-dagpengene-dine",
-                    "brev.blokk.barnetillegg",
-                    "brev.blokk.grunnlag",
-                    "brev.blokk.arbeidstiden-din",
-                    "brev.blokk.egenandel",
-                    "brev.blokk.du-maa-sende-meldekort",
-                    "brev.blokk.utbetaling",
-                    "brev.blokk.husk-aa-sjekke-skattekortet-ditt",
-                    "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du",
-                    "brev.blokk.du-maa-melde-fra-om-endringer",
-                    "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger",
+                    INNVILGELSE_INNLEDNING.brevblokkId,
+                    INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                    INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                    INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                    INNVILGELSE_BARNETILLEGG.brevblokkId,
+                    INNVILGELSE_GRUNNLAG.brevblokkId,
+                    INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                    INNVILGELSE_EGENANDEL.brevblokkId,
+                    INNVILGELSE_MELDEKORT.brevblokkId,
+                    INNVILGELSE_UTBETALING.brevblokkId,
+                    INNVILGELSE_SKATTEKORT.brevblokkId,
+                    INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                    INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                    INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
                     "brev.blokk.sporsmaal",
                     "brev.blokk.rett-til-innsyn",
                     "brev.blokk.rett-til-aa-klage",
