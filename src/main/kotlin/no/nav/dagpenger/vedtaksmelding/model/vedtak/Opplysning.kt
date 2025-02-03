@@ -63,11 +63,13 @@ data class Opplysning(
     private fun formaterDesimaltall(
         desimaltall: Double,
         antallDesimaler: Int = 1,
-    ): String =
-        when {
-            erHeltall(desimaltall) -> desimaltall.toInt().toString()
-            else -> "%.${antallDesimaler}f".format(Locale.US, desimaltall)
+    ): String {
+        val norskFormat = Locale.of("nb", "NO")
+        return when {
+            erHeltall(desimaltall) -> String.format(norskFormat, format = "%,.0f", desimaltall)
+            else -> String.format(norskFormat, format = "%,.${antallDesimaler}f", desimaltall)
         }
+    }
 
     private fun erHeltall(desimaltall: Double) = desimaltall % 1 == 0.0
 

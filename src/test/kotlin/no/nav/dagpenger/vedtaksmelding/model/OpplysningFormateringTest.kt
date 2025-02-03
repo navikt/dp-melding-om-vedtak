@@ -7,6 +7,11 @@ import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
 import org.junit.jupiter.api.Test
 
 class OpplysningFormateringTest {
+    // NBSP - Non breaking space blir lagt på som default ved norsk formatering av tusenskille i tall
+    // F.eks: 10 000 vil se slik ut: 10NBSP000
+    // https://en.wikipedia.org/wiki/Non-breaking_space
+    private val nonBreakingSpace = "\u00A0"
+
     @Test
     fun `Flyttall med enhet kroner skal formateres riktig`() {
         Opplysning(
@@ -14,21 +19,21 @@ class OpplysningFormateringTest {
             verdi = "10.5",
             datatype = FLYTTALL,
             enhet = KRONER,
-        ).formaterVerdi() shouldBe "10.50"
+        ).formaterVerdi() shouldBe "10,50"
 
         Opplysning(
             opplysningTekstId = "bubba",
             verdi = "10.599",
             datatype = FLYTTALL,
             enhet = KRONER,
-        ).formaterVerdi() shouldBe "10.60"
+        ).formaterVerdi() shouldBe "10,60"
 
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "10.0",
+            verdi = "1000.0",
             datatype = FLYTTALL,
             enhet = KRONER,
-        ).formaterVerdi() shouldBe "10"
+        ).formaterVerdi() shouldBe "1${nonBreakingSpace}000"
 
         Opplysning(
             opplysningTekstId = "bubba",
@@ -56,18 +61,18 @@ class OpplysningFormateringTest {
             opplysningTekstId = "bubba",
             verdi = "10.5",
             datatype = FLYTTALL,
-        ).formaterVerdi() shouldBe "10.5"
+        ).formaterVerdi() shouldBe "10,5"
 
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "10.59",
+            verdi = "1000000.59",
             datatype = FLYTTALL,
-        ).formaterVerdi() shouldBe "10.6"
+        ).formaterVerdi() shouldBe "1${nonBreakingSpace}000${nonBreakingSpace}000,6"
 
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "10.593",
+            verdi = "10000.593",
             datatype = FLYTTALL,
-        ).formaterVerdi() shouldBe "10.6"
+        ).formaterVerdi() shouldBe "10${nonBreakingSpace}000,6"
     }
 }
