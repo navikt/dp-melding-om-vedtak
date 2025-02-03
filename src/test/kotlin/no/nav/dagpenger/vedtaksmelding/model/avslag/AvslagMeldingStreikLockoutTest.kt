@@ -5,6 +5,9 @@ import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.ManglerBrevstøtte
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_STREIK_LOCKOUT_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_STREIK_LOCKOUT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MEDLEM_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.AVSLÅTT
@@ -47,9 +50,9 @@ class AvslagMeldingStreikLockoutTest {
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
-                "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-streik-lockout-del-1",
-                "brev.blokk.avslag-streik-lockout-del-2",
+                AVSLAG_INNLEDNING.brevblokkId,
+                AVSLAG_STREIK_LOCKOUT_DEL_1.brevblokkId,
+                AVSLAG_STREIK_LOCKOUT_DEL_2.brevblokkId,
             ) + VedtakMelding.fasteBlokker
     }
 }

@@ -6,6 +6,7 @@ import io.ktor.client.engine.mock.respond
 import io.ktor.http.headersOf
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.lagHttpKlient
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import org.junit.jupiter.api.Test
 
 class SanityKlientMappingTest {
@@ -17,7 +18,7 @@ class SanityKlientMappingTest {
             SanityKlient(
                 sanityUrl = "http://locahost/sanity",
                 httpKlient = lagHttpKlient(engine = lageMockEngine(), SanityKlient.httpClientConfig),
-            ).hentOpplysningTekstIder(listOf("brev.blokk.vedtak-avslag")) shouldBe listOf("opplysning.provingsdato")
+            ).hentOpplysningTekstIder(listOf(AVSLAG_INNLEDNING.brevblokkId)) shouldBe listOf("opplysning.provingsdato")
         }
     }
 

@@ -4,6 +4,8 @@ import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.TAPT_ARBEIDSTID
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
@@ -68,8 +70,8 @@ class AvslagMeldingTaptArbeidstidTest {
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
-                "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-tapt-arbeidstid",
+                AVSLAG_INNLEDNING.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID.brevblokkId,
             ) + VedtakMelding.fasteBlokker
     }
 

@@ -4,6 +4,15 @@ import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEID_I_HELE_NORGE
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_REGISTRERT_ARBEIDSSOKER
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_ARBEIDSFØR
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_ETHVERT_ARBEID
@@ -98,11 +107,11 @@ class AvslagMeldingReellArbeidssøkerTest {
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
-                "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-reell-arbeidssoker-overskrift",
-                "brev.blokk.avslag-reell-arbeidssoker-heltid-deltid",
-                "brev.blokk.avslag-reell-arbeidssoker-unntak-heltid-deltid-hele-norge",
-                "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
+                AVSLAG_INNLEDNING.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
             ) + VedtakMelding.fasteBlokker
     }
 
@@ -120,11 +129,11 @@ class AvslagMeldingReellArbeidssøkerTest {
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
-                "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-reell-arbeidssoker-overskrift",
-                "brev.blokk.avslag-reell-arbeidssoker-arbeid-i-hele-norge",
-                "brev.blokk.avslag-reell-arbeidssoker-unntak-heltid-deltid-hele-norge",
-                "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
+                AVSLAG_INNLEDNING.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_ARBEID_I_HELE_NORGE.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
             ) + VedtakMelding.fasteBlokker
     }
 
@@ -142,10 +151,10 @@ class AvslagMeldingReellArbeidssøkerTest {
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
-                "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-reell-arbeidssoker-overskrift",
-                "brev.blokk.avslag-reell-arbeidssoker-arbeidsfor",
-                "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
+                AVSLAG_INNLEDNING.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
             ) + VedtakMelding.fasteBlokker
     }
 
@@ -163,10 +172,10 @@ class AvslagMeldingReellArbeidssøkerTest {
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
-                "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-reell-arbeidssoker-overskrift",
-                "brev.blokk.avslag-reell-arbeidssoker-ethvert-arbeid",
-                "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
+                AVSLAG_INNLEDNING.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
             ) + VedtakMelding.fasteBlokker
     }
 
@@ -184,10 +193,10 @@ class AvslagMeldingReellArbeidssøkerTest {
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
-                "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-reell-arbeidssoker-overskrift",
-                "brev.blokk.avslag-reell-arbeidssoker-registrert-arbeidssoker",
-                "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
+                AVSLAG_INNLEDNING.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_REGISTRERT_ARBEIDSSOKER.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
             ) + VedtakMelding.fasteBlokker
     }
 
@@ -209,15 +218,15 @@ class AvslagMeldingReellArbeidssøkerTest {
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
-                "brev.blokk.vedtak-avslag",
-                "brev.blokk.avslag-reell-arbeidssoker-overskrift",
-                "brev.blokk.avslag-reell-arbeidssoker-heltid-deltid",
-                "brev.blokk.avslag-reell-arbeidssoker-arbeid-i-hele-norge",
-                "brev.blokk.avslag-reell-arbeidssoker-unntak-heltid-deltid-hele-norge",
-                "brev.blokk.avslag-reell-arbeidssoker-arbeidsfor",
-                "brev.blokk.avslag-reell-arbeidssoker-ethvert-arbeid",
-                "brev.blokk.avslag-reell-arbeidssoker-registrert-arbeidssoker",
-                "brev.blokk.avslag-reell-arbeidssoker-hjemmel",
+                AVSLAG_INNLEDNING.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_ARBEID_I_HELE_NORGE.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_REGISTRERT_ARBEIDSSOKER.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
             ) + VedtakMelding.fasteBlokker
     }
 
