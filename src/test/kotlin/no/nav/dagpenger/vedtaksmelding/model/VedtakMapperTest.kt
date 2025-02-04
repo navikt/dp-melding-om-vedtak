@@ -157,14 +157,14 @@ class VedtakMapperTest {
     }
 
     @Test
-    fun `Hent opplysning om brukt beregningsregel for grunnlagsberegning`() {
+    fun `Hent opplysning om brukt beregningsregel for grunnlagsberegning i lowercase`() {
         vedtak.finnOpplysning("opplysning.brukt-beregningsregel-grunnlag") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.brukt-beregningsregel-grunnlag",
                 råVerdi = "Gjennomsnittlig arbeidsinntekt siste 36 måneder",
                 datatype = TEKST,
                 enhet = ENHETSLØS,
-            )
+            ).also { it.formatertVerdi shouldBe "gjennomsnittlig arbeidsinntekt siste 36 måneder" }
     }
 
     @Test

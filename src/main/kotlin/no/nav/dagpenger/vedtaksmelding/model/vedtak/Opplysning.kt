@@ -43,6 +43,11 @@ data class Opplysning(
                     }
 
                 DATO -> formaterDato(råVerdi)
+                TEKST ->
+                    when (opplysningTekstId) {
+                        "opplysning.brukt-beregningsregel-grunnlag" -> råVerdi.lowercase()
+                        else -> råVerdi
+                    }
                 else -> råVerdi
             }
 
