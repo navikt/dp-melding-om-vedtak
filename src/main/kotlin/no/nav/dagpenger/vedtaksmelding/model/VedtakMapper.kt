@@ -261,13 +261,13 @@ class VedtakMapper(vedtakJson: String) {
             this.singleOrNull {
                 it.opplysningTekstId == "opplysning.forste-maaned-av-opptjeningsperiode"
             }?.let { opplysning ->
-                LocalDate.parse(opplysning.formatertVerdi)
+                LocalDate.parse(opplysning.råVerdi())
             }
         val opptjeningsperiodeSlutt: LocalDate? =
             this.singleOrNull {
                 it.opplysningTekstId == "opplysning.siste-avsluttende-kalendermaaned"
             }?.let { opplysning ->
-                LocalDate.parse(opplysning.formatertVerdi)
+                LocalDate.parse(opplysning.råVerdi())
             }
 
         if (opptjeningsperiodeStart != null && opptjeningsperiodeSlutt != null) {
