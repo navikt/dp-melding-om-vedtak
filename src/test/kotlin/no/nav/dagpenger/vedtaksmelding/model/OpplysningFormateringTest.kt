@@ -4,6 +4,7 @@ import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.DATO
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
 import org.junit.jupiter.api.Test
 
@@ -26,6 +27,23 @@ class OpplysningFormateringTest {
             råVerdi = "2025-01-10",
             datatype = DATO,
         ).formatertVerdi shouldBe "10. januar 2025"
+    }
+
+    @Test
+    fun `Heltall med enhet kroner skal formateres riktig`() {
+        Opplysning(
+            opplysningTekstId = "bubba",
+            råVerdi = "10",
+            datatype = HELTALL,
+            enhet = KRONER,
+        ).formatertVerdi shouldBe "10 kroner"
+
+        Opplysning(
+            opplysningTekstId = "bubba",
+            råVerdi = "1000",
+            datatype = HELTALL,
+            enhet = KRONER,
+        ).formatertVerdi shouldBe "1${nonBreakingSpace}000 kroner"
     }
 
     @Test

@@ -2,6 +2,7 @@ package no.nav.dagpenger.vedtaksmelding.model.vedtak
 
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.DATO
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.TEKST
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.ENHETSLØS
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
@@ -32,23 +33,22 @@ data class Opplysning(
             when (datatype) {
                 FLYTTALL ->
                     when (enhet) {
-                        KRONER -> formaterDesimaltall(antallDesimaler = 2, desimaltall = råVerdi.toDouble()) + " kroner"
-                        else -> formaterDesimaltall(desimaltall = råVerdi.toDouble())
+                        KRONER -> "${formaterTall(antallDesimaler = 2, desimaltall = råVerdi.toDouble())} kroner"
+                        else -> formaterTall(antallDesimaler = 1, desimaltall = råVerdi.toDouble())
+                    }
+                HELTALL ->
+                    when (enhet) {
+                        KRONER -> "${formaterTall(desimaltall = råVerdi.toDouble())} kroner"
+                        else -> formaterTall(desimaltall = råVerdi.toDouble())
                     }
 
                 DATO -> formaterDato(råVerdi)
                 else -> råVerdi
             }
 
-    private fun formaterDato(dateString: String): String {
-        val date = LocalDate.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE)
-        val norskFormat = Locale.of("nb", "NO")
-        return "${date.dayOfMonth}. " + date.format(DateTimeFormatter.ofPattern("MMMM yyyy", norskFormat))
-    }
-
-    private fun formaterDesimaltall(
+    private fun formaterTall(
         desimaltall: Double,
-        antallDesimaler: Int = 1,
+        antallDesimaler: Int = 0,
     ): String {
         val norskFormat = Locale.of("nb", "NO")
         return when {
@@ -58,6 +58,12 @@ data class Opplysning(
     }
 
     private fun erHeltall(desimaltall: Double) = desimaltall % 1 == 0.0
+
+    private fun formaterDato(dateString: String): String {
+        val date = LocalDate.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE)
+        val norskFormat = Locale.of("nb", "NO")
+        return "${date.dayOfMonth}. " + date.format(DateTimeFormatter.ofPattern("MMMM yyyy", norskFormat))
+    }
 
     enum class Datatype {
         TEKST,
