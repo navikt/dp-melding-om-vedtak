@@ -166,7 +166,9 @@ class AvslagMelding(
             grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE.brevblokkId)
         }
 
-        if (grunnerTilAvslag.size > 1) {
+        if (grunnerTilAvslag.contains(AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID.brevblokkId) ||
+            grunnerTilAvslag.contains(AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE.brevblokkId)
+        ) {
             grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId)
         }
         vedtak.vilkår.find { vilkår ->
