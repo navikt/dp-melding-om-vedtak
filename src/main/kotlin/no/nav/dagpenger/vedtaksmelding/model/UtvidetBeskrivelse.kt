@@ -31,6 +31,10 @@ data class UtvidetBeskrivelse(
     }
 
     fun htmlTekst(): String? {
-        return tekst?.replace("\n", "<br/>")
+        return tekst?.replace("\r\n", "<br/>")
+            ?.replace("\r", "<br/>")
+            ?.replace("\n", "<br/>")
+            ?.replace("\u2028", "<br/>")
+            ?.replace("\u2029", "<br/>")
     }
 }
