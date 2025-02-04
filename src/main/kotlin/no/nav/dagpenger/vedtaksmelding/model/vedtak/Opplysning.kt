@@ -10,7 +10,7 @@ import java.util.Locale
 
 data class Opplysning(
     val opplysningTekstId: String,
-    val verdi: String,
+    private val råVerdi: String,
     val datatype: Datatype,
     val enhet: Enhet = ENHETSLØS,
 ) {
@@ -18,16 +18,42 @@ data class Opplysning(
         val NULL_OPPLYSNING =
             Opplysning(
                 opplysningTekstId = "ukjent.opplysning",
-                verdi = "ukjent",
+                råVerdi = "ukjent",
                 datatype = TEKST,
                 enhet = ENHETSLØS,
             )
     }
 
+    fun råVerdi(): String = råVerdi
+
+    val formatertVerdi: String
+        get() =
+            when (datatype) {
+                FLYTTALL ->
+                    when (enhet) {
+                        KRONER -> formaterDesimaltall(antallDesimaler = 2, desimaltall = råVerdi.toDouble())
+                        else -> formaterDesimaltall(desimaltall = råVerdi.toDouble())
+                    }
+                else -> råVerdi
+            }
+
+    private fun formaterDesimaltall(
+        desimaltall: Double,
+        antallDesimaler: Int = 1,
+    ): String {
+        val norskFormat = Locale.of("nb", "NO")
+        return when {
+            erHeltall(desimaltall) -> String.format(norskFormat, format = "%,.0f", desimaltall)
+            else -> String.format(norskFormat, format = "%,.${antallDesimaler}f", desimaltall)
+        }
+    }
+
+    private fun erHeltall(desimaltall: Double) = desimaltall % 1 == 0.0
+
     fun formatering(): String {
         return when (this.datatype) {
-            Datatype.DATO -> formatDate(this.verdi)
-            else -> this.verdi
+            Datatype.DATO -> formatDate(this.råVerdi)
+            else -> this.råVerdi
         }
     }
 
@@ -44,34 +70,10 @@ data class Opplysning(
 
     fun formatDate(dateString: String): String {
         val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val outputFormatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy", Locale("no"))
+        val outputFormatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy", Locale.of("nb", "NO"))
         val date = LocalDate.parse(dateString, inputFormatter)
         return date.format(outputFormatter)
     }
-
-    fun formaterVerdi(): String {
-        return when (datatype) {
-            FLYTTALL ->
-                when (enhet) {
-                    KRONER -> formaterDesimaltall(antallDesimaler = 2, desimaltall = verdi.toDouble())
-                    else -> formaterDesimaltall(desimaltall = verdi.toDouble())
-                }
-            else -> verdi
-        }
-    }
-
-    private fun formaterDesimaltall(
-        desimaltall: Double,
-        antallDesimaler: Int = 1,
-    ): String {
-        val norskFormat = Locale.of("nb", "NO")
-        return when {
-            erHeltall(desimaltall) -> String.format(norskFormat, format = "%,.0f", desimaltall)
-            else -> String.format(norskFormat, format = "%,.${antallDesimaler}f", desimaltall)
-        }
-    }
-
-    private fun erHeltall(desimaltall: Double) = desimaltall % 1 == 0.0
 
     enum class Datatype {
         TEKST,
