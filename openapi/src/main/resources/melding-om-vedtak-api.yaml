@@ -220,6 +220,8 @@ components:
           type: string
         fodselsnummer:
           type: string
+          pattern: '^\d{11}$'
+          description: "Må være et gyldig fødselsnummer med nøyaktig 11 sifre."
         saksbehandler:
           $ref: '#/components/schemas/Behandler'
         beslutter:
