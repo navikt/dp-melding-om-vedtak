@@ -20,20 +20,20 @@ class VernepliktOgInntektTest {
         vedtakVernepliktOgInntekt.finnOpplysning("opplysning.er-innvilget-med-verneplikt") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.er-innvilget-med-verneplikt",
-                verdi = true.toString(),
+                råVerdi = true.toString(),
                 datatype = BOOLSK,
             )
         vedtakVernepliktOgInntekt.finnOpplysning("opplysning.antall-stonadsuker") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.antall-stonadsuker",
-                verdi = "26",
+                råVerdi = "26",
                 datatype = HELTALL,
                 enhet = UKER,
             )
         vedtakVernepliktOgInntekt.finnOpplysning("opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger",
-                verdi = "52",
+                råVerdi = "52",
                 datatype = HELTALL,
                 enhet = UKER,
             )

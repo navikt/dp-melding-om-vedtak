@@ -54,14 +54,14 @@ class MeldingOmVedtakApiTest {
         val opplysning1 =
             Opplysning(
                 opplysningTekstId = "opplysning.opplysning-1",
-                verdi = "true",
+                råVerdi = "true",
                 datatype = BOOLSK,
                 enhet = ENHETSLØS,
             )
         val opplysning2 =
             Opplysning(
                 opplysningTekstId = "opplysning.opplysning-2",
-                verdi = "true",
+                råVerdi = "true",
                 datatype = BOOLSK,
                 enhet = ENHETSLØS,
             )

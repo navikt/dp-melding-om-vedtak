@@ -50,7 +50,7 @@ class InnvilgelseMeldingTest {
             opplysningTekstId =
                 "opplysning.andel-av-dagsats-med-barne" +
                     "tillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget",
-            verdi = verdi,
+            råVerdi = verdi,
             datatype = FLYTTALL,
             enhet = KRONER,
         )
@@ -58,7 +58,7 @@ class InnvilgelseMeldingTest {
     private fun samordnetOpplysning(verdi: String = "true") =
         Opplysning(
             opplysningTekstId = "opplysning.har-samordnet",
-            verdi = verdi,
+            råVerdi = verdi,
             datatype = BOOLSK,
         )
 
@@ -67,14 +67,14 @@ class InnvilgelseMeldingTest {
         dagsats: Int = 100,
     ) = Opplysning(
         opplysningTekstId = opplysningTekstId,
-        verdi = dagsats.toString(),
+        råVerdi = dagsats.toString(),
         datatype = BOOLSK,
     )
 
     private fun barnetilleggOpplysning(verdi: String = "1") =
         Opplysning(
             opplysningTekstId = "opplysning.antall-barn-som-gir-rett-til-barnetillegg",
-            verdi = verdi,
+            råVerdi = verdi,
             datatype = HELTALL,
             enhet = BARN,
         )

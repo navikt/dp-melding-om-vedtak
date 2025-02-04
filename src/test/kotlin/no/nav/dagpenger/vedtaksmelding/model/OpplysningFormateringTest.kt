@@ -16,63 +16,63 @@ class OpplysningFormateringTest {
     fun `Flyttall med enhet kroner skal formateres riktig`() {
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "10.5",
+            råVerdi = "10.5",
             datatype = FLYTTALL,
             enhet = KRONER,
-        ).formaterVerdi() shouldBe "10,50"
+        ).formatertVerdi shouldBe "10,50"
 
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "10.599",
+            råVerdi = "10.599",
             datatype = FLYTTALL,
             enhet = KRONER,
-        ).formaterVerdi() shouldBe "10,60"
+        ).formatertVerdi shouldBe "10,60"
 
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "1000.0",
+            råVerdi = "1000.0",
             datatype = FLYTTALL,
             enhet = KRONER,
-        ).formaterVerdi() shouldBe "1${nonBreakingSpace}000"
+        ).formatertVerdi shouldBe "1${nonBreakingSpace}000"
 
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "10",
+            råVerdi = "10",
             datatype = FLYTTALL,
             enhet = KRONER,
-        ).formaterVerdi() shouldBe "10"
+        ).formatertVerdi shouldBe "10"
     }
 
     @Test
     fun `Flyttall formateres riktig`() {
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "10",
+            råVerdi = "10",
             datatype = FLYTTALL,
-        ).formaterVerdi() shouldBe "10"
+        ).formatertVerdi shouldBe "10"
 
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "10.0",
+            råVerdi = "10.0",
             datatype = FLYTTALL,
-        ).formaterVerdi() shouldBe "10"
+        ).formatertVerdi shouldBe "10"
 
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "10.5",
+            råVerdi = "10.5",
             datatype = FLYTTALL,
-        ).formaterVerdi() shouldBe "10,5"
+        ).formatertVerdi shouldBe "10,5"
 
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "1000000.59",
+            råVerdi = "1000000.59",
             datatype = FLYTTALL,
-        ).formaterVerdi() shouldBe "1${nonBreakingSpace}000${nonBreakingSpace}000,6"
+        ).formatertVerdi shouldBe "1${nonBreakingSpace}000${nonBreakingSpace}000,6"
 
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "10000.593",
+            råVerdi = "10000.593",
             datatype = FLYTTALL,
-        ).formaterVerdi() shouldBe "10${nonBreakingSpace}000,6"
+        ).formatertVerdi shouldBe "10${nonBreakingSpace}000,6"
     }
 }
