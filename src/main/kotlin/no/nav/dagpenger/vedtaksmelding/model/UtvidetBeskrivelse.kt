@@ -29,4 +29,8 @@ data class UtvidetBeskrivelse(
                 INNVILGELSE_DAGPENGEPERIODE.brevblokkId to "Hvor lenge kan du få dagpenger?",
             )
     }
+
+    fun htmlTekst(): String? {
+        return tekst?.replace("\n", "<br/>")
+    }
 }

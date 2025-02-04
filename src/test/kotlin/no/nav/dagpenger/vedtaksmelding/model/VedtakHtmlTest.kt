@@ -30,6 +30,7 @@ import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseMelding
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
+import no.nav.dagpenger.vedtaksmelding.util.finnUtvidetBeskrivelseTekst
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -121,12 +122,6 @@ class VedtakHtmlTest {
                 content = htmlInnhold,
             )
         }
-    }
-
-    private infix fun String.finnUtvidetBeskrivelseTekst(utvidetBeskrivelseId: String): String? {
-        return Jsoup.parse(this).select("[data-utvidet-beskrivelse-id]").singleOrNull {
-            it.attr("data-utvidet-beskrivelse-id") == utvidetBeskrivelseId
-        }?.text()
     }
 
     private infix fun String.brevblokkRekkefølgeShouldBe(expectedOrder: List<String>) {
