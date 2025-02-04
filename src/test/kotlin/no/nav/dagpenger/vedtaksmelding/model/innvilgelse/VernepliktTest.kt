@@ -22,10 +22,12 @@ class VernepliktTest {
         vedtakVerneplikt.finnOpplysning("opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt",
-                verdi = "3",
+                råVerdi = "3.0",
                 datatype = FLYTTALL,
                 enhet = KRONER,
-            )
+            ).also {
+                it.formatertVerdi shouldBe "3 kroner"
+            }
     }
 
     @Test
@@ -33,10 +35,12 @@ class VernepliktTest {
         vedtakVerneplikt.finnOpplysning("opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger",
-                verdi = "0",
+                råVerdi = "0",
                 datatype = HELTALL,
                 enhet = UKER,
-            )
+            ).also {
+                it.formatertVerdi shouldBe "0"
+            }
     }
 
     @Test
@@ -44,14 +48,14 @@ class VernepliktTest {
         vedtakVerneplikt.finnOpplysning("opplysning.antall-stonadsuker") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.antall-stonadsuker",
-                verdi = "26",
+                råVerdi = "26",
                 datatype = HELTALL,
                 enhet = UKER,
             )
         vedtakVerneplikt.finnOpplysning("opplysning.er-innvilget-med-verneplikt") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.er-innvilget-med-verneplikt",
-                verdi = true.toString(),
+                råVerdi = true.toString(),
                 datatype = BOOLSK,
             )
     }

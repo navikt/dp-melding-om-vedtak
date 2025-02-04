@@ -50,7 +50,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                                         vedtaksmelding.hentOpplysninger().map {
                                             OpplysningDTO(
                                                 tekstId = it.opplysningTekstId,
-                                                verdi = it.verdi,
+                                                verdi = it.formatertVerdi,
                                                 datatype = it.mapDatatype(),
                                             )
                                         },

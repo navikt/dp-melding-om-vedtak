@@ -1,6 +1,8 @@
 package no.nav.dagpenger.vedtaksmelding.model.vedtak
 
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.DATO
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.TEKST
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.ENHETSLØS
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
@@ -10,7 +12,7 @@ import java.util.Locale
 
 data class Opplysning(
     val opplysningTekstId: String,
-    val verdi: String,
+    private val råVerdi: String,
     val datatype: Datatype,
     val enhet: Enhet = ENHETSLØS,
 ) {
@@ -18,51 +20,35 @@ data class Opplysning(
         val NULL_OPPLYSNING =
             Opplysning(
                 opplysningTekstId = "ukjent.opplysning",
-                verdi = "ukjent",
+                råVerdi = "ukjent",
                 datatype = TEKST,
                 enhet = ENHETSLØS,
             )
     }
 
-    fun formatering(): String {
-        return when (this.datatype) {
-            Datatype.DATO -> formatDate(this.verdi)
-            else -> this.verdi
-        }
-    }
+    fun råVerdi(): String = råVerdi
 
-    fun enhet(): String {
-        return when (this.enhet) {
-            KRONER -> " kroner"
-            else -> ""
-        }
-    }
+    val formatertVerdi: String
+        get() =
+            when (datatype) {
+                FLYTTALL ->
+                    when (enhet) {
+                        KRONER -> "${formaterTall(antallDesimaler = 2, desimaltall = råVerdi.toDouble())} kroner"
+                        else -> formaterTall(antallDesimaler = 1, desimaltall = råVerdi.toDouble())
+                    }
+                HELTALL ->
+                    when (enhet) {
+                        KRONER -> "${formaterTall(desimaltall = råVerdi.toDouble())} kroner"
+                        else -> formaterTall(desimaltall = råVerdi.toDouble())
+                    }
 
-    fun verdiMedEnhet(): String {
-        return "${this.formatering()}${this.enhet()}"
-    }
+                DATO -> formaterDato(råVerdi)
+                else -> råVerdi
+            }
 
-    fun formatDate(dateString: String): String {
-        val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val outputFormatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy", Locale("no"))
-        val date = LocalDate.parse(dateString, inputFormatter)
-        return date.format(outputFormatter)
-    }
-
-    fun formaterVerdi(): String {
-        return when (datatype) {
-            FLYTTALL ->
-                when (enhet) {
-                    KRONER -> formaterDesimaltall(antallDesimaler = 2, desimaltall = verdi.toDouble())
-                    else -> formaterDesimaltall(desimaltall = verdi.toDouble())
-                }
-            else -> verdi
-        }
-    }
-
-    private fun formaterDesimaltall(
+    private fun formaterTall(
         desimaltall: Double,
-        antallDesimaler: Int = 1,
+        antallDesimaler: Int = 0,
     ): String {
         val norskFormat = Locale.of("nb", "NO")
         return when {
@@ -72,6 +58,12 @@ data class Opplysning(
     }
 
     private fun erHeltall(desimaltall: Double) = desimaltall % 1 == 0.0
+
+    private fun formaterDato(dateString: String): String {
+        val date = LocalDate.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE)
+        val norskFormat = Locale.of("nb", "NO")
+        return "${date.dayOfMonth}. " + date.format(DateTimeFormatter.ofPattern("MMMM yyyy", norskFormat))
+    }
 
     enum class Datatype {
         TEKST,
