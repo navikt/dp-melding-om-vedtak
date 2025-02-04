@@ -1,6 +1,9 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
 import mu.KotlinLogging
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.RETT_TIL_INNSYN
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.SPØRSMÅL
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagMelding
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseMelding
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
@@ -44,9 +47,9 @@ abstract class VedtakMelding(
     companion object {
         val fasteBlokker =
             listOf(
-                "brev.blokk.sporsmaal",
-                "brev.blokk.rett-til-innsyn",
-                "brev.blokk.rett-til-aa-klage",
+                SPØRSMÅL.brevBlokkId,
+                RETT_TIL_INNSYN.brevBlokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
             )
 
         fun byggVedtaksmelding(
@@ -77,6 +80,12 @@ abstract class VedtakMelding(
                 }
             }
         }
+    }
+
+    enum class FasteBrevblokker(val brevBlokkId: String) {
+        SPØRSMÅL("brev.blokk.sporsmaal"),
+        RETT_TIL_INNSYN("brev.blokk.rett-til-innsyn"),
+        RETT_TIL_Å_KLAGE("brev.blokk.rett-til-aa-klage"),
     }
 
     class UkjentVedtakException(override val message: String, override val cause: Throwable? = null) :

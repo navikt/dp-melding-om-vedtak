@@ -26,6 +26,7 @@ import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.BOOLSK
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.ENHETSLØS
@@ -214,7 +215,7 @@ class MeldingOmVedtakApiTest {
             }.let { response ->
                 response.status shouldBe HttpStatusCode.OK
                 response.bodyAsText() shouldEqualJson
-                    """{"brevblokkIder" : ["brev.blokk.rett-til-aa-klage"], "opplysninger" : [], "utvidedeBeskrivelser" : []}"""
+                    """{"brevblokkIder" : ["${RETT_TIL_Å_KLAGE.brevBlokkId}"], "opplysninger" : [], "utvidedeBeskrivelser" : []}"""
             }
         }
     }
@@ -286,7 +287,7 @@ class MeldingOmVedtakApiTest {
                     listOf(
                         UtvidetBeskrivelse(
                             behandlingId = behandlingId,
-                            brevblokkId = "brev.blokk.rett-til-aa-klage",
+                            brevblokkId = RETT_TIL_Å_KLAGE.brevBlokkId,
                             tekst = "hallo",
                             sistEndretTidspunkt = LocalDateTime.MAX,
                         ),
@@ -315,7 +316,7 @@ class MeldingOmVedtakApiTest {
                     {
                       "utvidedeBeskrivelser": [
                          {
-                           "brevblokkId": "brev.blokk.rett-til-aa-klage",
+                           "brevblokkId": "${RETT_TIL_Å_KLAGE.brevBlokkId}",
                            "tekst": "hallo",
                            "sistEndretTidspunkt": "+999999999-12-31T23:59:59.999999999"
                          },

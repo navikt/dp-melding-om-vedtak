@@ -25,6 +25,7 @@ import no.nav.dagpenger.vedtaksmelding.apiconfig.apiConfig
 import no.nav.dagpenger.vedtaksmelding.apiconfig.jwt
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import java.util.UUID
 
@@ -70,7 +71,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                             }.onFailure { t ->
                                 logger.error(t) { "Feil ved henting av melding om vedtak for behandling $behandlingId" }
                             }.getOrElse {
-                                MeldingOmVedtakDTO(listOf("brev.blokk.rett-til-aa-klage"), emptyList(), emptyList())
+                                MeldingOmVedtakDTO(listOf(RETT_TIL_Å_KLAGE.brevBlokkId), emptyList(), emptyList())
                             }
                     call.respond(meldingOmVedtakDTO)
                 }
