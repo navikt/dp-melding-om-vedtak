@@ -165,9 +165,12 @@ object HtmlConverter {
                             if (brevBlokk.utvidetBeskrivelse) {
                                 p {
                                     attributes["data-utvidet-beskrivelse-id"] = brevBlokk.textId
-                                    utvidetBeskrivelse.find { it.brevblokkId == brevBlokk.textId }?.tekst?.let {
-                                        +it
-                                    }
+                                    utvidetBeskrivelse.find { it.brevblokkId == brevBlokk.textId }?.htmlTekst()
+                                        ?.let { html ->
+                                            unsafe {
+                                                raw(html)
+                                            }
+                                        }
                                 }
                             }
                         }
