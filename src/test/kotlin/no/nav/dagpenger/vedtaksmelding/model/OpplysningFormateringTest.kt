@@ -2,7 +2,9 @@ package no.nav.dagpenger.vedtaksmelding.model
 
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.DATO
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
 import org.junit.jupiter.api.Test
 
@@ -13,66 +15,98 @@ class OpplysningFormateringTest {
     private val nonBreakingSpace = "\u00A0"
 
     @Test
+    fun `Dato formateres riktig`() {
+        Opplysning(
+            opplysningTekstId = "bubba",
+            råVerdi = "2025-01-01",
+            datatype = DATO,
+        ).formatertVerdi shouldBe "1. januar 2025"
+
+        Opplysning(
+            opplysningTekstId = "bubba",
+            råVerdi = "2025-01-10",
+            datatype = DATO,
+        ).formatertVerdi shouldBe "10. januar 2025"
+    }
+
+    @Test
+    fun `Heltall med enhet kroner skal formateres riktig`() {
+        Opplysning(
+            opplysningTekstId = "bubba",
+            råVerdi = "10",
+            datatype = HELTALL,
+            enhet = KRONER,
+        ).formatertVerdi shouldBe "10 kroner"
+
+        Opplysning(
+            opplysningTekstId = "bubba",
+            råVerdi = "1000",
+            datatype = HELTALL,
+            enhet = KRONER,
+        ).formatertVerdi shouldBe "1${nonBreakingSpace}000 kroner"
+    }
+
+    @Test
     fun `Flyttall med enhet kroner skal formateres riktig`() {
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "10.5",
+            råVerdi = "10.5",
             datatype = FLYTTALL,
             enhet = KRONER,
-        ).formaterVerdi() shouldBe "10,50"
+        ).formatertVerdi shouldBe "10,50 kroner"
 
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "10.599",
+            råVerdi = "10.599",
             datatype = FLYTTALL,
             enhet = KRONER,
-        ).formaterVerdi() shouldBe "10,60"
+        ).formatertVerdi shouldBe "10,60 kroner"
 
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "1000.0",
+            råVerdi = "1000.0",
             datatype = FLYTTALL,
             enhet = KRONER,
-        ).formaterVerdi() shouldBe "1${nonBreakingSpace}000"
+        ).formatertVerdi shouldBe "1${nonBreakingSpace}000 kroner"
 
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "10",
+            råVerdi = "10",
             datatype = FLYTTALL,
             enhet = KRONER,
-        ).formaterVerdi() shouldBe "10"
+        ).formatertVerdi shouldBe "10 kroner"
     }
 
     @Test
     fun `Flyttall formateres riktig`() {
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "10",
+            råVerdi = "10",
             datatype = FLYTTALL,
-        ).formaterVerdi() shouldBe "10"
+        ).formatertVerdi shouldBe "10"
 
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "10.0",
+            råVerdi = "10.0",
             datatype = FLYTTALL,
-        ).formaterVerdi() shouldBe "10"
+        ).formatertVerdi shouldBe "10"
 
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "10.5",
+            råVerdi = "10.5",
             datatype = FLYTTALL,
-        ).formaterVerdi() shouldBe "10,5"
+        ).formatertVerdi shouldBe "10,5"
 
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "1000000.59",
+            råVerdi = "1000000.59",
             datatype = FLYTTALL,
-        ).formaterVerdi() shouldBe "1${nonBreakingSpace}000${nonBreakingSpace}000,6"
+        ).formatertVerdi shouldBe "1${nonBreakingSpace}000${nonBreakingSpace}000,6"
 
         Opplysning(
             opplysningTekstId = "bubba",
-            verdi = "10000.593",
+            råVerdi = "10000.593",
             datatype = FLYTTALL,
-        ).formaterVerdi() shouldBe "10${nonBreakingSpace}000,6"
+        ).formatertVerdi shouldBe "10${nonBreakingSpace}000,6"
     }
 }

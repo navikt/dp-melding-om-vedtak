@@ -38,7 +38,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.grunnlag") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.grunnlag",
-                verdi = "206997",
+                råVerdi = "206997",
                 datatype = HELTALL,
                 enhet = KRONER,
             )
@@ -49,7 +49,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.provingsdato") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.provingsdato",
-                verdi = "2025-01-16",
+                råVerdi = "2025-01-16",
                 datatype = DATO,
                 enhet = ENHETSLØS,
             )
@@ -60,7 +60,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.fastsatt-ny-arbeidstid-per-uke") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.fastsatt-ny-arbeidstid-per-uke",
-                verdi = "10.1",
+                råVerdi = "10.123456",
                 datatype = FLYTTALL,
                 enhet = TIMER,
             )
@@ -71,7 +71,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.fastsatt-arbeidstid-per-uke-for-tap") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.fastsatt-arbeidstid-per-uke-for-tap",
-                verdi = "33.5",
+                råVerdi = "33.45",
                 datatype = FLYTTALL,
                 enhet = TIMER,
             )
@@ -82,7 +82,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.krav-til-prosentvis-tap-av-arbeidstid") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.krav-til-prosentvis-tap-av-arbeidstid",
-                verdi = "50",
+                råVerdi = "50.0",
                 datatype = FLYTTALL,
                 enhet = ENHETSLØS,
             )
@@ -93,10 +93,12 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.dagsats-med-barnetillegg-etter-samordning-og-90-prosent-regel") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.dagsats-med-barnetillegg-etter-samordning-og-90-prosent-regel",
-                verdi = "321",
+                råVerdi = "321",
                 datatype = HELTALL,
                 enhet = KRONER,
-            )
+            ).also {
+                it.formatertVerdi shouldBe "321 kroner"
+            }
     }
 
     @Test
@@ -104,7 +106,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.inntektskrav-for-siste-12-mnd") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.inntektskrav-for-siste-12-mnd",
-                verdi = "186042",
+                råVerdi = "186042",
                 datatype = HELTALL,
                 enhet = KRONER,
             )
@@ -115,7 +117,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.inntektskrav-for-siste-36-mnd") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.inntektskrav-for-siste-36-mnd",
-                verdi = "372084",
+                råVerdi = "372084",
                 datatype = HELTALL,
                 enhet = KRONER,
             )
@@ -126,7 +128,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.arbeidsinntekt-siste-12-mnd") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.arbeidsinntekt-siste-12-mnd",
-                verdi = "0",
+                råVerdi = "0",
                 datatype = HELTALL,
                 enhet = KRONER,
             )
@@ -137,7 +139,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.arbeidsinntekt-siste-36-mnd") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.arbeidsinntekt-siste-36-mnd",
-                verdi = "555500",
+                råVerdi = "555500",
                 datatype = HELTALL,
                 enhet = KRONER,
             )
@@ -148,7 +150,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt",
-                verdi = "3",
+                råVerdi = "3.0",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -159,7 +161,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.brukt-beregningsregel-grunnlag") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.brukt-beregningsregel-grunnlag",
-                verdi = "Gjennomsnittlig arbeidsinntekt siste 36 måneder",
+                råVerdi = "Gjennomsnittlig arbeidsinntekt siste 36 måneder",
                 datatype = TEKST,
                 enhet = ENHETSLØS,
             )
@@ -170,7 +172,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger",
-                verdi = "52",
+                råVerdi = "52",
                 datatype = HELTALL,
                 enhet = UKER,
             )
@@ -181,7 +183,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.antall-stonadsuker") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.antall-stonadsuker",
-                verdi = "52",
+                råVerdi = "52",
                 datatype = HELTALL,
                 enhet = UKER,
             )
@@ -192,7 +194,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.egenandel") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.egenandel",
-                verdi = "963",
+                råVerdi = "963",
                 datatype = HELTALL,
                 enhet = KRONER,
             )
@@ -203,7 +205,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.sykepenger-dagsats") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.sykepenger-dagsats",
-                verdi = "100",
+                råVerdi = "100",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -214,7 +216,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.pleiepenger-dagsats") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.pleiepenger-dagsats",
-                verdi = "150",
+                råVerdi = "150",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -225,7 +227,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.omsorgspenger-dagsats") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.omsorgspenger-dagsats",
-                verdi = "150",
+                råVerdi = "150",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -236,7 +238,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.opplaeringspenger-dagsats") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.opplaeringspenger-dagsats",
-                verdi = "180",
+                råVerdi = "180",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -247,7 +249,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.ufore-dagsats") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.ufore-dagsats",
-                verdi = "200",
+                råVerdi = "200",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -258,7 +260,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.foreldrepenger-dagsats") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.foreldrepenger-dagsats",
-                verdi = "210",
+                råVerdi = "210",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -269,7 +271,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.svangerskapspenger-dagsats") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.svangerskapspenger-dagsats",
-                verdi = "150",
+                råVerdi = "150",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -280,7 +282,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.utbetalt-arbeidsinntekt-periode-1") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.utbetalt-arbeidsinntekt-periode-1",
-                verdi = "0",
+                råVerdi = "0",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -291,7 +293,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.utbetalt-arbeidsinntekt-periode-2") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.utbetalt-arbeidsinntekt-periode-2",
-                verdi = "55550",
+                råVerdi = "55550",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -302,7 +304,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.utbetalt-arbeidsinntekt-periode-3") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.utbetalt-arbeidsinntekt-periode-3",
-                verdi = "499950",
+                råVerdi = "499950",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -313,7 +315,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.har-samordnet") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.har-samordnet",
-                verdi = "true",
+                råVerdi = "true",
                 datatype = BOOLSK,
                 enhet = ENHETSLØS,
             )
@@ -324,7 +326,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget",
-                verdi = "0",
+                råVerdi = "0",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -335,7 +337,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.antall-barn-som-gir-rett-til-barnetillegg") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.antall-barn-som-gir-rett-til-barnetillegg",
-                verdi = "2",
+                råVerdi = "2",
                 datatype = HELTALL,
                 enhet = BARN,
             )
@@ -346,7 +348,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.barnetillegg-i-kroner") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.barnetillegg-i-kroner",
-                verdi = "74",
+                råVerdi = "74",
                 datatype = FLYTTALL,
                 enhet = KRONER,
             )
@@ -357,7 +359,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.forste-maaned-av-opptjeningsperiode") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.forste-maaned-av-opptjeningsperiode",
-                verdi = "2022-01-01",
+                råVerdi = "2022-01-01",
                 datatype = DATO,
                 enhet = ENHETSLØS,
             )
@@ -368,7 +370,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.siste-avsluttende-kalendermaaned") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.siste-avsluttende-kalendermaaned",
-                verdi = "2024-12-31",
+                råVerdi = "2024-12-31",
                 datatype = DATO,
                 enhet = ENHETSLØS,
             )
@@ -379,7 +381,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.6-ganger-grunnbelop") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.6-ganger-grunnbelop",
-                verdi = "744168",
+                råVerdi = "744168",
                 datatype = HELTALL,
                 enhet = KRONER,
             )
@@ -390,7 +392,7 @@ class VedtakMapperTest {
         vedtak.finnOpplysning("opplysning.krav-til-minsteinntekt") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.krav-til-minsteinntekt",
-                verdi = "true",
+                råVerdi = "true",
                 datatype = BOOLSK,
             )
     }
@@ -399,23 +401,23 @@ class VedtakMapperTest {
     fun `Hent inntjeningsperiode opplysninger`() {
         vedtak.opplysninger.single {
             it.opplysningTekstId == "opplysning.forste-maaned-aar-for-inntektsperiode-1"
-        }.verdi shouldBe "januar 2024"
+        }.formatertVerdi shouldBe "januar 2024"
         vedtak.opplysninger.single {
             it.opplysningTekstId == "opplysning.forste-maaned-aar-for-inntektsperiode-2"
-        }.verdi shouldBe "januar 2023"
+        }.formatertVerdi shouldBe "januar 2023"
         vedtak.opplysninger.single {
             it.opplysningTekstId == "opplysning.forste-maaned-aar-for-inntektsperiode-3"
-        }.verdi shouldBe "januar 2022"
+        }.formatertVerdi shouldBe "januar 2022"
 
         vedtak.opplysninger.single {
             it.opplysningTekstId == "opplysning.siste-maaned-aar-for-inntektsperiode-1"
-        }.verdi shouldBe "desember 2024"
+        }.formatertVerdi shouldBe "desember 2024"
         vedtak.opplysninger.single {
             it.opplysningTekstId == "opplysning.siste-maaned-aar-for-inntektsperiode-2"
-        }.verdi shouldBe "desember 2023"
+        }.formatertVerdi shouldBe "desember 2023"
         vedtak.opplysninger.single {
             it.opplysningTekstId == "opplysning.siste-maaned-aar-for-inntektsperiode-3"
-        }.verdi shouldBe "desember 2022"
+        }.formatertVerdi shouldBe "desember 2022"
     }
 
     @Test

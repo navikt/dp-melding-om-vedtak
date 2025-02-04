@@ -24,27 +24,27 @@ class AvslagMeldingTaptArbeidstidTest {
         avslagArbeidstidVedtak.finnOpplysning("opplysning.fastsatt-arbeidstid-per-uke-for-tap") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.fastsatt-arbeidstid-per-uke-for-tap",
-                verdi = "37.5",
+                råVerdi = "37.5",
                 datatype = FLYTTALL,
                 enhet = TIMER,
             )
         avslagArbeidstidVedtak.finnOpplysning("opplysning.fastsatt-ny-arbeidstid-per-uke") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.fastsatt-ny-arbeidstid-per-uke",
-                verdi = "20",
+                råVerdi = "20",
                 datatype = FLYTTALL,
                 enhet = TIMER,
             )
         avslagArbeidstidVedtak.finnOpplysning("opplysning.krav-til-prosentvis-tap-av-arbeidstid") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.krav-til-prosentvis-tap-av-arbeidstid",
-                verdi = "50",
+                råVerdi = "50.0",
                 datatype = FLYTTALL,
             )
         avslagArbeidstidVedtak.finnOpplysning("opplysning.prosentvis-tapt-arbeidstid") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.prosentvis-tapt-arbeidstid",
-                verdi = "46.7",
+                råVerdi = "46.7",
                 datatype = FLYTTALL,
             )
     }
