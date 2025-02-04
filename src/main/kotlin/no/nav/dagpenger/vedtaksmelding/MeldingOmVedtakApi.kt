@@ -105,7 +105,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
 
                         call.respond(meldingOmVedtakResponseDTO)
                     }.onFailure { t ->
-                        logger.error(t) { "Feil ved henting av vedtaksmelding som html (hentVedtakHtml)" }
+                        logger.error(t) { "Feil ved henting av vedtaksmelding som html (hentVedtakHtml). BehandlingId: $behandlingId" }
                         call.respond(HttpStatusCode.InternalServerError)
                     }
                 }
@@ -124,7 +124,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                             )
                         call.respond(vedtaksHtml)
                     }.onFailure { t ->
-                        logger.error(t) { "Feil ved henting av vedtaksmelding som html (hentEndeligVedtak)" }
+                        logger.error(t) { "Feil ved henting av vedtaksmelding som html (hentEndeligVedtak). BehandlingId: $behandlingId" }
                         call.respond(HttpStatusCode.InternalServerError)
                     }
                 }

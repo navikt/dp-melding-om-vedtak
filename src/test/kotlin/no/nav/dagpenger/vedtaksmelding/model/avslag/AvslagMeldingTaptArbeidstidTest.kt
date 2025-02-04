@@ -44,7 +44,7 @@ class AvslagMeldingTaptArbeidstidTest {
         avslagArbeidstidVedtak.finnOpplysning("opplysning.prosentvis-tapt-arbeidstid") shouldBe
             Opplysning(
                 opplysningTekstId = "opplysning.prosentvis-tapt-arbeidstid",
-                råVerdi = "46.7",
+                råVerdi = "46.666666666666664",
                 datatype = FLYTTALL,
             )
     }

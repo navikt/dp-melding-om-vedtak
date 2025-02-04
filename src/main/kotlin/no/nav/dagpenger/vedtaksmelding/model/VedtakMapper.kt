@@ -45,7 +45,6 @@ import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.INNVILGET
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
 import java.time.LocalDate
 import java.time.Month
-import java.util.Locale
 import java.util.UUID
 
 class VedtakMapper(vedtakJson: String) {
@@ -231,25 +230,17 @@ class VedtakMapper(vedtakJson: String) {
             }?.let { opplysning ->
                 opplysning.råVerdi().toDouble()
             }
-        if (fastsattVanligArbeidsid != null && fastsattNyArbeidstid != null) {
+        if (fastsattVanligArbeidsid != null && fastsattNyArbeidstid != null && fastsattVanligArbeidsid != 0.0) {
             val prosentvisTaptArbeidstid = ((fastsattVanligArbeidsid - fastsattNyArbeidstid) / fastsattVanligArbeidsid) * 100
             opplysninger.add(
                 Opplysning(
                     opplysningTekstId = "opplysning.prosentvis-tapt-arbeidstid",
-                    råVerdi = formaterDesimaltall(prosentvisTaptArbeidstid),
+                    råVerdi = prosentvisTaptArbeidstid.toString(),
                     datatype = FLYTTALL,
                 ),
             )
         }
         return opplysninger
-    }
-
-    private fun formaterDesimaltall(
-        desimaltall: Double,
-        antallDesimaler: Int = 1,
-    ) = when {
-        desimaltall % 1 == 0.0 -> String.format("%.0f", desimaltall)
-        else -> String.format(Locale.US, "%.${antallDesimaler}f", desimaltall)
     }
 
     private val inntjeningsperiodeOpplysninger = vedtakOpplysninger.finnInntjeningsPeriode()
