@@ -20,6 +20,7 @@ import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagMelding
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT_ELLER_VERNEPLIKT
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
@@ -195,7 +196,7 @@ class MediatorTest {
                     listOf(
                         UtvidetBeskrivelse(
                             behandlingId = behandlingId,
-                            brevblokkId = "brev.blokk.rett-til-aa-klage",
+                            brevblokkId = RETT_TIL_Å_KLAGE.brevBlokkId,
                             tekst = "hallo",
                             sistEndretTidspunkt = LocalDateTime.MAX,
                         ),
@@ -221,7 +222,7 @@ class MediatorTest {
                             coEvery { it.hentBrevBlokker() } returns
                                 listOf(
                                     BrevBlokk(
-                                        textId = "brev.blokk.rett-til-aa-klage",
+                                        textId = RETT_TIL_Å_KLAGE.brevBlokkId,
                                         title = "Rett til å klage",
                                         utvidetBeskrivelse = true,
                                         innhold = emptyList(),
@@ -260,7 +261,7 @@ class MediatorTest {
                 it.brevblokkId == "brev.blokk.rett-til-ikke-innhold"
             }.tekst shouldBe null
             utvidedebeskrivelser.single {
-                it.brevblokkId == "brev.blokk.rett-til-aa-klage"
+                it.brevblokkId == RETT_TIL_Å_KLAGE.brevBlokkId
             }.tekst shouldBe "hallo"
             utvidedebeskrivelser.single {
                 it.brevblokkId == "brev.blokk.rett-til-aa-random"
