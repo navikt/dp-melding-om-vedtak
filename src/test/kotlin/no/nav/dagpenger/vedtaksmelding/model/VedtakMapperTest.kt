@@ -96,7 +96,9 @@ class VedtakMapperTest {
                 råVerdi = "321",
                 datatype = HELTALL,
                 enhet = KRONER,
-            )
+            ).also {
+                it.formatertVerdi shouldBe "321 kroner"
+            }
     }
 
     @Test
