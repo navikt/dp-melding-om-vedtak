@@ -1,5 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.model.vedtak
 
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.DATO
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.TEKST
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.ENHETSLØS
@@ -31,11 +32,19 @@ data class Opplysning(
             when (datatype) {
                 FLYTTALL ->
                     when (enhet) {
-                        KRONER -> formaterDesimaltall(antallDesimaler = 2, desimaltall = råVerdi.toDouble())
+                        KRONER -> formaterDesimaltall(antallDesimaler = 2, desimaltall = råVerdi.toDouble()) + " kroner"
                         else -> formaterDesimaltall(desimaltall = råVerdi.toDouble())
                     }
+
+                DATO -> formaterDato(råVerdi)
                 else -> råVerdi
             }
+
+    private fun formaterDato(dateString: String): String {
+        val date = LocalDate.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE)
+        val norskFormat = Locale.of("nb", "NO")
+        return "${date.dayOfMonth}. " + date.format(DateTimeFormatter.ofPattern("MMMM yyyy", norskFormat))
+    }
 
     private fun formaterDesimaltall(
         desimaltall: Double,
@@ -49,31 +58,6 @@ data class Opplysning(
     }
 
     private fun erHeltall(desimaltall: Double) = desimaltall % 1 == 0.0
-
-    fun formatering(): String {
-        return when (this.datatype) {
-            Datatype.DATO -> formatDate(this.råVerdi)
-            else -> this.råVerdi
-        }
-    }
-
-    fun enhet(): String {
-        return when (this.enhet) {
-            KRONER -> " kroner"
-            else -> ""
-        }
-    }
-
-    fun verdiMedEnhet(): String {
-        return "${this.formatering()}${this.enhet()}"
-    }
-
-    fun formatDate(dateString: String): String {
-        val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val outputFormatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy", Locale.of("nb", "NO"))
-        val date = LocalDate.parse(dateString, inputFormatter)
-        return date.format(outputFormatter)
-    }
 
     enum class Datatype {
         TEKST,

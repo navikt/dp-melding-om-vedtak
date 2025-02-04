@@ -154,7 +154,7 @@ object HtmlConverter {
                                                         mapping[textId]
                                                             ?: throw RuntimeException("Opplysning ikke funnet $textId")
                                                     span("melding-om-vedtak-opplysning-verdi") {
-                                                        +opplysning.verdiMedEnhet()
+                                                        +opplysning.formatertVerdi
                                                     }
                                                 }
                                             }

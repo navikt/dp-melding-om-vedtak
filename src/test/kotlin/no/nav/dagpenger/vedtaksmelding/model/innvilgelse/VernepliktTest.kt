@@ -26,7 +26,7 @@ class VernepliktTest {
                 datatype = FLYTTALL,
                 enhet = KRONER,
             ).also {
-                it.formatertVerdi shouldBe "3"
+                it.formatertVerdi shouldBe "3 kroner"
             }
     }
 
