@@ -250,13 +250,13 @@ class VedtakMapper(vedtakJson: String) {
 
         val opptjeningsperiodeStart: LocalDate? =
             this.singleOrNull {
-                it.opplysningTekstId == "opplysning.forste-maaned-av-opptjeningsperiode"
+                it.opplysningTekstId == FørsteMånedAvOpptjeningsperiode.opplysningTekstId
             }?.let { opplysning ->
                 LocalDate.parse(opplysning.råVerdi())
             }
         val opptjeningsperiodeSlutt: LocalDate? =
             this.singleOrNull {
-                it.opplysningTekstId == "opplysning.siste-avsluttende-kalendermaaned"
+                it.opplysningTekstId == SisteMånedAvOpptjeningsperiode.opplysningTekstId
             }?.let { opplysning ->
                 LocalDate.parse(opplysning.råVerdi())
             }

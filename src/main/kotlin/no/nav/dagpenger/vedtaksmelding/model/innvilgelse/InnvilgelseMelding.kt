@@ -1,5 +1,8 @@
 package no.nav.dagpenger.vedtaksmelding.model.innvilgelse
 
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.KravTilMinsteinntekt
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
@@ -73,7 +76,7 @@ class InnvilgelseMelding(
         }
 
     private fun nittiProsentRegel(): List<String> {
-        val id = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget"
+        val id = AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget.opplysningTekstId
         return vedtak.opplysninger.find {
             it.opplysningTekstId == id &&
                 it.råVerdi().toDouble() > 0
@@ -132,7 +135,7 @@ class InnvilgelseMelding(
 
     private fun barnetillegg(): List<String> {
         return vedtak.opplysninger.find {
-            it.opplysningTekstId == "opplysning.antall-barn-som-gir-rett-til-barnetillegg" && it.råVerdi().toInt() > 0
+            it.opplysningTekstId == AntallBarnSomGirRettTilBarnetillegg.opplysningTekstId && it.råVerdi().toInt() > 0
         }
             ?.let {
                 listOf(INNVILGELSE_BARNETILLEGG.brevblokkId)
@@ -144,7 +147,7 @@ class InnvilgelseMelding(
         val erInnvilgetMedVerneplikt =
             vedtak.opplysninger.any { it.opplysningTekstId == "opplysning.er-innvilget-med-verneplikt" && it.formatertVerdi == "true" }
         val kravTilMinsteinntektErOppfylt =
-            vedtak.opplysninger.any { it.opplysningTekstId == "opplysning.krav-til-minsteinntekt" && it.formatertVerdi == "true" }
+            vedtak.opplysninger.any { it.opplysningTekstId == KravTilMinsteinntekt.opplysningTekstId && it.formatertVerdi == "true" }
 
         if (erInnvilgetMedVerneplikt) {
             grunnlagBlokker.add(INNVILGELSE_GRUNNLAG_VERNEPLIKT.brevblokkId)

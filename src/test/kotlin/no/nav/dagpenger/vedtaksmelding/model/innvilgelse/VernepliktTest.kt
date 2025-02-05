@@ -1,6 +1,8 @@
 package no.nav.dagpenger.vedtaksmelding.model.innvilgelse
 
 import io.kotest.matchers.shouldBe
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallGSomGisSomGrunnlagVedVerneplikt
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallStønadsukerSomGisVedOrdinæreDagpenger
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.BOOLSK
@@ -19,9 +21,9 @@ class VernepliktTest {
 
     @Test
     fun `skal hente antall G som gis som grunnlag ved bruk av vernepliktregel`() {
-        vedtakVerneplikt.finnOpplysning("opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt") shouldBe
+        vedtakVerneplikt.finnOpplysning(AntallGSomGisSomGrunnlagVedVerneplikt.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt",
+                opplysningTekstId = AntallGSomGisSomGrunnlagVedVerneplikt.opplysningTekstId,
                 råVerdi = "3.0",
                 datatype = FLYTTALL,
                 enhet = KRONER,
@@ -32,9 +34,9 @@ class VernepliktTest {
 
     @Test
     fun `Hent opplysning Antall stønadsuker som gis ved ordinære dagpenger`() {
-        vedtakVerneplikt.finnOpplysning("opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger") shouldBe
+        vedtakVerneplikt.finnOpplysning(AntallStønadsukerSomGisVedOrdinæreDagpenger.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger",
+                opplysningTekstId = AntallStønadsukerSomGisVedOrdinæreDagpenger.opplysningTekstId,
                 råVerdi = "0",
                 datatype = HELTALL,
                 enhet = UKER,

@@ -1,6 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding.model.innvilgelse
 
 import io.kotest.matchers.shouldBe
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallStønadsukerSomGisVedOrdinæreDagpenger
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.BOOLSK
@@ -30,9 +31,9 @@ class VernepliktOgInntektTest {
                 datatype = HELTALL,
                 enhet = UKER,
             )
-        vedtakVernepliktOgInntekt.finnOpplysning("opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger") shouldBe
+        vedtakVernepliktOgInntekt.finnOpplysning(AntallStønadsukerSomGisVedOrdinæreDagpenger.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger",
+                opplysningTekstId = AntallStønadsukerSomGisVedOrdinæreDagpenger.opplysningTekstId,
                 råVerdi = "52",
                 datatype = HELTALL,
                 enhet = UKER,

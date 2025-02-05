@@ -2,6 +2,7 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.KravTilProsentvisTapAvArbeidstid
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
@@ -35,9 +36,9 @@ class AvslagMeldingTaptArbeidstidTest {
                 datatype = FLYTTALL,
                 enhet = TIMER,
             )
-        avslagArbeidstidVedtak.finnOpplysning("opplysning.krav-til-prosentvis-tap-av-arbeidstid") shouldBe
+        avslagArbeidstidVedtak.finnOpplysning(KravTilProsentvisTapAvArbeidstid.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.krav-til-prosentvis-tap-av-arbeidstid",
+                opplysningTekstId = KravTilProsentvisTapAvArbeidstid.opplysningTekstId,
                 råVerdi = "50.0",
                 datatype = FLYTTALL,
             )
