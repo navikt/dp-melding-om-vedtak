@@ -45,16 +45,18 @@ class AvslagMelding(
 ) : VedtakMelding(vedtak) {
     override val harBrevstøtte: Boolean =
         vedtak.utfall == AVSLÅTT &&
-            (
-                vedtak.vilkår.avslagMinsteinntekt() ||
-                    vedtak.vilkår.avslagReellArbeidssøker() ||
-                    vedtak.vilkår.avslagTaptArbeidsinntekt() ||
-                    vedtak.vilkår.avslagTaptArbeidstid() ||
-                    vedtak.vilkår.avslagOppholdUtland() ||
-                    vedtak.vilkår.avslagAndreFulleYtelser() ||
-                    vedtak.vilkår.avslagUtestengt() ||
-                    vedtak.vilkår.avslagStreikEllerLockout()
-            )
+            listOf(
+                MINSTEINNTEKT_ELLER_VERNEPLIKT,
+                REELL_ARBEIDSSØKER,
+                TAPT_ARBEIDSINNTEKT,
+                TAPT_ARBEIDSTID,
+                OPPHOLD_I_NORGE,
+                IKKE_ANDRE_FULLE_YTELSER,
+                IKKE_UTESTENGT,
+                MEDLEM_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT,
+            ).any { vilkår ->
+                vedtak.vilkår.ikkeOppfylt(vilkår)
+            }
 
     init {
         require(this.harBrevstøtte) {
@@ -62,8 +64,10 @@ class AvslagMelding(
         }
     }
 
-    private val innledendeBrevblokker = listOf(AVSLAG_INNLEDNING.brevblokkId)
+    private fun Set<Vilkår>.ikkeOppfylt(avslagsvilkår: AvslagVilkårMedBrevstøtte): Boolean =
+        any { vilkår -> vilkår.navn == avslagsvilkår.navn && vilkår.status == IKKE_OPPFYLT }
 
+    private val innledendeBrevblokker = listOf(AVSLAG_INNLEDNING.brevblokkId)
     override val brevBlokkIder: List<String>
         get() {
             return innledendeBrevblokker +
@@ -76,6 +80,7 @@ class AvslagMelding(
                 blokkerAndreFulleYtelser() +
                 blokkerStreikLockout()
         }
+
     override val brevBlokker: List<BrevBlokk> =
         run {
             val brevBlokkMap = alleBrevblokker.associateBy { it.textId }
@@ -196,61 +201,5 @@ class AvslagMelding(
         }
 
         return grunnerTilAvslag.toList()
-    }
-
-    private fun Set<Vilkår>.avslagMinsteinntekt(): Boolean {
-        return this.any {
-                vilkår ->
-            vilkår.navn == MINSTEINNTEKT_ELLER_VERNEPLIKT.navn && vilkår.status == IKKE_OPPFYLT
-        }
-    }
-
-    private fun Set<Vilkår>.avslagTaptArbeidstid(): Boolean {
-        return this.any {
-                vilkår ->
-            vilkår.navn == TAPT_ARBEIDSTID.navn && vilkår.status == IKKE_OPPFYLT
-        }
-    }
-
-    private fun Set<Vilkår>.avslagTaptArbeidsinntekt(): Boolean {
-        return this.any {
-                vilkår ->
-            vilkår.navn == TAPT_ARBEIDSINNTEKT.navn && vilkår.status == IKKE_OPPFYLT
-        }
-    }
-
-    private fun Set<Vilkår>.avslagUtestengt(): Boolean {
-        return this.any {
-                vilkår ->
-            vilkår.navn == IKKE_UTESTENGT.navn && vilkår.status == IKKE_OPPFYLT
-        }
-    }
-
-    private fun Set<Vilkår>.avslagStreikEllerLockout(): Boolean {
-        return this.any {
-                vilkår ->
-            vilkår.navn == MEDLEM_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT.navn && vilkår.status == IKKE_OPPFYLT
-        }
-    }
-
-    private fun Set<Vilkår>.avslagOppholdUtland(): Boolean {
-        return this.any {
-                vilkår ->
-            vilkår.navn == OPPHOLD_I_NORGE.navn && vilkår.status == IKKE_OPPFYLT
-        }
-    }
-
-    private fun Set<Vilkår>.avslagAndreFulleYtelser(): Boolean {
-        return this.any {
-                vilkår ->
-            vilkår.navn == IKKE_ANDRE_FULLE_YTELSER.navn && vilkår.status == IKKE_OPPFYLT
-        }
-    }
-
-    private fun Set<Vilkår>.avslagReellArbeidssøker(): Boolean {
-        return this.any {
-                vilkår ->
-            vilkår.navn == REELL_ARBEIDSSØKER.navn && vilkår.status == IKKE_OPPFYLT
-        }
     }
 }
