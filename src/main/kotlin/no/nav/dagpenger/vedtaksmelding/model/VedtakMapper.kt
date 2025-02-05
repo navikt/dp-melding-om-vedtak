@@ -9,18 +9,41 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallGSomGisSomGrunnlagVedVerneplikt
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallStønadsuker
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallStønadsukerSomGisVedOrdinæreDagpenger
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ArbeidsinntektSiste12Måneder
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ArbeidsinntektSiste36Måneder
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.BarnetilleggIKroner
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.BruktBeregningsregelGrunnlag
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.Egenandel
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ErInnvilgetMedVerneplikt
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FastsattNyArbeidstidPerUke
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FastsattVanligArbeidstidPerUke
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ForeldrepengerDagsats
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FørsteMånedAvOpptjeningsperiode
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FørsteMånedOgÅrForInntektsperiode1
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FørsteMånedOgÅrForInntektsperiode2
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FørsteMånedOgÅrForInntektsperiode3
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.Grunnlag
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarSamordnet
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.InntektskravSiste12Måneder
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.InntektskravSiste36Måneder
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.KravTilMinsteinntekt
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.KravTilProsentvisTapAvArbeidstid
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.OmsorgspengerDagsats
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.OpplæringspengerDagsats
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.PleiepengerDagsats
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ProsentvisTaptArbeidstid
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.Prøvingsdato
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SeksGangerGrunnbeløp
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SisteMånedAvOpptjeningsperiode
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SisteMånedOgÅrForInntektsperiode1
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SisteMånedOgÅrForInntektsperiode2
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SisteMånedOgÅrForInntektsperiode3
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SvangerskapspengerDagsats
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SykepengerDagsats
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.UføreDagsats
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.UtbetaltArbeidsinntektPeriode1
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.UtbetaltArbeidsinntektPeriode2
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.UtbetaltArbeidsinntektPeriode3
@@ -99,30 +122,30 @@ class VedtakMapper(vedtakJson: String) {
     private val vedtakOpplysninger: Set<Opplysning> =
         setOf(
             vedtak.finnOpplysningAt(
-                opplysningTekstId = "opplysning.grunnlag",
+                opplysningTekstId = Grunnlag.opplysningTekstId,
                 jsonPointer = "/fastsatt/grunnlag/grunnlag",
                 datatype = HELTALL,
                 enhet = KRONER,
             ),
             vedtak.finnOpplysningAt(
-                opplysningTekstId = "opplysning.dagsats-med-barnetillegg-etter-samordning-og-90-prosent-regel",
+                opplysningTekstId = DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel.opplysningTekstId,
                 jsonPointer = "/fastsatt/sats/dagsatsMedBarnetillegg",
                 datatype = HELTALL,
                 enhet = KRONER,
             ),
             vedtak.finnOpplysningAt(
-                opplysningTekstId = "opplysning.provingsdato",
+                opplysningTekstId = Prøvingsdato.opplysningTekstId,
                 jsonPointer = "/virkningsdato",
                 datatype = DATO,
             ),
             vedtak.finnOpplysningAt(
-                opplysningTekstId = "opplysning.fastsatt-ny-arbeidstid-per-uke",
+                opplysningTekstId = FastsattNyArbeidstidPerUke.opplysningTekstId,
                 jsonPointer = "/fastsatt/fastsattVanligArbeidstid/nyArbeidstidPerUke",
                 datatype = FLYTTALL,
                 enhet = TIMER,
             ),
             vedtak.finnOpplysningAt(
-                opplysningTekstId = "opplysning.fastsatt-arbeidstid-per-uke-for-tap",
+                opplysningTekstId = FastsattVanligArbeidstidPerUke.opplysningTekstId,
                 jsonPointer = "/fastsatt/fastsattVanligArbeidstid/vanligArbeidstidPerUke",
                 datatype = FLYTTALL,
                 enhet = TIMER,
@@ -220,13 +243,13 @@ class VedtakMapper(vedtakJson: String) {
         val opplysninger = mutableSetOf<Opplysning>()
         val fastsattVanligArbeidsid: Double? =
             this.singleOrNull {
-                it.opplysningTekstId == "opplysning.fastsatt-arbeidstid-per-uke-for-tap"
+                it.opplysningTekstId == FastsattVanligArbeidstidPerUke.opplysningTekstId
             }?.let { opplysning ->
                 opplysning.råVerdi().toDouble()
             }
         val fastsattNyArbeidstid: Double? =
             this.singleOrNull {
-                it.opplysningTekstId == "opplysning.fastsatt-ny-arbeidstid-per-uke"
+                it.opplysningTekstId == FastsattNyArbeidstidPerUke.opplysningTekstId
             }?.let { opplysning ->
                 opplysning.råVerdi().toDouble()
             }
@@ -234,7 +257,7 @@ class VedtakMapper(vedtakJson: String) {
             val prosentvisTaptArbeidstid = ((fastsattVanligArbeidsid - fastsattNyArbeidstid) / fastsattVanligArbeidsid) * 100
             opplysninger.add(
                 Opplysning(
-                    opplysningTekstId = "opplysning.prosentvis-tapt-arbeidstid",
+                    opplysningTekstId = ProsentvisTaptArbeidstid.opplysningTekstId,
                     råVerdi = prosentvisTaptArbeidstid.toString(),
                     datatype = FLYTTALL,
                 ),
@@ -264,7 +287,7 @@ class VedtakMapper(vedtakJson: String) {
         if (opptjeningsperiodeStart != null && opptjeningsperiodeSlutt != null) {
             opptjeningsperiodeOpplysninger.add(
                 Opplysning(
-                    opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-1",
+                    opplysningTekstId = FørsteMånedOgÅrForInntektsperiode1.opplysningTekstId,
                     råVerdi = opptjeningsperiodeStart.plusYears(2).norskMånedOgÅr(),
                     datatype = TEKST,
                     enhet = ENHETSLØS,
@@ -272,7 +295,7 @@ class VedtakMapper(vedtakJson: String) {
             )
             opptjeningsperiodeOpplysninger.add(
                 Opplysning(
-                    opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-2",
+                    opplysningTekstId = FørsteMånedOgÅrForInntektsperiode2.opplysningTekstId,
                     råVerdi = opptjeningsperiodeStart.plusYears(1).norskMånedOgÅr(),
                     datatype = TEKST,
                     enhet = ENHETSLØS,
@@ -280,7 +303,7 @@ class VedtakMapper(vedtakJson: String) {
             )
             opptjeningsperiodeOpplysninger.add(
                 Opplysning(
-                    opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-3",
+                    opplysningTekstId = FørsteMånedOgÅrForInntektsperiode3.opplysningTekstId,
                     råVerdi = opptjeningsperiodeStart.norskMånedOgÅr(),
                     datatype = TEKST,
                     enhet = ENHETSLØS,
@@ -289,7 +312,7 @@ class VedtakMapper(vedtakJson: String) {
 
             opptjeningsperiodeOpplysninger.add(
                 Opplysning(
-                    opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-1",
+                    opplysningTekstId = SisteMånedOgÅrForInntektsperiode1.opplysningTekstId,
                     råVerdi = opptjeningsperiodeSlutt.norskMånedOgÅr(),
                     datatype = TEKST,
                     enhet = ENHETSLØS,
@@ -297,7 +320,7 @@ class VedtakMapper(vedtakJson: String) {
             )
             opptjeningsperiodeOpplysninger.add(
                 Opplysning(
-                    opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-2",
+                    opplysningTekstId = SisteMånedOgÅrForInntektsperiode2.opplysningTekstId,
                     råVerdi = opptjeningsperiodeSlutt.minusYears(1).norskMånedOgÅr(),
                     datatype = TEKST,
                     enhet = ENHETSLØS,
@@ -305,7 +328,7 @@ class VedtakMapper(vedtakJson: String) {
             )
             opptjeningsperiodeOpplysninger.add(
                 Opplysning(
-                    opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-3",
+                    opplysningTekstId = SisteMånedOgÅrForInntektsperiode3.opplysningTekstId,
                     råVerdi = opptjeningsperiodeSlutt.minusYears(2).norskMånedOgÅr(),
                     datatype = TEKST,
                     enhet = ENHETSLØS,
@@ -358,7 +381,7 @@ class VedtakMapper(vedtakJson: String) {
                 "Sykepenger dagsats" ->
                     opplysninger.add(
                         Opplysning(
-                            opplysningTekstId = "opplysning.sykepenger-dagsats",
+                            opplysningTekstId = SykepengerDagsats.opplysningTekstId,
                             råVerdi = samordnetYtelse["beløp"].asText(),
                             datatype = FLYTTALL,
                             enhet = KRONER,
@@ -368,7 +391,7 @@ class VedtakMapper(vedtakJson: String) {
                 "Pleiepenger dagsats" ->
                     opplysninger.add(
                         Opplysning(
-                            opplysningTekstId = "opplysning.pleiepenger-dagsats",
+                            opplysningTekstId = PleiepengerDagsats.opplysningTekstId,
                             råVerdi = samordnetYtelse["beløp"].asText(),
                             datatype = FLYTTALL,
                             enhet = KRONER,
@@ -378,7 +401,7 @@ class VedtakMapper(vedtakJson: String) {
                 "Omsorgspenger dagsats" ->
                     opplysninger.add(
                         Opplysning(
-                            opplysningTekstId = "opplysning.omsorgspenger-dagsats",
+                            opplysningTekstId = OmsorgspengerDagsats.opplysningTekstId,
                             råVerdi = samordnetYtelse["beløp"].asText(),
                             datatype = FLYTTALL,
                             enhet = KRONER,
@@ -388,7 +411,7 @@ class VedtakMapper(vedtakJson: String) {
                 "Opplæringspenger dagsats" ->
                     opplysninger.add(
                         Opplysning(
-                            opplysningTekstId = "opplysning.opplaeringspenger-dagsats",
+                            opplysningTekstId = OpplæringspengerDagsats.opplysningTekstId,
                             råVerdi = samordnetYtelse["beløp"].asText(),
                             datatype = FLYTTALL,
                             enhet = KRONER,
@@ -398,7 +421,7 @@ class VedtakMapper(vedtakJson: String) {
                 "Uføre dagsats" ->
                     opplysninger.add(
                         Opplysning(
-                            opplysningTekstId = "opplysning.ufore-dagsats",
+                            opplysningTekstId = UføreDagsats.opplysningTekstId,
                             råVerdi = samordnetYtelse["beløp"].asText(),
                             datatype = FLYTTALL,
                             enhet = KRONER,
@@ -408,7 +431,7 @@ class VedtakMapper(vedtakJson: String) {
                 "Foreldrepenger dagsats" ->
                     opplysninger.add(
                         Opplysning(
-                            opplysningTekstId = "opplysning.foreldrepenger-dagsats",
+                            opplysningTekstId = ForeldrepengerDagsats.opplysningTekstId,
                             råVerdi = samordnetYtelse["beløp"].asText(),
                             datatype = FLYTTALL,
                             enhet = KRONER,
@@ -418,7 +441,7 @@ class VedtakMapper(vedtakJson: String) {
                 "Svangerskapspenger dagsats" ->
                     opplysninger.add(
                         Opplysning(
-                            opplysningTekstId = "opplysning.svangerskapspenger-dagsats",
+                            opplysningTekstId = SvangerskapspengerDagsats.opplysningTekstId,
                             råVerdi = samordnetYtelse["beløp"].asText(),
                             datatype = FLYTTALL,
                             enhet = KRONER,
@@ -433,14 +456,14 @@ class VedtakMapper(vedtakJson: String) {
         return when (samordnedeYtelser.size()) {
             0 ->
                 Opplysning(
-                    opplysningTekstId = "opplysning.har-samordnet",
+                    opplysningTekstId = HarSamordnet.opplysningTekstId,
                     råVerdi = false.toString(),
                     datatype = BOOLSK,
                 )
 
             else ->
                 Opplysning(
-                    opplysningTekstId = "opplysning.har-samordnet",
+                    opplysningTekstId = HarSamordnet.opplysningTekstId,
                     råVerdi = true.toString(),
                     datatype = BOOLSK,
                 )
@@ -460,7 +483,7 @@ class VedtakMapper(vedtakJson: String) {
                     bestemStønadsukerOpplysning(opplysninger, kvote)
                     opplysninger.add(
                         Opplysning(
-                            opplysningTekstId = "opplysning.er-innvilget-med-verneplikt",
+                            opplysningTekstId = ErInnvilgetMedVerneplikt.opplysningTekstId,
                             råVerdi = true.toString(),
                             datatype = BOOLSK,
                         ),
@@ -470,7 +493,7 @@ class VedtakMapper(vedtakJson: String) {
                 "Egenandel" ->
                     opplysninger.add(
                         Opplysning(
-                            opplysningTekstId = "opplysning.egenandel",
+                            opplysningTekstId = Egenandel.opplysningTekstId,
                             råVerdi = kvote["verdi"].asText(),
                             datatype = HELTALL,
                             enhet = KRONER,
@@ -486,7 +509,7 @@ class VedtakMapper(vedtakJson: String) {
         opplysninger: MutableSet<Opplysning>,
         kvote: JsonNode,
     ) {
-        val antallStønadsukerTekstId = "opplysning.antall-stonadsuker"
+        val antallStønadsukerTekstId = AntallStønadsuker.opplysningTekstId
         val stønadsukerOpplysning =
             Opplysning(
                 opplysningTekstId = antallStønadsukerTekstId,

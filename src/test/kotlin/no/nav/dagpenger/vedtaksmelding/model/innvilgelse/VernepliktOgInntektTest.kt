@@ -1,7 +1,9 @@
 package no.nav.dagpenger.vedtaksmelding.model.innvilgelse
 
 import io.kotest.matchers.shouldBe
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallStønadsuker
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallStønadsukerSomGisVedOrdinæreDagpenger
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ErInnvilgetMedVerneplikt
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.BOOLSK
@@ -18,15 +20,15 @@ class VernepliktOgInntektTest {
 
     @Test
     fun `Hent relevate opplysninger når både verneplikt og inntektskravet er oppfylt`() {
-        vedtakVernepliktOgInntekt.finnOpplysning("opplysning.er-innvilget-med-verneplikt") shouldBe
+        vedtakVernepliktOgInntekt.finnOpplysning(ErInnvilgetMedVerneplikt.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.er-innvilget-med-verneplikt",
+                opplysningTekstId = ErInnvilgetMedVerneplikt.opplysningTekstId,
                 råVerdi = true.toString(),
                 datatype = BOOLSK,
             )
-        vedtakVernepliktOgInntekt.finnOpplysning("opplysning.antall-stonadsuker") shouldBe
+        vedtakVernepliktOgInntekt.finnOpplysning(AntallStønadsuker.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.antall-stonadsuker",
+                opplysningTekstId = AntallStønadsuker.opplysningTekstId,
                 råVerdi = "26",
                 datatype = HELTALL,
                 enhet = UKER,

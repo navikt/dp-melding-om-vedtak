@@ -2,7 +2,16 @@ package no.nav.dagpenger.vedtaksmelding.model.innvilgelse
 
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ErInnvilgetMedVerneplikt
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ForeldrepengerDagsats
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarSamordnet
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.KravTilMinsteinntekt
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.OmsorgspengerDagsats
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.OpplæringspengerDagsats
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.PleiepengerDagsats
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SvangerskapspengerDagsats
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SykepengerDagsats
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.UføreDagsats
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
@@ -87,31 +96,31 @@ class InnvilgelseMelding(
     }
 
     private fun samordnet(): List<String> {
-        if (!vedtak.opplysninger.any { it.opplysningTekstId == "opplysning.har-samordnet" && it.formatertVerdi == "true" }) {
+        if (!vedtak.opplysninger.any { it.opplysningTekstId == HarSamordnet.opplysningTekstId && it.formatertVerdi == "true" }) {
             return emptyList()
         }
 
         val samordnedeYtelser = mutableSetOf<Pair<String, Double>>()
-        vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.sykepenger-dagsats" && it.råVerdi().toDouble() > 0 }?.let {
+        vedtak.opplysninger.find { it.opplysningTekstId == SykepengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0 }?.let {
             samordnedeYtelser.add("Sykepenger" to it.råVerdi().toDouble())
         }
-        vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.pleiepenger-dagsats" && it.råVerdi().toDouble() > 0 }?.let {
+        vedtak.opplysninger.find { it.opplysningTekstId == PleiepengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0 }?.let {
             samordnedeYtelser.add("Pleiepenger" to it.råVerdi().toDouble())
         }
-        vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.omsorgspenger-dagsats" && it.råVerdi().toDouble() > 0 }?.let {
+        vedtak.opplysninger.find { it.opplysningTekstId == OmsorgspengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0 }?.let {
             samordnedeYtelser.add("Omsorgspenger" to it.råVerdi().toDouble())
         }
-        vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.opplaeringspenger-dagsats" && it.råVerdi().toDouble() > 0 }?.let {
+        vedtak.opplysninger.find { it.opplysningTekstId == OpplæringspengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0 }?.let {
             samordnedeYtelser.add("Opplæringspenger" to it.råVerdi().toDouble())
         }
-        vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.ufore-dagsats" && it.råVerdi().toDouble() > 0 }?.let {
+        vedtak.opplysninger.find { it.opplysningTekstId == UføreDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0 }?.let {
             samordnedeYtelser.add("Uføre" to it.råVerdi().toDouble())
         }
-        vedtak.opplysninger.find { it.opplysningTekstId == "opplysning.foreldrepenger-dagsats" && it.råVerdi().toDouble() > 0 }?.let {
+        vedtak.opplysninger.find { it.opplysningTekstId == ForeldrepengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0 }?.let {
             samordnedeYtelser.add("Foreldrepenger" to it.råVerdi().toDouble())
         }
         vedtak.opplysninger.find {
-            it.opplysningTekstId == "opplysning.svangerskapspenger-dagsats" && it.råVerdi().toDouble() > 0
+            it.opplysningTekstId == SvangerskapspengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
         }?.let {
             samordnedeYtelser.add("Svangerskapspenger" to it.råVerdi().toDouble())
         }
@@ -145,7 +154,7 @@ class InnvilgelseMelding(
     private fun grunnlag(): List<String> {
         val grunnlagBlokker = mutableListOf<String>()
         val erInnvilgetMedVerneplikt =
-            vedtak.opplysninger.any { it.opplysningTekstId == "opplysning.er-innvilget-med-verneplikt" && it.formatertVerdi == "true" }
+            vedtak.opplysninger.any { it.opplysningTekstId == ErInnvilgetMedVerneplikt.opplysningTekstId && it.formatertVerdi == "true" }
         val kravTilMinsteinntektErOppfylt =
             vedtak.opplysninger.any { it.opplysningTekstId == KravTilMinsteinntekt.opplysningTekstId && it.formatertVerdi == "true" }
 
