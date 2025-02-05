@@ -75,6 +75,10 @@ enum class OpplysningTyper(val opplysningTypeId: UUID?, val opplysningTekstId: S
         opplysningTypeId = UUID.fromString("0194881f-9410-7481-b263-4606fdd10ca8"),
         opplysningTekstId = "opplysning.6-ganger-grunnbelop",
     ),
+    Aldersgrense(
+        opplysningTypeId = UUID.fromString("0194881f-940b-76ff-acf5-ba7bcb367234"),
+        opplysningTekstId = "opplysning.aldersgrense",
+    ),
     Grunnlag(
         opplysningTypeId = null,
         opplysningTekstId = "opplysning.grunnlag",

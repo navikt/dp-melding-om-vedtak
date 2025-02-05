@@ -3,6 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ALDER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ANDRE_FULLE_YTELSER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_BEGRUNNELSE
@@ -36,6 +37,7 @@ class AvslagMeldingAlleVilkårTest {
             listOf(
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId,
+                AVSLAG_ALDER.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSINNTEKT.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID.brevblokkId,
                 AVSLAG_UTESTENGT.brevblokkId,
@@ -74,6 +76,12 @@ private val json =
           "status": "IkkeOppfylt",
           "vurderingstidspunkt": "2025-01-16T09:16:38.778989",
           "hjemmel": "folketrygdloven § 4-5"
+        },
+        {
+            "navn": "Oppfyller kravet til alder",
+            "status": "IkkeOppfylt",
+            "vurderingstidspunkt": "2025-01-27T12:08:17.941134",
+            "hjemmel": "folketrygdloven § 4-23"
         },
         {
           "navn": "Mottar ikke andre fulle ytelser",
@@ -188,12 +196,6 @@ private val json =
 //        "status": "IkkeOppfylt",
 //        "vurderingstidspunkt": "2025-01-27T12:08:17.941459",
 //        "hjemmel": "folketrygdloven § 4-6"
-//    },
-//    {
-//        "navn": "Oppfyller kravet til alder",
-//        "status": "IkkeOppfylt",
-//        "vurderingstidspunkt": "2025-01-27T12:08:17.941134",
-//        "hjemmel": "folketrygdloven § 4-23"
 //    },
 //    {
 //        "navn": "Er medlemmet ikke påvirket av streik eller lock-out?",
