@@ -42,7 +42,7 @@ class AvslagMeldingOppholdUtlandTest {
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_OPPHOLD_UTLAND_DEL_1.brevblokkId,
                 AVSLAG_OPPHOLD_UTLAND_DEL_2.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 
     @Test

@@ -49,7 +49,7 @@ class AvslagMeldingAndreFulleYtelserTest {
             listOf(
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_ANDRE_FULLE_YTELSER.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 }
 

@@ -41,7 +41,7 @@ class AvslagMeldingUtestengtTest {
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_UTESTENGT.brevblokkId,
                 AVSLAG_UTESTENGT_HJEMMEL.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 
     @Test

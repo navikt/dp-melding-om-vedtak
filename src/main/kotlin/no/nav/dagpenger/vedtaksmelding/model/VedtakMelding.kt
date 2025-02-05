@@ -1,9 +1,12 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
 import mu.KotlinLogging
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.HJELP_FRA_ANDRE
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.PERSONOPPLYSNINGER
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.RETT_TIL_INNSYN
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.SPØRSMÅL
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.VEILEDNING_FRA_NAV
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagMelding
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseMelding
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
@@ -22,7 +25,7 @@ abstract class VedtakMelding(
     protected abstract val brevBlokker: List<BrevBlokk>
 
     fun brevBlokkIder(): List<String> {
-        return brevBlokkIder + fasteBlokker
+        return brevBlokkIder + fasteAvsluttendeBlokker
     }
 
     fun hentBrevBlokker(): List<BrevBlokk> {
@@ -45,11 +48,14 @@ abstract class VedtakMelding(
     }
 
     companion object {
-        val fasteBlokker =
+        val fasteAvsluttendeBlokker =
             listOf(
-                SPØRSMÅL.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
+                PERSONOPPLYSNINGER.brevBlokkId,
+                HJELP_FRA_ANDRE.brevBlokkId,
+                VEILEDNING_FRA_NAV.brevBlokkId,
                 RETT_TIL_Å_KLAGE.brevBlokkId,
+                SPØRSMÅL.brevBlokkId,
             )
 
         fun byggVedtaksmelding(
@@ -83,9 +89,12 @@ abstract class VedtakMelding(
     }
 
     enum class FasteBrevblokker(val brevBlokkId: String) {
-        SPØRSMÅL("brev.blokk.sporsmaal"),
         RETT_TIL_INNSYN("brev.blokk.rett-til-innsyn"),
         RETT_TIL_Å_KLAGE("brev.blokk.rett-til-aa-klage"),
+        PERSONOPPLYSNINGER("brev.blokk.personopplysninger"),
+        HJELP_FRA_ANDRE("brev.blokk.hjelp-fra-andre"),
+        VEILEDNING_FRA_NAV("brev.blokk.veiledning-fra-nav"),
+        SPØRSMÅL("brev.blokk.sporsmaal"),
     }
 
     class UkjentVedtakException(override val message: String, override val cause: Throwable? = null) :

@@ -114,7 +114,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 
     @Test
@@ -138,7 +138,7 @@ class AvslagMeldingReellArbeidssøkerTest {
             listOf(
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 
     @Test
@@ -160,7 +160,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 
     @Test
@@ -181,7 +181,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 
     @Test
@@ -202,7 +202,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 
     @Test
@@ -223,7 +223,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_REGISTRERT_ARBEIDSSOKER.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 
     @Test
@@ -253,7 +253,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_REGISTRERT_ARBEIDSSOKER.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 
     @Test

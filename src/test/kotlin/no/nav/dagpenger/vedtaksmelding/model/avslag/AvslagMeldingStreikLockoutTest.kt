@@ -53,7 +53,7 @@ class AvslagMeldingStreikLockoutTest {
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_STREIK_LOCKOUT_DEL_1.brevblokkId,
                 AVSLAG_STREIK_LOCKOUT_DEL_2.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 }
 

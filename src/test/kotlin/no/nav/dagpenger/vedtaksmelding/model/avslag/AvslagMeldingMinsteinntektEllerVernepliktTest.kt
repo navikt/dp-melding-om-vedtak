@@ -43,7 +43,7 @@ class AvslagMeldingMinsteinntektEllerVernepliktTest {
             listOf(
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 }
 

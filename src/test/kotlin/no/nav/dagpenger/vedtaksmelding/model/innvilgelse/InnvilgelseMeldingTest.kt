@@ -139,7 +139,7 @@ class InnvilgelseMeldingTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =
@@ -171,7 +171,7 @@ class InnvilgelseMeldingTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =
@@ -204,7 +204,7 @@ class InnvilgelseMeldingTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =
@@ -247,7 +247,7 @@ class InnvilgelseMeldingTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =
@@ -298,7 +298,7 @@ class InnvilgelseMeldingTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =
@@ -334,7 +334,7 @@ class InnvilgelseMeldingTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =
@@ -370,7 +370,7 @@ class InnvilgelseMeldingTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =
@@ -406,7 +406,7 @@ class InnvilgelseMeldingTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =
@@ -442,7 +442,7 @@ class InnvilgelseMeldingTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =
@@ -478,7 +478,7 @@ class InnvilgelseMeldingTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =
@@ -514,7 +514,7 @@ class InnvilgelseMeldingTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =
@@ -551,7 +551,7 @@ class InnvilgelseMeldingTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =
@@ -590,7 +590,7 @@ class InnvilgelseMeldingTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =
@@ -622,7 +622,7 @@ class InnvilgelseMeldingTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =
@@ -658,7 +658,7 @@ class InnvilgelseMeldingTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =
@@ -726,7 +726,7 @@ class InnvilgelseMeldingTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =

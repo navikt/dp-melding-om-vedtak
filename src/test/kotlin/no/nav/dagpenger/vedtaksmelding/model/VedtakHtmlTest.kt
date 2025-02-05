@@ -6,9 +6,12 @@ import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.HJELP_FRA_ANDRE
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.PERSONOPPLYSNINGER
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.RETT_TIL_INNSYN
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.SPØRSMÅL
+import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.VEILEDNING_FRA_NAV
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagMelding
@@ -110,9 +113,12 @@ class VedtakHtmlTest {
                 listOf(
                     AVSLAG_INNLEDNING.brevblokkId,
                     AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId,
-                    SPØRSMÅL.brevBlokkId,
                     RETT_TIL_INNSYN.brevBlokkId,
+                    PERSONOPPLYSNINGER.brevBlokkId,
+                    HJELP_FRA_ANDRE.brevBlokkId,
+                    VEILEDNING_FRA_NAV.brevBlokkId,
                     RETT_TIL_Å_KLAGE.brevBlokkId,
+                    SPØRSMÅL.brevBlokkId,
                 )
 
             htmlInnhold finnUtvidetBeskrivelseTekst AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId shouldBe "noe saksbehandler har skrevet"
@@ -133,7 +139,7 @@ class VedtakHtmlTest {
     }
 
     @Test
-    fun `Html av innvilgelse `() {
+    fun `Html av innvilgelse`() {
         runBlocking {
             val innvilgelseMelding =
                 InnvilgelseMelding(
@@ -166,9 +172,12 @@ class VedtakHtmlTest {
                     INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                     INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                     INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-                    SPØRSMÅL.brevBlokkId,
                     RETT_TIL_INNSYN.brevBlokkId,
+                    PERSONOPPLYSNINGER.brevBlokkId,
+                    HJELP_FRA_ANDRE.brevBlokkId,
+                    VEILEDNING_FRA_NAV.brevBlokkId,
                     RETT_TIL_Å_KLAGE.brevBlokkId,
+                    SPØRSMÅL.brevBlokkId,
                 )
             writeStringToFile(
                 filePath = "build/temp/innvilgelse.html",
