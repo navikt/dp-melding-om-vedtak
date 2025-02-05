@@ -50,7 +50,7 @@ class AvslagMeldingTaptArbeidsinntektTest {
             listOf(
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSINNTEKT.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 }
 

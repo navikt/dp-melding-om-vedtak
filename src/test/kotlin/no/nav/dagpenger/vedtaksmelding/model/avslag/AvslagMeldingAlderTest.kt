@@ -52,7 +52,7 @@ class AvslagMeldingAlderTest {
             listOf(
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_ALDER.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 }
 

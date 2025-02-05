@@ -76,7 +76,7 @@ class AvslagMeldingTaptArbeidstidTest {
             listOf(
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID.brevblokkId,
-            ) + VedtakMelding.fasteBlokker
+            ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 
     @Test
