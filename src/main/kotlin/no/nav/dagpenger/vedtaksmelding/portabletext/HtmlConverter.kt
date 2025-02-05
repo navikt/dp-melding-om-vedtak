@@ -4,13 +4,17 @@ import kotlinx.html.FlowContent
 import kotlinx.html.FlowOrPhrasingContent
 import kotlinx.html.HTMLTag
 import kotlinx.html.HtmlBlockInlineTag
+import kotlinx.html.OL
 import kotlinx.html.TagConsumer
 import kotlinx.html.UL
 import kotlinx.html.a
 import kotlinx.html.attributesMapOf
+import kotlinx.html.b
 import kotlinx.html.body
 import kotlinx.html.br
+import kotlinx.html.code
 import kotlinx.html.div
+import kotlinx.html.em
 import kotlinx.html.h1
 import kotlinx.html.h2
 import kotlinx.html.h3
@@ -22,11 +26,13 @@ import kotlinx.html.li
 import kotlinx.html.meta
 import kotlinx.html.ol
 import kotlinx.html.p
+import kotlinx.html.s
 import kotlinx.html.span
 import kotlinx.html.stream.createHTML
 import kotlinx.html.style
 import kotlinx.html.svg
 import kotlinx.html.title
+import kotlinx.html.u
 import kotlinx.html.ul
 import kotlinx.html.unsafe
 import kotlinx.html.visit
@@ -62,15 +68,22 @@ object HtmlConverter {
             val groupedBlocks = mutableListOf<MutableList<Block>>()
             var currentGroup = mutableListOf<Block>()
 
+            var currentListItemGroup: String? = null
             for (block in blocks) {
                 if (block.listItem == null) {
                     groupedBlocks.add(currentGroup)
                     groupedBlocks.add(mutableListOf(block))
                     currentGroup = mutableListOf()
-                }
-
-                if (block.listItem != null) {
-                    currentGroup.add(block)
+                    currentListItemGroup = null
+                } else {
+                    if (currentListItemGroup == null || currentListItemGroup == block.listItem) {
+                        currentListItemGroup = block.listItem
+                        currentGroup.add(block)
+                    } else {
+                        groupedBlocks.add(currentGroup)
+                        currentGroup = mutableListOf(block)
+                        currentListItemGroup = block.listItem
+                    }
                 }
             }
             groupedBlocks.add(currentGroup)
@@ -128,36 +141,8 @@ object HtmlConverter {
                                 maybeWrapList(blocks) { block: Block ->
                                     wrapHeadings(block) { children ->
                                         val marks = block.markDefs.associateBy { it._key }
-                                        children.forEach { child: Child ->
-                                            when (child) {
-                                                is Child.Span -> {
-                                                    if (child.marks.size == 1) {
-                                                        val mark: MarkDef =
-                                                            marks[child.marks[0]]
-                                                                ?: throw RuntimeException("Mark not found for ${child.marks[0]}")
-                                                        when (mark) {
-                                                            is MarkDef.Link -> {
-                                                                a {
-                                                                    attributes["href"] = mark.href
-                                                                    +child.text
-                                                                }
-                                                            }
-                                                        }
-                                                    } else {
-                                                        +child.text
-                                                    }
-                                                }
-
-                                                is Child.OpplysningReference -> {
-                                                    val textId = child.behandlingOpplysning.textId
-                                                    val opplysning =
-                                                        mapping[textId]
-                                                            ?: throw RuntimeException("Opplysning ikke funnet $textId")
-                                                    span("melding-om-vedtak-opplysning-verdi") {
-                                                        +opplysning.formatertVerdi
-                                                    }
-                                                }
-                                            }
+                                        children.forEach {
+                                            handleChild(it, mapping, marks)
                                         }
                                     }
                                 }
@@ -216,10 +201,82 @@ object HtmlConverter {
 
             else -> {
                 // is a list
-                ul {
-                    blocks.forEach { block ->
-                        wrapListElement(block, b)
+                when (blocks.first().listItem) {
+                    "bullet" ->
+                        ul {
+                            blocks.forEach { block ->
+                                wrapListElement(block, b)
+                            }
+                        }
+
+                    "number" ->
+                        ol {
+                            blocks.forEach { block ->
+                                wrapListElement(block, b)
+                            }
+                        }
+
+                    else -> {
+                        blocks.forEach { block ->
+                            b(block)
+                        }
                     }
+                }
+            }
+        }
+    }
+
+    private fun FlowContent.processMarks(
+        text: String,
+        marks: List<Mark>,
+        markDefs: Map<String, MarkDef>,
+    ) {
+        when (marks.isEmpty()) {
+            true -> +text
+            false -> {
+                val mark: Mark = marks.first()
+                when (mark) {
+                    is Mark.Annotation -> {
+                        val markDef: MarkDef =
+                            markDefs[mark._key]
+                                ?: throw RuntimeException("Mark not found for ${mark._key}")
+                        when (markDef) {
+                            is MarkDef.Link -> {
+                                a {
+                                    attributes["href"] = markDef.href
+                                    +text
+                                }
+                            }
+                        }
+                    }
+
+                    Mark.Code -> code { processMarks(text, marks.drop(1), markDefs) }
+                    Mark.Em -> em { processMarks(text, marks.drop(1), markDefs) }
+                    Mark.StrikeThrough -> s { processMarks(text, marks.drop(1), markDefs) }
+                    Mark.Strong -> b { processMarks(text, marks.drop(1), markDefs) }
+                    Mark.Underline -> u { processMarks(text, marks.drop(1), markDefs) }
+                }
+            }
+        }
+    }
+
+    private fun FlowContent.handleChild(
+        child: Child,
+        mapping: Map<String, Opplysning>,
+        markDefs: Map<String, MarkDef>,
+    ) {
+        when (child) {
+            is Child.Span -> {
+                processMarks(child.text, child.marks, markDefs)
+            }
+
+            is Child.OpplysningReference -> {
+                val textId = child.behandlingOpplysning.textId
+                val opplysning =
+                    mapping[textId]
+                        ?: throw RuntimeException("Opplysning ikke funnet $textId")
+                span("melding-om-vedtak-opplysning-verdi") {
+                    +opplysning.formatertVerdi
                 }
             }
         }
@@ -260,22 +317,21 @@ object HtmlConverter {
         }
     }
 
+    private fun OL.wrapListElement(
+        block: Block,
+        b: FlowContent.(block: Block) -> Unit = {},
+    ) {
+        li {
+            b(block)
+        }
+    }
+
     private fun UL.wrapListElement(
         block: Block,
         b: FlowContent.(block: Block) -> Unit = {},
     ) {
-        when (block.listItem) {
-            "bullet" -> {
-                li {
-                    b(block)
-                }
-            }
-
-            else -> {
-                ol {
-                    b(block)
-                }
-            }
+        li {
+            b(block)
         }
     }
 }
