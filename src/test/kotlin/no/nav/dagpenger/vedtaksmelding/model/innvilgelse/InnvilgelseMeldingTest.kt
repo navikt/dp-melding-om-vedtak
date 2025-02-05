@@ -3,6 +3,10 @@ package no.nav.dagpenger.vedtaksmelding.model.innvilgelse
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallStønadsukerSomGisVedOrdinæreDagpenger
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.KravTilMinsteinntekt
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.ManglerBrevstøtte
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
@@ -48,8 +52,7 @@ class InnvilgelseMeldingTest {
     private fun nittiprosentRegelOpplysning(verdi: String = "10") =
         Opplysning(
             opplysningTekstId =
-                "opplysning.andel-av-dagsats-med-barne" +
-                    "tillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget",
+                AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget.opplysningTekstId,
             råVerdi = verdi,
             datatype = FLYTTALL,
             enhet = KRONER,
@@ -73,7 +76,7 @@ class InnvilgelseMeldingTest {
 
     private fun barnetilleggOpplysning(verdi: String = "1") =
         Opplysning(
-            opplysningTekstId = "opplysning.antall-barn-som-gir-rett-til-barnetillegg",
+            opplysningTekstId = AntallBarnSomGirRettTilBarnetillegg.opplysningTekstId,
             råVerdi = verdi,
             datatype = HELTALL,
             enhet = BARN,
@@ -203,9 +206,9 @@ class InnvilgelseMeldingTest {
                     opplysninger =
                         setOf(
                             Opplysning("opplysning.er-innvilget-med-verneplikt", "true", BOOLSK),
-                            Opplysning("opplysning.krav-til-minsteinntekt", "true", BOOLSK),
+                            Opplysning(KravTilMinsteinntekt.opplysningTekstId, "true", BOOLSK),
                             Opplysning(
-                                "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger",
+                                AntallStønadsukerSomGisVedOrdinæreDagpenger.opplysningTekstId,
                                 "52",
                                 HELTALL,
                                 UKER,

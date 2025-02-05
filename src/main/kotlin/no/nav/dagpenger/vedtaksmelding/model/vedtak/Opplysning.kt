@@ -1,5 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.model.vedtak
 
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.BruktBeregningsregelGrunnlag
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.DATO
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL
@@ -45,7 +46,7 @@ data class Opplysning(
                 DATO -> formaterDato(råVerdi)
                 TEKST ->
                     when (opplysningTekstId) {
-                        "opplysning.brukt-beregningsregel-grunnlag" -> råVerdi.lowercase()
+                        BruktBeregningsregelGrunnlag.opplysningTekstId -> råVerdi.lowercase()
                         else -> råVerdi
                     }
                 else -> råVerdi

@@ -3,6 +3,23 @@ package no.nav.dagpenger.vedtaksmelding.model
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallGSomGisSomGrunnlagVedVerneplikt
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallStønadsukerSomGisVedOrdinæreDagpenger
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ArbeidsinntektSiste12Måneder
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ArbeidsinntektSiste36Måneder
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.BarnetilleggIKroner
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.BruktBeregningsregelGrunnlag
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FørsteMånedAvOpptjeningsperiode
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.InntektskravSiste12Måneder
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.InntektskravSiste36Måneder
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.KravTilMinsteinntekt
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SeksGangerGrunnbeløp
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SisteMånedAvOpptjeningsperiode
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.UtbetaltArbeidsinntektPeriode1
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.UtbetaltArbeidsinntektPeriode2
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.UtbetaltArbeidsinntektPeriode3
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.BOOLSK
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.DATO
@@ -103,9 +120,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning inntektskrav siste 12 måneder`() {
-        vedtak.finnOpplysning("opplysning.inntektskrav-for-siste-12-mnd") shouldBe
+        vedtak.finnOpplysning(InntektskravSiste12Måneder.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.inntektskrav-for-siste-12-mnd",
+                opplysningTekstId = InntektskravSiste12Måneder.opplysningTekstId,
                 råVerdi = "186042",
                 datatype = HELTALL,
                 enhet = KRONER,
@@ -114,9 +131,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning inntektskrav siste 36 måneder`() {
-        vedtak.finnOpplysning("opplysning.inntektskrav-for-siste-36-mnd") shouldBe
+        vedtak.finnOpplysning(InntektskravSiste36Måneder.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.inntektskrav-for-siste-36-mnd",
+                opplysningTekstId = InntektskravSiste36Måneder.opplysningTekstId,
                 råVerdi = "372084",
                 datatype = HELTALL,
                 enhet = KRONER,
@@ -125,9 +142,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning arbeidsinntekt siste 12 måneder`() {
-        vedtak.finnOpplysning("opplysning.arbeidsinntekt-siste-12-mnd") shouldBe
+        vedtak.finnOpplysning(ArbeidsinntektSiste12Måneder.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.arbeidsinntekt-siste-12-mnd",
+                opplysningTekstId = ArbeidsinntektSiste12Måneder.opplysningTekstId,
                 råVerdi = "0",
                 datatype = HELTALL,
                 enhet = KRONER,
@@ -136,9 +153,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning arbeidsinntekt siste 36 måneder`() {
-        vedtak.finnOpplysning("opplysning.arbeidsinntekt-siste-36-mnd") shouldBe
+        vedtak.finnOpplysning(ArbeidsinntektSiste36Måneder.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.arbeidsinntekt-siste-36-mnd",
+                opplysningTekstId = ArbeidsinntektSiste36Måneder.opplysningTekstId,
                 råVerdi = "555500",
                 datatype = HELTALL,
                 enhet = KRONER,
@@ -147,9 +164,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning om antall G som gis som grunnlag ved verneplikt`() {
-        vedtak.finnOpplysning("opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt") shouldBe
+        vedtak.finnOpplysning(AntallGSomGisSomGrunnlagVedVerneplikt.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt",
+                opplysningTekstId = AntallGSomGisSomGrunnlagVedVerneplikt.opplysningTekstId,
                 råVerdi = "3.0",
                 datatype = FLYTTALL,
                 enhet = KRONER,
@@ -158,9 +175,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning om brukt beregningsregel for grunnlagsberegning i lowercase`() {
-        vedtak.finnOpplysning("opplysning.brukt-beregningsregel-grunnlag") shouldBe
+        vedtak.finnOpplysning(BruktBeregningsregelGrunnlag.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.brukt-beregningsregel-grunnlag",
+                opplysningTekstId = BruktBeregningsregelGrunnlag.opplysningTekstId,
                 råVerdi = "Gjennomsnittlig arbeidsinntekt siste 36 måneder",
                 datatype = TEKST,
                 enhet = ENHETSLØS,
@@ -169,9 +186,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning om antall stønadsuker som gis ved ordinære dagpenger`() {
-        vedtak.finnOpplysning("opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger") shouldBe
+        vedtak.finnOpplysning(AntallStønadsukerSomGisVedOrdinæreDagpenger.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger",
+                opplysningTekstId = AntallStønadsukerSomGisVedOrdinæreDagpenger.opplysningTekstId,
                 råVerdi = "52",
                 datatype = HELTALL,
                 enhet = UKER,
@@ -279,9 +296,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning utbetalt arbeidsinntekt periode 1`() {
-        vedtak.finnOpplysning("opplysning.utbetalt-arbeidsinntekt-periode-1") shouldBe
+        vedtak.finnOpplysning(UtbetaltArbeidsinntektPeriode1.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.utbetalt-arbeidsinntekt-periode-1",
+                opplysningTekstId = UtbetaltArbeidsinntektPeriode1.opplysningTekstId,
                 råVerdi = "0",
                 datatype = FLYTTALL,
                 enhet = KRONER,
@@ -290,9 +307,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning utbetalt arbeidsinntekt periode 2`() {
-        vedtak.finnOpplysning("opplysning.utbetalt-arbeidsinntekt-periode-2") shouldBe
+        vedtak.finnOpplysning(UtbetaltArbeidsinntektPeriode2.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.utbetalt-arbeidsinntekt-periode-2",
+                opplysningTekstId = UtbetaltArbeidsinntektPeriode2.opplysningTekstId,
                 råVerdi = "55550",
                 datatype = FLYTTALL,
                 enhet = KRONER,
@@ -301,9 +318,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning utbetalt arbeidsinntekt periode 3`() {
-        vedtak.finnOpplysning("opplysning.utbetalt-arbeidsinntekt-periode-3") shouldBe
+        vedtak.finnOpplysning(UtbetaltArbeidsinntektPeriode3.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.utbetalt-arbeidsinntekt-periode-3",
+                opplysningTekstId = UtbetaltArbeidsinntektPeriode3.opplysningTekstId,
                 råVerdi = "499950",
                 datatype = FLYTTALL,
                 enhet = KRONER,
@@ -323,9 +340,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning andel av dagsats med barnetillegg som overstiger maks andel av dagpengegrunnlaget`() {
-        vedtak.finnOpplysning("opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget") shouldBe
+        vedtak.finnOpplysning(AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget",
+                opplysningTekstId = AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget.opplysningTekstId,
                 råVerdi = "0",
                 datatype = FLYTTALL,
                 enhet = KRONER,
@@ -334,9 +351,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning antall barn som gir rett til barnetillegg`() {
-        vedtak.finnOpplysning("opplysning.antall-barn-som-gir-rett-til-barnetillegg") shouldBe
+        vedtak.finnOpplysning(AntallBarnSomGirRettTilBarnetillegg.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.antall-barn-som-gir-rett-til-barnetillegg",
+                opplysningTekstId = AntallBarnSomGirRettTilBarnetillegg.opplysningTekstId,
                 råVerdi = "2",
                 datatype = HELTALL,
                 enhet = BARN,
@@ -345,9 +362,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning barnetillegg i kroner`() {
-        vedtak.finnOpplysning("opplysning.barnetillegg-i-kroner") shouldBe
+        vedtak.finnOpplysning(BarnetilleggIKroner.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.barnetillegg-i-kroner",
+                opplysningTekstId = BarnetilleggIKroner.opplysningTekstId,
                 råVerdi = "74",
                 datatype = FLYTTALL,
                 enhet = KRONER,
@@ -356,9 +373,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning første måned av opptjeningsperiode`() {
-        vedtak.finnOpplysning("opplysning.forste-maaned-av-opptjeningsperiode") shouldBe
+        vedtak.finnOpplysning(FørsteMånedAvOpptjeningsperiode.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.forste-maaned-av-opptjeningsperiode",
+                opplysningTekstId = FørsteMånedAvOpptjeningsperiode.opplysningTekstId,
                 råVerdi = "2022-01-01",
                 datatype = DATO,
                 enhet = ENHETSLØS,
@@ -367,9 +384,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning siste avsluttende kalendermåned`() {
-        vedtak.finnOpplysning("opplysning.siste-avsluttende-kalendermaaned") shouldBe
+        vedtak.finnOpplysning(SisteMånedAvOpptjeningsperiode.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.siste-avsluttende-kalendermaaned",
+                opplysningTekstId = SisteMånedAvOpptjeningsperiode.opplysningTekstId,
                 råVerdi = "2024-12-31",
                 datatype = DATO,
                 enhet = ENHETSLØS,
@@ -378,9 +395,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning 6 ganger grunnbelop`() {
-        vedtak.finnOpplysning("opplysning.6-ganger-grunnbelop") shouldBe
+        vedtak.finnOpplysning(SeksGangerGrunnbeløp.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.6-ganger-grunnbelop",
+                opplysningTekstId = SeksGangerGrunnbeløp.opplysningTekstId,
                 råVerdi = "744168",
                 datatype = HELTALL,
                 enhet = KRONER,
@@ -389,9 +406,9 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent opplysning Krav til minsteinntekt`() {
-        vedtak.finnOpplysning("opplysning.krav-til-minsteinntekt") shouldBe
+        vedtak.finnOpplysning(KravTilMinsteinntekt.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.krav-til-minsteinntekt",
+                opplysningTekstId = KravTilMinsteinntekt.opplysningTekstId,
                 råVerdi = "true",
                 datatype = BOOLSK,
             )
