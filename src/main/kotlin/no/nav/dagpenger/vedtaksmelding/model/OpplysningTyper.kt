@@ -2,7 +2,7 @@ package no.nav.dagpenger.vedtaksmelding.model
 
 import java.util.UUID
 
-enum class OpplysningTyper(val opplysningTypeId: UUID, val opplysningTekstId: String) {
+enum class OpplysningTyper(val opplysningTypeId: UUID?, val opplysningTekstId: String) {
     KravTilProsentvisTapAvArbeidstid(
         opplysningTypeId = UUID.fromString("0194881f-9435-72a8-b1ce-9575cbc2a762"),
         opplysningTekstId = "opplysning.krav-til-prosentvis-tap-av-arbeidstid",
@@ -74,5 +74,97 @@ enum class OpplysningTyper(val opplysningTypeId: UUID, val opplysningTekstId: St
     SeksGangerGrunnbeløp(
         opplysningTypeId = UUID.fromString("0194881f-9410-7481-b263-4606fdd10ca8"),
         opplysningTekstId = "opplysning.6-ganger-grunnbelop",
+    ),
+    Grunnlag(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.grunnlag",
+    ),
+    DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.dagsats-med-barnetillegg-etter-samordning-og-90-prosent-regel",
+    ),
+    Prøvingsdato(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.provingsdato",
+    ),
+    FastsattVanligArbeidstidPerUke(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.fastsatt-arbeidstid-per-uke-for-tap",
+    ),
+    FastsattNyArbeidstidPerUke(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.fastsatt-ny-arbeidstid-per-uke",
+    ),
+    ProsentvisTaptArbeidstid(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.prosentvis-tapt-arbeidstid",
+    ),
+    HarSamordnet(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.har-samordnet",
+    ),
+    SykepengerDagsats(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.sykepenger-dagsats",
+    ),
+    PleiepengerDagsats(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.pleiepenger-dagsats",
+    ),
+    OmsorgspengerDagsats(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.omsorgspenger-dagsats",
+    ),
+    OpplæringspengerDagsats(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.opplaringspenger-dagsats",
+    ),
+    UføreDagsats(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.ufore-dagsats",
+    ),
+    ForeldrepengerDagsats(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.foreldrepenger-dagsats",
+    ),
+    SvangerskapspengerDagsats(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.svangerskapspenger-dagsats",
+    ),
+    ErInnvilgetMedVerneplikt(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.er-innvilget-med-verneplikt",
+    ),
+    AntallStønadsuker(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.antall-stonadsuker",
+    ),
+    Egenandel(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.egenandel",
+    ),
+    FørsteMånedOgÅrForInntektsperiode1(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-1",
+    ),
+    FørsteMånedOgÅrForInntektsperiode2(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-2",
+    ),
+    FørsteMånedOgÅrForInntektsperiode3(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.forste-maaned-aar-for-inntektsperiode-3",
+    ),
+    SisteMånedOgÅrForInntektsperiode1(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-1",
+    ),
+    SisteMånedOgÅrForInntektsperiode2(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-2",
+    ),
+    SisteMånedOgÅrForInntektsperiode3(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.siste-maaned-aar-for-inntektsperiode-3",
     ),
 }

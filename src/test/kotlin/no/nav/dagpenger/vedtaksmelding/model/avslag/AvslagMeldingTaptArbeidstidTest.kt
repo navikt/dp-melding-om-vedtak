@@ -2,7 +2,10 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FastsattNyArbeidstidPerUke
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FastsattVanligArbeidstidPerUke
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.KravTilProsentvisTapAvArbeidstid
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ProsentvisTaptArbeidstid
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
@@ -22,16 +25,16 @@ class AvslagMeldingTaptArbeidstidTest {
 
     @Test
     fun `Hent relevate opplysninger ved avslag tapt arbeidstid`() {
-        avslagArbeidstidVedtak.finnOpplysning("opplysning.fastsatt-arbeidstid-per-uke-for-tap") shouldBe
+        avslagArbeidstidVedtak.finnOpplysning(FastsattVanligArbeidstidPerUke.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.fastsatt-arbeidstid-per-uke-for-tap",
+                opplysningTekstId = FastsattVanligArbeidstidPerUke.opplysningTekstId,
                 råVerdi = "37.5",
                 datatype = FLYTTALL,
                 enhet = TIMER,
             )
-        avslagArbeidstidVedtak.finnOpplysning("opplysning.fastsatt-ny-arbeidstid-per-uke") shouldBe
+        avslagArbeidstidVedtak.finnOpplysning(FastsattNyArbeidstidPerUke.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.fastsatt-ny-arbeidstid-per-uke",
+                opplysningTekstId = FastsattNyArbeidstidPerUke.opplysningTekstId,
                 råVerdi = "20",
                 datatype = FLYTTALL,
                 enhet = TIMER,
@@ -42,9 +45,9 @@ class AvslagMeldingTaptArbeidstidTest {
                 råVerdi = "50.0",
                 datatype = FLYTTALL,
             )
-        avslagArbeidstidVedtak.finnOpplysning("opplysning.prosentvis-tapt-arbeidstid") shouldBe
+        avslagArbeidstidVedtak.finnOpplysning(ProsentvisTaptArbeidstid.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = "opplysning.prosentvis-tapt-arbeidstid",
+                opplysningTekstId = ProsentvisTaptArbeidstid.opplysningTekstId,
                 råVerdi = "46.666666666666664",
                 datatype = FLYTTALL,
             )

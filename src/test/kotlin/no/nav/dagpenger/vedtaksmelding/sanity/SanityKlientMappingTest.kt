@@ -8,6 +8,7 @@ import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.lagHttpKlient
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.BarnetilleggIKroner
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.Prøvingsdato
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT_HJEMMEL
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
@@ -22,7 +23,7 @@ class SanityKlientMappingTest {
             SanityKlient(
                 sanityUrl = "http://locahost/sanity",
                 httpKlient = lagHttpKlient(engine = lageMockEngine(), SanityKlient.httpClientConfig),
-            ).hentOpplysningTekstIder(listOf(AVSLAG_INNLEDNING.brevblokkId)) shouldBe listOf("opplysning.provingsdato")
+            ).hentOpplysningTekstIder(listOf(AVSLAG_INNLEDNING.brevblokkId)) shouldBe listOf(Prøvingsdato.opplysningTekstId)
         }
     }
 

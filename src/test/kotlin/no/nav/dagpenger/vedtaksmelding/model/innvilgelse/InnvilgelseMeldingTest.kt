@@ -6,7 +6,16 @@ import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallStønadsukerSomGisVedOrdinæreDagpenger
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ErInnvilgetMedVerneplikt
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ForeldrepengerDagsats
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarSamordnet
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.KravTilMinsteinntekt
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.OmsorgspengerDagsats
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.OpplæringspengerDagsats
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.PleiepengerDagsats
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SvangerskapspengerDagsats
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SykepengerDagsats
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.UføreDagsats
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.ManglerBrevstøtte
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
@@ -60,7 +69,7 @@ class InnvilgelseMeldingTest {
 
     private fun samordnetOpplysning(verdi: String = "true") =
         Opplysning(
-            opplysningTekstId = "opplysning.har-samordnet",
+            opplysningTekstId = HarSamordnet.opplysningTekstId,
             råVerdi = verdi,
             datatype = BOOLSK,
         )
@@ -170,7 +179,7 @@ class InnvilgelseMeldingTest {
                     behandlingId = behandlingId,
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
-                    opplysninger = setOf(Opplysning("opplysning.er-innvilget-med-verneplikt", "true", BOOLSK)),
+                    opplysninger = setOf(Opplysning(ErInnvilgetMedVerneplikt.opplysningTekstId, "true", BOOLSK)),
                     fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
@@ -205,7 +214,7 @@ class InnvilgelseMeldingTest {
                     utfall = Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            Opplysning("opplysning.er-innvilget-med-verneplikt", "true", BOOLSK),
+                            Opplysning(ErInnvilgetMedVerneplikt.opplysningTekstId, "true", BOOLSK),
                             Opplysning(KravTilMinsteinntekt.opplysningTekstId, "true", BOOLSK),
                             Opplysning(
                                 AntallStønadsukerSomGisVedOrdinæreDagpenger.opplysningTekstId,
@@ -299,7 +308,7 @@ class InnvilgelseMeldingTest {
                     utfall = Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            samordnetOpplysning(), samordnetYtelseDagsats("opplysning.sykepenger-dagsats"),
+                            samordnetOpplysning(), samordnetYtelseDagsats(SykepengerDagsats.opplysningTekstId),
                         ),
                     fagsakId = "fagsakId test",
                 ),
@@ -335,7 +344,7 @@ class InnvilgelseMeldingTest {
                     utfall = Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            samordnetOpplysning(), samordnetYtelseDagsats("opplysning.pleiepenger-dagsats"),
+                            samordnetOpplysning(), samordnetYtelseDagsats(PleiepengerDagsats.opplysningTekstId),
                         ),
                     fagsakId = "fagsakId test",
                 ),
@@ -371,7 +380,7 @@ class InnvilgelseMeldingTest {
                     utfall = Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            samordnetOpplysning(), samordnetYtelseDagsats("opplysning.omsorgspenger-dagsats"),
+                            samordnetOpplysning(), samordnetYtelseDagsats(OmsorgspengerDagsats.opplysningTekstId),
                         ),
                     fagsakId = "fagsakId test",
                 ),
@@ -407,7 +416,7 @@ class InnvilgelseMeldingTest {
                     utfall = Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            samordnetOpplysning(), samordnetYtelseDagsats("opplysning.opplaeringspenger-dagsats"),
+                            samordnetOpplysning(), samordnetYtelseDagsats(OpplæringspengerDagsats.opplysningTekstId),
                         ),
                     fagsakId = "fagsakId test",
                 ),
@@ -443,7 +452,7 @@ class InnvilgelseMeldingTest {
                     utfall = Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            samordnetOpplysning(), samordnetYtelseDagsats("opplysning.ufore-dagsats"),
+                            samordnetOpplysning(), samordnetYtelseDagsats(UføreDagsats.opplysningTekstId),
                         ),
                     fagsakId = "fagsakId test",
                 ),
@@ -479,7 +488,7 @@ class InnvilgelseMeldingTest {
                     utfall = Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            samordnetOpplysning(), samordnetYtelseDagsats("opplysning.foreldrepenger-dagsats"),
+                            samordnetOpplysning(), samordnetYtelseDagsats(ForeldrepengerDagsats.opplysningTekstId),
                         ),
                     fagsakId = "fagsakId test",
                 ),
@@ -516,7 +525,7 @@ class InnvilgelseMeldingTest {
                     opplysninger =
                         setOf(
                             samordnetOpplysning(),
-                            samordnetYtelseDagsats("opplysning.svangerskapspenger-dagsats"),
+                            samordnetYtelseDagsats(SvangerskapspengerDagsats.opplysningTekstId),
                         ),
                     fagsakId = "fagsakId test",
                 ),
@@ -553,9 +562,9 @@ class InnvilgelseMeldingTest {
                     opplysninger =
                         setOf(
                             samordnetOpplysning(),
-                            samordnetYtelseDagsats("opplysning.sykepenger-dagsats"),
-                            samordnetYtelseDagsats("opplysning.foreldrepenger-dagsats"),
-                            samordnetYtelseDagsats("opplysning.svangerskapspenger-dagsats"),
+                            samordnetYtelseDagsats(SykepengerDagsats.opplysningTekstId),
+                            samordnetYtelseDagsats(ForeldrepengerDagsats.opplysningTekstId),
+                            samordnetYtelseDagsats(SvangerskapspengerDagsats.opplysningTekstId),
                         ),
                     fagsakId = "fagsakId test",
                 ),
