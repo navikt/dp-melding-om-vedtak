@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.MissingNode
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.Aldersgrense
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallGSomGisSomGrunnlagVedVerneplikt
@@ -153,6 +154,10 @@ class VedtakMapper(vedtakJson: String) {
             vedtak.finnOpplysningFraType(
                 opplysningType = KravTilProsentvisTapAvArbeidstid,
                 datatype = FLYTTALL,
+            ),
+            vedtak.finnOpplysningFraType(
+                opplysningType = Aldersgrense,
+                datatype = HELTALL,
             ),
             vedtak.finnOpplysningFraType(
                 opplysningType = InntektskravSiste12Måneder,
