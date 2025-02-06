@@ -21,6 +21,7 @@ import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_STR
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_STREIK_LOCKOUT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTDANNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT_HJEMMEL
 import org.junit.jupiter.api.Test
@@ -42,6 +43,7 @@ class AvslagMeldingAlleVilkårTest {
                 AVSLAG_TAPT_ARBEIDSTID.brevblokkId,
                 AVSLAG_UTESTENGT.brevblokkId,
                 AVSLAG_UTESTENGT_HJEMMEL.brevblokkId,
+                AVSLAG_UTDANNING.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE.brevblokkId,
@@ -156,6 +158,12 @@ private val json =
           "hjemmel": "folketrygdloven § 4-3"
         },
         {
+            "navn": "Krav til utdanning eller opplæring",
+            "status": "IkkeOppfylt",
+            "vurderingstidspunkt": "2025-01-27T12:08:17.941459",
+            "hjemmel": "folketrygdloven § 4-6"
+        },
+        {
           "navn": "Er medlemmet ikke påvirket av streik eller lock-out?",
           "status": "IkkeOppfylt",
           "vurderingstidspunkt": "2025-01-27T12:08:17.927976",
@@ -190,16 +198,4 @@ private val json =
 //        "status": "Oppfylt",
 //        "vurderingstidspunkt": "2025-01-27T12:08:17.927809",
 //        "hjemmel": "folketrygdloven § 4-2"
-//    },
-//    {
-//        "navn": "Krav til utdanning eller opplæring",
-//        "status": "IkkeOppfylt",
-//        "vurderingstidspunkt": "2025-01-27T12:08:17.941459",
-//        "hjemmel": "folketrygdloven § 4-6"
-//    },
-//    {
-//        "navn": "Er medlemmet ikke påvirket av streik eller lock-out?",
-//        "status": "IkkeOppfylt",
-//        "vurderingstidspunkt": "2025-01-27T12:08:17.927976",
-//        "hjemmel": "folketrygdloven § 4-22"
 //    },

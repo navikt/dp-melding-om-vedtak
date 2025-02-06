@@ -1,40 +1,27 @@
 package no.nav.dagpenger.vedtaksmelding.model.avslag
 
+import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.Aldersgrense
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ALDER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.ENHETSLØS
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTDANNING
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.IKKE_UTDANNING
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
-class AvslagMeldingAlderTest {
-    private val avslagAlderVedtak = VedtakMapper(json).vedtak()
+class AvslagMeldingUtdanningTest {
+    private val avslagUtdanningVedtak = VedtakMapper(json).vedtak()
 
     @Test
-    fun `Hent relevate opplysninger ved avslag alder`() {
-        avslagAlderVedtak.finnOpplysning(Aldersgrense.opplysningTekstId) shouldBe
-            Opplysning(
-                opplysningTekstId = Aldersgrense.opplysningTekstId,
-                råVerdi = "67",
-                datatype = HELTALL,
-                enhet = ENHETSLØS,
-            )
-    }
-
-    @Test
-    fun `Riktige brevblokker for avslag alder`() {
+    fun `Riktige brevblokker for avslag på grunn av utdanning`() {
         val behandlingId = UUIDv7.ny()
-        val alderIkkeOppfylt =
+        val utdanningVilkår =
             Vilkår(
-                navn = AvslagVilkårMedBrevstøtte.IKKE_PASSERT_ALDERSGRENSE.navn,
+                navn = IKKE_UTDANNING.navn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
 
@@ -42,7 +29,7 @@ class AvslagMeldingAlderTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår = setOf(alderIkkeOppfylt),
+                    vilkår = setOf(utdanningVilkår),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
                     fagsakId = "fagsakId test",
@@ -51,8 +38,15 @@ class AvslagMeldingAlderTest {
         ).brevBlokkIder() shouldBe
             listOf(
                 AVSLAG_INNLEDNING.brevblokkId,
-                AVSLAG_ALDER.brevblokkId,
+                AVSLAG_UTDANNING.brevblokkId,
             ) + VedtakMelding.fasteAvsluttendeBlokker
+    }
+
+    @Test
+    fun `Brevstøtte for avslag utdanning`() {
+        shouldNotThrow<VedtakMelding.ManglerBrevstøtte> {
+            AvslagMelding(avslagUtdanningVedtak, emptyList())
+        }
     }
 }
 
@@ -69,10 +63,10 @@ private val json =
       "behandletAv": [],
       "vilkår": [
         {
-          "navn": "Oppfyller kravet til alder",
+          "navn": "Krav til utdanning eller opplæring",
           "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-27T12:08:17.941134",
-          "hjemmel": "folketrygdloven § 4-23"
+          "vurderingstidspunkt": "2025-01-21T11:03:11.076481",
+          "hjemmel": "folketrygdloven § 4-28"
         }
       ],
       "fastsatt": {
@@ -89,30 +83,7 @@ private val json =
         "kvoter": null
       },
       "utbetalinger": [],
-      "opplysninger": [
-        {
-          "id": "0194a772-ac7d-7c06-b093-9910c74fb344",
-          "opplysningTypeId": "0194881f-940b-76ff-acf5-ba7bcb367234",
-          "navn": "Aldersgrense",
-          "verdi": "67",
-          "status": "Faktum",
-          "datatype": "heltall",
-          "redigerbar": false,
-          "synlig": false,
-          "formål": "Regel",
-          "gyldigFraOgMed": null,
-          "gyldigTilOgMed": null,
-          "kilde": null,
-          "utledetAv": {
-            "regel": {
-              "navn": "Oppslag"
-            },
-            "opplysninger": [
-              "0194a772-ac74-78d2-93ee-83ddde7af10f"
-            ]
-          }
-        }
-      ],
+      "opplysninger": [],
       "automatisk": false,
       "gjenstående": {
         "kvoter": null
