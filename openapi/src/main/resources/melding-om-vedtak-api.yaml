@@ -4,38 +4,10 @@ info:
   version: 1.0.0
   description: Et API for å hente ut brevblokker som utgjør melding om vedtak.
 paths:
-  /melding-om-vedtak/{behandlingId}:
-    get:
-      summary: Hent brevblokkIder og korresponderende opplysninger som utgjør melding om vedtak
-      description: Henter melding om vedtak for en gitt behandlingId
-      parameters:
-        - name: behandlingId
-          in: path
-          description: id for behandling
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/MeldingOmVedtak'
-        '404':
-          description: Behandlingen finnes ikke
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/HttpProblem'
-
   /melding-om-vedtak/{behandlingId}/html:
     post:
-      summary: Hent HTML for en gitt behandlingId
-      description: Henter HTML for en gitt behandlingId
+      summary: Hent vedtak som HTML for en gitt behandlingId
+      description: Henter HTML for en gitt behandlingId. Henter alltid nyeste Sanity innhold og behandling
       parameters:
         - name: behandlingId
           in: path
@@ -66,8 +38,8 @@ paths:
                 $ref: '#/components/schemas/HttpProblem'
   /melding-om-vedtak/{behandlingId}/vedtaksmelding:
     post:
-      summary: Hent vedtaksHTML for en gitt behandlingId
-      description: Henter vedtaksHTML for en gitt behandlingId
+      summary: Hent vedtaks HTML for en gitt behandlingId
+      description: Henter vedtaksHTML for en gitt behandlingId, bruker garantert samme Sanity innhold som da sa
       parameters:
         - name: behandlingId
           in: path
@@ -153,21 +125,6 @@ components:
           format: date-time
           description: Tidspunkt utvidet beskrivelse sist ble endret
 
-    MeldingOmVedtak:
-      type: object
-      properties:
-        brevblokkIder:
-          type: array
-          items:
-            type: string
-        opplysninger:
-          type: array
-          items:
-            $ref: '#/components/schemas/Opplysning'
-        utvidedeBeskrivelser:
-          type: array
-          items:
-            $ref: '#/components/schemas/UtvidetBeskrivelse'
 
     MeldingOmVedtakResponse:
       type: object
@@ -199,15 +156,6 @@ components:
         - tekst
         - tittel
 
-    Opplysning:
-      type: object
-      properties:
-        tekstId:
-          type: string
-        verdi:
-            type: string
-        datatype:
-          type: string
 
     MeldingOmVedtakData:
       type: object
