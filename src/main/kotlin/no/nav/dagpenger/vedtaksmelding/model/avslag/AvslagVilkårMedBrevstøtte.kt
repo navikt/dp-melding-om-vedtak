@@ -20,7 +20,9 @@ enum class AvslagVilkårMedBrevstøtte(val navn: String) {
 
     TAPT_ARBEIDSINNTEKT(navn = "Krav til tap av arbeidsinntekt"),
 
-    MEDLEM_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT(navn = "Er medlemmet ikke påvirket av streik eller lock-out?"),
+    IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT(navn = "Er medlemmet ikke påvirket av streik eller lock-out?"),
 
-    ALDER(navn = "Oppfyller kravet til alder"),
+    IKKE_PASSERT_ALDERSGRENSE(navn = "Oppfyller kravet til alder"),
+
+    IKKE_UTDANNING(navn = "Krav til utdanning eller opplæring"),
 }

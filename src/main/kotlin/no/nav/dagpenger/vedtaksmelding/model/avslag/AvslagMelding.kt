@@ -1,6 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ALDER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ANDRE_FULLE_YTELSER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_BEGRUNNELSE
@@ -18,12 +19,14 @@ import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_STR
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_STREIK_LOCKOUT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTDANNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT_HJEMMEL
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.ALDER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.IKKE_ANDRE_FULLE_YTELSER
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.IKKE_PASSERT_ALDERSGRENSE
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.IKKE_UTDANNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.IKKE_UTESTENGT
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MEDLEM_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT_ELLER_VERNEPLIKT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.OPPHOLD_I_NORGE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER
@@ -48,14 +51,15 @@ class AvslagMelding(
         vedtak.utfall == AVSLÅTT &&
             listOf(
                 MINSTEINNTEKT_ELLER_VERNEPLIKT,
-                REELL_ARBEIDSSØKER,
+                IKKE_PASSERT_ALDERSGRENSE,
                 TAPT_ARBEIDSINNTEKT,
                 TAPT_ARBEIDSTID,
+                IKKE_UTESTENGT,
+                IKKE_UTDANNING,
+                REELL_ARBEIDSSØKER,
                 OPPHOLD_I_NORGE,
                 IKKE_ANDRE_FULLE_YTELSER,
-                IKKE_UTESTENGT,
-                MEDLEM_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT,
-                ALDER,
+                IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT,
             ).any { vilkår ->
                 vedtak.vilkår.ikkeOppfylt(vilkår)
             }
@@ -78,6 +82,7 @@ class AvslagMelding(
                 blokkerAvslagTaptArbeidsinntekt() +
                 blokkerAvslagTaptArbeidstid() +
                 blokkerAvslagUtestengt() +
+                blokkerAvslagUtdanning() +
                 blokkerAvslagReellArbeidssøker() +
                 blokkerAvslagOppholdUtland() +
                 blokkerAndreFulleYtelser() +
@@ -99,56 +104,14 @@ class AvslagMelding(
             } ?: emptyList()
     }
 
-    private fun blokkerAvslagOppholdUtland(): List<String> {
-        return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == OPPHOLD_I_NORGE.navn && vilkår.status == IKKE_OPPFYLT
-        }
-            ?.let {
-                listOf(
-                    AVSLAG_OPPHOLD_UTLAND_DEL_1.brevblokkId,
-                    AVSLAG_OPPHOLD_UTLAND_DEL_2.brevblokkId,
-                )
-            } ?: emptyList()
-    }
-
-    private fun blokkerAndreFulleYtelser(): List<String> {
-        return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == IKKE_ANDRE_FULLE_YTELSER.navn && vilkår.status == IKKE_OPPFYLT
-        }
-            ?.let {
-                listOf(AVSLAG_ANDRE_FULLE_YTELSER.brevblokkId)
-            } ?: emptyList()
-    }
-
-    private fun blokkerStreikLockout(): List<String> {
-        return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == MEDLEM_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT.navn && vilkår.status == IKKE_OPPFYLT
-        }
-            ?.let {
-                listOf(
-                    AVSLAG_STREIK_LOCKOUT_DEL_1.brevblokkId,
-                    AVSLAG_STREIK_LOCKOUT_DEL_2.brevblokkId,
-                )
-            } ?: emptyList()
-    }
-
     private fun blokkerAvslagAlder(): List<String> {
         return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == AvslagVilkårMedBrevstøtte.ALDER.navn && vilkår.status == IKKE_OPPFYLT
+            vilkår.navn == IKKE_PASSERT_ALDERSGRENSE.navn && vilkår.status == IKKE_OPPFYLT
         }
             ?.let {
                 listOf(
-                    AvslagBrevblokker.AVSLAG_ALDER.brevblokkId,
+                    AVSLAG_ALDER.brevblokkId,
                 )
-            } ?: emptyList()
-    }
-
-    private fun blokkerAvslagTaptArbeidstid(): List<String> {
-        return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == TAPT_ARBEIDSTID.navn && vilkår.status == IKKE_OPPFYLT
-        }
-            ?.let {
-                listOf(AVSLAG_TAPT_ARBEIDSTID.brevblokkId)
             } ?: emptyList()
     }
 
@@ -161,12 +124,32 @@ class AvslagMelding(
             } ?: emptyList()
     }
 
+    private fun blokkerAvslagTaptArbeidstid(): List<String> {
+        return vedtak.vilkår.find { vilkår ->
+            vilkår.navn == TAPT_ARBEIDSTID.navn && vilkår.status == IKKE_OPPFYLT
+        }
+            ?.let {
+                listOf(AVSLAG_TAPT_ARBEIDSTID.brevblokkId)
+            } ?: emptyList()
+    }
+
     private fun blokkerAvslagUtestengt(): List<String> {
         return vedtak.vilkår.find { vilkår ->
             vilkår.navn == IKKE_UTESTENGT.navn && vilkår.status == IKKE_OPPFYLT
         }
             ?.let {
                 listOf(AVSLAG_UTESTENGT.brevblokkId, AVSLAG_UTESTENGT_HJEMMEL.brevblokkId)
+            } ?: emptyList()
+    }
+
+    private fun blokkerAvslagUtdanning(): List<String> {
+        return vedtak.vilkår.find { vilkår ->
+            vilkår.navn == IKKE_UTDANNING.navn && vilkår.status == IKKE_OPPFYLT
+        }
+            ?.let {
+                listOf(
+                    AVSLAG_UTDANNING.brevblokkId,
+                )
             } ?: emptyList()
     }
 
@@ -215,5 +198,38 @@ class AvslagMelding(
         }
 
         return grunnerTilAvslag.toList()
+    }
+
+    private fun blokkerAvslagOppholdUtland(): List<String> {
+        return vedtak.vilkår.find { vilkår ->
+            vilkår.navn == OPPHOLD_I_NORGE.navn && vilkår.status == IKKE_OPPFYLT
+        }
+            ?.let {
+                listOf(
+                    AVSLAG_OPPHOLD_UTLAND_DEL_1.brevblokkId,
+                    AVSLAG_OPPHOLD_UTLAND_DEL_2.brevblokkId,
+                )
+            } ?: emptyList()
+    }
+
+    private fun blokkerAndreFulleYtelser(): List<String> {
+        return vedtak.vilkår.find { vilkår ->
+            vilkår.navn == IKKE_ANDRE_FULLE_YTELSER.navn && vilkår.status == IKKE_OPPFYLT
+        }
+            ?.let {
+                listOf(AVSLAG_ANDRE_FULLE_YTELSER.brevblokkId)
+            } ?: emptyList()
+    }
+
+    private fun blokkerStreikLockout(): List<String> {
+        return vedtak.vilkår.find { vilkår ->
+            vilkår.navn == IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT.navn && vilkår.status == IKKE_OPPFYLT
+        }
+            ?.let {
+                listOf(
+                    AVSLAG_STREIK_LOCKOUT_DEL_1.brevblokkId,
+                    AVSLAG_STREIK_LOCKOUT_DEL_2.brevblokkId,
+                )
+            } ?: emptyList()
     }
 }

@@ -8,7 +8,7 @@ import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.ManglerBrevstøtte
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_STREIK_LOCKOUT_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_STREIK_LOCKOUT_DEL_2
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MEDLEM_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.AVSLÅTT
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
@@ -34,7 +34,7 @@ class AvslagMeldingStreikLockoutTest {
         val behandlingId = UUIDv7.ny()
         val avslagStreikEllerLockoutIkkeOppfylt =
             Vilkår(
-                navn = MEDLEM_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT.navn,
+                navn = IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT.navn,
                 status = IKKE_OPPFYLT,
             )
 
