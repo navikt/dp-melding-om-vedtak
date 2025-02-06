@@ -1,11 +1,14 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
 import io.kotest.matchers.shouldBe
+import io.ktor.client.engine.mock.MockEngine
+import io.ktor.client.engine.mock.respond
+import io.ktor.http.headersOf
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
-import no.nav.dagpenger.vedtaksmelding.Configuration
+import no.nav.dagpenger.vedtaksmelding.lagHttpKlient
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.HJELP_FRA_ANDRE
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.PERSONOPPLYSNINGER
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.RETT_TIL_INNSYN
@@ -44,9 +47,21 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class VedtakHtmlTest {
-    fun hentVedtak(navn: String): Vedtak {
-        return navn.readFile().let { VedtakMapper(it).vedtak() }
-    }
+    private val sanityKlient =
+        SanityKlient(
+            "http://localhost:3000",
+            lagHttpKlient(
+                engine =
+                    MockEngine {
+                        respond(
+                            content = "/json/sanity.json".readFile(),
+                            headers = headersOf("Content-Type" to listOf("application/json")),
+                        )
+                    },
+            ),
+        )
+
+    private fun hentVedtak(navn: String): Vedtak = navn.readFile().let { VedtakMapper(it).vedtak() }
 
     private val meldingOmVedtakData =
         MeldingOmVedtakDataDTO(
@@ -74,7 +89,6 @@ class VedtakHtmlTest {
                         ),
                 ),
         )
-    val sanityKlient = SanityKlient(Configuration.sanityApiUrl)
 
     @Test
     fun `Html av avslag minsteinntekt`() {
