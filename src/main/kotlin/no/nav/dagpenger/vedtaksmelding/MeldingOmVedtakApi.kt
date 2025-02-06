@@ -15,17 +15,14 @@ import io.ktor.server.routing.put
 import io.ktor.server.routing.routing
 import mu.KotlinLogging
 import mu.withLoggingContext
-import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakResponseDTO
-import no.nav.dagpenger.saksbehandling.api.models.OpplysningDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseSistEndretTidspunktDTO
 import no.nav.dagpenger.vedtaksmelding.apiconfig.apiConfig
 import no.nav.dagpenger.vedtaksmelding.apiconfig.jwt
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import java.util.UUID
 
@@ -36,46 +33,6 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
     apiConfig()
     routing {
         authenticate("azureAd") {
-            get("/melding-om-vedtak/{behandlingId}") {
-                val behandlingId = call.parseUUID()
-                withLoggingContext("behandlingId" to behandlingId.toString()) {
-                    val saksbehandler = call.parseSaksbehandler()
-                    val utvidetBeskrivelse = mediator.hentUtvidedeBeskrivelser(behandlingId)
-                    val meldingOmVedtakDTO: MeldingOmVedtakDTO =
-                        runCatching {
-                            mediator.hentVedtaksmelding(behandlingId, saksbehandler).map { vedtaksmelding ->
-                                MeldingOmVedtakDTO(
-                                    brevblokkIder = vedtaksmelding.brevBlokkIder(),
-                                    opplysninger =
-                                        vedtaksmelding.hentOpplysninger().map {
-                                            OpplysningDTO(
-                                                tekstId = it.opplysningTekstId,
-                                                verdi = it.formatertVerdi,
-                                                datatype = it.mapDatatype(),
-                                            )
-                                        },
-                                    utvidedeBeskrivelser =
-                                        utvidetBeskrivelse.map {
-                                            UtvidetBeskrivelseDTO(
-                                                brevblokkId = it.brevblokkId,
-                                                tekst = it.tekst ?: "",
-                                                sistEndretTidspunkt = it.sistEndretTidspunkt,
-                                                tittel = it.tittel,
-                                            )
-                                        },
-                                )
-                            }.getOrThrow()
-                        }
-                            .onSuccess {
-                                sikkerlogger.info { "Melding om vedtak: $it" }
-                            }.onFailure { t ->
-                                logger.error(t) { "Feil ved henting av melding om vedtak for behandling $behandlingId" }
-                            }.getOrElse {
-                                MeldingOmVedtakDTO(listOf(RETT_TIL_Å_KLAGE.brevBlokkId), emptyList(), emptyList())
-                            }
-                    call.respond(meldingOmVedtakDTO)
-                }
-            }
             post("/melding-om-vedtak/{behandlingId}/html") {
                 val behandlingId = call.parseUUID()
                 val behandler = call.parseSaksbehandler()
