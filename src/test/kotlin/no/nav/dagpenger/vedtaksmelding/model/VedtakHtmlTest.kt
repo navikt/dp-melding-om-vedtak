@@ -34,20 +34,18 @@ import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
 import no.nav.dagpenger.vedtaksmelding.util.finnUtvidetBeskrivelseTekst
+import no.nav.dagpenger.vedtaksmelding.util.readFile
+import no.nav.dagpenger.vedtaksmelding.util.writeStringToFile
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.junit.jupiter.api.Test
-import java.nio.file.Files
-import java.nio.file.Paths
 import java.time.LocalDateTime
 
 class VedtakHtmlTest {
     fun hentVedtak(navn: String): Vedtak {
-        val resourseRetriever = object {}.javaClass
-        return resourseRetriever.getResource(navn)?.let { VedtakMapper(it.readText()).vedtak() }
-            ?: throw RuntimeException("Fant ikke ressurs")
+        return navn.readFile().let { VedtakMapper(it).vedtak() }
     }
 
     private val meldingOmVedtakData =
@@ -185,14 +183,5 @@ class VedtakHtmlTest {
                 htmlInnhold,
             )
         }
-    }
-
-    fun writeStringToFile(
-        filePath: String,
-        content: String,
-    ) {
-        val path = Paths.get(filePath)
-        Files.createDirectories(path.parent)
-        Files.writeString(path, content)
     }
 }
