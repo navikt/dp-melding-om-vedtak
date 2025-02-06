@@ -28,6 +28,7 @@ import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
+import no.nav.dagpenger.vedtaksmelding.util.readFile
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
@@ -35,7 +36,12 @@ import java.time.LocalDateTime
 class MediatorTest {
     private val behandlingId = UUIDv7.ny()
     private val saksbehandler = Saksbehandler("tulleToken")
-    private val resourseRetriever = object {}.javaClass
+
+    private val resource = "/json/sanity.json".readFile()
+    private val sanityKlient =
+        mockk<SanityKlient>().also {
+            coEvery { it.hentBrevBlokkerJson() } returns resource
+        }
 
     @Test
     fun `Returnere rett vedtak ved bruk av hentVedtaksmelding `() {
@@ -57,12 +63,6 @@ class MediatorTest {
             mockk<BehandlingKlient>().also {
                 coEvery { it.hentVedtak(behandlingId, saksbehandler) } returns Result.success(vedtak)
             }
-
-        val resource = resourseRetriever.getResource("/json/sanity.json").readText()
-        val sanityKlient =
-            mockk<SanityKlient>().also {
-                coEvery { it.hentBrevBlokkerJson() } returns resource
-            }
         withMigratedDb { dataSource ->
             val repository = PostgresVedtaksmeldingRepository(dataSource)
             val mediator =
@@ -81,7 +81,7 @@ class MediatorTest {
     @Test
     fun `Returnere rett vedtak ved bruk av hentEndeligVedtaksmelding `() {
         val vedtak =
-            resourseRetriever.getResource("/json/vedtak.json").readText().let {
+            ("/json/vedtak.json").readFile().let {
                 VedtakMapper(it).vedtak()
             }
         val meldingOmVedtakDataDTO =
@@ -102,11 +102,6 @@ class MediatorTest {
                     ),
             )
 
-        val resource = resourseRetriever.getResource("/json/sanity.json").readText()
-        val sanityKlient =
-            mockk<SanityKlient>().also {
-                coEvery { it.hentBrevBlokkerJson() } returns resource
-            }
         val behandlingKlient =
             mockk<BehandlingKlient>().also {
                 coEvery { it.hentVedtak(behandlingId, saksbehandler) } returns Result.success(vedtak)
@@ -114,7 +109,7 @@ class MediatorTest {
 
         withMigratedDb {
             val repository = PostgresVedtaksmeldingRepository(dataSource)
-            repository.lagreSanityInnhold(behandlingId, resourseRetriever.getResource("/json/sanity.json").readText())
+            repository.lagreSanityInnhold(behandlingId, resource)
             val mediator =
                 Mediator(
                     behandlingKlient = behandlingKlient,
@@ -152,7 +147,7 @@ class MediatorTest {
         val mediator =
             Mediator(
                 behandlingKlient = behandlingKlient,
-                sanityKlient = SanityKlient(Configuration.sanityApiUrl),
+                sanityKlient = sanityKlient,
                 vedtaksmeldingRepository = mockk<VedtaksmeldingRepository>(relaxed = true),
             )
 
@@ -212,7 +207,7 @@ class MediatorTest {
             spyk(
                 Mediator(
                     behandlingKlient = mockk(),
-                    sanityKlient = mockk<SanityKlient>(),
+                    sanityKlient = sanityKlient,
                     vedtaksmeldingRepository = vedtaksmeldingRepository,
                 ),
             ).also {
