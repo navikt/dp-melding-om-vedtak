@@ -7,17 +7,16 @@ import io.ktor.http.headersOf
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.k8.setAzureAuthEnv
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
+import no.nav.dagpenger.vedtaksmelding.util.readFile
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.util.UUID
 
 internal class BehandlingKlientTest {
-    private val resourseRetriever = object {}.javaClass
-
     @Test
     fun `Skal kalle behandling endepunkt med riktig headers og parse response`() {
         val behandlingId = UUID.fromString("01937743-812d-7a69-b492-d25eb9768c68")
-        val vedtakJson = resourseRetriever.getResource("/json/vedtak.json")!!.readText()
+        val vedtakJson = "/json/vedtak.json".readFile()
 
         val behandlingKlient =
             BehandlingHttpKlient(
