@@ -46,7 +46,8 @@ sealed interface Child {
 
     data class Span(
         val text: String,
-        val marks: List<String>,
+        @JsonDeserialize(using = Mark.ListMarkDeserialiser::class)
+        val marks: List<Mark>,
         val _key: String,
     ) : Child {
         override val _type = SPAN
@@ -81,6 +82,38 @@ sealed interface Child {
                     OPPLYSNING_REFERENCE -> {
                         p.codec.treeToValue(it, Child.OpplysningReference::class.java)
                     }
+                }
+            }
+        }
+    }
+}
+
+sealed interface Mark {
+    data class Annotation(val _key: String) : Mark
+
+    data object Em : Mark
+
+    data object Strong : Mark
+
+    data object Underline : Mark
+
+    data object StrikeThrough : Mark
+
+    data object Code : Mark
+
+    object ListMarkDeserialiser : JsonDeserializer<List<Mark>>() {
+        override fun deserialize(
+            p: JsonParser,
+            ctxt: DeserializationContext,
+        ): List<Mark> {
+            return p.readValueAsTree<JsonNode>().map {
+                when (val text = it.asText()) {
+                    "em" -> Em
+                    "strong" -> Strong
+                    "underline" -> Underline
+                    "strike-through" -> StrikeThrough
+                    "code" -> Code
+                    else -> Annotation(text)
                 }
             }
         }

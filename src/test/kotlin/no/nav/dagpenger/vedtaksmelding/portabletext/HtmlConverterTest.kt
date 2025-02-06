@@ -1,5 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.portabletext
 
+import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
@@ -12,24 +13,42 @@ import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MIN
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.sanity.ResultDTO
 import no.nav.dagpenger.vedtaksmelding.util.finnUtvidetBeskrivelseNode
+import no.nav.dagpenger.vedtaksmelding.util.readFile
+import no.nav.dagpenger.vedtaksmelding.util.writeStringToFile
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
 @Suppress("ktlint:standard:max-line-length")
 class HtmlConverterTest {
-    private fun String.lesFil(): String {
-        val resourseRetriever = object {}.javaClass
-        return resourseRetriever.getResource(this)?.readText() ?: throw RuntimeException("Fant ikke ressurs $this")
+    private fun hentVedtak(navn: String): Vedtak {
+        return navn.readFile().let { VedtakMapper(it).vedtak() }
     }
 
-    private fun hentVedtak(navn: String): Vedtak {
-        return navn.lesFil().let { VedtakMapper(it).vedtak() }
+    @Test
+    fun `Skal bygge HTML med ulike tekst formattering`() {
+        val sanityTekster =
+            "/json/sanity.json".readFile().let {
+                objectMapper.readValue(it, ResultDTO::class.java)
+            }.result.filter { it.textId.contains("hubba.bubba") }
+
+        sanityTekster.size shouldBe 1
+
+        shouldNotThrowAny {
+            HtmlConverter.toHtml(
+                brevBlokker = sanityTekster,
+                opplysninger = emptyList(),
+                meldingOmVedtakData = meldingOmVedtakDTO,
+                fagsakId = "123456789",
+            ).also {
+                writeStringToFile("build/temp/test.html", it)
+            }
+        }
     }
 
     @Test
     fun `Skal bygge HTML med utvidede beskrivelse`() {
         val sanityTekster =
-            "/json/sanity.json".lesFil().let {
+            "/json/sanity.json".readFile().let {
                 objectMapper.readValue(it, ResultDTO::class.java)
             }.result
 
