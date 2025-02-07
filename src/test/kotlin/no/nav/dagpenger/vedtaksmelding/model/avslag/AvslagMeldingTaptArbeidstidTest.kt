@@ -10,6 +10,7 @@ import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_FASTSATT_VANLIG_ARBEDSTID_0
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.TAPT_ARBEIDSTID
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
@@ -54,7 +55,7 @@ class AvslagMeldingTaptArbeidstidTest {
     }
 
     @Test
-    fun `Riktige brevblokker for avslag arbeidstid`() {
+    fun `Riktige brevblokker for avslag arbeidstid når fastsatt vanlig arbeidstid er større enn 0`() {
         val behandlingId = UUIDv7.ny()
         val arbeidstidIkkeOppfylt =
             Vilkår(
@@ -68,7 +69,15 @@ class AvslagMeldingTaptArbeidstidTest {
                     behandlingId = behandlingId,
                     vilkår = setOf(arbeidstidIkkeOppfylt),
                     utfall = Utfall.AVSLÅTT,
-                    opplysninger = emptySet(),
+                    opplysninger =
+                        setOf(
+                            Opplysning(
+                                opplysningTekstId = FastsattVanligArbeidstidPerUke.opplysningTekstId,
+                                råVerdi = "37.5",
+                                datatype = FLYTTALL,
+                                enhet = TIMER,
+                            ),
+                        ),
                     fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
@@ -76,6 +85,74 @@ class AvslagMeldingTaptArbeidstidTest {
             listOf(
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID.brevblokkId,
+            ) + VedtakMelding.fasteAvsluttendeBlokker
+    }
+
+    @Test
+    fun `Riktige brevblokker for avslag arbeidstid når fastsatt vanlig arbeidstid er 0`() {
+        val behandlingId = UUIDv7.ny()
+        val arbeidstidIkkeOppfylt =
+            Vilkår(
+                navn = TAPT_ARBEIDSTID.navn,
+                status = Vilkår.Status.IKKE_OPPFYLT,
+            )
+
+        AvslagMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = setOf(arbeidstidIkkeOppfylt),
+                    utfall = Utfall.AVSLÅTT,
+                    opplysninger =
+                        setOf(
+                            Opplysning(
+                                opplysningTekstId = FastsattVanligArbeidstidPerUke.opplysningTekstId,
+                                råVerdi = "0.0",
+                                datatype = FLYTTALL,
+                                enhet = TIMER,
+                            ),
+                        ),
+                    fagsakId = "fagsakId test",
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe
+            listOf(
+                AVSLAG_INNLEDNING.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID_FASTSATT_VANLIG_ARBEDSTID_0.brevblokkId,
+            ) + VedtakMelding.fasteAvsluttendeBlokker
+    }
+
+    @Test
+    fun `Riktige brevblokker for avslag arbeidstid når fastsatt vanlig arbeidstid er mindre enn 0`() {
+        val behandlingId = UUIDv7.ny()
+        val arbeidstidIkkeOppfylt =
+            Vilkår(
+                navn = TAPT_ARBEIDSTID.navn,
+                status = Vilkår.Status.IKKE_OPPFYLT,
+            )
+
+        AvslagMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = setOf(arbeidstidIkkeOppfylt),
+                    utfall = Utfall.AVSLÅTT,
+                    opplysninger =
+                        setOf(
+                            Opplysning(
+                                opplysningTekstId = FastsattVanligArbeidstidPerUke.opplysningTekstId,
+                                råVerdi = "-0.5",
+                                datatype = FLYTTALL,
+                                enhet = TIMER,
+                            ),
+                        ),
+                    fagsakId = "fagsakId test",
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe
+            listOf(
+                AVSLAG_INNLEDNING.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID_FASTSATT_VANLIG_ARBEDSTID_0.brevblokkId,
             ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 

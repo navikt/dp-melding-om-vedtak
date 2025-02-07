@@ -1,5 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.model.avslag
 
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FastsattVanligArbeidstidPerUke
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ALDER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ANDRE_FULLE_YTELSER
@@ -19,6 +20,7 @@ import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_STR
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_STREIK_LOCKOUT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_FASTSATT_VANLIG_ARBEDSTID_0
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTDANNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT_HJEMMEL
@@ -125,12 +127,23 @@ class AvslagMelding(
     }
 
     private fun blokkerAvslagTaptArbeidstid(): List<String> {
-        return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == TAPT_ARBEIDSTID.navn && vilkår.status == IKKE_OPPFYLT
+        return when (
+            vedtak.vilkår.any { vilkår ->
+                vilkår.navn == TAPT_ARBEIDSTID.navn && vilkår.status == IKKE_OPPFYLT
+            }
+        ) {
+            true ->
+                when (
+                    vedtak.opplysninger.any { opplysning ->
+                        opplysning.opplysningTekstId == FastsattVanligArbeidstidPerUke.opplysningTekstId &&
+                            opplysning.råVerdi().toDouble() > 0.0
+                    }
+                ) {
+                    true -> listOf(AVSLAG_TAPT_ARBEIDSTID.brevblokkId)
+                    false -> listOf(AVSLAG_TAPT_ARBEIDSTID_FASTSATT_VANLIG_ARBEDSTID_0.brevblokkId)
+                }
+            else -> emptyList()
         }
-            ?.let {
-                listOf(AVSLAG_TAPT_ARBEIDSTID.brevblokkId)
-            } ?: emptyList()
     }
 
     private fun blokkerAvslagUtestengt(): List<String> {
