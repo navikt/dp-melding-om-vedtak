@@ -14,7 +14,8 @@ enum class AvslagVilkårMedBrevstøtte(val navn: String) {
 
     IKKE_ANDRE_FULLE_YTELSER(navn = "Mottar ikke andre fulle ytelser"),
 
-    MINSTEINNTEKT_ELLER_VERNEPLIKT(navn = "Oppfyller kravet til minsteinntekt eller verneplikt"),
+    MINSTEINNTEKT(navn = "Oppfyller kravet til minsteinntekt"),
+    MINSTEINNTEKT_OLD(navn = "Oppfyller kravet til minsteinntekt eller verneplikt"),
 
     TAPT_ARBEIDSTID(navn = "Tap av arbeidstid er minst terskel"),
 

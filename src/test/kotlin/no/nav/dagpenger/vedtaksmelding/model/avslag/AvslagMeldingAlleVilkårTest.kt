@@ -140,7 +140,7 @@ private val json =
           "hjemmel": "folketrygdloven § 4-5"
         },
         {
-          "navn": "Oppfyller kravet til minsteinntekt eller verneplikt",
+          "navn": "Oppfyller kravet til minsteinntekt",
           "status": "IkkeOppfylt",
           "vurderingstidspunkt": "2025-01-29T10:13:36.505549",
           "hjemmel": "folketrygdloven § 4-4"

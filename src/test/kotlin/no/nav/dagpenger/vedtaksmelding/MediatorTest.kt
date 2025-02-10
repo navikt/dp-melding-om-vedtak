@@ -22,7 +22,7 @@ import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagMelding
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT_ELLER_VERNEPLIKT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
@@ -51,7 +51,7 @@ class MediatorTest {
                 vilkår =
                     setOf(
                         Vilkår(
-                            "Oppfyller kravet til minsteinntekt eller verneplikt",
+                            MINSTEINNTEKT.navn,
                             Vilkår.Status.IKKE_OPPFYLT,
                         ),
                     ),
@@ -131,7 +131,7 @@ class MediatorTest {
                 vilkår =
                     setOf(
                         Vilkår(
-                            MINSTEINNTEKT_ELLER_VERNEPLIKT.navn,
+                            MINSTEINNTEKT.navn,
                             Vilkår.Status.IKKE_OPPFYLT,
                         ),
                     ),

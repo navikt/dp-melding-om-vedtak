@@ -29,7 +29,8 @@ import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.IKKE_UTDANNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.IKKE_UTESTENGT
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT_ELLER_VERNEPLIKT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT_OLD
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.OPPHOLD_I_NORGE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_ARBEIDSFØR
@@ -52,7 +53,8 @@ class AvslagMelding(
     override val harBrevstøtte: Boolean =
         vedtak.utfall == AVSLÅTT &&
             listOf(
-                MINSTEINNTEKT_ELLER_VERNEPLIKT,
+                MINSTEINNTEKT,
+                MINSTEINNTEKT_OLD,
                 IKKE_PASSERT_ALDERSGRENSE,
                 TAPT_ARBEIDSINNTEKT,
                 TAPT_ARBEIDSTID,
@@ -99,7 +101,8 @@ class AvslagMelding(
 
     private fun blokkerAvslagMinsteinntekt(): List<String> {
         return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == MINSTEINNTEKT_ELLER_VERNEPLIKT.navn && vilkår.status == IKKE_OPPFYLT
+            (vilkår.navn == MINSTEINNTEKT.navn && vilkår.status == IKKE_OPPFYLT) ||
+                (vilkår.navn == MINSTEINNTEKT_OLD.navn && vilkår.status == IKKE_OPPFYLT)
         }
             ?.let {
                 listOf(AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId)

@@ -6,14 +6,14 @@ import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_BEGRUNNELSE
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT_OLD
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
-class AvslagMeldingMinsteinntektEllerVernepliktTest {
+class AvslagMeldingMinsteinntektTest {
     @Test
     fun `Brevstøtte for avslag minsteinntekt eller verneplikt`() {
         val avslagMinsteinntektVedtak = VedtakMapper(json).vedtak()
@@ -26,7 +26,7 @@ class AvslagMeldingMinsteinntektEllerVernepliktTest {
     fun `Rikige brevblokker for avslag på minsteinntekt`() {
         val minsteInntektIkkeOppfylt =
             Vilkår(
-                navn = MINSTEINNTEKT_OLD.navn,
+                navn = MINSTEINNTEKT.navn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
         AvslagMelding(
@@ -60,7 +60,7 @@ private val json =
       "behandletAv": [],
       "vilkår": [
         {
-          "navn": "Oppfyller kravet til minsteinntekt eller verneplikt",
+          "navn": "Oppfyller kravet til minsteinntekt",
           "status": "IkkeOppfylt",
           "vurderingstidspunkt": "2025-01-21T11:03:11.070006",
           "hjemmel": "folketrygdloven § 4-4"
