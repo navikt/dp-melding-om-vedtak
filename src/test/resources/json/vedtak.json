@@ -98,7 +98,7 @@
       "hjemmel": "folketrygdloven § 4-5"
     },
     {
-      "navn": "Oppfyller kravet til minsteinntekt eller verneplikt",
+      "navn": "Oppfyller kravet til minsteinntekt",
       "status": "Oppfylt",
       "vurderingstidspunkt": "2025-01-29T10:13:36.505549",
       "hjemmel": "folketrygdloven § 4-4"
@@ -4167,7 +4167,7 @@
     {
       "id": "0194b156-63f9-7b3e-b980-eae4f4b05fd8",
       "opplysningTypeId": "0194881f-9440-7e1c-9ec4-0f20650bc0cd",
-      "navn": "Oppfyller kravet til minsteinntekt eller verneplikt",
+      "navn": "Oppfyller kravet til minsteinntekt",
       "verdi": "true",
       "status": "Faktum",
       "datatype": "boolsk",

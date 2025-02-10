@@ -3,7 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.model
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.types.shouldBeInstanceOf
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagMelding
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT_ELLER_VERNEPLIKT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseMelding
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.AVSLÅTT
@@ -24,7 +24,7 @@ class VedtakMeldingTest {
                     vilkår =
                         setOf(
                             Vilkår(
-                                navn = MINSTEINNTEKT_ELLER_VERNEPLIKT.navn,
+                                navn = MINSTEINNTEKT.navn,
                                 status = Vilkår.Status.IKKE_OPPFYLT,
                             ),
                         ),
