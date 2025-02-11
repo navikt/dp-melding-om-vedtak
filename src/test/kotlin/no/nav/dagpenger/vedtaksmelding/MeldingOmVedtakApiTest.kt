@@ -19,6 +19,8 @@ import io.mockk.slot
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
+import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakResponseDTO
+import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
@@ -105,7 +107,7 @@ class MeldingOmVedtakApiTest {
         val mediator =
             mockk<Mediator>().also {
                 coEvery {
-                    it.hentVedtakHtml(
+                    it.hentVedtak(
                         behandlingId,
                         Saksbehandler(saksbehandlerToken),
                         meldingOmVedtakData =
@@ -135,21 +137,24 @@ class MeldingOmVedtakApiTest {
                                     ),
                             ),
                     )
-                } returns "<html><body>Test HTML Test ForNavn</body></html>"
-                coEvery { it.hentUtvidedeBeskrivelser(behandlingId, saksbehandler) } returns
-                    listOf(
-                        UtvidetBeskrivelse(
-                            behandlingId = behandlingId,
-                            brevblokkId = RETT_TIL_Å_KLAGE.brevBlokkId,
-                            tekst = "hallo",
-                            sistEndretTidspunkt = LocalDateTime.MAX,
-                        ),
-                        UtvidetBeskrivelse(
-                            behandlingId = behandlingId,
-                            brevblokkId = "brev.blokk.rett-til-aa-random",
-                            tekst = "random test",
-                            sistEndretTidspunkt = LocalDateTime.MAX,
-                        ),
+                } returns
+                    MeldingOmVedtakResponseDTO(
+                        html = "<html><body>Test HTML Test ForNavn</body></html>",
+                        utvidedeBeskrivelser =
+                            listOf(
+                                UtvidetBeskrivelseDTO(
+                                    brevblokkId = RETT_TIL_Å_KLAGE.brevBlokkId,
+                                    tekst = "hallo",
+                                    sistEndretTidspunkt = LocalDateTime.MAX,
+                                    tittel = "Tittel",
+                                ),
+                                UtvidetBeskrivelseDTO(
+                                    brevblokkId = "brev.blokk.rett-til-aa-random",
+                                    tekst = "random test",
+                                    sistEndretTidspunkt = LocalDateTime.MAX,
+                                    tittel = "Tittel 2",
+                                ),
+                            ),
                     )
             }
         testApplication {
