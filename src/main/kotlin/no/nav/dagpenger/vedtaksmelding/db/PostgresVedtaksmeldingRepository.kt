@@ -90,6 +90,41 @@ class PostgresVedtaksmeldingRepository(private val dataSource: DataSource) : Ved
         }
     }
 
+    override fun hentUtvidedeBeskrivelserFor(
+        behandlingId: UUID,
+        brevblokkIder: Set<String>,
+    ): List<UtvidetBeskrivelse> {
+        return sessionOf(dataSource).use { session ->
+
+            session.run(
+                queryOf(
+                    //language=PostgreSQL
+                    statement =
+                        """
+                        SELECT  tekst, brevblokk_id, endret_tidspunkt
+                        FROM    utvidet_beskrivelse_v1
+                        WHERE   behandling_id = :behandling_id
+                        AND     brevblokk_id = ANY(:brevblokkIder)
+                        AND     tekst IS NOT NULL
+                        AND     tekst != ''
+                        """.trimIndent(),
+                    paramMap =
+                        mapOf(
+                            "behandling_id" to behandlingId,
+                            "brevblokkIder" to brevblokkIder.toTypedArray(),
+                        ),
+                ).map { row ->
+                    UtvidetBeskrivelse(
+                        behandlingId = behandlingId,
+                        brevblokkId = row.string("brevblokk_id"),
+                        tekst = row.string("tekst"),
+                        sistEndretTidspunkt = row.localDateTime("endret_tidspunkt"),
+                    )
+                }.asList,
+            )
+        }
+    }
+
     override fun lagreSanityInnhold(
         behandlingId: UUID,
         sanityInnhold: String,

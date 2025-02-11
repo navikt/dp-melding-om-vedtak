@@ -84,6 +84,28 @@ class PostgresVedtakMeldingRepositoryTest {
     }
 
     @Test
+    fun `Skal kunne hente utvidede beskrivelser for behandling og gitte brevblokk id`() {
+        val behandlingId = UUIDv7.ny()
+        val utvidedBeskrivelser =
+            (1..3).map {
+                UtvidetBeskrivelse(
+                    behandlingId = behandlingId,
+                    brevblokkId = "$it",
+                    tekst = "tekst$it",
+                )
+            }
+
+        withMigratedDb { datasource ->
+            val repository = PostgresVedtaksmeldingRepository(datasource)
+            utvidedBeskrivelser.forEach { repository.lagre(it) }
+
+            val utvidedeBeskrivelserFraDB = repository.hentUtvidedeBeskrivelserFor(behandlingId, setOf("1", "3"))
+            utvidedeBeskrivelserFraDB.size shouldBe 2
+            utvidedeBeskrivelserFraDB.map { it.brevblokkId } shouldBe setOf("1", "3")
+        }
+    }
+
+    @Test
     fun `Skal kun hente utvidede beskrivelser som ikke er en tom streng`() {
         val behandlingId = UUIDv7.ny()
         val brevblokkId = "brevblokk1"
