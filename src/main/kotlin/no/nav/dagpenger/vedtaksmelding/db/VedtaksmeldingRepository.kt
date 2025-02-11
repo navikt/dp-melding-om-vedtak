@@ -19,11 +19,6 @@ interface VedtaksmeldingRepository {
 
     fun hentUtvidedeBeskrivelserFor(behandlingId: UUID): List<UtvidetBeskrivelse>
 
-    fun hentUtvidedeBeskrivelserFor(
-        behandlingId: UUID,
-        brevblokkIder: Set<String>,
-    ): List<UtvidetBeskrivelse>
-
     fun lagreSanityInnhold(
         behandlingId: UUID,
         sanityInnhold: String,
