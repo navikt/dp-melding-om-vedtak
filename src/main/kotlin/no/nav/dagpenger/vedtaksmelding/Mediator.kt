@@ -3,6 +3,8 @@ package no.nav.dagpenger.vedtaksmelding
 import com.fasterxml.jackson.core.type.TypeReference
 import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
+import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakResponseDTO
+import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
@@ -64,44 +66,50 @@ class Mediator(
         return vedtaksmeldingRepository.lagre(utvidetBeskrivelse)
     }
 
-    fun hentUtvidedeBeskrivelser(behandlingId: UUID): List<UtvidetBeskrivelse> {
-        return vedtaksmeldingRepository.hentUtvidedeBeskrivelserFor(behandlingId)
-    }
-
-    suspend fun hentUtvidedeBeskrivelser(
+    private fun hentUtvidedeBeskrivelser(
         behandlingId: UUID,
-        saksbehandler: Saksbehandler,
+        vedtaksMelding: VedtakMelding,
     ): List<UtvidetBeskrivelse> {
         val tekstmapping =
             vedtaksmeldingRepository.hentUtvidedeBeskrivelserFor(behandlingId).associateBy { it.brevblokkId }
-        return hentVedtaksmelding(behandlingId, saksbehandler).map { vedtaksmelding ->
-            vedtaksmelding.hentBrevBlokker().filter { it.utvidetBeskrivelse }.map {
-                UtvidetBeskrivelse(
-                    behandlingId = behandlingId,
-                    brevblokkId = it.textId,
-                    tekst = tekstmapping[it.textId]?.tekst,
-                    sistEndretTidspunkt = LocalDateTime.now(),
-                    tittel = it.title,
-                )
-            }
-        }.getOrThrow()
+        return vedtaksMelding.hentBrevBlokker().filter { it.utvidetBeskrivelse }.map {
+            UtvidetBeskrivelse(
+                behandlingId = behandlingId,
+                brevblokkId = it.textId,
+                tekst = tekstmapping[it.textId]?.tekst,
+                sistEndretTidspunkt = LocalDateTime.now(),
+                tittel = it.title,
+            )
+        }
     }
 
-    suspend fun hentVedtakHtml(
+    suspend fun hentVedtak(
         behandlingId: UUID,
         behandler: Saksbehandler,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
-    ): String {
-        val html =
-            hentVedtaksmelding(behandlingId, behandler).map { vedtak ->
+    ): MeldingOmVedtakResponseDTO {
+        return hentVedtaksmelding(behandlingId, behandler).map { vedtak ->
+            val html =
                 HtmlConverter.toHtml(
                     vedtak.hentBrevBlokker(),
                     vedtak.hentOpplysninger(),
                     meldingOmVedtakData,
                     vedtak.hentFagsakId(),
                 )
-            }.getOrThrow()
-        return html
+
+            MeldingOmVedtakResponseDTO(
+                html = html,
+                utvidedeBeskrivelser =
+                    hentUtvidedeBeskrivelser(behandlingId, vedtak).map {
+                        UtvidetBeskrivelseDTO(
+                            brevblokkId = it.brevblokkId,
+                            tekst = it.tekst ?: "",
+                            sistEndretTidspunkt = it.sistEndretTidspunkt ?: LocalDateTime.now(),
+                            tittel = it.tittel,
+                        )
+                    },
+            )
+        }.getOrThrow()
     }
 
     suspend fun hentEndeligVedtak(
@@ -109,15 +117,15 @@ class Mediator(
         behandler: Saksbehandler,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): String {
-        val utvidetBeskrivelse = hentUtvidedeBeskrivelser(behandlingId, behandler).toSet()
         val html =
             hentEnderligVedtaksmelding(behandlingId, behandler).map { vedtak ->
+
                 HtmlConverter.toHtml(
                     vedtak.hentBrevBlokker(),
                     vedtak.hentOpplysninger(),
                     meldingOmVedtakData,
                     vedtak.hentFagsakId(),
-                    utvidetBeskrivelse,
+                    hentUtvidedeBeskrivelser(behandlingId, vedtak).toSet(),
                 )
             }.getOrThrow()
         vedtaksmeldingRepository.lagreVedaksmeldingHtml(behandlingId, html)

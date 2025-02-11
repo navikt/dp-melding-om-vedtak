@@ -72,10 +72,15 @@ class MediatorTest {
                     vedtaksmeldingRepository = repository,
                 )
             runBlocking {
-                mediator.hentVedtaksmelding(behandlingId, saksbehandler).getOrThrow().shouldBeInstanceOf<AvslagMelding>()
+                mediator.hentVedtaksmelding(behandlingId, saksbehandler).getOrThrow()
+                    .shouldBeInstanceOf<AvslagMelding>()
             }
             repository.hentSanityInnhold(behandlingId) shouldEqualJson resource
         }
+    }
+
+    @Test
+    fun `Skal kun ta med utvidede beskrivelse som finnes på vedtak`() {
     }
 
     @Test
@@ -213,7 +218,7 @@ class MediatorTest {
             ).also {
                 coEvery { it.hentVedtaksmelding(behandlingId, saksbehandler) } returns
                     Result.success(
-                        mockk<VedtakMelding>().also {
+                        mockk<VedtakMelding>(relaxed = true).also {
                             coEvery { it.hentBrevBlokker() } returns
                                 listOf(
                                     BrevBlokk(
@@ -248,13 +253,17 @@ class MediatorTest {
                         },
                     )
             }
-
         runBlocking {
-            val utvidedebeskrivelser = mediator.hentUtvidedeBeskrivelser(behandlingId, saksbehandler)
+            val utvidedebeskrivelser =
+                mediator.hentVedtak(behandlingId, saksbehandler, mockk(relaxed = true)).utvidedeBeskrivelser
+            require(utvidedebeskrivelser != null) {
+                "utvidedeBeskrivelser should not be null"
+            }
+
             utvidedebeskrivelser.size shouldBe 3
             utvidedebeskrivelser.single {
                 it.brevblokkId == "brev.blokk.rett-til-ikke-innhold"
-            }.tekst shouldBe null
+            }.tekst shouldBe ""
             utvidedebeskrivelser.single {
                 it.brevblokkId == RETT_TIL_Å_KLAGE.brevBlokkId
             }.tekst shouldBe "hallo"

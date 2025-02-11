@@ -16,8 +16,6 @@ import io.ktor.server.routing.routing
 import mu.KotlinLogging
 import mu.withLoggingContext
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
-import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakResponseDTO
-import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseSistEndretTidspunktDTO
 import no.nav.dagpenger.vedtaksmelding.apiconfig.apiConfig
 import no.nav.dagpenger.vedtaksmelding.apiconfig.jwt
@@ -39,30 +37,15 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                 val meldingOmVedtakData = call.receive<MeldingOmVedtakDataDTO>()
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
                     kotlin.runCatching {
-                        val vedtaksHtml =
-                            mediator.hentVedtakHtml(
+                        val meldingOmVedtakResponseDTO =
+                            mediator.hentVedtak(
                                 behandlingId = behandlingId,
                                 behandler = behandler,
                                 meldingOmVedtakData = meldingOmVedtakData,
                             )
-                        val utvidetBeskrivelser = mediator.hentUtvidedeBeskrivelser(behandlingId, saksbehandler = behandler)
-                        val meldingOmVedtakResponseDTO =
-                            MeldingOmVedtakResponseDTO(
-                                utvidedeBeskrivelser =
-                                    utvidetBeskrivelser.map {
-                                        UtvidetBeskrivelseDTO(
-                                            brevblokkId = it.brevblokkId,
-                                            tekst = it.tekst ?: "",
-                                            sistEndretTidspunkt = it.sistEndretTidspunkt,
-                                            tittel = it.tittel,
-                                        )
-                                    },
-                                html = vedtaksHtml,
-                            )
-
                         call.respond(meldingOmVedtakResponseDTO)
                     }.onFailure { t ->
-                        logger.error(t) { "Feil ved henting av vedtaksmelding som html (hentVedtakHtml). BehandlingId: $behandlingId" }
+                        logger.error(t) { "Feil ved henting av vedtaksmelding som html (hentVedtak). BehandlingId: $behandlingId" }
                         call.respond(HttpStatusCode.InternalServerError)
                     }
                 }
