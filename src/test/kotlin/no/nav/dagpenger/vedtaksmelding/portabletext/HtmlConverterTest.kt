@@ -64,22 +64,20 @@ class HtmlConverterTest {
                             UtvidetBeskrivelse(
                                 behandlingId = UUIDv7.ny(),
                                 brevblokkId = AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId,
-                                tekst = """ Dette er en test linje 1
-                                    linje 1 med <
-                                    
-                                    
-                                    linje 2 med > 
-                                    
-                                    
-                                    linje 3 med  & 
-                                    
-                                    linje 4 med 
-                                    """,
+                                tekst =
+                                    """Dette er en test linje med <, > og &
+Dette er linje 2
+ 
+Dette er linje 3
+
+
+Dette er linje 4
+                                    """.trimMargin(),
                             ),
                         ),
                 )
             } finnUtvidetBeskrivelseNode AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId shouldBe
-            """<p data-utvidet-beskrivelse-id="brev.blokk.begrunnelse-avslag-minsteinntekt">Dette er en test linje 1<br> linje 1 med &lt;<br> <br> <br> linje 2 med &gt; <br> <br> <br> linje 3 med &amp; <br> <br> linje 4 med <br></p>"""
+            """<p data-utvidet-beskrivelse-id="brev.blokk.begrunnelse-avslag-minsteinntekt">Dette er en test linje med &lt;, &gt; og &amp;<br>Dette er linje 2<br> <br>Dette er linje 3<br><br><br>Dette er linje 4</p>"""
     }
 
     private val meldingOmVedtakDTO =

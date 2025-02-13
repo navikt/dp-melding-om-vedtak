@@ -8,7 +8,9 @@ infix fun String.finnUtvidetBeskrivelseTekst(utvidetBeskrivelseId: String): Stri
 infix fun String.finnUtvidetBeskrivelseNode(utvidetBeskrivelseId: String): String? = finnElement(utvidetBeskrivelseId)?.toString()
 
 infix fun String.finnElement(utvidetBeskrivelseId: String): Element? {
-    return Jsoup.parse(this).select("[data-utvidet-beskrivelse-id]").singleOrNull {
+    val document = Jsoup.parse(this)
+    document.outputSettings().prettyPrint(false)
+    return document.select("[data-utvidet-beskrivelse-id]").singleOrNull {
         it.attr("data-utvidet-beskrivelse-id") == utvidetBeskrivelseId
     }
 }

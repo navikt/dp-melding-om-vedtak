@@ -197,7 +197,7 @@ object HtmlConverter {
 
     private fun String.sanitize(): String {
         return split("\n", "\r", "\r\n", "\u2028", "\u2029")
-            .joinToString("<br>") { it.escapeHTML() }
+            .joinToString("<br/>") { it.escapeHTML() }
     }
 
     private fun FlowContent.maybeWrapList(
