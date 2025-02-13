@@ -46,7 +46,7 @@ class HtmlConverterTest {
     }
 
     @Test
-    fun `Skal bygge HTML med utvidede beskrivelse`() {
+    fun `Skal sanitisere og legge inn utvidede beskrivelse i HTML som blir laget`() {
         val sanityTekster =
             "/json/sanity.json".readFile().let {
                 objectMapper.readValue(it, ResultDTO::class.java)
@@ -65,21 +65,21 @@ class HtmlConverterTest {
                                 behandlingId = UUIDv7.ny(),
                                 brevblokkId = AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId,
                                 tekst = """ Dette er en test linje 1
-                                    linje 1
+                                    linje 1 med <
                                     
                                     
-                                    linje 2
+                                    linje 2 med > 
                                     
                                     
-                                    linje 3
+                                    linje 3 med  & 
                                     
-                                    linje 4
+                                    linje 4 med 
                                     """,
                             ),
                         ),
                 )
             } finnUtvidetBeskrivelseNode AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId shouldBe
-            """<p data-utvidet-beskrivelse-id="brev.blokk.begrunnelse-avslag-minsteinntekt"> Dette er en test linje 1<br> linje 1<br> <br> <br> linje 2<br> <br> <br> linje 3<br> <br> linje 4<br> </p>"""
+            """<p data-utvidet-beskrivelse-id="brev.blokk.begrunnelse-avslag-minsteinntekt">Dette er en test linje 1<br> linje 1 med &lt;<br> <br> <br> linje 2 med &gt; <br> <br> <br> linje 3 med &amp; <br> <br> linje 4 med <br></p>"""
     }
 
     private val meldingOmVedtakDTO =

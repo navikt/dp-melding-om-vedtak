@@ -1,5 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.portabletext
 
+import io.ktor.util.escapeHTML
 import kotlinx.html.FlowContent
 import kotlinx.html.FlowOrPhrasingContent
 import kotlinx.html.HTMLTag
@@ -147,17 +148,7 @@ object HtmlConverter {
                                     }
                                 }
                             }
-                            if (brevBlokk.utvidetBeskrivelse) {
-                                p {
-                                    attributes["data-utvidet-beskrivelse-id"] = brevBlokk.textId
-                                    utvidetBeskrivelse.find { it.brevblokkId == brevBlokk.textId }?.htmlTekst()
-                                        ?.let { html ->
-                                            unsafe {
-                                                raw(html)
-                                            }
-                                        }
-                                }
-                            }
+                            maybeAddUtvidetBesskrivelse(utvidetBeskrivelse, brevBlokk)
                         }
                     }
                     div {
@@ -184,6 +175,29 @@ object HtmlConverter {
                 }
             }
         }
+    }
+
+    private fun FlowContent.maybeAddUtvidetBesskrivelse(
+        utvidetBeskrivelse: Set<UtvidetBeskrivelse>,
+        brevBlokk: BrevBlokk,
+    ) {
+        if (brevBlokk.utvidetBeskrivelse) {
+            p {
+                attributes["data-utvidet-beskrivelse-id"] = brevBlokk.textId
+                utvidetBeskrivelse.find { it.brevblokkId == brevBlokk.textId }?.tekst
+                    ?.let { html ->
+                        unsafe {
+                            val s = html.sanitize()
+                            raw(s)
+                        }
+                    }
+            }
+        }
+    }
+
+    private fun String.sanitize(): String {
+        return split("\n", "\r", "\r\n", "\u2028", "\u2029")
+            .joinToString("<br>") { it.escapeHTML() }
     }
 
     private fun FlowContent.maybeWrapList(

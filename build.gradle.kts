@@ -37,8 +37,8 @@ dependencies {
     testImplementation(libs.bundles.postgres.test)
     testImplementation("io.ktor:ktor-client-mock:${libs.versions.ktor.get()}")
 
-    testImplementation("io.kubernetes:client-java:21.0.1")
-    testImplementation("org.jsoup:jsoup:1.14.3")
+    testImplementation("io.kubernetes:client-java:22.0.0")
+    testImplementation("org.jsoup:jsoup:1.15.3")
 }
 
 application {
