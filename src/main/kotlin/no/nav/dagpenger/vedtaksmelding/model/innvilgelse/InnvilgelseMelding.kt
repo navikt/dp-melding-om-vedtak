@@ -15,8 +15,10 @@ import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.UføreDagsats
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN_VERNEPLIKT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_VERNEPLIKT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_EGENANDEL
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG_VERNEPLIKT
@@ -62,13 +64,10 @@ class InnvilgelseMelding(
                 listOf(
                     INNVILGELSE_INNLEDNING.brevblokkId,
                     INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
-                    INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
-                    INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
                 )
 
             val avsluttendeBrevblokker =
                 listOf(
-                    INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
                     INNVILGELSE_EGENANDEL.brevblokkId,
                     INNVILGELSE_MELDEKORT.brevblokkId,
                     INNVILGELSE_UTBETALING.brevblokkId,
@@ -78,7 +77,15 @@ class InnvilgelseMelding(
                     INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
                 )
 
-            return innledendeBrevblokker + barnetillegg() + nittiProsentRegel() + samordnet() + grunnlag() + avsluttendeBrevblokker
+            return innledendeBrevblokker +
+                dagpengeperiode() +
+                listOf(INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId) +
+                barnetillegg() +
+                nittiProsentRegel() +
+                samordnet() +
+                grunnlag() +
+                arbeidstidenDin() +
+                avsluttendeBrevblokker
         }
     override val brevBlokker: List<BrevBlokk> =
         run {
@@ -172,5 +179,27 @@ class InnvilgelseMelding(
             grunnlagBlokker.add(INNVILGELSE_GRUNNLAG.brevblokkId)
         }
         return grunnlagBlokker.toList()
+    }
+
+    private fun arbeidstidenDin(): List<String> {
+        val erInnvilgetMedVerneplikt =
+            vedtak.opplysninger.any { it.opplysningTekstId == ErInnvilgetMedVerneplikt.opplysningTekstId && it.formatertVerdi == "true" }
+
+        return if (erInnvilgetMedVerneplikt) {
+            listOf(INNVILGELSE_ARBEIDSTIDEN_DIN_VERNEPLIKT.brevblokkId)
+        } else {
+            listOf(INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId)
+        }
+    }
+
+    private fun dagpengeperiode(): List<String> {
+        val erInnvilgetMedVerneplikt =
+            vedtak.opplysninger.any { it.opplysningTekstId == ErInnvilgetMedVerneplikt.opplysningTekstId && it.formatertVerdi == "true" }
+
+        return if (erInnvilgetMedVerneplikt) {
+            listOf(INNVILGELSE_DAGPENGEPERIODE_VERNEPLIKT.brevblokkId)
+        } else {
+            listOf(INNVILGELSE_DAGPENGEPERIODE.brevblokkId)
+        }
     }
 }

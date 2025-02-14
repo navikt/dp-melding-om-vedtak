@@ -19,8 +19,10 @@ import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.UføreDagsats
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.ManglerBrevstøtte
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN_VERNEPLIKT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_VERNEPLIKT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_EGENANDEL
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG_VERNEPLIKT
@@ -160,10 +162,10 @@ class InnvilgelseMeldingTest {
             listOf(
                 INNVILGELSE_INNLEDNING.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
-                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_VERNEPLIKT.brevblokkId,
                 INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
                 INNVILGELSE_GRUNNLAG_VERNEPLIKT.brevblokkId,
-                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN_VERNEPLIKT.brevblokkId,
                 INNVILGELSE_EGENANDEL.brevblokkId,
                 INNVILGELSE_MELDEKORT.brevblokkId,
                 INNVILGELSE_UTBETALING.brevblokkId,
@@ -192,11 +194,11 @@ class InnvilgelseMeldingTest {
             listOf(
                 INNVILGELSE_INNLEDNING.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
-                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_VERNEPLIKT.brevblokkId,
                 INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
                 INNVILGELSE_GRUNNLAG_VERNEPLIKT.brevblokkId,
                 INNVILGELSE_VERNEPLIKT_GUNSTIGEST.brevblokkId,
-                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN_VERNEPLIKT.brevblokkId,
                 INNVILGELSE_EGENANDEL.brevblokkId,
                 INNVILGELSE_MELDEKORT.brevblokkId,
                 INNVILGELSE_UTBETALING.brevblokkId,
