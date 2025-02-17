@@ -31,6 +31,7 @@ import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_NITTI_PROSENT_REGEL
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_PERMITTERING
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_FORELDREPENGER
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_GENERISK
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_OMSORGSPENGER
@@ -45,6 +46,7 @@ import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_UTBETALING
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VERNEPLIKT_GUNSTIGEST
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseVilkårMedBrevstøtte.OPPFYLLER_KRAVET_TIL_PERMITTERING
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.BOOLSK
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
@@ -54,6 +56,8 @@ import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.UKER
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår.Status.OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
@@ -738,6 +742,44 @@ class InnvilgelseMeldingTest {
                     utfall = Utfall.INNVILGET,
                     opplysninger =
                         setOf(nittiprosentRegelOpplysning(), samordnetOpplysning(), barnetilleggOpplysning()),
+                    fagsakId = "fagsakId test",
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Rikig brevblokker rekkefølge for innvilgelse med permittering`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_PERMITTERING.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+            ) + VedtakMelding.fasteAvsluttendeBlokker
+
+        InnvilgelseMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår =
+                        setOf(
+                            Vilkår(
+                                navn = OPPFYLLER_KRAVET_TIL_PERMITTERING.name,
+                                status = OPPFYLT,
+                            ),
+                        ),
+                    utfall = Utfall.INNVILGET,
+                    opplysninger = setOf(),
                     fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),

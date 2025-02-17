@@ -10,6 +10,7 @@ import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.Aldersgrense
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallGSomGisSomGrunnlagVedVerneplikt
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallPermitteringsuker
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallStønadsuker
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallStønadsukerSomGisVedOrdinæreDagpenger
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ArbeidsinntektSiste12Måneder
@@ -491,6 +492,17 @@ class VedtakMapper(vedtakJson: String) {
                             opplysningTekstId = ErInnvilgetMedVerneplikt.opplysningTekstId,
                             råVerdi = true.toString(),
                             datatype = BOOLSK,
+                        ),
+                    )
+                }
+
+                "Permitteringsperiode" -> {
+                    opplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = AntallPermitteringsuker.opplysningTekstId,
+                            råVerdi = kvote["verdi"].asText(),
+                            datatype = HELTALL,
+                            enhet = UKER,
                         ),
                     )
                 }
