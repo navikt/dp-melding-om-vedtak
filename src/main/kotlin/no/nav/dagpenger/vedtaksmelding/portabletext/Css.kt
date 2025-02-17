@@ -50,7 +50,7 @@ fun css(saksId: String): String {
            }
         
            .melding-om-vedtak-tekst-blokk {
-             margin-bottom: 26px;
+             margin-bottom: 0;
            }
         
           .melding-om-vedtak-tekst-blokk-first {
