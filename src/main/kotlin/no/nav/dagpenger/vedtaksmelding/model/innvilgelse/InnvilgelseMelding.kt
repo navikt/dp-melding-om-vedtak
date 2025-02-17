@@ -27,7 +27,7 @@ import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_NITTI_PROSENT_REGEL
-import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_PERMITTERING
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERING
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_FORELDREPENGER
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_GENERISK
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_OMSORGSPENGER
@@ -165,30 +165,26 @@ class InnvilgelseMelding(
 
     private fun grunnlag(): List<String> {
         val grunnlagBlokker = mutableListOf<String>()
-        val erInnvilgetMedVerneplikt =
-            vedtak.opplysninger.any { it.opplysningTekstId == ErInnvilgetMedVerneplikt.opplysningTekstId && it.formatertVerdi == "true" }
         val kravTilMinsteinntektErOppfyltOld =
             vedtak.opplysninger.any { it.opplysningTekstId == KravTilMinsteinntekt.opplysningTekstId && it.formatertVerdi == "true" }
         val kravTilMinsteinntektOppfylt =
             vedtak.vilkår.any { vilkår ->
                 vilkår.navn == MINSTEINNTEKT.navn && vilkår.status == IKKE_OPPFYLT
             }
-        if (erInnvilgetMedVerneplikt) {
-            grunnlagBlokker.add(INNVILGELSE_GRUNNLAG_VERNEPLIKT.brevblokkId)
-            if (kravTilMinsteinntektErOppfyltOld || kravTilMinsteinntektOppfylt) {
-                grunnlagBlokker.add(INNVILGELSE_VERNEPLIKT_GUNSTIGEST.brevblokkId)
+        when {
+            erInnvilgetMedVerneplikt() -> {
+                grunnlagBlokker.add(INNVILGELSE_GRUNNLAG_VERNEPLIKT.brevblokkId)
+                if (kravTilMinsteinntektErOppfyltOld || kravTilMinsteinntektOppfylt) {
+                    grunnlagBlokker.add(INNVILGELSE_VERNEPLIKT_GUNSTIGEST.brevblokkId)
+                }
             }
-        } else {
-            grunnlagBlokker.add(INNVILGELSE_GRUNNLAG.brevblokkId)
+            else -> grunnlagBlokker.add(INNVILGELSE_GRUNNLAG.brevblokkId)
         }
         return grunnlagBlokker.toList()
     }
 
     private fun arbeidstidenDin(): List<String> {
-        val erInnvilgetMedVerneplikt =
-            vedtak.opplysninger.any { it.opplysningTekstId == ErInnvilgetMedVerneplikt.opplysningTekstId && it.formatertVerdi == "true" }
-
-        return if (erInnvilgetMedVerneplikt) {
+        return if (erInnvilgetMedVerneplikt()) {
             listOf(INNVILGELSE_ARBEIDSTIDEN_DIN_VERNEPLIKT.brevblokkId)
         } else {
             listOf(INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId)
@@ -196,15 +192,17 @@ class InnvilgelseMelding(
     }
 
     private fun dagpengeperiode(): List<String> {
-        val erInnvilgetMedVerneplikt =
-            vedtak.opplysninger.any { it.opplysningTekstId == ErInnvilgetMedVerneplikt.opplysningTekstId && it.formatertVerdi == "true" }
-
-        val erInnvilgetPermittering = vedtak.vilkår.any { it.navn == OPPFYLLER_KRAVET_TIL_PERMITTERING.name && it.status == OPPFYLT }
-
         return when {
-            erInnvilgetMedVerneplikt -> listOf(INNVILGELSE_DAGPENGEPERIODE_VERNEPLIKT.brevblokkId)
-            erInnvilgetPermittering -> listOf(INNVILGELSE_PERMITTERING.brevblokkId)
+            erInnvilgetMedVerneplikt() -> listOf(INNVILGELSE_DAGPENGEPERIODE_VERNEPLIKT.brevblokkId)
+            erInnvilgetPermittering() -> listOf(INNVILGELSE_DAGPENGEPERIODE_PERMITTERING.brevblokkId)
             else -> listOf(INNVILGELSE_DAGPENGEPERIODE.brevblokkId)
         }
     }
+
+    private fun erInnvilgetMedVerneplikt() =
+        vedtak.opplysninger.any {
+            it.opplysningTekstId == ErInnvilgetMedVerneplikt.opplysningTekstId && it.formatertVerdi == "true"
+        }
+
+    private fun erInnvilgetPermittering() = vedtak.vilkår.any { it.navn == OPPFYLLER_KRAVET_TIL_PERMITTERING.name && it.status == OPPFYLT }
 }
