@@ -182,7 +182,6 @@ class VedtakMapper(vedtakJson: String) {
             vedtak.finnOpplysningFraType(
                 opplysningType = AntallGSomGisSomGrunnlagVedVerneplikt,
                 datatype = FLYTTALL,
-                enhet = KRONER,
             ),
             vedtak.finnOpplysningFraType(
                 opplysningType = BruktBeregningsregelGrunnlag,
