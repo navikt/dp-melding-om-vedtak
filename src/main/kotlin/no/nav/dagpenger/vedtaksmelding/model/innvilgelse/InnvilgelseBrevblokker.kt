@@ -28,4 +28,6 @@ enum class InnvilgelseBrevblokker(val brevblokkId: String) {
     INNVILGELSE_STANS_ÅRSAKER(brevblokkId = "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du"),
     INNVILGELSE_MELD_FRA_OM_ENDRINGER(brevblokkId = "brev.blokk.du-maa-melde-fra-om-endringer"),
     INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING(brevblokkId = "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger"),
+
+    INNVILGELSE_PERMITTERING(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert"),
 }

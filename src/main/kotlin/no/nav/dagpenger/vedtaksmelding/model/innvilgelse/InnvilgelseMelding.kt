@@ -27,6 +27,7 @@ import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_NITTI_PROSENT_REGEL
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_PERMITTERING
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_FORELDREPENGER
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_GENERISK
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_OMSORGSPENGER
@@ -41,9 +42,11 @@ import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_UTBETALING
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VERNEPLIKT_GUNSTIGEST
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseVilkårMedBrevstøtte.OPPFYLLER_KRAVET_TIL_PERMITTERING
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.INNVILGET
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår.Status.IKKE_OPPFYLT
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår.Status.OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 
 class InnvilgelseMelding(
@@ -196,10 +199,12 @@ class InnvilgelseMelding(
         val erInnvilgetMedVerneplikt =
             vedtak.opplysninger.any { it.opplysningTekstId == ErInnvilgetMedVerneplikt.opplysningTekstId && it.formatertVerdi == "true" }
 
-        return if (erInnvilgetMedVerneplikt) {
-            listOf(INNVILGELSE_DAGPENGEPERIODE_VERNEPLIKT.brevblokkId)
-        } else {
-            listOf(INNVILGELSE_DAGPENGEPERIODE.brevblokkId)
+        val erInnvilgetPermittering = vedtak.vilkår.any { it.navn == OPPFYLLER_KRAVET_TIL_PERMITTERING.name && it.status == OPPFYLT }
+
+        return when {
+            erInnvilgetMedVerneplikt -> listOf(INNVILGELSE_DAGPENGEPERIODE_VERNEPLIKT.brevblokkId)
+            erInnvilgetPermittering -> listOf(INNVILGELSE_PERMITTERING.brevblokkId)
+            else -> listOf(INNVILGELSE_DAGPENGEPERIODE.brevblokkId)
         }
     }
 }
