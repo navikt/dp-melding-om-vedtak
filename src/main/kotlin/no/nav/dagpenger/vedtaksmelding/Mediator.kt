@@ -67,13 +67,18 @@ class Mediator(
         return runCatching {
             VedtakMelding.byggVedtaksmelding(vedtak, alleBrevblokker)
         }.getOrElse {
-            if (Configuration.isDev) {
-                TomtVedtak(
-                    vedtak = vedtak,
-                    alleBrevblokker = alleBrevblokker,
-                )
+            when {
+                Configuration.isDev -> {
+                    logger.error(it) { "Lager tomt vedtak i dev men feil er: ${it.message}" }
+                    TomtVedtak(
+                        vedtak = vedtak,
+                        alleBrevblokker = alleBrevblokker,
+                    )
+                }
+                else -> {
+                    throw it
+                }
             }
-            throw it
         }
     }
 
