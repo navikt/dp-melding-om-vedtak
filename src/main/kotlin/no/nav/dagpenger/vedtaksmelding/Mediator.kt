@@ -10,6 +10,7 @@ import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.avslag.TomtVedtak
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter
 import no.nav.dagpenger.vedtaksmelding.sanity.ResultDTO
@@ -27,7 +28,7 @@ class Mediator(
     suspend fun hentVedtaksmelding(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
-    ): Result<VedtakMelding> {
+    ): VedtakMelding {
         val sanityInnhold = sanityKlient.hentBrevBlokkerJson()
         vedtaksmeldingRepository.lagreSanityInnhold(behandlingId, sanityInnhold)
         return hentVedtakOgByggVedtaksMelding(behandlingId, saksbehandler) { sanityInnhold }
@@ -36,7 +37,7 @@ class Mediator(
     suspend fun hentEnderligVedtaksmelding(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
-    ): Result<VedtakMelding> {
+    ): VedtakMelding {
         return hentVedtakOgByggVedtaksMelding(behandlingId, saksbehandler) {
             vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
         }
@@ -46,7 +47,7 @@ class Mediator(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
         sanitySupplier: suspend () -> String,
-    ): Result<VedtakMelding> {
+    ): VedtakMelding {
         val sanityInnhold = sanitySupplier.invoke()
 
         val alleBrevblokker: List<BrevBlokk> =
@@ -54,12 +55,26 @@ class Mediator(
                 sanityInnhold,
                 object : TypeReference<ResultDTO>() {},
             ).result
-        return behandlingKlient.hentVedtak(
-            behandlingId = behandlingId,
-            saksbehandler = saksbehandler,
-        ).onFailure { throwable ->
-            logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
-        }.map { VedtakMelding.byggVedtaksmelding(it, alleBrevblokker) }
+
+        val vedtak =
+            behandlingKlient.hentVedtak(
+                behandlingId = behandlingId,
+                saksbehandler = saksbehandler,
+            ).onFailure { throwable ->
+                logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
+            }.getOrThrow()
+
+        return runCatching {
+            VedtakMelding.byggVedtaksmelding(vedtak, alleBrevblokker)
+        }.getOrElse {
+            if (Configuration.isDev) {
+                TomtVedtak(
+                    vedtak = vedtak,
+                    alleBrevblokker = alleBrevblokker,
+                )
+            }
+            throw it
+        }
     }
 
     fun lagreUtvidetBeskrivelse(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime {
@@ -88,7 +103,7 @@ class Mediator(
         behandler: Saksbehandler,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): MeldingOmVedtakResponseDTO {
-        return hentVedtaksmelding(behandlingId, behandler).map { vedtak ->
+        return hentVedtaksmelding(behandlingId, behandler).let { vedtak ->
             val html =
                 HtmlConverter.toHtml(
                     vedtak.hentBrevBlokker(),
@@ -109,7 +124,7 @@ class Mediator(
                         )
                     },
             )
-        }.getOrThrow()
+        }
     }
 
     suspend fun hentEndeligVedtak(
@@ -118,7 +133,7 @@ class Mediator(
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): String {
         val html =
-            hentEnderligVedtaksmelding(behandlingId, behandler).map { vedtak ->
+            hentEnderligVedtaksmelding(behandlingId, behandler).let { vedtak ->
 
                 HtmlConverter.toHtml(
                     vedtak.hentBrevBlokker(),
@@ -127,7 +142,7 @@ class Mediator(
                     vedtak.hentFagsakId(),
                     hentUtvidedeBeskrivelser(behandlingId, vedtak).toSet(),
                 )
-            }.getOrThrow()
+            }
         vedtaksmeldingRepository.lagreVedaksmeldingHtml(behandlingId, html)
         return html
     }
