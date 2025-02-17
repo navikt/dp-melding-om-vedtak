@@ -72,8 +72,7 @@ class MediatorTest {
                     vedtaksmeldingRepository = repository,
                 )
             runBlocking {
-                mediator.hentVedtaksmelding(behandlingId, saksbehandler).getOrThrow()
-                    .shouldBeInstanceOf<AvslagMelding>()
+                mediator.hentVedtaksmelding(behandlingId, saksbehandler).shouldBeInstanceOf<AvslagMelding>()
             }
             repository.hentSanityInnhold(behandlingId) shouldEqualJson resource
         }
@@ -160,7 +159,7 @@ class MediatorTest {
             mediator.hentVedtaksmelding(
                 behandlingId = behandlingId,
                 saksbehandler = saksbehandler,
-            ).getOrThrow().shouldBeInstanceOf<AvslagMelding>()
+            ).shouldBeInstanceOf<AvslagMelding>()
         }
 
         coVerify(exactly = 1) {
@@ -183,7 +182,7 @@ class MediatorTest {
                 mediator.hentVedtaksmelding(
                     behandlingId = behandlingId,
                     saksbehandler = saksbehandler,
-                ).getOrThrow()
+                )
             }
         }
     }
@@ -217,41 +216,39 @@ class MediatorTest {
                 ),
             ).also {
                 coEvery { it.hentVedtaksmelding(behandlingId, saksbehandler) } returns
-                    Result.success(
-                        mockk<VedtakMelding>(relaxed = true).also {
-                            coEvery { it.hentBrevBlokker() } returns
-                                listOf(
-                                    BrevBlokk(
-                                        textId = RETT_TIL_Å_KLAGE.brevBlokkId,
-                                        title = "Rett til å klage",
-                                        utvidetBeskrivelse = true,
-                                        innhold = emptyList(),
-                                        _type = "brevblokk",
-                                    ),
-                                    BrevBlokk(
-                                        textId = "brev.blokk.rett-til-aa-random",
-                                        title = "Fjas",
-                                        utvidetBeskrivelse = true,
-                                        innhold = emptyList(),
-                                        _type = "brevblokk",
-                                    ),
-                                    BrevBlokk(
-                                        textId = "brev.blokk.rett-til-ikke-innhold",
-                                        title = "Tull",
-                                        utvidetBeskrivelse = true,
-                                        innhold = emptyList(),
-                                        _type = "brevblokk",
-                                    ),
-                                    BrevBlokk(
-                                        textId = "brev.blokk.rett-til-ikke-utvidet",
-                                        title = "Tull",
-                                        utvidetBeskrivelse = false,
-                                        innhold = emptyList(),
-                                        _type = "brevblokk",
-                                    ),
-                                )
-                        },
-                    )
+                    mockk<VedtakMelding>(relaxed = true).also {
+                        coEvery { it.hentBrevBlokker() } returns
+                            listOf(
+                                BrevBlokk(
+                                    textId = RETT_TIL_Å_KLAGE.brevBlokkId,
+                                    title = "Rett til å klage",
+                                    utvidetBeskrivelse = true,
+                                    innhold = emptyList(),
+                                    _type = "brevblokk",
+                                ),
+                                BrevBlokk(
+                                    textId = "brev.blokk.rett-til-aa-random",
+                                    title = "Fjas",
+                                    utvidetBeskrivelse = true,
+                                    innhold = emptyList(),
+                                    _type = "brevblokk",
+                                ),
+                                BrevBlokk(
+                                    textId = "brev.blokk.rett-til-ikke-innhold",
+                                    title = "Tull",
+                                    utvidetBeskrivelse = true,
+                                    innhold = emptyList(),
+                                    _type = "brevblokk",
+                                ),
+                                BrevBlokk(
+                                    textId = "brev.blokk.rett-til-ikke-utvidet",
+                                    title = "Tull",
+                                    utvidetBeskrivelse = false,
+                                    innhold = emptyList(),
+                                    _type = "brevblokk",
+                                ),
+                            )
+                    }
             }
         runBlocking {
             val utvidedebeskrivelser =
