@@ -28,4 +28,10 @@ enum class InnvilgelseBrevblokker(val brevblokkId: String) {
     INNVILGELSE_STANS_ÅRSAKER(brevblokkId = "brev.blokk.vi-stanser-dagpengene-dine-automatisk-naar-du"),
     INNVILGELSE_MELD_FRA_OM_ENDRINGER(brevblokkId = "brev.blokk.du-maa-melde-fra-om-endringer"),
     INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING(brevblokkId = "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger"),
+
+    INNVILGELSE_INNLEDNING_PERMITTERT(brevblokkId = "brev.blokk.vedtak-innvilgelse-permittert"),
+    INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT(brevblokkId = "brev.blokk.begrunnelse-innvilgelsesdato-permittert"),
+    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert"),
+    INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT(brevblokkId = "brev.blokk.arbeidsforhold-avslutt-permittert"),
+    INNVILGELSE_HVA_SKJER_ETTER_PERMITTERINGEN(brevblokkId = "brev.blokk.hva-skjer-etter-permitteringen"),
 }
