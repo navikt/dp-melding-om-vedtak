@@ -14,20 +14,23 @@ import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SykepengerDagsats
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.UføreDagsats
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN_VERNEPLIKT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_VERNEPLIKT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_EGENANDEL
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG_VERNEPLIKT
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_HVA_SKJER_ETTER_PERMITTERINGEN
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_INNLEDNING_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_NITTI_PROSENT_REGEL
-import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERING
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_FORELDREPENGER
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_GENERISK
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_OMSORGSPENGER
@@ -42,6 +45,7 @@ import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_UTBETALING
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VERNEPLIKT_GUNSTIGEST
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseVilkårMedBrevstøtte.OPPFYLLER_KRAVET_TIL_PERMITTERING
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.INNVILGET
@@ -63,12 +67,6 @@ class InnvilgelseMelding(
 
     override val brevBlokkIder: List<String>
         get() {
-            val innledendeBrevblokker =
-                listOf(
-                    INNVILGELSE_INNLEDNING.brevblokkId,
-                    INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
-                )
-
             val avsluttendeBrevblokker =
                 listOf(
                     INNVILGELSE_EGENANDEL.brevblokkId,
@@ -79,9 +77,10 @@ class InnvilgelseMelding(
                     INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                     INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
                 )
-
-            return innledendeBrevblokker +
+            return innledning() +
+                virkningsdato() +
                 dagpengeperiode() +
+                ekstrablokkerPermittert() +
                 listOf(INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId) +
                 barnetillegg() +
                 nittiProsentRegel() +
@@ -113,22 +112,34 @@ class InnvilgelseMelding(
         }
 
         val samordnedeYtelser = mutableSetOf<Pair<String, Double>>()
-        vedtak.opplysninger.find { it.opplysningTekstId == SykepengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0 }?.let {
+        vedtak.opplysninger.find {
+            it.opplysningTekstId == SykepengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
+        }?.let {
             samordnedeYtelser.add("Sykepenger" to it.råVerdi().toDouble())
         }
-        vedtak.opplysninger.find { it.opplysningTekstId == PleiepengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0 }?.let {
+        vedtak.opplysninger.find {
+            it.opplysningTekstId == PleiepengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
+        }?.let {
             samordnedeYtelser.add("Pleiepenger" to it.råVerdi().toDouble())
         }
-        vedtak.opplysninger.find { it.opplysningTekstId == OmsorgspengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0 }?.let {
+        vedtak.opplysninger.find {
+            it.opplysningTekstId == OmsorgspengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
+        }?.let {
             samordnedeYtelser.add("Omsorgspenger" to it.råVerdi().toDouble())
         }
-        vedtak.opplysninger.find { it.opplysningTekstId == OpplæringspengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0 }?.let {
+        vedtak.opplysninger.find {
+            it.opplysningTekstId == OpplæringspengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
+        }?.let {
             samordnedeYtelser.add("Opplæringspenger" to it.råVerdi().toDouble())
         }
-        vedtak.opplysninger.find { it.opplysningTekstId == UføreDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0 }?.let {
+        vedtak.opplysninger.find {
+            it.opplysningTekstId == UføreDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
+        }?.let {
             samordnedeYtelser.add("Uføre" to it.råVerdi().toDouble())
         }
-        vedtak.opplysninger.find { it.opplysningTekstId == ForeldrepengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0 }?.let {
+        vedtak.opplysninger.find {
+            it.opplysningTekstId == ForeldrepengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
+        }?.let {
             samordnedeYtelser.add("Foreldrepenger" to it.råVerdi().toDouble())
         }
         vedtak.opplysninger.find {
@@ -178,6 +189,7 @@ class InnvilgelseMelding(
                     grunnlagBlokker.add(INNVILGELSE_VERNEPLIKT_GUNSTIGEST.brevblokkId)
                 }
             }
+
             else -> grunnlagBlokker.add(INNVILGELSE_GRUNNLAG.brevblokkId)
         }
         return grunnlagBlokker.toList()
@@ -191,11 +203,37 @@ class InnvilgelseMelding(
         }
     }
 
+    private fun innledning(): List<String> {
+        return when {
+            erInnvilgetSomPermittert() -> listOf(INNVILGELSE_INNLEDNING_PERMITTERT.brevblokkId)
+            else -> listOf(INNVILGELSE_INNLEDNING.brevblokkId)
+        }
+    }
+
+    private fun virkningsdato(): List<String> {
+        return when {
+            erInnvilgetSomPermittert() -> listOf(INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT.brevblokkId)
+            else -> listOf(INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId)
+        }
+    }
+
     private fun dagpengeperiode(): List<String> {
         return when {
             erInnvilgetMedVerneplikt() -> listOf(INNVILGELSE_DAGPENGEPERIODE_VERNEPLIKT.brevblokkId)
-            erInnvilgetPermittering() -> listOf(INNVILGELSE_DAGPENGEPERIODE_PERMITTERING.brevblokkId)
+            erInnvilgetSomPermittert() -> listOf(INNVILGELSE_DAGPENGEPERIODE_PERMITTERT.brevblokkId)
             else -> listOf(INNVILGELSE_DAGPENGEPERIODE.brevblokkId)
+        }
+    }
+
+    private fun ekstrablokkerPermittert(): List<String> {
+        return when {
+            erInnvilgetSomPermittert() ->
+                listOf(
+                    INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT.brevblokkId,
+                    INNVILGELSE_HVA_SKJER_ETTER_PERMITTERINGEN.brevblokkId,
+                )
+
+            else -> emptyList()
         }
     }
 
@@ -204,5 +242,5 @@ class InnvilgelseMelding(
             it.opplysningTekstId == ErInnvilgetMedVerneplikt.opplysningTekstId && it.formatertVerdi == "true"
         }
 
-    private fun erInnvilgetPermittering() = vedtak.vilkår.any { it.navn == OPPFYLLER_KRAVET_TIL_PERMITTERING.name && it.status == OPPFYLT }
+    private fun erInnvilgetSomPermittert() = vedtak.vilkår.any { it.navn == OPPFYLLER_KRAVET_TIL_PERMITTERING.name && it.status == OPPFYLT }
 }
