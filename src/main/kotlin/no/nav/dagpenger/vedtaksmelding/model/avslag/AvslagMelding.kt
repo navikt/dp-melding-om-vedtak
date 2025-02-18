@@ -40,6 +40,7 @@ import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.TAPT_ARBEIDSINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.TAPT_ARBEIDSTID
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.TAPT_ARBEIDSTID_ELLER_ARBEIDSINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.AVSLÅTT
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
@@ -56,6 +57,7 @@ class AvslagMelding(
                 MINSTEINNTEKT,
                 MINSTEINNTEKT_OLD,
                 IKKE_PASSERT_ALDERSGRENSE,
+                TAPT_ARBEIDSTID_ELLER_ARBEIDSINNTEKT,
                 TAPT_ARBEIDSINNTEKT,
                 TAPT_ARBEIDSTID,
                 IKKE_UTESTENGT,
