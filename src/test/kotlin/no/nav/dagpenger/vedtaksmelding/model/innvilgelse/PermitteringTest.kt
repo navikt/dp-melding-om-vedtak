@@ -13,7 +13,7 @@ class PermitteringTest {
     private val innvilgelsePermittering = VedtakMapper(json).vedtak()
 
     @Test
-    fun `skal hente antall G som gis som grunnlag ved bruk av vernepliktregel`() {
+    fun `Skal hente aktuelle opplysninger for innvilgelse som permittert`() {
         innvilgelsePermittering.finnOpplysning(AntallPermitteringsuker.opplysningTekstId) shouldBe
             Opplysning(
                 opplysningTekstId = AntallPermitteringsuker.opplysningTekstId,
