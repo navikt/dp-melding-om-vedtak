@@ -246,11 +246,11 @@ class InnvilgelseMelding(
         }
 
     private fun erInnvilgetSomPermittert(): Boolean {
-        val gjelderPermittering = vedtak.vilkår.any { it.navn == OPPFYLLER_KRAVET_TIL_PERMITTERING.name && it.status == OPPFYLT }
+        val gjelderPermittering = vedtak.vilkår.any { it.navn == OPPFYLLER_KRAVET_TIL_PERMITTERING.vilkårNavn && it.status == OPPFYLT }
         if (gjelderPermittering) {
-            logger.info { "Behandling ${vedtak.behandlingId} er innvilget som permittert: $gjelderPermittering" }
+            logger.info { "Behandling ${vedtak.behandlingId} er innvilget som permittert" }
         } else {
-            logger.info { "Behandling ${vedtak.behandlingId} er ikke innvilget som permittert: $gjelderPermittering" }
+            logger.info { "Behandling ${vedtak.behandlingId} er ikke innvilget som permittert" }
         }
         return gjelderPermittering
     }

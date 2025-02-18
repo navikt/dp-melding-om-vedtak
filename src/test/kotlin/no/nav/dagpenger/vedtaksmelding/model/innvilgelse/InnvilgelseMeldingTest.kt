@@ -780,7 +780,7 @@ class InnvilgelseMeldingTest {
                     vilkår =
                         setOf(
                             Vilkår(
-                                navn = OPPFYLLER_KRAVET_TIL_PERMITTERING.name,
+                                navn = OPPFYLLER_KRAVET_TIL_PERMITTERING.vilkårNavn,
                                 status = OPPFYLT,
                             ),
                         ),
