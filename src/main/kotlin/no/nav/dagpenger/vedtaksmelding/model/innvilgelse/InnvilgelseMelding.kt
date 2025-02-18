@@ -1,5 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.model.innvilgelse
 
+import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ErInnvilgetMedVerneplikt
@@ -52,6 +53,8 @@ import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.INNVILGET
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår.Status.IKKE_OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår.Status.OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
+
+private val logger = KotlinLogging.logger {}
 
 class InnvilgelseMelding(
     override val vedtak: Vedtak,
@@ -242,5 +245,13 @@ class InnvilgelseMelding(
             it.opplysningTekstId == ErInnvilgetMedVerneplikt.opplysningTekstId && it.formatertVerdi == "true"
         }
 
-    private fun erInnvilgetSomPermittert() = vedtak.vilkår.any { it.navn == OPPFYLLER_KRAVET_TIL_PERMITTERING.name && it.status == OPPFYLT }
+    private fun erInnvilgetSomPermittert(): Boolean {
+        val gjelderPermittering = vedtak.vilkår.any { it.navn == OPPFYLLER_KRAVET_TIL_PERMITTERING.name && it.status == OPPFYLT }
+        if (gjelderPermittering) {
+            logger.info { "Behandling ${vedtak.behandlingId} er innvilget som permittert: $gjelderPermittering" }
+        } else {
+            logger.info { "Behandling ${vedtak.behandlingId} er ikke innvilget som permittert: $gjelderPermittering" }
+        }
+        return gjelderPermittering
+    }
 }
