@@ -10,7 +10,6 @@ import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.BOOLSK
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.UKER
 import org.junit.jupiter.api.Test
 
@@ -28,9 +27,8 @@ class VernepliktTest {
                 opplysningTekstId = AntallGSomGisSomGrunnlagVedVerneplikt.opplysningTekstId,
                 råVerdi = "3.0",
                 datatype = FLYTTALL,
-                enhet = KRONER,
             ).also {
-                it.formatertVerdi shouldBe "3 kroner"
+                it.formatertVerdi shouldBe "3"
             }
     }
 
