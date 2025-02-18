@@ -191,7 +191,6 @@ class VedtakMapperTest {
                 opplysningTekstId = AntallGSomGisSomGrunnlagVedVerneplikt.opplysningTekstId,
                 råVerdi = "3.0",
                 datatype = FLYTTALL,
-                enhet = KRONER,
             )
     }
 
