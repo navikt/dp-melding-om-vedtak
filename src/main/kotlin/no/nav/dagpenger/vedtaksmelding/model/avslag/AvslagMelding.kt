@@ -77,7 +77,7 @@ class AvslagMelding(
     }
 
     private fun Set<Vilkår>.ikkeOppfylt(avslagsvilkår: AvslagVilkårMedBrevstøtte): Boolean =
-        any { vilkår -> vilkår.navn == avslagsvilkår.navn && vilkår.status == IKKE_OPPFYLT }
+        any { vilkår -> vilkår.navn == avslagsvilkår.vilkårNavn && vilkår.status == IKKE_OPPFYLT }
 
     private val innledendeBrevblokker = listOf(AVSLAG_INNLEDNING.brevblokkId)
     override val brevBlokkIder: List<String>
@@ -103,8 +103,8 @@ class AvslagMelding(
 
     private fun blokkerAvslagMinsteinntekt(): List<String> {
         return vedtak.vilkår.find { vilkår ->
-            (vilkår.navn == MINSTEINNTEKT.navn && vilkår.status == IKKE_OPPFYLT) ||
-                (vilkår.navn == MINSTEINNTEKT_OLD.navn && vilkår.status == IKKE_OPPFYLT)
+            (vilkår.navn == MINSTEINNTEKT.vilkårNavn && vilkår.status == IKKE_OPPFYLT) ||
+                (vilkår.navn == MINSTEINNTEKT_OLD.vilkårNavn && vilkår.status == IKKE_OPPFYLT)
         }
             ?.let {
                 listOf(AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId)
@@ -113,7 +113,7 @@ class AvslagMelding(
 
     private fun blokkerAvslagAlder(): List<String> {
         return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == IKKE_PASSERT_ALDERSGRENSE.navn && vilkår.status == IKKE_OPPFYLT
+            vilkår.navn == IKKE_PASSERT_ALDERSGRENSE.vilkårNavn && vilkår.status == IKKE_OPPFYLT
         }
             ?.let {
                 listOf(
@@ -124,7 +124,7 @@ class AvslagMelding(
 
     private fun blokkerAvslagTaptArbeidsinntekt(): List<String> {
         return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == TAPT_ARBEIDSINNTEKT.navn && vilkår.status == IKKE_OPPFYLT
+            vilkår.navn == TAPT_ARBEIDSINNTEKT.vilkårNavn && vilkår.status == IKKE_OPPFYLT
         }
             ?.let {
                 listOf(AVSLAG_TAPT_ARBEIDSINNTEKT.brevblokkId)
@@ -134,7 +134,7 @@ class AvslagMelding(
     private fun blokkerAvslagTaptArbeidstid(): List<String> {
         return when (
             vedtak.vilkår.any { vilkår ->
-                vilkår.navn == TAPT_ARBEIDSTID.navn && vilkår.status == IKKE_OPPFYLT
+                vilkår.navn == TAPT_ARBEIDSTID.vilkårNavn && vilkår.status == IKKE_OPPFYLT
             }
         ) {
             true ->
@@ -153,7 +153,7 @@ class AvslagMelding(
 
     private fun blokkerAvslagUtestengt(): List<String> {
         return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == IKKE_UTESTENGT.navn && vilkår.status == IKKE_OPPFYLT
+            vilkår.navn == IKKE_UTESTENGT.vilkårNavn && vilkår.status == IKKE_OPPFYLT
         }
             ?.let {
                 listOf(AVSLAG_UTESTENGT.brevblokkId, AVSLAG_UTESTENGT_HJEMMEL.brevblokkId)
@@ -162,7 +162,7 @@ class AvslagMelding(
 
     private fun blokkerAvslagUtdanning(): List<String> {
         return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == IKKE_UTDANNING.navn && vilkår.status == IKKE_OPPFYLT
+            vilkår.navn == IKKE_UTDANNING.vilkårNavn && vilkår.status == IKKE_OPPFYLT
         }
             ?.let {
                 listOf(
@@ -175,13 +175,13 @@ class AvslagMelding(
         val grunnerTilAvslag = mutableListOf(AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId)
 
         vedtak.vilkår.find { vilkår ->
-            vilkår.navn == REELL_ARBEIDSSØKER_HELTID_DELTID.navn && vilkår.status == IKKE_OPPFYLT
+            vilkår.navn == REELL_ARBEIDSSØKER_HELTID_DELTID.vilkårNavn && vilkår.status == IKKE_OPPFYLT
         }?.let {
             grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID.brevblokkId)
         }
 
         vedtak.vilkår.find { vilkår ->
-            vilkår.navn == REELL_ARBEIDSSØKER_MOBILITET.navn && vilkår.status == IKKE_OPPFYLT
+            vilkår.navn == REELL_ARBEIDSSØKER_MOBILITET.vilkårNavn && vilkår.status == IKKE_OPPFYLT
         }?.let {
             grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE.brevblokkId)
         }
@@ -192,19 +192,19 @@ class AvslagMelding(
             grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId)
         }
         vedtak.vilkår.find { vilkår ->
-            vilkår.navn == REELL_ARBEIDSSØKER_ARBEIDSFØR.navn && vilkår.status == IKKE_OPPFYLT
+            vilkår.navn == REELL_ARBEIDSSØKER_ARBEIDSFØR.vilkårNavn && vilkår.status == IKKE_OPPFYLT
         }?.let {
             grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR.brevblokkId)
         }
 
         vedtak.vilkår.find { vilkår ->
-            vilkår.navn == REELL_ARBEIDSSØKER_ETHVERT_ARBEID.navn && vilkår.status == IKKE_OPPFYLT
+            vilkår.navn == REELL_ARBEIDSSØKER_ETHVERT_ARBEID.vilkårNavn && vilkår.status == IKKE_OPPFYLT
         }?.let {
             grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID.brevblokkId)
         }
 
         vedtak.vilkår.find { vilkår ->
-            vilkår.navn == REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER.navn && vilkår.status == IKKE_OPPFYLT
+            vilkår.navn == REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER.vilkårNavn && vilkår.status == IKKE_OPPFYLT
         }?.let {
             grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_REGISTRERT_ARBEIDSSOKER.brevblokkId)
         }
@@ -220,7 +220,7 @@ class AvslagMelding(
 
     private fun blokkerAvslagOppholdUtland(): List<String> {
         return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == OPPHOLD_I_NORGE.navn && vilkår.status == IKKE_OPPFYLT
+            vilkår.navn == OPPHOLD_I_NORGE.vilkårNavn && vilkår.status == IKKE_OPPFYLT
         }
             ?.let {
                 listOf(
@@ -232,7 +232,7 @@ class AvslagMelding(
 
     private fun blokkerAndreFulleYtelser(): List<String> {
         return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == IKKE_ANDRE_FULLE_YTELSER.navn && vilkår.status == IKKE_OPPFYLT
+            vilkår.navn == IKKE_ANDRE_FULLE_YTELSER.vilkårNavn && vilkår.status == IKKE_OPPFYLT
         }
             ?.let {
                 listOf(AVSLAG_ANDRE_FULLE_YTELSER.brevblokkId)
@@ -241,7 +241,7 @@ class AvslagMelding(
 
     private fun blokkerStreikLockout(): List<String> {
         return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT.navn && vilkår.status == IKKE_OPPFYLT
+            vilkår.navn == IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT.vilkårNavn && vilkår.status == IKKE_OPPFYLT
         }
             ?.let {
                 listOf(

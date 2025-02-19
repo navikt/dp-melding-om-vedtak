@@ -59,7 +59,7 @@ class AvslagMeldingTaptArbeidstidTest {
         val behandlingId = UUIDv7.ny()
         val arbeidstidIkkeOppfylt =
             Vilkår(
-                navn = TAPT_ARBEIDSTID.navn,
+                navn = TAPT_ARBEIDSTID.vilkårNavn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
 
@@ -93,7 +93,7 @@ class AvslagMeldingTaptArbeidstidTest {
         val behandlingId = UUIDv7.ny()
         val arbeidstidIkkeOppfylt =
             Vilkår(
-                navn = TAPT_ARBEIDSTID.navn,
+                navn = TAPT_ARBEIDSTID.vilkårNavn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
 
@@ -127,7 +127,7 @@ class AvslagMeldingTaptArbeidstidTest {
         val behandlingId = UUIDv7.ny()
         val arbeidstidIkkeOppfylt =
             Vilkår(
-                navn = TAPT_ARBEIDSTID.navn,
+                navn = TAPT_ARBEIDSTID.vilkårNavn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
 

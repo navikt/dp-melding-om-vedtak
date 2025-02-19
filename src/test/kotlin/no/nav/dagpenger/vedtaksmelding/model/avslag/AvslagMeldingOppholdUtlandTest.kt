@@ -23,7 +23,7 @@ class AvslagMeldingOppholdUtlandTest {
         val behandlingId = UUIDv7.ny()
         val oppholdNorgeIkkeOppfylt =
             Vilkår(
-                navn = OPPHOLD_I_NORGE.navn,
+                navn = OPPHOLD_I_NORGE.vilkårNavn,
                 status = IKKE_OPPFYLT,
             )
 
