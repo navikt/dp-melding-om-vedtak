@@ -26,7 +26,7 @@ class AvslagMeldingMinsteinntektTest {
     fun `Rikige brevblokker for avslag på minsteinntekt`() {
         val minsteInntektIkkeOppfylt =
             Vilkår(
-                navn = MINSTEINNTEKT.navn,
+                navn = MINSTEINNTEKT.vilkårNavn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
         AvslagMelding(

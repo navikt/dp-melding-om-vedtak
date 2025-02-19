@@ -21,7 +21,7 @@ class AvslagMeldingUtdanningTest {
         val behandlingId = UUIDv7.ny()
         val utdanningVilkår =
             Vilkår(
-                navn = IKKE_UTDANNING.navn,
+                navn = IKKE_UTDANNING.vilkårNavn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
 

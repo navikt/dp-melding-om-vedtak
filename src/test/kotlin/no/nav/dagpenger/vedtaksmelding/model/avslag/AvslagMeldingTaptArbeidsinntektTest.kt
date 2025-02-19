@@ -32,7 +32,7 @@ class AvslagMeldingTaptArbeidsinntektTest {
         val behandlingId = UUIDv7.ny()
         val taptArbeidsinntektIkkeOppfylt =
             Vilkår(
-                navn = TAPT_ARBEIDSINNTEKT.navn,
+                navn = TAPT_ARBEIDSINNTEKT.vilkårNavn,
                 status = IKKE_OPPFYLT,
             )
 

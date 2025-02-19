@@ -51,7 +51,7 @@ class MediatorTest {
                 vilkår =
                     setOf(
                         Vilkår(
-                            MINSTEINNTEKT.navn,
+                            MINSTEINNTEKT.vilkårNavn,
                             Vilkår.Status.IKKE_OPPFYLT,
                         ),
                     ),
@@ -135,7 +135,7 @@ class MediatorTest {
                 vilkår =
                     setOf(
                         Vilkår(
-                            MINSTEINNTEKT.navn,
+                            MINSTEINNTEKT.vilkårNavn,
                             Vilkår.Status.IKKE_OPPFYLT,
                         ),
                     ),

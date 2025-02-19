@@ -180,7 +180,7 @@ class InnvilgelseMelding(
             vedtak.opplysninger.any { it.opplysningTekstId == KravTilMinsteinntekt.opplysningTekstId && it.formatertVerdi == "true" }
         val kravTilMinsteinntektOppfylt =
             vedtak.vilkår.any { vilkår ->
-                vilkår.navn == MINSTEINNTEKT.navn && vilkår.status == IKKE_OPPFYLT
+                vilkår.navn == MINSTEINNTEKT.vilkårNavn && vilkår.status == IKKE_OPPFYLT
             }
         when {
             erInnvilgetMedVerneplikt() -> {

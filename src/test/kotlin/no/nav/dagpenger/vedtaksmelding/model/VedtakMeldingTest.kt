@@ -24,7 +24,7 @@ class VedtakMeldingTest {
                     vilkår =
                         setOf(
                             Vilkår(
-                                navn = MINSTEINNTEKT.navn,
+                                navn = MINSTEINNTEKT.vilkårNavn,
                                 status = Vilkår.Status.IKKE_OPPFYLT,
                             ),
                         ),

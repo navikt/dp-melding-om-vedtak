@@ -34,7 +34,7 @@ class AvslagMeldingStreikLockoutTest {
         val behandlingId = UUIDv7.ny()
         val avslagStreikEllerLockoutIkkeOppfylt =
             Vilkår(
-                navn = IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT.navn,
+                navn = IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT.vilkårNavn,
                 status = IKKE_OPPFYLT,
             )
 

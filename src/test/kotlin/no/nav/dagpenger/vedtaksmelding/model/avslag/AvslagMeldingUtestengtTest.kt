@@ -22,7 +22,7 @@ class AvslagMeldingUtestengtTest {
         val behandlingId = UUIDv7.ny()
         val utestengtVilkår =
             Vilkår(
-                navn = IKKE_UTESTENGT.navn,
+                navn = IKKE_UTESTENGT.vilkårNavn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
 

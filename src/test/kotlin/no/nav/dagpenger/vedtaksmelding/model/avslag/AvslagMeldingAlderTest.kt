@@ -34,7 +34,7 @@ class AvslagMeldingAlderTest {
         val behandlingId = UUIDv7.ny()
         val alderIkkeOppfylt =
             Vilkår(
-                navn = AvslagVilkårMedBrevstøtte.IKKE_PASSERT_ALDERSGRENSE.navn,
+                navn = AvslagVilkårMedBrevstøtte.IKKE_PASSERT_ALDERSGRENSE.vilkårNavn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
 

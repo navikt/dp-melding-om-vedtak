@@ -32,36 +32,36 @@ class AvslagMeldingReellArbeidssøkerTest {
 
     private val reellArbeidssøkerIkkeOppfylt =
         Vilkår(
-            navn = REELL_ARBEIDSSØKER.navn,
+            navn = REELL_ARBEIDSSØKER.vilkårNavn,
             status = Vilkår.Status.IKKE_OPPFYLT,
         )
     private val heltidDeltidIkkeOppfylt =
         Vilkår(
-            navn = REELL_ARBEIDSSØKER_HELTID_DELTID.navn,
+            navn = REELL_ARBEIDSSØKER_HELTID_DELTID.vilkårNavn,
             status = Vilkår.Status.IKKE_OPPFYLT,
         )
 
     private val mobilitetIkkeOppfylt =
         Vilkår(
-            navn = REELL_ARBEIDSSØKER_MOBILITET.navn,
+            navn = REELL_ARBEIDSSØKER_MOBILITET.vilkårNavn,
             status = Vilkår.Status.IKKE_OPPFYLT,
         )
 
     private val arbeidsførIkkeOppfylt =
         Vilkår(
-            navn = REELL_ARBEIDSSØKER_ARBEIDSFØR.navn,
+            navn = REELL_ARBEIDSSØKER_ARBEIDSFØR.vilkårNavn,
             status = Vilkår.Status.IKKE_OPPFYLT,
         )
 
     private val ethvertArbeidIkkeOppfylt =
         Vilkår(
-            navn = REELL_ARBEIDSSØKER_ETHVERT_ARBEID.navn,
+            navn = REELL_ARBEIDSSØKER_ETHVERT_ARBEID.vilkårNavn,
             status = Vilkår.Status.IKKE_OPPFYLT,
         )
 
     private val registrertArbeidssøkerIkkeOppfylt =
         Vilkår(
-            navn = REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER.navn,
+            navn = REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER.vilkårNavn,
             status = Vilkår.Status.IKKE_OPPFYLT,
         )
 
@@ -121,7 +121,7 @@ class AvslagMeldingReellArbeidssøkerTest {
     fun `Bugfix - Skal ikke legge til unntaksblokk når ikke blokk om heltid deltid eller hele norge inngår i brevblokklista`() {
         val minsteinntektIkkeOppfylt =
             Vilkår(
-                navn = MINSTEINNTEKT.navn,
+                navn = MINSTEINNTEKT.vilkårNavn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
         AvslagMelding(

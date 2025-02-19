@@ -31,7 +31,7 @@ class AvslagMeldingAndreFulleYtelserTest {
         val behandlingId = UUIDv7.ny()
         val andreFulleYtelserIkkeOppfylt =
             Vilkår(
-                navn = IKKE_ANDRE_FULLE_YTELSER.navn,
+                navn = IKKE_ANDRE_FULLE_YTELSER.vilkårNavn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
 
