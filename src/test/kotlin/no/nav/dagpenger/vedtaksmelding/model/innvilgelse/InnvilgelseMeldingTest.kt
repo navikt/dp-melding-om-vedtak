@@ -9,7 +9,6 @@ import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallStønadsukerS
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ErInnvilgetMedVerneplikt
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ForeldrepengerDagsats
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarSamordnet
-import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.KravTilMinsteinntekt
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.OmsorgspengerDagsats
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.OpplæringspengerDagsats
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.PleiepengerDagsats
@@ -18,6 +17,7 @@ import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SykepengerDagsats
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.UføreDagsats
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.ManglerBrevstøtte
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN_VERNEPLIKT
@@ -220,12 +220,11 @@ class InnvilgelseMeldingTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår = emptySet(),
+                    vilkår = setOf(Vilkår(navn = MINSTEINNTEKT.vilkårNavn, status = OPPFYLT)),
                     utfall = Utfall.INNVILGET,
                     opplysninger =
                         setOf(
                             Opplysning(ErInnvilgetMedVerneplikt.opplysningTekstId, "true", BOOLSK),
-                            Opplysning(KravTilMinsteinntekt.opplysningTekstId, "true", BOOLSK),
                             Opplysning(
                                 AntallStønadsukerSomGisVedOrdinæreDagpenger.opplysningTekstId,
                                 "52",
