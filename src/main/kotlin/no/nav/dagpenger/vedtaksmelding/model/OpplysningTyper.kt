@@ -47,10 +47,6 @@ enum class OpplysningTyper(val opplysningTypeId: UUID?, val opplysningTekstId: S
         opplysningTypeId = UUID.fromString("0194881f-943d-77a7-969c-147999f15459"),
         opplysningTekstId = "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger",
     ),
-    KravTilMinsteinntekt(
-        opplysningTypeId = UUID.fromString("0194881f-9413-77ce-92ec-d29700f0424c"),
-        opplysningTekstId = "opplysning.krav-til-minsteinntekt",
-    ),
     AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
         opplysningTypeId = UUID.fromString("0194881f-9428-74d5-b160-f63a4c61a242"),
         opplysningTekstId = "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget",

@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test
 
 class AvslagMeldingMinsteinntektTest {
     @Test
-    fun `Brevstøtte for avslag minsteinntekt eller verneplikt`() {
+    fun `Brevstøtte for avslag minsteinntekt`() {
         val avslagMinsteinntektVedtak = VedtakMapper(json).vedtak()
         shouldNotThrow<VedtakMelding.ManglerBrevstøtte> {
             AvslagMelding(avslagMinsteinntektVedtak, emptyList())

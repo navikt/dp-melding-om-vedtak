@@ -30,7 +30,6 @@ import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.IKKE_UTDANNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.IKKE_UTESTENGT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT_OLD
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.OPPHOLD_I_NORGE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_ARBEIDSFØR
@@ -55,7 +54,6 @@ class AvslagMelding(
         vedtak.utfall == AVSLÅTT &&
             listOf(
                 MINSTEINNTEKT,
-                MINSTEINNTEKT_OLD,
                 IKKE_PASSERT_ALDERSGRENSE,
                 TAPT_ARBEIDSTID_ELLER_ARBEIDSINNTEKT,
                 TAPT_ARBEIDSINNTEKT,
@@ -103,8 +101,7 @@ class AvslagMelding(
 
     private fun blokkerAvslagMinsteinntekt(): List<String> {
         return vedtak.vilkår.find { vilkår ->
-            (vilkår.navn == MINSTEINNTEKT.vilkårNavn && vilkår.status == IKKE_OPPFYLT) ||
-                (vilkår.navn == MINSTEINNTEKT_OLD.vilkårNavn && vilkår.status == IKKE_OPPFYLT)
+            vilkår.navn == MINSTEINNTEKT.vilkårNavn && vilkår.status == IKKE_OPPFYLT
         }
             ?.let {
                 listOf(AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId)

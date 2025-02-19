@@ -5,7 +5,6 @@ import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallBarnSomGirRet
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ErInnvilgetMedVerneplikt
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ForeldrepengerDagsats
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarSamordnet
-import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.KravTilMinsteinntekt
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.OmsorgspengerDagsats
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.OpplæringspengerDagsats
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.PleiepengerDagsats
@@ -49,7 +48,6 @@ import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseVilkårMedBrevstøtte.OPPFYLLER_KRAVET_TIL_PERMITTERING
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.INNVILGET
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår.Status.IKKE_OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår.Status.OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 
@@ -176,16 +174,14 @@ class InnvilgelseMelding(
 
     private fun grunnlag(): List<String> {
         val grunnlagBlokker = mutableListOf<String>()
-        val kravTilMinsteinntektErOppfyltOld =
-            vedtak.opplysninger.any { it.opplysningTekstId == KravTilMinsteinntekt.opplysningTekstId && it.formatertVerdi == "true" }
         val kravTilMinsteinntektOppfylt =
             vedtak.vilkår.any { vilkår ->
-                vilkår.navn == MINSTEINNTEKT.vilkårNavn && vilkår.status == IKKE_OPPFYLT
+                vilkår.navn == MINSTEINNTEKT.vilkårNavn && vilkår.status == OPPFYLT
             }
         when {
             erInnvilgetMedVerneplikt() -> {
                 grunnlagBlokker.add(INNVILGELSE_GRUNNLAG_VERNEPLIKT.brevblokkId)
-                if (kravTilMinsteinntektErOppfyltOld || kravTilMinsteinntektOppfylt) {
+                if (kravTilMinsteinntektOppfylt) {
                     grunnlagBlokker.add(INNVILGELSE_VERNEPLIKT_GUNSTIGEST.brevblokkId)
                 }
             }

@@ -25,7 +25,6 @@ import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.Grunnlag
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarSamordnet
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.InntektskravSiste12Måneder
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.InntektskravSiste36Måneder
-import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.KravTilMinsteinntekt
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.KravTilProsentvisTapAvArbeidstid
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.OmsorgspengerDagsats
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.OpplæringspengerDagsats
@@ -422,16 +421,6 @@ class VedtakMapperTest {
                 råVerdi = "744168",
                 datatype = HELTALL,
                 enhet = KRONER,
-            )
-    }
-
-    @Test
-    fun `Hent opplysning Krav til minsteinntekt`() {
-        vedtak.finnOpplysning(KravTilMinsteinntekt.opplysningTekstId) shouldBe
-            Opplysning(
-                opplysningTekstId = KravTilMinsteinntekt.opplysningTekstId,
-                råVerdi = "true",
-                datatype = BOOLSK,
             )
     }
 
