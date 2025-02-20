@@ -66,10 +66,10 @@ private val avslagOppholdNorgeJson =
       "behandletAv": [],
       "vilkår": [
         {
-          "navn": "Oppfyller kravet til opphold i Norge",
+          "navn": "Oppfyller kravet til opphold i Norge eller unntak",
           "status": "IkkeOppfylt",
           "vurderingstidspunkt": "2025-01-21T11:03:11.079514",
-          "hjemmel": "folketrygdloven § 4-5"
+          "hjemmel": "§ 4-2. Opphold i Norge"
         }
       ],
       "fastsatt": {

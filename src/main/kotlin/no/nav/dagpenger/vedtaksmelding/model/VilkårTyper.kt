@@ -10,7 +10,7 @@ enum class VilkårTyper(val vilkårNavn: String) {
 
     IKKE_UTESTENGT(vilkårNavn = "Oppfyller krav til ikke utestengt"),
 
-    OPPHOLD_I_NORGE(vilkårNavn = "Oppfyller kravet til opphold i Norge"),
+    OPPHOLD_I_NORGE(vilkårNavn = "Oppfyller kravet til opphold i Norge eller unntak"),
 
     IKKE_ANDRE_FULLE_YTELSER(vilkårNavn = "Mottar ikke andre fulle ytelser"),
 
@@ -27,6 +27,8 @@ enum class VilkårTyper(val vilkårNavn: String) {
     IKKE_UTDANNING(vilkårNavn = "Krav til utdanning eller opplæring"),
 
     MEDLEMSKAP(vilkårNavn = "Oppfyller kravet til medlemskap"),
+
+    LOVVALG(vilkårNavn = "Er omfattet av trygdelovgivningen i Norge"),
 
     PERMITTERING(vilkårNavn = "Oppfyller kravet til permittering"),
 }

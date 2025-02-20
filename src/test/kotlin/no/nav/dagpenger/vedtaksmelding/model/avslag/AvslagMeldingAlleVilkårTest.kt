@@ -74,100 +74,130 @@ private val json =
       "behandletAv": [],
       "vilkår": [
         {
-          "navn": "Oppfyller kravet til å ta ethvert arbeid",
+          "navn": "Oppfyller kravet til alder",
           "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-16T09:16:38.778989",
-          "hjemmel": "folketrygdloven § 4-5"
+          "vurderingstidspunkt": "2025-02-17T16:37:49.167239",
+          "hjemmel": "§ 4-23. Bortfall på grunn av alder"
         },
         {
-            "navn": "Oppfyller kravet til alder",
-            "status": "IkkeOppfylt",
-            "vurderingstidspunkt": "2025-01-27T12:08:17.941134",
-            "hjemmel": "folketrygdloven § 4-23"
-        },
-        {
-          "navn": "Mottar ikke andre fulle ytelser",
-          "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-27T12:08:17.919669",
-          "hjemmel": "folketrygdloven § 4-24"
-        },
-        {
-          "navn": "Oppfyller kravet til heltid- og deltidsarbeid",
-          "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-27T12:08:17.927834",
-          "hjemmel": "folketrygdloven § 4-5"
-        },
-        {
-          "navn": "Oppfyller kravet til mobilitet",
-          "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-27T12:08:17.927856",
-          "hjemmel": "folketrygdloven § 4-5"
-        },
-        {
-          "navn": "Oppfyller kravet til å være arbeidsfør",
-          "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-27T12:08:17.927877",
-          "hjemmel": "folketrygdloven § 4-5"
-        },
-        {
-          "navn": "Krav til tap av arbeidsinntekt",
-          "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-27T12:08:17.928029",
-          "hjemmel": "folketrygdloven § 4-3"
-        },
-        {
-          "navn": "Oppfyller krav til ikke utestengt",
-          "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-27T12:08:17.929454",
-          "hjemmel": "folketrygdloven § 4-28"
-        },
-        {
-          "navn": "Oppfyller kravet til opphold i Norge",
-          "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-27T12:08:17.933163",
-          "hjemmel": "folketrygdloven § 4-5"
-        },
-        {
-          "navn": "Registrert som arbeidssøker på søknadstidspunktet",
-          "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-29T10:13:36.435915",
-          "hjemmel": "folketrygdloven § 4-5"
-        },
-        {
-          "navn": "Krav til arbeidssøker",
-          "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-29T10:13:36.458124",
-          "hjemmel": "folketrygdloven § 4-5"
+          "navn": "Er omfattet av trygdelovgivningen i Norge",
+          "status": "Oppfylt",
+          "vurderingstidspunkt": "2025-02-20T09:45:19.72993",
+          "hjemmel": "§ 4-1. Forholdet til bestemmelser om internasjonal trygdekoordinering"
         },
         {
           "navn": "Oppfyller kravet til minsteinntekt",
           "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-29T10:13:36.505549",
-          "hjemmel": "folketrygdloven § 4-4"
+          "vurderingstidspunkt": "2025-02-17T16:37:50.531663",
+          "hjemmel": "§ 4-4. Krav til minsteinntekt"
         },
         {
-          "navn": "Tap av arbeidstid er minst terskel",
+          "navn": "Oppfyller kravet til verneplikt",
           "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-29T10:13:36.580173",
-          "hjemmel": "folketrygdloven § 4-3"
+          "vurderingstidspunkt": "2025-02-20T09:45:35.975779",
+          "hjemmel": "§ 4-19. Dagpenger etter avtjent verneplikt"
         },
         {
-          "navn": "Krav til tap av arbeidsinntekt og arbeidstid",
+          "navn": "Mottar ikke andre fulle ytelser",
           "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-29T10:13:36.592332",
-          "hjemmel": "folketrygdloven § 4-3"
+          "vurderingstidspunkt": "2025-02-17T16:55:56.627729",
+          "hjemmel": "§ 4-24. Medlem som har fulle ytelser etter folketrygdloven eller avtalefestet pensjon"
         },
         {
-            "navn": "Krav til utdanning eller opplæring",
-            "status": "IkkeOppfylt",
-            "vurderingstidspunkt": "2025-01-27T12:08:17.941459",
-            "hjemmel": "folketrygdloven § 4-6"
+          "navn": "Oppfyller kravet til opphold i Norge eller unntak",
+          "status": "IkkeOppfylt",
+          "vurderingstidspunkt": "2025-02-20T09:30:34.020535",
+          "hjemmel": "§ 4-2. Opphold i Norge"
+        },
+        {
+          "navn": "Oppfyller kravet til medlemskap",
+          "status": "IkkeOppfylt",
+          "vurderingstidspunkt": "2025-02-20T09:31:20.587784",
+          "hjemmel": "§ 4-2. Opphold i Norge"
+        },
+        {
+          "navn": "Oppfyller kravet til opphold i Norge",
+          "status": "IkkeOppfylt",
+          "vurderingstidspunkt": "2025-02-20T09:31:20.589332",
+          "hjemmel": "§ 4-2. Opphold i Norge"
+        },
+        {
+          "navn": "Oppfyller kravet til heltid- og deltidsarbeid",
+          "status": "IkkeOppfylt",
+          "vurderingstidspunkt": "2025-02-17T16:37:50.527381",
+          "hjemmel": "§ 4-5. Reelle arbeidssøkere"
+        },
+        {
+          "navn": "Oppfyller kravet til mobilitet",
+          "status": "IkkeOppfylt",
+          "vurderingstidspunkt": "2025-02-20T09:23:11.998006",
+          "hjemmel": "§ 4-5. Reelle arbeidssøkere"
+        },
+        {
+          "navn": "Oppfyller kravet til å være arbeidsfør",
+          "status": "IkkeOppfylt",
+          "vurderingstidspunkt": "2025-02-19T15:47:52.997433",
+          "hjemmel": "§ 4-5. Reelle arbeidssøkere"
+        },
+        {
+          "navn": "Oppfyller kravet til å ta ethvert arbeid",
+          "status": "IkkeOppfylt",
+          "vurderingstidspunkt": "2025-02-20T09:23:22.424583",
+          "hjemmel": "§ 4-5. Reelle arbeidssøkere"
+        },
+        {
+          "navn": "Krav til arbeidssøker",
+          "status": "IkkeOppfylt",
+          "vurderingstidspunkt": "2025-02-20T09:23:22.429505",
+          "hjemmel": "§ 4-5. Reelle arbeidssøkere"
+        },
+        {
+          "navn": "Registrert som arbeidssøker på søknadstidspunktet",
+          "status": "IkkeOppfylt",
+          "vurderingstidspunkt": "2025-02-17T16:37:50.527438",
+          "hjemmel": "§ 4-5. Reelle arbeidssøkere - registrert som arbeidssøker"
         },
         {
           "navn": "Er medlemmet ikke påvirket av streik eller lock-out?",
           "status": "IkkeOppfylt",
-          "vurderingstidspunkt": "2025-01-27T12:08:17.927976",
-          "hjemmel": "folketrygdloven § 4-22"
+          "vurderingstidspunkt": "2025-02-17T16:55:56.630306",
+          "hjemmel": "§ 4-22. Bortfall ved streik og lock-out"
+        },
+        {
+          "navn": "Krav til tap av arbeidsinntekt",
+          "status": "IkkeOppfylt",
+          "vurderingstidspunkt": "2025-02-17T16:55:56.631843",
+          "hjemmel": "§ 4-3. Krav til tap av arbeidsinntekt og arbeidstid"
+        },
+        {
+          "navn": "Tap av arbeidstid er minst terskel",
+          "status": "IkkeOppfylt",
+          "vurderingstidspunkt": "2025-02-18T16:35:26.095209",
+          "hjemmel": "§ 4-3. Krav til tap av arbeidsinntekt og arbeidstid"
+        },
+        {
+          "navn": "Krav til tap av arbeidsinntekt og arbeidstid",
+          "status": "IkkeOppfylt",
+          "vurderingstidspunkt": "2025-02-18T16:35:59.06211",
+          "hjemmel": "§ 4-3. Krav til tap av arbeidsinntekt og arbeidstid"
+        },
+        {
+          "navn": "Krav til utdanning eller opplæring",
+          "status": "IkkeOppfylt",
+          "vurderingstidspunkt": "2025-02-17T16:55:57.729065",
+          "hjemmel": "§ 4-6. Dagpenger under utdanning, opplæring, etablering av egen virksomhet m.v"
+        },
+        {
+          "navn": "Oppfyller krav til ikke utestengt",
+          "status": "IkkeOppfylt",
+          "vurderingstidspunkt": "2025-02-17T16:55:56.63037",
+          "hjemmel": "§ 4-28. Utestengning"
+        },
+        {
+          "navn": "Oppfyller kravet til permittering",
+          "status": "IkkeOppfylt",
+          "vurderingstidspunkt": "2025-02-18T08:55:08.27086",
+          "hjemmel": "§ 4-7. Dagpenger til permitterte"
         }
       ],
       "fastsatt": {
@@ -191,11 +221,3 @@ private val json =
       }
     }
     """.trimIndent()
-
-// Disse vilkårene støttes ikke i brevløsningen ennå
-//    {
-//        "navn": "Oppfyller kravet til medlemskap",
-//        "status": "Oppfylt",
-//        "vurderingstidspunkt": "2025-01-27T12:08:17.927809",
-//        "hjemmel": "folketrygdloven § 4-2"
-//    },
