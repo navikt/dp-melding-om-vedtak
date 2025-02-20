@@ -5,7 +5,7 @@ import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallPermitterings
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallStønadsuker
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
-import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.OPPFYLLER_KRAVET_TIL_PERMITTERING
+import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.PERMITTERING
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERT
@@ -81,7 +81,7 @@ class PermitteringTest {
                     vilkår =
                         setOf(
                             Vilkår(
-                                navn = OPPFYLLER_KRAVET_TIL_PERMITTERING.vilkårNavn,
+                                navn = PERMITTERING.vilkårNavn,
                                 status = OPPFYLT,
                             ),
                         ),

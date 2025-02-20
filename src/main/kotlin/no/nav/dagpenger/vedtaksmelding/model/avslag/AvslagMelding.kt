@@ -65,6 +65,8 @@ class AvslagMelding(
                 OPPHOLD_I_NORGE,
                 IKKE_ANDRE_FULLE_YTELSER,
                 IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT,
+// TODO               MEDLEMSKAP,
+// TODO               PERMITTERING,
             ).any { vilkår ->
                 vedtak.vilkår.ikkeOppfylt(vilkår)
             }
