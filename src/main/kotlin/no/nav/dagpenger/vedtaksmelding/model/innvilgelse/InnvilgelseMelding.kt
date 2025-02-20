@@ -13,7 +13,7 @@ import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SykepengerDagsats
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.UføreDagsats
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.MINSTEINNTEKT
-import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.OPPFYLLER_KRAVET_TIL_PERMITTERING
+import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.PERMITTERING
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN_VERNEPLIKT
@@ -240,6 +240,6 @@ class InnvilgelseMelding(
 
     private fun erInnvilgetSomPermittert() =
         vedtak.vilkår.any {
-            it.navn == OPPFYLLER_KRAVET_TIL_PERMITTERING.vilkårNavn && it.status == OPPFYLT
+            it.navn == PERMITTERING.vilkårNavn && it.status == OPPFYLT
         }
 }

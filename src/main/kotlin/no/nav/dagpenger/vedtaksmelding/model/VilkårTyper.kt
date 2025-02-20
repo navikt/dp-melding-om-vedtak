@@ -26,5 +26,7 @@ enum class VilkårTyper(val vilkårNavn: String) {
 
     IKKE_UTDANNING(vilkårNavn = "Krav til utdanning eller opplæring"),
 
-    OPPFYLLER_KRAVET_TIL_PERMITTERING(vilkårNavn = "Oppfyller kravet til permittering"),
+    MEDLEMSKAP(vilkårNavn = "Oppfyller kravet til medlemskap"),
+
+    PERMITTERING(vilkårNavn = "Oppfyller kravet til permittering"),
 }
