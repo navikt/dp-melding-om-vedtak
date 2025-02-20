@@ -4,6 +4,13 @@ import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.MINSTEINNTEKT
+import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.REELL_ARBEIDSSØKER
+import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.REELL_ARBEIDSSØKER_ARBEIDSFØR
+import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.REELL_ARBEIDSSØKER_ETHVERT_ARBEID
+import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.REELL_ARBEIDSSØKER_HELTID_DELTID
+import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.REELL_ARBEIDSSØKER_MOBILITET
+import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR
@@ -14,13 +21,6 @@ import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_REGISTRERT_ARBEIDSSOKER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.MINSTEINNTEKT
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_ARBEIDSFØR
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_ETHVERT_ARBEID
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_HELTID_DELTID
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_MOBILITET
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagVilkårMedBrevstøtte.REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår

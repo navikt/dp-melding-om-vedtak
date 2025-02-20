@@ -4,6 +4,7 @@ import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.Aldersgrense
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ALDER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
@@ -34,7 +35,7 @@ class AvslagMeldingAlderTest {
         val behandlingId = UUIDv7.ny()
         val alderIkkeOppfylt =
             Vilkår(
-                navn = AvslagVilkårMedBrevstøtte.IKKE_PASSERT_ALDERSGRENSE.vilkårNavn,
+                navn = VilkårTyper.IKKE_PASSERT_ALDERSGRENSE.vilkårNavn,
                 status = Vilkår.Status.IKKE_OPPFYLT,
             )
 

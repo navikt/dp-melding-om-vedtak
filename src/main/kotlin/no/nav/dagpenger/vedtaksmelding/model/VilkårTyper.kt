@@ -1,6 +1,6 @@
-package no.nav.dagpenger.vedtaksmelding.model.avslag
+package no.nav.dagpenger.vedtaksmelding.model
 
-enum class AvslagVilkårMedBrevstøtte(val vilkårNavn: String) {
+enum class VilkårTyper(val vilkårNavn: String) {
     REELL_ARBEIDSSØKER(vilkårNavn = "Krav til arbeidssøker"),
     REELL_ARBEIDSSØKER_MOBILITET(vilkårNavn = "Oppfyller kravet til mobilitet"),
     REELL_ARBEIDSSØKER_ARBEIDSFØR(vilkårNavn = "Oppfyller kravet til å være arbeidsfør"),
@@ -25,4 +25,6 @@ enum class AvslagVilkårMedBrevstøtte(val vilkårNavn: String) {
     IKKE_PASSERT_ALDERSGRENSE(vilkårNavn = "Oppfyller kravet til alder"),
 
     IKKE_UTDANNING(vilkårNavn = "Krav til utdanning eller opplæring"),
+
+    OPPFYLLER_KRAVET_TIL_PERMITTERING(vilkårNavn = "Oppfyller kravet til permittering"),
 }
