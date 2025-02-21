@@ -35,4 +35,7 @@ enum class AvslagBrevblokker(val brevblokkId: String) {
     AVSLAG_ALDER(brevblokkId = "brev.blokk.avslag-alder"),
 
     AVSLAG_UTDANNING(brevblokkId = "brev.blokk.avslag-utdanning"),
+
+    AVSLAG_MEDLEMSKAP_DEL_1(brevblokkId = "brev.blokk.avslag-medlemskap-del-1"),
+    AVSLAG_MEDLEMSKAP_DEL_2(brevblokkId = "brev.blokk.avslag-medlemskap-del-2"),
 }
