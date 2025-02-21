@@ -2,6 +2,7 @@ package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 enum class AvslagBrevblokker(val brevblokkId: String) {
     AVSLAG_INNLEDNING(brevblokkId = "brev.blokk.vedtak-avslag"),
+    AVSLAG_INNLEDNING_PERMITTERT(brevblokkId = "brev.blokk.vedtak-avslag-permittert"),
 
     AVSLAG_MINSTEINNTEKT_BEGRUNNELSE(brevblokkId = "brev.blokk.begrunnelse-avslag-minsteinntekt"),
 
@@ -38,4 +39,7 @@ enum class AvslagBrevblokker(val brevblokkId: String) {
 
     AVSLAG_MEDLEMSKAP_DEL_1(brevblokkId = "brev.blokk.avslag-medlemskap-del-1"),
     AVSLAG_MEDLEMSKAP_DEL_2(brevblokkId = "brev.blokk.avslag-medlemskap-del-2"),
+
+    AVSLAG_PERMITTERT_DEL_1(brevblokkId = "brev.blokk.avslag-permittert-del-1"),
+    AVSLAG_PERMITTERT_DEL_2(brevblokkId = "brev.blokk.avslag-permittert-del-2"),
 }

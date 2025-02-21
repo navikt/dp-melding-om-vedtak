@@ -11,6 +11,7 @@ import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.IKKE_UTESTENGT
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.MEDLEMSKAP
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.OPPHOLD_I_NORGE
+import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.PERMITTERING
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.REELL_ARBEIDSSØKER
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.REELL_ARBEIDSSØKER_ARBEIDSFØR
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.REELL_ARBEIDSSØKER_ETHVERT_ARBEID
@@ -23,11 +24,14 @@ import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.TAPT_ARBEIDSTID_ELLER_
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ALDER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ANDRE_FULLE_YTELSER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MEDLEMSKAP_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MEDLEMSKAP_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_OPPHOLD_UTLAND_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_OPPHOLD_UTLAND_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_PERMITTERT_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_PERMITTERT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID
@@ -69,7 +73,7 @@ class AvslagMelding(
                 IKKE_ANDRE_FULLE_YTELSER,
                 IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT,
                 MEDLEMSKAP,
-// TODO               PERMITTERING,
+                PERMITTERING,
             ).any { vilkår ->
                 vedtak.vilkår.ikkeOppfylt(vilkår)
             }
@@ -83,10 +87,15 @@ class AvslagMelding(
     private fun Set<Vilkår>.ikkeOppfylt(avslagsvilkår: VilkårTyper): Boolean =
         any { vilkår -> vilkår.navn == avslagsvilkår.vilkårNavn && vilkår.status == IKKE_OPPFYLT }
 
-    private val innledendeBrevblokker = listOf(AVSLAG_INNLEDNING.brevblokkId)
+    private val innledendeBrevblokk =
+        when (avslåttPermittering()) {
+            true -> listOf(AVSLAG_INNLEDNING_PERMITTERT.brevblokkId)
+            false -> listOf(AVSLAG_INNLEDNING.brevblokkId)
+        }
     override val brevBlokkIder: List<String>
         get() {
-            return innledendeBrevblokker +
+            return innledendeBrevblokk +
+                blokkerAvslagPermittering() +
                 blokkerAvslagMinsteinntekt() +
                 blokkerAvslagAlder() +
                 blokkerAvslagTaptArbeidsinntekt() +
@@ -266,4 +275,21 @@ class AvslagMelding(
                 )
             } ?: emptyList()
     }
+
+    private fun blokkerAvslagPermittering(): List<String> {
+        return vedtak.vilkår.find { vilkår ->
+            vilkår.navn == PERMITTERING.vilkårNavn && vilkår.status == IKKE_OPPFYLT
+        }
+            ?.let {
+                listOf(
+                    AVSLAG_PERMITTERT_DEL_1.brevblokkId,
+                    AVSLAG_PERMITTERT_DEL_2.brevblokkId,
+                )
+            } ?: emptyList()
+    }
+
+    private fun avslåttPermittering(): Boolean =
+        vedtak.vilkår.any { vilkår ->
+            vilkår.navn == PERMITTERING.vilkårNavn && vilkår.status == IKKE_OPPFYLT
+        }
 }
