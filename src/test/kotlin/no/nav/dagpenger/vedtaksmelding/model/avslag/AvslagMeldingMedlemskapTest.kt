@@ -18,7 +18,7 @@ class AvslagMeldingMedlemskapTest {
     private val avslagMedlemskapVedtak = VedtakMapper(json).vedtak()
 
     @Test
-    fun `Riktige brevblokker for avslag på grunn av utdanning`() {
+    fun `Riktige brevblokker for avslag på grunn av manglende medlemskap i folketrygden`() {
         val avslåttVilkår =
             Vilkår(
                 navn = MEDLEMSKAP.vilkårNavn,
@@ -44,7 +44,7 @@ class AvslagMeldingMedlemskapTest {
     }
 
     @Test
-    fun `Brevstøtte for avslag utdanning`() {
+    fun `Brevstøtte for avslag på grunn av manglende medlemskap i folketrygden`() {
         shouldNotThrow<VedtakMelding.ManglerBrevstøtte> {
             AvslagMelding(avslagMedlemskapVedtak, emptyList())
         }
