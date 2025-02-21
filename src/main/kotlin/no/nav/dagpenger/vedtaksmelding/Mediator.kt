@@ -19,6 +19,7 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 private val logger = KotlinLogging.logger {}
+private val sikkerlogger = KotlinLogging.logger("tjenestekall")
 
 class Mediator(
     private val behandlingKlient: BehandlingKlient,
@@ -100,6 +101,8 @@ class Mediator(
                 sistEndretTidspunkt = LocalDateTime.now(),
                 tittel = it.title,
             )
+        }.also {
+            sikkerlogger.info { "Hentet utvidede beskrivelser for behandlingId=$behandlingId: $it" }
         }
     }
 
