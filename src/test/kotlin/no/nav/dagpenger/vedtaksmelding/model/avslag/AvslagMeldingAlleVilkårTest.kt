@@ -6,6 +6,8 @@ import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ALDER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ANDRE_FULLE_YTELSER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MEDLEMSKAP_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MEDLEMSKAP_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_OPPHOLD_UTLAND_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_OPPHOLD_UTLAND_DEL_2
@@ -41,6 +43,8 @@ class AvslagMeldingAlleVilkårTest {
                 AVSLAG_ALDER.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSINNTEKT.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID.brevblokkId,
+                AVSLAG_MEDLEMSKAP_DEL_1.brevblokkId,
+                AVSLAG_MEDLEMSKAP_DEL_2.brevblokkId,
                 AVSLAG_UTESTENGT.brevblokkId,
                 AVSLAG_UTESTENGT_HJEMMEL.brevblokkId,
                 AVSLAG_UTDANNING.brevblokkId,

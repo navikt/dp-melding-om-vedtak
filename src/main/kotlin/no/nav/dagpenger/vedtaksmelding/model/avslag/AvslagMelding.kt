@@ -8,6 +8,7 @@ import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.IKKE_PASSERT_ALDERSGRE
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.IKKE_UTDANNING
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.IKKE_UTESTENGT
+import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.MEDLEMSKAP
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.OPPHOLD_I_NORGE
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.REELL_ARBEIDSSØKER
@@ -22,6 +23,8 @@ import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.TAPT_ARBEIDSTID_ELLER_
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ALDER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ANDRE_FULLE_YTELSER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MEDLEMSKAP_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MEDLEMSKAP_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_OPPHOLD_UTLAND_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_OPPHOLD_UTLAND_DEL_2
@@ -65,7 +68,7 @@ class AvslagMelding(
                 OPPHOLD_I_NORGE,
                 IKKE_ANDRE_FULLE_YTELSER,
                 IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT,
-// TODO               MEDLEMSKAP,
+                MEDLEMSKAP,
 // TODO               PERMITTERING,
             ).any { vilkår ->
                 vedtak.vilkår.ikkeOppfylt(vilkår)
@@ -88,6 +91,7 @@ class AvslagMelding(
                 blokkerAvslagAlder() +
                 blokkerAvslagTaptArbeidsinntekt() +
                 blokkerAvslagTaptArbeidstid() +
+                blokkerAvslagMedlemskap() +
                 blokkerAvslagUtestengt() +
                 blokkerAvslagUtdanning() +
                 blokkerAvslagReellArbeidssøker() +
@@ -247,6 +251,18 @@ class AvslagMelding(
                 listOf(
                     AVSLAG_STREIK_LOCKOUT_DEL_1.brevblokkId,
                     AVSLAG_STREIK_LOCKOUT_DEL_2.brevblokkId,
+                )
+            } ?: emptyList()
+    }
+
+    private fun blokkerAvslagMedlemskap(): List<String> {
+        return vedtak.vilkår.find { vilkår ->
+            vilkår.navn == MEDLEMSKAP.vilkårNavn && vilkår.status == IKKE_OPPFYLT
+        }
+            ?.let {
+                listOf(
+                    AVSLAG_MEDLEMSKAP_DEL_1.brevblokkId,
+                    AVSLAG_MEDLEMSKAP_DEL_2.brevblokkId,
                 )
             } ?: emptyList()
     }
