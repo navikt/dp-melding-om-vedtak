@@ -126,14 +126,7 @@ object HtmlConverter {
                     }
 
                     brevBlokker.forEachIndexed { index, brevBlokk ->
-                        div(
-                            classes =
-                                if (index == 0) {
-                                    "melding-om-vedtak-tekst-blokk-first"
-                                } else {
-                                    "melding-om-vedtak-tekst-blokk"
-                                },
-                        ) {
+                        div(classes = "melding-om-vedtak-tekst-blokk") {
                             val groupedBlocks = groupBlocks(brevBlokk.innhold)
 
                             groupedBlocks.forEachIndexed { _, blocks ->
