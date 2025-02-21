@@ -53,9 +53,6 @@ fun css(saksId: String): String {
              margin-bottom: 0;
            }
         
-          .melding-om-vedtak-tekst-blokk-first {
-            margin-bottom: 0;
-          }
         
         .melding-om-vedtak-tekst-blokk h1 {
           font-size: 16px;
@@ -144,10 +141,6 @@ fun css(saksId: String): String {
 
             .melding-om-vedtak-tekst-blokk {
               margin-bottom: 26px;
-            }
-            
-            .melding-om-vedtak-tekst-blokk-first {
-              margin-bottom: 0;
             }
             
             .melding-om-vedtak-tekst-blokk h1,
