@@ -211,7 +211,7 @@ class AvslagMeldingReellArbeidssøkerTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår = setOf(reellArbeidssøkerIkkeOppfylt, registrertArbeidssøkerIkkeOppfylt),
+                    vilkår = setOf(registrertArbeidssøkerIkkeOppfylt),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
                     fagsakId = "fagsakId test",

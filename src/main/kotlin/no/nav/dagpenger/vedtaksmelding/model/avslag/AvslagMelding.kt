@@ -69,6 +69,7 @@ class AvslagMelding(
                 IKKE_UTESTENGT,
                 IKKE_UTDANNING,
                 REELL_ARBEIDSSØKER,
+                REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER,
                 OPPHOLD_I_NORGE,
                 IKKE_ANDRE_FULLE_YTELSER,
                 IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT,
