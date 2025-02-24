@@ -9,7 +9,7 @@ import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_BEGRUNNELSE
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.sanity.ResultDTO
 import no.nav.dagpenger.vedtaksmelding.util.finnUtvidetBeskrivelseNode
@@ -63,7 +63,7 @@ class HtmlConverterTest {
                         setOf(
                             UtvidetBeskrivelse(
                                 behandlingId = UUIDv7.ny(),
-                                brevblokkId = AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId,
+                                brevblokkId = AVSLAG_MINSTEINNTEKT.brevblokkId,
                                 tekst =
                                     """Dette er en test linje med <, > og &
 Dette er linje 2
@@ -76,7 +76,7 @@ Dette er linje 4
                             ),
                         ),
                 )
-            } finnUtvidetBeskrivelseNode AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId shouldBe
+            } finnUtvidetBeskrivelseNode AVSLAG_MINSTEINNTEKT.brevblokkId shouldBe
             """<p data-utvidet-beskrivelse-id="brev.blokk.begrunnelse-avslag-minsteinntekt">Dette er en test linje med &lt;, &gt; og &amp;<br>Dette er linje 2<br> <br>Dette er linje 3<br><br><br>Dette er linje 4</p>"""
     }
 

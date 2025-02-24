@@ -27,14 +27,14 @@ import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INN
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MEDLEMSKAP_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MEDLEMSKAP_DEL_2
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_BEGRUNNELSE
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_OPPHOLD_UTLAND_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_OPPHOLD_UTLAND_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_PERMITTERT_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_PERMITTERT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_HELE_NORGE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT
@@ -120,7 +120,7 @@ class AvslagMelding(
             vilkår.navn == MINSTEINNTEKT.vilkårNavn && vilkår.status == IKKE_OPPFYLT
         }
             ?.let {
-                listOf(AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId)
+                listOf(AVSLAG_MINSTEINNTEKT.brevblokkId)
             } ?: emptyList()
     }
 
@@ -196,11 +196,11 @@ class AvslagMelding(
         vedtak.vilkår.find { vilkår ->
             vilkår.navn == REELL_ARBEIDSSØKER_MOBILITET.vilkårNavn && vilkår.status == IKKE_OPPFYLT
         }?.let {
-            grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE.brevblokkId)
+            grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_HELE_NORGE.brevblokkId)
         }
 
         if (grunnerTilAvslag.contains(AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID.brevblokkId) ||
-            grunnerTilAvslag.contains(AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE.brevblokkId)
+            grunnerTilAvslag.contains(AVSLAG_REELL_ARBEIDSSØKER_HELE_NORGE.brevblokkId)
         ) {
             grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId)
         }

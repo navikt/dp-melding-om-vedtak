@@ -12,10 +12,10 @@ import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.REELL_ARBEIDSSØKER_HE
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.REELL_ARBEIDSSØKER_MOBILITET
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_BEGRUNNELSE
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_HELE_NORGE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT
@@ -137,7 +137,7 @@ class AvslagMeldingReellArbeidssøkerTest {
         ).brevBlokkIder() shouldBe
             listOf(
                 AVSLAG_INNLEDNING.brevblokkId,
-                AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId,
+                AVSLAG_MINSTEINNTEKT.brevblokkId,
             ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 
@@ -157,7 +157,7 @@ class AvslagMeldingReellArbeidssøkerTest {
             listOf(
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
-                AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_HELE_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
             ) + VedtakMelding.fasteAvsluttendeBlokker
@@ -247,7 +247,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID.brevblokkId,
-                AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_HELE_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID.brevblokkId,
