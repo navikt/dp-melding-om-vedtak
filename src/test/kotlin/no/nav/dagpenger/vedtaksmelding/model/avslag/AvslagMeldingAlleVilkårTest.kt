@@ -9,14 +9,14 @@ import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INN
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MEDLEMSKAP_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MEDLEMSKAP_DEL_2
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_BEGRUNNELSE
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_OPPHOLD_UTLAND_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_OPPHOLD_UTLAND_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_PERMITTERT_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_PERMITTERT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_HELE_NORGE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT
@@ -43,7 +43,7 @@ class AvslagMeldingAlleVilkårTest {
         ).brevBlokkIder() shouldBe
             listOf(
                 AVSLAG_INNLEDNING.brevblokkId,
-                AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId,
+                AVSLAG_MINSTEINNTEKT.brevblokkId,
                 AVSLAG_ALDER.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSINNTEKT.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID.brevblokkId,
@@ -54,7 +54,7 @@ class AvslagMeldingAlleVilkårTest {
                 AVSLAG_UTDANNING.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID.brevblokkId,
-                AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_HELE_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID.brevblokkId,
@@ -78,7 +78,7 @@ class AvslagMeldingAlleVilkårTest {
                 AVSLAG_INNLEDNING_PERMITTERT.brevblokkId,
                 AVSLAG_PERMITTERT_DEL_1.brevblokkId,
                 AVSLAG_PERMITTERT_DEL_2.brevblokkId,
-                AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId,
+                AVSLAG_MINSTEINNTEKT.brevblokkId,
                 AVSLAG_ALDER.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSINNTEKT.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID.brevblokkId,
@@ -89,7 +89,7 @@ class AvslagMeldingAlleVilkårTest {
                 AVSLAG_UTDANNING.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID.brevblokkId,
-                AVSLAG_REELL_ARBEIDSSØKER_ARBEID_NORGE.brevblokkId,
+                AVSLAG_REELL_ARBEIDSSØKER_HELE_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID.brevblokkId,

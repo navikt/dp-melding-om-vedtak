@@ -6,7 +6,7 @@ import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_BEGRUNNELSE
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
@@ -42,7 +42,7 @@ class AvslagMeldingMinsteinntektTest {
         ).brevBlokkIder() shouldBe
             listOf(
                 AVSLAG_INNLEDNING.brevblokkId,
-                AVSLAG_MINSTEINNTEKT_BEGRUNNELSE.brevblokkId,
+                AVSLAG_MINSTEINNTEKT.brevblokkId,
             ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 }
