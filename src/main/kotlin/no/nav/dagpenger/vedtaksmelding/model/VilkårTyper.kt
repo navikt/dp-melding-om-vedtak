@@ -1,12 +1,14 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
 enum class VilkårTyper(val vilkårNavn: String) {
-    REELL_ARBEIDSSØKER(vilkårNavn = "Krav til arbeidssøker"),
-    REELL_ARBEIDSSØKER_MOBILITET(vilkårNavn = "Oppfyller kravet til mobilitet"),
-    REELL_ARBEIDSSØKER_ARBEIDSFØR(vilkårNavn = "Oppfyller kravet til å være arbeidsfør"),
+    REELL_ARBEIDSSØKER(vilkårNavn = "Krav til arbeidssøker"), // Toppnivå-vilkår § 4-5
+    REELL_ARBEIDSSØKER_MOBILITET(vilkårNavn = "Oppfyller kravet til mobilitet"), // Delvilkår
+    REELL_ARBEIDSSØKER_ARBEIDSFØR(vilkårNavn = "Oppfyller kravet til å være arbeidsfør"), // Delvilkår
+    REELL_ARBEIDSSØKER_HELTID_DELTID(vilkårNavn = "Oppfyller kravet til heltid- og deltidsarbeid"), // Delvilkår
+    REELL_ARBEIDSSØKER_ETHVERT_ARBEID(vilkårNavn = "Oppfyller kravet til å ta ethvert arbeid"), // Delvilkår
+
+    // Skal behandles som et eget selvstendig vilkår, selv om dette også gjelder § 4-5
     REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER(vilkårNavn = "Registrert som arbeidssøker på søknadstidspunktet"),
-    REELL_ARBEIDSSØKER_HELTID_DELTID(vilkårNavn = "Oppfyller kravet til heltid- og deltidsarbeid"),
-    REELL_ARBEIDSSØKER_ETHVERT_ARBEID(vilkårNavn = "Oppfyller kravet til å ta ethvert arbeid"),
 
     IKKE_UTESTENGT(vilkårNavn = "Oppfyller krav til ikke utestengt"),
 
@@ -16,9 +18,9 @@ enum class VilkårTyper(val vilkårNavn: String) {
 
     MINSTEINNTEKT(vilkårNavn = "Oppfyller kravet til minsteinntekt"),
 
-    TAPT_ARBEIDSTID_ELLER_ARBEIDSINNTEKT(vilkårNavn = "Krav til tap av arbeidsinntekt og arbeidstid"),
-    TAPT_ARBEIDSTID(vilkårNavn = "Tap av arbeidstid er minst terskel"),
-    TAPT_ARBEIDSINNTEKT(vilkårNavn = "Krav til tap av arbeidsinntekt"),
+    TAPT_ARBEIDSTID_ELLER_ARBEIDSINNTEKT(vilkårNavn = "Krav til tap av arbeidsinntekt og arbeidstid"), // Toppnivå-vilkår
+    TAPT_ARBEIDSTID(vilkårNavn = "Tap av arbeidstid er minst terskel"), // Delvilkår
+    TAPT_ARBEIDSINNTEKT(vilkårNavn = "Krav til tap av arbeidsinntekt"), // Delvilkår
 
     IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT(vilkårNavn = "Er medlemmet ikke påvirket av streik eller lock-out?"),
 
