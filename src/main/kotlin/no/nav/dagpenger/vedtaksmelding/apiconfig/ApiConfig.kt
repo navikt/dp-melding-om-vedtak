@@ -5,6 +5,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.jackson.JacksonConverter
 import io.ktor.serialization.jackson.jackson
 import io.ktor.server.application.Application
+import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.install
 import io.ktor.server.auth.Authentication
 import io.ktor.server.plugins.calllogging.CallLogging
@@ -71,7 +72,7 @@ fun Application.apiConfig() {
                             title = "Unauthorized",
                             detail = cause.message,
                             status = HttpStatusCode.Unauthorized.value,
-                            instance = call.request.path(),
+                            instance = instanceTekst(call),
                             type = URI.create("dagpenger.nav.no/saksbehandling:problem:unauthorized").toString(),
                         )
                     call.respond(HttpStatusCode.Unauthorized, problem)
@@ -85,7 +86,7 @@ fun Application.apiConfig() {
                             title = "Bad request",
                             detail = cause.message,
                             status = HttpStatusCode.BadRequest.value,
-                            instance = call.request.path(),
+                            instance = instanceTekst(call),
                             type = URI.create("dagpenger.nav.no/saksbehandling:problem:bad-request").toString(),
                         )
                     call.respond(HttpStatusCode.BadRequest, problem)
@@ -99,7 +100,7 @@ fun Application.apiConfig() {
                             title = "Uhåndtert feil",
                             detail = cause.message,
                             status = HttpStatusCode.InternalServerError.value,
-                            instance = call.request.path(),
+                            instance = instanceTekst(call),
                             type = URI.create("dagpenger.nav.no/saksbehandling:problem:uhåndtert-feil").toString(),
                         )
                     call.respond(HttpStatusCode.InternalServerError, problem)
@@ -108,3 +109,5 @@ fun Application.apiConfig() {
         }
     }
 }
+
+private fun instanceTekst(call: ApplicationCall) = "dp-melding-om-vedtak" + call.request.path()
