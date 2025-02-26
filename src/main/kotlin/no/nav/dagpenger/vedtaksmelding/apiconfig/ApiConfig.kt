@@ -18,6 +18,7 @@ import io.ktor.server.response.respond
 import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
+import no.nav.dagpenger.vedtaksmelding.HentVedtakException
 import no.nav.dagpenger.vedtaksmelding.metrics.metrics
 import org.slf4j.event.Level
 import java.net.URI
@@ -89,6 +90,9 @@ fun Application.apiConfig() {
                             type = URI.create("dagpenger.nav.no/saksbehandling:problem:bad-request").toString(),
                         )
                     call.respond(HttpStatusCode.BadRequest, problem)
+                }
+                is HentVedtakException -> {
+                    call.respond(cause.statusCode, cause.httpProblem)
                 }
 
                 else -> {

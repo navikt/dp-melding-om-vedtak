@@ -22,7 +22,7 @@ class SanityKlientMappingTest {
         runBlocking {
             SanityKlient(
                 sanityUrl = "http://locahost/sanity",
-                httpKlient = lagHttpKlient(engine = lageMockEngine(), SanityKlient.httpClientConfig),
+                httpKlient = lagHttpKlient(engine = lageMockEngine(), block = SanityKlient.httpClientConfig),
             ).hentOpplysningTekstIder(listOf(AVSLAG_INNLEDNING.brevblokkId)) shouldBe listOf(Prøvingsdato.opplysningTekstId)
         }
     }
