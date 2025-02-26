@@ -17,10 +17,11 @@ private val sikkerlogg = KotlinLogging.logger("tjenestekall")
 
 internal fun lagHttpKlient(
     engine: HttpClientEngine,
+    expectSucces: Boolean = true,
     block: HttpClientConfig<*>.() -> Unit = {},
 ): HttpClient {
     return HttpClient(engine) {
-        expectSuccess = true
+        expectSuccess = expectSucces
         install(ContentNegotiation) {
             jackson {
                 registerModule(JavaTimeModule())
