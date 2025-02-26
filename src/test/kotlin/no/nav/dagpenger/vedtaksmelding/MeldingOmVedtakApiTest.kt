@@ -18,6 +18,7 @@ import io.mockk.mockk
 import io.mockk.slot
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
+import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakResponseDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
@@ -193,31 +194,6 @@ class MeldingOmVedtakApiTest {
     @Test
     fun `Skal returnere en html ved bruk av melding-om-vedtak {behandlingId} vedtakshtml`() {
         val behandlingId = UUID.randomUUID()
-        val requestBody =
-            """
-            {
-                "fornavn": "Test ForNavn",
-                "etternavn": "Test EtterNavn",
-                "fodselsnummer": "12345678901",
-                "saksbehandler": {
-                    "fornavn": "Ola",
-                    "etternavn": "Nordmann",
-                    "enhet": {
-                        "navn": "Enhet Navn",
-                        "postadresse": "Postadresse 123"
-                    }
-                },
-                "beslutter": {
-                    "fornavn": "Kari",
-                    "etternavn": "Nordmann",
-                    "enhet": {
-                        "navn": "Enhet Navn",
-                        "postadresse": "Postadresse 123"
-                    }
-                }
-            }
-            """.trimIndent()
-
         val mediator =
             mockk<Mediator>().also {
                 coEvery {
@@ -308,6 +284,80 @@ class MeldingOmVedtakApiTest {
             }
         }
     }
+
+    @Test
+    fun `Skal sende videre httpProblem fra dp-behandling ved feil`() {
+        val behandlingId = UUID.randomUUID()
+        val mediator =
+            mockk<Mediator>().also {
+                coEvery {
+                    it.hentVedtak(
+                        behandlingId,
+                        any(),
+                        any(),
+                    )
+                } throws
+                    HentVedtakException(
+                        HttpStatusCode.InternalServerError,
+                        HttpProblemDTO(
+                            "dagpenger.nav.no/saksbehandling:problem:uhåndtert-feil",
+                            "Uhåndtert feil",
+                            500,
+                            "detail",
+                            "/melding-om-vedtak/$behandlingId/html",
+                        ),
+                    )
+            }
+        testApplication {
+            application {
+                meldingOmVedtakApi(mediator)
+            }
+
+            client.post("/melding-om-vedtak/$behandlingId/html") {
+                autentisert(token = saksbehandlerToken)
+                header(HttpHeaders.ContentType, ContentType.Application.Json)
+                setBody(requestBody)
+            }.let { response ->
+                response.status shouldBe HttpStatusCode.InternalServerError
+                response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
+                    //language=JSON
+                    """
+                     {
+                    "type" : "dagpenger.nav.no/saksbehandling:problem:uhåndtert-feil",
+                    "title" : "Uhåndtert feil",
+                    "status" : 500,
+                    "detail" : "detail",
+                    "instance" : "/melding-om-vedtak/$behandlingId/html"
+                    }
+                    """.trimIndent()
+            }
+        }
+    }
+
+    private val requestBody =
+        """
+        {
+            "fornavn": "Test ForNavn",
+            "etternavn": "Test EtterNavn",
+            "fodselsnummer": "12345678901",
+            "saksbehandler": {
+                "fornavn": "Ola",
+                "etternavn": "Nordmann",
+                "enhet": {
+                    "navn": "Enhet Navn",
+                    "postadresse": "Postadresse 123"
+                }
+            },
+            "beslutter": {
+                "fornavn": "Kari",
+                "etternavn": "Nordmann",
+                "enhet": {
+                    "navn": "Enhet Navn",
+                    "postadresse": "Postadresse 123"
+                }
+            }
+        }
+        """.trimIndent()
 
     private fun HttpRequestBuilder.autentisert(token: String) {
         header(HttpHeaders.Authorization, "Bearer $token")

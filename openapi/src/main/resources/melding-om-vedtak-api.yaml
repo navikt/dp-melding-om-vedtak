@@ -3,11 +3,18 @@ info:
   title: Melding om vedtak API
   version: 1.0.0
   description: Et API for å hente ut brevblokker som utgjør melding om vedtak.
+servers:
+  - url: https://dp-melding-om-vedtak.intern.dev.nav.no
+    description: dev
+  - url: https://dp-melding-om-vedtak.intern.nav.no
+    description: prod
 paths:
   /melding-om-vedtak/{behandlingId}/html:
     post:
       summary: Hent vedtak som HTML for en gitt behandlingId
       description: Henter HTML for en gitt behandlingId. Henter alltid nyeste Sanity innhold og behandling
+      security:
+        - azureAd: [ ]
       parameters:
         - name: behandlingId
           in: path
@@ -40,6 +47,8 @@ paths:
     post:
       summary: Hent vedtaks HTML for en gitt behandlingId
       description: Henter vedtaksHTML for en gitt behandlingId, bruker garantert samme Sanity innhold som da sa
+      security:
+        - azureAd: [ ]
       parameters:
         - name: behandlingId
           in: path
@@ -75,6 +84,8 @@ paths:
   /melding-om-vedtak/{behandlingId}/{brevblokkId}/utvidet-beskrivelse:
     put:
       summary: Lagrer utvidet beskrivelse for en gitt brevblokk i meldingen om vedtak
+      security:
+        - azureAd: [ ]
       parameters:
         - in: path
           name: behandlingId
