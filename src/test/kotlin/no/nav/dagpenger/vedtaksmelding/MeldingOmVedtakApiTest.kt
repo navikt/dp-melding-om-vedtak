@@ -295,6 +295,17 @@ class MeldingOmVedtakApiTest {
                 setBody(requestBody)
             }.let { response ->
                 response.status shouldBe HttpStatusCode.InternalServerError
+                response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
+                    //language=JSON
+                    """
+                     {
+                    "type" : "dagpenger.nav.no/saksbehandling:problem:uhåndtert-feil",
+                    "title" : "Uhåndtert feil",
+                    "status" : 500,
+                    "detail" : "Failed to convert request body to class no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO",
+                    "instance" : "/melding-om-vedtak/$behandlingId/html"
+                    }
+                    """.trimIndent()
             }
         }
     }
