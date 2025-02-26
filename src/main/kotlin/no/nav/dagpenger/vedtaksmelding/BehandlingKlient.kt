@@ -8,13 +8,16 @@ import io.ktor.client.request.header
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpStatusCode
 import mu.KotlinLogging
+import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import java.util.UUID
 
 private val sikkerlogg = KotlinLogging.logger("tjenestekall")
+private val log = KotlinLogging.logger { }
 
 interface BehandlingKlient {
     suspend fun hentVedtak(
@@ -26,7 +29,7 @@ interface BehandlingKlient {
 internal class BehandlingHttpKlient(
     private val dpBehandlingApiUrl: String,
     private val tokenProvider: (String) -> String,
-    private val httpClient: HttpClient = lagHttpKlient(engine = CIO.create { }),
+    private val httpClient: HttpClient = lagHttpKlient(engine = CIO.create { }, expectSucces = false),
 ) : BehandlingKlient {
     private suspend fun hentVedtakJson(
         behandlingId: UUID,
@@ -35,9 +38,19 @@ internal class BehandlingHttpKlient(
         return httpClient.get(urlString = "$dpBehandlingApiUrl/$behandlingId/vedtak") {
             header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(saksbehandler.token)}")
             accept(ContentType.Application.Json)
-        }.bodyAsText().let { vedtak ->
-            sikkerlogg.info { "Hentet vedtak for behandling $behandlingId: $vedtak" }
-            Result.success(vedtak)
+        }.let { response ->
+            val responseTekst = response.bodyAsText()
+            when (response.status == HttpStatusCode.OK) {
+                true -> {
+                    sikkerlogg.info { "Hentet vedtak for behandling $behandlingId $responseTekst" }
+                    Result.success(responseTekst)
+                }
+
+                false -> {
+                    log.error { "Feil ved henting av vedtak for behandling $behandlingId: $responseTekst" }
+                    Result.failure(HentVedtakException(response.status, responseTekst.tilHttpProblem(response.status)))
+                }
+            }
         }
     }
 
@@ -48,3 +61,18 @@ internal class BehandlingHttpKlient(
         return hentVedtakJson(behandlingId, saksbehandler).map { VedtakMapper(it).vedtak() }
     }
 }
+
+private fun String.tilHttpProblem(status: HttpStatusCode): HttpProblemDTO {
+    return try {
+        Configuration.objectMapper.readValue(this, HttpProblemDTO::class.java)
+    } catch (e: Exception) {
+        HttpProblemDTO(
+            type = "Ukjent",
+            title = "Ukjent feil ved kall mot dp-behandling",
+            status = status.value,
+            detail = this,
+        )
+    }
+}
+
+internal class HentVedtakException(val statusCode: HttpStatusCode, val httpProblem: HttpProblemDTO) : RuntimeException()

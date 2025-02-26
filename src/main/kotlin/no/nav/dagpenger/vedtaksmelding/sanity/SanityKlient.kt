@@ -18,7 +18,7 @@ private val log = KotlinLogging.logger { }
 
 class SanityKlient(
     private val sanityUrl: String,
-    private val httpKlient: HttpClient = lagHttpKlient(engine = CIO.create { }, httpClientConfig),
+    private val httpKlient: HttpClient = lagHttpKlient(engine = CIO.create { }, block = httpClientConfig),
 ) {
     companion object {
         val httpClientConfig: HttpClientConfig<*>.() -> Unit = {
