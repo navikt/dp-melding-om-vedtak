@@ -39,7 +39,6 @@ class MeldingOmVedtakApiTest {
                     "NAVident" to testNavIdent,
                 ),
         )
-    private val saksbehandler = Saksbehandler(saksbehandlerToken)
     private val behandlingId = UUIDv7.ny()
 
     @Test
@@ -303,7 +302,7 @@ class MeldingOmVedtakApiTest {
                     "title" : "Uhåndtert feil",
                     "status" : 500,
                     "detail" : "Failed to convert request body to class no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO",
-                    "instance" : "/melding-om-vedtak/$behandlingId/html"
+                    "instance" : "dp-melding-om-vedtak/melding-om-vedtak/$behandlingId/html"
                     }
                     """.trimIndent()
             }
