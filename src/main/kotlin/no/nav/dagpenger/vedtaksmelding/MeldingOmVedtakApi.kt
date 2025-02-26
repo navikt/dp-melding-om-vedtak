@@ -9,7 +9,6 @@ import io.ktor.server.request.receive
 import io.ktor.server.request.receiveText
 import io.ktor.server.response.respond
 import io.ktor.server.routing.RoutingContext
-import io.ktor.server.routing.get
 import io.ktor.server.routing.post
 import io.ktor.server.routing.put
 import io.ktor.server.routing.routing
@@ -21,10 +20,8 @@ import no.nav.dagpenger.vedtaksmelding.apiconfig.apiConfig
 import no.nav.dagpenger.vedtaksmelding.apiconfig.jwt
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import java.util.UUID
 
-private val sikkerlogger = KotlinLogging.logger("tjenestekall")
 private val logger = KotlinLogging.logger {}
 
 fun Application.meldingOmVedtakApi(mediator: Mediator) {
@@ -46,7 +43,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                         call.respond(meldingOmVedtakResponseDTO)
                     }.onFailure { t ->
                         logger.error(t) { "Feil ved henting av vedtaksmelding som html (hentVedtak). BehandlingId: $behandlingId" }
-                        call.respond(HttpStatusCode.InternalServerError)
+                        throw t
                     }
                 }
             }
@@ -65,7 +62,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                         call.respond(vedtaksHtml)
                     }.onFailure { t ->
                         logger.error(t) { "Feil ved henting av vedtaksmelding som html (hentEndeligVedtak). BehandlingId: $behandlingId" }
-                        call.respond(HttpStatusCode.InternalServerError)
+                        throw t
                     }
                 }
             }
@@ -101,28 +98,5 @@ private fun ApplicationCall.parseUUID(): UUID {
 private fun RoutingContext.requirePlainText() {
     require(call.request.headers["Content-Type"]!!.contains(ContentType.Text.Plain.toString())) {
         "Content-Type må være ${ContentType.Text.Plain}, men var ${call.request.headers["Content-Type"]}"
-    }
-}
-
-private fun Opplysning.mapDatatype(): String {
-    return when (this.datatype) {
-        Opplysning.Datatype.TEKST -> "tekst"
-        Opplysning.Datatype.HELTALL -> {
-            when (this.enhet) {
-                Opplysning.Enhet.KRONER -> "penger"
-                Opplysning.Enhet.BARN -> "barn"
-                else -> "heltall"
-            }
-        }
-
-        Opplysning.Datatype.FLYTTALL -> {
-            when (this.enhet) {
-                Opplysning.Enhet.KRONER -> "penger"
-                else -> "desimaltall"
-            }
-        }
-
-        Opplysning.Datatype.DATO -> "dato"
-        Opplysning.Datatype.BOOLSK -> "boolean"
     }
 }
