@@ -33,4 +33,6 @@ enum class VilkårTyper(val vilkårNavn: String) {
     LOVVALG(vilkårNavn = "Er omfattet av trygdelovgivningen i Norge"),
 
     PERMITTERING(vilkårNavn = "Oppfyller kravet til permittering"),
+
+    PERMITTERING_FISK(vilkårNavn = "Oppfyller kravet til permittering i fiskeindustrien"),
 }

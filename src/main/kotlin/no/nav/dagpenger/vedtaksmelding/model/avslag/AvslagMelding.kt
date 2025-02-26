@@ -12,6 +12,7 @@ import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.MEDLEMSKAP
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.OPPHOLD_I_NORGE
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.PERMITTERING
+import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.PERMITTERING_FISK
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.REELL_ARBEIDSSØKER
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.REELL_ARBEIDSSØKER_ARBEIDSFØR
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.REELL_ARBEIDSSØKER_ETHVERT_ARBEID
@@ -75,13 +76,14 @@ class AvslagMelding(
                 IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT,
                 MEDLEMSKAP,
                 PERMITTERING,
+                PERMITTERING_FISK,
             ).any { vilkår ->
                 vedtak.vilkår.ikkeOppfylt(vilkår)
             }
 
     init {
         require(this.harBrevstøtte) {
-            throw ManglerBrevstøtte("Avslag for behandling ${this.vedtak.behandlingId} mangler brevstøtte")
+            throw ManglerBrevstøtte("Avslag for behandling ${this.vedtak.behandlingId}. Mangler brevstøtte.")
         }
     }
 
@@ -278,19 +280,19 @@ class AvslagMelding(
     }
 
     private fun blokkerAvslagPermittering(): List<String> {
-        return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == PERMITTERING.vilkårNavn && vilkår.status == IKKE_OPPFYLT
-        }
-            ?.let {
+        return when (avslåttPermittering()) {
+            true ->
                 listOf(
                     AVSLAG_PERMITTERT_DEL_1.brevblokkId,
                     AVSLAG_PERMITTERT_DEL_2.brevblokkId,
                 )
-            } ?: emptyList()
+            false -> emptyList()
+        }
     }
 
     private fun avslåttPermittering(): Boolean =
         vedtak.vilkår.any { vilkår ->
-            vilkår.navn == PERMITTERING.vilkårNavn && vilkår.status == IKKE_OPPFYLT
+            (vilkår.navn == PERMITTERING.vilkårNavn && vilkår.status == IKKE_OPPFYLT) ||
+                (vilkår.navn == PERMITTERING_FISK.vilkårNavn && vilkår.status == IKKE_OPPFYLT)
         }
 }
