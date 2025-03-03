@@ -8,11 +8,14 @@ import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.KravTilProsentvisTa
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ProsentvisTaptArbeidstid
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.PERMITTERING_FISK
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.TAPT_ARBEIDSTID
+import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.TAPT_ARBEIDSTID_ELLER_ARBEIDSINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_FASTSATT_VANLIG_ARBEDSTID_0
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.TIMER
@@ -56,7 +59,7 @@ class AvslagMeldingTaptArbeidstidTest {
     }
 
     @Test
-    fun `Riktige brevblokker for avslag arbeidstid når fastsatt vanlig arbeidstid er større enn 0`() {
+    fun `Riktige brevblokker for avslag arbeidstid når fastsatt vanlig arbeidstid er større enn 0 og rettighet er ordinær`() {
         val behandlingId = UUIDv7.ny()
         val arbeidstidIkkeOppfylt =
             Vilkår(
@@ -87,6 +90,45 @@ class AvslagMeldingTaptArbeidstidTest {
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_DEL_1.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_DEL_2.brevblokkId,
+            ) + VedtakMelding.fasteAvsluttendeBlokker
+    }
+
+    @Test
+    fun `Riktige brevblokker for avslag arbeidstid når fastsatt vanlig arbeidstid er større enn 0 og rettighet er permittering fisk`() {
+        val behandlingId = UUIDv7.ny()
+        val arbeidstidIkkeOppfylt =
+            Vilkår(
+                navn = TAPT_ARBEIDSTID.vilkårNavn,
+                status = Vilkår.Status.IKKE_OPPFYLT,
+            )
+        val permitteringFiskVilkår =
+            Vilkår(
+                navn = PERMITTERING_FISK.vilkårNavn,
+                status = Vilkår.Status.OPPFYLT,
+            )
+
+        AvslagMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = setOf(arbeidstidIkkeOppfylt, permitteringFiskVilkår),
+                    utfall = Utfall.AVSLÅTT,
+                    opplysninger =
+                        setOf(
+                            Opplysning(
+                                opplysningTekstId = FastsattVanligArbeidstidPerUke.opplysningTekstId,
+                                råVerdi = "37.5",
+                                datatype = FLYTTALL,
+                                enhet = TIMER,
+                            ),
+                        ),
+                    fagsakId = "fagsakId test",
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe
+            listOf(
+                AVSLAG_INNLEDNING.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK.brevblokkId,
             ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 
@@ -179,13 +221,13 @@ private val json =
       "behandletAv": [],
       "vilkår": [
         {
-          "navn": "Tap av arbeidstid er minst terskel",
+          "navn": "${TAPT_ARBEIDSTID.vilkårNavn}",
           "status": "IkkeOppfylt",
           "vurderingstidspunkt": "2025-01-21T11:06:58.171429",
           "hjemmel": "folketrygdloven § 4-3"
         },
         {
-          "navn": "Krav til tap av arbeidsinntekt og arbeidstid",
+          "navn": "${TAPT_ARBEIDSTID_ELLER_ARBEIDSINNTEKT.vilkårNavn}",
           "status": "IkkeOppfylt",
           "vurderingstidspunkt": "2025-01-21T11:06:58.212861",
           "hjemmel": "folketrygdloven § 4-3"
