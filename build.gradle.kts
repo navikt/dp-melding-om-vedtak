@@ -26,7 +26,7 @@ dependencies {
     implementation(libs.ktor.client.logging.jvm)
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:1.9.0")
 
-    val kotlinxHtmlVersion = "0.11.0"
+    val kotlinxHtmlVersion = "0.12.0"
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinxHtmlVersion")
 
     testImplementation("io.kotest:kotest-assertions-json:${libs.versions.kotest.get()}")
