@@ -14,7 +14,8 @@ enum class AvslagBrevblokker(val brevblokkId: String) {
     AVSLAG_STREIK_LOCKOUT_DEL_1(brevblokkId = "brev.blokk.avslag-streik-lockout-del-1"),
     AVSLAG_STREIK_LOCKOUT_DEL_2(brevblokkId = "brev.blokk.avslag-streik-lockout-del-2"),
 
-    AVSLAG_TAPT_ARBEIDSTID(brevblokkId = "brev.blokk.avslag-tapt-arbeidstid"),
+    AVSLAG_TAPT_ARBEIDSTID_DEL_1(brevblokkId = "brev.blokk.avslag-tapt-arbeidstid-del-1"),
+    AVSLAG_TAPT_ARBEIDSTID_DEL_2(brevblokkId = "brev.blokk.avslag-tapt-arbeidstid-del-2"),
     AVSLAG_TAPT_ARBEIDSTID_FASTSATT_VANLIG_ARBEDSTID_0(brevblokkId = "brev.blokk.avslag-tapt-arbeidstid-fastsatt-vanlig-arbeidstid-0"),
 
     AVSLAG_TAPT_ARBEIDSINNTEKT(brevblokkId = "brev.blokk.avslag-tapt-arbeidsinntekt"),
