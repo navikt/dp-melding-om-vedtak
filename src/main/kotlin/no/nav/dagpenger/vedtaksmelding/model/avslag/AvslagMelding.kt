@@ -47,6 +47,7 @@ import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAP
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_FASTSATT_VANLIG_ARBEDSTID_0
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTDANNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT_HJEMMEL
@@ -92,7 +93,7 @@ class AvslagMelding(
         any { vilkår -> vilkår.navn == avslagsvilkår.vilkårNavn && vilkår.status == IKKE_OPPFYLT }
 
     private val innledendeBrevblokk =
-        when (avslåttPermittering()) {
+        when (avslåttPermittering() || avslåttPermitteringFisk()) {
             true -> listOf(AVSLAG_INNLEDNING_PERMITTERT.brevblokkId)
             false -> listOf(AVSLAG_INNLEDNING.brevblokkId)
         }
@@ -100,6 +101,7 @@ class AvslagMelding(
         get() {
             return innledendeBrevblokk +
                 blokkerAvslagPermittering() +
+                blokkerAvslagPermitteringFisk() +
                 blokkerAvslagMinsteinntekt() +
                 blokkerAvslagAlder() +
                 blokkerAvslagTaptArbeidsinntekt() +
@@ -161,7 +163,16 @@ class AvslagMelding(
                             opplysning.råVerdi().toDouble() > 0.0
                     }
                 ) {
-                    true -> listOf(AVSLAG_TAPT_ARBEIDSTID_DEL_1.brevblokkId, AVSLAG_TAPT_ARBEIDSTID_DEL_2.brevblokkId)
+                    true ->
+                        when (gjelderPermitteringFisk()) {
+                            true -> listOf(AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK.brevblokkId)
+                            false ->
+                                listOf(
+                                    AVSLAG_TAPT_ARBEIDSTID_DEL_1.brevblokkId,
+                                    AVSLAG_TAPT_ARBEIDSTID_DEL_2.brevblokkId,
+                                )
+                        }
+
                     false -> listOf(AVSLAG_TAPT_ARBEIDSTID_FASTSATT_VANLIG_ARBEDSTID_0.brevblokkId)
                 }
             else -> emptyList()
@@ -287,13 +298,28 @@ class AvslagMelding(
                     AVSLAG_PERMITTERT_DEL_1.brevblokkId,
                     AVSLAG_PERMITTERT_DEL_2.brevblokkId,
                 )
+
+            false -> emptyList()
+        }
+    }
+
+    private fun blokkerAvslagPermitteringFisk(): List<String> {
+        return when (avslåttPermitteringFisk()) {
+            true ->
+                listOf(
+                    AVSLAG_PERMITTERT_DEL_1.brevblokkId,
+                    AVSLAG_PERMITTERT_DEL_2.brevblokkId,
+                )
+
             false -> emptyList()
         }
     }
 
     private fun avslåttPermittering(): Boolean =
-        vedtak.vilkår.any { vilkår ->
-            (vilkår.navn == PERMITTERING.vilkårNavn && vilkår.status == IKKE_OPPFYLT) ||
-                (vilkår.navn == PERMITTERING_FISK.vilkårNavn && vilkår.status == IKKE_OPPFYLT)
-        }
+        vedtak.vilkår.any { vilkår -> vilkår.navn == PERMITTERING.vilkårNavn && vilkår.status == IKKE_OPPFYLT }
+
+    private fun avslåttPermitteringFisk(): Boolean =
+        vedtak.vilkår.any { vilkår -> vilkår.navn == PERMITTERING_FISK.vilkårNavn && vilkår.status == IKKE_OPPFYLT }
+
+    private fun gjelderPermitteringFisk(): Boolean = vedtak.vilkår.any { vilkår -> vilkår.navn == PERMITTERING_FISK.vilkårNavn }
 }

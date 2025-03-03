@@ -27,6 +27,7 @@ import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_STR
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTDANNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT_HJEMMEL
@@ -120,8 +121,7 @@ class AvslagMeldingAlleVilkårTest {
                 AVSLAG_MINSTEINNTEKT.brevblokkId,
                 AVSLAG_ALDER.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSINNTEKT.brevblokkId,
-                AVSLAG_TAPT_ARBEIDSTID_DEL_1.brevblokkId,
-                AVSLAG_TAPT_ARBEIDSTID_DEL_2.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK.brevblokkId,
                 AVSLAG_MEDLEMSKAP_DEL_1.brevblokkId,
                 AVSLAG_MEDLEMSKAP_DEL_2.brevblokkId,
                 AVSLAG_UTESTENGT.brevblokkId,
