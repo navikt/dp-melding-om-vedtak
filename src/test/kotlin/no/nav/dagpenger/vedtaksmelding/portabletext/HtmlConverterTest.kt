@@ -9,7 +9,7 @@ import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.sanity.ResultDTO
 import no.nav.dagpenger.vedtaksmelding.util.finnUtvidetBeskrivelseNode
@@ -46,7 +46,7 @@ class HtmlConverterTest {
     }
 
     @Test
-    fun `Skal sanitisere og legge inn utvidede beskrivelse i HTML som blir laget`() {
+    fun `Skal sanitisere og legge inn utvidede beskrivelser i HTML som blir laget`() {
         val sanityTekster =
             "/json/sanity.json".readFile().let {
                 objectMapper.readValue(it, ResultDTO::class.java)
@@ -63,7 +63,7 @@ class HtmlConverterTest {
                         setOf(
                             UtvidetBeskrivelse(
                                 behandlingId = UUIDv7.ny(),
-                                brevblokkId = AVSLAG_MINSTEINNTEKT.brevblokkId,
+                                brevblokkId = AVSLAG_MINSTEINNTEKT_DEL_1.brevblokkId,
                                 tekst =
                                     """Dette er en test linje med <, > og &
 Dette er linje 2
@@ -76,8 +76,8 @@ Dette er linje 4
                             ),
                         ),
                 )
-            } finnUtvidetBeskrivelseNode AVSLAG_MINSTEINNTEKT.brevblokkId shouldBe
-            """<p data-utvidet-beskrivelse-id="brev.blokk.begrunnelse-avslag-minsteinntekt">Dette er en test linje med &lt;, &gt; og &amp;<br>Dette er linje 2<br> <br>Dette er linje 3<br><br><br>Dette er linje 4</p>"""
+            } finnUtvidetBeskrivelseNode AVSLAG_MINSTEINNTEKT_DEL_1.brevblokkId shouldBe
+            """<p data-utvidet-beskrivelse-id="brev.blokk.avslag-minsteinntekt-del-1">Dette er en test linje med &lt;, &gt; og &amp;<br>Dette er linje 2<br> <br>Dette er linje 3<br><br><br>Dette er linje 4</p>"""
     }
 
     private val meldingOmVedtakDTO =

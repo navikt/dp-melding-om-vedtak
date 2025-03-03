@@ -4,7 +4,8 @@ enum class AvslagBrevblokker(val brevblokkId: String) {
     AVSLAG_INNLEDNING(brevblokkId = "brev.blokk.vedtak-avslag"),
     AVSLAG_INNLEDNING_PERMITTERT(brevblokkId = "brev.blokk.vedtak-avslag-permittert"),
 
-    AVSLAG_MINSTEINNTEKT(brevblokkId = "brev.blokk.begrunnelse-avslag-minsteinntekt"),
+    AVSLAG_MINSTEINNTEKT_DEL_1(brevblokkId = "brev.blokk.avslag-minsteinntekt-del-1"),
+    AVSLAG_MINSTEINNTEKT_DEL_2(brevblokkId = "brev.blokk.avslag-minsteinntekt-del-2"),
 
     AVSLAG_OPPHOLD_UTLAND_DEL_1(brevblokkId = "brev.blokk.avslag-opphold-utlandet-del-1"),
     AVSLAG_OPPHOLD_UTLAND_DEL_2(brevblokkId = "brev.blokk.avslag-opphold-utlandet-del-2"),
