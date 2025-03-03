@@ -16,7 +16,8 @@ import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.RETT
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.SPØRSMÅL
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.VEILEDNING_FRA_NAV
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagMelding
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
@@ -113,7 +114,7 @@ class VedtakHtmlTest {
                         setOf(
                             UtvidetBeskrivelse(
                                 behandlingId = UUIDv7.ny(),
-                                brevblokkId = AVSLAG_MINSTEINNTEKT.brevblokkId,
+                                brevblokkId = AVSLAG_MINSTEINNTEKT_DEL_1.brevblokkId,
                                 tekst = "noe saksbehandler har skrevet",
                                 sistEndretTidspunkt = LocalDateTime.now(),
                                 tittel = "Dette er en tittel",
@@ -124,7 +125,8 @@ class VedtakHtmlTest {
             htmlInnhold brevblokkRekkefølgeShouldBe
                 listOf(
                     AVSLAG_INNLEDNING.brevblokkId,
-                    AVSLAG_MINSTEINNTEKT.brevblokkId,
+                    AVSLAG_MINSTEINNTEKT_DEL_1.brevblokkId,
+                    AVSLAG_MINSTEINNTEKT_DEL_2.brevblokkId,
                     RETT_TIL_INNSYN.brevBlokkId,
                     PERSONOPPLYSNINGER.brevBlokkId,
                     HJELP_FRA_ANDRE.brevBlokkId,
@@ -133,7 +135,7 @@ class VedtakHtmlTest {
                     SPØRSMÅL.brevBlokkId,
                 )
 
-            htmlInnhold finnUtvidetBeskrivelseTekst AVSLAG_MINSTEINNTEKT.brevblokkId shouldBe "noe saksbehandler har skrevet"
+            htmlInnhold finnUtvidetBeskrivelseTekst AVSLAG_MINSTEINNTEKT_DEL_1.brevblokkId shouldBe "noe saksbehandler har skrevet"
 
             writeStringToFile(
                 filePath = "build/temp/avslag-minsteinntekt.html",
