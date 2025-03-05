@@ -30,9 +30,9 @@ spec:
         - application: dp-saksbehandling-frontend
         {{#if wonderwalled}}
         - application: wonderwalled-azure
-          namespace: aura
+          namespace: nais
         - application: azure-token-generator
-          namespace: aura
+          namespace: nais
         {{/if}}
     outbound:
       external:
