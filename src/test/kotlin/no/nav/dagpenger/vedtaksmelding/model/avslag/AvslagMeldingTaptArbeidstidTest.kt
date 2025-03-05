@@ -59,7 +59,7 @@ class AvslagMeldingTaptArbeidstidTest {
     }
 
     @Test
-    fun `Riktige brevblokker for avslag arbeidstid når fastsatt vanlig arbeidstid er større enn 0 og rettighet er ordinær`() {
+    fun `Riktige brevblokker for avslag arbeidstid ved ordinær rettighet`() {
         val behandlingId = UUIDv7.ny()
         val arbeidstidIkkeOppfylt =
             Vilkår(
@@ -81,6 +81,17 @@ class AvslagMeldingTaptArbeidstidTest {
                                 datatype = FLYTTALL,
                                 enhet = TIMER,
                             ),
+                            Opplysning(
+                                opplysningTekstId = FastsattNyArbeidstidPerUke.opplysningTekstId,
+                                råVerdi = "20.5",
+                                datatype = FLYTTALL,
+                                enhet = TIMER,
+                            ),
+                            Opplysning(
+                                opplysningTekstId = ProsentvisTaptArbeidstid.opplysningTekstId,
+                                råVerdi = "45.333333",
+                                datatype = FLYTTALL,
+                            ),
                         ),
                     fagsakId = "fagsakId test",
                 ),
@@ -94,7 +105,7 @@ class AvslagMeldingTaptArbeidstidTest {
     }
 
     @Test
-    fun `Riktige brevblokker for avslag arbeidstid når fastsatt vanlig arbeidstid er større enn 0 og rettighet er permittering fisk`() {
+    fun `Riktige brevblokker for avslag arbeidstid ved rettighet permittering fisk`() {
         val behandlingId = UUIDv7.ny()
         val arbeidstidIkkeOppfylt =
             Vilkår(
@@ -120,6 +131,17 @@ class AvslagMeldingTaptArbeidstidTest {
                                 råVerdi = "37.5",
                                 datatype = FLYTTALL,
                                 enhet = TIMER,
+                            ),
+                            Opplysning(
+                                opplysningTekstId = FastsattNyArbeidstidPerUke.opplysningTekstId,
+                                råVerdi = "20.5",
+                                datatype = FLYTTALL,
+                                enhet = TIMER,
+                            ),
+                            Opplysning(
+                                opplysningTekstId = ProsentvisTaptArbeidstid.opplysningTekstId,
+                                råVerdi = "45.333333",
+                                datatype = FLYTTALL,
                             ),
                         ),
                     fagsakId = "fagsakId test",
@@ -185,6 +207,40 @@ class AvslagMeldingTaptArbeidstidTest {
                         setOf(
                             Opplysning(
                                 opplysningTekstId = FastsattVanligArbeidstidPerUke.opplysningTekstId,
+                                råVerdi = "-0.5",
+                                datatype = FLYTTALL,
+                                enhet = TIMER,
+                            ),
+                        ),
+                    fagsakId = "fagsakId test",
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe
+            listOf(
+                AVSLAG_INNLEDNING.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID_FASTSATT_VANLIG_ARBEDSTID_0.brevblokkId,
+            ) + VedtakMelding.fasteAvsluttendeBlokker
+    }
+
+    @Test
+    fun `Riktige brevblokker for avslag arbeidstid når prosentvis tapt arbeidstid er mindre enn 0`() {
+        val behandlingId = UUIDv7.ny()
+        val arbeidstidIkkeOppfylt =
+            Vilkår(
+                navn = TAPT_ARBEIDSTID.vilkårNavn,
+                status = Vilkår.Status.IKKE_OPPFYLT,
+            )
+
+        AvslagMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = setOf(arbeidstidIkkeOppfylt),
+                    utfall = Utfall.AVSLÅTT,
+                    opplysninger =
+                        setOf(
+                            Opplysning(
+                                opplysningTekstId = ProsentvisTaptArbeidstid.opplysningTekstId,
                                 råVerdi = "-0.5",
                                 datatype = FLYTTALL,
                                 enhet = TIMER,
