@@ -1,6 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FastsattVanligArbeidstidPerUke
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ProsentvisTaptArbeidstid
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.IKKE_ANDRE_FULLE_YTELSER
@@ -162,7 +163,11 @@ class AvslagMelding(
                     vedtak.opplysninger.any { opplysning ->
                         opplysning.opplysningTekstId == FastsattVanligArbeidstidPerUke.opplysningTekstId &&
                             opplysning.råVerdi().toDouble() > 0.0
-                    }
+                    } &&
+                        vedtak.opplysninger.any { opplysning ->
+                            opplysning.opplysningTekstId == ProsentvisTaptArbeidstid.opplysningTekstId &&
+                                opplysning.råVerdi().toDouble() >= 0.0
+                        }
                 ) {
                     true ->
                         when (gjelderPermitteringFisk()) {
@@ -176,6 +181,7 @@ class AvslagMelding(
 
                     false -> listOf(AVSLAG_TAPT_ARBEIDSTID_FASTSATT_VANLIG_ARBEDSTID_0.brevblokkId)
                 }
+
             else -> emptyList()
         }
     }
