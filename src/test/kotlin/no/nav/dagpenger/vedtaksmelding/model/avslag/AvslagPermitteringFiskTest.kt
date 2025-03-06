@@ -5,7 +5,7 @@ import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.PERMITTERING_FISK
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING_PERMITTERT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING_PERMITTERT_FISK
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_PERMITTERT_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_PERMITTERT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
@@ -37,7 +37,7 @@ class AvslagPermitteringFiskTest {
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
-                AVSLAG_INNLEDNING_PERMITTERT.brevblokkId,
+                AVSLAG_INNLEDNING_PERMITTERT_FISK.brevblokkId,
                 AVSLAG_PERMITTERT_DEL_1.brevblokkId,
                 AVSLAG_PERMITTERT_DEL_2.brevblokkId,
             ) + VedtakMelding.fasteAvsluttendeBlokker

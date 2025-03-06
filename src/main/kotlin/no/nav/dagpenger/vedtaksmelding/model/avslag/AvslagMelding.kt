@@ -27,6 +27,7 @@ import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ALD
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ANDRE_FULLE_YTELSER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING_PERMITTERT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING_PERMITTERT_FISK
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MEDLEMSKAP_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MEDLEMSKAP_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_DEL_1
@@ -95,9 +96,10 @@ class AvslagMelding(
         any { vilkår -> vilkår.navn == avslagsvilkår.vilkårNavn && vilkår.status == IKKE_OPPFYLT }
 
     private val innledendeBrevblokk =
-        when (avslåttPermittering() || avslåttPermitteringFisk()) {
-            true -> listOf(AVSLAG_INNLEDNING_PERMITTERT.brevblokkId)
-            false -> listOf(AVSLAG_INNLEDNING.brevblokkId)
+        when {
+            avslåttPermittering() -> listOf(AVSLAG_INNLEDNING_PERMITTERT.brevblokkId)
+            avslåttPermitteringFisk() -> listOf(AVSLAG_INNLEDNING_PERMITTERT_FISK.brevblokkId)
+            else -> listOf(AVSLAG_INNLEDNING.brevblokkId)
         }
     override val brevBlokkIder: List<String>
         get() {

@@ -1,8 +1,9 @@
 package no.nav.dagpenger.vedtaksmelding.model.avslag
 
 enum class AvslagBrevblokker(val brevblokkId: String) {
-    AVSLAG_INNLEDNING(brevblokkId = "brev.blokk.vedtak-avslag"),
-    AVSLAG_INNLEDNING_PERMITTERT(brevblokkId = "brev.blokk.vedtak-avslag-permittert"),
+    AVSLAG_INNLEDNING(brevblokkId = "brev.blokk.avslag-ordinaer"),
+    AVSLAG_INNLEDNING_PERMITTERT(brevblokkId = "brev.blokk.avslag-permittert"),
+    AVSLAG_INNLEDNING_PERMITTERT_FISK(brevblokkId = "brev.blokk.avslag-permittert-fisk"),
 
     AVSLAG_MINSTEINNTEKT_DEL_1(brevblokkId = "brev.blokk.avslag-minsteinntekt-del-1"),
     AVSLAG_MINSTEINNTEKT_DEL_2(brevblokkId = "brev.blokk.avslag-minsteinntekt-del-2"),
