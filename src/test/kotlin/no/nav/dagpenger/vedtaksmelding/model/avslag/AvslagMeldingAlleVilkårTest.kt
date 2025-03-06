@@ -7,6 +7,7 @@ import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ALD
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_ANDRE_FULLE_YTELSER
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING_PERMITTERT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING_PERMITTERT_FISK
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MEDLEMSKAP_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MEDLEMSKAP_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_DEL_1
@@ -118,7 +119,7 @@ class AvslagMeldingAlleVilkårTest {
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
             listOf(
-                AVSLAG_INNLEDNING_PERMITTERT.brevblokkId,
+                AVSLAG_INNLEDNING_PERMITTERT_FISK.brevblokkId,
                 AVSLAG_PERMITTERT_DEL_1.brevblokkId,
                 AVSLAG_PERMITTERT_DEL_2.brevblokkId,
                 AVSLAG_MINSTEINNTEKT_DEL_1.brevblokkId,

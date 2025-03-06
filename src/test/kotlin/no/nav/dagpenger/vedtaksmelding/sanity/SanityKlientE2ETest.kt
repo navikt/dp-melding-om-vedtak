@@ -2,12 +2,11 @@ package no.nav.dagpenger.vedtaksmelding.sanity
 
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.Configuration
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.io.File
 
 class SanityKlientE2ETest {
-    @Disabled
+//    @Disabled
     @Test
     fun hentNyeBrevblokker() {
         runBlocking {
