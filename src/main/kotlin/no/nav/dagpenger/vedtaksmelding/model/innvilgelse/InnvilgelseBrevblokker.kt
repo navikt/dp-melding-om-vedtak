@@ -39,5 +39,6 @@ enum class InnvilgelseBrevblokker(val brevblokkId: String) {
 
     INNVILGELSE_PERMITTERT_FISK(brevblokkId = "brev.blokk.innvilgelse-permittert-fisk"),
     INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT_FISK(brevblokkId = "brev.blokk.begrunnelse-innvilgelsesdato-permittert-fisk"),
-    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_FISK(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert-fisk"),
+    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_1(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert-fisk-del-1"),
+    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_2(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert-fisk-del-2"),
 }
