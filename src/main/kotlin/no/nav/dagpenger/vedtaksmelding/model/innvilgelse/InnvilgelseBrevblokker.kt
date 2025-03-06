@@ -1,7 +1,9 @@
 package no.nav.dagpenger.vedtaksmelding.model.innvilgelse
 
 enum class InnvilgelseBrevblokker(val brevblokkId: String) {
-    INNVILGELSE_INNLEDNING(brevblokkId = "brev.blokk.vedtak-innvilgelse"),
+    INNVILGELSE_ORDINÆR(brevblokkId = "brev.blokk.innvilgelse-ordinaer"),
+    INNVILGELSE_MED_EGENANDEL(brevblokkId = "brev.blokk.innvilgelse-med-egenandel"),
+    INNVILGELSE_UTEN_EGENANDEL(brevblokkId = "brev.blokk.innvilgelse-uten-egenandel"),
     INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE(brevblokkId = "brev.blokk.begrunnelse-innvilgelsesdato"),
     INNVILGELSE_DAGPENGEPERIODE(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger"),
     INNVILGELSE_DAGPENGEPERIODE_VERNEPLIKT(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-verneplikt"),
@@ -29,9 +31,13 @@ enum class InnvilgelseBrevblokker(val brevblokkId: String) {
     INNVILGELSE_MELD_FRA_OM_ENDRINGER(brevblokkId = "brev.blokk.du-maa-melde-fra-om-endringer"),
     INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING(brevblokkId = "brev.blokk.konsekvenser-av-aa-gi-uriktige-eller-mangelfulle-opplysninger"),
 
-    INNVILGELSE_INNLEDNING_PERMITTERT(brevblokkId = "brev.blokk.vedtak-innvilgelse-permittert"),
+    INNVILGELSE_PERMITTERT(brevblokkId = "brev.blokk.innvilgelse-permittert"),
     INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT(brevblokkId = "brev.blokk.begrunnelse-innvilgelsesdato-permittert"),
     INNVILGELSE_DAGPENGEPERIODE_PERMITTERT(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert"),
     INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT(brevblokkId = "brev.blokk.arbeidsforhold-avslutt-permittert"),
     INNVILGELSE_HVA_SKJER_ETTER_PERMITTERINGEN(brevblokkId = "brev.blokk.hva-skjer-etter-permitteringen"),
+
+    INNVILGELSE_PERMITTERT_FISK(brevblokkId = "brev.blokk.innvilgelse-permittert-fisk"),
+    INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT_FISK(brevblokkId = "brev.blokk.begrunnelse-innvilgelsesdato-permittert-fisk"),
+    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_FISK(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert-fisk"),
 }

@@ -1,31 +1,28 @@
 package no.nav.dagpenger.vedtaksmelding.model.innvilgelse
 
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallPermitteringsuker
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallPermitteringsukerFisk
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallStønadsuker
-import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.Egenandel
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
-import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.PERMITTERING
+import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.PERMITTERING_FISK
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
-import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERT
-import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_EGENANDEL
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_FISK
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_HVA_SKJER_ETTER_PERMITTERINGEN
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING
-import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MED_EGENANDEL
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER
-import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_PERMITTERT
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_PERMITTERT_FISK
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SKATTEKORT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_STANS_ÅRSAKER
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_UTBETALING
-import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_UTEN_EGENANDEL
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT_FISK
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.UKER
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall
@@ -34,42 +31,41 @@ import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår.Status.OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
-class PermitteringTest {
-    private val innvilgelsePermittering = VedtakMapper(json).vedtak()
+class PermitteringFiskTest {
+    private val innvilgelsePermitteringFisk = VedtakMapper(json).vedtak()
 
     @Test
-    fun `Skal hente aktuelle opplysninger for innvilgelse som permittert`() {
-        innvilgelsePermittering.finnOpplysning(AntallPermitteringsuker.opplysningTekstId) shouldBe
+    fun `Skal hente aktuelle opplysninger for innvilgelse som permittert fra fiskeindustri`() {
+        innvilgelsePermitteringFisk.finnOpplysning(AntallPermitteringsukerFisk.opplysningTekstId) shouldBe
             Opplysning(
-                opplysningTekstId = AntallPermitteringsuker.opplysningTekstId,
-                råVerdi = "26",
+                opplysningTekstId = AntallPermitteringsukerFisk.opplysningTekstId,
+                råVerdi = "52",
                 datatype = HELTALL,
                 enhet = UKER,
             )
 
-        innvilgelsePermittering.finnOpplysning(AntallStønadsuker.opplysningTekstId) shouldBe
+        innvilgelsePermitteringFisk.finnOpplysning(AntallStønadsuker.opplysningTekstId) shouldBe
             Opplysning(
                 opplysningTekstId = AntallStønadsuker.opplysningTekstId,
-                råVerdi = "52",
+                råVerdi = "104",
                 datatype = HELTALL,
                 enhet = UKER,
             )
     }
 
     @Test
-    fun `Rikig brevblokker rekkefølge for innvilgelse med permittering`() {
+    fun `Rikig brevblokker rekkefølge for innvilgelse med permittering fra fiseindustri`() {
         val forventedeBrevblokkIder =
             listOf(
-                INNVILGELSE_PERMITTERT.brevblokkId,
-                INNVILGELSE_MED_EGENANDEL.brevblokkId,
-                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT.brevblokkId,
-                INNVILGELSE_DAGPENGEPERIODE_PERMITTERT.brevblokkId,
+                INNVILGELSE_PERMITTERT_FISK.brevblokkId,
+                INNVILGELSE_UTEN_EGENANDEL.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT_FISK.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_FISK.brevblokkId,
                 INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT.brevblokkId,
                 INNVILGELSE_HVA_SKJER_ETTER_PERMITTERINGEN.brevblokkId,
                 INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
                 INNVILGELSE_GRUNNLAG.brevblokkId,
                 INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
-                INNVILGELSE_EGENANDEL.brevblokkId,
                 INNVILGELSE_MELDEKORT.brevblokkId,
                 INNVILGELSE_UTBETALING.brevblokkId,
                 INNVILGELSE_SKATTEKORT.brevblokkId,
@@ -85,26 +81,18 @@ class PermitteringTest {
                     vilkår =
                         setOf(
                             Vilkår(
-                                navn = PERMITTERING.vilkårNavn,
+                                navn = PERMITTERING_FISK.vilkårNavn,
                                 status = OPPFYLT,
                             ),
                         ),
                     utfall = Utfall.INNVILGET,
-                    opplysninger = setOf(egenandel()),
+                    opplysninger = setOf(),
                     fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
 }
-
-private fun egenandel() =
-    Opplysning(
-        opplysningTekstId = Egenandel.opplysningTekstId,
-        råVerdi = "3000",
-        datatype = HELTALL,
-        enhet = KRONER,
-    )
 
 // language = JSON
 private val json =
@@ -227,7 +215,7 @@ private val json =
           "hjemmel": "§ 4-28. Utestengning"
         },
         {
-          "navn": "$PERMITTERING",
+          "navn": "${PERMITTERING_FISK.vilkårNavn}",
           "status": "Oppfylt",
           "vurderingstidspunkt": "2025-02-17T12:53:00.173115",
           "hjemmel": "§ 4-7. Dagpenger til permitterte"
@@ -256,17 +244,17 @@ private val json =
           {
             "navn": "Dagpengeperiode",
             "type": "uker",
-            "verdi": 52
+            "verdi": 104
           },
           {
             "navn": "Egenandel",
             "type": "beløp",
-            "verdi": 1491
+            "verdi": 0
           },
           {
-            "navn": "Permitteringsperiode",
+            "navn": "FiskePermitteringsperiode",
             "type": "uker",
-            "verdi": 26
+            "verdi": 52
           }
         ]
       },

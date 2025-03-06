@@ -2,6 +2,7 @@ package no.nav.dagpenger.vedtaksmelding.model.innvilgelse
 
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.Egenandel
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ErInnvilgetMedVerneplikt
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ForeldrepengerDagsats
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarSamordnet
@@ -14,6 +15,7 @@ import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.UføreDagsats
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.PERMITTERING
+import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.PERMITTERING_FISK
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN_VERNEPLIKT
@@ -25,12 +27,14 @@ import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG_VERNEPLIKT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_HVA_SKJER_ETTER_PERMITTERINGEN
-import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_INNLEDNING
-import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_INNLEDNING_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MED_EGENANDEL
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_NITTI_PROSENT_REGEL
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_PERMITTERT
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_PERMITTERT_FISK
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_FORELDREPENGER
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_GENERISK
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_OMSORGSPENGER
@@ -43,9 +47,11 @@ import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_STANS_ÅRSAKER
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_UTBETALING
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_UTEN_EGENANDEL
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VERNEPLIKT_GUNSTIGEST
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT_FISK
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.INNVILGET
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår.Status.OPPFYLT
@@ -67,7 +73,6 @@ class InnvilgelseMelding(
         get() {
             val avsluttendeBrevblokker =
                 listOf(
-                    INNVILGELSE_EGENANDEL.brevblokkId,
                     INNVILGELSE_MELDEKORT.brevblokkId,
                     INNVILGELSE_UTBETALING.brevblokkId,
                     INNVILGELSE_SKATTEKORT.brevblokkId,
@@ -76,15 +81,17 @@ class InnvilgelseMelding(
                     INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
                 )
             return innledning() +
+                medEllerUtenEgenandel() +
                 virkningsdato() +
                 dagpengeperiode() +
-                ekstrablokkerPermittert() +
+                ekstrablokkerPermittertOgPermittertFisk() +
                 listOf(INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId) +
                 barnetillegg() +
                 nittiProsentRegel() +
                 samordnet() +
                 grunnlag() +
                 arbeidstidenDin() +
+                egenandel() +
                 avsluttendeBrevblokker
         }
     override val brevBlokker: List<BrevBlokk> =
@@ -201,14 +208,36 @@ class InnvilgelseMelding(
 
     private fun innledning(): List<String> {
         return when {
-            erInnvilgetSomPermittert() -> listOf(INNVILGELSE_INNLEDNING_PERMITTERT.brevblokkId)
-            else -> listOf(INNVILGELSE_INNLEDNING.brevblokkId)
+            erInnvilgetSomPermittert() -> listOf(INNVILGELSE_PERMITTERT.brevblokkId)
+            erInnvilgetSomPermittertIFiskeindustri() -> listOf(INNVILGELSE_PERMITTERT_FISK.brevblokkId)
+            else -> listOf(INNVILGELSE_ORDINÆR.brevblokkId)
+        }
+    }
+
+    private fun medEllerUtenEgenandel(): List<String> {
+        return when {
+            vedtak.opplysninger.any {
+                it.opplysningTekstId == Egenandel.opplysningTekstId &&
+                    it.råVerdi().toDouble() > 0.0
+            } -> listOf(INNVILGELSE_MED_EGENANDEL.brevblokkId)
+            else -> listOf(INNVILGELSE_UTEN_EGENANDEL.brevblokkId)
+        }
+    }
+
+    private fun egenandel(): List<String> {
+        return when {
+            vedtak.opplysninger.any {
+                it.opplysningTekstId == Egenandel.opplysningTekstId &&
+                    it.råVerdi().toDouble() > 0.0
+            } -> listOf(INNVILGELSE_EGENANDEL.brevblokkId)
+            else -> emptyList()
         }
     }
 
     private fun virkningsdato(): List<String> {
         return when {
             erInnvilgetSomPermittert() -> listOf(INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT.brevblokkId)
+            erInnvilgetSomPermittertIFiskeindustri() -> listOf(INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT_FISK.brevblokkId)
             else -> listOf(INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId)
         }
     }
@@ -217,13 +246,17 @@ class InnvilgelseMelding(
         return when {
             erInnvilgetMedVerneplikt() -> listOf(INNVILGELSE_DAGPENGEPERIODE_VERNEPLIKT.brevblokkId)
             erInnvilgetSomPermittert() -> listOf(INNVILGELSE_DAGPENGEPERIODE_PERMITTERT.brevblokkId)
+            erInnvilgetSomPermittertIFiskeindustri() ->
+                listOf(
+                    InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_FISK.brevblokkId,
+                )
             else -> listOf(INNVILGELSE_DAGPENGEPERIODE.brevblokkId)
         }
     }
 
-    private fun ekstrablokkerPermittert(): List<String> {
+    private fun ekstrablokkerPermittertOgPermittertFisk(): List<String> {
         return when {
-            erInnvilgetSomPermittert() ->
+            erInnvilgetSomPermittert() || erInnvilgetSomPermittertIFiskeindustri() ->
                 listOf(
                     INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT.brevblokkId,
                     INNVILGELSE_HVA_SKJER_ETTER_PERMITTERINGEN.brevblokkId,
@@ -241,5 +274,10 @@ class InnvilgelseMelding(
     private fun erInnvilgetSomPermittert() =
         vedtak.vilkår.any {
             it.navn == PERMITTERING.vilkårNavn && it.status == OPPFYLT
+        }
+
+    private fun erInnvilgetSomPermittertIFiskeindustri() =
+        vedtak.vilkår.any {
+            it.navn == PERMITTERING_FISK.vilkårNavn && it.status == OPPFYLT
         }
 }

@@ -143,6 +143,10 @@ enum class OpplysningTyper(val opplysningTypeId: UUID?, val opplysningTekstId: S
         opplysningTypeId = null,
         opplysningTekstId = "opplysning.antall-permitteringsuker",
     ),
+    AntallPermitteringsukerFisk(
+        opplysningTypeId = null,
+        opplysningTekstId = "opplysning.antall-permitteringsuker-fisk",
+    ),
     Egenandel(
         opplysningTypeId = null,
         opplysningTekstId = "opplysning.egenandel",
