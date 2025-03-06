@@ -11,6 +11,7 @@ import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AndelAvDagsatsMedBa
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallGSomGisSomGrunnlagVedVerneplikt
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallPermitteringsuker
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallPermitteringsukerFisk
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallStønadsuker
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallStønadsukerSomGisVedOrdinæreDagpenger
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ArbeidsinntektSiste12Måneder
@@ -489,7 +490,6 @@ class VedtakMapper(vedtakJson: String) {
                         ),
                     )
                 }
-
                 "Permitteringsperiode" -> {
                     opplysninger.add(
                         Opplysning(
@@ -500,7 +500,16 @@ class VedtakMapper(vedtakJson: String) {
                         ),
                     )
                 }
-
+                "FiskePermitteringsperiode" -> {
+                    opplysninger.add(
+                        Opplysning(
+                            opplysningTekstId = AntallPermitteringsukerFisk.opplysningTekstId,
+                            råVerdi = kvote["verdi"].asText(),
+                            datatype = HELTALL,
+                            enhet = UKER,
+                        ),
+                    )
+                }
                 "Egenandel" ->
                     opplysninger.add(
                         Opplysning(
@@ -520,10 +529,9 @@ class VedtakMapper(vedtakJson: String) {
         opplysninger: MutableSet<Opplysning>,
         kvote: JsonNode,
     ) {
-        val antallStønadsukerTekstId = AntallStønadsuker.opplysningTekstId
         val stønadsukerOpplysning =
             Opplysning(
-                opplysningTekstId = antallStønadsukerTekstId,
+                opplysningTekstId = AntallStønadsuker.opplysningTekstId,
                 råVerdi = kvote["verdi"].asText(),
                 datatype = HELTALL,
                 enhet = UKER,
@@ -533,13 +541,13 @@ class VedtakMapper(vedtakJson: String) {
             // Ikke optimalt, men dersom Verneplikt og Dagpengeperiode finnes i kvoter, så tar Verneplikt presedens.
             // Dette burde endres i vedtaksAPIet siden vi tolker regelverk her, og det er ikke vår oppgave.
             "Dagpengeperiode" -> {
-                if (opplysninger.none { it.opplysningTekstId == antallStønadsukerTekstId }) {
+                if (opplysninger.none { it.opplysningTekstId == AntallStønadsuker.opplysningTekstId }) {
                     opplysninger.add(stønadsukerOpplysning)
                 }
             }
 
             "Verneplikt" -> {
-                opplysninger.removeIf { it.opplysningTekstId == antallStønadsukerTekstId }
+                opplysninger.removeIf { it.opplysningTekstId == AntallStønadsuker.opplysningTekstId }
                 opplysninger.add(stønadsukerOpplysning)
             }
         }

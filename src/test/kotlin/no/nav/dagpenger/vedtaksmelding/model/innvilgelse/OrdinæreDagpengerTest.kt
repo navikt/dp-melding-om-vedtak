@@ -5,6 +5,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.Egenandel
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.ManglerBrevstøtte
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
@@ -12,11 +13,12 @@ import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_EGENANDEL
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG
-import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MED_EGENANDEL
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_NITTI_PROSENT_REGEL
+import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SKATTEKORT
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_STANS_ÅRSAKER
@@ -34,23 +36,6 @@ import org.junit.jupiter.api.Test
 
 class OrdinæreDagpengerTest {
     private val behandlingId = UUIDv7.ny()
-
-    private fun nittiProsentRegelOpplysning(verdi: String = "10") =
-        Opplysning(
-            opplysningTekstId =
-                AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget.opplysningTekstId,
-            råVerdi = verdi,
-            datatype = FLYTTALL,
-            enhet = KRONER,
-        )
-
-    private fun barnetilleggOpplysning(verdi: String = "1") =
-        Opplysning(
-            opplysningTekstId = AntallBarnSomGirRettTilBarnetillegg.opplysningTekstId,
-            råVerdi = verdi,
-            datatype = HELTALL,
-            enhet = BARN,
-        )
 
     @Test
     fun `kriterier for å lage innvigelse`() {
@@ -87,7 +72,8 @@ class OrdinæreDagpengerTest {
     fun `Rikige brevblokker for innvilgelse av ordinære dagpenger uten noen spesialregler`() {
         val forventedeBrevblokkIder =
             listOf(
-                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_ORDINÆR.brevblokkId,
+                INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
                 INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
@@ -108,7 +94,7 @@ class OrdinæreDagpengerTest {
                     behandlingId = behandlingId,
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
-                    opplysninger = emptySet(),
+                    opplysninger = setOf(egenandel()),
                     fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
@@ -119,7 +105,8 @@ class OrdinæreDagpengerTest {
     fun `Rikig brevblokker for innvilgelse av ordinære dagpenger med barnetillegg-opplysning`() {
         val forventedeBrevblokkIder =
             listOf(
-                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_ORDINÆR.brevblokkId,
+                INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
                 INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
@@ -141,10 +128,7 @@ class OrdinæreDagpengerTest {
                     behandlingId = behandlingId,
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
-                    opplysninger =
-                        setOf(
-                            barnetilleggOpplysning(),
-                        ),
+                    opplysninger = setOf(barnetilleggOpplysning(), egenandel()),
                     fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
@@ -159,6 +143,7 @@ class OrdinæreDagpengerTest {
                     opplysninger =
                         setOf(
                             barnetilleggOpplysning("0"),
+                            egenandel(),
                         ),
                     fagsakId = "fagsakId test",
                 ),
@@ -170,7 +155,8 @@ class OrdinæreDagpengerTest {
     fun `Rikig brevblokker for innvilgelse av ordinære dagpenger med barnetillegg og nittiProsentRegel`() {
         val forventedeBrevblokkIder =
             listOf(
-                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_ORDINÆR.brevblokkId,
+                INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
                 INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
@@ -195,7 +181,7 @@ class OrdinæreDagpengerTest {
                     utfall = Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            barnetilleggOpplysning(), nittiProsentRegelOpplysning(),
+                            barnetilleggOpplysning(), nittiProsentRegelOpplysning(), egenandel(),
                         ),
                     fagsakId = "fagsakId test",
                 ),
@@ -209,9 +195,7 @@ class OrdinæreDagpengerTest {
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                     opplysninger =
-                        setOf(
-                            barnetilleggOpplysning(), nittiProsentRegelOpplysning("0"),
-                        ),
+                        setOf(barnetilleggOpplysning(), nittiProsentRegelOpplysning("0"), egenandel()),
                     fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
@@ -222,7 +206,8 @@ class OrdinæreDagpengerTest {
     fun `Rikig brevblokker rekkefølge for innvilgelse med barnetillegg, nittiProsentRegel`() {
         val forventedeBrevblokkIder =
             listOf(
-                INNVILGELSE_INNLEDNING.brevblokkId,
+                INNVILGELSE_ORDINÆR.brevblokkId,
+                INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
                 INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
@@ -246,10 +231,35 @@ class OrdinæreDagpengerTest {
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                     opplysninger =
-                        setOf(nittiProsentRegelOpplysning(), barnetilleggOpplysning()),
+                        setOf(nittiProsentRegelOpplysning(), barnetilleggOpplysning(), egenandel()),
                     fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
+
+    private fun nittiProsentRegelOpplysning(verdi: String = "10") =
+        Opplysning(
+            opplysningTekstId =
+                AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget.opplysningTekstId,
+            råVerdi = verdi,
+            datatype = FLYTTALL,
+            enhet = KRONER,
+        )
+
+    private fun barnetilleggOpplysning(verdi: String = "1") =
+        Opplysning(
+            opplysningTekstId = AntallBarnSomGirRettTilBarnetillegg.opplysningTekstId,
+            råVerdi = verdi,
+            datatype = HELTALL,
+            enhet = BARN,
+        )
+
+    private fun egenandel() =
+        Opplysning(
+            opplysningTekstId = Egenandel.opplysningTekstId,
+            råVerdi = "3000",
+            datatype = HELTALL,
+            enhet = KRONER,
+        )
 }
