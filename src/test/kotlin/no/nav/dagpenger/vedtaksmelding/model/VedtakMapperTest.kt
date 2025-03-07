@@ -22,6 +22,9 @@ import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FørsteMånedOgÅrF
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FørsteMånedOgÅrForInntektsperiode2
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FørsteMånedOgÅrForInntektsperiode3
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.Grunnlag
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarBruktBeregningsregelArbeidstidSiste12Måneder
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarBruktBeregningsregelArbeidstidSiste36Måneder
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarBruktBeregningsregelArbeidstidSiste6Måneder
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarSamordnet
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.InntektskravSiste12Måneder
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.InntektskravSiste36Måneder
@@ -202,6 +205,39 @@ class VedtakMapperTest {
                 datatype = TEKST,
                 enhet = ENHETSLØS,
             ).also { it.formatertVerdi shouldBe "gjennomsnittlig arbeidsinntekt siste 36 måneder" }
+    }
+
+    @Test
+    fun `Hent opplysning om brukt beregningsregel for arbeidstid siste 6 måneder`() {
+        vedtak.finnOpplysning(HarBruktBeregningsregelArbeidstidSiste6Måneder.opplysningTekstId) shouldBe
+            Opplysning(
+                opplysningTekstId = HarBruktBeregningsregelArbeidstidSiste6Måneder.opplysningTekstId,
+                råVerdi = "true",
+                datatype = BOOLSK,
+                enhet = ENHETSLØS,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning om brukt beregningsregel for arbeidstid siste 12 måneder`() {
+        vedtak.finnOpplysning(HarBruktBeregningsregelArbeidstidSiste12Måneder.opplysningTekstId) shouldBe
+            Opplysning(
+                opplysningTekstId = HarBruktBeregningsregelArbeidstidSiste12Måneder.opplysningTekstId,
+                råVerdi = "false",
+                datatype = BOOLSK,
+                enhet = ENHETSLØS,
+            )
+    }
+
+    @Test
+    fun `Hent opplysning om brukt beregningsregel for arbeidstid siste 36 måneder`() {
+        vedtak.finnOpplysning(HarBruktBeregningsregelArbeidstidSiste36Måneder.opplysningTekstId) shouldBe
+            Opplysning(
+                opplysningTekstId = HarBruktBeregningsregelArbeidstidSiste36Måneder.opplysningTekstId,
+                råVerdi = "false",
+                datatype = BOOLSK,
+                enhet = ENHETSLØS,
+            )
     }
 
     @Test

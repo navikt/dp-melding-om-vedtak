@@ -4,6 +4,9 @@ import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FastsattNyArbeidstidPerUke
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FastsattVanligArbeidstidPerUke
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarBruktBeregningsregelArbeidstidSiste12Måneder
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarBruktBeregningsregelArbeidstidSiste36Måneder
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarBruktBeregningsregelArbeidstidSiste6Måneder
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.KravTilProsentvisTapAvArbeidstid
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ProsentvisTaptArbeidstid
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
@@ -14,10 +17,17 @@ import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.TAPT_ARBEIDSTID_ELLER_
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_DEL_3_SISTE_12_MND
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_DEL_3_SISTE_36_MND
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_DEL_3_SISTE_6_MND
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_FASTSATT_VANLIG_ARBEDSTID_0
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_3_SISTE_12_MND
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_3_SISTE_36_MND
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_3_SISTE_6_MND
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.BOOLSK
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.TIMER
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
@@ -57,10 +67,28 @@ class AvslagMeldingTaptArbeidstidTest {
                 råVerdi = "46.666666666666664",
                 datatype = FLYTTALL,
             )
+        avslagArbeidstidVedtak.finnOpplysning(HarBruktBeregningsregelArbeidstidSiste6Måneder.opplysningTekstId) shouldBe
+            Opplysning(
+                opplysningTekstId = HarBruktBeregningsregelArbeidstidSiste6Måneder.opplysningTekstId,
+                råVerdi = "false",
+                datatype = BOOLSK,
+            )
+        avslagArbeidstidVedtak.finnOpplysning(HarBruktBeregningsregelArbeidstidSiste12Måneder.opplysningTekstId) shouldBe
+            Opplysning(
+                opplysningTekstId = HarBruktBeregningsregelArbeidstidSiste12Måneder.opplysningTekstId,
+                råVerdi = "true",
+                datatype = BOOLSK,
+            )
+        avslagArbeidstidVedtak.finnOpplysning(HarBruktBeregningsregelArbeidstidSiste36Måneder.opplysningTekstId) shouldBe
+            Opplysning(
+                opplysningTekstId = HarBruktBeregningsregelArbeidstidSiste36Måneder.opplysningTekstId,
+                råVerdi = "false",
+                datatype = BOOLSK,
+            )
     }
 
     @Test
-    fun `Riktige brevblokker for avslag arbeidstid ved ordinær rettighet`() {
+    fun `Riktige brevblokker for avslag arbeidstid ved ordinær rettighet og 6 måneders beregning`() {
         val behandlingId = UUIDv7.ny()
         val arbeidstidIkkeOppfylt =
             Vilkår(
@@ -93,6 +121,11 @@ class AvslagMeldingTaptArbeidstidTest {
                                 råVerdi = "45.333333",
                                 datatype = FLYTTALL,
                             ),
+                            Opplysning(
+                                opplysningTekstId = HarBruktBeregningsregelArbeidstidSiste6Måneder.opplysningTekstId,
+                                råVerdi = "true",
+                                datatype = BOOLSK,
+                            ),
                         ),
                     fagsakId = "fagsakId test",
                 ),
@@ -102,11 +135,116 @@ class AvslagMeldingTaptArbeidstidTest {
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_DEL_1.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_DEL_2.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID_DEL_3_SISTE_6_MND.brevblokkId,
             ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 
     @Test
-    fun `Riktige brevblokker for avslag arbeidstid ved rettighet permittering fisk`() {
+    fun `Riktige brevblokker for avslag arbeidstid ved ordinær rettighet og 12 måneders gjennomsnittsberegning`() {
+        val behandlingId = UUIDv7.ny()
+        val arbeidstidIkkeOppfylt =
+            Vilkår(
+                navn = TAPT_ARBEIDSTID.vilkårNavn,
+                status = Vilkår.Status.IKKE_OPPFYLT,
+            )
+
+        AvslagMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = setOf(arbeidstidIkkeOppfylt),
+                    utfall = Utfall.AVSLÅTT,
+                    opplysninger =
+                        setOf(
+                            Opplysning(
+                                opplysningTekstId = FastsattVanligArbeidstidPerUke.opplysningTekstId,
+                                råVerdi = "37.5",
+                                datatype = FLYTTALL,
+                                enhet = TIMER,
+                            ),
+                            Opplysning(
+                                opplysningTekstId = FastsattNyArbeidstidPerUke.opplysningTekstId,
+                                råVerdi = "20.5",
+                                datatype = FLYTTALL,
+                                enhet = TIMER,
+                            ),
+                            Opplysning(
+                                opplysningTekstId = ProsentvisTaptArbeidstid.opplysningTekstId,
+                                råVerdi = "45.333333",
+                                datatype = FLYTTALL,
+                            ),
+                            Opplysning(
+                                opplysningTekstId = HarBruktBeregningsregelArbeidstidSiste12Måneder.opplysningTekstId,
+                                råVerdi = "true",
+                                datatype = BOOLSK,
+                            ),
+                        ),
+                    fagsakId = "fagsakId test",
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe
+            listOf(
+                AVSLAG_INNLEDNING.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID_DEL_1.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID_DEL_2.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID_DEL_3_SISTE_12_MND.brevblokkId,
+            ) + VedtakMelding.fasteAvsluttendeBlokker
+    }
+
+    @Test
+    fun `Riktige brevblokker for avslag arbeidstid ved ordinær rettighet og 36 måneders gjennomsnittsberegning`() {
+        val behandlingId = UUIDv7.ny()
+        val arbeidstidIkkeOppfylt =
+            Vilkår(
+                navn = TAPT_ARBEIDSTID.vilkårNavn,
+                status = Vilkår.Status.IKKE_OPPFYLT,
+            )
+
+        AvslagMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = setOf(arbeidstidIkkeOppfylt),
+                    utfall = Utfall.AVSLÅTT,
+                    opplysninger =
+                        setOf(
+                            Opplysning(
+                                opplysningTekstId = FastsattVanligArbeidstidPerUke.opplysningTekstId,
+                                råVerdi = "37.5",
+                                datatype = FLYTTALL,
+                                enhet = TIMER,
+                            ),
+                            Opplysning(
+                                opplysningTekstId = FastsattNyArbeidstidPerUke.opplysningTekstId,
+                                råVerdi = "20.5",
+                                datatype = FLYTTALL,
+                                enhet = TIMER,
+                            ),
+                            Opplysning(
+                                opplysningTekstId = ProsentvisTaptArbeidstid.opplysningTekstId,
+                                råVerdi = "45.333333",
+                                datatype = FLYTTALL,
+                            ),
+                            Opplysning(
+                                opplysningTekstId = HarBruktBeregningsregelArbeidstidSiste36Måneder.opplysningTekstId,
+                                råVerdi = "true",
+                                datatype = BOOLSK,
+                            ),
+                        ),
+                    fagsakId = "fagsakId test",
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe
+            listOf(
+                AVSLAG_INNLEDNING.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID_DEL_1.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID_DEL_2.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID_DEL_3_SISTE_36_MND.brevblokkId,
+            ) + VedtakMelding.fasteAvsluttendeBlokker
+    }
+
+    @Test
+    fun `Riktige brevblokker for avslag arbeidstid ved rettighet permittering fisk og 6 måneders beregning`() {
         val behandlingId = UUIDv7.ny()
         val arbeidstidIkkeOppfylt =
             Vilkår(
@@ -144,6 +282,11 @@ class AvslagMeldingTaptArbeidstidTest {
                                 råVerdi = "45.333333",
                                 datatype = FLYTTALL,
                             ),
+                            Opplysning(
+                                opplysningTekstId = HarBruktBeregningsregelArbeidstidSiste6Måneder.opplysningTekstId,
+                                råVerdi = "true",
+                                datatype = BOOLSK,
+                            ),
                         ),
                     fagsakId = "fagsakId test",
                 ),
@@ -153,6 +296,121 @@ class AvslagMeldingTaptArbeidstidTest {
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_1.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_2.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_3_SISTE_6_MND.brevblokkId,
+            ) + VedtakMelding.fasteAvsluttendeBlokker
+    }
+
+    @Test
+    fun `Riktige brevblokker for avslag arbeidstid ved rettighet permittering fisk og 12 måneders gjennomsnittsberegning`() {
+        val behandlingId = UUIDv7.ny()
+        val arbeidstidIkkeOppfylt =
+            Vilkår(
+                navn = TAPT_ARBEIDSTID.vilkårNavn,
+                status = Vilkår.Status.IKKE_OPPFYLT,
+            )
+        val permitteringFiskVilkår =
+            Vilkår(
+                navn = PERMITTERING_FISK.vilkårNavn,
+                status = Vilkår.Status.OPPFYLT,
+            )
+
+        AvslagMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = setOf(arbeidstidIkkeOppfylt, permitteringFiskVilkår),
+                    utfall = Utfall.AVSLÅTT,
+                    opplysninger =
+                        setOf(
+                            Opplysning(
+                                opplysningTekstId = FastsattVanligArbeidstidPerUke.opplysningTekstId,
+                                råVerdi = "37.5",
+                                datatype = FLYTTALL,
+                                enhet = TIMER,
+                            ),
+                            Opplysning(
+                                opplysningTekstId = FastsattNyArbeidstidPerUke.opplysningTekstId,
+                                råVerdi = "20.5",
+                                datatype = FLYTTALL,
+                                enhet = TIMER,
+                            ),
+                            Opplysning(
+                                opplysningTekstId = ProsentvisTaptArbeidstid.opplysningTekstId,
+                                råVerdi = "45.333333",
+                                datatype = FLYTTALL,
+                            ),
+                            Opplysning(
+                                opplysningTekstId = HarBruktBeregningsregelArbeidstidSiste12Måneder.opplysningTekstId,
+                                råVerdi = "true",
+                                datatype = BOOLSK,
+                            ),
+                        ),
+                    fagsakId = "fagsakId test",
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe
+            listOf(
+                AVSLAG_INNLEDNING.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_1.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_2.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_3_SISTE_12_MND.brevblokkId,
+            ) + VedtakMelding.fasteAvsluttendeBlokker
+    }
+
+    @Test
+    fun `Riktige brevblokker for avslag arbeidstid ved rettighet permittering fisk og 36 måneders gjennomsnittsberegning`() {
+        val behandlingId = UUIDv7.ny()
+        val arbeidstidIkkeOppfylt =
+            Vilkår(
+                navn = TAPT_ARBEIDSTID.vilkårNavn,
+                status = Vilkår.Status.IKKE_OPPFYLT,
+            )
+        val permitteringFiskVilkår =
+            Vilkår(
+                navn = PERMITTERING_FISK.vilkårNavn,
+                status = Vilkår.Status.OPPFYLT,
+            )
+
+        AvslagMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    vilkår = setOf(arbeidstidIkkeOppfylt, permitteringFiskVilkår),
+                    utfall = Utfall.AVSLÅTT,
+                    opplysninger =
+                        setOf(
+                            Opplysning(
+                                opplysningTekstId = FastsattVanligArbeidstidPerUke.opplysningTekstId,
+                                råVerdi = "37.5",
+                                datatype = FLYTTALL,
+                                enhet = TIMER,
+                            ),
+                            Opplysning(
+                                opplysningTekstId = FastsattNyArbeidstidPerUke.opplysningTekstId,
+                                råVerdi = "20.5",
+                                datatype = FLYTTALL,
+                                enhet = TIMER,
+                            ),
+                            Opplysning(
+                                opplysningTekstId = ProsentvisTaptArbeidstid.opplysningTekstId,
+                                råVerdi = "45.333333",
+                                datatype = FLYTTALL,
+                            ),
+                            Opplysning(
+                                opplysningTekstId = HarBruktBeregningsregelArbeidstidSiste36Måneder.opplysningTekstId,
+                                råVerdi = "true",
+                                datatype = BOOLSK,
+                            ),
+                        ),
+                    fagsakId = "fagsakId test",
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe
+            listOf(
+                AVSLAG_INNLEDNING.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_1.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_2.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_3_SISTE_36_MND.brevblokkId,
             ) + VedtakMelding.fasteAvsluttendeBlokker
     }
 
@@ -370,6 +628,72 @@ private val json =
             },
             "opplysninger": [
               "01948850-df4a-79b7-9bd4-f81f6e629ec1"
+            ]
+          }
+        },
+        {
+          "id": "01957010-95c8-7630-b47a-0fd80e0613b8",
+          "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a764",
+          "navn": "Beregningsregel: Arbeidstid siste 6 måneder",
+          "verdi": "false",
+          "status": "Faktum",
+          "datatype": "boolsk",
+          "redigerbar": true,
+          "synlig": true,
+          "formål": "Regel",
+          "gyldigFraOgMed": null,
+          "gyldigTilOgMed": null,
+          "kilde": null,
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "01957010-858c-757b-84dd-57c591684ad2"
+            ]
+          }
+        },
+        {
+          "id": "01957010-95c8-7630-b47a-0fd80e0613ba",
+          "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a765",
+          "navn": "Beregningsregel: Arbeidstid siste 12 måneder",
+          "verdi": "true",
+          "status": "Faktum",
+          "datatype": "boolsk",
+          "redigerbar": true,
+          "synlig": true,
+          "formål": "Regel",
+          "gyldigFraOgMed": null,
+          "gyldigTilOgMed": null,
+          "kilde": null,
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "01957010-858c-757b-84dd-57c591684ad2"
+            ]
+          }
+        },
+        {
+          "id": "01957010-95c8-7630-b47a-0fd80e0613bc",
+          "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a766",
+          "navn": "Beregningsregel: Arbeidstid siste 36 måneder",
+          "verdi": "false",
+          "status": "Faktum",
+          "datatype": "boolsk",
+          "redigerbar": true,
+          "synlig": true,
+          "formål": "Regel",
+          "gyldigFraOgMed": null,
+          "gyldigTilOgMed": null,
+          "kilde": null,
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "01957010-858c-757b-84dd-57c591684ad2"
             ]
           }
         }

@@ -29,6 +29,9 @@ import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FørsteMånedOgÅrF
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FørsteMånedOgÅrForInntektsperiode2
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FørsteMånedOgÅrForInntektsperiode3
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.Grunnlag
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarBruktBeregningsregelArbeidstidSiste12Måneder
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarBruktBeregningsregelArbeidstidSiste36Måneder
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarBruktBeregningsregelArbeidstidSiste6Måneder
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarSamordnet
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.InntektskravSiste12Måneder
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.InntektskravSiste36Måneder
@@ -187,6 +190,18 @@ class VedtakMapper(vedtakJson: String) {
             vedtak.finnOpplysningFraType(
                 opplysningType = BruktBeregningsregelGrunnlag,
                 datatype = TEKST,
+            ),
+            vedtak.finnOpplysningFraType(
+                opplysningType = HarBruktBeregningsregelArbeidstidSiste6Måneder,
+                datatype = BOOLSK,
+            ),
+            vedtak.finnOpplysningFraType(
+                opplysningType = HarBruktBeregningsregelArbeidstidSiste12Måneder,
+                datatype = BOOLSK,
+            ),
+            vedtak.finnOpplysningFraType(
+                opplysningType = HarBruktBeregningsregelArbeidstidSiste36Måneder,
+                datatype = BOOLSK,
             ),
             vedtak.finnOpplysningFraType(
                 opplysningType = UtbetaltArbeidsinntektPeriode1,
