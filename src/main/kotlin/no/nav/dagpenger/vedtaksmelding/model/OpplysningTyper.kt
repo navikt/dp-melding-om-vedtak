@@ -31,6 +31,18 @@ enum class OpplysningTyper(val opplysningTypeId: UUID?, val opplysningTekstId: S
         opplysningTypeId = UUID.fromString("0194881f-9410-7481-b263-4606fdd10cba"),
         opplysningTekstId = "opplysning.brukt-beregningsregel-grunnlag",
     ),
+    HarBruktBeregningsregelArbeidstidSiste6Måneder(
+        opplysningTypeId = UUID.fromString("0194881f-9435-72a8-b1ce-9575cbc2a764"),
+        opplysningTekstId = "opplysning.har-brukt-beregningsregel-arbeidstid-siste-6-mnd",
+    ),
+    HarBruktBeregningsregelArbeidstidSiste12Måneder(
+        opplysningTypeId = UUID.fromString("0194881f-9435-72a8-b1ce-9575cbc2a765"),
+        opplysningTekstId = "opplysning.har-brukt-beregningsregel-arbeidstid-siste-12-mnd",
+    ),
+    HarBruktBeregningsregelArbeidstidSiste36Måneder(
+        opplysningTypeId = UUID.fromString("0194881f-9435-72a8-b1ce-9575cbc2a766"),
+        opplysningTekstId = "opplysning.har-brukt-beregningsregel-arbeidstid-siste-36-mnd",
+    ),
     UtbetaltArbeidsinntektPeriode1(
         opplysningTypeId = UUID.fromString("0194881f-9410-7481-b263-4606fdd10cad"),
         opplysningTekstId = "opplysning.utbetalt-arbeidsinntekt-periode-1",
