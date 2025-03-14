@@ -4,6 +4,7 @@ import io.kotest.assertions.json.shouldEqualJson
 import io.kotest.assertions.json.shouldEqualSpecifiedJsonIgnoringOrder
 import io.kotest.matchers.shouldBe
 import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.request.put
@@ -330,6 +331,20 @@ class MeldingOmVedtakApiTest {
                     "instance" : "/melding-om-vedtak/$behandlingId/html"
                     }
                     """.trimIndent()
+            }
+        }
+    }
+
+    @Test
+    fun `Skal ha swagger APi`() {
+        testApplication {
+            application {
+                meldingOmVedtakApi(mockk())
+            }
+
+            client.get("/openapi") {
+            }.let { response ->
+                response.status shouldBe HttpStatusCode.OK
             }
         }
     }

@@ -5,6 +5,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.auth.authenticate
+import io.ktor.server.plugins.swagger.swaggerUI
 import io.ktor.server.request.receive
 import io.ktor.server.request.receiveText
 import io.ktor.server.response.respond
@@ -27,6 +28,7 @@ private val logger = KotlinLogging.logger {}
 fun Application.meldingOmVedtakApi(mediator: Mediator) {
     apiConfig()
     routing {
+        swaggerUI(path = "openapi", swaggerFile = "melding-om-vedtak-api.yaml")
         authenticate("azureAd") {
             post("/melding-om-vedtak/{behandlingId}/html") {
                 val behandlingId = call.parseUUID()
