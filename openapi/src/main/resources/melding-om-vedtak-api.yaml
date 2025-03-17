@@ -43,6 +43,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/HttpProblem'
+        default:
+          description: Feil
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpProblem'
   /melding-om-vedtak/{behandlingId}/vedtaksmelding:
     post:
       summary: Hent vedtaks HTML for en gitt behandlingId
@@ -76,6 +82,12 @@ paths:
                     description: HTML for melding om vedtak
         '404':
           description: Behandlingen finnes ikke
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpProblem'
+        default:
+          description: Feil
           content:
             application/problem+json:
               schema:
@@ -124,6 +136,13 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/HttpProblem'
+        default:
+          description: Feil
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpProblem'
+
   /melding-om-vedtak/{behandlingId}/{brevblokkId}/utvidet-beskrivelse-json:
     put:
       summary: Lagrer utvidet beskrivelse for en gitt brevblokk i meldingen om vedtak
@@ -166,7 +185,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/HttpProblem'
-
+        default:
+          description: Feil
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpProblem'
 
 components:
   schemas:
@@ -187,7 +211,6 @@ components:
           format: date-time
           description: Tidspunkt utvidet beskrivelse sist ble endret
 
-
     MeldingOmVedtakResponse:
       type: object
       properties:
@@ -198,8 +221,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UtvidetBeskrivelse'
-
-
 
     UtvidetBeskrivelse:
       type: object
@@ -217,7 +238,6 @@ components:
         - brevblokkId
         - tekst
         - tittel
-
 
     MeldingOmVedtakData:
       type: object
