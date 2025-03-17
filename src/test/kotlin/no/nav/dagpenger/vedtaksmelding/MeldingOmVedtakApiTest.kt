@@ -77,6 +77,39 @@ class MeldingOmVedtakApiTest {
     }
 
     @Test
+    fun `Skal lagre utvidet beskrivelse fra json for en gitt brevblokk for en behandling`() {
+        val brevblokkId = "brevblokkId"
+        val utvidetBeskrivelseJson = """{"tekst":"En fritekst av noe slag"}"""
+        val utvidetBeskrivelseCapturingSlot = slot<UtvidetBeskrivelse>()
+        val mediator =
+            mockk<Mediator>().also {
+                coEvery {
+                    it.lagreUtvidetBeskrivelse(capture(utvidetBeskrivelseCapturingSlot))
+                } returns LocalDateTime.MAX
+            }
+        testApplication {
+            application {
+                meldingOmVedtakApi(mediator)
+            }
+
+            client.put("/melding-om-vedtak/$behandlingId/$brevblokkId/utvidet-beskrivelse-json") {
+                autentisert(token = saksbehandlerToken)
+                header(HttpHeaders.ContentType, ContentType.Application.Json)
+                setBody(utvidetBeskrivelseJson)
+            }.let { response ->
+                response.status shouldBe HttpStatusCode.OK
+                response.bodyAsText() shouldEqualJson """{"sistEndretTidspunkt" : "+999999999-12-31T23:59:59.999999999"}"""
+            }
+        }
+        utvidetBeskrivelseCapturingSlot.captured shouldBe
+            UtvidetBeskrivelse(
+                behandlingId = behandlingId,
+                brevblokkId = brevblokkId,
+                tekst = "En fritekst av noe slag",
+            )
+    }
+
+    @Test
     fun `Skal returnere en html ved bruk av melding-om-vedtak {behandlingId} html`() {
         val behandlingId = UUID.randomUUID()
         val requestBody =

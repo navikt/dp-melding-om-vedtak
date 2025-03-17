@@ -124,10 +124,61 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/HttpProblem'
+  /melding-om-vedtak/{behandlingId}/{brevblokkId}/utvidet-beskrivelse-json:
+    put:
+      summary: Lagrer utvidet beskrivelse for en gitt brevblokk i meldingen om vedtak
+      security:
+        - azureAd: [ ]
+      parameters:
+        - in: path
+          name: behandlingId
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: path
+          name: brevblokkId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/UtvidetBeskrivelseTekst'
+      responses:
+        '200':
+          description: Utvidet beskrivelse for brevblokk er lagret og returnerer sistEndretTidspunkt
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtvidetBeskrivelseSistEndretTidspunkt'
+        '400':
+          description: ContentType må være text/plain
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpProblem'
+        '404':
+          description: Behandlingen finnes ikke
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpProblem'
 
 
 components:
   schemas:
+    UtvidetBeskrivelseTekst:
+      type: object
+      properties:
+        tekst:
+          type: string
+          description: Utvidet beskrivelse som skal inngå i vedtaksmeldingen
+      required:
+        - tekst
+
     UtvidetBeskrivelseSistEndretTidspunkt:
       type: object
       properties:

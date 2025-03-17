@@ -17,6 +17,7 @@ import mu.KotlinLogging
 import mu.withLoggingContext
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseSistEndretTidspunktDTO
+import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseTekstDTO
 import no.nav.dagpenger.vedtaksmelding.apiconfig.apiConfig
 import no.nav.dagpenger.vedtaksmelding.apiconfig.jwt
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
@@ -80,6 +81,22 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                             behandlingId = behandlingId,
                             brevblokkId = brevblokkId,
                             tekst = utvidetBeskrivelseTekst,
+                        )
+                    val sistEndretTidspunkt = mediator.lagreUtvidetBeskrivelse(utvidetBeskrivelse)
+                    call.respond(HttpStatusCode.OK, UtvidetBeskrivelseSistEndretTidspunktDTO(sistEndretTidspunkt))
+                }
+            }
+
+            put("/melding-om-vedtak/{behandlingId}/{brevblokkId}/utvidet-beskrivelse-json") {
+                val behandlingId = call.parseUUID()
+                val brevblokkId = call.parameters["brevblokkId"].toString()
+                withLoggingContext("behandlingId" to behandlingId.toString(), "brevblokkId" to brevblokkId) {
+                    val utvidetBeskrivelseTekstDTO = call.receive<UtvidetBeskrivelseTekstDTO>()
+                    val utvidetBeskrivelse =
+                        UtvidetBeskrivelse(
+                            behandlingId = behandlingId,
+                            brevblokkId = brevblokkId,
+                            tekst = utvidetBeskrivelseTekstDTO.tekst,
                         )
                     val sistEndretTidspunkt = mediator.lagreUtvidetBeskrivelse(utvidetBeskrivelse)
                     call.respond(HttpStatusCode.OK, UtvidetBeskrivelseSistEndretTidspunktDTO(sistEndretTidspunkt))
