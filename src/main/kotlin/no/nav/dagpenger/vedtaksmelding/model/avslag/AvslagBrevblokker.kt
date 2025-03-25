@@ -34,7 +34,8 @@ enum class AvslagBrevblokker(val brevblokkId: String) {
         brevblokkId = "brev.blokk.avslag-tapt-arbeidstid-permittert-fisk-del-3-siste-36-mnd",
     ),
 
-    AVSLAG_TAPT_ARBEIDSINNTEKT(brevblokkId = "brev.blokk.avslag-tapt-arbeidsinntekt"),
+    AVSLAG_TAPT_ARBEIDSINNTEKT_DEL_1(brevblokkId = "brev.blokk.avslag-tapt-arbeidsinntekt-del-1"),
+    AVSLAG_TAPT_ARBEIDSINNTEKT_DEL_2(brevblokkId = "brev.blokk.avslag-tapt-arbeidsinntekt-del-2"),
 
     AVSLAG_UTESTENGT(brevblokkId = "brev.blokk.avslag-utestengt"),
     AVSLAG_UTESTENGT_HJEMMEL(brevblokkId = "brev.blokk.avslag-utestengt-hjemmel"),
