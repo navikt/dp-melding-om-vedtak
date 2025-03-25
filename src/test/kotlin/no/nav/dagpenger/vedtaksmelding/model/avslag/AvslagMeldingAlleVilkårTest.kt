@@ -26,7 +26,8 @@ import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_STREIK_LOCKOUT_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_STREIK_LOCKOUT_DEL_2
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSINNTEKT
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSINNTEKT_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSINNTEKT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_DEL_3_SISTE_12_MND
@@ -55,7 +56,8 @@ class AvslagMeldingAlleVilkårTest {
                 AVSLAG_MINSTEINNTEKT_DEL_1.brevblokkId,
                 AVSLAG_MINSTEINNTEKT_DEL_2.brevblokkId,
                 AVSLAG_ALDER.brevblokkId,
-                AVSLAG_TAPT_ARBEIDSINNTEKT.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSINNTEKT_DEL_1.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSINNTEKT_DEL_2.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_DEL_1.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_DEL_2.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_DEL_3_SISTE_12_MND.brevblokkId,
@@ -93,7 +95,8 @@ class AvslagMeldingAlleVilkårTest {
                 AVSLAG_MINSTEINNTEKT_DEL_1.brevblokkId,
                 AVSLAG_MINSTEINNTEKT_DEL_2.brevblokkId,
                 AVSLAG_ALDER.brevblokkId,
-                AVSLAG_TAPT_ARBEIDSINNTEKT.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSINNTEKT_DEL_1.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSINNTEKT_DEL_2.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_DEL_1.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_DEL_2.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_DEL_3_SISTE_6_MND.brevblokkId,
@@ -131,7 +134,8 @@ class AvslagMeldingAlleVilkårTest {
                 AVSLAG_MINSTEINNTEKT_DEL_1.brevblokkId,
                 AVSLAG_MINSTEINNTEKT_DEL_2.brevblokkId,
                 AVSLAG_ALDER.brevblokkId,
-                AVSLAG_TAPT_ARBEIDSINNTEKT.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSINNTEKT_DEL_1.brevblokkId,
+                AVSLAG_TAPT_ARBEIDSINNTEKT_DEL_2.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_1.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_2.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_3_SISTE_36_MND.brevblokkId,
