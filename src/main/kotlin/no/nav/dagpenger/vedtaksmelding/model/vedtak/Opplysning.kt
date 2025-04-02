@@ -7,6 +7,7 @@ import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.TEKST
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.ENHETSLØS
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.TIMER
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -34,6 +35,7 @@ data class Opplysning(
             when (datatype) {
                 FLYTTALL ->
                     when (enhet) {
+                        TIMER -> formaterTall(antallDesimaler = 2, desimaltall = råVerdi.toDouble())
                         KRONER -> "${formaterTall(antallDesimaler = 2, desimaltall = råVerdi.toDouble())} kroner"
                         else -> formaterTall(antallDesimaler = 1, desimaltall = råVerdi.toDouble())
                     }

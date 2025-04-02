@@ -6,6 +6,7 @@ import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.DATO
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.TIMER
 import org.junit.jupiter.api.Test
 
 class OpplysningFormateringTest {
@@ -27,6 +28,16 @@ class OpplysningFormateringTest {
             råVerdi = "2025-01-10",
             datatype = DATO,
         ).formatertVerdi shouldBe "10. januar 2025"
+    }
+
+    @Test
+    fun `Formatering av timer`() {
+        Opplysning(
+            opplysningTekstId = "bubba",
+            råVerdi = "18.75",
+            datatype = FLYTTALL,
+            enhet = TIMER,
+        ).formatertVerdi shouldBe "18,75"
     }
 
     @Test
