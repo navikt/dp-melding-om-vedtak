@@ -1,10 +1,8 @@
 package no.nav.dagpenger.vedtaksmelding.model.avslag
 
-import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.FastsattVanligArbeidstidPerUke
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarBruktBeregningsregelArbeidstidSiste12Måneder
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarBruktBeregningsregelArbeidstidSiste36Måneder
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.HarBruktBeregningsregelArbeidstidSiste6Måneder
-import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ProsentvisTaptArbeidstid
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper
 import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.IKKE_ANDRE_FULLE_YTELSER
@@ -56,7 +54,6 @@ import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAP
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_DEL_3_SISTE_12_MND
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_DEL_3_SISTE_36_MND
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_DEL_3_SISTE_6_MND
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_FASTSATT_VANLIG_ARBEDSTID_0
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_3_SISTE_12_MND
@@ -172,34 +169,19 @@ class AvslagMelding(
             }
         ) {
             true ->
-                when (
-                    vedtak.opplysninger.any { opplysning ->
-                        opplysning.opplysningTekstId == FastsattVanligArbeidstidPerUke.opplysningTekstId &&
-                            opplysning.råVerdi().toDouble() > 0.0
-                    } &&
-                        vedtak.opplysninger.any { opplysning ->
-                            opplysning.opplysningTekstId == ProsentvisTaptArbeidstid.opplysningTekstId &&
-                                opplysning.råVerdi().toDouble() >= 0.0
-                        }
-                ) {
+                when (gjelderPermitteringFisk()) {
                     true ->
-                        when (gjelderPermitteringFisk()) {
-                            true ->
-                                listOf(
-                                    AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_1.brevblokkId,
-                                    AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_2.brevblokkId,
-                                ) + avslagTaptArbeidstidPermittertFiskHjemmelBlokk()
+                        listOf(
+                            AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_1.brevblokkId,
+                            AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_2.brevblokkId,
+                        ) + avslagTaptArbeidstidPermittertFiskHjemmelBlokk()
 
-                            false ->
-                                listOf(
-                                    AVSLAG_TAPT_ARBEIDSTID_DEL_1.brevblokkId,
-                                    AVSLAG_TAPT_ARBEIDSTID_DEL_2.brevblokkId,
-                                ) + avslagTaptArbeidstidHjemmelBlokk()
-                        }
-
-                    false -> listOf(AVSLAG_TAPT_ARBEIDSTID_FASTSATT_VANLIG_ARBEDSTID_0.brevblokkId)
+                    false ->
+                        listOf(
+                            AVSLAG_TAPT_ARBEIDSTID_DEL_1.brevblokkId,
+                            AVSLAG_TAPT_ARBEIDSTID_DEL_2.brevblokkId,
+                        ) + avslagTaptArbeidstidHjemmelBlokk()
                 }
-
             else -> emptyList()
         }
     }
@@ -380,9 +362,21 @@ class AvslagMelding(
 
     private fun avslagTaptArbeidstidPermittertFiskHjemmelBlokk(): List<String> {
         return when {
-            harBrukBeregningsregelArbeidstidSiste6Mnd() -> listOf(AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_3_SISTE_6_MND.brevblokkId)
-            harBrukBeregningsregelArbeidstidSiste12Mnd() -> listOf(AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_3_SISTE_12_MND.brevblokkId)
-            harBrukBeregningsregelArbeidstidSiste36Mnd() -> listOf(AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_3_SISTE_36_MND.brevblokkId)
+            harBrukBeregningsregelArbeidstidSiste6Mnd() ->
+                listOf(
+                    AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_3_SISTE_6_MND.brevblokkId,
+                )
+
+            harBrukBeregningsregelArbeidstidSiste12Mnd() ->
+                listOf(
+                    AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_3_SISTE_12_MND.brevblokkId,
+                )
+
+            harBrukBeregningsregelArbeidstidSiste36Mnd() ->
+                listOf(
+                    AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_3_SISTE_36_MND.brevblokkId,
+                )
+
             else -> emptyList()
         }
     }

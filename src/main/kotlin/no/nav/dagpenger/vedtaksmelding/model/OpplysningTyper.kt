@@ -107,10 +107,6 @@ enum class OpplysningTyper(val opplysningTypeId: UUID?, val opplysningTekstId: S
         opplysningTypeId = null,
         opplysningTekstId = "opplysning.fastsatt-ny-arbeidstid-per-uke",
     ),
-    ProsentvisTaptArbeidstid(
-        opplysningTypeId = null,
-        opplysningTekstId = "opplysning.prosentvis-tapt-arbeidstid",
-    ),
     HarSamordnet(
         opplysningTypeId = null,
         opplysningTekstId = "opplysning.har-samordnet",

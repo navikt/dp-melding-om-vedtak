@@ -39,7 +39,6 @@ import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.KravTilProsentvisTa
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.OmsorgspengerDagsats
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.OpplæringspengerDagsats
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.PleiepengerDagsats
-import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.ProsentvisTaptArbeidstid
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.Prøvingsdato
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SeksGangerGrunnbeløp
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.SisteMånedAvOpptjeningsperiode
@@ -91,7 +90,7 @@ class VedtakMapper(vedtakJson: String) {
             behandlingId = behandlingId,
             utfall = utfall,
             vilkår = vilkår,
-            opplysninger = vedtakOpplysninger + inntjeningsperiodeOpplysninger + prosentvisTaptArbeidstidOpplysninger,
+            opplysninger = vedtakOpplysninger + inntjeningsperiodeOpplysninger,
             fagsakId = fagsakId,
         )
     }
@@ -252,35 +251,6 @@ class VedtakMapper(vedtakJson: String) {
                 enhet = KRONER,
             ),
         ) + vedtak.lagOpplysningerFraKvoter() + vedtak.lagOpplysningerForSamordning()
-
-    private val prosentvisTaptArbeidstidOpplysninger = vedtakOpplysninger.finnProsentvisTaptArbeidstid()
-
-    private fun Set<Opplysning>.finnProsentvisTaptArbeidstid(): Set<Opplysning> {
-        val opplysninger = mutableSetOf<Opplysning>()
-        val fastsattVanligArbeidsid: Double? =
-            this.singleOrNull {
-                it.opplysningTekstId == FastsattVanligArbeidstidPerUke.opplysningTekstId
-            }?.let { opplysning ->
-                opplysning.råVerdi().toDouble()
-            }
-        val fastsattNyArbeidstid: Double? =
-            this.singleOrNull {
-                it.opplysningTekstId == FastsattNyArbeidstidPerUke.opplysningTekstId
-            }?.let { opplysning ->
-                opplysning.råVerdi().toDouble()
-            }
-        if (fastsattVanligArbeidsid != null && fastsattNyArbeidstid != null && fastsattVanligArbeidsid != 0.0) {
-            val prosentvisTaptArbeidstid = ((fastsattVanligArbeidsid - fastsattNyArbeidstid) / fastsattVanligArbeidsid) * 100
-            opplysninger.add(
-                Opplysning(
-                    opplysningTekstId = ProsentvisTaptArbeidstid.opplysningTekstId,
-                    råVerdi = prosentvisTaptArbeidstid.toString(),
-                    datatype = FLYTTALL,
-                ),
-            )
-        }
-        return opplysninger
-    }
 
     private val inntjeningsperiodeOpplysninger = vedtakOpplysninger.finnInntjeningsPeriode()
 
