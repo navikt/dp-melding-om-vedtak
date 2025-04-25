@@ -40,6 +40,8 @@ spec:
       rules:
         - application: dp-behandling
           namespace: teamdagpenger
+        - application: dp-saksbehandling
+          namespace: teamdagpenger
   env:
     - name: JDK_JAVA_OPTIONS
       value: -XX:+UseParallelGC -XX:ActiveProcessorCount=4
