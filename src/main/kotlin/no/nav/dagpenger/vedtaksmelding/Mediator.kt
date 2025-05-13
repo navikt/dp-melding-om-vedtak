@@ -7,6 +7,9 @@ import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakResponseDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.Companion.tilBehandlingstype
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.KLAGE
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.RETT_TIL_DAGPENGER
 import no.nav.dagpenger.vedtaksmelding.model.Brev
 import no.nav.dagpenger.vedtaksmelding.model.KlagevedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
@@ -147,10 +150,9 @@ class Mediator(
         behandlingId: UUID,
         behandler: Saksbehandler,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
-        type: String = "rettTilDagpenger",
     ): MeldingOmVedtakResponseDTO {
-        return when (type) {
-            "rettTilDagpenger" -> {
+        return when (meldingOmVedtakData.behandlingstype.tilBehandlingstype()) {
+            RETT_TIL_DAGPENGER -> {
                 hentVedtaksmelding(behandlingId, behandler).let { vedtak ->
                     val html =
                         HtmlConverter.toHtml(
@@ -174,7 +176,7 @@ class Mediator(
                     )
                 }
             }
-            "klage" -> {
+            KLAGE -> {
                 hentKlageVedtaksmelding(behandlingId, behandler).let { vedtak ->
                     val html =
                         HtmlConverter.toHtml(
@@ -197,9 +199,6 @@ class Mediator(
                             },
                     )
                 }
-            }
-            else -> {
-                throw IllegalArgumentException("Ugyldig type: $type")
             }
         }
     }

@@ -23,6 +23,9 @@ import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakResponseDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.KLAGE
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.RETT_TIL_DAGPENGER
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
@@ -110,6 +113,157 @@ class MeldingOmVedtakApiTest {
     }
 
     @Test
+    fun `Skal kunne spesifisere om brev av behandlingstype Klage eller RTD skal generes `() {
+        val behandlingId = UUID.randomUUID()
+        val requestBody =
+            """
+            {
+                "fornavn": "Test ForNavn",
+                "etternavn": "Test EtterNavn",
+                "fodselsnummer": "12345678901",
+                "sakId": "sak123",
+                "behandlingstype": "RETT_TIL_DAGPENGER",
+                "saksbehandler": {
+                    "fornavn": "Ola",
+                    "etternavn": "Nordmann",
+                    "enhet": {
+                        "navn": "Enhet Navn",
+                        "postadresse": "Postadresse 123"
+                    }
+                },
+                "beslutter": {
+                    "fornavn": "Kari",
+                    "etternavn": "Nordmann",
+                    "enhet": {
+                        "navn": "Enhet Navn",
+                        "postadresse": "Postadresse 123"
+                    }
+                }
+            }
+            """.trimIndent()
+
+        val mediator =
+            mockk<Mediator>().also {
+                coEvery {
+                    it.hentVedtak(
+                        behandlingId = any(),
+                        behandler = any(),
+                        meldingOmVedtakData = lagMeldingOmVedtakDataDTO(RETT_TIL_DAGPENGER),
+                    )
+                } returns
+                    MeldingOmVedtakResponseDTO(
+                        html = "<html><body>Test HTML Test RETT_TIL_DAGPENGER</body></html>",
+                        utvidedeBeskrivelser = listOf(),
+                    )
+                coEvery {
+                    it.hentVedtak(
+                        behandlingId = any(),
+                        behandler = any(),
+                        meldingOmVedtakData = lagMeldingOmVedtakDataDTO(KLAGE),
+                    )
+                } returns
+                    MeldingOmVedtakResponseDTO(
+                        html = "<html><body>Test HTML Test KLAGE</body></html>",
+                        utvidedeBeskrivelser = listOf(),
+                    )
+            }
+
+        testApplication {
+            application {
+                meldingOmVedtakApi(mediator)
+            }
+
+            client.post("/melding-om-vedtak/$behandlingId/html") {
+                autentisert(token = saksbehandlerToken)
+                header(HttpHeaders.ContentType, ContentType.Application.Json)
+                setBody(requestBody)
+            }.let { response ->
+                response.status shouldBe HttpStatusCode.OK
+                response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
+                    //language=JSON
+                    """
+                    {
+                      "utvidedeBeskrivelser": [],
+                     "html" : "<html><body>Test HTML Test RETT_TIL_DAGPENGER</body></html>"
+                    } 
+                    """.trimIndent()
+            }
+
+            val requestBodyKlage =
+                """
+                {
+                    "fornavn": "Test ForNavn",
+                    "etternavn": "Test EtterNavn",
+                    "fodselsnummer": "12345678901",
+                    "sakId": "sak123",
+                    "behandlingstype": "KLAGE",
+                    "saksbehandler": {
+                        "fornavn": "Ola",
+                        "etternavn": "Nordmann",
+                        "enhet": {
+                            "navn": "Enhet Navn",
+                            "postadresse": "Postadresse 123"
+                        }
+                    },
+                    "beslutter": {
+                        "fornavn": "Kari",
+                        "etternavn": "Nordmann",
+                        "enhet": {
+                            "navn": "Enhet Navn",
+                            "postadresse": "Postadresse 123"
+                        }
+                    }
+                }
+                """.trimIndent()
+
+            client.post("/melding-om-vedtak/$behandlingId/html") {
+                autentisert(token = saksbehandlerToken)
+                header(HttpHeaders.ContentType, ContentType.Application.Json)
+                setBody(requestBodyKlage)
+            }.let { response ->
+                response.status shouldBe HttpStatusCode.OK
+                response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
+                    //language=JSON
+                    """
+                    {
+                      "utvidedeBeskrivelser": [],
+                     "html" : "<html><body>Test HTML Test KLAGE</body></html>"
+                    }
+                    """.trimIndent()
+            }
+        }
+    }
+
+    private fun lagMeldingOmVedtakDataDTO(behandlingstype: Behandlingstype): MeldingOmVedtakDataDTO {
+        return MeldingOmVedtakDataDTO(
+            behandlingstype = behandlingstype.name,
+            fornavn = "Test ForNavn",
+            etternavn = "Test EtterNavn",
+            fodselsnummer = "12345678901",
+            saksbehandler =
+                BehandlerDTO(
+                    fornavn = "Ola",
+                    etternavn = "Nordmann",
+                    enhet =
+                        BehandlerEnhetDTO(
+                            navn = "Enhet Navn",
+                            postadresse = "Postadresse 123",
+                        ),
+                ),
+            beslutter =
+                BehandlerDTO(
+                    fornavn = "Kari",
+                    etternavn = "Nordmann",
+                    enhet =
+                        BehandlerEnhetDTO(
+                            navn = "Enhet Navn",
+                            postadresse = "Postadresse 123",
+                        ),
+                ),
+        )
+    }
+
+    @Test
     fun `Skal returnere en html ved bruk av melding-om-vedtak {behandlingId} html`() {
         val behandlingId = UUID.randomUUID()
         val requestBody =
@@ -144,32 +298,7 @@ class MeldingOmVedtakApiTest {
                     it.hentVedtak(
                         behandlingId,
                         Saksbehandler(saksbehandlerToken),
-                        meldingOmVedtakData =
-                            MeldingOmVedtakDataDTO(
-                                fornavn = "Test ForNavn",
-                                etternavn = "Test EtterNavn",
-                                fodselsnummer = "12345678901",
-                                saksbehandler =
-                                    BehandlerDTO(
-                                        fornavn = "Ola",
-                                        etternavn = "Nordmann",
-                                        enhet =
-                                            BehandlerEnhetDTO(
-                                                navn = "Enhet Navn",
-                                                postadresse = "Postadresse 123",
-                                            ),
-                                    ),
-                                beslutter =
-                                    BehandlerDTO(
-                                        fornavn = "Kari",
-                                        etternavn = "Nordmann",
-                                        enhet =
-                                            BehandlerEnhetDTO(
-                                                navn = "Enhet Navn",
-                                                postadresse = "Postadresse 123",
-                                            ),
-                                    ),
-                            ),
+                        meldingOmVedtakData = lagMeldingOmVedtakDataDTO(behandlingstype = RETT_TIL_DAGPENGER),
                     )
                 } returns
                     MeldingOmVedtakResponseDTO(

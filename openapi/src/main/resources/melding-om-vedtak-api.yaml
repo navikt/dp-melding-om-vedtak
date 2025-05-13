@@ -245,6 +245,9 @@ components:
     MeldingOmVedtakData:
       type: object
       properties:
+        behandlingstype:
+          type: string
+          default: RETT_TIL_DAGPENGER
         fornavn:
           type: string
         mellomnavn:
