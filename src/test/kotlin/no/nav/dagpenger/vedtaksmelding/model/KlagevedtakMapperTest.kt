@@ -14,7 +14,7 @@ class KlagevedtakMapperTest() {
             vedtak.fagsakId shouldBe "fagsakId"
             vedtak.opplysninger.size shouldBe 1
             vedtak.opplysninger.single().let {
-                it.opplysningTekstId shouldBe "KLAGEFRIST"
+                it.opplysningTekstId shouldBe KlageOpplysningTyper.KlageMottatDato.opplysningTekstId
                 it.formatertVerdi shouldBe "7. mai 2025"
             }
         }
