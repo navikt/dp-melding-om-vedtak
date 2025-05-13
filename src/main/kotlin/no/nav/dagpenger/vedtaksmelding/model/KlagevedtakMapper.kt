@@ -38,16 +38,16 @@ class KlagevedtakMapper(vedtakJson: String) {
     private val vedtakOpplysninger: Set<Opplysning> =
         setOf(
             Opplysning(
-                opplysningTekstId = "KLAGEFRIST",
-                råVerdi = vedtak.råVerdi("KLAGEFRIST"),
+                opplysningTekstId = KlageOpplysningTyper.KlageMottatDato.opplysningTekstId,
+                råVerdi = vedtak.verdi(KlageOpplysningTyper.KlageMottatDato.opplysningNavnId),
                 datatype = Opplysning.Datatype.DATO,
             ),
         )
 
-    private fun JsonNode.råVerdi(opplysningTekstId: String): String {
+    private fun JsonNode.verdi(opplysningNavnId: String): String {
         return this.get("behandlingOpplysninger").find {
-            it.get("opplysningNavnId").asText() == opplysningTekstId
+            it.get("opplysningNavnId").asText() == opplysningNavnId
         }?.get("verdi")?.asText()
-            ?: throw IllegalArgumentException("Opplysning med tekstId $opplysningTekstId mangler for behandlingId $behandlingId")
+            ?: throw IllegalArgumentException("Opplysning med navnId $opplysningNavnId mangler for behandlingId $behandlingId")
     }
 }
