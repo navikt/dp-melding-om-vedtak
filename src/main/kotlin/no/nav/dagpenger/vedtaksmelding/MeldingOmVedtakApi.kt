@@ -20,6 +20,8 @@ import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseSistEndretTi
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseTekstDTO
 import no.nav.dagpenger.vedtaksmelding.apiconfig.apiConfig
 import no.nav.dagpenger.vedtaksmelding.apiconfig.jwt
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.Companion.tilBehandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import java.util.UUID
@@ -107,6 +109,10 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
 }
 
 private fun ApplicationCall.parseSaksbehandler(): Saksbehandler = Saksbehandler(this.request.jwt())
+
+private fun ApplicationCall.behandlingstype(): Behandlingstype =
+    this.request.queryParameters["behandlingstype"]?.tilBehandlingstype()
+        ?: Behandlingstype.RETT_TIL_DAGPENGER
 
 private fun ApplicationCall.parseUUID(): UUID {
     return this.parameters["behandlingId"]?.let {
