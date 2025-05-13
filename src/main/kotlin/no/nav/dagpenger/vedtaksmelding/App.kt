@@ -24,12 +24,23 @@ fun main() {
             dpBehandlingApiUrl = Configuration.dbBehandlingApiUrl,
             tokenProvider = Configuration.dpBehandlingOboExchanger,
         )
-
+    val klageBehandlingKlient =
+        KlageBehandlingHttpKlient(
+            dpSaksbehandlingKlageApiUrl = Configuration.dpSaksbehandlingKlageApiUrl,
+            tokenProvider = Configuration.dpSaksbehandlingKlageOboExchanger,
+        )
     val sanityKlient = SanityKlient(Configuration.sanityApiUrl)
     val vedtaksmeldingRepository = PostgresVedtaksmeldingRepository(PostgresDataSourceBuilder.dataSource)
 
     embeddedServer(CIO, port = 8080) {
         helsesjekker()
-        meldingOmVedtakApi(Mediator(behandlingKlient, sanityKlient, vedtaksmeldingRepository))
+        meldingOmVedtakApi(
+            Mediator(
+                behandlingKlient = behandlingKlient,
+                klageBehandlingKlient = klageBehandlingKlient,
+                sanityKlient = sanityKlient,
+                vedtaksmeldingRepository = vedtaksmeldingRepository,
+            ),
+        )
     }.start(wait = true)
 }

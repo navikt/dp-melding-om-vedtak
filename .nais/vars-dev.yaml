@@ -5,6 +5,7 @@ azure:
 
 wonderwalled: true
 DP_BEHANDLING_API_SCOPE: "api://dev-gcp.teamdagpenger.dp-behandling/.default"
+DP_SAKSBEHANDLING_API_SCOPE: "api://dev-gcp.teamdagpenger.dp-saksbehandling/.default"
 
 ingresses: |
   ingresses:

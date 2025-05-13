@@ -22,6 +22,8 @@ object Configuration {
                 "GRUPPE_SAKSBEHANDLER" to "SaksbehandlerADGruppe",
                 "DP_BEHANDLING_API_SCOPE" to "api://dev-gcp.teamdagpenger.dp-behandling/.default",
                 "DP_BEHANDLING_API_URL" to "http://dp-behandling/behandling",
+                "DP_SAKSBEHANDLING_API_SCOPE" to "api://dev-gcp.teamdagpenger.dp-saksbehandling/.default",
+                "DP_SAKSBEHANDLING_API_URL" to "http://dp-saksbehandling",
                 "SANITY_API_URL" to "https://rt6o382n.api.sanity.io/v2022-03-07/data/query/production",
             ),
         )
@@ -39,9 +41,18 @@ object Configuration {
     }
 
     val dbBehandlingApiUrl by lazy { properties[Key("DP_BEHANDLING_API_URL", stringType)] }
+    val dpSaksbehandlingKlageApiUrl by lazy { properties[Key("DP_SAKSBEHANDLING_API_URL", stringType)] }
 
     val dpBehandlingOboExchanger: (String) -> String by lazy {
         val scope = properties[Key("DP_BEHANDLING_API_SCOPE", stringType)]
+        { token: String ->
+            val accessToken = azureAdClient.onBehalfOf(token, scope).access_token
+            requireNotNull(accessToken) { "Failed to get access token" }
+            accessToken
+        }
+    }
+    val dpSaksbehandlingKlageOboExchanger: (String) -> String by lazy {
+        val scope = properties[Key("DP_SAKSBEHANDLING_API_SCOPE", stringType)]
         { token: String ->
             val accessToken = azureAdClient.onBehalfOf(token, scope).access_token
             requireNotNull(accessToken) { "Failed to get access token" }
