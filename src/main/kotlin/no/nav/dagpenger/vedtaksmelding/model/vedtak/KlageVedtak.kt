@@ -4,8 +4,8 @@ import java.util.UUID
 
 data class KlageVedtak(
     val behandlingId: UUID,
-    val opplysninger: Set<Opplysning> = emptySet(),
     val fagsakId: String,
+    val opplysninger: Set<Opplysning>,
 ) {
     fun finnOpplysning(opplysningTekstId: String) = this.opplysninger.singleOrNull { it.opplysningTekstId == opplysningTekstId }
 

@@ -60,9 +60,8 @@ internal class KlageBehandlingHttpKlient(
     ): Result<KlageVedtak> {
         // lag en tilsvarende KlageBehandlingMapper
         return hentVedtakJson(behandlingId, saksbehandler).map {
-            KlagevedtakMapper(it).vedtak(
-
-            ) }
+            KlagevedtakMapper(it).vedtak()
+        }
     }
 }
 

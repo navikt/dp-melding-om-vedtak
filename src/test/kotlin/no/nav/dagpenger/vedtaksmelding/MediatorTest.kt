@@ -79,10 +79,6 @@ class MediatorTest {
     }
 
     @Test
-    fun `Skal kun ta med utvidede beskrivelse som finnes på vedtak`() {
-    }
-
-    @Test
     fun `Returnere rett vedtak ved bruk av hentEndeligVedtaksmelding `() {
         val vedtak =
             ("/json/vedtak.json").readFile().let {
