@@ -32,7 +32,22 @@ class KlagevedtakMapper(vedtakJson: String) {
         UUID.fromString(vedtak.get("behandlingId").asText())
             ?: throw IllegalArgumentException("behandlingId mangler")
 
-    val fagsakId = vedtak.get("fagsakId")?.asText() ?: throw FagsakIdMangler("FagsakId mangler i path /fagsakId")
+    // TODO: FagsakId må hentes fra vedtakJson
+    val fagsakId = "fagsakId"
 
-    private val vedtakOpplysninger: Set<Opplysning> = emptySet()
+    private val vedtakOpplysninger: Set<Opplysning> =
+        setOf(
+            Opplysning(
+                opplysningTekstId = "KLAGEFRIST",
+                råVerdi = vedtak.råVerdi("KLAGEFRIST"),
+                datatype = Opplysning.Datatype.DATO,
+            ),
+        )
+
+    private fun JsonNode.råVerdi(opplysningTekstId: String): String {
+        return this.get("behandlingOpplysninger").find {
+            it.get("opplysningNavnId").asText() == opplysningTekstId
+        }?.get("verdi")?.asText()
+            ?: throw IllegalArgumentException("Opplysning med tekstId $opplysningTekstId mangler for behandlingId $behandlingId")
+    }
 }
