@@ -56,7 +56,6 @@ class Mediator(
                 sanityInnhold,
                 object : TypeReference<ResultDTO>() {},
             ).result
-
         val vedtak =
             behandlingKlient.hentVedtak(
                 behandlingId = behandlingId,
