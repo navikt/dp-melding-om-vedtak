@@ -77,7 +77,7 @@ class Mediator(
             }.getOrThrow()
         return KlagevedtakMelding(
             klagevedtak = vedtak,
-            brevBlokker = alleBrevblokker,
+            alleBrevBlokker = alleBrevblokker,
         )
     }
 
@@ -178,10 +178,10 @@ class Mediator(
                 hentKlageVedtaksmelding(behandlingId, behandler).let { vedtak ->
                     val html =
                         HtmlConverter.toHtml(
-                            vedtak.hentBrevBlokker(),
-                            vedtak.hentOpplysninger(),
-                            meldingOmVedtakData,
-                            vedtak.hentFagsakId(),
+                            brevBlokker = vedtak.hentBrevBlokker(),
+                            opplysninger = vedtak.hentOpplysninger(),
+                            meldingOmVedtakData = meldingOmVedtakData,
+                            fagsakId = vedtak.hentFagsakId(),
                         )
 
                     MeldingOmVedtakResponseDTO(

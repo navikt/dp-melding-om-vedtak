@@ -43,6 +43,8 @@ class MediatorTest {
             coEvery { it.hentBrevBlokkerJson() } returns resource
         }
 
+    private val mockKlageBehandlingKlient = mockk<KlageBehandlingKlient>()
+
     @Test
     fun `Returnere rett vedtak ved bruk av hentVedtaksmelding `() {
         val vedtak =
@@ -69,6 +71,7 @@ class MediatorTest {
                 Mediator(
                     behandlingKlient = behandlingKlient,
                     sanityKlient = sanityKlient,
+                    klageBehandlingKlient = mockKlageBehandlingKlient,
                     vedtaksmeldingRepository = repository,
                 )
             runBlocking {
@@ -112,6 +115,7 @@ class MediatorTest {
             repository.lagreSanityInnhold(behandlingId, resource)
             val mediator =
                 Mediator(
+                    klageBehandlingKlient = mockKlageBehandlingKlient,
                     behandlingKlient = behandlingKlient,
                     sanityKlient = sanityKlient,
                     vedtaksmeldingRepository = repository,
@@ -148,6 +152,7 @@ class MediatorTest {
             Mediator(
                 behandlingKlient = behandlingKlient,
                 sanityKlient = sanityKlient,
+                klageBehandlingKlient = mockKlageBehandlingKlient,
                 vedtaksmeldingRepository = mockk<VedtaksmeldingRepository>(relaxed = true),
             )
 
@@ -167,10 +172,12 @@ class MediatorTest {
     fun `Kaster feil dersom vi ikke får hentet vedtak fra dp-behandling`() {
         val mediator =
             Mediator(
-                mockk<BehandlingKlient>().also {
-                    coEvery { it.hentVedtak(any(), any()) } throws RuntimeException("Noe gikk galt")
-                },
-                mockk(),
+                behandlingKlient =
+                    mockk<BehandlingKlient>().also {
+                        coEvery { it.hentVedtak(any(), any()) } throws RuntimeException("Noe gikk galt")
+                    },
+                klageBehandlingKlient = mockKlageBehandlingKlient,
+                sanityKlient = sanityKlient,
                 vedtaksmeldingRepository = mockk<VedtaksmeldingRepository>(relaxed = true),
             )
         runBlocking {
@@ -208,6 +215,7 @@ class MediatorTest {
                 Mediator(
                     behandlingKlient = mockk(),
                     sanityKlient = sanityKlient,
+                    klageBehandlingKlient = mockKlageBehandlingKlient,
                     vedtaksmeldingRepository = vedtaksmeldingRepository,
                 ),
             ).also {
@@ -248,8 +256,12 @@ class MediatorTest {
             }
         runBlocking {
             val utvidedebeskrivelser =
-                mediator.hentVedtak(behandlingId, saksbehandler, mockk(relaxed = true)).utvidedeBeskrivelser
-            require(utvidedebeskrivelser != null) {
+                mediator.hentVedtak(
+                    behandlingId = behandlingId,
+                    behandler = saksbehandler,
+                    meldingOmVedtakData = mockk(relaxed = true),
+                ).utvidedeBeskrivelser
+            require(true) {
                 "utvidedeBeskrivelser should not be null"
             }
 

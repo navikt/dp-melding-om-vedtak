@@ -291,7 +291,7 @@ class MeldingOmVedtakApiTest {
             }
             """.trimIndent()
 
-        val mediator = Mediator(mockk(), mockk(), mockk())
+        val mediator = Mediator(mockk(), mockk(), mockk(), mockk())
 
         testApplication {
             application {
