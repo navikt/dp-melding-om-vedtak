@@ -49,6 +49,8 @@ spec:
       value: {{ azure.grupper.saksbehandler }}
     - name: DP_BEHANDLING_API_SCOPE
       value: {{ DP_BEHANDLING_API_SCOPE }}
+    - name: DP_SAKSBEHANDLING_API_SCOPE
+      value: {{ DP_SAKSBEHANDLING_API_SCOPE }}
   observability:
     autoInstrumentation:
       enabled: true

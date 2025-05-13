@@ -5,7 +5,7 @@ azure:
 
 wonderwalled: false
 DP_BEHANDLING_API_SCOPE: "api://prod-gcp.teamdagpenger.dp-behandling/.default"
-
+DP_SAKSBEHANDLING_API_SCOPE: "api://prod-gcp.teamdagpenger.dp-saksbehandling/.default"
 db:
   highAvailability: true
   pointInTimeRecovery: true

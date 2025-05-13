@@ -16,23 +16,31 @@ import no.nav.dagpenger.vedtaksmelding.portabletext.Child
 
 private val logger = KotlinLogging.logger {}
 
+interface Brev {
+    fun brevBlokkIder(): List<String>
+
+    fun hentBrevBlokker(): List<BrevBlokk>
+
+    fun hentOpplysninger(): List<Opplysning>
+}
+
 abstract class VedtakMelding(
     protected open val vedtak: Vedtak,
-) {
+) : Brev {
     abstract val harBrevstøtte: Boolean
 
     protected abstract val brevBlokkIder: List<String>
     protected abstract val brevBlokker: List<BrevBlokk>
 
-    fun brevBlokkIder(): List<String> {
+    override fun brevBlokkIder(): List<String> {
         return brevBlokkIder + fasteAvsluttendeBlokker
     }
 
-    fun hentBrevBlokker(): List<BrevBlokk> {
+    override fun hentBrevBlokker(): List<BrevBlokk> {
         return brevBlokker
     }
 
-    fun hentOpplysninger(): List<Opplysning> {
+    override fun hentOpplysninger(): List<Opplysning> {
         return brevBlokker.asSequence()
             .filter { it.textId in brevBlokkIder() }
             .flatMap { it.innhold }
