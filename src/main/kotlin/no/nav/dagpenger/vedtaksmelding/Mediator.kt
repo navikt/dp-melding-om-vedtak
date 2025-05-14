@@ -40,7 +40,7 @@ class Mediator(
     ): Brev {
         val sanityInnhold = sanityKlient.hentBrevBlokkerJson()
         vedtaksmeldingRepository.lagreSanityInnhold(behandlingId, sanityInnhold)
-        return hentVedtakOgByggVedtaksMelding2(
+        return hentVedtakOgByggVedtaksMelding(
             behandlingId = behandlingId,
             saksbehandler = saksbehandler,
             behandlingstype = behanldingstype,
@@ -54,7 +54,7 @@ class Mediator(
         saksbehandler: Saksbehandler,
         behanldingstype: Behandlingstype,
     ): Brev {
-        return hentVedtakOgByggVedtaksMelding2(
+        return hentVedtakOgByggVedtaksMelding(
             behandlingId = behandlingId,
             saksbehandler = saksbehandler,
             behandlingstype = behanldingstype,
@@ -64,45 +64,6 @@ class Mediator(
     }
 
     private suspend fun hentVedtakOgByggVedtaksMelding(
-        behandlingId: UUID,
-        saksbehandler: Saksbehandler,
-        sanitySupplier: suspend () -> String,
-    ): VedtakMelding {
-        val sanityInnhold = sanitySupplier.invoke()
-
-        val alleBrevblokker: List<BrevBlokk> =
-            objectMapper.readValue(
-                sanityInnhold,
-                object : TypeReference<ResultDTO>() {},
-            ).result
-        val vedtak =
-            behandlingKlient.hentVedtak(
-                behandlingId = behandlingId,
-                saksbehandler = saksbehandler,
-            ).onFailure { throwable ->
-                logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
-            }.getOrThrow()
-
-        return runCatching {
-            VedtakMelding.byggVedtaksmelding(vedtak, alleBrevblokker)
-        }.getOrElse {
-            when {
-                Configuration.isDev -> {
-                    logger.error(it) { "Lager tomt vedtak i dev men feil er: ${it.message}" }
-                    TomtVedtak(
-                        vedtak = vedtak,
-                        alleBrevblokker = alleBrevblokker,
-                    )
-                }
-
-                else -> {
-                    throw it
-                }
-            }
-        }
-    }
-
-    private suspend fun hentVedtakOgByggVedtaksMelding2(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
         behandlingstype: Behandlingstype,
@@ -124,7 +85,23 @@ class Mediator(
                     ).onFailure { throwable ->
                         logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
                     }.getOrThrow()
-                VedtakMelding.byggVedtaksmelding(vedtak, alleBrevblokker)
+
+                runCatching {
+                    VedtakMelding.byggVedtaksmelding(vedtak, alleBrevblokker)
+                }.getOrElse {
+                    when {
+                        Configuration.isDev -> {
+                            logger.error(it) { "Lager tomt vedtak i dev men feil er: ${it.message}" }
+                            TomtVedtak(
+                                vedtak = vedtak,
+                                alleBrevblokker = alleBrevblokker,
+                            )
+                        }
+                        else -> {
+                            throw it
+                        }
+                    }
+                }
             }
 
             KLAGE -> {
@@ -135,6 +112,7 @@ class Mediator(
                     ).onFailure { throwable ->
                         logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
                     }.getOrThrow()
+
                 KlagevedtakMelding(
                     klagevedtak = vedtak,
                     alleBrevBlokker = alleBrevblokker,
@@ -206,7 +184,11 @@ class Mediator(
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): String {
         val html =
-            hentEnderligVedtaksmelding(behandlingId, behandler, meldingOmVedtakData.behandlingstype.tilBehandlingstype()).let { vedtak ->
+            hentEnderligVedtaksmelding(
+                behandlingId,
+                behandler,
+                meldingOmVedtakData.behandlingstype.tilBehandlingstype(),
+            ).let { vedtak ->
 
                 HtmlConverter.toHtml(
                     vedtak.hentBrevBlokker(),
