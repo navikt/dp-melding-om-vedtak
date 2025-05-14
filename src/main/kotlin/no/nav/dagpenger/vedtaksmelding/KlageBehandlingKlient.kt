@@ -35,7 +35,7 @@ internal class KlageBehandlingHttpKlient(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
     ): Result<String> {
-        return httpClient.get(urlString = "$dpSaksbehandlingKlageApiUrl/$behandlingId") {
+        return httpClient.get(urlString = "$dpSaksbehandlingKlageApiUrl/klage/$behandlingId") {
             header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(saksbehandler.token)}")
             accept(ContentType.Application.Json)
         }.let { response ->
