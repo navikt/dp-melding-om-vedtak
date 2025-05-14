@@ -52,8 +52,13 @@ class Mediator(
     suspend fun hentEnderligVedtaksmelding(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
-    ): VedtakMelding {
-        return hentVedtakOgByggVedtaksMelding(behandlingId, saksbehandler) {
+        behanldingstype: Behandlingstype,
+    ): Brev {
+        return hentVedtakOgByggVedtaksMelding2(
+            behandlingId = behandlingId,
+            saksbehandler = saksbehandler,
+            behandlingstype = behanldingstype,
+        ) {
             vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
         }
     }
@@ -201,7 +206,7 @@ class Mediator(
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): String {
         val html =
-            hentEnderligVedtaksmelding(behandlingId, behandler).let { vedtak ->
+            hentEnderligVedtaksmelding(behandlingId, behandler, meldingOmVedtakData.behandlingstype.tilBehandlingstype()).let { vedtak ->
 
                 HtmlConverter.toHtml(
                     vedtak.hentBrevBlokker(),
