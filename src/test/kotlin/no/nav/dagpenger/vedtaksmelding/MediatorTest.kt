@@ -16,6 +16,7 @@ import no.nav.dagpenger.vedtaksmelding.db.Postgres.withMigratedDb
 import no.nav.dagpenger.vedtaksmelding.db.PostgresDataSourceBuilder.dataSource
 import no.nav.dagpenger.vedtaksmelding.db.PostgresVedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
@@ -75,7 +76,11 @@ class MediatorTest {
                     vedtaksmeldingRepository = repository,
                 )
             runBlocking {
-                mediator.hentVedtaksmelding(behandlingId, saksbehandler).shouldBeInstanceOf<AvslagMelding>()
+                mediator.hentVedtaksmelding(
+                    behandlingId,
+                    saksbehandler,
+                    Behandlingstype.RETT_TIL_DAGPENGER,
+                ).shouldBeInstanceOf<AvslagMelding>()
             }
             repository.hentSanityInnhold(behandlingId) shouldEqualJson resource
         }
@@ -160,6 +165,7 @@ class MediatorTest {
             mediator.hentVedtaksmelding(
                 behandlingId = behandlingId,
                 saksbehandler = saksbehandler,
+                Behandlingstype.RETT_TIL_DAGPENGER,
             ).shouldBeInstanceOf<AvslagMelding>()
         }
 
@@ -185,6 +191,7 @@ class MediatorTest {
                 mediator.hentVedtaksmelding(
                     behandlingId = behandlingId,
                     saksbehandler = saksbehandler,
+                    Behandlingstype.RETT_TIL_DAGPENGER,
                 )
             }
         }
@@ -219,7 +226,7 @@ class MediatorTest {
                     vedtaksmeldingRepository = vedtaksmeldingRepository,
                 ),
             ).also {
-                coEvery { it.hentVedtaksmelding(behandlingId, saksbehandler) } returns
+                coEvery { it.hentVedtaksmelding(behandlingId, saksbehandler, behanldingstype = any()) } returns
                     mockk<VedtakMelding>(relaxed = true).also {
                         coEvery { it.hentBrevBlokker() } returns
                             listOf(

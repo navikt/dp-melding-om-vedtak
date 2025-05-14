@@ -22,6 +22,8 @@ interface Brev {
     fun hentBrevBlokker(): List<BrevBlokk>
 
     fun hentOpplysninger(): List<Opplysning>
+
+    fun hentFagsakId(): String
 }
 
 abstract class VedtakMelding(
@@ -51,7 +53,7 @@ abstract class VedtakMelding(
             .toList()
     }
 
-    fun hentFagsakId(): String {
+    override fun hentFagsakId(): String {
         return vedtak.fagsakId
     }
 

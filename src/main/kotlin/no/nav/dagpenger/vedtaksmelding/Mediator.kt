@@ -7,6 +7,7 @@ import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakResponseDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.Companion.tilBehandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.KLAGE
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.RETT_TIL_DAGPENGER
@@ -35,19 +36,17 @@ class Mediator(
     suspend fun hentVedtaksmelding(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
-    ): VedtakMelding {
+        behanldingstype: Behandlingstype,
+    ): Brev {
         val sanityInnhold = sanityKlient.hentBrevBlokkerJson()
         vedtaksmeldingRepository.lagreSanityInnhold(behandlingId, sanityInnhold)
-        return hentVedtakOgByggVedtaksMelding(behandlingId, saksbehandler) { sanityInnhold }
-    }
-
-    suspend fun hentKlageVedtaksmelding(
-        behandlingId: UUID,
-        saksbehandler: Saksbehandler,
-    ): KlagevedtakMelding {
-        val sanityInnhold = sanityKlient.hentBrevBlokkerJson()
-        vedtaksmeldingRepository.lagreSanityInnhold(behandlingId, sanityInnhold)
-        return hentVedtakOgByggKlageVedtaksMelding(behandlingId, saksbehandler) { sanityInnhold }
+        return hentVedtakOgByggVedtaksMelding2(
+            behandlingId = behandlingId,
+            saksbehandler = saksbehandler,
+            behandlingstype = behanldingstype,
+        ) {
+            sanityInnhold
+        }
     }
 
     suspend fun hentEnderligVedtaksmelding(
@@ -57,31 +56,6 @@ class Mediator(
         return hentVedtakOgByggVedtaksMelding(behandlingId, saksbehandler) {
             vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
         }
-    }
-
-    private suspend fun hentVedtakOgByggKlageVedtaksMelding(
-        behandlingId: UUID,
-        saksbehandler: Saksbehandler,
-        sanitySupplier: suspend () -> String,
-    ): KlagevedtakMelding {
-        val sanityInnhold = sanitySupplier.invoke()
-
-        val alleBrevblokker: List<BrevBlokk> =
-            objectMapper.readValue(
-                sanityInnhold,
-                object : TypeReference<ResultDTO>() {},
-            ).result
-        val vedtak =
-            klageBehandlingKlient.hentVedtak(
-                behandlingId = behandlingId,
-                saksbehandler = saksbehandler,
-            ).onFailure { throwable ->
-                logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
-            }.getOrThrow()
-        return KlagevedtakMelding(
-            klagevedtak = vedtak,
-            alleBrevBlokker = alleBrevblokker,
-        )
     }
 
     private suspend fun hentVedtakOgByggVedtaksMelding(
@@ -123,6 +97,47 @@ class Mediator(
         }
     }
 
+    private suspend fun hentVedtakOgByggVedtaksMelding2(
+        behandlingId: UUID,
+        saksbehandler: Saksbehandler,
+        behandlingstype: Behandlingstype,
+        sanitySupplier: suspend () -> String,
+    ): Brev {
+        val sanityInnhold = sanitySupplier.invoke()
+
+        val alleBrevblokker: List<BrevBlokk> =
+            objectMapper.readValue(
+                sanityInnhold,
+                object : TypeReference<ResultDTO>() {},
+            ).result
+        return when (behandlingstype) {
+            RETT_TIL_DAGPENGER -> {
+                val vedtak =
+                    behandlingKlient.hentVedtak(
+                        behandlingId = behandlingId,
+                        saksbehandler = saksbehandler,
+                    ).onFailure { throwable ->
+                        logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
+                    }.getOrThrow()
+                VedtakMelding.byggVedtaksmelding(vedtak, alleBrevblokker)
+            }
+
+            KLAGE -> {
+                val vedtak =
+                    klageBehandlingKlient.hentVedtak(
+                        behandlingId = behandlingId,
+                        saksbehandler = saksbehandler,
+                    ).onFailure { throwable ->
+                        logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
+                    }.getOrThrow()
+                KlagevedtakMelding(
+                    klagevedtak = vedtak,
+                    alleBrevBlokker = alleBrevblokker,
+                )
+            }
+        }
+    }
+
     fun lagreUtvidetBeskrivelse(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime {
         return vedtaksmeldingRepository.lagre(utvidetBeskrivelse)
     }
@@ -151,56 +166,33 @@ class Mediator(
         behandler: Saksbehandler,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): MeldingOmVedtakResponseDTO {
-        return when (meldingOmVedtakData.behandlingstype.tilBehandlingstype()) {
-            RETT_TIL_DAGPENGER -> {
-                hentVedtaksmelding(behandlingId, behandler).let { vedtak ->
-                    val html =
-                        HtmlConverter.toHtml(
-                            vedtak.hentBrevBlokker(),
-                            vedtak.hentOpplysninger(),
-                            meldingOmVedtakData,
-                            vedtak.hentFagsakId(),
-                        )
+        val vedtak =
+            hentVedtaksmelding(
+                behandlingId = behandlingId,
+                saksbehandler = behandler,
+                behanldingstype = meldingOmVedtakData.behandlingstype.tilBehandlingstype(),
+            )
 
-                    MeldingOmVedtakResponseDTO(
-                        html = html,
-                        utvidedeBeskrivelser =
-                            hentUtvidedeBeskrivelser(behandlingId, vedtak).map {
-                                UtvidetBeskrivelseDTO(
-                                    brevblokkId = it.brevblokkId,
-                                    tekst = it.tekst ?: "",
-                                    sistEndretTidspunkt = it.sistEndretTidspunkt ?: LocalDateTime.now(),
-                                    tittel = it.tittel,
-                                )
-                            },
-                    )
-                }
-            }
-            KLAGE -> {
-                hentKlageVedtaksmelding(behandlingId, behandler).let { vedtak ->
-                    val html =
-                        HtmlConverter.toHtml(
-                            brevBlokker = vedtak.hentBrevBlokker(),
-                            opplysninger = vedtak.hentOpplysninger(),
-                            meldingOmVedtakData = meldingOmVedtakData,
-                            fagsakId = vedtak.hentFagsakId(),
-                        )
+        val html =
+            HtmlConverter.toHtml(
+                vedtak.hentBrevBlokker(),
+                vedtak.hentOpplysninger(),
+                meldingOmVedtakData,
+                vedtak.hentFagsakId(),
+            )
 
-                    MeldingOmVedtakResponseDTO(
-                        html = html,
-                        utvidedeBeskrivelser =
-                            hentUtvidedeBeskrivelser(behandlingId, vedtak).map {
-                                UtvidetBeskrivelseDTO(
-                                    brevblokkId = it.brevblokkId,
-                                    tekst = it.tekst ?: "",
-                                    sistEndretTidspunkt = it.sistEndretTidspunkt ?: LocalDateTime.now(),
-                                    tittel = it.tittel,
-                                )
-                            },
+        return MeldingOmVedtakResponseDTO(
+            html = html,
+            utvidedeBeskrivelser =
+                hentUtvidedeBeskrivelser(behandlingId, vedtak).map {
+                    UtvidetBeskrivelseDTO(
+                        brevblokkId = it.brevblokkId,
+                        tekst = it.tekst ?: "",
+                        sistEndretTidspunkt = it.sistEndretTidspunkt ?: LocalDateTime.now(),
+                        tittel = it.tittel,
                     )
-                }
-            }
-        }
+                },
+        )
     }
 
     suspend fun hentEndeligVedtak(
