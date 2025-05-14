@@ -1,6 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
 import io.kotest.matchers.shouldBe
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker
 import no.nav.dagpenger.vedtaksmelding.util.readFile
 import org.junit.jupiter.api.Test
 
@@ -11,10 +12,12 @@ class KlagevedtakMeldingTest {
         ).vedtak()
 
     @Test
-    fun `Rikig brevblokker rekkefølge for klagemelding `() {
+    fun `Rikig brevblokker  for klagemelding `() {
         KlagevedtakMelding(
             klagevedtak = klageVedtak,
             alleBrevBlokker = emptyList(),
-        ).brevBlokkIder() shouldBe KlagevedtakMelding.fasteAvsluttendeBlokker
+        ).let { klageMelding ->
+            klageMelding.brevBlokkIder() shouldBe listOf(KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_1.brevblokkId)
+        }
     }
 }

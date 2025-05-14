@@ -35,7 +35,9 @@ import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_UTBETALING
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseMelding
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
+import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
 import no.nav.dagpenger.vedtaksmelding.util.finnUtvidetBeskrivelseTekst
@@ -62,6 +64,7 @@ class VedtakHtmlTest {
                     },
             ),
         )
+    private val alleBrevBlokker: List<BrevBlokk> = runBlocking { sanityKlient.hentBrevBlokker() }
 
     private fun hentVedtak(navn: String): Vedtak = navn.readFile().let { VedtakMapper(it).vedtak() }
 
@@ -91,6 +94,27 @@ class VedtakHtmlTest {
                         ),
                 ),
         )
+
+    @Test
+    fun `Html av klage`() {
+        val klageVedtak =
+            KlagevedtakMapper(
+                vedtakJson = "/json/klage/klagevedtak.json".readFile(),
+            ).vedtak()
+
+        val klageMelding =
+            KlagevedtakMelding(
+                klagevedtak = klageVedtak,
+                alleBrevBlokker = alleBrevBlokker,
+            )
+
+        HtmlConverter.toHtml(
+            brevBlokker = klageMelding.hentBrevBlokker(),
+            opplysninger = klageMelding.hentOpplysninger(),
+            meldingOmVedtakData = meldingOmVedtakData,
+            fagsakId = "fagsakId test",
+        ) brevblokkRekkefølgeShouldBe listOf(KLAGE_OPPRETTHOLDELSE_DEL_1.brevblokkId)
+    }
 
     @Test
     fun `Html av avslag minsteinntekt`() {
