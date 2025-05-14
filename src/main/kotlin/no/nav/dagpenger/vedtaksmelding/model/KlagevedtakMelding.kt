@@ -34,7 +34,7 @@ class KlagevedtakMelding(
             .toList()
     }
 
-    fun hentFagsakId(): String {
+    override fun hentFagsakId(): String {
         return klagevedtak.fagsakId
     }
 
