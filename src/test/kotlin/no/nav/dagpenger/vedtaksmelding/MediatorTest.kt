@@ -6,6 +6,7 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.every
 import io.mockk.mockk
 import io.mockk.spyk
 import kotlinx.coroutines.runBlocking
@@ -266,7 +267,10 @@ class MediatorTest {
                 mediator.hentVedtak(
                     behandlingId = behandlingId,
                     behandler = saksbehandler,
-                    meldingOmVedtakData = mockk(relaxed = true),
+                    meldingOmVedtakData =
+                        mockk<MeldingOmVedtakDataDTO>(relaxed = true).also {
+                            every { it.behandlingstype } returns null
+                        },
                 ).utvidedeBeskrivelser
             require(true) {
                 "utvidedeBeskrivelser should not be null"
