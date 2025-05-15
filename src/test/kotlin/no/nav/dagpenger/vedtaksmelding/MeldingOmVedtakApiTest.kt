@@ -19,6 +19,7 @@ import io.mockk.mockk
 import io.mockk.slot
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
+import no.nav.dagpenger.saksbehandling.api.models.BehandlingstypeDTO
 import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakResponseDTO
@@ -234,9 +235,9 @@ class MeldingOmVedtakApiTest {
         }
     }
 
-    private fun lagMeldingOmVedtakDataDTO(behandlingstype: Behandlingstype): MeldingOmVedtakDataDTO {
+    private fun lagMeldingOmVedtakDataDTO(behandlingstype: Behandlingstype?): MeldingOmVedtakDataDTO {
         return MeldingOmVedtakDataDTO(
-            behandlingstype = behandlingstype.name,
+            behandlingstype = behandlingstype?.let { BehandlingstypeDTO.valueOf(behandlingstype.name) },
             fornavn = "Test ForNavn",
             etternavn = "Test EtterNavn",
             fodselsnummer = "12345678901",
@@ -298,7 +299,7 @@ class MeldingOmVedtakApiTest {
                     it.hentVedtak(
                         behandlingId,
                         Saksbehandler(saksbehandlerToken),
-                        meldingOmVedtakData = lagMeldingOmVedtakDataDTO(behandlingstype = RETT_TIL_DAGPENGER),
+                        meldingOmVedtakData = lagMeldingOmVedtakDataDTO(behandlingstype = null),
                     )
                 } returns
                     MeldingOmVedtakResponseDTO(

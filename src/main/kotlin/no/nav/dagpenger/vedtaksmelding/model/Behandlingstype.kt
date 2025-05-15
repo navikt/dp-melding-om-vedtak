@@ -1,17 +1,17 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
+import no.nav.dagpenger.saksbehandling.api.models.BehandlingstypeDTO
+
 enum class Behandlingstype {
     RETT_TIL_DAGPENGER,
     KLAGE,
     ;
 
     companion object {
-        fun String?.tilBehandlingstype(): Behandlingstype {
-            return try {
-                Behandlingstype.valueOf(this?.uppercase() ?: "")
-            } catch (e: Throwable) {
-                RETT_TIL_DAGPENGER
-            }
+        fun BehandlingstypeDTO?.tilBehandlingstype(): Behandlingstype {
+            return this?.let {
+                Behandlingstype.valueOf(it.value)
+            } ?: RETT_TIL_DAGPENGER
         }
     }
 }

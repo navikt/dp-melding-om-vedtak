@@ -246,8 +246,11 @@ components:
       type: object
       properties:
         behandlingstype:
-          type: string
-          default: RETT_TIL_DAGPENGER
+          $ref: '#/components/schemas/Behandlingstype'
+          default: "RETT_TIL_DAGPENGER"
+#          schema:
+#          $ref: '#/components/schemas/Behandlingstype'
+#          default: "RETT_TIL_DAGPENGER"
         fornavn:
           type: string
         mellomnavn:
@@ -295,6 +298,11 @@ components:
         - etternavn
         - enhet
 
+    Behandlingstype:
+      type: string
+      enum:
+        - "RETT_TIL_DAGPENGER"
+        - "KLAGE"
     HttpProblem:
       type: object
       properties:
