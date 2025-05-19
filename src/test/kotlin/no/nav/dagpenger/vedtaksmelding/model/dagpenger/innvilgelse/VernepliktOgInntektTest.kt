@@ -28,10 +28,10 @@ import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.BOOLSK
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.UKER
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår.Status.OPPFYLT
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår.Status.OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 

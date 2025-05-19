@@ -1,6 +1,7 @@
-package no.nav.dagpenger.vedtaksmelding.model.vedtak
+package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
 import mu.KotlinLogging
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import java.util.UUID
 
 private val sikkerlogg = KotlinLogging.logger("tjenestekall")

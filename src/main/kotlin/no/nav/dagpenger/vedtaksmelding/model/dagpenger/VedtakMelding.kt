@@ -9,22 +9,12 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevbl
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.VEILEDNING_FRA_NAV
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseMelding
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Brev
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.portabletext.Child
 
 private val logger = KotlinLogging.logger {}
-
-interface Brev {
-    fun brevBlokkIder(): List<String>
-
-    fun hentBrevBlokker(): List<BrevBlokk>
-
-    fun hentOpplysninger(): List<Opplysning>
-
-    fun hentFagsakId(): String
-}
 
 abstract class VedtakMelding(
     protected open val vedtak: Vedtak,

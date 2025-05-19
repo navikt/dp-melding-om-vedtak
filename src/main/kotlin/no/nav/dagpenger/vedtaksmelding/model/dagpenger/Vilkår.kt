@@ -1,4 +1,4 @@
-package no.nav.dagpenger.vedtaksmelding.model.vedtak
+package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
 data class Vilkår(
     val navn: String,

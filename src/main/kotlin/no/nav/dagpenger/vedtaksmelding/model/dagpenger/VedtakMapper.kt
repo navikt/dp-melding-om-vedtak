@@ -65,11 +65,9 @@ import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.ENHETSLØS
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.TIMER
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.UKER
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.AVSLÅTT
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall.INNVILGET
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.AVSLÅTT
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.INNVILGET
 import java.time.LocalDate
 import java.time.Month
 import java.util.UUID
