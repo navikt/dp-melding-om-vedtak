@@ -39,13 +39,45 @@ class KlagevedtakMapper(vedtakJson: String) {
         setOf(
             Opplysning(
                 opplysningTekstId = KlageOpplysningTyper.KlageMottatDato.opplysningTekstId,
-                råVerdi = vedtak.verdi(KlageOpplysningTyper.KlageMottatDato.opplysningNavnId),
+                råVerdi = vedtak.behandlingsverdi(KlageOpplysningTyper.KlageMottatDato.opplysningNavnId),
                 datatype = Opplysning.Datatype.DATO,
+            ),
+            Opplysning(
+                opplysningTekstId = KlageOpplysningTyper.KlageUtfall.opplysningTekstId,
+                råVerdi = vedtak.utfallsverdi(KlageOpplysningTyper.KlageUtfall.opplysningNavnId),
+                datatype = Opplysning.Datatype.TEKST,
+            ),
+            Opplysning(
+                opplysningTekstId = KlageOpplysningTyper.ErKlagenSkriftelig.opplysningTekstId,
+                råVerdi = vedtak.behandlingsverdi(KlageOpplysningTyper.ErKlagenSkriftelig.opplysningNavnId),
+                datatype = Opplysning.Datatype.BOOLSK,
+            ),
+            Opplysning(
+                opplysningTekstId = KlageOpplysningTyper.ErKlagenUnderskrevet.opplysningTekstId,
+                råVerdi = vedtak.behandlingsverdi(KlageOpplysningTyper.ErKlagenUnderskrevet.opplysningNavnId),
+                datatype = Opplysning.Datatype.BOOLSK,
+            ),
+            Opplysning(
+                opplysningTekstId = KlageOpplysningTyper.KlagenNevnerEndring.opplysningTekstId,
+                råVerdi = vedtak.behandlingsverdi(KlageOpplysningTyper.KlagenNevnerEndring.opplysningNavnId),
+                datatype = Opplysning.Datatype.BOOLSK,
+            ),
+            Opplysning(
+                opplysningTekstId = KlageOpplysningTyper.RettsligKlageinteresse.opplysningTekstId,
+                råVerdi = vedtak.behandlingsverdi(KlageOpplysningTyper.RettsligKlageinteresse.opplysningNavnId),
+                datatype = Opplysning.Datatype.BOOLSK,
             ),
         )
 
-    private fun JsonNode.verdi(opplysningNavnId: String): String {
+    private fun JsonNode.behandlingsverdi(opplysningNavnId: String): String {
         return this.get("behandlingOpplysninger").find {
+            it.get("opplysningNavnId").asText() == opplysningNavnId
+        }?.get("verdi")?.asText()
+            ?: throw IllegalArgumentException("Opplysning med navnId $opplysningNavnId mangler for behandlingId $behandlingId")
+    }
+
+    private fun JsonNode.utfallsverdi(opplysningNavnId: String): String {
+        return this.get("utfallOpplysninger").find {
             it.get("opplysningNavnId").asText() == opplysningNavnId
         }?.get("verdi")?.asText()
             ?: throw IllegalArgumentException("Opplysning med navnId $opplysningNavnId mangler for behandlingId $behandlingId")
