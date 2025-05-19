@@ -1,7 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.model.klage
 
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Brev
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.KlageVedtak
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Brev
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.portabletext.Child

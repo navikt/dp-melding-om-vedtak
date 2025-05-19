@@ -13,7 +13,7 @@ import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMapper
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import java.util.UUID
 
 private val sikkerlogg = KotlinLogging.logger("tjenestekall")

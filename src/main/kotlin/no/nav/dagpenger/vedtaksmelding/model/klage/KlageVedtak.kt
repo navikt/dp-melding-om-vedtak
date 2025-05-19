@@ -1,5 +1,6 @@
-package no.nav.dagpenger.vedtaksmelding.model.vedtak
+package no.nav.dagpenger.vedtaksmelding.model.klage
 
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import java.util.UUID
 
 data class KlageVedtak(
