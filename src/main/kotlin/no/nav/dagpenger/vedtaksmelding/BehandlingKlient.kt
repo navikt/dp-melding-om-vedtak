@@ -12,7 +12,7 @@ import io.ktor.http.HttpStatusCode
 import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import java.util.UUID
 

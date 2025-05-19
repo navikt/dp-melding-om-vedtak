@@ -11,12 +11,12 @@ import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.Companion.tilBehandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.KLAGE
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.RETT_TIL_DAGPENGER
-import no.nav.dagpenger.vedtaksmelding.model.Brev
-import no.nav.dagpenger.vedtaksmelding.model.KlagevedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
-import no.nav.dagpenger.vedtaksmelding.model.avslag.TomtVedtak
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Brev
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.TomtVedtak
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlagevedtakMelding
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter
 import no.nav.dagpenger.vedtaksmelding.sanity.ResultDTO

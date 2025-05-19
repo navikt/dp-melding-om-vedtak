@@ -7,9 +7,9 @@ import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMapper
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
 import no.nav.dagpenger.vedtaksmelding.sanity.ResultDTO
 import no.nav.dagpenger.vedtaksmelding.util.finnUtvidetBeskrivelseNode
