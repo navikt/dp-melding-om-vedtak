@@ -6,12 +6,12 @@ import io.ktor.client.engine.mock.respond
 import io.ktor.http.headersOf
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.lagHttpKlient
-import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
-import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.BarnetilleggIKroner
-import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.Prøvingsdato
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT_HJEMMEL
-import no.nav.dagpenger.vedtaksmelding.model.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.BarnetilleggIKroner
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.Prøvingsdato
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT_HJEMMEL
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
 import org.junit.jupiter.api.Test
 
 class SanityKlientMappingTest {

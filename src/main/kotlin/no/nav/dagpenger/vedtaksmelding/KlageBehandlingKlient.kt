@@ -11,8 +11,8 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
-import no.nav.dagpenger.vedtaksmelding.model.KlagevedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlagevedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.KlageVedtak
 import java.util.UUID
 
