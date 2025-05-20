@@ -29,5 +29,7 @@ data class Vedtak(
         AVSLÅTT,
     }
 
-    class OpplysningIkkeFunnet(message: String) : RuntimeException(message)
+    class OpplysningIkkeFunnet(
+        message: String,
+    ) : RuntimeException(message)
 }

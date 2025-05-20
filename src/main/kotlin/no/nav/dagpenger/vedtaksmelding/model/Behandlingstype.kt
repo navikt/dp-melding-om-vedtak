@@ -8,10 +8,9 @@ enum class Behandlingstype {
     ;
 
     companion object {
-        fun BehandlingstypeDTO?.tilBehandlingstype(): Behandlingstype {
-            return this?.let {
+        fun BehandlingstypeDTO?.tilBehandlingstype(): Behandlingstype =
+            this?.let {
                 Behandlingstype.valueOf(it.value)
             } ?: RETT_TIL_DAGPENGER
-        }
     }
 }

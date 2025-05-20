@@ -2,7 +2,10 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
 import java.util.UUID
 
-enum class OpplysningTyper(val opplysningTypeId: UUID?, val opplysningTekstId: String) {
+enum class OpplysningTyper(
+    val opplysningTypeId: UUID?,
+    val opplysningTekstId: String,
+) {
     KravTilProsentvisTapAvArbeidstid(
         opplysningTypeId = UUID.fromString("0194881f-9435-72a8-b1ce-9575cbc2a762"),
         opplysningTekstId = "opplysning.krav-til-prosentvis-tap-av-arbeidstid",

@@ -8,8 +8,11 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.HarBruktB
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.HarBruktBeregningsregelArbeidstidSiste36Måneder
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.HarBruktBeregningsregelArbeidstidSiste6Måneder
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.KravTilProsentvisTapAvArbeidstid
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.PERMITTERING_FISK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.TAPT_ARBEIDSTID
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.TAPT_ARBEIDSTID_ELLER_ARBEIDSINNTEKT
@@ -28,9 +31,6 @@ import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.BOOLSK
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.TIMER
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 

@@ -1,6 +1,8 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag
 
-enum class AvslagBrevblokker(val brevblokkId: String) {
+enum class AvslagBrevblokker(
+    val brevblokkId: String,
+) {
     AVSLAG_INNLEDNING(brevblokkId = "brev.blokk.avslag-ordinaer"),
     AVSLAG_INNLEDNING_PERMITTERT(brevblokkId = "brev.blokk.avslag-permittert"),
     AVSLAG_INNLEDNING_PERMITTERT_FISK(brevblokkId = "brev.blokk.avslag-permittert-fisk"),

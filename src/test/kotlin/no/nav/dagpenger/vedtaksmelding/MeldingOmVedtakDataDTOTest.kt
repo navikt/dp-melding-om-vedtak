@@ -27,8 +27,8 @@ class MeldingOmVedtakDataDTOTest {
         fornavn: String,
         mellomnavn: String?,
         etternavn: String,
-    ): MeldingOmVedtakDataDTO {
-        return MeldingOmVedtakDataDTO(
+    ): MeldingOmVedtakDataDTO =
+        MeldingOmVedtakDataDTO(
             fornavn = fornavn,
             etternavn = etternavn,
             fodselsnummer = "12345678901",
@@ -54,5 +54,4 @@ class MeldingOmVedtakDataDTOTest {
                         ),
                 ),
         )
-    }
 }

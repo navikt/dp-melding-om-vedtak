@@ -24,16 +24,13 @@ abstract class VedtakMelding(
     protected abstract val brevBlokkIder: List<String>
     protected abstract val brevBlokker: List<BrevBlokk>
 
-    override fun brevBlokkIder(): List<String> {
-        return brevBlokkIder + fasteAvsluttendeBlokker
-    }
+    override fun brevBlokkIder(): List<String> = brevBlokkIder + fasteAvsluttendeBlokker
 
-    override fun hentBrevBlokker(): List<BrevBlokk> {
-        return brevBlokker
-    }
+    override fun hentBrevBlokker(): List<BrevBlokk> = brevBlokker
 
-    override fun hentOpplysninger(): List<Opplysning> {
-        return brevBlokker.asSequence()
+    override fun hentOpplysninger(): List<Opplysning> =
+        brevBlokker
+            .asSequence()
             .filter { it.textId in brevBlokkIder() }
             .flatMap { it.innhold }
             .flatMap { it.children }
@@ -41,11 +38,8 @@ abstract class VedtakMelding(
             .map { it.behandlingOpplysning.textId }
             .map { vedtak.hentOpplysning(it) }
             .toList()
-    }
 
-    override fun hentFagsakId(): String {
-        return vedtak.fagsakId
-    }
+    override fun hentFagsakId(): String = vedtak.fagsakId
 
     companion object {
         val fasteAvsluttendeBlokker =
@@ -61,13 +55,13 @@ abstract class VedtakMelding(
         fun byggVedtaksmelding(
             vedtak: Vedtak,
             alleBrevblokker: List<BrevBlokk>,
-        ): VedtakMelding {
-            return try {
-                mutableSetOf<Result<VedtakMelding>>().apply {
-                    add(kotlin.runCatching { AvslagMelding(vedtak, alleBrevblokker) })
-                    add(kotlin.runCatching { InnvilgelseMelding(vedtak, alleBrevblokker) })
-                }
-                    .single { it.isSuccess }
+        ): VedtakMelding =
+            try {
+                mutableSetOf<Result<VedtakMelding>>()
+                    .apply {
+                        add(kotlin.runCatching { AvslagMelding(vedtak, alleBrevblokker) })
+                        add(kotlin.runCatching { InnvilgelseMelding(vedtak, alleBrevblokker) })
+                    }.single { it.isSuccess }
                     .getOrThrow()
             } catch (e: Exception) {
                 logger.error(e) { "Feil ved oppbygging av vedtaksmelding. BehandlingId ${vedtak.behandlingId}" }
@@ -85,10 +79,11 @@ abstract class VedtakMelding(
                     else -> throw e
                 }
             }
-        }
     }
 
-    enum class FasteBrevblokker(val brevBlokkId: String) {
+    enum class FasteBrevblokker(
+        val brevBlokkId: String,
+    ) {
         RETT_TIL_INNSYN("brev.blokk.rett-til-innsyn"),
         RETT_TIL_Å_KLAGE("brev.blokk.rett-til-aa-klage"),
         PERSONOPPLYSNINGER("brev.blokk.personopplysninger"),
@@ -97,8 +92,12 @@ abstract class VedtakMelding(
         SPØRSMÅL("brev.blokk.sporsmaal"),
     }
 
-    class UkjentVedtakException(override val message: String, override val cause: Throwable? = null) :
-        RuntimeException(message, cause)
+    class UkjentVedtakException(
+        override val message: String,
+        override val cause: Throwable? = null,
+    ) : RuntimeException(message, cause)
 
-    class ManglerBrevstøtte(override val message: String) : RuntimeException(message)
+    class ManglerBrevstøtte(
+        override val message: String,
+    ) : RuntimeException(message)
 }

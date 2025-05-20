@@ -9,20 +9,21 @@ import java.time.LocalDateTime
 import java.util.UUID
 import javax.sql.DataSource
 
-class PostgresVedtaksmeldingRepository(private val dataSource: DataSource) : VedtaksmeldingRepository {
-    override fun lagre(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime {
-        return sessionOf(dataSource).use { session ->
+class PostgresVedtaksmeldingRepository(
+    private val dataSource: DataSource,
+) : VedtaksmeldingRepository {
+    override fun lagre(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime =
+        sessionOf(dataSource).use { session ->
             session.transaction { tx ->
                 tx.lagre(utvidetBeskrivelse)
             }
         }
-    }
 
     override fun finn(
         behandlingId: UUID,
         brevblokkId: String,
-    ): UtvidetBeskrivelse? {
-        return sessionOf(dataSource).use { session ->
+    ): UtvidetBeskrivelse? =
+        sessionOf(dataSource).use { session ->
             session.run(
                 queryOf(
                     //language=PostgreSQL
@@ -47,22 +48,20 @@ class PostgresVedtaksmeldingRepository(private val dataSource: DataSource) : Ved
                 }.asSingle,
             )
         }
-    }
 
     override fun hent(
         behandlingId: UUID,
         brevblokkId: String,
-    ): UtvidetBeskrivelse {
-        return finn(
+    ): UtvidetBeskrivelse =
+        finn(
             behandlingId = behandlingId,
             brevblokkId = brevblokkId,
         ) ?: throw DataNotFoundException(
             "Kunne ikke finne utvidet beskrivelse for behandlingId: $behandlingId og brevblokkId: $brevblokkId",
         )
-    }
 
-    override fun hentUtvidedeBeskrivelserFor(behandlingId: UUID): List<UtvidetBeskrivelse> {
-        return sessionOf(dataSource).use { session ->
+    override fun hentUtvidedeBeskrivelserFor(behandlingId: UUID): List<UtvidetBeskrivelse> =
+        sessionOf(dataSource).use { session ->
             session.run(
                 queryOf(
                     //language=PostgreSQL
@@ -88,13 +87,12 @@ class PostgresVedtaksmeldingRepository(private val dataSource: DataSource) : Ved
                 }.asList,
             )
         }
-    }
 
     override fun lagreSanityInnhold(
         behandlingId: UUID,
         sanityInnhold: String,
-    ) {
-        return sessionOf(dataSource).use { session ->
+    ): Unit =
+        sessionOf(dataSource).use { session ->
             session.run(
                 queryOf(
                     //language=PostgreSQL
@@ -118,10 +116,9 @@ class PostgresVedtaksmeldingRepository(private val dataSource: DataSource) : Ved
                 ).asUpdate,
             )
         }
-    }
 
-    override fun hentSanityInnhold(behandlingId: UUID): String {
-        return sessionOf(dataSource).use { session ->
+    override fun hentSanityInnhold(behandlingId: UUID): String =
+        sessionOf(dataSource).use { session ->
             session.run(
                 queryOf(
                     //language=PostgreSQL
@@ -138,13 +135,12 @@ class PostgresVedtaksmeldingRepository(private val dataSource: DataSource) : Ved
                 ).map { row -> row.string("sanity_innhold") }.asSingle,
             ) ?: throw DataNotFoundException("Fant ikke sanity innhold for behandlingId: $behandlingId")
         }
-    }
 
     override fun lagreVedaksmeldingHtml(
         behandlingId: UUID,
         vedtaksmeldingHtml: String,
-    ) {
-        return sessionOf(dataSource).use { session ->
+    ): Unit =
+        sessionOf(dataSource).use { session ->
             session.run(
                 queryOf(
                     //language=PostgreSQL
@@ -164,10 +160,9 @@ class PostgresVedtaksmeldingRepository(private val dataSource: DataSource) : Ved
                 ).asUpdate,
             )
         }
-    }
 
-    override fun hentVedaksmeldingHtml(behandlingId: UUID): String {
-        return sessionOf(dataSource).use { session ->
+    override fun hentVedaksmeldingHtml(behandlingId: UUID): String =
+        sessionOf(dataSource).use { session ->
             session.run(
                 queryOf(
                     //language=PostgreSQL
@@ -184,11 +179,10 @@ class PostgresVedtaksmeldingRepository(private val dataSource: DataSource) : Ved
                 ).map { row -> row.string("vedtaksmelding_html") }.asSingle,
             ) ?: throw DataNotFoundException("Fant ikke vedtaksmelding html for behandlingId: $behandlingId")
         }
-    }
 }
 
-private fun TransactionalSession.lagre(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime {
-    return run(
+private fun TransactionalSession.lagre(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime =
+    run(
         queryOf(
             //language=PostgreSQL
             statement =
@@ -211,8 +205,11 @@ private fun TransactionalSession.lagre(utvidetBeskrivelse: UtvidetBeskrivelse): 
         "Kunne ikke lagre utvidet beskrivelse for behandlingId: " +
             "${utvidetBeskrivelse.behandlingId} og brevblokkId: ${utvidetBeskrivelse.brevblokkId}",
     )
-}
 
-class DataNotFoundException(message: String) : RuntimeException(message)
+class DataNotFoundException(
+    message: String,
+) : RuntimeException(message)
 
-class KanIkkeLagreUtvidetBeskrivelseException(message: String) : RuntimeException(message)
+class KanIkkeLagreUtvidetBeskrivelseException(
+    message: String,
+) : RuntimeException(message)

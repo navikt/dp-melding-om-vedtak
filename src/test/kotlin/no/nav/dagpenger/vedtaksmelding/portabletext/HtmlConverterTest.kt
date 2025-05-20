@@ -7,10 +7,10 @@ import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_DEL_1
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.sanity.ResultDTO
 import no.nav.dagpenger.vedtaksmelding.util.finnUtvidetBeskrivelseNode
 import no.nav.dagpenger.vedtaksmelding.util.readFile
@@ -20,39 +20,44 @@ import org.junit.jupiter.api.Test
 
 @Suppress("ktlint:standard:max-line-length")
 class HtmlConverterTest {
-    private fun hentVedtak(navn: String): Vedtak {
-        return navn.readFile().let { VedtakMapper(it).vedtak() }
-    }
+    private fun hentVedtak(navn: String): Vedtak = navn.readFile().let { VedtakMapper(it).vedtak() }
 
     @Test
     fun `Skal bygge HTML med ulike tekst formattering`() {
         val sanityTekster =
-            "/json/sanity.json".readFile().let {
-                objectMapper.readValue(it, ResultDTO::class.java)
-            }.result.filter { it.textId.contains("hubba.bubba") }
+            "/json/sanity.json"
+                .readFile()
+                .let {
+                    objectMapper.readValue(it, ResultDTO::class.java)
+                }.result
+                .filter { it.textId.contains("hubba.bubba") }
 
         sanityTekster.size shouldBe 1
 
         shouldNotThrowAny {
-            HtmlConverter.toHtml(
-                brevBlokker = sanityTekster,
-                opplysninger = emptyList(),
-                meldingOmVedtakData = meldingOmVedtakDTO,
-                fagsakId = "123456789",
-            ).also {
-                writeStringToFile("build/temp/test.html", it)
-            }
+            HtmlConverter
+                .toHtml(
+                    brevBlokker = sanityTekster,
+                    opplysninger = emptyList(),
+                    meldingOmVedtakData = meldingOmVedtakDTO,
+                    fagsakId = "123456789",
+                ).also {
+                    writeStringToFile("build/temp/test.html", it)
+                }
         }
     }
 
     @Test
     fun `Skal sanitisere og legge inn utvidede beskrivelser i HTML som blir laget`() {
         val sanityTekster =
-            "/json/sanity.json".readFile().let {
-                objectMapper.readValue(it, ResultDTO::class.java)
-            }.result
+            "/json/sanity.json"
+                .readFile()
+                .let {
+                    objectMapper.readValue(it, ResultDTO::class.java)
+                }.result
 
-        hentVedtak("/json/avslag.json").let { vedtak -> VedtakMelding.byggVedtaksmelding(vedtak, sanityTekster) }
+        hentVedtak("/json/avslag.json")
+            .let { vedtak -> VedtakMelding.byggVedtaksmelding(vedtak, sanityTekster) }
             .let { vedtakMelding ->
                 HtmlConverter.toHtml(
                     brevBlokker = vedtakMelding.hentBrevBlokker(),

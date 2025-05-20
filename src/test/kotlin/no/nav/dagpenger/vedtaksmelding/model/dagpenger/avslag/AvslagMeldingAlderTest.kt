@@ -2,17 +2,17 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag
 
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.Aldersgrense
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_ALDER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.ENHETSLØS
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 

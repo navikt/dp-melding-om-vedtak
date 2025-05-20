@@ -2,11 +2,11 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.types.shouldBeInstanceOf
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.AVSLÅTT
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.INNVILGET
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseMelding
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.AVSLÅTT
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.INNVILGET
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
@@ -15,33 +15,35 @@ class VedtakMeldingTest {
 
     @Test
     fun `Skal lage riktig vedtaksmelding`() {
-        VedtakMelding.byggVedtaksmelding(
-            vedtak =
-                Vedtak(
-                    behandlingId = behandlingId,
-                    vilkår =
-                        setOf(
-                            Vilkår(
-                                navn = MINSTEINNTEKT.vilkårNavn,
-                                status = Vilkår.Status.IKKE_OPPFYLT,
+        VedtakMelding
+            .byggVedtaksmelding(
+                vedtak =
+                    Vedtak(
+                        behandlingId = behandlingId,
+                        vilkår =
+                            setOf(
+                                Vilkår(
+                                    navn = MINSTEINNTEKT.vilkårNavn,
+                                    status = Vilkår.Status.IKKE_OPPFYLT,
+                                ),
                             ),
-                        ),
-                    utfall = AVSLÅTT,
-                    fagsakId = "fagsakId test",
-                ),
-            alleBrevblokker = emptyList(),
-        ).shouldBeInstanceOf<AvslagMelding>()
+                        utfall = AVSLÅTT,
+                        fagsakId = "fagsakId test",
+                    ),
+                alleBrevblokker = emptyList(),
+            ).shouldBeInstanceOf<AvslagMelding>()
 
-        VedtakMelding.byggVedtaksmelding(
-            vedtak =
-                Vedtak(
-                    behandlingId = behandlingId,
-                    vilkår = emptySet(),
-                    utfall = INNVILGET,
-                    fagsakId = "fagsakId test",
-                ),
-            alleBrevblokker = emptyList(),
-        ).shouldBeInstanceOf<InnvilgelseMelding>()
+        VedtakMelding
+            .byggVedtaksmelding(
+                vedtak =
+                    Vedtak(
+                        behandlingId = behandlingId,
+                        vilkår = emptySet(),
+                        utfall = INNVILGET,
+                        fagsakId = "fagsakId test",
+                    ),
+                alleBrevblokker = emptyList(),
+            ).shouldBeInstanceOf<InnvilgelseMelding>()
     }
 
     @Test

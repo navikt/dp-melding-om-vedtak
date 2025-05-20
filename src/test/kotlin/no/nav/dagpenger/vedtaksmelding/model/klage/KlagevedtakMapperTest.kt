@@ -4,7 +4,7 @@ import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import java.util.UUID
 
-class KlagevedtakMapperTest() {
+class KlagevedtakMapperTest {
     @Test
     fun `skal kunne lage klagevedtak`() {
         KlagevedtakMapper(

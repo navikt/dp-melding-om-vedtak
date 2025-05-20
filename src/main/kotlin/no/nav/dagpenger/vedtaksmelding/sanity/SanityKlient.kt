@@ -53,32 +53,35 @@ class SanityKlient(
                               }"""
     }
 
-    suspend fun hentOpplysningTekstIder(brevBlokkIder: List<String>): List<String> {
-        return hentBrevBlokker().asSequence()
+    suspend fun hentOpplysningTekstIder(brevBlokkIder: List<String>): List<String> =
+        hentBrevBlokker()
+            .asSequence()
             .filter { it.textId in brevBlokkIder }
             .flatMap { it.innhold }
             .flatMap { it.children }
             .filterIsInstance<Child.OpplysningReference>()
             .map { it.behandlingOpplysning.textId }
             .toList()
-    }
 
     suspend fun hentBrevBlokkerJson(): String {
         log.info { "Henter brevblokker fra Sanity med url: $sanityUrl" }
-        return httpKlient.get("$sanityUrl") {
-            url {
-                parameters.append("query", query)
-            }
-        }.bodyAsText()
+        return httpKlient
+            .get("$sanityUrl") {
+                url {
+                    parameters.append("query", query)
+                }
+            }.bodyAsText()
     }
 
     suspend fun hentBrevBlokker(): List<BrevBlokk> {
         log.info { "Henter brevblokker fra Sanity med url: $sanityUrl" }
-        return httpKlient.get("$sanityUrl") {
-            url {
-                parameters.append("query", query)
-            }
-        }.body<ResultDTO>().result
+        return httpKlient
+            .get("$sanityUrl") {
+                url {
+                    parameters.append("query", query)
+                }
+            }.body<ResultDTO>()
+            .result
     }
 }
 

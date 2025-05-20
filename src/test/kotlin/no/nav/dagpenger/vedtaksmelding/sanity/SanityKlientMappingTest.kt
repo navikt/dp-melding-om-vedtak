@@ -31,7 +31,8 @@ class SanityKlientMappingTest {
     fun `test av brevblokk med flere opplysnigner`() {
         runBlocking {
             SanityKlient(
-                sanityUrl = "http://locahost/sanity", httpKlient = lagHttpKlient(engine = lageMockEngine()),
+                sanityUrl = "http://locahost/sanity",
+                httpKlient = lagHttpKlient(engine = lageMockEngine()),
             ).hentOpplysningTekstIder(listOf(INNVILGELSE_BARNETILLEGG.brevblokkId)) shouldBe
                 listOf(
                     AntallBarnSomGirRettTilBarnetillegg.opplysningTekstId,
@@ -44,14 +45,14 @@ class SanityKlientMappingTest {
     fun `test av brevblokk uten opplysninger`() {
         runBlocking {
             SanityKlient(
-                sanityUrl = "http://locahost/sanity", httpKlient = lagHttpKlient(engine = lageMockEngine()),
+                sanityUrl = "http://locahost/sanity",
+                httpKlient = lagHttpKlient(engine = lageMockEngine()),
             ).hentOpplysningTekstIder(listOf(AVSLAG_UTESTENGT_HJEMMEL.brevblokkId)) shouldBe emptyList()
         }
     }
 
-    private fun lageMockEngine(jsonResponse: String = resourseRetriever.getResource("/json/sanity.json")!!.readText()): MockEngine {
-        return MockEngine { _ ->
+    private fun lageMockEngine(jsonResponse: String = resourseRetriever.getResource("/json/sanity.json")!!.readText()): MockEngine =
+        MockEngine { _ ->
             respond(jsonResponse, headers = headersOf("Content-Type" to listOf("application/json")))
         }
-    }
 }
