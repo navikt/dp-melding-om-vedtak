@@ -4,8 +4,12 @@ import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.AntallPermitteringsuker
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.AntallStønadsuker
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.Egenandel
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår.Status.OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.PERMITTERING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
@@ -27,10 +31,6 @@ import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.UKER
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår.Status.OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 

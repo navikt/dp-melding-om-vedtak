@@ -6,6 +6,8 @@ import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.Egenandel
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.ManglerBrevstøtte
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
@@ -29,8 +31,6 @@ import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.BARN
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
@@ -181,7 +181,9 @@ class OrdinæreDagpengerTest {
                     utfall = Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            barnetilleggOpplysning(), nittiProsentRegelOpplysning(), egenandel(),
+                            barnetilleggOpplysning(),
+                            nittiProsentRegelOpplysning(),
+                            egenandel(),
                         ),
                     fagsakId = "fagsakId test",
                 ),

@@ -21,14 +21,17 @@ fun getAuthEnv(
     // IF this fails do kubectl get pod to aquire credentials
     val client: ApiClient = ClientBuilder.kubeconfig(KubeConfig.loadKubeConfig(FileReader(kubeConfigPath))).build()
     Configuration.setDefaultApiClient(client)
-    return CoreV1Api().listNamespacedSecret(
-        "teamdagpenger",
-    )
-        .labelSelector("app=$app,type=$type")
+    return CoreV1Api()
+        .listNamespacedSecret(
+            "teamdagpenger",
+        ).labelSelector("app=$app,type=$type")
         .execute()
-        .items.also { secrets ->
+        .items
+        .also { secrets ->
             secrets.sortByDescending<V1Secret?, OffsetDateTime> { it?.metadata?.creationTimestamp }
-        }.first<V1Secret?>()?.data!!.mapValues { e -> String(e.value) }
+        }.first<V1Secret?>()
+        ?.data!!
+        .mapValues { e -> String(e.value) }
 }
 
 fun setAzureAuthEnv(

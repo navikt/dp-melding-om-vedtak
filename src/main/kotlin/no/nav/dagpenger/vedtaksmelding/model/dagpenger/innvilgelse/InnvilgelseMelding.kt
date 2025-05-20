@@ -12,7 +12,10 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.Pleiepeng
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.SvangerskapspengerDagsats
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.SykepengerDagsats
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.UføreDagsats
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.INNVILGET
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår.Status.OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.PERMITTERING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.PERMITTERING_FISK
@@ -54,9 +57,6 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT_FISK
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.INNVILGET
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår.Status.OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 
 class InnvilgelseMelding(
@@ -104,11 +104,11 @@ class InnvilgelseMelding(
 
     private fun nittiProsentRegel(): List<String> {
         val id = AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget.opplysningTekstId
-        return vedtak.opplysninger.find {
-            it.opplysningTekstId == id &&
-                it.råVerdi().toDouble() > 0
-        }
-            ?.let {
+        return vedtak.opplysninger
+            .find {
+                it.opplysningTekstId == id &&
+                    it.råVerdi().toDouble() > 0
+            }?.let {
                 listOf(INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId)
             } ?: emptyList()
     }
@@ -119,41 +119,48 @@ class InnvilgelseMelding(
         }
 
         val samordnedeYtelser = mutableSetOf<Pair<String, Double>>()
-        vedtak.opplysninger.find {
-            it.opplysningTekstId == SykepengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
-        }?.let {
-            samordnedeYtelser.add("Sykepenger" to it.råVerdi().toDouble())
-        }
-        vedtak.opplysninger.find {
-            it.opplysningTekstId == PleiepengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
-        }?.let {
-            samordnedeYtelser.add("Pleiepenger" to it.råVerdi().toDouble())
-        }
-        vedtak.opplysninger.find {
-            it.opplysningTekstId == OmsorgspengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
-        }?.let {
-            samordnedeYtelser.add("Omsorgspenger" to it.råVerdi().toDouble())
-        }
-        vedtak.opplysninger.find {
-            it.opplysningTekstId == OpplæringspengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
-        }?.let {
-            samordnedeYtelser.add("Opplæringspenger" to it.råVerdi().toDouble())
-        }
-        vedtak.opplysninger.find {
-            it.opplysningTekstId == UføreDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
-        }?.let {
-            samordnedeYtelser.add("Uføre" to it.råVerdi().toDouble())
-        }
-        vedtak.opplysninger.find {
-            it.opplysningTekstId == ForeldrepengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
-        }?.let {
-            samordnedeYtelser.add("Foreldrepenger" to it.råVerdi().toDouble())
-        }
-        vedtak.opplysninger.find {
-            it.opplysningTekstId == SvangerskapspengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
-        }?.let {
-            samordnedeYtelser.add("Svangerskapspenger" to it.råVerdi().toDouble())
-        }
+        vedtak.opplysninger
+            .find {
+                it.opplysningTekstId == SykepengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
+            }?.let {
+                samordnedeYtelser.add("Sykepenger" to it.råVerdi().toDouble())
+            }
+        vedtak.opplysninger
+            .find {
+                it.opplysningTekstId == PleiepengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
+            }?.let {
+                samordnedeYtelser.add("Pleiepenger" to it.råVerdi().toDouble())
+            }
+        vedtak.opplysninger
+            .find {
+                it.opplysningTekstId == OmsorgspengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
+            }?.let {
+                samordnedeYtelser.add("Omsorgspenger" to it.råVerdi().toDouble())
+            }
+        vedtak.opplysninger
+            .find {
+                it.opplysningTekstId == OpplæringspengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
+            }?.let {
+                samordnedeYtelser.add("Opplæringspenger" to it.råVerdi().toDouble())
+            }
+        vedtak.opplysninger
+            .find {
+                it.opplysningTekstId == UføreDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
+            }?.let {
+                samordnedeYtelser.add("Uføre" to it.råVerdi().toDouble())
+            }
+        vedtak.opplysninger
+            .find {
+                it.opplysningTekstId == ForeldrepengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
+            }?.let {
+                samordnedeYtelser.add("Foreldrepenger" to it.råVerdi().toDouble())
+            }
+        vedtak.opplysninger
+            .find {
+                it.opplysningTekstId == SvangerskapspengerDagsats.opplysningTekstId && it.råVerdi().toDouble() > 0
+            }?.let {
+                samordnedeYtelser.add("Svangerskapspenger" to it.råVerdi().toDouble())
+            }
 
         val samordningBlokker = mutableListOf<String>()
         if (samordnedeYtelser.size == 1) {
@@ -172,14 +179,13 @@ class InnvilgelseMelding(
         return samordningBlokker
     }
 
-    private fun barnetillegg(): List<String> {
-        return vedtak.opplysninger.find {
-            it.opplysningTekstId == AntallBarnSomGirRettTilBarnetillegg.opplysningTekstId && it.råVerdi().toInt() > 0
-        }
-            ?.let {
+    private fun barnetillegg(): List<String> =
+        vedtak.opplysninger
+            .find {
+                it.opplysningTekstId == AntallBarnSomGirRettTilBarnetillegg.opplysningTekstId && it.råVerdi().toInt() > 0
+            }?.let {
                 listOf(INNVILGELSE_BARNETILLEGG.brevblokkId)
             } ?: emptyList()
-    }
 
     private fun grunnlag(): List<String> {
         val grunnlagBlokker = mutableListOf<String>()
@@ -200,52 +206,47 @@ class InnvilgelseMelding(
         return grunnlagBlokker.toList()
     }
 
-    private fun arbeidstidenDin(): List<String> {
-        return if (erInnvilgetMedVerneplikt()) {
+    private fun arbeidstidenDin(): List<String> =
+        if (erInnvilgetMedVerneplikt()) {
             listOf(INNVILGELSE_ARBEIDSTIDEN_DIN_VERNEPLIKT.brevblokkId)
         } else {
             listOf(INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId)
         }
-    }
 
-    private fun innledning(): List<String> {
-        return when {
+    private fun innledning(): List<String> =
+        when {
             erInnvilgetSomPermittert() -> listOf(INNVILGELSE_PERMITTERT.brevblokkId)
             erInnvilgetSomPermittertIFiskeindustri() -> listOf(INNVILGELSE_PERMITTERT_FISK.brevblokkId)
             else -> listOf(INNVILGELSE_ORDINÆR.brevblokkId)
         }
-    }
 
-    private fun medEllerUtenEgenandel(): List<String> {
-        return when {
+    private fun medEllerUtenEgenandel(): List<String> =
+        when {
             vedtak.opplysninger.any {
                 it.opplysningTekstId == Egenandel.opplysningTekstId &&
                     it.råVerdi().toDouble() > 0.0
             } -> listOf(INNVILGELSE_MED_EGENANDEL.brevblokkId)
             else -> listOf(INNVILGELSE_UTEN_EGENANDEL.brevblokkId)
         }
-    }
 
-    private fun egenandel(): List<String> {
-        return when {
+    private fun egenandel(): List<String> =
+        when {
             vedtak.opplysninger.any {
                 it.opplysningTekstId == Egenandel.opplysningTekstId &&
                     it.råVerdi().toDouble() > 0.0
             } -> listOf(INNVILGELSE_EGENANDEL.brevblokkId)
             else -> emptyList()
         }
-    }
 
-    private fun virkningsdato(): List<String> {
-        return when {
+    private fun virkningsdato(): List<String> =
+        when {
             erInnvilgetSomPermittert() -> listOf(INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT.brevblokkId)
             erInnvilgetSomPermittertIFiskeindustri() -> listOf(INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT_FISK.brevblokkId)
             else -> listOf(INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId)
         }
-    }
 
-    private fun dagpengeperiode(): List<String> {
-        return when {
+    private fun dagpengeperiode(): List<String> =
+        when {
             erInnvilgetMedVerneplikt() -> listOf(INNVILGELSE_DAGPENGEPERIODE_VERNEPLIKT.brevblokkId)
             erInnvilgetSomPermittert() -> listOf(INNVILGELSE_DAGPENGEPERIODE_PERMITTERT.brevblokkId)
             erInnvilgetSomPermittertIFiskeindustri() ->
@@ -255,10 +256,9 @@ class InnvilgelseMelding(
                 )
             else -> listOf(INNVILGELSE_DAGPENGEPERIODE.brevblokkId)
         }
-    }
 
-    private fun ekstrablokkerPermittertOgPermittertFisk(): List<String> {
-        return when {
+    private fun ekstrablokkerPermittertOgPermittertFisk(): List<String> =
+        when {
             erInnvilgetSomPermittert() || erInnvilgetSomPermittertIFiskeindustri() ->
                 listOf(
                     INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT.brevblokkId,
@@ -267,7 +267,6 @@ class InnvilgelseMelding(
 
             else -> emptyList()
         }
-    }
 
     private fun erInnvilgetMedVerneplikt() =
         vedtak.opplysninger.any {

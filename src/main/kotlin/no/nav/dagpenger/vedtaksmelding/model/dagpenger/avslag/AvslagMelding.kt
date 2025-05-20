@@ -3,7 +3,11 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.HarBruktBeregningsregelArbeidstidSiste12Måneder
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.HarBruktBeregningsregelArbeidstidSiste36Måneder
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.HarBruktBeregningsregelArbeidstidSiste6Måneder
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.AVSLÅTT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår.Status.IKKE_OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.IKKE_ANDRE_FULLE_YTELSER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.IKKE_PASSERT_ALDERSGRENSE
@@ -62,10 +66,6 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_UTDANNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT_HJEMMEL
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.AVSLÅTT
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår.Status.IKKE_OPPFYLT
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 
 class AvslagMelding(
@@ -133,37 +133,34 @@ class AvslagMelding(
             brevBlokkIder().mapNotNull { id -> brevBlokkMap[id] }
         }
 
-    private fun blokkerAvslagMinsteinntekt(): List<String> {
-        return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == MINSTEINNTEKT.vilkårNavn && vilkår.status == IKKE_OPPFYLT
-        }
-            ?.let {
+    private fun blokkerAvslagMinsteinntekt(): List<String> =
+        vedtak.vilkår
+            .find { vilkår ->
+                vilkår.navn == MINSTEINNTEKT.vilkårNavn && vilkår.status == IKKE_OPPFYLT
+            }?.let {
                 listOf(AVSLAG_MINSTEINNTEKT_DEL_1.brevblokkId, AVSLAG_MINSTEINNTEKT_DEL_2.brevblokkId)
             } ?: emptyList()
-    }
 
-    private fun blokkerAvslagAlder(): List<String> {
-        return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == IKKE_PASSERT_ALDERSGRENSE.vilkårNavn && vilkår.status == IKKE_OPPFYLT
-        }
-            ?.let {
+    private fun blokkerAvslagAlder(): List<String> =
+        vedtak.vilkår
+            .find { vilkår ->
+                vilkår.navn == IKKE_PASSERT_ALDERSGRENSE.vilkårNavn && vilkår.status == IKKE_OPPFYLT
+            }?.let {
                 listOf(
                     AVSLAG_ALDER.brevblokkId,
                 )
             } ?: emptyList()
-    }
 
-    private fun blokkerAvslagTaptArbeidsinntekt(): List<String> {
-        return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == TAPT_ARBEIDSINNTEKT.vilkårNavn && vilkår.status == IKKE_OPPFYLT
-        }
-            ?.let {
+    private fun blokkerAvslagTaptArbeidsinntekt(): List<String> =
+        vedtak.vilkår
+            .find { vilkår ->
+                vilkår.navn == TAPT_ARBEIDSINNTEKT.vilkårNavn && vilkår.status == IKKE_OPPFYLT
+            }?.let {
                 listOf(AVSLAG_TAPT_ARBEIDSINNTEKT_DEL_1.brevblokkId, AVSLAG_TAPT_ARBEIDSINNTEKT_DEL_2.brevblokkId)
             } ?: emptyList()
-    }
 
-    private fun blokkerAvslagTaptArbeidstid(): List<String> {
-        return when (
+    private fun blokkerAvslagTaptArbeidstid(): List<String> =
+        when (
             vedtak.vilkår.any { vilkår ->
                 vilkår.navn == TAPT_ARBEIDSTID.vilkårNavn && vilkår.status == IKKE_OPPFYLT
             }
@@ -184,65 +181,67 @@ class AvslagMelding(
                 }
             else -> emptyList()
         }
-    }
 
-    private fun blokkerAvslagUtestengt(): List<String> {
-        return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == IKKE_UTESTENGT.vilkårNavn && vilkår.status == IKKE_OPPFYLT
-        }
-            ?.let {
+    private fun blokkerAvslagUtestengt(): List<String> =
+        vedtak.vilkår
+            .find { vilkår ->
+                vilkår.navn == IKKE_UTESTENGT.vilkårNavn && vilkår.status == IKKE_OPPFYLT
+            }?.let {
                 listOf(AVSLAG_UTESTENGT.brevblokkId, AVSLAG_UTESTENGT_HJEMMEL.brevblokkId)
             } ?: emptyList()
-    }
 
-    private fun blokkerAvslagUtdanning(): List<String> {
-        return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == IKKE_UTDANNING.vilkårNavn && vilkår.status == IKKE_OPPFYLT
-        }
-            ?.let {
+    private fun blokkerAvslagUtdanning(): List<String> =
+        vedtak.vilkår
+            .find { vilkår ->
+                vilkår.navn == IKKE_UTDANNING.vilkårNavn && vilkår.status == IKKE_OPPFYLT
+            }?.let {
                 listOf(
                     AVSLAG_UTDANNING.brevblokkId,
                 )
             } ?: emptyList()
-    }
 
     private fun blokkerAvslagReellArbeidssøker(): List<String> {
         val grunnerTilAvslag = mutableListOf(AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId)
 
-        vedtak.vilkår.find { vilkår ->
-            vilkår.navn == REELL_ARBEIDSSØKER_HELTID_DELTID.vilkårNavn && vilkår.status == IKKE_OPPFYLT
-        }?.let {
-            grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID.brevblokkId)
-        }
+        vedtak.vilkår
+            .find { vilkår ->
+                vilkår.navn == REELL_ARBEIDSSØKER_HELTID_DELTID.vilkårNavn && vilkår.status == IKKE_OPPFYLT
+            }?.let {
+                grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID.brevblokkId)
+            }
 
-        vedtak.vilkår.find { vilkår ->
-            vilkår.navn == REELL_ARBEIDSSØKER_MOBILITET.vilkårNavn && vilkår.status == IKKE_OPPFYLT
-        }?.let {
-            grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_HELE_NORGE.brevblokkId)
-        }
+        vedtak.vilkår
+            .find { vilkår ->
+                vilkår.navn == REELL_ARBEIDSSØKER_MOBILITET.vilkårNavn && vilkår.status == IKKE_OPPFYLT
+            }?.let {
+                grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_HELE_NORGE.brevblokkId)
+            }
 
         if (grunnerTilAvslag.contains(AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID.brevblokkId) ||
             grunnerTilAvslag.contains(AVSLAG_REELL_ARBEIDSSØKER_HELE_NORGE.brevblokkId)
         ) {
             grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId)
         }
-        vedtak.vilkår.find { vilkår ->
-            vilkår.navn == REELL_ARBEIDSSØKER_ARBEIDSFØR.vilkårNavn && vilkår.status == IKKE_OPPFYLT
-        }?.let {
-            grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR.brevblokkId)
-        }
+        vedtak.vilkår
+            .find { vilkår ->
+                vilkår.navn == REELL_ARBEIDSSØKER_ARBEIDSFØR.vilkårNavn && vilkår.status == IKKE_OPPFYLT
+            }?.let {
+                grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR.brevblokkId)
+            }
 
-        vedtak.vilkår.find { vilkår ->
-            vilkår.navn == REELL_ARBEIDSSØKER_ETHVERT_ARBEID.vilkårNavn && vilkår.status == IKKE_OPPFYLT
-        }?.let {
-            grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID.brevblokkId)
-        }
+        vedtak.vilkår
+            .find { vilkår ->
+                vilkår.navn == REELL_ARBEIDSSØKER_ETHVERT_ARBEID.vilkårNavn && vilkår.status == IKKE_OPPFYLT
+            }?.let {
+                grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID.brevblokkId)
+            }
 
-        vedtak.vilkår.find { vilkår ->
-            vilkår.navn == REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER.vilkårNavn && vilkår.status == IKKE_OPPFYLT
-        }?.let {
-            grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_REGISTRERT_ARBEIDSSOKER.brevblokkId)
-        }
+        vedtak.vilkår
+            .find { vilkår ->
+                vilkår.navn == REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER.vilkårNavn && vilkår.status == IKKE_OPPFYLT
+            }?.let {
+                grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_REGISTRERT_ARBEIDSSOKER.brevblokkId)
+            }
 
         if (grunnerTilAvslag.size > 1) {
             grunnerTilAvslag.add(AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId)
@@ -253,53 +252,49 @@ class AvslagMelding(
         return grunnerTilAvslag.toList()
     }
 
-    private fun blokkerAvslagOppholdUtland(): List<String> {
-        return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == OPPHOLD_I_NORGE.vilkårNavn && vilkår.status == IKKE_OPPFYLT
-        }
-            ?.let {
+    private fun blokkerAvslagOppholdUtland(): List<String> =
+        vedtak.vilkår
+            .find { vilkår ->
+                vilkår.navn == OPPHOLD_I_NORGE.vilkårNavn && vilkår.status == IKKE_OPPFYLT
+            }?.let {
                 listOf(
                     AVSLAG_OPPHOLD_UTLAND_DEL_1.brevblokkId,
                     AVSLAG_OPPHOLD_UTLAND_DEL_2.brevblokkId,
                 )
             } ?: emptyList()
-    }
 
-    private fun blokkerAndreFulleYtelser(): List<String> {
-        return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == IKKE_ANDRE_FULLE_YTELSER.vilkårNavn && vilkår.status == IKKE_OPPFYLT
-        }
-            ?.let {
+    private fun blokkerAndreFulleYtelser(): List<String> =
+        vedtak.vilkår
+            .find { vilkår ->
+                vilkår.navn == IKKE_ANDRE_FULLE_YTELSER.vilkårNavn && vilkår.status == IKKE_OPPFYLT
+            }?.let {
                 listOf(AVSLAG_ANDRE_FULLE_YTELSER.brevblokkId)
             } ?: emptyList()
-    }
 
-    private fun blokkerStreikLockout(): List<String> {
-        return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT.vilkårNavn && vilkår.status == IKKE_OPPFYLT
-        }
-            ?.let {
+    private fun blokkerStreikLockout(): List<String> =
+        vedtak.vilkår
+            .find { vilkår ->
+                vilkår.navn == IKKE_PÅVIRKET_AV_STREIK_ELLER_LOCKOUT.vilkårNavn && vilkår.status == IKKE_OPPFYLT
+            }?.let {
                 listOf(
                     AVSLAG_STREIK_LOCKOUT_DEL_1.brevblokkId,
                     AVSLAG_STREIK_LOCKOUT_DEL_2.brevblokkId,
                 )
             } ?: emptyList()
-    }
 
-    private fun blokkerAvslagMedlemskap(): List<String> {
-        return vedtak.vilkår.find { vilkår ->
-            vilkår.navn == MEDLEMSKAP.vilkårNavn && vilkår.status == IKKE_OPPFYLT
-        }
-            ?.let {
+    private fun blokkerAvslagMedlemskap(): List<String> =
+        vedtak.vilkår
+            .find { vilkår ->
+                vilkår.navn == MEDLEMSKAP.vilkårNavn && vilkår.status == IKKE_OPPFYLT
+            }?.let {
                 listOf(
                     AVSLAG_MEDLEMSKAP_DEL_1.brevblokkId,
                     AVSLAG_MEDLEMSKAP_DEL_2.brevblokkId,
                 )
             } ?: emptyList()
-    }
 
-    private fun blokkerAvslagPermittering(): List<String> {
-        return when (avslåttPermittering()) {
+    private fun blokkerAvslagPermittering(): List<String> =
+        when (avslåttPermittering()) {
             true ->
                 listOf(
                     AVSLAG_PERMITTERT_DEL_1.brevblokkId,
@@ -308,10 +303,9 @@ class AvslagMelding(
 
             false -> emptyList()
         }
-    }
 
-    private fun blokkerAvslagPermitteringFisk(): List<String> {
-        return when (avslåttPermitteringFisk()) {
+    private fun blokkerAvslagPermitteringFisk(): List<String> =
+        when (avslåttPermitteringFisk()) {
             true ->
                 listOf(
                     AVSLAG_PERMITTERT_DEL_1.brevblokkId,
@@ -320,7 +314,6 @@ class AvslagMelding(
 
             false -> emptyList()
         }
-    }
 
     private fun avslåttPermittering(): Boolean =
         vedtak.vilkår.any { vilkår -> vilkår.navn == PERMITTERING.vilkårNavn && vilkår.status == IKKE_OPPFYLT }
@@ -330,38 +323,34 @@ class AvslagMelding(
 
     private fun gjelderPermitteringFisk(): Boolean = vedtak.vilkår.any { vilkår -> vilkår.navn == PERMITTERING_FISK.vilkårNavn }
 
-    private fun harBrukBeregningsregelArbeidstidSiste6Mnd(): Boolean {
-        return vedtak.opplysninger.any { opplysning ->
+    private fun harBrukBeregningsregelArbeidstidSiste6Mnd(): Boolean =
+        vedtak.opplysninger.any { opplysning ->
             opplysning.opplysningTekstId == HarBruktBeregningsregelArbeidstidSiste6Måneder.opplysningTekstId &&
                 opplysning.råVerdi().toBoolean()
         }
-    }
 
-    private fun harBrukBeregningsregelArbeidstidSiste12Mnd(): Boolean {
-        return vedtak.opplysninger.any { opplysning ->
+    private fun harBrukBeregningsregelArbeidstidSiste12Mnd(): Boolean =
+        vedtak.opplysninger.any { opplysning ->
             opplysning.opplysningTekstId == HarBruktBeregningsregelArbeidstidSiste12Måneder.opplysningTekstId &&
                 opplysning.råVerdi().toBoolean()
         }
-    }
 
-    private fun harBrukBeregningsregelArbeidstidSiste36Mnd(): Boolean {
-        return vedtak.opplysninger.any { opplysning ->
+    private fun harBrukBeregningsregelArbeidstidSiste36Mnd(): Boolean =
+        vedtak.opplysninger.any { opplysning ->
             opplysning.opplysningTekstId == HarBruktBeregningsregelArbeidstidSiste36Måneder.opplysningTekstId &&
                 opplysning.råVerdi().toBoolean()
         }
-    }
 
-    private fun avslagTaptArbeidstidHjemmelBlokk(): List<String> {
-        return when {
+    private fun avslagTaptArbeidstidHjemmelBlokk(): List<String> =
+        when {
             harBrukBeregningsregelArbeidstidSiste6Mnd() -> listOf(AVSLAG_TAPT_ARBEIDSTID_DEL_3_SISTE_6_MND.brevblokkId)
             harBrukBeregningsregelArbeidstidSiste12Mnd() -> listOf(AVSLAG_TAPT_ARBEIDSTID_DEL_3_SISTE_12_MND.brevblokkId)
             harBrukBeregningsregelArbeidstidSiste36Mnd() -> listOf(AVSLAG_TAPT_ARBEIDSTID_DEL_3_SISTE_36_MND.brevblokkId)
             else -> emptyList()
         }
-    }
 
-    private fun avslagTaptArbeidstidPermittertFiskHjemmelBlokk(): List<String> {
-        return when {
+    private fun avslagTaptArbeidstidPermittertFiskHjemmelBlokk(): List<String> =
+        when {
             harBrukBeregningsregelArbeidstidSiste6Mnd() ->
                 listOf(
                     AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_3_SISTE_6_MND.brevblokkId,
@@ -379,5 +368,4 @@ class AvslagMelding(
 
             else -> emptyList()
         }
-    }
 }

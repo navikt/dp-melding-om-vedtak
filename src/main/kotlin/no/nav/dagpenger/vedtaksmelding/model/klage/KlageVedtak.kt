@@ -18,5 +18,7 @@ data class KlageVedtak(
         return opplysning
     }
 
-    class OpplysningIkkeFunnet(message: String) : RuntimeException(message)
+    class OpplysningIkkeFunnet(
+        message: String,
+    ) : RuntimeException(message)
 }

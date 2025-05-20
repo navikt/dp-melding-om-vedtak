@@ -72,8 +72,8 @@ sealed interface Child {
         override fun deserialize(
             p: JsonParser,
             ctxt: DeserializationContext,
-        ): List<Child> {
-            return p.readValueAsTree<JsonNode>().map {
+        ): List<Child> =
+            p.readValueAsTree<JsonNode>().map {
                 when (val type = p.codec.treeToValue(it.get("_type"), Child.Type::class.java)) {
                     SPAN -> {
                         p.codec.treeToValue(it, Child.Span::class.java)
@@ -84,12 +84,13 @@ sealed interface Child {
                     }
                 }
             }
-        }
     }
 }
 
 sealed interface Mark {
-    data class Annotation(val _key: String) : Mark
+    data class Annotation(
+        val _key: String,
+    ) : Mark
 
     data object Em : Mark
 
@@ -105,8 +106,8 @@ sealed interface Mark {
         override fun deserialize(
             p: JsonParser,
             ctxt: DeserializationContext,
-        ): List<Mark> {
-            return p.readValueAsTree<JsonNode>().map {
+        ): List<Mark> =
+            p.readValueAsTree<JsonNode>().map {
                 when (val text = it.asText()) {
                     "em" -> Em
                     "strong" -> Strong
@@ -116,7 +117,6 @@ sealed interface Mark {
                     else -> Annotation(text)
                 }
             }
-        }
     }
 }
 
@@ -140,13 +140,12 @@ sealed interface MarkDef {
         override fun deserialize(
             p: JsonParser,
             ctxt: DeserializationContext,
-        ): List<MarkDef> {
-            return p.readValueAsTree<JsonNode>().map {
+        ): List<MarkDef> =
+            p.readValueAsTree<JsonNode>().map {
                 when (p.codec.treeToValue(it.get("_type"), Type::class.java)) {
                     LINK -> p.codec.treeToValue(it, Link::class.java)
                     else -> throw IllegalArgumentException("Unknown type")
                 }
             }
-        }
     }
 }

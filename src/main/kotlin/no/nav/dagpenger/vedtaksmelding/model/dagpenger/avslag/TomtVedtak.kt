@@ -1,7 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag
 
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 
 class TomtVedtak(

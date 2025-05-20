@@ -8,7 +8,9 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import java.util.UUID
 
-class KlagevedtakMapper(vedtakJson: String) {
+class KlagevedtakMapper(
+    vedtakJson: String,
+) {
     private val vedtak: JsonNode
     private val objectMapper: ObjectMapper =
         jacksonObjectMapper()
@@ -19,13 +21,12 @@ class KlagevedtakMapper(vedtakJson: String) {
         vedtak = objectMapper.readTree(vedtakJson)
     }
 
-    fun vedtak(): KlageVedtak {
-        return KlageVedtak(
+    fun vedtak(): KlageVedtak =
+        KlageVedtak(
             behandlingId = behandlingId,
             opplysninger = vedtakOpplysninger,
             fagsakId = fagsakId,
         )
-    }
 
     private val behandlingId =
         UUID.fromString(vedtak.get("behandlingId").asText())
@@ -43,10 +44,12 @@ class KlagevedtakMapper(vedtakJson: String) {
             ),
         )
 
-    private fun JsonNode.verdi(opplysningNavnId: String): String {
-        return this.get("behandlingOpplysninger").find {
-            it.get("opplysningNavnId").asText() == opplysningNavnId
-        }?.get("verdi")?.asText()
+    private fun JsonNode.verdi(opplysningNavnId: String): String =
+        this
+            .get("behandlingOpplysninger")
+            .find {
+                it.get("opplysningNavnId").asText() == opplysningNavnId
+            }?.get("verdi")
+            ?.asText()
             ?: throw IllegalArgumentException("Opplysning med navnId $opplysningNavnId mangler for behandlingId $behandlingId")
-    }
 }

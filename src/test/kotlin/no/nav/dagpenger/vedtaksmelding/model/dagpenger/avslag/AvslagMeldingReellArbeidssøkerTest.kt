@@ -3,7 +3,10 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.REELL_ARBEIDSSØKER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.REELL_ARBEIDSSØKER_ARBEIDSFØR
@@ -22,9 +25,6 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_REGISTRERT_ARBEIDSSOKER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
@@ -236,8 +236,12 @@ class AvslagMeldingReellArbeidssøkerTest {
                     behandlingId = behandlingId,
                     vilkår =
                         setOf(
-                            reellArbeidssøkerIkkeOppfylt, heltidDeltidIkkeOppfylt, mobilitetIkkeOppfylt,
-                            arbeidsførIkkeOppfylt, ethvertArbeidIkkeOppfylt, registrertArbeidssøkerIkkeOppfylt,
+                            reellArbeidssøkerIkkeOppfylt,
+                            heltidDeltidIkkeOppfylt,
+                            mobilitetIkkeOppfylt,
+                            arbeidsførIkkeOppfylt,
+                            ethvertArbeidIkkeOppfylt,
+                            registrertArbeidssøkerIkkeOppfylt,
                         ),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),

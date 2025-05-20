@@ -51,6 +51,9 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.UføreDag
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.UtbetaltArbeidsinntektPeriode1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.UtbetaltArbeidsinntektPeriode2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.UtbetaltArbeidsinntektPeriode3
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.AVSLÅTT
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.INNVILGET
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Companion.NULL_OPPLYSNING
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype
@@ -65,14 +68,13 @@ import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.ENHETSLØS
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.TIMER
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.UKER
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.AVSLÅTT
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.INNVILGET
 import java.time.LocalDate
 import java.time.Month
 import java.util.UUID
 
-class VedtakMapper(vedtakJson: String) {
+class VedtakMapper(
+    vedtakJson: String,
+) {
     private val vedtak: JsonNode
     private val objectMapper: ObjectMapper =
         jacksonObjectMapper()
@@ -83,15 +85,14 @@ class VedtakMapper(vedtakJson: String) {
         vedtak = objectMapper.readTree(vedtakJson)
     }
 
-    fun vedtak(): Vedtak {
-        return Vedtak(
+    fun vedtak(): Vedtak =
+        Vedtak(
             behandlingId = behandlingId,
             utfall = utfall,
             vilkår = vilkår,
             opplysninger = vedtakOpplysninger + inntjeningsperiodeOpplysninger,
             fagsakId = fagsakId,
         )
-    }
 
     private val behandlingId =
         UUID.fromString(vedtak.get("behandlingId").asText())
@@ -108,18 +109,20 @@ class VedtakMapper(vedtakJson: String) {
         } ?: throw UtfallMangler("Utfall mangler i path: /fastsatt/utfall")
 
     private val vilkår: Set<Vilkår> =
-        vedtak.get("vilkår")?.map { vilkårNode ->
-            Vilkår(
-                navn = vilkårNode["navn"].asText(),
-                status =
-                    vilkårNode["status"].asText().let {
-                        when (it) {
-                            "Oppfylt" -> Vilkår.Status.OPPFYLT
-                            else -> Vilkår.Status.IKKE_OPPFYLT
-                        }
-                    },
-            )
-        }?.toSet() ?: throw VilkårMangler("Vilkår mangler i path: /vilkår")
+        vedtak
+            .get("vilkår")
+            ?.map { vilkårNode ->
+                Vilkår(
+                    navn = vilkårNode["navn"].asText(),
+                    status =
+                        vilkårNode["status"].asText().let {
+                            when (it) {
+                                "Oppfylt" -> Vilkår.Status.OPPFYLT
+                                else -> Vilkår.Status.IKKE_OPPFYLT
+                            }
+                        },
+                )
+            }?.toSet() ?: throw VilkårMangler("Vilkår mangler i path: /vilkår")
 
     private val vedtakOpplysninger: Set<Opplysning> =
         setOf(
@@ -256,17 +259,19 @@ class VedtakMapper(vedtakJson: String) {
         val opptjeningsperiodeOpplysninger = mutableSetOf<Opplysning>()
 
         val opptjeningsperiodeStart: LocalDate? =
-            this.singleOrNull {
-                it.opplysningTekstId == FørsteMånedAvOpptjeningsperiode.opplysningTekstId
-            }?.let { opplysning ->
-                LocalDate.parse(opplysning.råVerdi())
-            }
+            this
+                .singleOrNull {
+                    it.opplysningTekstId == FørsteMånedAvOpptjeningsperiode.opplysningTekstId
+                }?.let { opplysning ->
+                    LocalDate.parse(opplysning.råVerdi())
+                }
         val opptjeningsperiodeSlutt: LocalDate? =
-            this.singleOrNull {
-                it.opplysningTekstId == SisteMånedAvOpptjeningsperiode.opplysningTekstId
-            }?.let { opplysning ->
-                LocalDate.parse(opplysning.råVerdi())
-            }
+            this
+                .singleOrNull {
+                    it.opplysningTekstId == SisteMånedAvOpptjeningsperiode.opplysningTekstId
+                }?.let { opplysning ->
+                    LocalDate.parse(opplysning.råVerdi())
+                }
 
         if (opptjeningsperiodeStart != null && opptjeningsperiodeSlutt != null) {
             opptjeningsperiodeOpplysninger.add(
@@ -342,8 +347,8 @@ class VedtakMapper(vedtakJson: String) {
         opplysningType: OpplysningTyper,
         datatype: Datatype,
         enhet: Enhet = ENHETSLØS,
-    ): Opplysning {
-        return finnOpplysningAt(
+    ): Opplysning =
+        finnOpplysningAt(
             opplysningTekstId = opplysningType.opplysningTekstId,
             jsonPointer = "/opplysninger",
             datatype = datatype,
@@ -351,7 +356,6 @@ class VedtakMapper(vedtakJson: String) {
         ) { opplysning ->
             opplysning.find { it["opplysningTypeId"].asText() == opplysningType.opplysningTypeId.toString() }?.findValue("verdi")?.asText()
         }
-    }
 
     private fun JsonNode.lagOpplysningerForSamordning(): Set<Opplysning> {
         val opplysninger = mutableSetOf<Opplysning>()
@@ -436,8 +440,8 @@ class VedtakMapper(vedtakJson: String) {
         return opplysninger
     }
 
-    private fun harSamordnet(samordnedeYtelser: JsonNode): Opplysning {
-        return when (samordnedeYtelser.size()) {
+    private fun harSamordnet(samordnedeYtelser: JsonNode): Opplysning =
+        when (samordnedeYtelser.size()) {
             0 ->
                 Opplysning(
                     opplysningTekstId = HarSamordnet.opplysningTekstId,
@@ -452,7 +456,6 @@ class VedtakMapper(vedtakJson: String) {
                     datatype = BOOLSK,
                 )
         }
-    }
 
     private fun JsonNode.lagOpplysningerFraKvoter(): Set<Opplysning> {
         val opplysninger = mutableSetOf<Opplysning>()
@@ -542,8 +545,8 @@ class VedtakMapper(vedtakJson: String) {
         datatype: Datatype,
         enhet: Enhet = ENHETSLØS,
         predicate: (JsonNode) -> String? = { node -> node.asText() },
-    ): Opplysning {
-        return this.at(jsonPointer).let {
+    ): Opplysning =
+        this.at(jsonPointer).let {
             when (it) {
                 is MissingNode -> NULL_OPPLYSNING
                 else -> {
@@ -560,11 +563,16 @@ class VedtakMapper(vedtakJson: String) {
                 }
             }
         }
-    }
 }
 
-class VilkårMangler(message: String) : RuntimeException(message)
+class VilkårMangler(
+    message: String,
+) : RuntimeException(message)
 
-class UtfallMangler(message: String) : RuntimeException(message)
+class UtfallMangler(
+    message: String,
+) : RuntimeException(message)
 
-class FagsakIdMangler(message: String) : RuntimeException(message)
+class FagsakIdMangler(
+    message: String,
+) : RuntimeException(message)

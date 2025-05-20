@@ -22,8 +22,9 @@ class KlagevedtakMelding(
 
     override fun hentBrevBlokker(): List<BrevBlokk> = brevBlokker
 
-    override fun hentOpplysninger(): List<Opplysning> {
-        return brevBlokker.asSequence()
+    override fun hentOpplysninger(): List<Opplysning> =
+        brevBlokker
+            .asSequence()
             .filter { it.textId in brevBlokkIder() }
             .flatMap { it.innhold }
             .flatMap { it.children }
@@ -31,11 +32,8 @@ class KlagevedtakMelding(
             .map { it.behandlingOpplysning.textId }
             .map { klagevedtak.hentOpplysning(it) }
             .toList()
-    }
 
-    override fun hentFagsakId(): String {
-        return klagevedtak.fagsakId
-    }
+    override fun hentFagsakId(): String = klagevedtak.fagsakId
 
     companion object {
         val fasteAvsluttendeBlokker = emptyList<String>()

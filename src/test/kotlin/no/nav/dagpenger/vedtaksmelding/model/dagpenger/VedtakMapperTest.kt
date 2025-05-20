@@ -44,6 +44,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.UføreDag
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.UtbetaltArbeidsinntektPeriode1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.UtbetaltArbeidsinntektPeriode2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.UtbetaltArbeidsinntektPeriode3
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.INNVILGET
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.BOOLSK
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.DATO
@@ -55,7 +56,6 @@ import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.ENHETSLØS
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.TIMER
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.UKER
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.INNVILGET
 import org.junit.jupiter.api.Test
 
 class VedtakMapperTest {
@@ -462,25 +462,31 @@ class VedtakMapperTest {
 
     @Test
     fun `Hent inntjeningsperiode opplysninger`() {
-        vedtak.opplysninger.single {
-            it.opplysningTekstId == FørsteMånedOgÅrForInntektsperiode1.opplysningTekstId
-        }.formatertVerdi shouldBe "januar 2024"
-        vedtak.opplysninger.single {
-            it.opplysningTekstId == FørsteMånedOgÅrForInntektsperiode2.opplysningTekstId
-        }.formatertVerdi shouldBe "januar 2023"
-        vedtak.opplysninger.single {
-            it.opplysningTekstId == FørsteMånedOgÅrForInntektsperiode3.opplysningTekstId
-        }.formatertVerdi shouldBe "januar 2022"
+        vedtak.opplysninger
+            .single {
+                it.opplysningTekstId == FørsteMånedOgÅrForInntektsperiode1.opplysningTekstId
+            }.formatertVerdi shouldBe "januar 2024"
+        vedtak.opplysninger
+            .single {
+                it.opplysningTekstId == FørsteMånedOgÅrForInntektsperiode2.opplysningTekstId
+            }.formatertVerdi shouldBe "januar 2023"
+        vedtak.opplysninger
+            .single {
+                it.opplysningTekstId == FørsteMånedOgÅrForInntektsperiode3.opplysningTekstId
+            }.formatertVerdi shouldBe "januar 2022"
 
-        vedtak.opplysninger.single {
-            it.opplysningTekstId == SisteMånedOgÅrForInntektsperiode1.opplysningTekstId
-        }.formatertVerdi shouldBe "desember 2024"
-        vedtak.opplysninger.single {
-            it.opplysningTekstId == SisteMånedOgÅrForInntektsperiode2.opplysningTekstId
-        }.formatertVerdi shouldBe "desember 2023"
-        vedtak.opplysninger.single {
-            it.opplysningTekstId == SisteMånedOgÅrForInntektsperiode3.opplysningTekstId
-        }.formatertVerdi shouldBe "desember 2022"
+        vedtak.opplysninger
+            .single {
+                it.opplysningTekstId == SisteMånedOgÅrForInntektsperiode1.opplysningTekstId
+            }.formatertVerdi shouldBe "desember 2024"
+        vedtak.opplysninger
+            .single {
+                it.opplysningTekstId == SisteMånedOgÅrForInntektsperiode2.opplysningTekstId
+            }.formatertVerdi shouldBe "desember 2023"
+        vedtak.opplysninger
+            .single {
+                it.opplysningTekstId == SisteMånedOgÅrForInntektsperiode3.opplysningTekstId
+            }.formatertVerdi shouldBe "desember 2022"
     }
 
     @Test

@@ -13,10 +13,10 @@ import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.KLAGE
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.RETT_TIL_DAGPENGER
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Brev
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.TomtVedtak
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlagevedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.Brev
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter
 import no.nav.dagpenger.vedtaksmelding.sanity.ResultDTO
@@ -53,15 +53,14 @@ class Mediator(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
         behanldingstype: Behandlingstype,
-    ): Brev {
-        return hentVedtakOgByggVedtaksMelding(
+    ): Brev =
+        hentVedtakOgByggVedtaksMelding(
             behandlingId = behandlingId,
             saksbehandler = saksbehandler,
             behandlingstype = behanldingstype,
         ) {
             vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
         }
-    }
 
     private suspend fun hentVedtakOgByggVedtaksMelding(
         behandlingId: UUID,
@@ -72,19 +71,21 @@ class Mediator(
         val sanityInnhold = sanitySupplier.invoke()
 
         val alleBrevblokker: List<BrevBlokk> =
-            objectMapper.readValue(
-                sanityInnhold,
-                object : TypeReference<ResultDTO>() {},
-            ).result
+            objectMapper
+                .readValue(
+                    sanityInnhold,
+                    object : TypeReference<ResultDTO>() {},
+                ).result
         return when (behandlingstype) {
             RETT_TIL_DAGPENGER -> {
                 val vedtak =
-                    behandlingKlient.hentVedtak(
-                        behandlingId = behandlingId,
-                        saksbehandler = saksbehandler,
-                    ).onFailure { throwable ->
-                        logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
-                    }.getOrThrow()
+                    behandlingKlient
+                        .hentVedtak(
+                            behandlingId = behandlingId,
+                            saksbehandler = saksbehandler,
+                        ).onFailure { throwable ->
+                            logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
+                        }.getOrThrow()
 
                 runCatching {
                     VedtakMelding.byggVedtaksmelding(vedtak, alleBrevblokker)
@@ -106,12 +107,13 @@ class Mediator(
 
             KLAGE -> {
                 val vedtak =
-                    klageBehandlingKlient.hentVedtak(
-                        behandlingId = behandlingId,
-                        saksbehandler = saksbehandler,
-                    ).onFailure { throwable ->
-                        logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
-                    }.getOrThrow()
+                    klageBehandlingKlient
+                        .hentVedtak(
+                            behandlingId = behandlingId,
+                            saksbehandler = saksbehandler,
+                        ).onFailure { throwable ->
+                            logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
+                        }.getOrThrow()
 
                 KlagevedtakMelding(
                     klagevedtak = vedtak,
@@ -121,9 +123,7 @@ class Mediator(
         }
     }
 
-    fun lagreUtvidetBeskrivelse(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime {
-        return vedtaksmeldingRepository.lagre(utvidetBeskrivelse)
-    }
+    fun lagreUtvidetBeskrivelse(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime = vedtaksmeldingRepository.lagre(utvidetBeskrivelse)
 
     private fun hentUtvidedeBeskrivelser(
         behandlingId: UUID,
@@ -131,17 +131,20 @@ class Mediator(
     ): List<UtvidetBeskrivelse> {
         val tekstmapping =
             vedtaksmeldingRepository.hentUtvidedeBeskrivelserFor(behandlingId).associateBy { it.brevblokkId }
-        return vedtaksMelding.hentBrevBlokker().filter { it.utvidetBeskrivelse }.map {
-            UtvidetBeskrivelse(
-                behandlingId = behandlingId,
-                brevblokkId = it.textId,
-                tekst = tekstmapping[it.textId]?.tekst,
-                sistEndretTidspunkt = LocalDateTime.now(),
-                tittel = it.title,
-            )
-        }.also {
-            sikkerlogger.info { "Hentet utvidede beskrivelser for behandlingId=$behandlingId: $it" }
-        }
+        return vedtaksMelding
+            .hentBrevBlokker()
+            .filter { it.utvidetBeskrivelse }
+            .map {
+                UtvidetBeskrivelse(
+                    behandlingId = behandlingId,
+                    brevblokkId = it.textId,
+                    tekst = tekstmapping[it.textId]?.tekst,
+                    sistEndretTidspunkt = LocalDateTime.now(),
+                    tittel = it.title,
+                )
+            }.also {
+                sikkerlogger.info { "Hentet utvidede beskrivelser for behandlingId=$behandlingId: $it" }
+            }
     }
 
     suspend fun hentVedtak(

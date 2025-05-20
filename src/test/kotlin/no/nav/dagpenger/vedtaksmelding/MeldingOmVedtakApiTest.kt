@@ -63,14 +63,15 @@ class MeldingOmVedtakApiTest {
                 meldingOmVedtakApi(mediator)
             }
 
-            client.put("/melding-om-vedtak/$behandlingId/$brevblokkId/utvidet-beskrivelse") {
-                autentisert(token = saksbehandlerToken)
-                header(HttpHeaders.ContentType, ContentType.Text.Plain)
-                setBody(utvidetBeskrivelseTekst)
-            }.let { response ->
-                response.status shouldBe HttpStatusCode.OK
-                response.bodyAsText() shouldEqualJson """{"sistEndretTidspunkt" : "+999999999-12-31T23:59:59.999999999"}"""
-            }
+            client
+                .put("/melding-om-vedtak/$behandlingId/$brevblokkId/utvidet-beskrivelse") {
+                    autentisert(token = saksbehandlerToken)
+                    header(HttpHeaders.ContentType, ContentType.Text.Plain)
+                    setBody(utvidetBeskrivelseTekst)
+                }.let { response ->
+                    response.status shouldBe HttpStatusCode.OK
+                    response.bodyAsText() shouldEqualJson """{"sistEndretTidspunkt" : "+999999999-12-31T23:59:59.999999999"}"""
+                }
         }
         utvidetBeskrivelseCapturingSlot.captured shouldBe
             UtvidetBeskrivelse(
@@ -96,14 +97,15 @@ class MeldingOmVedtakApiTest {
                 meldingOmVedtakApi(mediator)
             }
 
-            client.put("/melding-om-vedtak/$behandlingId/$brevblokkId/utvidet-beskrivelse-json") {
-                autentisert(token = saksbehandlerToken)
-                header(HttpHeaders.ContentType, ContentType.Application.Json)
-                setBody(utvidetBeskrivelseJson)
-            }.let { response ->
-                response.status shouldBe HttpStatusCode.OK
-                response.bodyAsText() shouldEqualJson """{"sistEndretTidspunkt" : "+999999999-12-31T23:59:59.999999999"}"""
-            }
+            client
+                .put("/melding-om-vedtak/$behandlingId/$brevblokkId/utvidet-beskrivelse-json") {
+                    autentisert(token = saksbehandlerToken)
+                    header(HttpHeaders.ContentType, ContentType.Application.Json)
+                    setBody(utvidetBeskrivelseJson)
+                }.let { response ->
+                    response.status shouldBe HttpStatusCode.OK
+                    response.bodyAsText() shouldEqualJson """{"sistEndretTidspunkt" : "+999999999-12-31T23:59:59.999999999"}"""
+                }
         }
         utvidetBeskrivelseCapturingSlot.captured shouldBe
             UtvidetBeskrivelse(
@@ -174,21 +176,22 @@ class MeldingOmVedtakApiTest {
                 meldingOmVedtakApi(mediator)
             }
 
-            client.post("/melding-om-vedtak/$behandlingId/html") {
-                autentisert(token = saksbehandlerToken)
-                header(HttpHeaders.ContentType, ContentType.Application.Json)
-                setBody(requestBody)
-            }.let { response ->
-                response.status shouldBe HttpStatusCode.OK
-                response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
-                    //language=JSON
-                    """
-                    {
-                      "utvidedeBeskrivelser": [],
-                     "html" : "<html><body>Test HTML Test RETT_TIL_DAGPENGER</body></html>"
-                    } 
-                    """.trimIndent()
-            }
+            client
+                .post("/melding-om-vedtak/$behandlingId/html") {
+                    autentisert(token = saksbehandlerToken)
+                    header(HttpHeaders.ContentType, ContentType.Application.Json)
+                    setBody(requestBody)
+                }.let { response ->
+                    response.status shouldBe HttpStatusCode.OK
+                    response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
+                        //language=JSON
+                        """
+                        {
+                          "utvidedeBeskrivelser": [],
+                         "html" : "<html><body>Test HTML Test RETT_TIL_DAGPENGER</body></html>"
+                        } 
+                        """.trimIndent()
+                }
 
             val requestBodyKlage =
                 """
@@ -217,26 +220,27 @@ class MeldingOmVedtakApiTest {
                 }
                 """.trimIndent()
 
-            client.post("/melding-om-vedtak/$behandlingId/html") {
-                autentisert(token = saksbehandlerToken)
-                header(HttpHeaders.ContentType, ContentType.Application.Json)
-                setBody(requestBodyKlage)
-            }.let { response ->
-                response.status shouldBe HttpStatusCode.OK
-                response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
-                    //language=JSON
-                    """
-                    {
-                      "utvidedeBeskrivelser": [],
-                     "html" : "<html><body>Test HTML Test KLAGE</body></html>"
-                    }
-                    """.trimIndent()
-            }
+            client
+                .post("/melding-om-vedtak/$behandlingId/html") {
+                    autentisert(token = saksbehandlerToken)
+                    header(HttpHeaders.ContentType, ContentType.Application.Json)
+                    setBody(requestBodyKlage)
+                }.let { response ->
+                    response.status shouldBe HttpStatusCode.OK
+                    response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
+                        //language=JSON
+                        """
+                        {
+                          "utvidedeBeskrivelser": [],
+                         "html" : "<html><body>Test HTML Test KLAGE</body></html>"
+                        }
+                        """.trimIndent()
+                }
         }
     }
 
-    private fun lagMeldingOmVedtakDataDTO(behandlingstype: Behandlingstype?): MeldingOmVedtakDataDTO {
-        return MeldingOmVedtakDataDTO(
+    private fun lagMeldingOmVedtakDataDTO(behandlingstype: Behandlingstype?): MeldingOmVedtakDataDTO =
+        MeldingOmVedtakDataDTO(
             behandlingstype = behandlingstype?.let { BehandlingstypeDTO.valueOf(behandlingstype.name) },
             fornavn = "Test ForNavn",
             etternavn = "Test EtterNavn",
@@ -262,7 +266,6 @@ class MeldingOmVedtakApiTest {
                         ),
                 ),
         )
-    }
 
     @Test
     fun `Skal returnere en html ved bruk av melding-om-vedtak {behandlingId} html`() {
@@ -326,32 +329,33 @@ class MeldingOmVedtakApiTest {
                 meldingOmVedtakApi(mediator)
             }
 
-            client.post("/melding-om-vedtak/$behandlingId/html") {
-                autentisert(token = saksbehandlerToken)
-                header(HttpHeaders.ContentType, ContentType.Application.Json)
-                setBody(requestBody)
-            }.let { response ->
-                response.status shouldBe HttpStatusCode.OK
-                response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
-                    //language=JSON
-                    """
-                    {
-                      "utvidedeBeskrivelser": [
-                         {
-                           "brevblokkId": "${RETT_TIL_Å_KLAGE.brevBlokkId}",
-                           "tekst": "hallo",
-                           "sistEndretTidspunkt": "+999999999-12-31T23:59:59.999999999"
-                         },
-                         {
-                           "brevblokkId": "brev.blokk.rett-til-aa-random",
-                           "tekst": "random test",
-                           "sistEndretTidspunkt": "+999999999-12-31T23:59:59.999999999"
-                         }
-                       ],
-                     "html" : "<html><body>Test HTML Test ForNavn</body></html>"
-                    } 
-                    """.trimIndent()
-            }
+            client
+                .post("/melding-om-vedtak/$behandlingId/html") {
+                    autentisert(token = saksbehandlerToken)
+                    header(HttpHeaders.ContentType, ContentType.Application.Json)
+                    setBody(requestBody)
+                }.let { response ->
+                    response.status shouldBe HttpStatusCode.OK
+                    response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
+                        //language=JSON
+                        """
+                        {
+                          "utvidedeBeskrivelser": [
+                             {
+                               "brevblokkId": "${RETT_TIL_Å_KLAGE.brevBlokkId}",
+                               "tekst": "hallo",
+                               "sistEndretTidspunkt": "+999999999-12-31T23:59:59.999999999"
+                             },
+                             {
+                               "brevblokkId": "brev.blokk.rett-til-aa-random",
+                               "tekst": "random test",
+                               "sistEndretTidspunkt": "+999999999-12-31T23:59:59.999999999"
+                             }
+                           ],
+                         "html" : "<html><body>Test HTML Test ForNavn</body></html>"
+                        } 
+                        """.trimIndent()
+                }
         }
     }
 
@@ -398,14 +402,15 @@ class MeldingOmVedtakApiTest {
                 meldingOmVedtakApi(mediator)
             }
 
-            client.post("/melding-om-vedtak/$behandlingId/vedtaksmelding") {
-                autentisert(token = saksbehandlerToken)
-                header(HttpHeaders.ContentType, ContentType.Application.Json)
-                setBody(requestBody)
-            }.let { response ->
-                response.status shouldBe HttpStatusCode.OK
-                response.bodyAsText() shouldBe "<html><body>Test HTML Test ForNavn</body></html>"
-            }
+            client
+                .post("/melding-om-vedtak/$behandlingId/vedtaksmelding") {
+                    autentisert(token = saksbehandlerToken)
+                    header(HttpHeaders.ContentType, ContentType.Application.Json)
+                    setBody(requestBody)
+                }.let { response ->
+                    response.status shouldBe HttpStatusCode.OK
+                    response.bodyAsText() shouldBe "<html><body>Test HTML Test ForNavn</body></html>"
+                }
         }
     }
 
@@ -428,24 +433,25 @@ class MeldingOmVedtakApiTest {
                 meldingOmVedtakApi(mediator)
             }
 
-            client.post("/melding-om-vedtak/$behandlingId/html") {
-                autentisert(token = saksbehandlerToken)
-                header(HttpHeaders.ContentType, ContentType.Application.Json)
-                setBody(requestBody)
-            }.let { response ->
-                response.status shouldBe HttpStatusCode.InternalServerError
-                response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
-                    //language=JSON
-                    """
-                     {
-                    "type" : "dagpenger.nav.no/saksbehandling:problem:uhåndtert-feil",
-                    "title" : "Uhåndtert feil",
-                    "status" : 500,
-                    "detail" : "Failed to convert request body to class no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO",
-                    "instance" : "dp-melding-om-vedtak/melding-om-vedtak/$behandlingId/html"
-                    }
-                    """.trimIndent()
-            }
+            client
+                .post("/melding-om-vedtak/$behandlingId/html") {
+                    autentisert(token = saksbehandlerToken)
+                    header(HttpHeaders.ContentType, ContentType.Application.Json)
+                    setBody(requestBody)
+                }.let { response ->
+                    response.status shouldBe HttpStatusCode.InternalServerError
+                    response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
+                        //language=JSON
+                        """
+                         {
+                        "type" : "dagpenger.nav.no/saksbehandling:problem:uhåndtert-feil",
+                        "title" : "Uhåndtert feil",
+                        "status" : 500,
+                        "detail" : "Failed to convert request body to class no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO",
+                        "instance" : "dp-melding-om-vedtak/melding-om-vedtak/$behandlingId/html"
+                        }
+                        """.trimIndent()
+                }
         }
     }
 
@@ -477,24 +483,25 @@ class MeldingOmVedtakApiTest {
                 meldingOmVedtakApi(mediator)
             }
 
-            client.post("/melding-om-vedtak/$behandlingId/html") {
-                autentisert(token = saksbehandlerToken)
-                header(HttpHeaders.ContentType, ContentType.Application.Json)
-                setBody(requestBody)
-            }.let { response ->
-                response.status shouldBe HttpStatusCode.InternalServerError
-                response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
-                    //language=JSON
-                    """
-                     {
-                    "type" : "dagpenger.nav.no/saksbehandling:problem:uhåndtert-feil",
-                    "title" : "Uhåndtert feil",
-                    "status" : 500,
-                    "detail" : "detail",
-                    "instance" : "/melding-om-vedtak/$behandlingId/html"
-                    }
-                    """.trimIndent()
-            }
+            client
+                .post("/melding-om-vedtak/$behandlingId/html") {
+                    autentisert(token = saksbehandlerToken)
+                    header(HttpHeaders.ContentType, ContentType.Application.Json)
+                    setBody(requestBody)
+                }.let { response ->
+                    response.status shouldBe HttpStatusCode.InternalServerError
+                    response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
+                        //language=JSON
+                        """
+                         {
+                        "type" : "dagpenger.nav.no/saksbehandling:problem:uhåndtert-feil",
+                        "title" : "Uhåndtert feil",
+                        "status" : 500,
+                        "detail" : "detail",
+                        "instance" : "/melding-om-vedtak/$behandlingId/html"
+                        }
+                        """.trimIndent()
+                }
         }
     }
 
@@ -505,10 +512,11 @@ class MeldingOmVedtakApiTest {
                 meldingOmVedtakApi(mockk())
             }
 
-            client.get("/openapi") {
-            }.let { response ->
-                response.status shouldBe HttpStatusCode.OK
-            }
+            client
+                .get("/openapi") {
+                }.let { response ->
+                    response.status shouldBe HttpStatusCode.OK
+                }
         }
     }
 

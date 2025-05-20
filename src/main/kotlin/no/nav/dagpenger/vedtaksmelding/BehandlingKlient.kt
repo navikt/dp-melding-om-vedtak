@@ -12,8 +12,8 @@ import io.ktor.http.HttpStatusCode
 import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMapper
 import java.util.UUID
 
 private val sikkerlogg = KotlinLogging.logger("tjenestekall")
@@ -34,36 +34,34 @@ internal class BehandlingHttpKlient(
     private suspend fun hentVedtakJson(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
-    ): Result<String> {
-        return httpClient.get(urlString = "$dpBehandlingApiUrl/$behandlingId/vedtak") {
-            header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(saksbehandler.token)}")
-            accept(ContentType.Application.Json)
-        }.let { response ->
-            val responseTekst = response.bodyAsText()
-            when (response.status == HttpStatusCode.OK) {
-                true -> {
-                    sikkerlogg.info { "Hentet vedtak for behandling $behandlingId $responseTekst" }
-                    Result.success(responseTekst)
-                }
+    ): Result<String> =
+        httpClient
+            .get(urlString = "$dpBehandlingApiUrl/$behandlingId/vedtak") {
+                header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(saksbehandler.token)}")
+                accept(ContentType.Application.Json)
+            }.let { response ->
+                val responseTekst = response.bodyAsText()
+                when (response.status == HttpStatusCode.OK) {
+                    true -> {
+                        sikkerlogg.info { "Hentet vedtak for behandling $behandlingId $responseTekst" }
+                        Result.success(responseTekst)
+                    }
 
-                false -> {
-                    log.error { "Feil ved henting av vedtak for behandling $behandlingId: $responseTekst" }
-                    Result.failure(HentVedtakException(response.status, responseTekst.tilHttpProblem(response.status)))
+                    false -> {
+                        log.error { "Feil ved henting av vedtak for behandling $behandlingId: $responseTekst" }
+                        Result.failure(HentVedtakException(response.status, responseTekst.tilHttpProblem(response.status)))
+                    }
                 }
             }
-        }
-    }
 
     override suspend fun hentVedtak(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
-    ): Result<Vedtak> {
-        return hentVedtakJson(behandlingId, saksbehandler).map { VedtakMapper(it).vedtak() }
-    }
+    ): Result<Vedtak> = hentVedtakJson(behandlingId, saksbehandler).map { VedtakMapper(it).vedtak() }
 }
 
-private fun String.tilHttpProblem(status: HttpStatusCode): HttpProblemDTO {
-    return try {
+private fun String.tilHttpProblem(status: HttpStatusCode): HttpProblemDTO =
+    try {
         Configuration.objectMapper.readValue(this, HttpProblemDTO::class.java)
     } catch (e: Exception) {
         HttpProblemDTO(
@@ -73,6 +71,8 @@ private fun String.tilHttpProblem(status: HttpStatusCode): HttpProblemDTO {
             detail = this,
         )
     }
-}
 
-internal class HentVedtakException(val statusCode: HttpStatusCode, val httpProblem: HttpProblemDTO) : RuntimeException()
+internal class HentVedtakException(
+    val statusCode: HttpStatusCode,
+    val httpProblem: HttpProblemDTO,
+) : RuntimeException()

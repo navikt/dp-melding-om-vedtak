@@ -19,8 +19,8 @@ internal fun lagHttpKlient(
     engine: HttpClientEngine,
     expectSucces: Boolean = true,
     block: HttpClientConfig<*>.() -> Unit = {},
-): HttpClient {
-    return HttpClient(engine) {
+): HttpClient =
+    HttpClient(engine) {
         expectSuccess = expectSucces
         install(ContentNegotiation) {
             jackson {
@@ -40,4 +40,3 @@ internal fun lagHttpKlient(
         }
         block()
     }
-}

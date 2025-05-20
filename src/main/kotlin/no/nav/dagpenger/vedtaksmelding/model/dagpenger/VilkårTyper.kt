@@ -1,6 +1,8 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
-enum class VilkårTyper(val vilkårNavn: String) {
+enum class VilkårTyper(
+    val vilkårNavn: String,
+) {
     REELL_ARBEIDSSØKER(vilkårNavn = "Krav til arbeidssøker"), // Toppnivå-vilkår § 4-5
     REELL_ARBEIDSSØKER_MOBILITET(vilkårNavn = "Oppfyller kravet til mobilitet"), // Delvilkår
     REELL_ARBEIDSSØKER_ARBEIDSFØR(vilkårNavn = "Oppfyller kravet til å være arbeidsfør"), // Delvilkår
