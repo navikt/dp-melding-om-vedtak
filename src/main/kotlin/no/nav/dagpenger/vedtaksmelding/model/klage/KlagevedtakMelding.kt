@@ -1,5 +1,8 @@
 package no.nav.dagpenger.vedtaksmelding.model.klage
 
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageOpplysningTyper.ErKlagenSkriftelig
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageOpplysningTyper.ErKlagenUnderskrevet
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageOpplysningTyper.KlageUtfall
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Brev
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
@@ -10,7 +13,9 @@ class KlagevedtakMelding(
     alleBrevBlokker: List<BrevBlokk>,
 ) : Brev {
     private val brevBlokkIder: List<String> =
-        listOf(KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_1.brevblokkId) + fasteAvsluttendeBlokker
+
+        opprettholdelse() +
+            avvist() + fasteAvsluttendeBlokker
 
     private val brevBlokker: List<BrevBlokk> =
         run {
@@ -34,6 +39,50 @@ class KlagevedtakMelding(
             .toList()
 
     override fun hentFagsakId(): String = klagevedtak.fagsakId
+
+    private fun opprettholdelse(): List<String> {
+        if (!klagevedtak.opplysninger.any { it.opplysningTekstId == KlageUtfall.opplysningTekstId && it.råVerdi() == "OPPRETTHOLDELSE" }) {
+            return emptyList()
+        }
+        return emptyList() // listOf(KlageBrevBlokker.KLAGE_OVERSENDT_KA.brevblokkId)
+    }
+
+    private fun avvist(): List<String> {
+        if (!klagevedtak.opplysninger.any { it.opplysningTekstId == KlageUtfall.opplysningTekstId && it.råVerdi() == "AVVIST" }) {
+            return emptyList()
+        }
+        val brevBlokkIder = mutableListOf<String>()
+        if (!klagevedtak.opplysninger.any {
+                it.opplysningTekstId == ErKlagenSkriftelig.opplysningTekstId && !it.råVerdi().toBoolean()
+            }
+        ) {
+            // todo legg til rett brevblokk
+        }
+        if (!klagevedtak.opplysninger.any {
+                it.opplysningTekstId == ErKlagenUnderskrevet.opplysningTekstId && !it.råVerdi().toBoolean()
+            }
+        ) {
+            // todo legg til rett brevblokk
+        }
+        if (!klagevedtak.opplysninger.any {
+                it.opplysningTekstId == KlageOpplysningTyper.KlagenNevnerEndring.opplysningTekstId &&
+                    !it.råVerdi()
+                        .toBoolean()
+            }
+        ) {
+            // todo legg til rett brevblokk
+        }
+        if (!klagevedtak.opplysninger.any {
+                it.opplysningTekstId == KlageOpplysningTyper.RettsligKlageinteresse.opplysningTekstId &&
+                    !it.råVerdi()
+                        .toBoolean()
+            }
+        ) {
+            // todo legg til rett brevblokk
+        }
+
+        return brevBlokkIder.toList()
+    }
 
     companion object {
         val fasteAvsluttendeBlokker = emptyList<String>()

@@ -36,7 +36,6 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_UTBETALING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseMelding
-import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlagevedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlagevedtakMelding
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
@@ -115,7 +114,7 @@ class VedtakHtmlTest {
             opplysninger = klageMelding.hentOpplysninger(),
             meldingOmVedtakData = meldingOmVedtakData,
             fagsakId = "fagsakId test",
-        ) brevblokkRekkefølgeShouldBe listOf(KLAGE_OPPRETTHOLDELSE_DEL_1.brevblokkId)
+        ) brevblokkRekkefølgeShouldBe emptyList() // listOf(KLAGE_OVERSENDT_KA.brevblokkId)
     }
 
     @Test
