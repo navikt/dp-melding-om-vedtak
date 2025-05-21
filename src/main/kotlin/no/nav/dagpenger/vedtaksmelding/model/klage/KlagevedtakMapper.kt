@@ -42,11 +42,39 @@ class KlagevedtakMapper(
                 råVerdi = vedtak.verdi(KlageOpplysningTyper.KlageMottatDato.opplysningNavnId),
                 datatype = Opplysning.Datatype.DATO,
             ),
+            Opplysning(
+                opplysningTekstId = KlageOpplysningTyper.KlageUtfall.opplysningTekstId,
+                råVerdi = vedtak.verdi(KlageOpplysningTyper.KlageUtfall.opplysningNavnId, opplysningsset = "utfallOpplysninger"),
+                datatype = Opplysning.Datatype.TEKST,
+            ),
+            Opplysning(
+                opplysningTekstId = KlageOpplysningTyper.ErKlagenSkriftelig.opplysningTekstId,
+                råVerdi = vedtak.verdi(KlageOpplysningTyper.ErKlagenSkriftelig.opplysningNavnId),
+                datatype = Opplysning.Datatype.BOOLSK,
+            ),
+            Opplysning(
+                opplysningTekstId = KlageOpplysningTyper.ErKlagenUnderskrevet.opplysningTekstId,
+                råVerdi = vedtak.verdi(KlageOpplysningTyper.ErKlagenUnderskrevet.opplysningNavnId),
+                datatype = Opplysning.Datatype.BOOLSK,
+            ),
+            Opplysning(
+                opplysningTekstId = KlageOpplysningTyper.KlagenNevnerEndring.opplysningTekstId,
+                råVerdi = vedtak.verdi(KlageOpplysningTyper.KlagenNevnerEndring.opplysningNavnId),
+                datatype = Opplysning.Datatype.BOOLSK,
+            ),
+            Opplysning(
+                opplysningTekstId = KlageOpplysningTyper.RettsligKlageinteresse.opplysningTekstId,
+                råVerdi = vedtak.verdi(KlageOpplysningTyper.RettsligKlageinteresse.opplysningNavnId),
+                datatype = Opplysning.Datatype.BOOLSK,
+            ),
         )
 
-    private fun JsonNode.verdi(opplysningNavnId: String): String =
+    private fun JsonNode.verdi(
+        opplysningNavnId: String,
+        opplysningsset: String = "behandlingOpplysninger",
+    ): String =
         this
-            .get("behandlingOpplysninger")
+            .get(opplysningsset)
             .find {
                 it.get("opplysningNavnId").asText() == opplysningNavnId
             }?.get("verdi")
