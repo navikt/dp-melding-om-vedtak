@@ -2,10 +2,10 @@ package no.nav.dagpenger.vedtaksmelding.sanity
 
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.Configuration
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.io.File
 import java.nio.file.Paths
-import org.junit.jupiter.api.Disabled
 
 class SanityKlientE2ETest {
     @Disabled
