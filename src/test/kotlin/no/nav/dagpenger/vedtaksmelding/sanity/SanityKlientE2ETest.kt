@@ -5,9 +5,10 @@ import no.nav.dagpenger.vedtaksmelding.Configuration
 import org.junit.jupiter.api.Test
 import java.io.File
 import java.nio.file.Paths
+import org.junit.jupiter.api.Disabled
 
 class SanityKlientE2ETest {
-    //    @Disabled
+    @Disabled
     @Test
     fun hentNyeBrevblokker() {
         runBlocking {
