@@ -1,6 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.model.vedtak
 
-import no.nav.dagpenger.vedtaksmelding.model.OpplysningTyper.BruktBeregningsregelGrunnlag
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.BruktBeregningsregelGrunnlag
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.DATO
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL

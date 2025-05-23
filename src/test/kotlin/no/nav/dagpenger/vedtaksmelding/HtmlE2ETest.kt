@@ -35,71 +35,73 @@ internal class HtmlE2ETest {
             type = "azurerator.nais.io",
         ) {
             runBlocking {
-                client.post("https://dp-melding-om-vedtak.intern.dev.nav.no/melding-om-vedtak/$behandlingId/html") {
-                    header(HttpHeaders.Authorization, "Bearer $token")
-                    header(HttpHeaders.ContentType, "application/json")
-                    setBody(
-                        """
-                                    
-                        {
-                            "fornavn": "Test ForNavn",
-                            "etternavn": "Test EtterNavn",
-                            "fodselsnummer": "12345678901",
-                            "saksbehandler": {
-                                "fornavn": "Ola",
-                                "etternavn": "Nordmann",
-                                "enhet": {
-                                    "navn": "Enhet Navn",
-                                    "postadresse": "Postadresse 123"
-                                }
-                            },
-                            "beslutter": {
-                                "fornavn": "Kari",
-                                "etternavn": "Nordmann",
-                                "enhet": {
-                                    "navn": "Enhet Navn",
-                                    "postadresse": "Postadresse 123"
+                client
+                    .post("https://dp-melding-om-vedtak.intern.dev.nav.no/melding-om-vedtak/$behandlingId/html") {
+                        header(HttpHeaders.Authorization, "Bearer $token")
+                        header(HttpHeaders.ContentType, "application/json")
+                        setBody(
+                            """
+                                        
+                            {
+                                "fornavn": "Test ForNavn",
+                                "etternavn": "Test EtterNavn",
+                                "fodselsnummer": "12345678901",
+                                "saksbehandler": {
+                                    "fornavn": "Ola",
+                                    "etternavn": "Nordmann",
+                                    "enhet": {
+                                        "navn": "Enhet Navn",
+                                        "postadresse": "Postadresse 123"
+                                    }
+                                },
+                                "beslutter": {
+                                    "fornavn": "Kari",
+                                    "etternavn": "Nordmann",
+                                    "enhet": {
+                                        "navn": "Enhet Navn",
+                                        "postadresse": "Postadresse 123"
+                                    }
                                 }
                             }
-                        }
-                        """.trimIndent(),
-                    )
-                }.let { response ->
-                    println(response.bodyAsText())
-                }
+                            """.trimIndent(),
+                        )
+                    }.let { response ->
+                        println(response.bodyAsText())
+                    }
 
-                client.post("https://dp-melding-om-vedtak.intern.dev.nav.no/melding-om-vedtak/$behandlingId/vedtaksmelding") {
-                    header(HttpHeaders.Authorization, "Bearer $token")
-                    header(HttpHeaders.ContentType, "application/json")
-                    setBody(
-                        """
-                                    
-                        {
-                            "fornavn": "Test ForNavn",
-                            "etternavn": "Test EtterNavn",
-                            "fodselsnummer": "12345678901",
-                            "saksbehandler": {
-                                "fornavn": "Ola",
-                                "etternavn": "Nordmann",
-                                "enhet": {
-                                    "navn": "Enhet Navn",
-                                    "postadresse": "Postadresse 123"
-                                }
-                            },
-                            "beslutter": {
-                                "fornavn": "Kari",
-                                "etternavn": "Nordmann",
-                                "enhet": {
-                                    "navn": "Enhet Navn",
-                                    "postadresse": "Postadresse 123"
+                client
+                    .post("https://dp-melding-om-vedtak.intern.dev.nav.no/melding-om-vedtak/$behandlingId/vedtaksmelding") {
+                        header(HttpHeaders.Authorization, "Bearer $token")
+                        header(HttpHeaders.ContentType, "application/json")
+                        setBody(
+                            """
+                                        
+                            {
+                                "fornavn": "Test ForNavn",
+                                "etternavn": "Test EtterNavn",
+                                "fodselsnummer": "12345678901",
+                                "saksbehandler": {
+                                    "fornavn": "Ola",
+                                    "etternavn": "Nordmann",
+                                    "enhet": {
+                                        "navn": "Enhet Navn",
+                                        "postadresse": "Postadresse 123"
+                                    }
+                                },
+                                "beslutter": {
+                                    "fornavn": "Kari",
+                                    "etternavn": "Nordmann",
+                                    "enhet": {
+                                        "navn": "Enhet Navn",
+                                        "postadresse": "Postadresse 123"
+                                    }
                                 }
                             }
-                        }
-                        """.trimIndent(),
-                    )
-                }.let { response ->
-                    println(response.bodyAsText())
-                }
+                            """.trimIndent(),
+                        )
+                    }.let { response ->
+                        println(response.bodyAsText())
+                    }
             }
         }
     }

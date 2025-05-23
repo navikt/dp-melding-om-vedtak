@@ -5,14 +5,15 @@ import no.nav.dagpenger.vedtaksmelding.Configuration
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.io.File
+import java.nio.file.Paths
 
 class SanityKlientE2ETest {
-    @Disabled
     @Test
+    @Disabled
     fun hentNyeBrevblokker() {
         runBlocking {
-            // Tilpass til eget miljø
-            val filePath = "C:\\navit\\dp-melding-om-vedtak\\src\\test\\resources\\json\\sanity.json"
+            // Use a relative path
+            val filePath = Paths.get("src/test/resources/json/sanity.json").toAbsolutePath().toString()
             val jsonContent = SanityKlient(Configuration.sanityApiUrl).hentBrevBlokkerJson()
             File(filePath).writeText(jsonContent)
         }

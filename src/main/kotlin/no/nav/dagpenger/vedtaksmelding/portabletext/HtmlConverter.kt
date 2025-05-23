@@ -47,13 +47,14 @@ import java.util.Locale
 
 @Suppress("ktlint:standard:max-line-length")
 object HtmlConverter {
-    fun MeldingOmVedtakDataDTO.hentNavn(): String {
-        return listOf(fornavn, mellomnavn, etternavn).filterNotNull().filter { it.isNotBlank() }.joinToString(" ")
-    }
+    fun MeldingOmVedtakDataDTO.hentNavn(): String =
+        listOf(fornavn, mellomnavn, etternavn)
+            .filterNotNull()
+            .filter {
+                it.isNotBlank()
+            }.joinToString(" ")
 
-    fun BehandlerDTO.navn(): String {
-        return listOf(fornavn, etternavn).filter { it.isNotBlank() }.joinToString(" ")
-    }
+    fun BehandlerDTO.navn(): String = listOf(fornavn, etternavn).filter { it.isNotBlank() }.joinToString(" ")
 
     fun toHtml(
         brevBlokker: List<BrevBlokk>,
@@ -177,7 +178,9 @@ object HtmlConverter {
         if (brevBlokk.utvidetBeskrivelse) {
             p {
                 attributes["data-utvidet-beskrivelse-id"] = brevBlokk.textId
-                utvidetBeskrivelse.find { it.brevblokkId == brevBlokk.textId }?.tekst
+                utvidetBeskrivelse
+                    .find { it.brevblokkId == brevBlokk.textId }
+                    ?.tekst
                     ?.let { html ->
                         unsafe {
                             val s = html.sanitize()
@@ -188,10 +191,9 @@ object HtmlConverter {
         }
     }
 
-    private fun String.sanitize(): String {
-        return split("\n", "\r", "\r\n", "\u2028", "\u2029")
+    private fun String.sanitize(): String =
+        split("\n", "\r", "\r\n", "\u2028", "\u2029")
             .joinToString("<br/>") { it.escapeHTML() }
-    }
 
     private fun FlowContent.maybeWrapList(
         blocks: List<Block>,
@@ -352,6 +354,8 @@ inline fun FlowOrPhrasingContent.path(
         consumer,
     ).visit(block)
 
-open class PATH(initialAttributes: Map<String, String>, override val consumer: TagConsumer<*>) :
-    HTMLTag("path", consumer, initialAttributes, null, true, false),
+open class PATH(
+    initialAttributes: Map<String, String>,
+    override val consumer: TagConsumer<*>,
+) : HTMLTag("path", consumer, initialAttributes, null, true, false),
     HtmlBlockInlineTag

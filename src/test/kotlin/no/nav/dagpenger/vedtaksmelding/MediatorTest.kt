@@ -20,14 +20,14 @@ import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMapper
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding
-import no.nav.dagpenger.vedtaksmelding.model.VedtakMelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
-import no.nav.dagpenger.vedtaksmelding.model.VilkårTyper.MINSTEINNTEKT
-import no.nav.dagpenger.vedtaksmelding.model.avslag.AvslagMelding
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vedtak.Utfall
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Vilkår
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMapper
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.MINSTEINNTEKT
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagMelding
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
 import no.nav.dagpenger.vedtaksmelding.util.readFile
@@ -77,11 +77,12 @@ class MediatorTest {
                     vedtaksmeldingRepository = repository,
                 )
             runBlocking {
-                mediator.hentVedtaksmelding(
-                    behandlingId,
-                    saksbehandler,
-                    Behandlingstype.RETT_TIL_DAGPENGER,
-                ).shouldBeInstanceOf<AvslagMelding>()
+                mediator
+                    .hentVedtaksmelding(
+                        behandlingId,
+                        saksbehandler,
+                        Behandlingstype.RETT_TIL_DAGPENGER,
+                    ).shouldBeInstanceOf<AvslagMelding>()
             }
             repository.hentSanityInnhold(behandlingId) shouldEqualJson resource
         }
@@ -163,11 +164,12 @@ class MediatorTest {
             )
 
         runBlocking {
-            mediator.hentVedtaksmelding(
-                behandlingId = behandlingId,
-                saksbehandler = saksbehandler,
-                Behandlingstype.RETT_TIL_DAGPENGER,
-            ).shouldBeInstanceOf<AvslagMelding>()
+            mediator
+                .hentVedtaksmelding(
+                    behandlingId = behandlingId,
+                    saksbehandler = saksbehandler,
+                    Behandlingstype.RETT_TIL_DAGPENGER,
+                ).shouldBeInstanceOf<AvslagMelding>()
         }
 
         coVerify(exactly = 1) {
@@ -264,28 +266,32 @@ class MediatorTest {
             }
         runBlocking {
             val utvidedebeskrivelser =
-                mediator.hentVedtak(
-                    behandlingId = behandlingId,
-                    behandler = saksbehandler,
-                    meldingOmVedtakData =
-                        mockk<MeldingOmVedtakDataDTO>(relaxed = true).also {
-                            every { it.behandlingstype } returns null
-                        },
-                ).utvidedeBeskrivelser
+                mediator
+                    .hentVedtak(
+                        behandlingId = behandlingId,
+                        behandler = saksbehandler,
+                        meldingOmVedtakData =
+                            mockk<MeldingOmVedtakDataDTO>(relaxed = true).also {
+                                every { it.behandlingstype } returns null
+                            },
+                    ).utvidedeBeskrivelser
             require(true) {
                 "utvidedeBeskrivelser should not be null"
             }
 
             utvidedebeskrivelser.size shouldBe 3
-            utvidedebeskrivelser.single {
-                it.brevblokkId == "brev.blokk.rett-til-ikke-innhold"
-            }.tekst shouldBe ""
-            utvidedebeskrivelser.single {
-                it.brevblokkId == RETT_TIL_Å_KLAGE.brevBlokkId
-            }.tekst shouldBe "hallo"
-            utvidedebeskrivelser.single {
-                it.brevblokkId == "brev.blokk.rett-til-aa-random"
-            }.tekst shouldBe "random test"
+            utvidedebeskrivelser
+                .single {
+                    it.brevblokkId == "brev.blokk.rett-til-ikke-innhold"
+                }.tekst shouldBe ""
+            utvidedebeskrivelser
+                .single {
+                    it.brevblokkId == RETT_TIL_Å_KLAGE.brevBlokkId
+                }.tekst shouldBe "hallo"
+            utvidedebeskrivelser
+                .single {
+                    it.brevblokkId == "brev.blokk.rett-til-aa-random"
+                }.tekst shouldBe "random test"
         }
     }
 }

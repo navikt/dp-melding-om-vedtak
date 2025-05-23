@@ -14,7 +14,6 @@ fun writeStringToFile(
 
 private val resourseRetriever = object {}.javaClass
 
-fun String.readFile(): String {
-    return resourseRetriever.getResource(this)?.readText()
+fun String.readFile(): String =
+    resourseRetriever.getResource(this)?.readText()
         ?: throw RuntimeException("Fant ikke ressurs $this")
-}
