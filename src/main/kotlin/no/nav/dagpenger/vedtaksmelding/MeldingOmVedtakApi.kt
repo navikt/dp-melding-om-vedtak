@@ -36,18 +36,19 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                 val behandler = call.parseSaksbehandler()
                 val meldingOmVedtakData = call.receive<MeldingOmVedtakDataDTO>()
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
-                    kotlin.runCatching {
-                        val meldingOmVedtakResponseDTO =
-                            mediator.hentVedtak(
-                                behandlingId = behandlingId,
-                                behandler = behandler,
-                                meldingOmVedtakData = meldingOmVedtakData,
-                            )
-                        call.respond(meldingOmVedtakResponseDTO)
-                    }.onFailure { t ->
-                        logger.error(t) { "Feil ved henting av vedtaksmelding som html (hentVedtak). BehandlingId: $behandlingId" }
-                        throw t
-                    }
+                    kotlin
+                        .runCatching {
+                            val meldingOmVedtakResponseDTO =
+                                mediator.hentVedtak(
+                                    behandlingId = behandlingId,
+                                    behandler = behandler,
+                                    meldingOmVedtakData = meldingOmVedtakData,
+                                )
+                            call.respond(meldingOmVedtakResponseDTO)
+                        }.onFailure { t ->
+                            logger.error(t) { "Feil ved henting av vedtaksmelding som html (hentVedtak). BehandlingId: $behandlingId" }
+                            throw t
+                        }
                 }
             }
             post("/melding-om-vedtak/{behandlingId}/vedtaksmelding") {
@@ -55,18 +56,21 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                 val behandler = call.parseSaksbehandler()
                 val meldingOmVedtakData = call.receive<MeldingOmVedtakDataDTO>()
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
-                    kotlin.runCatching {
-                        val vedtaksHtml =
-                            mediator.hentEndeligVedtak(
-                                behandlingId = behandlingId,
-                                behandler = behandler,
-                                meldingOmVedtakData = meldingOmVedtakData,
-                            )
-                        call.respond(vedtaksHtml)
-                    }.onFailure { t ->
-                        logger.error(t) { "Feil ved henting av vedtaksmelding som html (hentEndeligVedtak). BehandlingId: $behandlingId" }
-                        throw t
-                    }
+                    kotlin
+                        .runCatching {
+                            val vedtaksHtml =
+                                mediator.hentEndeligVedtak(
+                                    behandlingId = behandlingId,
+                                    behandler = behandler,
+                                    meldingOmVedtakData = meldingOmVedtakData,
+                                )
+                            call.respond(vedtaksHtml)
+                        }.onFailure { t ->
+                            logger.error(
+                                t,
+                            ) { "Feil ved henting av vedtaksmelding som html (hentEndeligVedtak). BehandlingId: $behandlingId" }
+                            throw t
+                        }
                 }
             }
             put("/melding-om-vedtak/{behandlingId}/{brevblokkId}/utvidet-beskrivelse") {
@@ -108,11 +112,10 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
 
 private fun ApplicationCall.parseSaksbehandler(): Saksbehandler = Saksbehandler(this.request.jwt())
 
-private fun ApplicationCall.parseUUID(): UUID {
-    return this.parameters["behandlingId"]?.let {
+private fun ApplicationCall.parseUUID(): UUID =
+    this.parameters["behandlingId"]?.let {
         UUID.fromString(it)
     } ?: throw IllegalArgumentException("")
-}
 
 private fun RoutingContext.requirePlainText() {
     require(call.request.headers["Content-Type"]!!.contains(ContentType.Text.Plain.toString())) {

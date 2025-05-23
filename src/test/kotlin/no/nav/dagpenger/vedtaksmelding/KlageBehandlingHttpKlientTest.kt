@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.util.UUID
 
-class KlageBehandlingHttpKlientTest() {
+class KlageBehandlingHttpKlientTest {
     @Test
     @Disabled
     fun `hent en klage for realz`() {
@@ -16,10 +16,11 @@ class KlageBehandlingHttpKlientTest() {
             tokenProvider = { "" },
         ).let {
             runBlocking {
-                it.hentVedtak(
-                    behandlingId = UUID.fromString("0196a5b8-3dab-779f-ba9c-a116e298b2b1"),
-                    saksbehandler = Saksbehandler(token = ""),
-                ).getOrThrow()
+                it
+                    .hentVedtak(
+                        behandlingId = UUID.fromString("0196a5b8-3dab-779f-ba9c-a116e298b2b1"),
+                        saksbehandler = Saksbehandler(token = ""),
+                    ).getOrThrow()
             }
         }
     }
