@@ -102,7 +102,7 @@ class VedtakHtmlTest {
     fun `Html av klage`() {
         val klageVedtak =
             KlagevedtakMapper(
-                vedtakJson = "/json/klage/klagevedtak.json".readFile(),
+                vedtakJson = "/json/klage/klagevedtakOpprettholdelse.json".readFile(),
             ).vedtak()
 
         val klageMelding =

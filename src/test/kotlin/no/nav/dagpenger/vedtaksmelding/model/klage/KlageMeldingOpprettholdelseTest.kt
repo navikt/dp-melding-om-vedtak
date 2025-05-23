@@ -6,14 +6,14 @@ import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRET
 import no.nav.dagpenger.vedtaksmelding.util.readFile
 import org.junit.jupiter.api.Test
 
-class KlagevedtakMeldingTest {
+class KlageMeldingOpprettholdelseTest {
     private val klageVedtak =
         KlagevedtakMapper(
-            vedtakJson = "/json/klage/klagevedtak.json".readFile(),
+            vedtakJson = "/json/klage/klagevedtakOpprettholdelse.json".readFile(),
         ).vedtak()
 
     @Test
-    fun `Rikig brevblokker for klagemelding `() {
+    fun `Rikige brevblokker for klagemelding med opprettholdelse av vedtak`() {
         KlageMelding(
             klagevedtak = klageVedtak,
             alleBrevBlokker = emptyList(),

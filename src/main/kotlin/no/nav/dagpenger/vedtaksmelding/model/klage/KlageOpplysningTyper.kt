@@ -15,18 +15,18 @@ enum class KlageOpplysningTyper(val opplysningNavnId: String, val opplysningTeks
     ),
     ErKlagenSkriftelig(
         opplysningNavnId = "ER_KLAGEN_SKRIFTLIG",
-        opplysningTekstId = "opplysning.er-klagen-skriftlig",
+        opplysningTekstId = "opplysning.klage-er-skriftlig",
     ),
     ErKlagenUnderskrevet(
         opplysningNavnId = "ER_KLAGEN_UNDERSKREVET",
-        opplysningTekstId = "opplysning.er-klagen-underskrevet",
+        opplysningTekstId = "opplysning.klage-er-underskrevet",
     ),
     KlagenNevnerEndring(
         opplysningNavnId = "KLAGEN_NEVNER_ENDRING",
-        opplysningTekstId = "opplysning.klagen-nevner-endring",
+        opplysningTekstId = "opplysning.klage-nevner-endring",
     ),
     RettsligKlageinteresse(
         opplysningNavnId = "RETTSLIG_KLAGEINTERESSE",
-        opplysningTekstId = "opplysning.rettsleg-klageinteresse",
+        opplysningTekstId = "opplysning.klage-klageinteresse-er-rettslig",
     ),
 }
