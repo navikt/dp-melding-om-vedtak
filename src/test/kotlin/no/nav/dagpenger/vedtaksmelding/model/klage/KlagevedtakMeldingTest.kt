@@ -16,7 +16,7 @@ class KlagevedtakMeldingTest {
             klagevedtak = klageVedtak,
             alleBrevBlokker = emptyList(),
         ).let { klageMelding ->
-            klageMelding.brevBlokkIder() shouldBe emptyList() // listOf(KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_1.brevblokkId)
+            klageMelding.brevBlokkIder() shouldBe listOf(KlageBrevBlokker.KLAGE_OVERSENDT_KA.brevblokkId)
         }
     }
 }
