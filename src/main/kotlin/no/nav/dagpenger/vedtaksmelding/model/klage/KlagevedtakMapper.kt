@@ -38,8 +38,8 @@ class KlagevedtakMapper(vedtakJson: String) {
     private val vedtakOpplysninger: Set<Opplysning> =
         setOf(
             Opplysning(
-                opplysningTekstId = KlageOpplysningTyper.KlageMottatDato.opplysningTekstId,
-                råVerdi = vedtak.behandlingsverdi(KlageOpplysningTyper.KlageMottatDato.opplysningNavnId),
+                opplysningTekstId = KlageOpplysningTyper.KlageMottattDato.opplysningTekstId,
+                råVerdi = vedtak.behandlingsverdi(KlageOpplysningTyper.KlageMottattDato.opplysningNavnId),
                 datatype = Opplysning.Datatype.DATO,
             ),
             Opplysning(
