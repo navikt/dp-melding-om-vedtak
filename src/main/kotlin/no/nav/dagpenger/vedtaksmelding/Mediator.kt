@@ -15,7 +15,7 @@ import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.TomtVedtak
-import no.nav.dagpenger.vedtaksmelding.model.klage.KlagevedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageMelding
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Brev
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter
@@ -115,7 +115,7 @@ class Mediator(
                             logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
                         }.getOrThrow()
 
-                KlagevedtakMelding(
+                KlageMelding(
                     klagevedtak = vedtak,
                     alleBrevBlokker = alleBrevblokker,
                 )

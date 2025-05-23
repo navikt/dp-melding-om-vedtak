@@ -5,6 +5,10 @@ enum class KlageOpplysningTyper(val opplysningNavnId: String, val opplysningTeks
         opplysningNavnId = "KLAGE_MOTTATT",
         opplysningTekstId = "opplysning.klage-mottatt-dato",
     ),
+    PåklagetVedtakDato(
+        opplysningNavnId = "KLAGEN_GJELDER_VEDTAKSDATO",
+        opplysningTekstId = "opplysning.klage-paaklaget-vedtak-dato",
+    ),
     KlageUtfall(
         opplysningNavnId = "UTFALL",
         opplysningTekstId = "opplysning.klage-utfall",

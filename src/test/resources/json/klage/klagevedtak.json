@@ -40,6 +40,17 @@
       "type": "TEKST"
     },
     {
+      "opplysningId": "0196a5b8-3dab-779f-ba9c-a116e298b4b7",
+      "opplysningNavnId": "KLAGEN_GJELDER_VEDTAKSDATO",
+      "navn": "Vedtaksdato",
+      "paakrevd": true,
+      "gruppe": "KLAGESAK",
+      "valgmuligheter": [],
+      "redigerbar": true,
+      "verdi": "2025-02-02",
+      "type": "DATO"
+    },
+    {
       "opplysningId": "0196a5b8-3dab-779f-ba9c-a116e298b2b9",
       "opplysningNavnId": "KLAGEFRIST",
       "navn": "Frist for å klage",

@@ -36,9 +36,10 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_UTBETALING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseMelding
-import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OVERSENDT_KA
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageMelding
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlagevedtakMapper
-import no.nav.dagpenger.vedtaksmelding.model.klage.KlagevedtakMelding
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
@@ -105,7 +106,7 @@ class VedtakHtmlTest {
             ).vedtak()
 
         val klageMelding =
-            KlagevedtakMelding(
+            KlageMelding(
                 klagevedtak = klageVedtak,
                 alleBrevBlokker = alleBrevBlokker,
             )
@@ -115,7 +116,11 @@ class VedtakHtmlTest {
             opplysninger = klageMelding.hentOpplysninger(),
             meldingOmVedtakData = meldingOmVedtakData,
             fagsakId = "fagsakId test",
-        ) brevblokkRekkefølgeShouldBe listOf(KLAGE_OVERSENDT_KA.brevblokkId)
+        ) brevblokkRekkefølgeShouldBe
+            listOf(
+                KLAGE_OPPRETTHOLDELSE_DEL_1.brevblokkId,
+                KLAGE_OPPRETTHOLDELSE_DEL_2.brevblokkId,
+            )
     }
 
     @Test

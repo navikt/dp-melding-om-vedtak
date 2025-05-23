@@ -43,6 +43,11 @@ class KlagevedtakMapper(vedtakJson: String) {
                 datatype = Opplysning.Datatype.DATO,
             ),
             Opplysning(
+                opplysningTekstId = KlageOpplysningTyper.PåklagetVedtakDato.opplysningTekstId,
+                råVerdi = vedtak.behandlingsverdi(KlageOpplysningTyper.PåklagetVedtakDato.opplysningNavnId),
+                datatype = Opplysning.Datatype.DATO,
+            ),
+            Opplysning(
                 opplysningTekstId = KlageOpplysningTyper.KlageUtfall.opplysningTekstId,
                 råVerdi = vedtak.utfallsverdi(KlageOpplysningTyper.KlageUtfall.opplysningNavnId),
                 datatype = Opplysning.Datatype.TEKST,
