@@ -38,6 +38,37 @@ class OpplysningFormateringTest {
             datatype = FLYTTALL,
             enhet = TIMER,
         ).formatertVerdi shouldBe "18,75"
+        Opplysning(
+            opplysningTekstId = "bubba",
+            råVerdi = "18.008",
+            datatype = FLYTTALL,
+            enhet = TIMER,
+        ).formatertVerdi shouldBe "18,01"
+        Opplysning(
+            opplysningTekstId = "bubba",
+            råVerdi = "18.7",
+            datatype = FLYTTALL,
+            enhet = TIMER,
+        ).formatertVerdi shouldBe "18,7"
+        Opplysning(
+            opplysningTekstId = "bubba",
+            råVerdi = "18.0",
+            datatype = FLYTTALL,
+            enhet = TIMER,
+        ).formatertVerdi shouldBe "18"
+        Opplysning(
+            opplysningTekstId = "bubba",
+            råVerdi = "18",
+            datatype = FLYTTALL,
+            enhet = TIMER,
+        ).formatertVerdi shouldBe "18"
+        // Edge-case som egentlig burde resultere i 18, men vi har valgt å ikke bruke tid på å håndtere det
+        Opplysning(
+            opplysningTekstId = "bubba",
+            råVerdi = "18.004",
+            datatype = FLYTTALL,
+            enhet = TIMER,
+        ).formatertVerdi shouldBe "18,00"
     }
 
     @Test
