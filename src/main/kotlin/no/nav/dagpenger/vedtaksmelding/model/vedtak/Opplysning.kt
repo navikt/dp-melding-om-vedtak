@@ -35,7 +35,7 @@ data class Opplysning(
             when (datatype) {
                 FLYTTALL ->
                     when (enhet) {
-                        TIMER -> formaterTall(antallDesimaler = 2, desimaltall = råVerdi.toDouble())
+                        TIMER -> formaterTimer(desimaltall = råVerdi.toDouble())
                         KRONER -> "${formaterTall(antallDesimaler = 2, desimaltall = råVerdi.toDouble())} kroner"
                         else -> formaterTall(antallDesimaler = 1, desimaltall = råVerdi.toDouble())
                     }
@@ -65,7 +65,21 @@ data class Opplysning(
         }
     }
 
+    private fun formaterTimer(desimaltall: Double): String {
+        val norskFormat = Locale.of("nb", "NO")
+        return when {
+            erHeltall(desimaltall) -> String.format(norskFormat, format = "%,.0f", desimaltall)
+            har1Desimal(desimaltall) -> String.format(norskFormat, format = "%,.1f", desimaltall)
+            else -> String.format(norskFormat, format = "%,.2f", desimaltall)
+        }
+    }
+
     private fun erHeltall(desimaltall: Double) = desimaltall % 1 == 0.0
+
+    private fun har1Desimal(desimaltall: Double): Boolean {
+        val scaled = desimaltall * 10
+        return scaled % 1 == 0.0 && desimaltall % 1 != 0.0
+    }
 
     private fun formaterDato(dateString: String): String {
         val date = LocalDate.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE)
