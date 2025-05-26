@@ -13,7 +13,7 @@ class KlagevedtakMapperTest {
         ).vedtak().let { vedtak ->
             vedtak.behandlingId shouldBe UUID.fromString("0196a5b8-3dab-779f-ba9c-a116e298b2b1")
             vedtak.fagsakId shouldBe "fagsakId"
-            vedtak.opplysninger.size shouldBe 7
+            vedtak.opplysninger.size shouldBe 8
             vedtak.opplysninger.single { it.opplysningTekstId == KlageOpplysningTyper.KlageMottattDato.opplysningTekstId }.let {
                 it.formatertVerdi shouldBe "7. mai 2025"
             }
