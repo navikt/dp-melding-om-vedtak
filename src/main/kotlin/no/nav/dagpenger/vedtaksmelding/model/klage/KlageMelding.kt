@@ -3,14 +3,22 @@ package no.nav.dagpenger.vedtaksmelding.model.klage
 import no.nav.dagpenger.vedtaksmelding.model.KlageOpplysningTyper.ErKlagenSkriftelig
 import no.nav.dagpenger.vedtaksmelding.model.KlageOpplysningTyper.ErKlagenUnderskrevet
 import no.nav.dagpenger.vedtaksmelding.model.KlageOpplysningTyper.KlageUtfall
+import no.nav.dagpenger.vedtaksmelding.model.KlageOpplysningTyper.KlagefristOppfylt
 import no.nav.dagpenger.vedtaksmelding.model.KlageOpplysningTyper.KlagenNevnerEndring
 import no.nav.dagpenger.vedtaksmelding.model.KlageOpplysningTyper.RettsligKlageinteresse
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.HJELP_FRA_ANDRE
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.PERSONOPPLYSNINGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.RETT_TIL_INNSYN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.SPØRSMÅL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.VEILEDNING_FRA_NAV
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_AVVIST_INTRO
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_AVVIST_KLAGEFIRST
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_AVVIST_KLAGEFIRST_HJEMMEL
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_AVVIST_NEVNER_ENDRING
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_AVVIST_RETTSLIG_KLAGEINTERESSE
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_AVVIST_RETTSLIG_KLAGEINTERESSE_HJEMMEL
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_AVVIST_SKRIFTLIG_OG_NEVNER_ENDRING_HJEMMEL
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_AVVIST_SKRIFTLIG_OG_SIGNERT
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Brev
@@ -69,7 +77,7 @@ class KlageMelding(
             return emptyList()
         }
         val brevBlokkIder = mutableListOf<String>()
-        brevBlokkIder.add(KlageBrevBlokker.KLAGE_AVVIST_DEL_1.brevblokkId)
+        brevBlokkIder.add(KLAGE_AVVIST_INTRO.brevblokkId)
 
         if ((
                 klagevedtak.opplysninger.any {
@@ -82,13 +90,13 @@ class KlageMelding(
                 }
             )
         ) {
-            brevBlokkIder.add(KlageBrevBlokker.KLAGE_AVVIST_SKRIFTLIG_DEL_2.brevblokkId)
+            brevBlokkIder.add(KLAGE_AVVIST_SKRIFTLIG_OG_SIGNERT.brevblokkId)
         }
         if (klagevedtak.opplysninger.any {
                 it.opplysningTekstId == KlagenNevnerEndring.opplysningTekstId && !it.råVerdi().toBoolean()
             }
         ) {
-            brevBlokkIder.add(KlageBrevBlokker.KLAGE_AVVIST_NEVNER_ENDRING_DEL_3.brevblokkId)
+            brevBlokkIder.add(KLAGE_AVVIST_NEVNER_ENDRING.brevblokkId)
         }
         if ((
                 klagevedtak.opplysninger.any {
@@ -106,24 +114,32 @@ class KlageMelding(
                 }
             )
         ) {
-            brevBlokkIder.add(KlageBrevBlokker.KLAGE_AVVIST_SKRIFTLIG_OG_NEVNER_ENDRING_HJEMMEL_DEL_4.brevblokkId)
+            brevBlokkIder.add(KLAGE_AVVIST_SKRIFTLIG_OG_NEVNER_ENDRING_HJEMMEL.brevblokkId)
         }
+
+        if (klagevedtak.opplysninger.any {
+                it.opplysningTekstId == KlagefristOppfylt.opplysningTekstId && !it.råVerdi().toBoolean()
+            }
+        ) {
+            brevBlokkIder.add(KLAGE_AVVIST_KLAGEFIRST.brevblokkId)
+            brevBlokkIder.add(KLAGE_AVVIST_KLAGEFIRST_HJEMMEL.brevblokkId)
+        }
+
         if (klagevedtak.opplysninger.any {
                 it.opplysningTekstId == RettsligKlageinteresse.opplysningTekstId && !it.råVerdi().toBoolean()
             }
         ) {
-            brevBlokkIder.add(KlageBrevBlokker.KLAGE_AVVIST_RETTSLIG_KLAGEINTERESSE_DEL_5.brevblokkId)
-            brevBlokkIder.add(KlageBrevBlokker.KLAGE_AVVIST_RETTSLIG_KLAGEINTERESSE_HJEMMEL_DEL_6.brevblokkId)
+            brevBlokkIder.add(KLAGE_AVVIST_RETTSLIG_KLAGEINTERESSE.brevblokkId)
+            brevBlokkIder.add(KLAGE_AVVIST_RETTSLIG_KLAGEINTERESSE_HJEMMEL.brevblokkId)
         }
 
-        return brevBlokkIder.toList() + fasteAvsluttendeBlokkerForVedtak
+        return brevBlokkIder.toList() + fasteAvsluttendeBlokker
     }
 
     companion object {
-        val fasteAvsluttendeBlokkerForVedtak =
+        val fasteAvsluttendeBlokker =
             listOf(
                 RETT_TIL_INNSYN.brevBlokkId,
-                PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
                 RETT_TIL_Å_KLAGE.brevBlokkId,

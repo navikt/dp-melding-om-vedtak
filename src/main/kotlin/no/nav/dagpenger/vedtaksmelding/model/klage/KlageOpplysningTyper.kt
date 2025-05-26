@@ -29,4 +29,8 @@ enum class KlageOpplysningTyper(val opplysningNavnId: String, val opplysningTeks
         opplysningNavnId = "RETTSLIG_KLAGEINTERESSE",
         opplysningTekstId = "opplysning.klage-klageinteresse-er-rettslig",
     ),
+    KlagefristOppfylt(
+        opplysningNavnId = "KLAGEFRIST_OPPFYLT",
+        opplysningTekstId = "opplysning.klage-klagefrist-oppfylt",
+    ),
 }

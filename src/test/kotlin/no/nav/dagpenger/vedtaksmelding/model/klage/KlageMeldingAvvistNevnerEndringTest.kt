@@ -1,9 +1,9 @@
 package no.nav.dagpenger.vedtaksmelding.model.klage
 
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_AVVIST_DEL_1
-import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_AVVIST_NEVNER_ENDRING_DEL_3
-import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_AVVIST_SKRIFTLIG_OG_NEVNER_ENDRING_HJEMMEL_DEL_4
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_AVVIST_INTRO
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_AVVIST_NEVNER_ENDRING
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_AVVIST_SKRIFTLIG_OG_NEVNER_ENDRING_HJEMMEL
 import no.nav.dagpenger.vedtaksmelding.util.readFile
 import org.junit.jupiter.api.Test
 
@@ -21,10 +21,10 @@ class KlageMeldingAvvistNevnerEndringTest {
         ).let { klageMelding ->
             klageMelding.brevBlokkIder() shouldBe
                 listOf(
-                    KLAGE_AVVIST_DEL_1.brevblokkId,
-                    KLAGE_AVVIST_NEVNER_ENDRING_DEL_3.brevblokkId,
-                    KLAGE_AVVIST_SKRIFTLIG_OG_NEVNER_ENDRING_HJEMMEL_DEL_4.brevblokkId,
-                ) + KlageMelding.fasteAvsluttendeBlokkerForVedtak
+                    KLAGE_AVVIST_INTRO.brevblokkId,
+                    KLAGE_AVVIST_NEVNER_ENDRING.brevblokkId,
+                    KLAGE_AVVIST_SKRIFTLIG_OG_NEVNER_ENDRING_HJEMMEL.brevblokkId,
+                ) + KlageMelding.fasteAvsluttendeBlokker
         }
     }
 }

@@ -68,6 +68,11 @@ class KlagevedtakMapper(vedtakJson: String) {
                 datatype = Opplysning.Datatype.BOOLSK,
             ),
             Opplysning(
+                opplysningTekstId = KlageOpplysningTyper.KlagefristOppfylt.opplysningTekstId,
+                råVerdi = vedtak.behandlingsverdi(KlageOpplysningTyper.KlagefristOppfylt.opplysningNavnId),
+                datatype = Opplysning.Datatype.BOOLSK,
+            ),
+            Opplysning(
                 opplysningTekstId = KlageOpplysningTyper.RettsligKlageinteresse.opplysningTekstId,
                 råVerdi = vedtak.behandlingsverdi(KlageOpplysningTyper.RettsligKlageinteresse.opplysningNavnId),
                 datatype = Opplysning.Datatype.BOOLSK,
