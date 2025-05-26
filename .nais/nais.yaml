@@ -6,7 +6,7 @@ metadata:
   labels:
     team: teamdagpenger
 spec:
-  image: {{ image }}
+  image: "{{ image }}"
   port: 8080
   prometheus:
     enabled: true
@@ -46,11 +46,11 @@ spec:
     - name: JDK_JAVA_OPTIONS
       value: -XX:+UseParallelGC -XX:ActiveProcessorCount=4
     - name: GRUPPE_SAKSBEHANDLER
-      value: {{ azure.grupper.saksbehandler }}
+      value: "{{ azure.grupper.saksbehandler }}"
     - name: DP_BEHANDLING_API_SCOPE
-      value: {{ DP_BEHANDLING_API_SCOPE }}
+      value: "{{ DP_BEHANDLING_API_SCOPE }}"
     - name: DP_SAKSBEHANDLING_API_SCOPE
-      value: {{ DP_SAKSBEHANDLING_API_SCOPE }}
+      value: "{{ DP_SAKSBEHANDLING_API_SCOPE }}"
   observability:
     autoInstrumentation:
       enabled: true
@@ -58,10 +58,10 @@ spec:
   azure:
     application:
       enabled: true
-      tenant: {{ azure.tenant }}
+      tenant: "{{ azure.tenant }}"
       claims:
         groups:
-          - id: {{ azure.grupper.saksbehandler }}
+          - id: "{{ azure.grupper.saksbehandler }}"
         extra:
           - NAVident
   gcp:
@@ -72,7 +72,7 @@ spec:
             name: vedtaksmelding-v1
         diskAutoresize: true
         diskType: SSD
-        highAvailability: {{ db.highAvailability }}
+        highAvailability: "{{ db.highAvailability }}"
         insights:
           enabled: true
           queryStringLength: 4500
@@ -81,6 +81,6 @@ spec:
         maintenance:
           day: 1
           hour: 4
-        pointInTimeRecovery: {{ db.pointInTimeRecovery }}
-        tier: {{ db.tier }}
+        pointInTimeRecovery: "{{ db.pointInTimeRecovery }}"
+        tier: "{{ db.tier }}"
         type: POSTGRES_16
