@@ -76,6 +76,8 @@ class Mediator(
                     sanityInnhold,
                     object : TypeReference<ResultDTO>() {},
                 ).result
+
+        logger.info { "behandlingtype: $behandlingstype" }
         return when (behandlingstype) {
             RETT_TIL_DAGPENGER -> {
                 val vedtak =
