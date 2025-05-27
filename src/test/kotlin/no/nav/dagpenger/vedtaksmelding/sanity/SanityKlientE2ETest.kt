@@ -8,8 +8,8 @@ import java.io.File
 import java.nio.file.Paths
 
 class SanityKlientE2ETest {
-    @Test
     @Disabled
+    @Test
     fun hentNyeBrevblokker() {
         runBlocking {
             // Use a relative path
