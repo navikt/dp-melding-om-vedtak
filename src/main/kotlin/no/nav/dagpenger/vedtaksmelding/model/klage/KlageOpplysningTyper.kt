@@ -1,12 +1,13 @@
-package no.nav.dagpenger.vedtaksmelding.model.klage
+package no.nav.dagpenger.vedtaksmelding.model
 
-enum class KlageOpplysningTyper(
-    val opplysningNavnId: String,
-    val opplysningTekstId: String,
-) {
-    KlageMottatDato(
+enum class KlageOpplysningTyper(val opplysningNavnId: String, val opplysningTekstId: String) {
+    KlageMottattDato(
         opplysningNavnId = "KLAGE_MOTTATT",
         opplysningTekstId = "opplysning.klage-mottatt-dato",
+    ),
+    PåklagetVedtakDato(
+        opplysningNavnId = "KLAGEN_GJELDER_VEDTAKSDATO",
+        opplysningTekstId = "opplysning.klage-paaklaget-vedtak-dato",
     ),
     KlageUtfall(
         opplysningNavnId = "UTFALL",
@@ -14,18 +15,22 @@ enum class KlageOpplysningTyper(
     ),
     ErKlagenSkriftelig(
         opplysningNavnId = "ER_KLAGEN_SKRIFTLIG",
-        opplysningTekstId = "opplysning.er-klagen-skriftlig",
+        opplysningTekstId = "opplysning.klage-er-skriftlig",
     ),
     ErKlagenUnderskrevet(
         opplysningNavnId = "ER_KLAGEN_UNDERSKREVET",
-        opplysningTekstId = "opplysning.er-klagen-underskrevet",
+        opplysningTekstId = "opplysning.klage-er-underskrevet",
     ),
     KlagenNevnerEndring(
         opplysningNavnId = "KLAGEN_NEVNER_ENDRING",
-        opplysningTekstId = "opplysning.klagen-nevner-endring",
+        opplysningTekstId = "opplysning.klage-nevner-endring",
     ),
     RettsligKlageinteresse(
         opplysningNavnId = "RETTSLIG_KLAGEINTERESSE",
-        opplysningTekstId = "opplysning.rettsleg-klageinteresse",
+        opplysningTekstId = "opplysning.klage-klageinteresse-er-rettslig",
+    ),
+    KlagefristOppfylt(
+        opplysningNavnId = "KLAGEFRIST_OPPFYLT",
+        opplysningTekstId = "opplysning.klage-klagefrist-oppfylt",
     ),
 }

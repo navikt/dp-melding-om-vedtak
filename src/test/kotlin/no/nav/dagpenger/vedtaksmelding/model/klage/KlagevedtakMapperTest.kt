@@ -1,6 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding.model.klage
 
 import io.kotest.matchers.shouldBe
+import no.nav.dagpenger.vedtaksmelding.model.KlageOpplysningTyper
 import org.junit.jupiter.api.Test
 import java.util.UUID
 
@@ -12,9 +13,12 @@ class KlagevedtakMapperTest {
         ).vedtak().let { vedtak ->
             vedtak.behandlingId shouldBe UUID.fromString("0196a5b8-3dab-779f-ba9c-a116e298b2b1")
             vedtak.fagsakId shouldBe "fagsakId"
-            vedtak.opplysninger.size shouldBe 6
-            vedtak.opplysninger.single { it.opplysningTekstId == KlageOpplysningTyper.KlageMottatDato.opplysningTekstId }.let {
+            vedtak.opplysninger.size shouldBe 8
+            vedtak.opplysninger.single { it.opplysningTekstId == KlageOpplysningTyper.KlageMottattDato.opplysningTekstId }.let {
                 it.formatertVerdi shouldBe "7. mai 2025"
+            }
+            vedtak.opplysninger.single { it.opplysningTekstId == KlageOpplysningTyper.PåklagetVedtakDato.opplysningTekstId }.let {
+                it.formatertVerdi shouldBe "3. februar 2025"
             }
         }
     }
@@ -55,6 +59,16 @@ private val klageVedtakJson =
         "redigerbar" : true,
         "verdi" : "12",
         "type" : "TEKST"
+      }, {
+        "opplysningId": "0196a5b8-3dab-779f-ba9c-a116e298b4b7",
+        "opplysningNavnId": "KLAGEN_GJELDER_VEDTAKSDATO",
+        "navn": "Vedtaksdato",
+        "paakrevd": true,
+        "gruppe": "KLAGESAK",
+        "valgmuligheter": [],
+        "redigerbar": true,
+        "verdi": "2025-02-03",
+        "type": "DATO"
       }, {
         "opplysningId" : "0196a5b8-3dab-779f-ba9c-a116e298b2b9",
         "opplysningNavnId" : "KLAGEFRIST",

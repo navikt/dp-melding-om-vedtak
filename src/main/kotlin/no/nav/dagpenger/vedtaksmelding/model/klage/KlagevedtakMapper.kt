@@ -5,12 +5,11 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import no.nav.dagpenger.vedtaksmelding.model.KlageOpplysningTyper
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import java.util.UUID
 
-class KlagevedtakMapper(
-    vedtakJson: String,
-) {
+class KlagevedtakMapper(vedtakJson: String) {
     private val vedtak: JsonNode
     private val objectMapper: ObjectMapper =
         jacksonObjectMapper()
@@ -21,12 +20,13 @@ class KlagevedtakMapper(
         vedtak = objectMapper.readTree(vedtakJson)
     }
 
-    fun vedtak(): KlageVedtak =
-        KlageVedtak(
+    fun vedtak(): KlageVedtak {
+        return KlageVedtak(
             behandlingId = behandlingId,
             opplysninger = vedtakOpplysninger,
             fagsakId = fagsakId,
         )
+    }
 
     private val behandlingId =
         UUID.fromString(vedtak.get("behandlingId").asText())
@@ -38,46 +38,58 @@ class KlagevedtakMapper(
     private val vedtakOpplysninger: Set<Opplysning> =
         setOf(
             Opplysning(
-                opplysningTekstId = KlageOpplysningTyper.KlageMottatDato.opplysningTekstId,
-                råVerdi = vedtak.verdi(KlageOpplysningTyper.KlageMottatDato.opplysningNavnId),
+                opplysningTekstId = KlageOpplysningTyper.KlageMottattDato.opplysningTekstId,
+                råVerdi = vedtak.behandlingsverdi(KlageOpplysningTyper.KlageMottattDato.opplysningNavnId),
+                datatype = Opplysning.Datatype.DATO,
+            ),
+            Opplysning(
+                opplysningTekstId = KlageOpplysningTyper.PåklagetVedtakDato.opplysningTekstId,
+                råVerdi = vedtak.behandlingsverdi(KlageOpplysningTyper.PåklagetVedtakDato.opplysningNavnId),
                 datatype = Opplysning.Datatype.DATO,
             ),
             Opplysning(
                 opplysningTekstId = KlageOpplysningTyper.KlageUtfall.opplysningTekstId,
-                råVerdi = vedtak.verdi(KlageOpplysningTyper.KlageUtfall.opplysningNavnId, opplysningsset = "utfallOpplysninger"),
+                råVerdi = vedtak.utfallsverdi(KlageOpplysningTyper.KlageUtfall.opplysningNavnId),
                 datatype = Opplysning.Datatype.TEKST,
             ),
             Opplysning(
                 opplysningTekstId = KlageOpplysningTyper.ErKlagenSkriftelig.opplysningTekstId,
-                råVerdi = vedtak.verdi(KlageOpplysningTyper.ErKlagenSkriftelig.opplysningNavnId),
+                råVerdi = vedtak.behandlingsverdi(KlageOpplysningTyper.ErKlagenSkriftelig.opplysningNavnId),
                 datatype = Opplysning.Datatype.BOOLSK,
             ),
             Opplysning(
                 opplysningTekstId = KlageOpplysningTyper.ErKlagenUnderskrevet.opplysningTekstId,
-                råVerdi = vedtak.verdi(KlageOpplysningTyper.ErKlagenUnderskrevet.opplysningNavnId),
+                råVerdi = vedtak.behandlingsverdi(KlageOpplysningTyper.ErKlagenUnderskrevet.opplysningNavnId),
                 datatype = Opplysning.Datatype.BOOLSK,
             ),
             Opplysning(
                 opplysningTekstId = KlageOpplysningTyper.KlagenNevnerEndring.opplysningTekstId,
-                råVerdi = vedtak.verdi(KlageOpplysningTyper.KlagenNevnerEndring.opplysningNavnId),
+                råVerdi = vedtak.behandlingsverdi(KlageOpplysningTyper.KlagenNevnerEndring.opplysningNavnId),
+                datatype = Opplysning.Datatype.BOOLSK,
+            ),
+            Opplysning(
+                opplysningTekstId = KlageOpplysningTyper.KlagefristOppfylt.opplysningTekstId,
+                råVerdi = vedtak.behandlingsverdi(KlageOpplysningTyper.KlagefristOppfylt.opplysningNavnId),
                 datatype = Opplysning.Datatype.BOOLSK,
             ),
             Opplysning(
                 opplysningTekstId = KlageOpplysningTyper.RettsligKlageinteresse.opplysningTekstId,
-                råVerdi = vedtak.verdi(KlageOpplysningTyper.RettsligKlageinteresse.opplysningNavnId),
+                råVerdi = vedtak.behandlingsverdi(KlageOpplysningTyper.RettsligKlageinteresse.opplysningNavnId),
                 datatype = Opplysning.Datatype.BOOLSK,
             ),
         )
 
-    private fun JsonNode.verdi(
-        opplysningNavnId: String,
-        opplysningsset: String = "behandlingOpplysninger",
-    ): String =
-        this
-            .get(opplysningsset)
-            .find {
-                it.get("opplysningNavnId").asText() == opplysningNavnId
-            }?.get("verdi")
-            ?.asText()
+    private fun JsonNode.behandlingsverdi(opplysningNavnId: String): String {
+        return this.get("behandlingOpplysninger").find {
+            it.get("opplysningNavnId").asText() == opplysningNavnId
+        }?.get("verdi")?.asText()
             ?: throw IllegalArgumentException("Opplysning med navnId $opplysningNavnId mangler for behandlingId $behandlingId")
+    }
+
+    private fun JsonNode.utfallsverdi(opplysningNavnId: String): String {
+        return this.get("utfallOpplysninger").find {
+            it.get("opplysningNavnId").asText() == opplysningNavnId
+        }?.get("verdi")?.asText()
+            ?: throw IllegalArgumentException("Opplysning med navnId $opplysningNavnId mangler for behandlingId $behandlingId")
+    }
 }

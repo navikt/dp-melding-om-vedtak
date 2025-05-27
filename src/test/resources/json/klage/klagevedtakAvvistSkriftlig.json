@@ -40,6 +40,17 @@
       "type": "TEKST"
     },
     {
+      "opplysningId": "0196a5b8-3dab-779f-ba9c-a116e298b4b7",
+      "opplysningNavnId": "KLAGEN_GJELDER_VEDTAKSDATO",
+      "navn": "Vedtaksdato",
+      "paakrevd": true,
+      "gruppe": "KLAGESAK",
+      "valgmuligheter": [],
+      "redigerbar": true,
+      "verdi": "2025-02-02",
+      "type": "DATO"
+    },
+    {
       "opplysningId": "0196a5b8-3dab-779f-ba9c-a116e298b2b9",
       "opplysningNavnId": "KLAGEFRIST",
       "navn": "Frist for å klage",
@@ -47,7 +58,7 @@
       "gruppe": "FRIST",
       "valgmuligheter": [],
       "redigerbar": true,
-      "verdi": "2025-05-07",
+      "verdi": "2025-05-08",
       "type": "DATO"
     },
     {
@@ -80,7 +91,7 @@
       "gruppe": "FORMKRAV",
       "valgmuligheter": [],
       "redigerbar": true,
-      "verdi": true,
+      "verdi": false,
       "type": "BOOLSK"
     },
     {
@@ -131,7 +142,7 @@
         "AVVIST"
       ],
       "redigerbar": true,
-      "verdi": "OPPRETTHOLDELSE",
+      "verdi": "AVVIST",
       "type": "LISTEVALG"
     },
     {
@@ -142,7 +153,7 @@
       "gruppe": "KLAGE_ANKE",
       "valgmuligheter": [],
       "redigerbar": true,
-      "verdi": "adf",
+      "verdi": "Test avvist pga mangler skriftlig klage",
       "type": "TEKST"
     },
     {
@@ -156,7 +167,7 @@
         "FULLMEKTIG"
       ],
       "redigerbar": true,
-      "verdi": "BRUKER",
+      "verdi": null,
       "type": "LISTEVALG"
     },
     {
@@ -173,9 +184,7 @@
         "§ 4-5"
       ],
       "redigerbar": true,
-      "verdi": [
-        "§ 4-1"
-      ],
+      "verdi": [ ],
       "type": "FLER_LISTEVALG"
     },
     {
@@ -186,7 +195,7 @@
       "gruppe": "KLAGE_ANKE",
       "valgmuligheter": [],
       "redigerbar": true,
-      "verdi": "qasdas",
+      "verdi": null,
       "type": "TEKST"
     }
   ],
