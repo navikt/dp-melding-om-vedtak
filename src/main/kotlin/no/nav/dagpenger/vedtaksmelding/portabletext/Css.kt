@@ -20,22 +20,6 @@ fun css(saksId: String): String {
                font-weight: normal;
              }
              
-             .melding-om-vedtak * p {
-               margin-block-start: 1em;
-               margin-block-end: 1em;
-              }
-             
-             .melding-om-vedtak * ul {
-               display: block;
-               list-style-type: disc;
-               margin-block-start: 1em;
-               margin-block-end: 1em;
-               padding-inline-start: 40px;
-              }
-             
-             .melding-om-vedtak * a {
-               text-decoration-line: underline;
-              }             
         
             .melding-om-vedtak-header,
             .melding-om-vedtak-logo {
@@ -102,11 +86,24 @@ fun css(saksId: String): String {
           letter-spacing: 0.1px;
         }
         
+        .melding-om-vedtak-tekst-blokk ul {
+          display: block;
+          list-style-type: disc;
+          margin-block-start: 1em;
+          margin-block-end: 1em;
+          padding-inline-start: 40px;
+         }
         .melding-om-vedtak-tekst-blokk p {
           font-size: 11px;
           line-height: 16px;
           font-weight: normal;
+          margin-block-start: 1em;
+          margin-block-end: 1em;
         }
+        
+        .melding-om-vedtak-tekst-blokk a {
+          text-decoration-line: underline;
+         }             
         
         .melding-om-vedtak-signatur-container {
           margin-top: 32px;
