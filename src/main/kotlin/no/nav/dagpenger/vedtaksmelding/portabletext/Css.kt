@@ -19,11 +19,28 @@ fun css(saksId: String): String {
                line-height: 16px;
                font-weight: normal;
              }
+             
+             .melding-om-vedtak * p {
+               margin-block-start: 1em;
+               margin-block-end: 1em;
+              }
+             
+             .melding-om-vedtak * ul {
+               display: block;
+               list-style-type: disc;
+               margin-block-start: 1em;
+               margin-block-end: 1em;
+               padding-inline-start: 40px;
+              }
+             
+             .melding-om-vedtak * a {
+               text-decoration-line: underline;
+              }             
         
             .melding-om-vedtak-header,
             .melding-om-vedtak-logo {
               margin-bottom: 48px;
-            }
+             }
         
             .melding-om-vedtak-header p {
               font-size: 11px;
