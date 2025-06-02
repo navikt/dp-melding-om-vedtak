@@ -52,6 +52,10 @@ spec:
     - name: DP_SAKSBEHANDLING_API_SCOPE
       value: "{{ DP_SAKSBEHANDLING_API_SCOPE }}"
   observability:
+    logging:
+      destinations:
+        - id: loki
+        - id: elastic
     autoInstrumentation:
       enabled: true
       runtime: java
