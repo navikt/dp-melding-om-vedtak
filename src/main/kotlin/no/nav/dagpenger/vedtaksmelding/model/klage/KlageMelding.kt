@@ -60,7 +60,10 @@ class KlageMelding(
     }
 
     private fun opprettholdelse(): List<String> {
-        if (!klagevedtak.opplysninger.any { it.opplysningTekstId == KlageUtfall.opplysningTekstId && it.råVerdi() == "OPPRETTHOLDELSE" }) {
+        if (!klagevedtak.opplysninger.any {
+                it.opplysningTekstId == KlageUtfall.opplysningTekstId && it.råVerdi().uppercase() == "OPPRETTHOLDELSE"
+            }
+        ) {
             return emptyList()
         }
         return listOf(
@@ -71,7 +74,7 @@ class KlageMelding(
 
     private fun avvist(): List<String> {
         if (!klagevedtak.opplysninger.any {
-                it.opplysningTekstId == KlageUtfall.opplysningTekstId && it.råVerdi() == "AVVIST"
+                it.opplysningTekstId == KlageUtfall.opplysningTekstId && it.råVerdi().uppercase() == "AVVIST"
             }
         ) {
             return emptyList()
