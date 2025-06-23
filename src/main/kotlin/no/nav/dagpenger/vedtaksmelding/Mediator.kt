@@ -10,6 +10,7 @@ import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.Companion.tilBehandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.KLAGE
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MELDEKORT
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.RETT_TIL_DAGPENGER
 import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
@@ -40,7 +41,7 @@ class Mediator(
     ): Brev {
         val sanityInnhold = sanityKlient.hentBrevBlokkerJson()
         vedtaksmeldingRepository.lagreSanityInnhold(behandlingId, sanityInnhold)
-        return hentVedtakOgByggVedtaksMelding(
+        return hentVedtakOgByggVedtaksmelding(
             behandlingId = behandlingId,
             saksbehandler = saksbehandler,
             behandlingstype = behanldingstype,
@@ -49,12 +50,12 @@ class Mediator(
         }
     }
 
-    suspend fun hentEnderligVedtaksmelding(
+    suspend fun hentEndeligVedtaksmelding(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
         behanldingstype: Behandlingstype,
     ): Brev =
-        hentVedtakOgByggVedtaksMelding(
+        hentVedtakOgByggVedtaksmelding(
             behandlingId = behandlingId,
             saksbehandler = saksbehandler,
             behandlingstype = behanldingstype,
@@ -62,7 +63,7 @@ class Mediator(
             vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
         }
 
-    private suspend fun hentVedtakOgByggVedtaksMelding(
+    private suspend fun hentVedtakOgByggVedtaksmelding(
         behandlingId: UUID,
         saksbehandler: Saksbehandler,
         behandlingstype: Behandlingstype,
@@ -122,6 +123,8 @@ class Mediator(
                     alleBrevBlokker = alleBrevblokker,
                 )
             }
+
+            MELDEKORT -> throw IllegalArgumentException("Meldekortbehandling har ikke støtte for vedtaksmelding")
         }
     }
 
@@ -189,7 +192,7 @@ class Mediator(
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): String {
         val html =
-            hentEnderligVedtaksmelding(
+            hentEndeligVedtaksmelding(
                 behandlingId,
                 behandler,
                 meldingOmVedtakData.behandlingstype.tilBehandlingstype(),

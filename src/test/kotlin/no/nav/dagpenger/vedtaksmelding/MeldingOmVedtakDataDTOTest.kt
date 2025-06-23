@@ -3,6 +3,7 @@ package no.nav.dagpenger.vedtaksmelding
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
+import no.nav.dagpenger.saksbehandling.api.models.BehandlingstypeDTO.RETT_TIL_DAGPENGER
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter.hentNavn
 import org.junit.jupiter.api.Test
@@ -29,6 +30,7 @@ class MeldingOmVedtakDataDTOTest {
         etternavn: String,
     ): MeldingOmVedtakDataDTO =
         MeldingOmVedtakDataDTO(
+            behandlingstype = RETT_TIL_DAGPENGER,
             fornavn = fornavn,
             etternavn = etternavn,
             fodselsnummer = "12345678901",

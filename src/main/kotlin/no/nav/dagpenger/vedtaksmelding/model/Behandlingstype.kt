@@ -5,6 +5,7 @@ import no.nav.dagpenger.saksbehandling.api.models.BehandlingstypeDTO
 enum class Behandlingstype {
     RETT_TIL_DAGPENGER,
     KLAGE,
+    MELDEKORT,
     ;
 
     companion object {

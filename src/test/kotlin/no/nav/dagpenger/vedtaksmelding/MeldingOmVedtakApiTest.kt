@@ -116,7 +116,7 @@ class MeldingOmVedtakApiTest {
     }
 
     @Test
-    fun `Skal kunne spesifisere om brev av behandlingstype Klage eller RTD skal generes `() {
+    fun `Skal kunne spesifisere behandlingstype for brevet`() {
         val behandlingId = UUID.randomUUID()
         val requestBody =
             """
@@ -169,6 +169,13 @@ class MeldingOmVedtakApiTest {
                         html = "<html><body>Test HTML Test KLAGE</body></html>",
                         utvidedeBeskrivelser = listOf(),
                     )
+                coEvery {
+                    it.hentVedtak(
+                        behandlingId = any(),
+                        behandler = any(),
+                        meldingOmVedtakData = lagMeldingOmVedtakDataDTO(Behandlingstype.MELDEKORT),
+                    )
+                } throws IllegalArgumentException("Meldekortbehandling har ikke støtte for vedtaksmelding")
             }
 
         testApplication {
@@ -236,12 +243,58 @@ class MeldingOmVedtakApiTest {
                         }
                         """.trimIndent()
                 }
+
+            val requestBodyMeldekort =
+                """
+                {
+                    "fornavn": "Test ForNavn",
+                    "etternavn": "Test EtterNavn",
+                    "fodselsnummer": "12345678901",
+                    "sakId": "sak123",
+                    "behandlingstype": "MELDEKORT",
+                    "saksbehandler": {
+                        "fornavn": "Ola",
+                        "etternavn": "Nordmann",
+                        "enhet": {
+                            "navn": "Enhet Navn",
+                            "postadresse": "Postadresse 123"
+                        }
+                    },
+                    "beslutter": {
+                        "fornavn": "Kari",
+                        "etternavn": "Nordmann",
+                        "enhet": {
+                            "navn": "Enhet Navn",
+                            "postadresse": "Postadresse 123"
+                        }
+                    }
+                }
+                """.trimIndent()
+            client
+                .post("/melding-om-vedtak/$behandlingId/html") {
+                    autentisert(token = saksbehandlerToken)
+                    header(HttpHeaders.ContentType, ContentType.Application.Json)
+                    setBody(requestBodyMeldekort)
+                }.let { response ->
+                    response.status shouldBe HttpStatusCode.BadRequest
+                    response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
+                        //language=JSON
+                        """
+                        {
+                          "type": "dagpenger.nav.no/saksbehandling:problem:bad-request",
+                          "title": "Bad request",
+                          "status": 400,
+                          "detail": "Meldekortbehandling har ikke støtte for vedtaksmelding",
+                          "instance": "dp-melding-om-vedtak/melding-om-vedtak/$behandlingId/html"
+                        }
+                        """.trimIndent()
+                }
         }
     }
 
-    private fun lagMeldingOmVedtakDataDTO(behandlingstype: Behandlingstype?): MeldingOmVedtakDataDTO =
+    private fun lagMeldingOmVedtakDataDTO(behandlingstype: Behandlingstype): MeldingOmVedtakDataDTO =
         MeldingOmVedtakDataDTO(
-            behandlingstype = behandlingstype?.let { BehandlingstypeDTO.valueOf(behandlingstype.name) },
+            behandlingstype = BehandlingstypeDTO.valueOf(behandlingstype.name),
             fornavn = "Test ForNavn",
             etternavn = "Test EtterNavn",
             fodselsnummer = "12345678901",
@@ -273,6 +326,7 @@ class MeldingOmVedtakApiTest {
         val requestBody =
             """
             {
+                "behandlingstype": "RETT_TIL_DAGPENGER",
                 "fornavn": "Test ForNavn",
                 "etternavn": "Test EtterNavn",
                 "fodselsnummer": "12345678901",
@@ -302,7 +356,7 @@ class MeldingOmVedtakApiTest {
                     it.hentVedtak(
                         behandlingId,
                         Saksbehandler(saksbehandlerToken),
-                        meldingOmVedtakData = lagMeldingOmVedtakDataDTO(behandlingstype = null),
+                        meldingOmVedtakData = lagMeldingOmVedtakDataDTO(behandlingstype = RETT_TIL_DAGPENGER),
                     )
                 } returns
                     MeldingOmVedtakResponseDTO(
@@ -370,6 +424,7 @@ class MeldingOmVedtakApiTest {
                         Saksbehandler(saksbehandlerToken),
                         meldingOmVedtakData =
                             MeldingOmVedtakDataDTO(
+                                behandlingstype = BehandlingstypeDTO.RETT_TIL_DAGPENGER,
                                 fornavn = "Test ForNavn",
                                 etternavn = "Test EtterNavn",
                                 fodselsnummer = "12345678901",
@@ -523,6 +578,7 @@ class MeldingOmVedtakApiTest {
     private val requestBody =
         """
         {
+            "behandlingstype": "RETT_TIL_DAGPENGER",
             "fornavn": "Test ForNavn",
             "etternavn": "Test EtterNavn",
             "fodselsnummer": "12345678901",
