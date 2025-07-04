@@ -30,7 +30,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
     apiConfig()
     routing {
         swaggerUI(path = "openapi", swaggerFile = "melding-om-vedtak-api.yaml")
-        authenticate("azureAd") {
+        authenticate("azureAd", "azureAd-M2M") {
             post("/melding-om-vedtak/{behandlingId}/html") {
                 val behandlingId = call.parseUUID()
                 val behandler = call.parseSaksbehandler()

@@ -30,6 +30,25 @@ fun AuthenticationConfig.jwt(name: String) {
     }
 }
 
+fun AuthenticationConfig.jwtM2M(name: String) {
+    jwt(name) {
+        verifier(AzureAd)
+        validate { jwtClaims ->
+            jwtClaims.måVæreApp()
+            JWTPrincipal(jwtClaims.payload)
+        }
+    }
+}
+
+private fun JWTCredential.måVæreApp() {
+    val erApp = this.payload.claims["idtyp"]?.asString() == "app"
+    if (!erApp) {
+        val errorMessage = "Credential inneholder ikke idtyp med verdi app"
+        logger.warn { errorMessage }
+        throw IllegalAccessException(errorMessage)
+    }
+}
+
 private fun JWTCredential.måInneholde(autorisertADGruppe: String) {
     val groups = this.payload.claims["groups"]?.asList(String::class.java)
     if (groups == null) {
