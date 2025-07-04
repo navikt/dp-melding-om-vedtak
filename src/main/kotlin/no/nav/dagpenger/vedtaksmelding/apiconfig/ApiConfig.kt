@@ -32,6 +32,7 @@ fun Application.apiConfig() {
 
     install(Authentication) {
         jwt("azureAd")
+        jwtM2M("azureAd-M2M")
     }
 
     install(ContentNegotiation) {
