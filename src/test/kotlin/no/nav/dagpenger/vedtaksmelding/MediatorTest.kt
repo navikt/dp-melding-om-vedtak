@@ -12,6 +12,7 @@ import io.mockk.spyk
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
+import no.nav.dagpenger.saksbehandling.api.models.BehandlingstypeDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.db.Postgres.withMigratedDb
 import no.nav.dagpenger.vedtaksmelding.db.PostgresDataSourceBuilder.dataSource
@@ -96,6 +97,7 @@ class MediatorTest {
             }
         val meldingOmVedtakDataDTO =
             MeldingOmVedtakDataDTO(
+                behandlingstype = BehandlingstypeDTO.RETT_TIL_DAGPENGER,
                 fornavn = "Ola",
                 etternavn = "Nordmann",
                 fodselsnummer = "12345678901",
@@ -272,7 +274,7 @@ class MediatorTest {
                         behandler = saksbehandler,
                         meldingOmVedtakData =
                             mockk<MeldingOmVedtakDataDTO>(relaxed = true).also {
-                                every { it.behandlingstype } returns null
+                                every { it.behandlingstype } returns BehandlingstypeDTO.RETT_TIL_DAGPENGER
                             },
                     ).utvidedeBeskrivelser
             require(true) {
