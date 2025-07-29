@@ -7,6 +7,7 @@ import io.ktor.http.headersOf
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
+import no.nav.dagpenger.saksbehandling.api.models.BehandlingstypeDTO.RETT_TIL_DAGPENGER
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.lagHttpKlient
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
@@ -73,6 +74,7 @@ class VedtakHtmlTest {
 
     private val meldingOmVedtakData =
         MeldingOmVedtakDataDTO(
+            behandlingstype = RETT_TIL_DAGPENGER,
             fornavn = "Test ForNavn",
             etternavn = "Test EtterNavn",
             fodselsnummer = "12345678901",
