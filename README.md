@@ -21,4 +21,4 @@ Spørsmål knyttet til koden eller prosjektet kan meldes ved å bruke issues på
 
 ## For NAV-ansatte
 
-Interne henvendelser kan sendes via Slack i kanalen #dagpenger.
+Interne henvendelser kan sendes via Slack i kanalen #team-dagpenger-behandling.
