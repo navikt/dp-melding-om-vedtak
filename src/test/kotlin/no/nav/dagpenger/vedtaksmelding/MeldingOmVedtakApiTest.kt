@@ -24,6 +24,8 @@ import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakResponseDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
+import no.nav.dagpenger.vedtaksmelding.apiconfig.Klient
+import no.nav.dagpenger.vedtaksmelding.apiconfig.Maskin
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.KLAGE
@@ -43,6 +45,13 @@ class MeldingOmVedtakApiTest {
                 mapOf(
                     "groups" to listOf("SaksbehandlerADGruppe"),
                     "NAVident" to testNavIdent,
+                ),
+        )
+    private val maskinToken =
+        mockAzure().lagTokenMedClaims(
+            claims =
+                mapOf(
+                    "idtyp" to "app",
                 ),
         )
     private val behandlingId = UUIDv7.ny()
@@ -414,14 +423,15 @@ class MeldingOmVedtakApiTest {
     }
 
     @Test
-    fun `Skal returnere en html ved bruk av melding-om-vedtak {behandlingId} vedtakshtml`() {
+    fun `Skal returnere en html ved bruk av melding-om-vedtak {behandlingId} vedtaksmelding`() {
         val behandlingId = UUID.randomUUID()
+        val klientSlot = slot<Klient>()
         val mediator =
             mockk<Mediator>().also {
                 coEvery {
                     it.hentEndeligVedtak(
-                        behandlingId,
-                        Saksbehandler(saksbehandlerToken),
+                        behandlingId = behandlingId,
+                        klient = capture(klientSlot),
                         meldingOmVedtakData =
                             MeldingOmVedtakDataDTO(
                                 behandlingstype = BehandlingstypeDTO.RETT_TIL_DAGPENGER,
@@ -466,6 +476,17 @@ class MeldingOmVedtakApiTest {
                     response.status shouldBe HttpStatusCode.OK
                     response.bodyAsText() shouldBe "<html><body>Test HTML Test ForNavn</body></html>"
                 }
+            klientSlot.captured shouldBe Saksbehandler(saksbehandlerToken)
+            client
+                .post("/melding-om-vedtak/$behandlingId/vedtaksmelding") {
+                    autentisert(token = maskinToken)
+                    header(HttpHeaders.ContentType, ContentType.Application.Json)
+                    setBody(requestBody)
+                }.let { response ->
+                    response.status shouldBe HttpStatusCode.OK
+                    response.bodyAsText() shouldBe "<html><body>Test HTML Test ForNavn</body></html>"
+                }
+            klientSlot.captured shouldBe Maskin
         }
     }
 
