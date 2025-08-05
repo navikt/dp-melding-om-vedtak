@@ -22,7 +22,7 @@ fun main() {
     val behandlingKlient =
         BehandlingHttpKlient(
             dpBehandlingApiUrl = Configuration.dbBehandlingApiUrl,
-            tokenProvider = Configuration.dpBehandlingOboExchanger,
+            tokenProvider = Configuration.dpBehandlingTokenProvider,
         )
     val klageBehandlingKlient =
         KlageBehandlingHttpKlient(

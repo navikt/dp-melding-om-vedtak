@@ -11,7 +11,7 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
-import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
+import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageVedtak
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlagevedtakMapper
 import java.util.UUID
@@ -22,7 +22,7 @@ private val log = KotlinLogging.logger { }
 interface KlageBehandlingKlient {
     suspend fun hentVedtak(
         behandlingId: UUID,
-        saksbehandler: Saksbehandler,
+        klient: Saksbehandler,
     ): Result<KlageVedtak>
 }
 
@@ -33,11 +33,11 @@ internal class KlageBehandlingHttpKlient(
 ) : KlageBehandlingKlient {
     private suspend fun hentVedtakJson(
         behandlingId: UUID,
-        saksbehandler: Saksbehandler,
+        klient: Saksbehandler,
     ): Result<String> =
         httpClient
             .get(urlString = "$dpSaksbehandlingKlageApiUrl/klage/$behandlingId") {
-                header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(saksbehandler.token)}")
+                header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(klient.token)}")
                 accept(ContentType.Application.Json)
             }.let { response ->
                 val responseTekst = response.bodyAsText()
@@ -56,10 +56,10 @@ internal class KlageBehandlingHttpKlient(
 
     override suspend fun hentVedtak(
         behandlingId: UUID,
-        saksbehandler: Saksbehandler,
+        klient: Saksbehandler,
     ): Result<KlageVedtak> {
         // lag en tilsvarende KlageBehandlingMapper
-        return hentVedtakJson(behandlingId, saksbehandler).map {
+        return hentVedtakJson(behandlingId, klient).map {
             KlagevedtakMapper(it).vedtak()
         }
     }

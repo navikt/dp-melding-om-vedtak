@@ -14,6 +14,9 @@ import com.natpryce.konfig.overriding
 import com.natpryce.konfig.stringType
 import no.nav.dagpenger.oauth2.CachedOauth2Client
 import no.nav.dagpenger.oauth2.OAuth2Config
+import no.nav.dagpenger.vedtaksmelding.apiconfig.Klient
+import no.nav.dagpenger.vedtaksmelding.apiconfig.Maskin
+import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
 
 object Configuration {
     private val defaultProperties =
@@ -43,14 +46,16 @@ object Configuration {
     val dbBehandlingApiUrl by lazy { properties[Key("DP_BEHANDLING_API_URL", stringType)] }
     val dpSaksbehandlingKlageApiUrl by lazy { properties[Key("DP_SAKSBEHANDLING_API_URL", stringType)] }
 
-    val dpBehandlingOboExchanger: (String) -> String by lazy {
-        val scope = properties[Key("DP_BEHANDLING_API_SCOPE", stringType)]
-        { token: String ->
-            val accessToken = azureAdClient.onBehalfOf(token, scope).access_token
-            requireNotNull(accessToken) { "Failed to get access token" }
-            accessToken
+    val dpBehandlingTokenProvider: (Klient) -> String by lazy {
+        { klient: Klient ->
+            val scope = properties[Key("DP_BEHANDLING_API_SCOPE", stringType)]
+            when (klient) {
+                Maskin -> azureAdClient.clientCredentials(scope).access_token
+                is Saksbehandler -> azureAdClient.onBehalfOf(klient.token, scope).access_token
+            } ?: throw IllegalStateException("Failed to get access token for DP Behandling API")
         }
     }
+
     val dpSaksbehandlingKlageOboExchanger: (String) -> String by lazy {
         val scope = properties[Key("DP_SAKSBEHANDLING_API_SCOPE", stringType)]
         { token: String ->

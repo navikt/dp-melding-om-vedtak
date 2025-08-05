@@ -1,7 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding
 
 import kotlinx.coroutines.runBlocking
-import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
+import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.util.UUID
@@ -19,7 +19,7 @@ class KlageBehandlingHttpKlientTest {
                 it
                     .hentVedtak(
                         behandlingId = UUID.fromString("0196a5b8-3dab-779f-ba9c-a116e298b2b1"),
-                        saksbehandler = Saksbehandler(token = ""),
+                        klient = Saksbehandler(token = ""),
                     ).getOrThrow()
             }
         }
