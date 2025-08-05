@@ -19,8 +19,7 @@ import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseSistEndretTidspunktDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseTekstDTO
 import no.nav.dagpenger.vedtaksmelding.apiconfig.apiConfig
-import no.nav.dagpenger.vedtaksmelding.apiconfig.jwt
-import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
+import no.nav.dagpenger.vedtaksmelding.apiconfig.klient
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import java.util.UUID
 
@@ -33,7 +32,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
         authenticate("azureAd", "azureAd-M2M") {
             post("/melding-om-vedtak/{behandlingId}/html") {
                 val behandlingId = call.parseUUID()
-                val behandler = call.parseSaksbehandler()
+                val klient = call.request.klient()
                 val meldingOmVedtakData = call.receive<MeldingOmVedtakDataDTO>()
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
                     kotlin
@@ -41,7 +40,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                             val meldingOmVedtakResponseDTO =
                                 mediator.hentVedtak(
                                     behandlingId = behandlingId,
-                                    behandler = behandler,
+                                    klient = klient,
                                     meldingOmVedtakData = meldingOmVedtakData,
                                 )
                             call.respond(meldingOmVedtakResponseDTO)
@@ -53,7 +52,8 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
             }
             post("/melding-om-vedtak/{behandlingId}/vedtaksmelding") {
                 val behandlingId = call.parseUUID()
-                val behandler = call.parseSaksbehandler()
+                val klient = call.request.klient()
+
                 val meldingOmVedtakData = call.receive<MeldingOmVedtakDataDTO>()
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
                     kotlin
@@ -61,7 +61,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                             val vedtaksHtml =
                                 mediator.hentEndeligVedtak(
                                     behandlingId = behandlingId,
-                                    behandler = behandler,
+                                    klient = klient,
                                     meldingOmVedtakData = meldingOmVedtakData,
                                 )
                             call.respond(vedtaksHtml)
@@ -109,8 +109,6 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
         }
     }
 }
-
-private fun ApplicationCall.parseSaksbehandler(): Saksbehandler = Saksbehandler(this.request.jwt())
 
 private fun ApplicationCall.parseUUID(): UUID =
     this.parameters["behandlingId"]?.let {

@@ -6,8 +6,8 @@ import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
 import kotlinx.coroutines.runBlocking
+import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.k8.setAzureAuthEnv
-import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.util.readFile
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -101,7 +101,7 @@ internal class BehandlingKlientTest {
             app = "dp-melding-om-vedtak",
             type = "azurerator.nais.io",
         ) {
-            val tokenProvider = Configuration.dpBehandlingOboExchanger
+            val tokenProvider = Configuration.dpBehandlingTokenProvider
             val klient =
                 BehandlingHttpKlient(
                     dpBehandlingApiUrl = "https://dp-behandling.intern.dev.nav.no/behandling",
@@ -113,7 +113,7 @@ internal class BehandlingKlientTest {
 //                println(behandling)
 
                 klient
-                    .hentVedtak(behandlingId = behandlingId, saksbehandler = Saksbehandler(token))
+                    .hentVedtak(behandlingId = behandlingId, klient = Saksbehandler(token))
                     .onFailure { println(it) }
                     .getOrThrow()
                     .let { vedtak ->

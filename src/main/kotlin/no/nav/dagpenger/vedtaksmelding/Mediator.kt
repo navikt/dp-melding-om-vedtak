@@ -6,13 +6,14 @@ import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakResponseDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
+import no.nav.dagpenger.vedtaksmelding.apiconfig.Klient
+import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.Companion.tilBehandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.KLAGE
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MELDEKORT
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.RETT_TIL_DAGPENGER
-import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.TomtVedtak
@@ -36,14 +37,14 @@ class Mediator(
 ) {
     suspend fun hentVedtaksmelding(
         behandlingId: UUID,
-        saksbehandler: Saksbehandler,
+        klient: Klient,
         behanldingstype: Behandlingstype,
     ): Brev {
         val sanityInnhold = sanityKlient.hentBrevBlokkerJson()
         vedtaksmeldingRepository.lagreSanityInnhold(behandlingId, sanityInnhold)
         return hentVedtakOgByggVedtaksmelding(
             behandlingId = behandlingId,
-            saksbehandler = saksbehandler,
+            klient = klient,
             behandlingstype = behanldingstype,
         ) {
             sanityInnhold
@@ -52,12 +53,12 @@ class Mediator(
 
     suspend fun hentEndeligVedtaksmelding(
         behandlingId: UUID,
-        saksbehandler: Saksbehandler,
+        klient: Klient,
         behanldingstype: Behandlingstype,
     ): Brev =
         hentVedtakOgByggVedtaksmelding(
             behandlingId = behandlingId,
-            saksbehandler = saksbehandler,
+            klient = klient,
             behandlingstype = behanldingstype,
         ) {
             vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
@@ -65,7 +66,7 @@ class Mediator(
 
     private suspend fun hentVedtakOgByggVedtaksmelding(
         behandlingId: UUID,
-        saksbehandler: Saksbehandler,
+        klient: Klient,
         behandlingstype: Behandlingstype,
         sanitySupplier: suspend () -> String,
     ): Brev {
@@ -85,7 +86,7 @@ class Mediator(
                     behandlingKlient
                         .hentVedtak(
                             behandlingId = behandlingId,
-                            saksbehandler = saksbehandler,
+                            klient = klient,
                         ).onFailure { throwable ->
                             logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
                         }.getOrThrow()
@@ -113,7 +114,8 @@ class Mediator(
                     klageBehandlingKlient
                         .hentVedtak(
                             behandlingId = behandlingId,
-                            saksbehandler = saksbehandler,
+                            // todo unsafe cast?
+                            klient = klient as Saksbehandler,
                         ).onFailure { throwable ->
                             logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
                         }.getOrThrow()
@@ -154,13 +156,13 @@ class Mediator(
 
     suspend fun hentVedtak(
         behandlingId: UUID,
-        behandler: Saksbehandler,
+        klient: Klient,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): MeldingOmVedtakResponseDTO {
         val vedtak =
             hentVedtaksmelding(
                 behandlingId = behandlingId,
-                saksbehandler = behandler,
+                klient = klient,
                 behanldingstype = meldingOmVedtakData.behandlingstype.tilBehandlingstype(),
             )
 
@@ -188,13 +190,13 @@ class Mediator(
 
     suspend fun hentEndeligVedtak(
         behandlingId: UUID,
-        behandler: Saksbehandler,
+        klient: Klient,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): String {
         val html =
             hentEndeligVedtaksmelding(
                 behandlingId,
-                behandler,
+                klient,
                 meldingOmVedtakData.behandlingstype.tilBehandlingstype(),
             ).let { vedtak ->
 

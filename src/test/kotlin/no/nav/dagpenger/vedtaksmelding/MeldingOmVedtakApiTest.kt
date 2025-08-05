@@ -24,10 +24,10 @@ import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakResponseDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
+import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.KLAGE
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.RETT_TIL_DAGPENGER
-import no.nav.dagpenger.vedtaksmelding.model.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
@@ -150,7 +150,7 @@ class MeldingOmVedtakApiTest {
                 coEvery {
                     it.hentVedtak(
                         behandlingId = any(),
-                        behandler = any(),
+                        klient = any(),
                         meldingOmVedtakData = lagMeldingOmVedtakDataDTO(RETT_TIL_DAGPENGER),
                     )
                 } returns
@@ -161,7 +161,7 @@ class MeldingOmVedtakApiTest {
                 coEvery {
                     it.hentVedtak(
                         behandlingId = any(),
-                        behandler = any(),
+                        klient = any(),
                         meldingOmVedtakData = lagMeldingOmVedtakDataDTO(KLAGE),
                     )
                 } returns
@@ -172,7 +172,7 @@ class MeldingOmVedtakApiTest {
                 coEvery {
                     it.hentVedtak(
                         behandlingId = any(),
-                        behandler = any(),
+                        klient = any(),
                         meldingOmVedtakData = lagMeldingOmVedtakDataDTO(Behandlingstype.MELDEKORT),
                     )
                 } throws IllegalArgumentException("Meldekortbehandling har ikke støtte for vedtaksmelding")

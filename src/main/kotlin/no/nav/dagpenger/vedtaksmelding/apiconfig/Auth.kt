@@ -8,12 +8,30 @@ import io.ktor.server.auth.jwt.JWTCredential
 import io.ktor.server.auth.jwt.JWTPrincipal
 import io.ktor.server.auth.jwt.jwt
 import io.ktor.server.auth.parseAuthorizationHeader
+import io.ktor.server.auth.principal
 import io.ktor.server.request.ApplicationRequest
 import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.Configuration
 import java.net.URL
 
 private val logger = KotlinLogging.logger {}
+
+sealed class Klient
+
+data object Maskin : Klient()
+
+data class Saksbehandler(
+    val token: String,
+) : Klient()
+
+internal fun ApplicationRequest.klient(): Klient {
+    return this.call.principal<JWTPrincipal>()?.let {
+        when (it.payload.claims["idtyp"]?.asString() == "app") {
+            true -> Maskin
+            false -> Saksbehandler(this.jwt())
+        }
+    } ?: throw IllegalArgumentException("Ugyldig token eller manglende JWT i forespørselen")
+}
 
 internal fun ApplicationRequest.jwt(): String =
     this.parseAuthorizationHeader().let { authHeader ->
