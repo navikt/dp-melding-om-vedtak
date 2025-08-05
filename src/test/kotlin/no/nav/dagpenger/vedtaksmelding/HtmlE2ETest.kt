@@ -1,5 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding
 
+import io.kotest.matchers.shouldBe
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
@@ -8,11 +9,11 @@ import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking
-import no.nav.dagpenger.vedtaksmelding.k8.setAzureAuthEnv
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.util.UUID
+import org.junit.jupiter.api.Disabled
 
 internal class HtmlE2ETest {
     @Disabled
@@ -30,79 +31,50 @@ internal class HtmlE2ETest {
                     level = LogLevel.ALL
                 }
             }
-        setAzureAuthEnv(
-            app = "dp-melding-om-vedtak",
-            type = "azurerator.nais.io",
-        ) {
-            runBlocking {
-                client
-                    .post("https://dp-melding-om-vedtak.intern.dev.nav.no/melding-om-vedtak/$behandlingId/html") {
-                        header(HttpHeaders.Authorization, "Bearer $token")
-                        header(HttpHeaders.ContentType, "application/json")
-                        setBody(
-                            """
-                                        
-                            {
-                                "fornavn": "Test ForNavn",
-                                "etternavn": "Test EtterNavn",
-                                "fodselsnummer": "12345678901",
-                                "saksbehandler": {
-                                    "fornavn": "Ola",
-                                    "etternavn": "Nordmann",
-                                    "enhet": {
-                                        "navn": "Enhet Navn",
-                                        "postadresse": "Postadresse 123"
-                                    }
-                                },
-                                "beslutter": {
-                                    "fornavn": "Kari",
-                                    "etternavn": "Nordmann",
-                                    "enhet": {
-                                        "navn": "Enhet Navn",
-                                        "postadresse": "Postadresse 123"
-                                    }
+        val jsonString = """
+                        {
+                            "behandlingstype": "RETT_TIL_DAGPENGER",
+                            "fornavn": "Test ForNavn",
+                            "etternavn": "Test EtterNavn",
+                            "fodselsnummer": "12345678901",
+                            "saksbehandler": {
+                                "fornavn": "Ola",
+                                "etternavn": "Nordmann",
+                                "enhet": {
+                                    "navn": "Enhet Navn",
+                                    "postadresse": "Postadresse 123"
+                                }
+                            },
+                            "beslutter": {
+                                "fornavn": "Kari",
+                                "etternavn": "Nordmann",
+                                "enhet": {
+                                    "navn": "Enhet Navn",
+                                    "postadresse": "Postadresse 123"
                                 }
                             }
-                            """.trimIndent(),
-                        )
-                    }.let { response ->
-                        println(response.bodyAsText())
-                    }
+                        }
+                        """.trimIndent()
+        runBlocking {
+            client
+                .post("https://dp-melding-om-vedtak.intern.dev.nav.no/melding-om-vedtak/$behandlingId/html") {
+                    header(HttpHeaders.Authorization, "Bearer $token")
+                    header(HttpHeaders.ContentType, "application/json")
+                    setBody(jsonString)
+                }.let { response ->
+                    response.status shouldBe HttpStatusCode.OK
+                    println(response.bodyAsText())
+                }
 
-                client
-                    .post("https://dp-melding-om-vedtak.intern.dev.nav.no/melding-om-vedtak/$behandlingId/vedtaksmelding") {
-                        header(HttpHeaders.Authorization, "Bearer $token")
-                        header(HttpHeaders.ContentType, "application/json")
-                        setBody(
-                            """
-                                        
-                            {
-                                "fornavn": "Test ForNavn",
-                                "etternavn": "Test EtterNavn",
-                                "fodselsnummer": "12345678901",
-                                "saksbehandler": {
-                                    "fornavn": "Ola",
-                                    "etternavn": "Nordmann",
-                                    "enhet": {
-                                        "navn": "Enhet Navn",
-                                        "postadresse": "Postadresse 123"
-                                    }
-                                },
-                                "beslutter": {
-                                    "fornavn": "Kari",
-                                    "etternavn": "Nordmann",
-                                    "enhet": {
-                                        "navn": "Enhet Navn",
-                                        "postadresse": "Postadresse 123"
-                                    }
-                                }
-                            }
-                            """.trimIndent(),
-                        )
-                    }.let { response ->
-                        println(response.bodyAsText())
-                    }
-            }
+            client
+                .post("https://dp-melding-om-vedtak.intern.dev.nav.no/melding-om-vedtak/$behandlingId/vedtaksmelding") {
+                    header(HttpHeaders.Authorization, "Bearer $token")
+                    header(HttpHeaders.ContentType, "application/json")
+                    setBody(jsonString)
+                }.let { response ->
+                    response.status shouldBe HttpStatusCode.OK
+                    println(response.bodyAsText())
+                }
         }
     }
 }
