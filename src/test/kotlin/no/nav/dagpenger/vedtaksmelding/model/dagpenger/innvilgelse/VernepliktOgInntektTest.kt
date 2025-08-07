@@ -109,7 +109,6 @@ class VernepliktOgInntektTest {
                                 KRONER,
                             ),
                         ),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder

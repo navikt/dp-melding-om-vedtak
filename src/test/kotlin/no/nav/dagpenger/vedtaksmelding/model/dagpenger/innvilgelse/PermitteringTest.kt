@@ -91,7 +91,6 @@ class PermitteringTest {
                         ),
                     utfall = Utfall.INNVILGET,
                     opplysninger = setOf(egenandel()),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder

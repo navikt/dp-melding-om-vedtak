@@ -114,7 +114,6 @@ class AvslagMeldingTaptArbeidstidTest {
                                 datatype = BOOLSK,
                             ),
                         ),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -161,7 +160,6 @@ class AvslagMeldingTaptArbeidstidTest {
                                 datatype = BOOLSK,
                             ),
                         ),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -208,7 +206,6 @@ class AvslagMeldingTaptArbeidstidTest {
                                 datatype = BOOLSK,
                             ),
                         ),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -260,7 +257,6 @@ class AvslagMeldingTaptArbeidstidTest {
                                 datatype = BOOLSK,
                             ),
                         ),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -312,7 +308,6 @@ class AvslagMeldingTaptArbeidstidTest {
                                 datatype = BOOLSK,
                             ),
                         ),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -364,7 +359,6 @@ class AvslagMeldingTaptArbeidstidTest {
                                 datatype = BOOLSK,
                             ),
                         ),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

@@ -28,7 +28,6 @@ class VedtakMeldingTest {
                                 ),
                             ),
                         utfall = AVSLÅTT,
-                        fagsakId = "fagsakId test",
                     ),
                 alleBrevblokker = emptyList(),
             ).shouldBeInstanceOf<AvslagMelding>()
@@ -40,7 +39,6 @@ class VedtakMeldingTest {
                         behandlingId = behandlingId,
                         vilkår = emptySet(),
                         utfall = INNVILGET,
-                        fagsakId = "fagsakId test",
                     ),
                 alleBrevblokker = emptyList(),
             ).shouldBeInstanceOf<InnvilgelseMelding>()
@@ -55,7 +53,6 @@ class VedtakMeldingTest {
                         behandlingId = behandlingId,
                         vilkår = emptySet(),
                         utfall = AVSLÅTT,
-                        fagsakId = "fagsakId test",
                     ),
                 alleBrevblokker = emptyList(),
             )

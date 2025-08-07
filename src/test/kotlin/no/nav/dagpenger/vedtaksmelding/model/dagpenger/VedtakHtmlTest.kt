@@ -117,7 +117,6 @@ class VedtakHtmlTest {
             brevBlokker = klageMelding.hentBrevBlokker(),
             opplysninger = klageMelding.hentOpplysninger(),
             meldingOmVedtakData = meldingOmVedtakData,
-            fagsakId = "fagsakId test",
         ) brevblokkRekkefølgeShouldBe
             listOf(
                 KLAGE_OPPRETTHOLDELSE_DEL_1.brevblokkId,
@@ -143,7 +142,6 @@ class VedtakHtmlTest {
                     brevBlokker = brevBlokker,
                     opplysninger = avslagMelding.hentOpplysninger(),
                     meldingOmVedtakData = meldingOmVedtakData,
-                    fagsakId = "fagsakId test",
                     utvidetBeskrivelse =
                         setOf(
                             UtvidetBeskrivelse(
@@ -201,7 +199,6 @@ class VedtakHtmlTest {
                     brevBlokker = brevBlokker,
                     opplysninger = innvilgelseMelding.hentOpplysninger(),
                     meldingOmVedtakData = meldingOmVedtakData,
-                    fagsakId = "fagsakId test",
                 )
 
             htmlInnhold brevblokkRekkefølgeShouldBe

@@ -89,7 +89,6 @@ class PermitteringFiskTest {
                         ),
                     utfall = Utfall.INNVILGET,
                     opplysninger = setOf(),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder

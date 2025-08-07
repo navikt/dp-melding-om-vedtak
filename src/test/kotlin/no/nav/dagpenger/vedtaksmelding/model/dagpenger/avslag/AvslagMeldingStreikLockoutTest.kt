@@ -45,7 +45,6 @@ class AvslagMeldingStreikLockoutTest {
                     vilkår = setOf(avslagStreikEllerLockoutIkkeOppfylt),
                     utfall = AVSLÅTT,
                     opplysninger = emptySet(),
-                    fagsakId = "15257652",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

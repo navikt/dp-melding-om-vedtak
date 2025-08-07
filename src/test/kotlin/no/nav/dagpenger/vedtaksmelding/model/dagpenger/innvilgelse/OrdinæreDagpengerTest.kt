@@ -47,7 +47,6 @@ class OrdinæreDagpengerTest {
                         vilkår = emptySet(),
                         utfall = Utfall.AVSLÅTT,
                         opplysninger = emptySet(),
-                        fagsakId = "fagsakId test",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -61,7 +60,6 @@ class OrdinæreDagpengerTest {
                         vilkår = emptySet(),
                         utfall = Utfall.INNVILGET,
                         opplysninger = emptySet(),
-                        fagsakId = "fagsakId test",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -95,7 +93,6 @@ class OrdinæreDagpengerTest {
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                     opplysninger = setOf(egenandel()),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -129,7 +126,6 @@ class OrdinæreDagpengerTest {
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                     opplysninger = setOf(barnetilleggOpplysning(), egenandel()),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -145,7 +141,6 @@ class OrdinæreDagpengerTest {
                             barnetilleggOpplysning("0"),
                             egenandel(),
                         ),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder - INNVILGELSE_BARNETILLEGG.brevblokkId
@@ -185,7 +180,6 @@ class OrdinæreDagpengerTest {
                             nittiProsentRegelOpplysning(),
                             egenandel(),
                         ),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -198,7 +192,6 @@ class OrdinæreDagpengerTest {
                     utfall = Utfall.INNVILGET,
                     opplysninger =
                         setOf(barnetilleggOpplysning(), nittiProsentRegelOpplysning("0"), egenandel()),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder - INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId
@@ -234,7 +227,6 @@ class OrdinæreDagpengerTest {
                     utfall = Utfall.INNVILGET,
                     opplysninger =
                         setOf(nittiProsentRegelOpplysning(), barnetilleggOpplysning(), egenandel()),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder

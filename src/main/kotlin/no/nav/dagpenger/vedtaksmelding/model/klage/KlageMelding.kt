@@ -55,10 +55,6 @@ class KlageMelding(
             .toList()
     }
 
-    override fun hentFagsakId(): String {
-        return klagevedtak.fagsakId
-    }
-
     private fun opprettholdelse(): List<String> {
         if (!klagevedtak.opplysninger.any {
                 it.opplysningTekstId == KlageUtfall.opplysningTekstId && it.råVerdi().uppercase() == "OPPRETTHOLDELSE"
