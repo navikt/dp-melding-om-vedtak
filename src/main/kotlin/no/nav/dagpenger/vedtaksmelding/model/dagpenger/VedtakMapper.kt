@@ -569,7 +569,3 @@ class VilkårMangler(
 class UtfallMangler(
     message: String,
 ) : RuntimeException(message)
-
-class FagsakIdMangler(
-    message: String,
-) : RuntimeException(message)

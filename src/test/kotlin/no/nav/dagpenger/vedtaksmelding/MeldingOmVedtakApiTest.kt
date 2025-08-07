@@ -29,6 +29,7 @@ import no.nav.dagpenger.vedtaksmelding.apiconfig.Maskin
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.KLAGE
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MELDEKORT
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.RETT_TIL_DAGPENGER
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
@@ -127,33 +128,6 @@ class MeldingOmVedtakApiTest {
     @Test
     fun `Skal kunne spesifisere behandlingstype for brevet`() {
         val behandlingId = UUID.randomUUID()
-        val requestBody =
-            """
-            {
-                "fornavn": "Test ForNavn",
-                "etternavn": "Test EtterNavn",
-                "fodselsnummer": "12345678901",
-                "sakId": "sak123",
-                "behandlingstype": "RETT_TIL_DAGPENGER",
-                "saksbehandler": {
-                    "fornavn": "Ola",
-                    "etternavn": "Nordmann",
-                    "enhet": {
-                        "navn": "Enhet Navn",
-                        "postadresse": "Postadresse 123"
-                    }
-                },
-                "beslutter": {
-                    "fornavn": "Kari",
-                    "etternavn": "Nordmann",
-                    "enhet": {
-                        "navn": "Enhet Navn",
-                        "postadresse": "Postadresse 123"
-                    }
-                }
-            }
-            """.trimIndent()
-
         val mediator =
             mockk<Mediator>().also {
                 coEvery {
@@ -196,7 +170,7 @@ class MeldingOmVedtakApiTest {
                 .post("/melding-om-vedtak/$behandlingId/html") {
                     autentisert(token = saksbehandlerToken)
                     header(HttpHeaders.ContentType, ContentType.Application.Json)
-                    setBody(requestBody)
+                    setBody(requestBody(lagMeldingOmVedtakDataDTO(RETT_TIL_DAGPENGER)))
                 }.let { response ->
                     response.status shouldBe HttpStatusCode.OK
                     response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
@@ -209,38 +183,11 @@ class MeldingOmVedtakApiTest {
                         """.trimIndent()
                 }
 
-            val requestBodyKlage =
-                """
-                {
-                    "fornavn": "Test ForNavn",
-                    "etternavn": "Test EtterNavn",
-                    "fodselsnummer": "12345678901",
-                    "sakId": "sak123",
-                    "behandlingstype": "KLAGE",
-                    "saksbehandler": {
-                        "fornavn": "Ola",
-                        "etternavn": "Nordmann",
-                        "enhet": {
-                            "navn": "Enhet Navn",
-                            "postadresse": "Postadresse 123"
-                        }
-                    },
-                    "beslutter": {
-                        "fornavn": "Kari",
-                        "etternavn": "Nordmann",
-                        "enhet": {
-                            "navn": "Enhet Navn",
-                            "postadresse": "Postadresse 123"
-                        }
-                    }
-                }
-                """.trimIndent()
-
             client
                 .post("/melding-om-vedtak/$behandlingId/html") {
                     autentisert(token = saksbehandlerToken)
                     header(HttpHeaders.ContentType, ContentType.Application.Json)
-                    setBody(requestBodyKlage)
+                    setBody(requestBody(lagMeldingOmVedtakDataDTO(KLAGE)))
                 }.let { response ->
                     response.status shouldBe HttpStatusCode.OK
                     response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
@@ -253,37 +200,11 @@ class MeldingOmVedtakApiTest {
                         """.trimIndent()
                 }
 
-            val requestBodyMeldekort =
-                """
-                {
-                    "fornavn": "Test ForNavn",
-                    "etternavn": "Test EtterNavn",
-                    "fodselsnummer": "12345678901",
-                    "sakId": "sak123",
-                    "behandlingstype": "MELDEKORT",
-                    "saksbehandler": {
-                        "fornavn": "Ola",
-                        "etternavn": "Nordmann",
-                        "enhet": {
-                            "navn": "Enhet Navn",
-                            "postadresse": "Postadresse 123"
-                        }
-                    },
-                    "beslutter": {
-                        "fornavn": "Kari",
-                        "etternavn": "Nordmann",
-                        "enhet": {
-                            "navn": "Enhet Navn",
-                            "postadresse": "Postadresse 123"
-                        }
-                    }
-                }
-                """.trimIndent()
             client
                 .post("/melding-om-vedtak/$behandlingId/html") {
                     autentisert(token = saksbehandlerToken)
                     header(HttpHeaders.ContentType, ContentType.Application.Json)
-                    setBody(requestBodyMeldekort)
+                    setBody(requestBody(lagMeldingOmVedtakDataDTO(MELDEKORT)))
                 }.let { response ->
                     response.status shouldBe HttpStatusCode.BadRequest
                     response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
@@ -301,8 +222,9 @@ class MeldingOmVedtakApiTest {
         }
     }
 
-    private fun lagMeldingOmVedtakDataDTO(behandlingstype: Behandlingstype): MeldingOmVedtakDataDTO =
+    private fun lagMeldingOmVedtakDataDTO(behandlingstype: Behandlingstype = RETT_TIL_DAGPENGER): MeldingOmVedtakDataDTO =
         MeldingOmVedtakDataDTO(
+            sakId = "sak123",
             behandlingstype = BehandlingstypeDTO.valueOf(behandlingstype.name),
             fornavn = "Test ForNavn",
             etternavn = "Test EtterNavn",
@@ -332,28 +254,29 @@ class MeldingOmVedtakApiTest {
     @Test
     fun `Skal returnere en html ved bruk av melding-om-vedtak {behandlingId} html`() {
         val behandlingId = UUID.randomUUID()
+        val meldingOmVedtakData = lagMeldingOmVedtakDataDTO(behandlingstype = RETT_TIL_DAGPENGER)
         val requestBody =
             """
             {
-                "behandlingstype": "RETT_TIL_DAGPENGER",
-                "fornavn": "Test ForNavn",
-                "etternavn": "Test EtterNavn",
-                "fodselsnummer": "12345678901",
-                "sakId": "sak123",
+                "behandlingstype": "${meldingOmVedtakData.behandlingstype.value}",
+                "fornavn": "${meldingOmVedtakData.fornavn}",
+                "etternavn": "${meldingOmVedtakData.etternavn}",
+                "fodselsnummer": "${meldingOmVedtakData.fodselsnummer}",
+                "sakId": "${meldingOmVedtakData.sakId}",
                 "saksbehandler": {
-                    "fornavn": "Ola",
-                    "etternavn": "Nordmann",
+                    "fornavn": "${meldingOmVedtakData.saksbehandler.fornavn}",
+                    "etternavn": "${meldingOmVedtakData.saksbehandler.etternavn}",
                     "enhet": {
-                        "navn": "Enhet Navn",
-                        "postadresse": "Postadresse 123"
+                        "navn": "${meldingOmVedtakData.saksbehandler.enhet.navn}",
+                        "postadresse": "${meldingOmVedtakData.saksbehandler.enhet.postadresse}"
                     }
                 },
                 "beslutter": {
-                    "fornavn": "Kari",
-                    "etternavn": "Nordmann",
+                    "fornavn": "${meldingOmVedtakData.beslutter?.fornavn}",
+                    "etternavn": "${meldingOmVedtakData.beslutter?.etternavn}",
                     "enhet": {
-                        "navn": "Enhet Navn",
-                        "postadresse": "Postadresse 123"
+                        "navn": "${meldingOmVedtakData.beslutter?.enhet?.navn}",
+                        "postadresse": "${meldingOmVedtakData.beslutter?.enhet?.postadresse}"
                     }
                 }
             }
@@ -365,7 +288,7 @@ class MeldingOmVedtakApiTest {
                     it.hentVedtak(
                         behandlingId,
                         Saksbehandler(saksbehandlerToken),
-                        meldingOmVedtakData = lagMeldingOmVedtakDataDTO(behandlingstype = RETT_TIL_DAGPENGER),
+                        meldingOmVedtakData = meldingOmVedtakData,
                     )
                 } returns
                     MeldingOmVedtakResponseDTO(
@@ -426,39 +349,14 @@ class MeldingOmVedtakApiTest {
     fun `Skal returnere en html ved bruk av melding-om-vedtak {behandlingId} vedtaksmelding`() {
         val behandlingId = UUID.randomUUID()
         val klientSlot = slot<Klient>()
+        val meldingOmVedtakData = lagMeldingOmVedtakDataDTO(behandlingstype = RETT_TIL_DAGPENGER)
         val mediator =
             mockk<Mediator>().also {
                 coEvery {
                     it.hentEndeligVedtak(
                         behandlingId = behandlingId,
                         klient = capture(klientSlot),
-                        meldingOmVedtakData =
-                            MeldingOmVedtakDataDTO(
-                                behandlingstype = BehandlingstypeDTO.RETT_TIL_DAGPENGER,
-                                fornavn = "Test ForNavn",
-                                etternavn = "Test EtterNavn",
-                                fodselsnummer = "12345678901",
-                                saksbehandler =
-                                    BehandlerDTO(
-                                        fornavn = "Ola",
-                                        etternavn = "Nordmann",
-                                        enhet =
-                                            BehandlerEnhetDTO(
-                                                navn = "Enhet Navn",
-                                                postadresse = "Postadresse 123",
-                                            ),
-                                    ),
-                                beslutter =
-                                    BehandlerDTO(
-                                        fornavn = "Kari",
-                                        etternavn = "Nordmann",
-                                        enhet =
-                                            BehandlerEnhetDTO(
-                                                navn = "Enhet Navn",
-                                                postadresse = "Postadresse 123",
-                                            ),
-                                    ),
-                            ),
+                        meldingOmVedtakData = meldingOmVedtakData,
                     )
                 } returns "<html><body>Test HTML Test ForNavn</body></html>"
             }
@@ -471,7 +369,7 @@ class MeldingOmVedtakApiTest {
                 .post("/melding-om-vedtak/$behandlingId/vedtaksmelding") {
                     autentisert(token = saksbehandlerToken)
                     header(HttpHeaders.ContentType, ContentType.Application.Json)
-                    setBody(requestBody)
+                    setBody(requestBody(meldingOmVedtakData))
                 }.let { response ->
                     response.status shouldBe HttpStatusCode.OK
                     response.bodyAsText() shouldBe "<html><body>Test HTML Test ForNavn</body></html>"
@@ -481,7 +379,7 @@ class MeldingOmVedtakApiTest {
                 .post("/melding-om-vedtak/$behandlingId/vedtaksmelding") {
                     autentisert(token = maskinToken)
                     header(HttpHeaders.ContentType, ContentType.Application.Json)
-                    setBody(requestBody)
+                    setBody(requestBody(meldingOmVedtakData))
                 }.let { response ->
                     response.status shouldBe HttpStatusCode.OK
                     response.bodyAsText() shouldBe "<html><body>Test HTML Test ForNavn</body></html>"
@@ -563,7 +461,7 @@ class MeldingOmVedtakApiTest {
                 .post("/melding-om-vedtak/$behandlingId/html") {
                     autentisert(token = saksbehandlerToken)
                     header(HttpHeaders.ContentType, ContentType.Application.Json)
-                    setBody(requestBody)
+                    setBody(requestBody())
                 }.let { response ->
                     response.status shouldBe HttpStatusCode.InternalServerError
                     response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
@@ -596,31 +494,33 @@ class MeldingOmVedtakApiTest {
         }
     }
 
-    private val requestBody =
-        """
-        {
-            "behandlingstype": "RETT_TIL_DAGPENGER",
-            "fornavn": "Test ForNavn",
-            "etternavn": "Test EtterNavn",
-            "fodselsnummer": "12345678901",
-            "saksbehandler": {
-                "fornavn": "Ola",
-                "etternavn": "Nordmann",
-                "enhet": {
-                    "navn": "Enhet Navn",
-                    "postadresse": "Postadresse 123"
-                }
-            },
-            "beslutter": {
-                "fornavn": "Kari",
-                "etternavn": "Nordmann",
-                "enhet": {
-                    "navn": "Enhet Navn",
-                    "postadresse": "Postadresse 123"
+    private fun requestBody(meldingOmVedtakData: MeldingOmVedtakDataDTO = lagMeldingOmVedtakDataDTO()): String {
+        return """
+            {
+                "behandlingstype": "${meldingOmVedtakData.behandlingstype.value}",
+                "fornavn": "${meldingOmVedtakData.fornavn}",
+                "etternavn": "${meldingOmVedtakData.etternavn}",
+                "fodselsnummer": "${meldingOmVedtakData.fodselsnummer}",
+                "sakId": "${meldingOmVedtakData.sakId}",
+                "saksbehandler": {
+                    "fornavn": "${meldingOmVedtakData.saksbehandler.fornavn}",
+                    "etternavn": "${meldingOmVedtakData.saksbehandler.etternavn}",
+                    "enhet": {
+                        "navn": "${meldingOmVedtakData.saksbehandler.enhet.navn}",
+                        "postadresse": "${meldingOmVedtakData.saksbehandler.enhet.postadresse}"
+                    }
+                },
+                "beslutter": {
+                    "fornavn": "${meldingOmVedtakData.beslutter?.fornavn}",
+                    "etternavn": "${meldingOmVedtakData.beslutter?.etternavn}",
+                    "enhet": {
+                        "navn": "${meldingOmVedtakData.beslutter?.enhet?.navn}",
+                        "postadresse": "${meldingOmVedtakData.beslutter?.enhet?.postadresse}"
+                    }
                 }
             }
-        }
-        """.trimIndent()
+            """
+    }
 
     private fun HttpRequestBuilder.autentisert(token: String) {
         header(HttpHeaders.Authorization, "Bearer $token")

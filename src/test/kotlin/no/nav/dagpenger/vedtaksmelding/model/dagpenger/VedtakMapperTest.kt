@@ -535,19 +535,5 @@ class VedtakMapperTest {
             """,
             ).vedtak()
         }
-
-        shouldThrow<FagsakIdMangler> {
-            VedtakMapper(
-                """
-            {
-                "behandlingId": "01944f92-9828-770f-874d-534fd69b17c1",
-                "fastsatt": {
-                    "utfall": false
-                },
-                "vilkår": []
-            }
-            """,
-            ).vedtak()
-        }
     }
 }
