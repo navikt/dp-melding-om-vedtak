@@ -76,7 +76,6 @@ class SamordningTest {
                             egenandel(),
                             samordnetYtelseDagsats(SykepengerDagsats.opplysningTekstId),
                         ),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -115,7 +114,6 @@ class SamordningTest {
                             egenandel(),
                             samordnetYtelseDagsats(PleiepengerDagsats.opplysningTekstId),
                         ),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -154,7 +152,6 @@ class SamordningTest {
                             egenandel(),
                             samordnetYtelseDagsats(OmsorgspengerDagsats.opplysningTekstId),
                         ),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -193,7 +190,6 @@ class SamordningTest {
                             egenandel(),
                             samordnetYtelseDagsats(OpplæringspengerDagsats.opplysningTekstId),
                         ),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -232,7 +228,6 @@ class SamordningTest {
                             egenandel(),
                             samordnetYtelseDagsats(UføreDagsats.opplysningTekstId),
                         ),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -271,7 +266,6 @@ class SamordningTest {
                             egenandel(),
                             samordnetYtelseDagsats(ForeldrepengerDagsats.opplysningTekstId),
                         ),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -310,7 +304,6 @@ class SamordningTest {
                             egenandel(),
                             samordnetYtelseDagsats(SvangerskapspengerDagsats.opplysningTekstId),
                         ),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -351,7 +344,6 @@ class SamordningTest {
                             samordnetYtelseDagsats(ForeldrepengerDagsats.opplysningTekstId),
                             samordnetYtelseDagsats(SvangerskapspengerDagsats.opplysningTekstId),
                         ),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -385,7 +377,6 @@ class SamordningTest {
                     vilkår = emptySet(),
                     utfall = Utfall.INNVILGET,
                     opplysninger = setOf(samordnetOpplysning(), egenandel()),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder

@@ -60,11 +60,11 @@ object HtmlConverter {
         brevBlokker: List<BrevBlokk>,
         opplysninger: List<Opplysning>,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
-        fagsakId: String,
         utvidetBeskrivelse: Set<UtvidetBeskrivelse> = emptySet(),
     ): String {
         val mapping: Map<String, Opplysning> = opplysninger.associateBy { it.opplysningTekstId }
         val currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.of("no", "NO")))
+        val sakId = meldingOmVedtakData.sakId ?: "TBD"
 
         fun groupBlocks(blocks: List<Block>): List<List<Block>> {
             val groupedBlocks = mutableListOf<MutableList<Block>>()
@@ -99,7 +99,7 @@ object HtmlConverter {
                 title { +"Vedtak fra NAV" } // todo hente tittel
                 style {
                     unsafe {
-                        raw(css(fagsakId))
+                        raw(css(sakId))
                     }
                 }
             }
@@ -121,7 +121,7 @@ object HtmlConverter {
                         p { +"Navn: ${meldingOmVedtakData.hentNavn()}" }
                         p { +"Fødselsnummer: ${meldingOmVedtakData.fodselsnummer}" }
                         div(classes = "melding-om-vedtak-saksnummer-dato") {
-                            p(classes = "melding-om-vedtak-saksnummer-dato-left") { +"Saksid: $fagsakId" } //
+                            p(classes = "melding-om-vedtak-saksnummer-dato-left") { +"Saksid: $sakId" } //
                             p(classes = "melding-om-vedtak-saksnummer-dato-right") { +currentDate } //
                         }
                     }

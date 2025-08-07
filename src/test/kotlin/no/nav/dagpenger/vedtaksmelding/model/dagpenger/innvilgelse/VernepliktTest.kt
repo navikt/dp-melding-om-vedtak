@@ -119,7 +119,6 @@ class VernepliktTest {
                             Opplysning(ErInnvilgetMedVerneplikt.opplysningTekstId, "true", BOOLSK),
                             Opplysning(Egenandel.opplysningTekstId, "1000.0", HELTALL, KRONER),
                         ),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder

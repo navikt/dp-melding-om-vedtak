@@ -76,7 +76,6 @@ class AvslagMeldingReellArbeidssøkerTest {
                         vilkår = setOf(reellArbeidssøkerIkkeOppfylt),
                         utfall = Utfall.AVSLÅTT,
                         opplysninger = emptySet(),
-                        fagsakId = "fagsakId test",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -89,7 +88,6 @@ class AvslagMeldingReellArbeidssøkerTest {
                         vilkår = emptySet(),
                         utfall = Utfall.AVSLÅTT,
                         opplysninger = emptySet(),
-                        fagsakId = "fagsakId test",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -105,7 +103,6 @@ class AvslagMeldingReellArbeidssøkerTest {
                     vilkår = setOf(reellArbeidssøkerIkkeOppfylt, heltidDeltidIkkeOppfylt),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -132,7 +129,6 @@ class AvslagMeldingReellArbeidssøkerTest {
                     vilkår = setOf(minsteinntektIkkeOppfylt),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -152,7 +148,6 @@ class AvslagMeldingReellArbeidssøkerTest {
                     vilkår = setOf(reellArbeidssøkerIkkeOppfylt, mobilitetIkkeOppfylt),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -174,7 +169,6 @@ class AvslagMeldingReellArbeidssøkerTest {
                     vilkår = setOf(reellArbeidssøkerIkkeOppfylt, arbeidsførIkkeOppfylt),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -195,7 +189,6 @@ class AvslagMeldingReellArbeidssøkerTest {
                     vilkår = setOf(reellArbeidssøkerIkkeOppfylt, ethvertArbeidIkkeOppfylt),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -216,7 +209,6 @@ class AvslagMeldingReellArbeidssøkerTest {
                     vilkår = setOf(registrertArbeidssøkerIkkeOppfylt),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -245,7 +237,6 @@ class AvslagMeldingReellArbeidssøkerTest {
                         ),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -272,7 +263,6 @@ class AvslagMeldingReellArbeidssøkerTest {
                         vilkår = emptySet(),
                         utfall = Utfall.AVSLÅTT,
                         opplysninger = emptySet(),
-                        fagsakId = "fagsakId test",
                     ),
                 alleBrevblokker = emptyList(),
             )

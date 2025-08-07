@@ -39,8 +39,6 @@ abstract class VedtakMelding(
             .map { vedtak.hentOpplysning(it) }
             .toList()
 
-    override fun hentFagsakId(): String = vedtak.fagsakId
-
     companion object {
         val fasteAvsluttendeBlokker =
             listOf(

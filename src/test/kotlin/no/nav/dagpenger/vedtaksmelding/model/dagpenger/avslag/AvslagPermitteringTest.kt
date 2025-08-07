@@ -32,7 +32,6 @@ class AvslagPermitteringTest {
                     vilkår = setOf(avslåttVilkår),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

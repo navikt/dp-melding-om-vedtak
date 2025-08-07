@@ -245,6 +245,8 @@ components:
     MeldingOmVedtakData:
       type: object
       properties:
+        sakId:
+          type: string
         behandlingstype:
           $ref: '#/components/schemas/Behandlingstype'
         fornavn:
@@ -266,7 +268,6 @@ components:
         - fornavn
         - etternavn
         - fodselsnummer
-        - sakId
         - saksbehandler
 
     Behandler:

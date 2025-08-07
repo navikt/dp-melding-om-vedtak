@@ -171,7 +171,6 @@ class Mediator(
                 vedtak.hentBrevBlokker(),
                 vedtak.hentOpplysninger(),
                 meldingOmVedtakData,
-                vedtak.hentFagsakId(),
             )
 
         return MeldingOmVedtakResponseDTO(
@@ -204,7 +203,6 @@ class Mediator(
                     vedtak.hentBrevBlokker(),
                     vedtak.hentOpplysninger(),
                     meldingOmVedtakData,
-                    vedtak.hentFagsakId(),
                     hentUtvidedeBeskrivelser(behandlingId, vedtak).toSet(),
                 )
             }

@@ -46,7 +46,6 @@ class AvslagMeldingAlderTest {
                     vilkår = setOf(alderIkkeOppfylt),
                     utfall = Utfall.AVSLÅTT,
                     opplysninger = emptySet(),
-                    fagsakId = "fagsakId test",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

@@ -8,6 +8,4 @@ interface Brev {
     fun hentBrevBlokker(): List<BrevBlokk>
 
     fun hentOpplysninger(): List<Opplysning>
-
-    fun hentFagsakId(): String
 }

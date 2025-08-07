@@ -41,7 +41,6 @@ class HtmlConverterTest {
                     brevBlokker = sanityTekster,
                     opplysninger = emptyList(),
                     meldingOmVedtakData = meldingOmVedtakDTO,
-                    fagsakId = "123456789",
                 ).also {
                     writeStringToFile("build/temp/test.html", it)
                 }
@@ -64,7 +63,6 @@ class HtmlConverterTest {
                     brevBlokker = vedtakMelding.hentBrevBlokker(),
                     opplysninger = vedtakMelding.hentOpplysninger(),
                     meldingOmVedtakData = meldingOmVedtakDTO,
-                    fagsakId = "123456789",
                     utvidetBeskrivelse =
                         setOf(
                             UtvidetBeskrivelse(
