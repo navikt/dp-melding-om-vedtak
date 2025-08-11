@@ -1,13 +1,20 @@
 package no.nav.dagpenger.vedtaksmelding
 
 import io.kotest.matchers.shouldBe
+import io.ktor.client.engine.cio.CIO
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
+import io.ktor.client.request.accept
+import io.ktor.client.request.get
+import io.ktor.client.request.header
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
 import kotlinx.coroutines.runBlocking
+import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
-import no.nav.dagpenger.vedtaksmelding.k8.setAzureAuthEnv
 import no.nav.dagpenger.vedtaksmelding.util.readFile
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -89,37 +96,54 @@ internal class BehandlingKlientTest {
     @Disabled
     @Test
     fun `brukes for å hente ut en behandling manuelt, må ha saksbehandler token`() {
+        fun String.tilHttpProblem(status: HttpStatusCode): HttpProblemDTO =
+            try {
+                Configuration.objectMapper.readValue(this, HttpProblemDTO::class.java)
+            } catch (e: Exception) {
+                HttpProblemDTO(
+                    type = "Ukjent",
+                    title = "Ukjent feil ved kall mot dp-behandling",
+                    status = status.value,
+                    detail = this,
+                )
+            }
+
         val behandlingId = UUID.fromString("01943b06-1a68-7dad-88e1-19e31cde711c")
 
         // saksbhehandler token, hentes fra azure-token-generator f,eks
         @Suppress("ktlint:standard:max-line-length")
-        val token = ""
+        val token =
+            ""
+        val klient = lagHttpKlient(engine = CIO.create { }, expectSucces = false)
 
-        // krever at man er logget inn paa naisdevice, dev-gcp
-        // k8s kontekst er satt til dev-gcp og i riktig namespace
-        setAzureAuthEnv(
-            app = "dp-melding-om-vedtak",
-            type = "azurerator.nais.io",
-        ) {
-            val tokenProvider = Configuration.dpBehandlingTokenProvider
-            val klient =
-                BehandlingHttpKlient(
-                    dpBehandlingApiUrl = "https://dp-behandling.intern.dev.nav.no/behandling",
-                    tokenProvider = tokenProvider,
-                )
-            runBlocking {
-//                val behandling =
-//                    klient.hentBehandling(behandling = behandlingId, saksbehandler = Saksbehandler(token))
-//                println(behandling)
+        runBlocking {
+            val dpBehandlingApiUrl = "https://dp-behandling.intern.dev.nav.no/behandling"
+            klient
+                .get(urlString = "$dpBehandlingApiUrl/$behandlingId/klumpen") {
+                    header(HttpHeaders.Authorization, "Bearer $token")
+                    accept(ContentType.Application.Json)
+                }.let { response ->
+                    val responseTekst = response.bodyAsText()
+                    when (response.status == HttpStatusCode.OK) {
+                        true -> {
+                            Result.success(responseTekst)
+                        }
 
-                klient
-                    .hentVedtak(behandlingId = behandlingId, klient = Saksbehandler(token))
-                    .onFailure { println(it) }
-                    .getOrThrow()
-                    .let { vedtak ->
-                        println(vedtak)
+                        false -> {
+                            Result.failure(
+                                HentVedtakException(
+                                    response.status,
+                                    responseTekst.tilHttpProblem(response.status),
+                                ),
+                            )
+                        }
                     }
-            }
+                }
+                .onFailure { println(it) }
+                .getOrThrow()
+                .let { vedtak ->
+                    println(vedtak)
+                }
         }
     }
 }

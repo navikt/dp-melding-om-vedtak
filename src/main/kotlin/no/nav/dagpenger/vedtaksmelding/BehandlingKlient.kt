@@ -12,6 +12,7 @@ import io.ktor.http.HttpStatusCode
 import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Klient
+import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMapper
 import java.util.UUID
@@ -49,6 +50,29 @@ internal class BehandlingHttpKlient(
 
                     false -> {
                         log.error { "Feil ved henting av vedtak for behandling $behandlingId: $responseTekst" }
+                        Result.failure(HentVedtakException(response.status, responseTekst.tilHttpProblem(response.status)))
+                    }
+                }
+            }
+
+    suspend fun hentKlumpJson(
+        behandlingId: UUID,
+        saksbehandler: Saksbehandler,
+    ): Result<String> =
+        httpClient
+            .get(urlString = "$dpBehandlingApiUrl/$behandlingId/klumpen") {
+                header(HttpHeaders.Authorization, "Bearer ${saksbehandler.token}")
+                accept(ContentType.Application.Json)
+            }.let { response ->
+                val responseTekst = response.bodyAsText()
+                when (response.status == HttpStatusCode.OK) {
+                    true -> {
+                        sikkerlogg.info { "Hentet klump for behandling $behandlingId $responseTekst" }
+                        Result.success(responseTekst)
+                    }
+
+                    false -> {
+                        log.error { "Feil ved henting av klump for behandling $behandlingId: $responseTekst" }
                         Result.failure(HentVedtakException(response.status, responseTekst.tilHttpProblem(response.status)))
                     }
                 }

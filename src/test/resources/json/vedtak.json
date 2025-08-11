@@ -1,5107 +1,1615 @@
 {
-  "behandlingId": "01946e2f-5a73-7f88-bc8a-8e0a5184a200",
-  "fagsakId": "15246021",
-  "søknadId": "8afc5a92-2d7e-44fb-8a32-1e5f40d5dcbe",
-  "ident": "08858598622",
-  "vedtakstidspunkt": "2025-01-29T13:00:07.58118429",
-  "virkningsdato": "2025-01-16",
-  "behandletAv": [],
+  "behandlingId": "01937743-812d-7a69-b492-d25eb9768c68",
+  "behandletHendelse": {
+    "datatype": "UUID",
+    "id": "5feba812-82bc-4c16-a0f2-4d1e82926a85",
+    "type": "Søknad"
+  },
+  "ident": "12345678900",
   "vilkår": [
     {
-      "navn": "Rettighetstype",
-      "status": "Oppfylt",
-      "vurderingstidspunkt": "2025-01-16T09:16:26.754114",
-      "hjemmel": "folketrygdloven kapittel 4"
+      "navn": "Minsteinntekt",
+      "hjemmel": {
+        "kilde": {
+          "navn": "Folketrygdloven",
+          "kortnavn": "ftrl"
+        },
+        "kapittel": "4",
+        "paragraf": "4",
+        "tittel": "§ 4-4. Krav til minsteinntekt",
+        "url": "https://lovdata.no/nav/lov/1997-02-28-19/§4-4"
+      },
+      "perioder": [],
+      "utfall": [
+        "0194881f-9413-77ce-92ec-d29700f0424c"
+      ],
+      "ønsketResultat": [
+        "0194881f-9413-77ce-92ec-d29700f0424c"
+      ],
+      "opplysninger": [
+        "0194881f-9413-77ce-92ec-d29700f04246",
+        "0194881f-9413-77ce-92ec-d29700f04247",
+        "0194881f-9413-77ce-92ec-d29700f04244",
+        "0194881f-9413-77ce-92ec-d29700f04245",
+        "0194881f-9413-77ce-92ec-d29700f04243",
+        "0194881f-9413-77ce-92ec-d29700f04241",
+        "0194881f-9413-77ce-92ec-d29700f0423f",
+        "0194881f-9413-77ce-92ec-d29700f04248",
+        "0194881f-9413-77ce-92ec-d29700f0424a",
+        "0194881f-9413-77ce-92ec-d29700f04242",
+        "0194881f-9413-77ce-92ec-d29700f04240",
+        "0194881f-9413-77ce-92ec-d29700f04249",
+        "0194881f-9413-77ce-92ec-d29700f0424b",
+        "0194881f-9413-77ce-92ec-d29700f0424c"
+      ]
     },
     {
-      "navn": "Oppfyller kravet til å ta ethvert arbeid",
-      "status": "Oppfylt",
-      "vurderingstidspunkt": "2025-01-16T09:16:38.778989",
-      "hjemmel": "folketrygdloven § 4-5"
+      "navn": "Reell arbeidssøker",
+      "hjemmel": {
+        "kilde": {
+          "navn": "Folketrygdloven",
+          "kortnavn": "ftrl"
+        },
+        "kapittel": "4",
+        "paragraf": "5",
+        "tittel": "§ 4-5. Reelle arbeidssøkere",
+        "url": "https://lovdata.no/nav/lov/1997-02-28-19/§4-5"
+      },
+      "perioder": [],
+      "utfall": [
+        "0194881f-9442-707b-a6ee-e96c06877bd8",
+        "0194881f-9442-707b-a6ee-e96c06877bdb",
+        "0194881f-9442-707b-a6ee-e96c06877bdd",
+        "0194881f-9442-707b-a6ee-e96c06877bdf",
+        "0194881f-9442-707b-a6ee-e96c06877be2"
+      ],
+      "ønsketResultat": [
+        "0194881f-9442-707b-a6ee-e96c06877bd8",
+        "0194881f-9442-707b-a6ee-e96c06877bdb",
+        "0194881f-9442-707b-a6ee-e96c06877bdd",
+        "0194881f-9442-707b-a6ee-e96c06877bdf",
+        "0194881f-9442-707b-a6ee-e96c06877be2"
+      ],
+      "opplysninger": [
+        "0194881f-9441-7d1b-a06a-6727543a141e",
+        "0194881f-9441-7d1b-a06a-6727543a141f",
+        "0194881f-9442-707b-a6ee-e96c06877bd9",
+        "0194881f-9442-707b-a6ee-e96c06877bda",
+        "0194881f-9442-707b-a6ee-e96c06877bdc",
+        "0194881f-9442-707b-a6ee-e96c06877bde",
+        "0194881f-9442-707b-a6ee-e96c06877bd8",
+        "0194881f-9442-707b-a6ee-e96c06877bdb",
+        "0194881f-9442-707b-a6ee-e96c06877bdd",
+        "0194881f-9442-707b-a6ee-e96c06877bdf",
+        "0194881f-9442-707b-a6ee-e96c06877be2"
+      ]
     },
     {
-      "navn": "Mottar ikke andre fulle ytelser",
-      "status": "Oppfylt",
-      "vurderingstidspunkt": "2025-01-27T12:08:17.919669",
-      "hjemmel": "folketrygdloven § 4-24"
+      "navn": "Registrert som arbeidssøker",
+      "hjemmel": {
+        "kilde": {
+          "navn": "Folketrygdloven",
+          "kortnavn": "ftrl"
+        },
+        "kapittel": "4",
+        "paragraf": "5",
+        "tittel": "§ 4-5. Reelle arbeidssøkere - registrert som arbeidssøker",
+        "url": "https://lovdata.no/nav/lov/1997-02-28-19/§4-5"
+      },
+      "perioder": [
+        {
+          "fraOgMed": "2025-01-06",
+          "harRett": true
+        }
+      ],
+      "utfall": [
+        "0194881f-9442-707b-a6ee-e96c06877be1"
+      ],
+      "ønsketResultat": [
+        "0194881f-9442-707b-a6ee-e96c06877be1"
+      ],
+      "opplysninger": [
+        "0194881f-9442-707b-a6ee-e96c06877be0",
+        "0194881f-9442-707b-a6ee-e96c06877be1"
+      ]
     },
     {
-      "navn": "Oppfyller kravet til medlemskap",
-      "status": "Oppfylt",
-      "vurderingstidspunkt": "2025-01-27T12:08:17.927809",
-      "hjemmel": "folketrygdloven § 4-2"
+      "navn": "Verneplikt",
+      "hjemmel": {
+        "kilde": {
+          "navn": "Folketrygdloven",
+          "kortnavn": "ftrl"
+        },
+        "kapittel": "4",
+        "paragraf": "19",
+        "tittel": "§ 4-19. Dagpenger etter avtjent verneplikt",
+        "url": "https://lovdata.no/nav/lov/1997-02-28-19/§4-19"
+      },
+      "perioder": [],
+      "utfall": [
+        "01948d43-e218-76f1-b29b-7e604241d98a"
+      ],
+      "ønsketResultat": [
+        "01948d43-e218-76f1-b29b-7e604241d98a"
+      ],
+      "opplysninger": [
+        "01948d3c-4bea-7802-9d18-5342a5e2be99",
+        "01948d43-e218-76f1-b29b-7e604241d98a"
+      ]
     },
     {
-      "navn": "Oppfyller kravet til heltid- og deltidsarbeid",
-      "status": "Oppfylt",
-      "vurderingstidspunkt": "2025-01-27T12:08:17.927834",
-      "hjemmel": "folketrygdloven § 4-5"
-    },
-    {
-      "navn": "Oppfyller kravet til mobilitet",
-      "status": "Oppfylt",
-      "vurderingstidspunkt": "2025-01-27T12:08:17.927856",
-      "hjemmel": "folketrygdloven § 4-5"
-    },
-    {
-      "navn": "Oppfyller kravet til å være arbeidsfør",
-      "status": "Oppfylt",
-      "vurderingstidspunkt": "2025-01-27T12:08:17.927877",
-      "hjemmel": "folketrygdloven § 4-5"
-    },
-    {
-      "navn": "Er medlemmet ikke påvirket av streik eller lock-out?",
-      "status": "Oppfylt",
-      "vurderingstidspunkt": "2025-01-27T12:08:17.927976",
-      "hjemmel": "folketrygdloven § 4-22"
-    },
-    {
-      "navn": "Krav til tap av arbeidsinntekt",
-      "status": "Oppfylt",
-      "vurderingstidspunkt": "2025-01-27T12:08:17.928029",
-      "hjemmel": "folketrygdloven § 4-3"
-    },
-    {
-      "navn": "Oppfyller krav til ikke utestengt",
-      "status": "Oppfylt",
-      "vurderingstidspunkt": "2025-01-27T12:08:17.929454",
-      "hjemmel": "folketrygdloven § 4-28"
-    },
-    {
-      "navn": "Oppfyller kravet til opphold i Norge",
-      "status": "Oppfylt",
-      "vurderingstidspunkt": "2025-01-27T12:08:17.933163",
-      "hjemmel": "folketrygdloven § 4-5"
-    },
-    {
-      "navn": "Oppfyller kravet til alder",
-      "status": "Oppfylt",
-      "vurderingstidspunkt": "2025-01-27T12:08:17.941134",
-      "hjemmel": "folketrygdloven § 4-23"
-    },
-    {
-      "navn": "Krav til utdanning eller opplæring",
-      "status": "Oppfylt",
-      "vurderingstidspunkt": "2025-01-27T12:08:17.941459",
-      "hjemmel": "folketrygdloven § 4-6"
-    },
-    {
-      "navn": "Registrert som arbeidssøker på søknadstidspunktet",
-      "status": "Oppfylt",
-      "vurderingstidspunkt": "2025-01-29T10:13:36.435915",
-      "hjemmel": "folketrygdloven § 4-5"
-    },
-    {
-      "navn": "Krav til arbeidssøker",
-      "status": "Oppfylt",
-      "vurderingstidspunkt": "2025-01-29T10:13:36.458124",
-      "hjemmel": "folketrygdloven § 4-5"
-    },
-    {
-      "navn": "Oppfyller kravet til minsteinntekt",
-      "status": "Oppfylt",
-      "vurderingstidspunkt": "2025-01-29T10:13:36.505549",
-      "hjemmel": "folketrygdloven § 4-4"
-    },
-    {
-      "navn": "Tap av arbeidstid er minst terskel",
-      "status": "Oppfylt",
-      "vurderingstidspunkt": "2025-01-29T10:13:36.580173",
-      "hjemmel": "folketrygdloven § 4-3"
-    },
-    {
-      "navn": "Krav til tap av arbeidsinntekt og arbeidstid",
-      "status": "Oppfylt",
-      "vurderingstidspunkt": "2025-01-29T10:13:36.592332",
-      "hjemmel": "folketrygdloven § 4-3"
+      "navn": "Alder",
+      "hjemmel": {
+        "kilde": {
+          "navn": "Folketrygdloven",
+          "kortnavn": "ftrl"
+        },
+        "kapittel": "4",
+        "paragraf": "23",
+        "tittel": "§ 4-23. Bortfall på grunn av alder",
+        "url": "https://lovdata.no/nav/lov/1997-02-28-19/§4-23"
+      },
+      "perioder": [],
+      "utfall": [
+        "0194881f-940b-76ff-acf5-ba7bcb367237"
+      ],
+      "ønsketResultat": [
+        "0194881f-940b-76ff-acf5-ba7bcb367237"
+      ],
+      "opplysninger": [
+        "0194881f-940b-76ff-acf5-ba7bcb367233",
+        "0194881f-940b-76ff-acf5-ba7bcb367234",
+        "0194881f-940b-76ff-acf5-ba7bcb367235",
+        "0194881f-940b-76ff-acf5-ba7bcb367236",
+        "0194881f-940b-76ff-acf5-ba7bcb367237"
+      ]
     }
   ],
-  "fastsatt": {
-    "utfall": true,
-    "status": null,
-    "grunnlag": {
-      "grunnlag": 206997,
-      "begrunnelse": null
-    },
-    "fastsattVanligArbeidstid": {
-      "vanligArbeidstidPerUke": 33.45,
-      "nyArbeidstidPerUke": 10.123456,
-      "begrunnelse": null
-    },
-    "sats": {
-      "dagsatsMedBarnetillegg": 321,
-      "dagsats": null,
-      "begrunnelse": null,
-      "barn": [
-        {
-          "fødselsdato": "2013-09-28",
-          "kvalifiserer": true
+  "fastsettelser": [
+    {
+      "navn": "Rettighetstype",
+      "hjemmel": {
+        "kilde": {
+          "navn": "Folketrygdloven",
+          "kortnavn": "ftrl"
         },
+        "kapittel": "0",
+        "paragraf": "0",
+        "tittel": "§ 0-0. Rettighetstype",
+        "url": "https://lovdata.no/nav/lov/1997-02-28-19/§0-0"
+      },
+      "perioder": [],
+      "utfall": [],
+      "ønsketResultat": [
+        "0194881f-9444-7a73-a458-0af81c034d8b"
+      ],
+      "opplysninger": [
+        "0194881f-9444-7a73-a458-0af81c034d86",
+        "0194881f-9444-7a73-a458-0af81c034d85",
+        "0194881f-9444-7a73-a458-0af81c034d87",
+        "0194881f-9444-7a73-a458-0af81c034d88",
+        "0194881f-9444-7a73-a458-0af81c034d89",
+        "0194881f-9444-7a73-a458-0af81c034d8a",
+        "0194881f-9444-7a73-a458-0af81c034d8b"
+      ]
+    },
+    {
+      "navn": "Søknadstidspunkt",
+      "hjemmel": {
+        "kilde": {
+          "navn": "Forskrift til Folketrygdloven",
+          "kortnavn": "ftrl"
+        },
+        "kapittel": "3",
+        "paragraf": "1",
+        "tittel": "§ 3-1. Søknadstidspunkt"
+      },
+      "perioder": [],
+      "utfall": [],
+      "ønsketResultat": [],
+      "opplysninger": [
+        "0194881f-91d1-7df2-ba1d-4533f37fcc77",
+        "0194881f-91d1-7df2-ba1d-4533f37fcc73",
+        "0194881f-91d1-7df2-ba1d-4533f37fcc74",
+        "0194881f-91d1-7df2-ba1d-4533f37fcc75",
+        "0194881f-91d1-7df2-ba1d-4533f37fcc76"
+      ]
+    },
+    {
+      "navn": "Opptjeningsperiode",
+      "hjemmel": {
+        "kilde": {
+          "navn": "A-opplysningsloven",
+          "kortnavn": "a-opplysningsloven"
+        },
+        "kapittel": "1",
+        "paragraf": "2",
+        "tittel": "§ 1-2. Frist for levering av opplysninger"
+      },
+      "perioder": [],
+      "utfall": [],
+      "ønsketResultat": [],
+      "opplysninger": [
+        "0194881f-9414-7823-8d29-0e25b7feb7ce",
+        "0194881f-9414-7823-8d29-0e25b7feb7cf",
+        "0194881f-9414-7823-8d29-0e25b7feb7d0"
+      ]
+    }
+  ],
+  "opplysninger": [
+    {
+      "opplysningTypeId": "0194881f-9462-78af-8977-46092bb030eb",
+      "navn": "fagsakId",
+      "datatype": "heltall",
+      "opplysninger": [
         {
-          "fødselsdato": "2007-09-07",
-          "kvalifiserer": true
+          "id": "01943b06-1a67-7705-a526-89cdcb513e1d",
+          "opplysningTypeId": "0194881f-9462-78af-8977-46092bb030eb",
+          "navn": "fagsakId",
+          "verdien": {
+            "verdi": 15233644,
+            "datatype": "heltall"
+          },
+          "verdi": "15233644",
+          "datatype": "heltall",
+          "kilde": {
+            "type": "System",
+            "registrert": "2025-01-06T10:50:43.302897",
+            "meldingId": "28fc0809-9d27-4c14-90af-7b9016f9b4ff"
+          }
         }
       ]
     },
-    "samordning": [
-      {
-        "type": "Sykepenger dagsats",
-        "beløp": 100,
-        "grad": 50
-      },
-      {
-        "type": "Pleiepenger dagsats",
-        "beløp": 150,
-        "grad": 10
-      },
-      {
-        "type": "Omsorgspenger dagsats",
-        "beløp": 150,
-        "grad": 10
-      },
-      {
-        "type": "Opplæringspenger dagsats",
-        "beløp": 180,
-        "grad": 10
-      },
-      {
-        "type": "Uføre dagsats",
-        "beløp": 200,
-        "grad": 10
-      },
-      {
-        "type": "Foreldrepenger dagsats",
-        "beløp": 210,
-        "grad": 10
-      },
-      {
-        "type": "Svangerskapspenger dagsats",
-        "beløp": 150,
-        "grad": 10
-      }
-    ],
-    "kvoter": [
-      {
-        "navn": "Dagpengeperiode",
-        "type": "uker",
-        "verdi": 52
-      },
-      {
-        "navn": "Egenandel",
-        "type": "beløp",
-        "verdi": 963
-      }
-    ]
-  },
-  "utbetalinger": [],
-  "opplysninger": [
     {
-      "id": "01946e2f-5a73-7f88-bc8a-8e0a5184a1fd",
-      "opplysningTypeId": "0194881f-9462-78af-8977-46092bb030eb",
-      "navn": "fagsakId",
-      "verdi": "15246021",
-      "status": "Faktum",
-      "datatype": "heltall",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-16T09:16:24.691427",
-        "ident": null,
-        "meldingId": "4d502399-7548-431b-b35b-845cb6365b8a"
-      },
-      "utledetAv": null
-    },
-    {
-      "id": "01946e2f-5a73-7f88-bc8a-8e0a5184a1ff",
       "opplysningTypeId": "0194881f-91d1-7df2-ba1d-4533f37fcc77",
       "navn": "søknadId",
-      "verdi": "8afc5a92-2d7e-44fb-8a32-1e5f40d5dcbe",
-      "status": "Faktum",
       "datatype": "tekst",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-16T09:16:24.691443",
-        "ident": null,
-        "meldingId": "4d502399-7548-431b-b35b-845cb6365b8a"
-      },
-      "utledetAv": null
+      "opplysninger": [
+        {
+          "id": "01943b06-1a68-7dad-88e1-19e31cde7119",
+          "opplysningTypeId": "0194881f-91d1-7df2-ba1d-4533f37fcc77",
+          "navn": "søknadId",
+          "verdien": {
+            "verdi": "5feba812-82bc-4c16-a0f2-4d1e82926a85",
+            "datatype": "tekst"
+          },
+          "verdi": "5feba812-82bc-4c16-a0f2-4d1e82926a85",
+          "datatype": "tekst",
+          "kilde": {
+            "type": "System",
+            "registrert": "2025-01-06T10:50:43.30418",
+            "meldingId": "28fc0809-9d27-4c14-90af-7b9016f9b4ff"
+          }
+        }
+      ]
     },
     {
-      "id": "01946e2f-6281-726d-bbdf-fe072d53bf02",
+      "opplysningTypeId": "1b53791d-5d14-449a-b62a-5e5b3238c4aa",
+      "navn": "støtterInnvilgelse",
+      "datatype": "boolsk",
+      "opplysninger": [
+        {
+          "id": "01943b06-1a68-7dad-88e1-19e31cde711b",
+          "opplysningTypeId": "1b53791d-5d14-449a-b62a-5e5b3238c4aa",
+          "navn": "støtterInnvilgelse",
+          "verdien": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "verdi": "true",
+          "datatype": "boolsk",
+          "kilde": {
+            "type": "System",
+            "registrert": "2025-01-06T10:50:43.304532",
+            "meldingId": "28fc0809-9d27-4c14-90af-7b9016f9b4ff"
+          }
+        }
+      ]
+    },
+    {
       "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d85",
       "navn": "Har rett til ordinære dagpenger gjennom arbeidsforhold",
-      "verdi": "false",
-      "status": "Faktum",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-16T09:16:26.699602",
-        "ident": null,
-        "meldingId": "f44534b2-efd7-42c4-bc39-893503e008fe"
-      },
-      "utledetAv": null
+      "opplysninger": [
+        {
+          "id": "01943b06-1d0e-7dd7-bb7f-11973c9ddc33",
+          "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d85",
+          "navn": "Har rett til ordinære dagpenger gjennom arbeidsforhold",
+          "verdien": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "verdi": "false",
+          "datatype": "boolsk",
+          "kilde": {
+            "type": "System",
+            "registrert": "2025-01-06T10:50:43.700509",
+            "meldingId": "3f74d906-3581-40db-a7ff-f796d4166e35"
+          }
+        }
+      ]
     },
     {
-      "id": "01946e2f-6281-726d-bbdf-fe072d53bf03",
       "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d86",
-      "navn": "Har rett til dagpenger under permittering",
-      "verdi": "false",
-      "status": "Faktum",
+      "navn": "Bruker er permittert",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-16T09:16:26.699697",
-        "ident": null,
-        "meldingId": "f44534b2-efd7-42c4-bc39-893503e008fe"
-      },
-      "utledetAv": null
+      "opplysninger": [
+        {
+          "id": "01943b06-1d0e-7dd7-bb7f-11973c9ddc34",
+          "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d86",
+          "navn": "Bruker er permittert",
+          "verdien": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "verdi": "false",
+          "datatype": "boolsk",
+          "kilde": {
+            "type": "System",
+            "registrert": "2025-01-06T10:50:43.702423",
+            "meldingId": "3f74d906-3581-40db-a7ff-f796d4166e35"
+          }
+        }
+      ]
     },
     {
-      "id": "01946e2f-6281-726d-bbdf-fe072d53bf04",
       "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d87",
-      "navn": "Har rett til dagpenger etter konkurs",
-      "verdi": "false",
-      "status": "Faktum",
+      "navn": "Forskutterte lønnsgarantimidler i form av dagpenger",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-16T09:16:26.699766",
-        "ident": null,
-        "meldingId": "f44534b2-efd7-42c4-bc39-893503e008fe"
-      },
-      "utledetAv": null
+      "opplysninger": [
+        {
+          "id": "01943b06-1d0e-7dd7-bb7f-11973c9ddc35",
+          "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d87",
+          "navn": "Forskutterte lønnsgarantimidler i form av dagpenger",
+          "verdien": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "verdi": "false",
+          "datatype": "boolsk",
+          "kilde": {
+            "type": "System",
+            "registrert": "2025-01-06T10:50:43.702653",
+            "meldingId": "3f74d906-3581-40db-a7ff-f796d4166e35"
+          }
+        }
+      ]
     },
     {
-      "id": "01946e2f-6281-726d-bbdf-fe072d53bf05",
       "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d88",
-      "navn": "Har rett til dagpenger under permittering i fiskeforedlingsindustri",
-      "verdi": "false",
-      "status": "Faktum",
+      "navn": "Permittert fra fiskeindustrien",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-16T09:16:26.699834",
-        "ident": null,
-        "meldingId": "f44534b2-efd7-42c4-bc39-893503e008fe"
-      },
-      "utledetAv": null
+      "opplysninger": [
+        {
+          "id": "01943b06-1d0e-7dd7-bb7f-11973c9ddc36",
+          "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d88",
+          "navn": "Permittert fra fiskeindustrien",
+          "verdien": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "verdi": "false",
+          "datatype": "boolsk",
+          "kilde": {
+            "type": "System",
+            "registrert": "2025-01-06T10:50:43.702851",
+            "meldingId": "3f74d906-3581-40db-a7ff-f796d4166e35"
+          }
+        }
+      ]
     },
     {
-      "id": "01946e2f-6281-726d-bbdf-fe072d53bf06",
       "opplysningTypeId": "0194881f-91d1-7df2-ba1d-4533f37fcc73",
       "navn": "Søknadsdato",
-      "verdi": "2025-01-15",
-      "status": "Faktum",
       "datatype": "dato",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-16T09:16:26.699895",
-        "ident": null,
-        "meldingId": "f44534b2-efd7-42c4-bc39-893503e008fe"
-      },
-      "utledetAv": {
-        "regel": {
-          "navn": "innhentMed"
-        },
-        "opplysninger": [
-          "01946e2f-5a73-7f88-bc8a-8e0a5184a1ff"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-1d0f-7ddd-8b59-a3936f1c70fc",
+          "opplysningTypeId": "0194881f-91d1-7df2-ba1d-4533f37fcc73",
+          "navn": "Søknadsdato",
+          "verdien": {
+            "verdi": "2025-01-06",
+            "datatype": "dato"
+          },
+          "verdi": "2025-01-06",
+          "datatype": "dato",
+          "kilde": {
+            "type": "System",
+            "registrert": "2025-01-06T10:50:43.703049",
+            "meldingId": "3f74d906-3581-40db-a7ff-f796d4166e35"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "01943b06-1a68-7dad-88e1-19e31cde7119"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "01946e2f-6281-726d-bbdf-fe072d53bf07",
       "opplysningTypeId": "0194881f-91d1-7df2-ba1d-4533f37fcc74",
       "navn": "Ønsker dagpenger fra dato",
-      "verdi": "2025-01-15",
-      "status": "Faktum",
       "datatype": "dato",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-16T09:16:26.69997",
-        "ident": null,
-        "meldingId": "f44534b2-efd7-42c4-bc39-893503e008fe"
-      },
-      "utledetAv": {
-        "regel": {
-          "navn": "innhentMed"
-        },
-        "opplysninger": [
-          "01946e2f-5a73-7f88-bc8a-8e0a5184a1ff"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-1d0f-7ddd-8b59-a3936f1c70fd",
+          "opplysningTypeId": "0194881f-91d1-7df2-ba1d-4533f37fcc74",
+          "navn": "Ønsker dagpenger fra dato",
+          "verdien": {
+            "verdi": "2025-01-06",
+            "datatype": "dato"
+          },
+          "verdi": "2025-01-06",
+          "datatype": "dato",
+          "kilde": {
+            "type": "System",
+            "registrert": "2025-01-06T10:50:43.703809",
+            "meldingId": "3f74d906-3581-40db-a7ff-f796d4166e35"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "01943b06-1a68-7dad-88e1-19e31cde7119"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "01946e2f-6281-726d-bbdf-fe072d53bf08",
       "opplysningTypeId": "0194881f-940b-76ff-acf5-ba7bcb367233",
       "navn": "Fødselsdato",
-      "verdi": "1985-05-08",
-      "status": "Faktum",
       "datatype": "dato",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Bruker",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-16T09:16:26.700062",
-        "ident": null,
-        "meldingId": "f44534b2-efd7-42c4-bc39-893503e008fe"
-      },
-      "utledetAv": null
+      "opplysninger": [
+        {
+          "id": "01943b06-1d0f-7ddd-8b59-a3936f1c70fe",
+          "opplysningTypeId": "0194881f-940b-76ff-acf5-ba7bcb367233",
+          "navn": "Fødselsdato",
+          "verdien": {
+            "verdi": "1964-01-16",
+            "datatype": "dato"
+          },
+          "verdi": "1964-01-16",
+          "datatype": "dato",
+          "kilde": {
+            "type": "System",
+            "registrert": "2025-01-06T10:50:43.704078",
+            "meldingId": "3f74d906-3581-40db-a7ff-f796d4166e35"
+          }
+        }
+      ]
     },
     {
-      "id": "01946e2f-6281-726d-bbdf-fe072d53bf0e",
       "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d89",
       "navn": "Har rett til ordinære dagpenger uten arbeidsforhold",
-      "verdi": "true",
-      "status": "Faktum",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "IngenAv"
-        },
-        "opplysninger": [
-          "01946e2f-6281-726d-bbdf-fe072d53bf02",
-          "01946e2f-6281-726d-bbdf-fe072d53bf03",
-          "01946e2f-6281-726d-bbdf-fe072d53bf04",
-          "01946e2f-6281-726d-bbdf-fe072d53bf05"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-1d10-7c1a-94dd-f9a514b7e508",
+          "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d89",
+          "navn": "Har rett til ordinære dagpenger uten arbeidsforhold",
+          "verdien": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "verdi": "true",
+          "datatype": "boolsk",
+          "utledetAv": {
+            "regel": {
+              "navn": "IngenAv"
+            },
+            "opplysninger": [
+              "01943b06-1d0e-7dd7-bb7f-11973c9ddc33",
+              "01943b06-1d0e-7dd7-bb7f-11973c9ddc34",
+              "01943b06-1d0e-7dd7-bb7f-11973c9ddc35",
+              "01943b06-1d0e-7dd7-bb7f-11973c9ddc36"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "01946e2f-6281-726d-bbdf-fe072d53bf10",
       "opplysningTypeId": "0194881f-91d1-7df2-ba1d-4533f37fcc75",
       "navn": "Søknadstidspunkt",
-      "verdi": "2025-01-15",
-      "status": "Faktum",
       "datatype": "dato",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "SisteAv"
-        },
-        "opplysninger": [
-          "01946e2f-6281-726d-bbdf-fe072d53bf06",
-          "01946e2f-6281-726d-bbdf-fe072d53bf07"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-1d10-7c1a-94dd-f9a514b7e50a",
+          "opplysningTypeId": "0194881f-91d1-7df2-ba1d-4533f37fcc75",
+          "navn": "Søknadstidspunkt",
+          "verdien": {
+            "verdi": "2025-01-06",
+            "datatype": "dato"
+          },
+          "verdi": "2025-01-06",
+          "datatype": "dato",
+          "utledetAv": {
+            "regel": {
+              "navn": "SisteAv"
+            },
+            "opplysninger": [
+              "01943b06-1d0f-7ddd-8b59-a3936f1c70fc",
+              "01943b06-1d0f-7ddd-8b59-a3936f1c70fd"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "01946e2f-6281-726d-bbdf-fe072d53bf16",
       "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d8a",
-      "navn": "Har rett til ordinære dagpenger",
-      "verdi": "true",
-      "status": "Faktum",
+      "navn": "Ordinære dagpenger",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "EnAv"
-        },
-        "opplysninger": [
-          "01946e2f-6281-726d-bbdf-fe072d53bf02",
-          "01946e2f-6281-726d-bbdf-fe072d53bf0e"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-1d11-7b0a-b571-a13ce5393d32",
+          "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d8a",
+          "navn": "Ordinære dagpenger",
+          "verdien": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "verdi": "true",
+          "datatype": "boolsk",
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "01943b06-1d0e-7dd7-bb7f-11973c9ddc33",
+              "01943b06-1d10-7c1a-94dd-f9a514b7e508"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "01946e2f-6281-726d-bbdf-fe072d53bf18",
-      "opplysningTypeId": "b81a0b12-ec32-4135-b8e0-a7c60f84c759",
-      "navn": "Prøvingsdato",
-      "verdi": "2025-01-15",
-      "status": "Faktum",
-      "datatype": "dato",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "SisteAv"
-        },
-        "opplysninger": [
-          "01946e2f-6281-726d-bbdf-fe072d53bf10"
-        ]
-      }
-    },
-    {
-      "id": "01946e2f-6282-7e69-ad86-5fa12930c476",
-      "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d8b",
-      "navn": "Rettighetstype",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "EnAv"
-        },
-        "opplysninger": [
-          "01946e2f-6281-726d-bbdf-fe072d53bf03",
-          "01946e2f-6281-726d-bbdf-fe072d53bf04",
-          "01946e2f-6281-726d-bbdf-fe072d53bf05",
-          "01946e2f-6281-726d-bbdf-fe072d53bf16"
-        ]
-      }
-    },
-    {
-      "id": "01946e2f-7c6b-7b0a-b34b-7b5acaa00ca8",
-      "opplysningTypeId": "01948d3c-4bea-7802-9d18-5342a5e2be99",
-      "navn": "Avtjent verneplikt",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Bruker",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-16T09:16:33.358316",
-        "ident": null,
-        "meldingId": "2d7e164c-f238-4ad9-a5a9-fd83fe4fdec2"
-      },
-      "utledetAv": {
-        "regel": {
-          "navn": "innhentMed"
-        },
-        "opplysninger": [
-          "01946e2f-5a73-7f88-bc8a-8e0a5184a1ff"
-        ]
-      }
-    },
-    {
-      "id": "01946e2f-9174-7f60-8bfb-c08ab6f75e08",
-      "opplysningTypeId": "0194881f-9441-7d1b-a06a-6727543a141e",
-      "navn": "Kan jobbe heltid og deltid",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Bruker",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-16T09:16:38.729867",
-        "ident": null,
-        "meldingId": "ce574974-d83e-4264-ba3c-79e5dca6f6df"
-      },
-      "utledetAv": null
-    },
-    {
-      "id": "01946e2f-9174-7f60-8bfb-c08ab6f75e09",
-      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bd9",
-      "navn": "Kan jobbe i hele Norge",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Bruker",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-16T09:16:38.729982",
-        "ident": null,
-        "meldingId": "ce574974-d83e-4264-ba3c-79e5dca6f6df"
-      },
-      "utledetAv": null
-    },
-    {
-      "id": "01946e2f-9174-7f60-8bfb-c08ab6f75e0a",
-      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bdc",
-      "navn": "Kan ta alle typer arbeid",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Bruker",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-16T09:16:38.730073",
-        "ident": null,
-        "meldingId": "ce574974-d83e-4264-ba3c-79e5dca6f6df"
-      },
-      "utledetAv": null
-    },
-    {
-      "id": "01946e2f-9174-7f60-8bfb-c08ab6f75e0b",
-      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bde",
-      "navn": "Villig til å bytte yrke",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Bruker",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-16T09:16:38.730142",
-        "ident": null,
-        "meldingId": "ce574974-d83e-4264-ba3c-79e5dca6f6df"
-      },
-      "utledetAv": null
-    },
-    {
-      "id": "01946e2f-9174-7f60-8bfb-c08ab6f75e0c",
-      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a75f",
-      "navn": "Ønsket arbeidstid",
-      "verdi": "40.0",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": true,
-      "synlig": false,
-      "formål": "Bruker",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-16T09:16:38.730214",
-        "ident": null,
-        "meldingId": "ce574974-d83e-4264-ba3c-79e5dca6f6df"
-      },
-      "utledetAv": {
-        "regel": {
-          "navn": "innhentMed"
-        },
-        "opplysninger": [
-          "01946e2f-5a73-7f88-bc8a-8e0a5184a1ff"
-        ]
-      }
-    },
-    {
-      "id": "01946e2f-9174-7f60-8bfb-c08ab6f75e0d",
-      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b522",
-      "navn": "Tar utdanning eller opplæring?",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Bruker",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-16T09:16:38.730295",
-        "ident": null,
-        "meldingId": "ce574974-d83e-4264-ba3c-79e5dca6f6df"
-      },
-      "utledetAv": null
-    },
-    {
-      "id": "01946e2f-9174-7f60-8bfb-c08ab6f75e0e",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a23b",
-      "navn": "Barn",
-      "verdi": "Barn(fødselsdato=2013-09-28, fornavnOgMellomnavn=LEKKER, \netternavn=BILLETT, statsborgerskap=NOR, kvalifiserer=true), Barn(fødselsdato=2007-09-07, fornavnOgMellomnavn=SPRUDLENDE, \netternavn=MOTORDEL, statsborgerskap=NOR, kvalifiserer=true)",
-      "status": "Faktum",
-      "datatype": "barn",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Register",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-16T09:16:38.730385",
-        "ident": null,
-        "meldingId": "ce574974-d83e-4264-ba3c-79e5dca6f6df"
-      },
-      "utledetAv": {
-        "regel": {
-          "navn": "innhentMed"
-        },
-        "opplysninger": [
-          "01946e2f-5a73-7f88-bc8a-8e0a5184a1ff"
-        ]
-      }
-    },
-    {
-      "id": "01946e2f-917a-7ac5-95f7-f4dda19d3ad0",
-      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bdf",
-      "navn": "Oppfyller kravet til å ta ethvert arbeid",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "EnAv"
-        },
-        "opplysninger": [
-          "01946e2f-9174-7f60-8bfb-c08ab6f75e0b"
-        ]
-      }
-    },
-    {
-      "id": "01946e2f-917b-7e2b-97f5-64ea35baef84",
-      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b524",
-      "navn": "Har svart ja på spørsmål om utdanning eller opplæring",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "ErSann"
-        },
-        "opplysninger": [
-          "01946e2f-9174-7f60-8bfb-c08ab6f75e0d"
-        ]
-      }
-    },
-    {
-      "id": "01946e2f-917b-7e2b-97f5-64ea35baef86",
-      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b525",
-      "navn": "Har svart nei på spørsmål om utdanning eller opplæring",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "ErUsann"
-        },
-        "opplysninger": [
-          "01946e2f-9174-7f60-8bfb-c08ab6f75e0d"
-        ]
-      }
-    },
-    {
-      "id": "01946e2f-917b-7e2b-97f5-64ea35baef88",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a23c",
-      "navn": "Antall barn som gir rett til barnetillegg",
-      "verdi": "2",
-      "status": "Faktum",
-      "datatype": "heltall",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "AntallAv"
-        },
-        "opplysninger": [
-          "01946e2f-9174-7f60-8bfb-c08ab6f75e0e"
-        ]
-      }
-    },
-    {
-      "id": "01946e2f-abcb-72ed-86be-b581f46b6f9c",
-      "opplysningTypeId": "0194881f-942e-7cb0-aa59-05ea449d88e0",
-      "navn": "Oppgitt andre ytelser utenfor NAV i søknaden",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-16T09:16:45.473663",
-        "ident": null,
-        "meldingId": "45814d5d-1db9-4cc1-9ed7-d9e1cbae52ff"
-      },
-      "utledetAv": null
-    },
-    {
-      "id": "01946e2f-abcb-72ed-86be-b581f46b6f9d",
-      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a2a",
-      "navn": "Mottar andre økonomiske ytelser fra arbeidsgiver eller tidligere arbeidsgiver enn lønn",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-16T09:16:45.473762",
-        "ident": null,
-        "meldingId": "45814d5d-1db9-4cc1-9ed7-d9e1cbae52ff"
-      },
-      "utledetAv": null
-    },
-    {
-      "id": "01947441-6857-7ea6-a14b-ba949233186b",
-      "opplysningTypeId": "01948d43-e218-76f1-b29b-7e604241d98a",
-      "navn": "Har utført minst tre måneders militærtjeneste eller obligatorisk sivilforsvarstjeneste",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "Saksbehandler",
-        "registrert": "2025-01-17T13:33:51.041254",
-        "ident": "Z993298",
-        "meldingId": null
-      },
-      "utledetAv": null
-    },
-    {
-      "id": "01948d77-7a2f-79fc-bb68-98b4f019b9a4",
-      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a767",
-      "navn": "Beregnet vanlig arbeidstid per uke før tap",
-      "verdi": "33.45",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "Saksbehandler",
-        "registrert": "2025-01-22T11:03:24.861167",
-        "ident": "Z994854",
-        "meldingId": null
-      },
-      "utledetAv": null
-    },
-    {
-      "id": "01948d77-7aca-7844-b7b7-f72c16fa2f15",
-      "opplysningTypeId": "34860abb-6ca2-452e-9cff-893886798923",
-      "navn": "Fastsatt vanlig arbeidstid er minst minimum arbeidstid",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "StørreEnnEllerLik"
-        },
-        "opplysninger": []
-      }
-    },
-    {
-      "id": "01948d78-724f-7eb9-a437-beef0f71cf98",
-      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a76b",
-      "navn": "Ny arbeidstid per uke",
-      "verdi": "10.123456",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "Saksbehandler",
-        "registrert": "2025-01-22T11:04:28.394185",
-        "ident": "Z994854",
-        "meldingId": null
-      },
-      "utledetAv": null
-    },
-    {
-      "id": "019498c8-535f-7cc8-bf2b-c999ed2d94a8",
-      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45ce",
-      "navn": "Pleiepenger etter lovens kapittel 9",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "Saksbehandler",
-        "registrert": "2025-01-24T15:47:32.709871",
-        "ident": "Z994854",
-        "meldingId": null
-      },
-      "utledetAv": null
-    },
-    {
-      "id": "019498f2-ccfa-7f5d-9657-b7e8d8979ccf",
-      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45d5",
-      "navn": "Pleiepenger dagsats",
-      "verdi": "150",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "Saksbehandler",
-        "registrert": "2025-01-24T16:33:56.21171",
-        "ident": "Z994854",
-        "meldingId": null
-      },
-      "utledetAv": null
-    },
-    {
-      "id": "019498f6-0ff8-7db6-b738-b79b112faf81",
-      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45cd",
-      "navn": "Sykepenger etter lovens kapittel 8",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "Saksbehandler",
-        "registrert": "2025-01-24T16:37:30.189434",
-        "ident": "Z994854",
-        "meldingId": null
-      },
-      "utledetAv": null
-    },
-    {
-      "id": "019498f6-31ee-76fd-b828-c4d27dd44ddb",
-      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45d4",
-      "navn": "Sykepenger dagsats",
-      "verdi": "100",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "Saksbehandler",
-        "registrert": "2025-01-24T16:37:38.98775",
-        "ident": "Z994854",
-        "meldingId": null
-      },
-      "utledetAv": null
-    },
-    {
-      "id": "0194a772-ac74-78d2-93ee-83ddde7af10f",
       "opplysningTypeId": "0194881f-91d1-7df2-ba1d-4533f37fcc76",
       "navn": "Prøvingsdato",
-      "verdi": "2025-01-16",
-      "status": "Faktum",
       "datatype": "dato",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "Saksbehandler",
-        "registrert": "2025-01-27T12:08:17.680206",
-        "ident": "Z994854",
-        "meldingId": null
-      },
-      "utledetAv": null
+      "opplysninger": [
+        {
+          "id": "01943b06-1d11-7b0a-b571-a13ce5393d34",
+          "opplysningTypeId": "0194881f-91d1-7df2-ba1d-4533f37fcc76",
+          "navn": "Prøvingsdato",
+          "verdien": {
+            "verdi": "2025-01-06",
+            "datatype": "dato"
+          },
+          "verdi": "2025-01-06",
+          "datatype": "dato",
+          "utledetAv": {
+            "regel": {
+              "navn": "SisteAv"
+            },
+            "opplysninger": [
+              "01943b06-1d10-7c1a-94dd-f9a514b7e50a"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194a772-ac7d-7c06-b093-9910c74fb344",
+      "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d8b",
+      "navn": "Rettighetstype",
+      "datatype": "boolsk",
+      "opplysninger": [
+        {
+          "id": "01943b06-1d11-7b0a-b571-a13ce5393d3a",
+          "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d8b",
+          "navn": "Rettighetstype",
+          "verdien": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "verdi": "true",
+          "datatype": "boolsk",
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "01943b06-1d0e-7dd7-bb7f-11973c9ddc34",
+              "01943b06-1d0e-7dd7-bb7f-11973c9ddc35",
+              "01943b06-1d0e-7dd7-bb7f-11973c9ddc36",
+              "01943b06-1d11-7b0a-b571-a13ce5393d32"
+            ]
+          }
+        }
+      ]
+    },
+    {
       "opplysningTypeId": "0194881f-940b-76ff-acf5-ba7bcb367234",
       "navn": "Aldersgrense",
-      "verdi": "67",
-      "status": "Faktum",
       "datatype": "heltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-1d12-7eb3-ba0f-9209a921790a",
+          "opplysningTypeId": "0194881f-940b-76ff-acf5-ba7bcb367234",
+          "navn": "Aldersgrense",
+          "verdien": {
+            "verdi": 67,
+            "datatype": "heltall"
+          },
+          "verdi": "67",
+          "datatype": "heltall",
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "01943b06-1d11-7b0a-b571-a13ce5393d34"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194a772-ac7e-719f-98c7-679bcacaaca5",
-      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04243",
-      "navn": "Grunnbeløp",
-      "verdi": "124028",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac7f-7819-9658-3e946e038045",
-      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f0423f",
-      "navn": "Antall G for krav til 12 mnd arbeidsinntekt",
-      "verdi": "1.5",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac7f-7819-9658-3e946e038047",
-      "opplysningTypeId": "0194881f-9414-7823-8d29-0e25b7feb7ce",
-      "navn": "Lovpålagt rapporteringsfrist for A-ordningen",
-      "verdi": "2025-01-05",
-      "status": "Faktum",
-      "datatype": "dato",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac7f-7819-9658-3e946e03804b",
-      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04246",
-      "navn": "Maks lengde på opptjeningsperiode",
-      "verdi": "36",
-      "status": "Faktum",
-      "datatype": "heltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac7f-7819-9658-3e946e03804d",
-      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04240",
-      "navn": "Antall G for krav til 36 mnd arbeidsinntekt",
-      "verdi": "3.0",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac7f-7819-9658-3e946e03804f",
-      "opplysningTypeId": "0194881f-943f-78d9-b874-00a4944c54f1",
-      "navn": "Mottar ikke andre fulle ytelser",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac7f-7819-9658-3e946e038051",
-      "opplysningTypeId": "0194881f-9443-72b4-8b30-5f6cdb24d549",
-      "navn": "Opphold i Norge",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac7f-7819-9658-3e946e038053",
-      "opplysningTypeId": "0194881f-9443-72b4-8b30-5f6cdb24d54a",
-      "navn": "Oppfyller unntak for opphold i Norge",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac7f-7819-9658-3e946e038055",
-      "opplysningTypeId": "0194881f-9443-72b4-8b30-5f6cdb24d54c",
-      "navn": "Er personen medlem av folketrygden",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac7f-7819-9658-3e946e038057",
-      "opplysningTypeId": "0194881f-9441-7d1b-a06a-6727543a141f",
-      "navn": "Det er godkjent at bruker kun søker deltidsarbeid",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac80-7fa1-8d71-e81d5ab282c4",
-      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bda",
-      "navn": "Det er godkjent at bruker kun søk arbeid lokalt",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac80-7fa1-8d71-e81d5ab282c6",
-      "opplysningTypeId": "0194929e-2036-7ac1-ada3-5cbe05a83f08",
-      "navn": "Har helsemessige begrensninger og kan ikke ta alle typer arbeid",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac80-7fa1-8d71-e81d5ab282c8",
-      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a769",
-      "navn": "Minimum vanlig arbeidstid",
-      "verdi": "18.75",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": true,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac80-7fa1-8d71-e81d5ab282ca",
-      "opplysningTypeId": "0194881f-91df-746a-a8ac-4a6b2b30685d",
-      "navn": "Deltar medlemmet i streik eller er omfattet av lock-out?",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac80-7fa1-8d71-e81d5ab282cc",
-      "opplysningTypeId": "0194881f-91df-746a-a8ac-4a6b2b30685e",
-      "navn": "Ledig ved samme bedrift eller arbeidsplass, og blir påvirket av utfallet?",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac80-7fa1-8d71-e81d5ab282ce",
-      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a75d",
-      "navn": "Har tapt arbeid",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac80-7fa1-8d71-e81d5ab282d0",
-      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a75e",
-      "navn": "Krav på lønn fra tidligere arbeidsgiver",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac80-7fa1-8d71-e81d5ab282d2",
-      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a764",
-      "navn": "Beregningsregel: Arbeidstid siste 6 måneder",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac80-7fa1-8d71-e81d5ab282d4",
-      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a765",
-      "navn": "Beregningsregel: Arbeidstid siste 12 måneder",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac80-7fa1-8d71-e81d5ab282d6",
-      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a766",
-      "navn": "Beregningsregel: Arbeidstid siste 36 måneder",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac80-7fa1-8d71-e81d5ab282d8",
-      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a762",
-      "navn": "Krav til prosentvis tap av arbeidstid",
-      "verdi": "50.0",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac80-7fa1-8d71-e81d5ab282da",
-      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a768",
-      "navn": "Maksimal vanlig arbeidstid",
-      "verdi": "40.0",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac80-7fa1-8d71-e81d5ab282dc",
-      "opplysningTypeId": "0194881f-9434-79e8-a64d-1a23cc5d86ed",
-      "navn": "Antall timer arbeidstiden skal samordnes mot",
-      "verdi": "0.0",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac80-7fa1-8d71-e81d5ab282de",
-      "opplysningTypeId": "0194881f-9421-766c-9dc6-41fe6c9a1e02",
-      "navn": "Fastsatt vanlig arbeidstid for verneplikt",
-      "verdi": "37.5",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac80-7fa1-8d71-e81d5ab282e0",
-      "opplysningTypeId": "0194881f-9421-766c-9dc6-41fe6c9a1e04",
-      "navn": "Grunnlag for verneplikt hvis kravet ikke er oppfylt",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac80-7fa1-8d71-e81d5ab282e2",
-      "opplysningTypeId": "0194881f-940f-7af9-9387-052e028b29ee",
-      "navn": "Grunnbeløp for grunnlag",
-      "verdi": "124028",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac80-7fa1-8d71-e81d5ab282e4",
-      "opplysningTypeId": "0194881f-9421-766c-9dc6-41fe6c9a1dff",
-      "navn": "Antall G som gis som grunnlag ved verneplikt",
-      "verdi": "3.0",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac80-7fa1-8d71-e81d5ab282e6",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10ca7",
-      "navn": "Faktor for maksimalt mulig grunnlag",
-      "verdi": "6.0",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac80-7fa1-8d71-e81d5ab282e8",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10ca9",
-      "navn": "Antall år i 36 måneder",
-      "verdi": "3.0",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac81-7054-b6ac-d372dc9591ff",
-      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b527",
-      "navn": "Deltar i arbeidsmarkedstiltak",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac81-7054-b6ac-d372dc959201",
-      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b528",
-      "navn": "Deltar i opplæring for innvandrere",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac81-7054-b6ac-d372dc959203",
-      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b529",
-      "navn": "Deltar i grunnskoleopplæring, videregående opplæring og opplæring i grunnleggende ferdigheter",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac81-7054-b6ac-d372dc959205",
-      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b52a",
-      "navn": "Deltar i høyere yrkesfaglig utdanning",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac81-7054-b6ac-d372dc959207",
-      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b52b",
-      "navn": "Deltar i høyere utdanning",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac81-7054-b6ac-d372dc959209",
-      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b52c",
-      "navn": "Deltar på kurs mv",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac81-7054-b6ac-d372dc95920b",
-      "opplysningTypeId": "0194881f-9447-7e36-a569-3e9f42bff9f6",
-      "navn": "Bruker er utestengt fra dagpenger",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac81-7054-b6ac-d372dc95920d",
-      "opplysningTypeId": "0194881f-943f-78d9-b874-00a4944c54f0",
-      "navn": "Antall dagsats for egenandel",
-      "verdi": "3.0",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac81-7054-b6ac-d372dc95920f",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a247",
-      "navn": "Antall arbeidsdager per år",
-      "verdi": "260",
-      "status": "Faktum",
-      "datatype": "heltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac81-7054-b6ac-d372dc959211",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a246",
-      "navn": "90% av grunnlag for dagpenger",
-      "verdi": "0.9",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac81-7054-b6ac-d372dc959213",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a23d",
-      "navn": "Barnetilleggets størrelse i kroner per dag for hvert barn",
-      "verdi": "37",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac81-7054-b6ac-d372dc959215",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a249",
-      "navn": "Antall arbeidsdager per uke",
-      "verdi": "5",
-      "status": "Faktum",
-      "datatype": "heltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac82-7437-9616-36ad195958b8",
-      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a2b",
-      "navn": "Hvor mange prosent av G skal brukes som terskel ved samordning",
-      "verdi": "0.03",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac82-7437-9616-36ad195958ba",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a23e",
-      "navn": "Faktor for utregning av dagsats etter dagpengegrunnlaget",
-      "verdi": "0.0024",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac82-7437-9616-36ad195958bc",
-      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45d6",
-      "navn": "Omsorgspenger dagsats",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": true,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac82-7437-9616-36ad195958be",
-      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45d7",
-      "navn": "Opplæringspenger dagsats",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": true,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac82-7437-9616-36ad195958c0",
-      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45d8",
-      "navn": "Uføre dagsats",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": true,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac82-7437-9616-36ad195958c2",
-      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45d9",
-      "navn": "Foreldrepenger dagsats",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": true,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac82-7437-9616-36ad195958c4",
-      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45da",
-      "navn": "Svangerskapspenger dagsats",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": true,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac82-7437-9616-36ad195958c6",
-      "opplysningTypeId": "0194881f-942e-7cb0-aa59-05ea449d88e7",
-      "navn": "Pensjon fra en offentlig tjenestepensjonsordning beløp",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac82-7437-9616-36ad195958c8",
-      "opplysningTypeId": "0194881f-942e-7cb0-aa59-05ea449d88e8",
-      "navn": "Uførepensjon fra offentlig pensjonsordning beløp",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac82-7437-9616-36ad195958ca",
-      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a26",
-      "navn": "Vartpenger beløp",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac82-7437-9616-36ad195958cc",
-      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a27",
-      "navn": "Ventelønn beløp",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac82-7437-9616-36ad195958ce",
-      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a28",
-      "navn": "Etterlønn beløp",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac82-7437-9616-36ad195958d0",
-      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a29",
-      "navn": "Garantilott fra Garantikassen for fiskere beløp",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac82-7437-9616-36ad195958d2",
-      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15458",
-      "navn": "Stønadsuker når kravet til minste arbeidsinntekt ikke er oppfylt",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "heltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac82-7437-9616-36ad195958d4",
-      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f1544b",
-      "navn": "Lang dagpengeperiode",
-      "verdi": "104",
-      "status": "Faktum",
-      "datatype": "heltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac83-7477-918f-5d4ca35dfc0a",
-      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f1544a",
-      "navn": "Kort dagpengeperiode",
-      "verdi": "52",
-      "status": "Faktum",
-      "datatype": "heltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac83-7477-918f-5d4ca35dfc0c",
-      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f1544f",
-      "navn": "Terskelfaktor for 12 måneder",
-      "verdi": "2.0",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac83-7477-918f-5d4ca35dfc0e",
-      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15450",
-      "navn": "Terskelfaktor for 36 måneder",
-      "verdi": "2.0",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac83-7477-918f-5d4ca35dfc10",
-      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f1544e",
-      "navn": "Divisior",
-      "verdi": "3.0",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac83-7477-918f-5d4ca35dfc12",
-      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15449",
-      "navn": "Antall dager som skal regnes med i hver uke",
-      "verdi": "5",
-      "status": "Faktum",
-      "datatype": "heltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac83-7477-918f-5d4ca35dfc14",
-      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45d1",
-      "navn": "Uføretrygd etter lovens kapittel 12",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac83-7477-918f-5d4ca35dfc16",
-      "opplysningTypeId": "0194881f-942e-7cb0-aa59-05ea449d88e1",
-      "navn": "Mottar pensjon fra en offentlig tjenestepensjonsordning",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac83-7477-918f-5d4ca35dfc18",
-      "opplysningTypeId": "0194881f-942e-7cb0-aa59-05ea449d88e2",
-      "navn": "Mottar redusert uførepensjon fra offentlig pensjonsordning",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac83-7477-918f-5d4ca35dfc1a",
-      "opplysningTypeId": "0194881f-942e-7cb0-aa59-05ea449d88e3",
-      "navn": "Mottar vartpenger",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac83-7477-918f-5d4ca35dfc1c",
-      "opplysningTypeId": "0194881f-942e-7cb0-aa59-05ea449d88e4",
-      "navn": "Mottar ventelønn",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac83-7477-918f-5d4ca35dfc1e",
-      "opplysningTypeId": "0194881f-942e-7cb0-aa59-05ea449d88e5",
-      "navn": "Mottar etterlønn",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac83-7477-918f-5d4ca35dfc20",
-      "opplysningTypeId": "0194881f-942e-7cb0-aa59-05ea449d88e6",
-      "navn": "Mottar garantilott fra Garantikassen for fiskere.",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac83-7477-918f-5d4ca35dfc22",
-      "opplysningTypeId": "0194881f-9421-766c-9dc6-41fe6c9a1e01",
-      "navn": "Periode som gis ved verneplikt",
-      "verdi": "26",
-      "status": "Faktum",
-      "datatype": "heltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppslag"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac86-7ba0-8c6e-040f234f5c01",
       "opplysningTypeId": "0194881f-940b-76ff-acf5-ba7bcb367235",
       "navn": "Dato søker når maks alder",
-      "verdi": "2052-05-08",
-      "status": "Faktum",
       "datatype": "dato",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "LeggTilÅr"
-        },
-        "opplysninger": [
-          "01946e2f-6281-726d-bbdf-fe072d53bf08",
-          "0194a772-ac7d-7c06-b093-9910c74fb344"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-1d12-7eb3-ba0f-9209a9217910",
+          "opplysningTypeId": "0194881f-940b-76ff-acf5-ba7bcb367235",
+          "navn": "Dato søker når maks alder",
+          "verdien": {
+            "verdi": "2031-01-16",
+            "datatype": "dato"
+          },
+          "verdi": "2031-01-16",
+          "datatype": "dato",
+          "utledetAv": {
+            "regel": {
+              "navn": "LeggTilÅr"
+            },
+            "opplysninger": [
+              "01943b06-1d0f-7ddd-8b59-a3936f1c70fe",
+              "01943b06-1d12-7eb3-ba0f-9209a921790a"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194a772-ac86-7ba0-8c6e-040f234f5c03",
-      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04248",
-      "navn": "Inntektskrav for siste 12 mnd",
-      "verdi": "186042",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Multiplikasjon"
-        },
-        "opplysninger": [
-          "0194a772-ac7e-719f-98c7-679bcacaaca5",
-          "0194a772-ac7f-7819-9658-3e946e038045"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac87-7d12-a86c-e949c9924618",
-      "opplysningTypeId": "0194881f-9414-7823-8d29-0e25b7feb7cf",
-      "navn": "Arbeidsgivers rapporteringsfrist",
-      "verdi": "2025-01-06",
-      "status": "Faktum",
-      "datatype": "dato",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "FørsteArbeidsdag"
-        },
-        "opplysninger": [
-          "0194a772-ac7f-7819-9658-3e946e038047"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac87-7d12-a86c-e949c992461c",
-      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04249",
-      "navn": "Inntektskrav for siste 36 mnd",
-      "verdi": "372084",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Multiplikasjon"
-        },
-        "opplysninger": [
-          "0194a772-ac7e-719f-98c7-679bcacaaca5",
-          "0194a772-ac7f-7819-9658-3e946e03804d"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac87-7d12-a86c-e949c992461e",
-      "opplysningTypeId": "0194881f-9443-72b4-8b30-5f6cdb24d54b",
-      "navn": "Oppfyller kravet til opphold i Norge eller unntak",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "EnAv"
-        },
-        "opplysninger": [
-          "0194a772-ac7f-7819-9658-3e946e038051",
-          "0194a772-ac7f-7819-9658-3e946e038053"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac87-7d12-a86c-e949c9924620",
-      "opplysningTypeId": "0194881f-9443-72b4-8b30-5f6cdb24d54d",
-      "navn": "Oppfyller kravet til medlemskap",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "ErSann"
-        },
-        "opplysninger": [
-          "0194a772-ac7f-7819-9658-3e946e038055"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac87-7d12-a86c-e949c9924622",
-      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bd8",
-      "navn": "Oppfyller kravet til heltid- og deltidsarbeid",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "EnAv"
-        },
-        "opplysninger": [
-          "01946e2f-9174-7f60-8bfb-c08ab6f75e08",
-          "0194a772-ac7f-7819-9658-3e946e038057"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac87-7d12-a86c-e949c9924624",
-      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bdb",
-      "navn": "Oppfyller kravet til mobilitet",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "EnAv"
-        },
-        "opplysninger": [
-          "01946e2f-9174-7f60-8bfb-c08ab6f75e09",
-          "0194a772-ac80-7fa1-8d71-e81d5ab282c4"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac87-7d12-a86c-e949c9924626",
-      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bdd",
-      "navn": "Oppfyller kravet til å være arbeidsfør",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "EnAv"
-        },
-        "opplysninger": [
-          "01946e2f-9174-7f60-8bfb-c08ab6f75e0a",
-          "0194a772-ac80-7fa1-8d71-e81d5ab282c6"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac87-7d12-a86c-e949c9924628",
-      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a76d",
-      "navn": "Villig til å jobbe minimum arbeidstid",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "StørreEnnEllerLik"
-        },
-        "opplysninger": [
-          "01946e2f-9174-7f60-8bfb-c08ab6f75e0c",
-          "0194a772-ac80-7fa1-8d71-e81d5ab282c8"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac87-7d12-a86c-e949c992462a",
-      "opplysningTypeId": "0194881f-91df-746a-a8ac-4a6b2b30685f",
-      "navn": "Er medlemmet ikke påvirket av streik eller lock-out?",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "IngenAv"
-        },
-        "opplysninger": [
-          "0194a772-ac80-7fa1-8d71-e81d5ab282ca",
-          "0194a772-ac80-7fa1-8d71-e81d5ab282cc"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac87-7d12-a86c-e949c992462c",
-      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a760",
-      "navn": "Ikke krav på lønn fra tidligere arbeidsgiver",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "IngenAv"
-        },
-        "opplysninger": [
-          "0194a772-ac80-7fa1-8d71-e81d5ab282d0"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac88-7498-8d35-2b369c4554c6",
-      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a761",
-      "navn": "Krav til tap av arbeidsinntekt",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Alle"
-        },
-        "opplysninger": [
-          "0194a772-ac80-7fa1-8d71-e81d5ab282ce",
-          "0194a772-ac87-7d12-a86c-e949c992462c"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac88-7498-8d35-2b369c4554c8",
-      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a763",
-      "navn": "Beregningsregel: Tapt arbeidstid",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "EnAv"
-        },
-        "opplysninger": [
-          "0194a772-ac80-7fa1-8d71-e81d5ab282d2",
-          "0194a772-ac80-7fa1-8d71-e81d5ab282d4",
-          "0194a772-ac80-7fa1-8d71-e81d5ab282d6"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac88-7498-8d35-2b369c4554ca",
-      "opplysningTypeId": "0194881f-9434-79e8-a64d-1a23cc5d86ee",
-      "navn": "Samordnet fastsatt arbeidstid",
-      "verdi": "33.45",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Substraksjon"
-        },
-        "opplysninger": [
-          "01948d77-7a2f-79fc-bb68-98b4f019b9a4",
-          "0194a772-ac80-7fa1-8d71-e81d5ab282dc"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac88-7498-8d35-2b369c4554cc",
-      "opplysningTypeId": "0194881f-9421-766c-9dc6-41fe6c9a1e00",
-      "navn": "Grunnlag for gis ved verneplikt",
-      "verdi": "372084",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Multiplikasjon"
-        },
-        "opplysninger": [
-          "0194a772-ac80-7fa1-8d71-e81d5ab282e2",
-          "0194a772-ac80-7fa1-8d71-e81d5ab282e4"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac88-7498-8d35-2b369c4554ce",
-      "opplysningTypeId": "0194881f-9421-766c-9dc6-41fe6c9a1e03",
-      "navn": "Grunnlag for verneplikt hvis kravet er oppfylt",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "HvisSannMedResultat"
-        },
-        "opplysninger": [
-          "01947441-6857-7ea6-a14b-ba949233186b",
-          "0194a772-ac80-7fa1-8d71-e81d5ab282e0",
-          "0194a772-ac88-7498-8d35-2b369c4554cc"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac88-7498-8d35-2b369c4554d0",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10ca8",
-      "navn": "6 ganger grunnbeløp",
-      "verdi": "744168",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Multiplikasjon"
-        },
-        "opplysninger": [
-          "0194a772-ac80-7fa1-8d71-e81d5ab282e2",
-          "0194a772-ac80-7fa1-8d71-e81d5ab282e6"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac89-7d3f-9e44-131154d4f197",
-      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b523",
-      "navn": "Godkjent unntak for utdanning eller opplæring?",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "EnAv"
-        },
-        "opplysninger": [
-          "0194a772-ac81-7054-b6ac-d372dc9591ff",
-          "0194a772-ac81-7054-b6ac-d372dc959201",
-          "0194a772-ac81-7054-b6ac-d372dc959203",
-          "0194a772-ac81-7054-b6ac-d372dc959205",
-          "0194a772-ac81-7054-b6ac-d372dc959207",
-          "0194a772-ac81-7054-b6ac-d372dc959209"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac89-7d3f-9e44-131154d4f199",
-      "opplysningTypeId": "0194881f-9447-7e36-a569-3e9f42bff9f7",
-      "navn": "Oppfyller krav til ikke utestengt",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "IngenAv"
-        },
-        "opplysninger": [
-          "0194a772-ac81-7054-b6ac-d372dc95920b"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac89-7d3f-9e44-131154d4f19f",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a244",
-      "navn": "Sum av barnetillegg",
-      "verdi": "74",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Multiplikasjon"
-        },
-        "opplysninger": [
-          "01946e2f-917b-7e2b-97f5-64ea35baef88",
-          "0194a772-ac81-7054-b6ac-d372dc959213"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac89-7d3f-9e44-131154d4f1a1",
-      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a2c",
-      "navn": "Beløp tilsvarende nedre terskel av G",
-      "verdi": "3720.84",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Multiplikasjon"
-        },
-        "opplysninger": [
-          "0194a772-ac80-7fa1-8d71-e81d5ab282e2",
-          "0194a772-ac82-7437-9616-36ad195958b8"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac89-7d3f-9e44-131154d4f1a5",
-      "opplysningTypeId": "0194881f-9434-79e8-a64d-1a23cc5d86e9",
-      "navn": "Sum andre ytelser",
-      "verdi": "250",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Addisjon"
-        },
-        "opplysninger": [
-          "019498f2-ccfa-7f5d-9657-b7e8d8979ccf",
-          "019498f6-31ee-76fd-b828-c4d27dd44ddb",
-          "0194a772-ac82-7437-9616-36ad195958bc",
-          "0194a772-ac82-7437-9616-36ad195958be",
-          "0194a772-ac82-7437-9616-36ad195958c0",
-          "0194a772-ac82-7437-9616-36ad195958c2",
-          "0194a772-ac82-7437-9616-36ad195958c4"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac89-7d3f-9e44-131154d4f1a9",
-      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a2e",
-      "navn": "Sum av ytelser utenfor folketrygden",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "SumAv"
-        },
-        "opplysninger": [
-          "0194a772-ac82-7437-9616-36ad195958c6",
-          "0194a772-ac82-7437-9616-36ad195958c8",
-          "0194a772-ac82-7437-9616-36ad195958ca",
-          "0194a772-ac82-7437-9616-36ad195958cc",
-          "0194a772-ac82-7437-9616-36ad195958ce",
-          "0194a772-ac82-7437-9616-36ad195958d0"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac8a-7d9b-8d36-6b636d29bffa",
-      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f1544c",
-      "navn": "Terskel for 12 måneder",
-      "verdi": "248056",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Multiplikasjon"
-        },
-        "opplysninger": [
-          "0194a772-ac7e-719f-98c7-679bcacaaca5",
-          "0194a772-ac83-7477-918f-5d4ca35dfc0c"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac8a-7d9b-8d36-6b636d29bffe",
-      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f1544d",
-      "navn": "Terskel for 36 måneder",
-      "verdi": "248056",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Multiplikasjon"
-        },
-        "opplysninger": [
-          "0194a772-ac7e-719f-98c7-679bcacaaca5",
-          "0194a772-ac83-7477-918f-5d4ca35dfc0e"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac8a-7d9b-8d36-6b636d29c00a",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a24c",
-      "navn": "Har barnetillegg",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "StørreEnnEllerLik"
-        },
-        "opplysninger": [
-          "0194a772-ac81-7054-b6ac-d372dc959213",
-          "0194a772-ac89-7d3f-9e44-131154d4f19f"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac8a-7d9b-8d36-6b636d29c00c",
-      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a2d",
-      "navn": "Skal samordnes med ytelser utenfor folketrygden",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "EnAv"
-        },
-        "opplysninger": [
-          "01946e2f-abcb-72ed-86be-b581f46b6f9c",
-          "01946e2f-abcb-72ed-86be-b581f46b6f9d",
-          "0194a772-ac83-7477-918f-5d4ca35dfc16",
-          "0194a772-ac83-7477-918f-5d4ca35dfc18",
-          "0194a772-ac83-7477-918f-5d4ca35dfc1a",
-          "0194a772-ac83-7477-918f-5d4ca35dfc1c",
-          "0194a772-ac83-7477-918f-5d4ca35dfc1e",
-          "0194a772-ac83-7477-918f-5d4ca35dfc20"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac8d-7bd9-bd41-0e070242ec1d",
       "opplysningTypeId": "0194881f-940b-76ff-acf5-ba7bcb367236",
       "navn": "Siste mulige dag bruker kan oppfylle alderskrav",
-      "verdi": "2052-05-31",
-      "status": "Faktum",
       "datatype": "dato",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "SisteDagIMåned"
-        },
-        "opplysninger": [
-          "0194a772-ac86-7ba0-8c6e-040f234f5c01"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-1d12-7eb3-ba0f-9209a9217916",
+          "opplysningTypeId": "0194881f-940b-76ff-acf5-ba7bcb367236",
+          "navn": "Siste mulige dag bruker kan oppfylle alderskrav",
+          "verdien": {
+            "verdi": "2031-01-31",
+            "datatype": "dato"
+          },
+          "verdi": "2031-01-31",
+          "datatype": "dato",
+          "utledetAv": {
+            "regel": {
+              "navn": "SisteDagIMåned"
+            },
+            "opplysninger": [
+              "01943b06-1d12-7eb3-ba0f-9209a9217910"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194a772-ac8d-7bd9-bd41-0e070242ec1f",
-      "opplysningTypeId": "0194881f-9414-7823-8d29-0e25b7feb7d0",
-      "navn": "Siste avsluttende kalendermåned",
-      "verdi": "2024-12-31",
-      "status": "Faktum",
-      "datatype": "dato",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "SisteavsluttendeKalenderMåned"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f",
-          "0194a772-ac87-7d12-a86c-e949c9924618"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac8d-7bd9-bd41-0e070242ec25",
-      "opplysningTypeId": "0194881f-9443-72b4-8b30-5f6cdb24d54e",
-      "navn": "Oppfyller kravet til opphold i Norge",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Alle"
-        },
-        "opplysninger": [
-          "0194a772-ac87-7d12-a86c-e949c992461e",
-          "0194a772-ac87-7d12-a86c-e949c9924620"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac8e-7fd6-a831-751ed7ba6728",
-      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b526",
-      "navn": "Oppfyller kravet på unntak for utdanning eller opplæring",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Alle"
-        },
-        "opplysninger": [
-          "01946e2f-917b-7e2b-97f5-64ea35baef84",
-          "0194a772-ac89-7d3f-9e44-131154d4f197"
-        ]
-      }
-    },
-    {
-      "id": "0194a772-ac95-7913-a299-28a6e87b31e7",
       "opplysningTypeId": "0194881f-940b-76ff-acf5-ba7bcb367237",
       "navn": "Oppfyller kravet til alder",
-      "verdi": "true",
-      "status": "Faktum",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "FørEllerLik"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f",
-          "0194a772-ac8d-7bd9-bd41-0e070242ec1d"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-1d13-76d3-b413-8b5d8e3250c7",
+          "opplysningTypeId": "0194881f-940b-76ff-acf5-ba7bcb367237",
+          "navn": "Oppfyller kravet til alder",
+          "verdien": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "verdi": "true",
+          "datatype": "boolsk",
+          "utledetAv": {
+            "regel": {
+              "navn": "FørEllerLik"
+            },
+            "opplysninger": [
+              "01943b06-1d11-7b0a-b571-a13ce5393d34",
+              "01943b06-1d12-7eb3-ba0f-9209a9217916"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194a772-ac95-7913-a299-28a6e87b31e9",
+      "opplysningTypeId": "0194881f-9414-7823-8d29-0e25b7feb7ce",
+      "navn": "Lovpålagt rapporteringsfrist for A-ordningen",
+      "datatype": "dato",
+      "opplysninger": [
+        {
+          "id": "01943b06-1d15-7920-b6d7-c4378834d2e0",
+          "opplysningTypeId": "0194881f-9414-7823-8d29-0e25b7feb7ce",
+          "navn": "Lovpålagt rapporteringsfrist for A-ordningen",
+          "verdien": {
+            "verdi": "2025-01-05",
+            "datatype": "dato"
+          },
+          "verdi": "2025-01-05",
+          "datatype": "dato",
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "01943b06-1d11-7b0a-b571-a13ce5393d34"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04246",
+      "navn": "Maks lengde på opptjeningsperiode",
+      "datatype": "heltall",
+      "opplysninger": [
+        {
+          "id": "01943b06-1d15-7920-b6d7-c4378834d2e2",
+          "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04246",
+          "navn": "Maks lengde på opptjeningsperiode",
+          "verdien": {
+            "verdi": 36,
+            "datatype": "heltall"
+          },
+          "verdi": "36",
+          "datatype": "heltall",
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "01943b06-1d11-7b0a-b571-a13ce5393d34"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04243",
+      "navn": "Grunnbeløp",
+      "datatype": "penger",
+      "opplysninger": [
+        {
+          "id": "01943b06-1d78-7e1c-8a81-7677c5b9bf1e",
+          "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04243",
+          "navn": "Grunnbeløp",
+          "verdien": {
+            "verdi": 124028,
+            "datatype": "penger"
+          },
+          "verdi": "124028",
+          "datatype": "penger",
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "01943b06-1d11-7b0a-b571-a13ce5393d34"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f0423f",
+      "navn": "Antall G for krav til 12 mnd arbeidsinntekt",
+      "datatype": "desimaltall",
+      "opplysninger": [
+        {
+          "id": "01943b06-1d79-7178-877a-72897b881b93",
+          "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f0423f",
+          "navn": "Antall G for krav til 12 mnd arbeidsinntekt",
+          "verdien": {
+            "verdi": 1.5,
+            "datatype": "desimaltall"
+          },
+          "verdi": "1.5",
+          "datatype": "desimaltall",
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "01943b06-1d11-7b0a-b571-a13ce5393d34"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04240",
+      "navn": "Antall G for krav til 36 mnd arbeidsinntekt",
+      "datatype": "desimaltall",
+      "opplysninger": [
+        {
+          "id": "01943b06-1d79-7178-877a-72897b881b95",
+          "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04240",
+          "navn": "Antall G for krav til 36 mnd arbeidsinntekt",
+          "verdien": {
+            "verdi": 3.0,
+            "datatype": "desimaltall"
+          },
+          "verdi": "3.0",
+          "datatype": "desimaltall",
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "01943b06-1d11-7b0a-b571-a13ce5393d34"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9414-7823-8d29-0e25b7feb7cf",
+      "navn": "Arbeidsgivers rapporteringsfrist",
+      "datatype": "dato",
+      "opplysninger": [
+        {
+          "id": "01943b06-1d7c-742a-95f4-62b47b0e0420",
+          "opplysningTypeId": "0194881f-9414-7823-8d29-0e25b7feb7cf",
+          "navn": "Arbeidsgivers rapporteringsfrist",
+          "verdien": {
+            "verdi": "2025-01-06",
+            "datatype": "dato"
+          },
+          "verdi": "2025-01-06",
+          "datatype": "dato",
+          "utledetAv": {
+            "regel": {
+              "navn": "FørsteArbeidsdag"
+            },
+            "opplysninger": [
+              "01943b06-1d15-7920-b6d7-c4378834d2e0"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04248",
+      "navn": "Inntektskrav for siste 12 måneder",
+      "datatype": "penger",
+      "opplysninger": [
+        {
+          "id": "01943b06-1d7c-742a-95f4-62b47b0e0422",
+          "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04248",
+          "navn": "Inntektskrav for siste 12 måneder",
+          "verdien": {
+            "verdi": 186042,
+            "datatype": "penger"
+          },
+          "verdi": "186042",
+          "datatype": "penger",
+          "utledetAv": {
+            "regel": {
+              "navn": "Multiplikasjon"
+            },
+            "opplysninger": [
+              "01943b06-1d78-7e1c-8a81-7677c5b9bf1e",
+              "01943b06-1d79-7178-877a-72897b881b93"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04249",
+      "navn": "Inntektskrav for siste 36 måneder",
+      "datatype": "penger",
+      "opplysninger": [
+        {
+          "id": "01943b06-1d7c-742a-95f4-62b47b0e0424",
+          "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04249",
+          "navn": "Inntektskrav for siste 36 måneder",
+          "verdien": {
+            "verdi": 372084,
+            "datatype": "penger"
+          },
+          "verdi": "372084",
+          "datatype": "penger",
+          "utledetAv": {
+            "regel": {
+              "navn": "Multiplikasjon"
+            },
+            "opplysninger": [
+              "01943b06-1d78-7e1c-8a81-7677c5b9bf1e",
+              "01943b06-1d79-7178-877a-72897b881b95"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9414-7823-8d29-0e25b7feb7d0",
+      "navn": "Siste avsluttende kalendermåned",
+      "datatype": "dato",
+      "opplysninger": [
+        {
+          "id": "01943b06-1d7d-7eee-b2aa-190ffbccdab6",
+          "opplysningTypeId": "0194881f-9414-7823-8d29-0e25b7feb7d0",
+          "navn": "Siste avsluttende kalendermåned",
+          "verdien": {
+            "verdi": "2024-11-30",
+            "datatype": "dato"
+          },
+          "verdi": "2024-11-30",
+          "datatype": "dato",
+          "utledetAv": {
+            "regel": {
+              "navn": "SisteavsluttendeKalenderMåned"
+            },
+            "opplysninger": [
+              "01943b06-1d11-7b0a-b571-a13ce5393d34",
+              "01943b06-1d7c-742a-95f4-62b47b0e0420"
+            ]
+          }
+        }
+      ]
+    },
+    {
       "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04247",
       "navn": "Første måned av opptjeningsperiode",
-      "verdi": "2022-01-01",
-      "status": "Faktum",
       "datatype": "dato",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "TrekkFraMåned"
-        },
-        "opplysninger": [
-          "0194a772-ac7f-7819-9658-3e946e03804b",
-          "0194a772-ac8d-7bd9-bd41-0e070242ec1f"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-1d7e-74c2-937a-54f45b80d94f",
+          "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04247",
+          "navn": "Første måned av opptjeningsperiode",
+          "verdien": {
+            "verdi": "2021-12-01",
+            "datatype": "dato"
+          },
+          "verdi": "2021-12-01",
+          "datatype": "dato",
+          "utledetAv": {
+            "regel": {
+              "navn": "TrekkFraMåned"
+            },
+            "opplysninger": [
+              "01943b06-1d15-7920-b6d7-c4378834d2e2",
+              "01943b06-1d7d-7eee-b2aa-190ffbccdab6"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194a772-ac95-7913-a299-28a6e87b31f3",
-      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b52d",
-      "navn": "Krav til utdanning eller opplæring",
-      "verdi": "true",
-      "status": "Faktum",
+      "opplysningTypeId": "01948d3c-4bea-7802-9d18-5342a5e2be99",
+      "navn": "Avtjent verneplikt",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "EnAv"
-        },
-        "opplysninger": [
-          "01946e2f-917b-7e2b-97f5-64ea35baef86",
-          "0194a772-ac8e-7fd6-a831-751ed7ba6728"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-265d-74fe-9b37-546b68ee3b11",
+          "opplysningTypeId": "01948d3c-4bea-7802-9d18-5342a5e2be99",
+          "navn": "Avtjent verneplikt",
+          "verdien": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "verdi": "false",
+          "datatype": "boolsk",
+          "kilde": {
+            "type": "System",
+            "registrert": "2025-01-06T10:50:46.191094",
+            "meldingId": "dcaef655-401a-4d98-9d54-d439a34d67d3"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "01943b06-1a68-7dad-88e1-19e31cde7119"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-639e-7bb0-83e9-a3d057bb8419",
-      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45d2",
-      "navn": "Foreldrepenger etter lovens kapittel 14",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-29T10:13:36.321047",
-        "ident": null,
-        "meldingId": "b3269d26-6601-4105-88a9-83fe8455fb3e"
-      },
-      "utledetAv": {
-        "regel": {
-          "navn": "innhentMed"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-639e-7bb0-83e9-a3d057bb841a",
-      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45cf",
-      "navn": "Omsorgspenger etter lovens kapittel 9",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-29T10:13:36.322663",
-        "ident": null,
-        "meldingId": "b3269d26-6601-4105-88a9-83fe8455fb3e"
-      },
-      "utledetAv": {
-        "regel": {
-          "navn": "innhentMed"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-639e-7bb0-83e9-a3d057bb841b",
-      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45d3",
-      "navn": "Svangerskapspenger etter lovens kapittel 14",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-29T10:13:36.322878",
-        "ident": null,
-        "meldingId": "b3269d26-6601-4105-88a9-83fe8455fb3e"
-      },
-      "utledetAv": {
-        "regel": {
-          "navn": "innhentMed"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-639f-7b89-9d17-585ea92374d0",
-      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45d0",
-      "navn": "Opplæringspenger etter lovens kapittel 9",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": true,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-29T10:13:36.323066",
-        "ident": null,
-        "meldingId": "b3269d26-6601-4105-88a9-83fe8455fb3e"
-      },
-      "utledetAv": {
-        "regel": {
-          "navn": "innhentMed"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-639f-7b89-9d17-585ea92374d1",
       "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877be0",
       "navn": "Registrert som arbeidssøker",
-      "verdi": "true",
-      "status": "Faktum",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": "2025-01-15",
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-29T10:13:36.323326",
-        "ident": null,
-        "meldingId": "b3269d26-6601-4105-88a9-83fe8455fb3e"
-      },
-      "utledetAv": {
-        "regel": {
-          "navn": "innhentMed"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-265d-74fe-9b37-546b68ee3b12",
+          "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877be0",
+          "navn": "Registrert som arbeidssøker",
+          "verdien": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "verdi": "true",
+          "gyldigFraOgMed": "2025-01-06",
+          "datatype": "boolsk",
+          "kilde": {
+            "type": "System",
+            "registrert": "2025-01-06T10:50:46.191364",
+            "meldingId": "dcaef655-401a-4d98-9d54-d439a34d67d3"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "01943b06-1d11-7b0a-b571-a13ce5393d34"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-639f-7b89-9d17-585ea92374d2",
       "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04244",
       "navn": "Inntektsopplysninger",
-      "verdi": "01JHQ2Z5GW1MJEDBBDJ99SJ4KB",
-      "status": "Faktum",
       "datatype": "inntekt",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Register",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": {
-        "type": "System",
-        "registrert": "2025-01-29T10:13:36.323573",
-        "ident": null,
-        "meldingId": "b3269d26-6601-4105-88a9-83fe8455fb3e"
-      },
-      "utledetAv": {
-        "regel": {
-          "navn": "innhentMed"
-        },
-        "opplysninger": [
-          "0194a772-ac74-78d2-93ee-83ddde7af10f",
-          "0194a772-ac8d-7bd9-bd41-0e070242ec1f",
-          "0194a772-ac95-7913-a299-28a6e87b31e9"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-265d-74fe-9b37-546b68ee3b13",
+          "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04244",
+          "navn": "Inntektsopplysninger",
+          "verdien": {
+            "verdi": "01JGXGC9BV8DVFDR77NC42WD0Y",
+            "datatype": "tekst"
+          },
+          "verdi": "01JGXGC9BV8DVFDR77NC42WD0Y",
+          "datatype": "inntekt",
+          "kilde": {
+            "type": "System",
+            "registrert": "2025-01-06T10:50:46.191554",
+            "meldingId": "dcaef655-401a-4d98-9d54-d439a34d67d3"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "01943b06-1d11-7b0a-b571-a13ce5393d34",
+              "01943b06-1d7d-7eee-b2aa-190ffbccdab6",
+              "01943b06-1d7e-74c2-937a-54f45b80d94f"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-63b3-7e7c-9895-d98400f6a82b",
       "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877be1",
-      "navn": "Registrert som arbeidssøker på søknadstidspunktet",
-      "verdi": "true",
-      "status": "Faktum",
+      "navn": "Oppfyller kravet til å være registrert som arbeidssøker",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": "2025-01-15",
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "ErSann"
-        },
-        "opplysninger": [
-          "0194b156-639f-7b89-9d17-585ea92374d1"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-265f-7b30-bfc1-36b6e19f75d4",
+          "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877be1",
+          "navn": "Oppfyller kravet til å være registrert som arbeidssøker",
+          "verdien": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "verdi": "true",
+          "gyldigFraOgMed": "2025-01-06",
+          "datatype": "boolsk",
+          "utledetAv": {
+            "regel": {
+              "navn": "ErSann"
+            },
+            "opplysninger": [
+              "01943b06-265d-74fe-9b37-546b68ee3b12"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-63b4-7a68-bccd-57122c212626",
       "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04245",
       "navn": "Brutto arbeidsinntekt",
-      "verdi": "01JHQ2Z5GW1MJEDBBDJ99SJ4KB",
-      "status": "Faktum",
       "datatype": "inntekt",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "FiltrerRelevanteInntekter"
-        },
-        "opplysninger": [
-          "0194b156-639f-7b89-9d17-585ea92374d2"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-265f-7b30-bfc1-36b6e19f75d6",
+          "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04245",
+          "navn": "Brutto arbeidsinntekt",
+          "verdien": {
+            "verdi": "01JGXGC9BV8DVFDR77NC42WD0Y",
+            "datatype": "tekst"
+          },
+          "verdi": "01JGXGC9BV8DVFDR77NC42WD0Y",
+          "datatype": "inntekt",
+          "utledetAv": {
+            "regel": {
+              "navn": "FiltrerRelevanteInntekter"
+            },
+            "opplysninger": [
+              "01943b06-265d-74fe-9b37-546b68ee3b13"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-63b4-7a68-bccd-57122c212628",
-      "opplysningTypeId": "0194881f-940f-7af9-9387-052e028b29ed",
-      "navn": "Tellende inntekt",
-      "verdi": "01JHQ2Z5GW1MJEDBBDJ99SJ4KB",
-      "status": "Faktum",
-      "datatype": "inntekt",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "FiltrerRelevanteInntekter"
-        },
-        "opplysninger": [
-          "0194b156-639f-7b89-9d17-585ea92374d2"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63b4-7a68-bccd-57122c21262a",
-      "opplysningTypeId": "0194881f-9434-79e8-a64d-1a23cc5d86ea",
-      "navn": "Medlem har reduserte ytelser fra folketrygden (Samordning)",
-      "verdi": "true",
-      "status": "Faktum",
+      "opplysningTypeId": "01948d43-e218-76f1-b29b-7e604241d98a",
+      "navn": "Oppfyller kravet til verneplikt",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "EnAv"
-        },
-        "opplysninger": [
-          "019498c8-535f-7cc8-bf2b-c999ed2d94a8",
-          "019498f6-0ff8-7db6-b738-b79b112faf81",
-          "0194a772-ac83-7477-918f-5d4ca35dfc14",
-          "0194b156-639e-7bb0-83e9-a3d057bb8419",
-          "0194b156-639e-7bb0-83e9-a3d057bb841a",
-          "0194b156-639e-7bb0-83e9-a3d057bb841b",
-          "0194b156-639f-7b89-9d17-585ea92374d0"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-265f-7b30-bfc1-36b6e19f75d8",
+          "opplysningTypeId": "01948d43-e218-76f1-b29b-7e604241d98a",
+          "navn": "Oppfyller kravet til verneplikt",
+          "verdien": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "verdi": "false",
+          "datatype": "boolsk",
+          "utledetAv": {
+            "regel": {
+              "navn": "ErSann"
+            },
+            "opplysninger": [
+              "01943b06-265d-74fe-9b37-546b68ee3b11"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-63c8-7eb7-84eb-d8ea14574104",
       "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04241",
-      "navn": "Arbeidsinntekt siste 12 mnd",
-      "verdi": "0",
-      "status": "Faktum",
+      "navn": "Arbeidsinntekt siste 12 måneder",
       "datatype": "penger",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "SummerPeriode"
-        },
-        "opplysninger": [
-          "0194b156-63b4-7a68-bccd-57122c212626"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-2664-7c75-b7d0-c9775f593cc6",
+          "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04241",
+          "navn": "Arbeidsinntekt siste 12 måneder",
+          "verdien": {
+            "verdi": 0,
+            "datatype": "penger"
+          },
+          "verdi": "0",
+          "datatype": "penger",
+          "utledetAv": {
+            "regel": {
+              "navn": "SummerPeriode"
+            },
+            "opplysninger": [
+              "01943b06-265f-7b30-bfc1-36b6e19f75d6"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-63c9-7742-ae29-32e59e03dd7f",
       "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04242",
-      "navn": "Arbeidsinntekt siste 36 mnd",
-      "verdi": "555500",
-      "status": "Faktum",
+      "navn": "Arbeidsinntekt siste 36 måneder",
       "datatype": "penger",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "SummerPeriode"
-        },
-        "opplysninger": [
-          "0194b156-63b4-7a68-bccd-57122c212626"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-2665-7c90-9af0-11d19cd4d8c1",
+          "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04242",
+          "navn": "Arbeidsinntekt siste 36 måneder",
+          "verdien": {
+            "verdi": 55550,
+            "datatype": "penger"
+          },
+          "verdi": "55550",
+          "datatype": "penger",
+          "utledetAv": {
+            "regel": {
+              "navn": "SummerPeriode"
+            },
+            "opplysninger": [
+              "01943b06-265f-7b30-bfc1-36b6e19f75d6"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-63ca-711a-b32a-163326efcccd",
-      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877be2",
-      "navn": "Krav til arbeidssøker",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": "2025-01-15",
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Alle"
-        },
-        "opplysninger": [
-          "01946e2f-917a-7ac5-95f7-f4dda19d3ad0",
-          "0194a772-ac87-7d12-a86c-e949c9924622",
-          "0194a772-ac87-7d12-a86c-e949c9924624",
-          "0194a772-ac87-7d12-a86c-e949c9924626",
-          "0194a772-ac87-7d12-a86c-e949c9924628",
-          "0194b156-63b3-7e7c-9895-d98400f6a82b"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63cf-7084-8066-1fba18ce3654",
-      "opplysningTypeId": "0194881f-940f-7af9-9387-052e028b29ec",
-      "navn": "Oppjustert inntekt",
-      "verdi": "01JHQ2Z5GW1MJEDBBDJ99SJ4KB",
-      "status": "Faktum",
-      "datatype": "inntekt",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Oppjuster"
-        },
-        "opplysninger": [
-          "0194a772-ac80-7fa1-8d71-e81d5ab282e2",
-          "0194b156-63b4-7a68-bccd-57122c212628"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63cf-7084-8066-1fba18ce3656",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cad",
-      "navn": "Utbetalt arbeidsinntekt periode 1",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "SummerPeriode"
-        },
-        "opplysninger": [
-          "0194b156-63b4-7a68-bccd-57122c212628"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63d0-71c3-aeef-2a8f3a165337",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cae",
-      "navn": "Utbetalt arbeidsinntekt periode 2",
-      "verdi": "55550",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "SummerPeriode"
-        },
-        "opplysninger": [
-          "0194b156-63b4-7a68-bccd-57122c212628"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63d0-71c3-aeef-2a8f3a165339",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10caf",
-      "navn": "Utbetalt arbeidsinntekt periode 3",
-      "verdi": "499950",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "SummerPeriode"
-        },
-        "opplysninger": [
-          "0194b156-63b4-7a68-bccd-57122c212628"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63e1-7594-bcfc-07a6bfc7baac",
       "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f0424a",
-      "navn": "Arbeidsinntekt er over kravet for siste 12 mnd",
-      "verdi": "false",
-      "status": "Faktum",
+      "navn": "Arbeidsinntekt er over kravet for siste 12 måneder",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "StørreEnnEllerLik"
-        },
-        "opplysninger": [
-          "0194a772-ac86-7ba0-8c6e-040f234f5c03",
-          "0194b156-63c8-7eb7-84eb-d8ea14574104"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-2665-7c90-9af0-11d19cd4d8c8",
+          "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f0424a",
+          "navn": "Arbeidsinntekt er over kravet for siste 12 måneder",
+          "verdien": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "verdi": "false",
+          "datatype": "boolsk",
+          "utledetAv": {
+            "regel": {
+              "navn": "StørreEnnEllerLik"
+            },
+            "opplysninger": [
+              "01943b06-1d7c-742a-95f4-62b47b0e0422",
+              "01943b06-2664-7c75-b7d0-c9775f593cc6"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-63e2-7cb8-97fb-868d9fcacce8",
       "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f0424b",
-      "navn": "Arbeidsinntekt er over kravet for siste 36 mnd",
-      "verdi": "true",
-      "status": "Faktum",
+      "navn": "Arbeidsinntekt er over kravet for siste 36 måneder",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "StørreEnnEllerLik"
-        },
-        "opplysninger": [
-          "0194a772-ac87-7d12-a86c-e949c992461c",
-          "0194b156-63c9-7742-ae29-32e59e03dd7f"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-2665-7c90-9af0-11d19cd4d8ca",
+          "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f0424b",
+          "navn": "Arbeidsinntekt er over kravet for siste 36 måneder",
+          "verdien": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "verdi": "false",
+          "datatype": "boolsk",
+          "utledetAv": {
+            "regel": {
+              "navn": "StørreEnnEllerLik"
+            },
+            "opplysninger": [
+              "01943b06-1d7c-742a-95f4-62b47b0e0424",
+              "01943b06-2665-7c90-9af0-11d19cd4d8c1"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-63e2-7cb8-97fb-868d9fcaccea",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb0",
-      "navn": "Inntektperiode 1",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "SummerPeriode"
-        },
-        "opplysninger": [
-          "0194b156-63cf-7084-8066-1fba18ce3654"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63e2-7cb8-97fb-868d9fcaccec",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb1",
-      "navn": "Inntektperiode 2",
-      "verdi": "61804.27711545882",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "SummerPeriode"
-        },
-        "opplysninger": [
-          "0194b156-63cf-7084-8066-1fba18ce3654"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63e3-73a5-bc4f-6eaf82552ce5",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb2",
-      "navn": "Inntektperiode 3",
-      "verdi": "559188.1657389789",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "SummerPeriode"
-        },
-        "opplysninger": [
-          "0194b156-63cf-7084-8066-1fba18ce3654"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63e3-73a5-bc4f-6eaf82552ce7",
-      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15454",
-      "navn": "Over terskel for 12 måneder",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "StørreEnnEllerLik"
-        },
-        "opplysninger": [
-          "0194a772-ac8a-7d9b-8d36-6b636d29bffa",
-          "0194b156-63c8-7eb7-84eb-d8ea14574104"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63e3-73a5-bc4f-6eaf82552ce9",
-      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15451",
-      "navn": "Snittinntekt siste 36 måneder",
-      "verdi": "185166.6666666667",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Divisjon"
-        },
-        "opplysninger": [
-          "0194a772-ac83-7477-918f-5d4ca35dfc10",
-          "0194b156-63c9-7742-ae29-32e59e03dd7f"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63ef-79e9-a620-e041691657a6",
       "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f0424c",
-      "navn": "Krav til minsteinntekt",
-      "verdi": "true",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "EnAv"
-        },
-        "opplysninger": [
-          "0194b156-63e1-7594-bcfc-07a6bfc7baac",
-          "0194b156-63e2-7cb8-97fb-868d9fcacce8"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63ef-79e9-a620-e041691657a8",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10caa",
-      "navn": "Grunnlag siste 12 mnd.",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "MinstAv"
-        },
-        "opplysninger": [
-          "0194a772-ac88-7498-8d35-2b369c4554d0",
-          "0194b156-63e2-7cb8-97fb-868d9fcaccea"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63ef-79e9-a620-e041691657aa",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb3",
-      "navn": "Avkortet inntektperiode 1",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "MinstAv"
-        },
-        "opplysninger": [
-          "0194a772-ac88-7498-8d35-2b369c4554d0",
-          "0194b156-63e2-7cb8-97fb-868d9fcaccea"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63ef-79e9-a620-e041691657ac",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb4",
-      "navn": "Avkortet inntektperiode 2",
-      "verdi": "61804.27711545882",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "MinstAv"
-        },
-        "opplysninger": [
-          "0194a772-ac88-7498-8d35-2b369c4554d0",
-          "0194b156-63e2-7cb8-97fb-868d9fcaccec"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63ef-79e9-a620-e041691657ae",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb5",
-      "navn": "Avkortet inntektperiode 3",
-      "verdi": "559188.1657389789",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "MinstAv"
-        },
-        "opplysninger": [
-          "0194a772-ac88-7498-8d35-2b369c4554d0",
-          "0194b156-63e3-73a5-bc4f-6eaf82552ce5"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63ef-79e9-a620-e041691657b0",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb6",
-      "navn": "Har avkortet grunnlaget i periode 1",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "StørreEnn"
-        },
-        "opplysninger": [
-          "0194a772-ac88-7498-8d35-2b369c4554d0",
-          "0194b156-63e2-7cb8-97fb-868d9fcaccea"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63f0-76e0-b5e5-9f03987eefb4",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb7",
-      "navn": "Har avkortet grunnlaget i periode 2",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "StørreEnn"
-        },
-        "opplysninger": [
-          "0194a772-ac88-7498-8d35-2b369c4554d0",
-          "0194b156-63e2-7cb8-97fb-868d9fcaccec"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63f0-76e0-b5e5-9f03987eefb6",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb8",
-      "navn": "Har avkortet grunnlaget i periode 3",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "StørreEnn"
-        },
-        "opplysninger": [
-          "0194a772-ac88-7498-8d35-2b369c4554d0",
-          "0194b156-63e3-73a5-bc4f-6eaf82552ce5"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63f0-76e0-b5e5-9f03987eefb8",
-      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15452",
-      "navn": "Stønadsuker ved siste 12 måneder",
-      "verdi": "52",
-      "status": "Faktum",
-      "datatype": "heltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "HvisSannMedResultat"
-        },
-        "opplysninger": [
-          "0194a772-ac82-7437-9616-36ad195958d4",
-          "0194a772-ac83-7477-918f-5d4ca35dfc0a",
-          "0194b156-63e3-73a5-bc4f-6eaf82552ce7"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63f0-76e0-b5e5-9f03987eefba",
-      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15455",
-      "navn": "Over terskel for 36 måneder",
-      "verdi": "false",
-      "status": "Faktum",
-      "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "StørreEnnEllerLik"
-        },
-        "opplysninger": [
-          "0194a772-ac8a-7d9b-8d36-6b636d29bffe",
-          "0194b156-63e3-73a5-bc4f-6eaf82552ce9"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63f9-7b3e-b980-eae4f4b05fd8",
-      "opplysningTypeId": "0194881f-9440-7e1c-9ec4-0f20650bc0cd",
       "navn": "Oppfyller kravet til minsteinntekt",
-      "verdi": "true",
-      "status": "Faktum",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "EnAv"
-        },
-        "opplysninger": [
-          "01947441-6857-7ea6-a14b-ba949233186b",
-          "0194b156-63ef-79e9-a620-e041691657a6"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-2666-7da8-b19e-b788f3ad01c9",
+          "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f0424c",
+          "navn": "Oppfyller kravet til minsteinntekt",
+          "verdien": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "verdi": "false",
+          "datatype": "boolsk",
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "01943b06-2665-7c90-9af0-11d19cd4d8c8",
+              "01943b06-2665-7c90-9af0-11d19cd4d8ca"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-63fa-7a05-b906-e90530f900e3",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cab",
-      "navn": "Inntekt siste 36 måneder",
-      "verdi": "620992.4428544377",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "SumAv"
-        },
-        "opplysninger": [
-          "0194b156-63ef-79e9-a620-e041691657aa",
-          "0194b156-63ef-79e9-a620-e041691657ac",
-          "0194b156-63ef-79e9-a620-e041691657ae"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63fa-7a05-b906-e90530f900e7",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb9",
-      "navn": "Har avkortet grunnlag",
-      "verdi": "false",
-      "status": "Faktum",
+      "opplysningTypeId": "0194881f-9440-7e1c-9ec4-0f20650bc0cd",
+      "navn": "Oppfyller kravet til minsteinntekt eller verneplikt",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "EnAv"
-        },
-        "opplysninger": [
-          "0194b156-63ef-79e9-a620-e041691657b0",
-          "0194b156-63f0-76e0-b5e5-9f03987eefb4",
-          "0194b156-63f0-76e0-b5e5-9f03987eefb6"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-2666-7da8-b19e-b788f3ad01d0",
+          "opplysningTypeId": "0194881f-9440-7e1c-9ec4-0f20650bc0cd",
+          "navn": "Oppfyller kravet til minsteinntekt eller verneplikt",
+          "verdien": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "verdi": "false",
+          "datatype": "boolsk",
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "01943b06-265f-7b30-bfc1-36b6e19f75d8",
+              "01943b06-2666-7da8-b19e-b788f3ad01c9"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-63fa-7a05-b906-e90530f900e9",
-      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15453",
-      "navn": "Stønadsuker ved siste 36 måneder",
-      "verdi": "52",
-      "status": "Faktum",
-      "datatype": "heltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "HvisSannMedResultat"
-        },
-        "opplysninger": [
-          "0194a772-ac82-7437-9616-36ad195958d4",
-          "0194a772-ac83-7477-918f-5d4ca35dfc0a",
-          "0194b156-63f0-76e0-b5e5-9f03987eefba"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63fa-7a05-b906-e90530f900eb",
-      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15456",
-      "navn": "Antall stønadsuker",
-      "verdi": "52",
-      "status": "Faktum",
-      "datatype": "heltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "HøyesteAv"
-        },
-        "opplysninger": [
-          "0194b156-63f0-76e0-b5e5-9f03987eefb8",
-          "0194b156-63fa-7a05-b906-e90530f900e9"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-63fa-7a05-b906-e90530f900ed",
-      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15459",
-      "navn": "Antall stønadsuker som gis ved ordinære dagpenger",
-      "verdi": "52",
-      "status": "Faktum",
-      "datatype": "heltall",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "HvisSannMedResultat"
-        },
-        "opplysninger": [
-          "0194a772-ac82-7437-9616-36ad195958d2",
-          "0194b156-63ef-79e9-a620-e041691657a6",
-          "0194b156-63fa-7a05-b906-e90530f900eb"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-6404-7930-9bc6-c461aaeb206f",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cac",
-      "navn": "Gjennomsnittlig arbeidsinntekt siste 36 måneder",
-      "verdi": "206997.4809514792",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Divisjon"
-        },
-        "opplysninger": [
-          "0194a772-ac80-7fa1-8d71-e81d5ab282e8",
-          "0194b156-63fa-7a05-b906-e90530f900e3"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-6407-7df9-8c70-a9cf208899f9",
-      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15457",
-      "navn": "Antall gjenstående stønadsdager",
-      "verdi": "260",
-      "status": "Faktum",
-      "datatype": "heltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Multiplikasjon"
-        },
-        "opplysninger": [
-          "0194a772-ac83-7477-918f-5d4ca35dfc12",
-          "0194b156-63fa-7a05-b906-e90530f900eb"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-640f-75c8-a218-7b8cbe7944d0",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cbb",
-      "navn": "Uavrundet grunnlag",
-      "verdi": "206997.4809514792",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "HøyesteAv"
-        },
-        "opplysninger": [
-          "0194b156-63ef-79e9-a620-e041691657a8",
-          "0194b156-6404-7930-9bc6-c461aaeb206f"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-6417-7e23-afd0-ebd2e4d3cf46",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cbc",
-      "navn": "Grunnlag ved ordinære dagpenger",
-      "verdi": "206997",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Avrund"
-        },
-        "opplysninger": [
-          "0194b156-640f-75c8-a218-7b8cbe7944d0"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-6418-7776-a370-caae532864a1",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cba",
-      "navn": "Brukt beregningsregel",
-      "verdi": "Gjennomsnittlig arbeidsinntekt siste 36 måneder",
-      "status": "Faktum",
-      "datatype": "tekst",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Brukt"
-        },
-        "opplysninger": [
-          "0194b156-640f-75c8-a218-7b8cbe7944d0"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-6420-74bb-9393-fca65f3da29b",
-      "opplysningTypeId": "0194881f-9421-766c-9dc6-41fe6c9a1e05",
-      "navn": "Grunnlaget for verneplikt er høyere enn dagpengegrunnlaget",
-      "verdi": "false",
-      "status": "Faktum",
+      "opplysningTypeId": "0194881f-9441-7d1b-a06a-6727543a141f",
+      "navn": "Det er godkjent at bruker kun søker deltidsarbeid",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "StørreEnn"
-        },
-        "opplysninger": [
-          "0194a772-ac88-7498-8d35-2b369c4554ce",
-          "0194b156-6417-7e23-afd0-ebd2e4d3cf46"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-2667-7d7a-8849-336ca183c021",
+          "opplysningTypeId": "0194881f-9441-7d1b-a06a-6727543a141f",
+          "navn": "Det er godkjent at bruker kun søker deltidsarbeid",
+          "verdien": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "verdi": "false",
+          "datatype": "boolsk",
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "01943b06-1d11-7b0a-b571-a13ce5393d34"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-6420-74bb-9393-fca65f3da29f",
-      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cbd",
-      "navn": "Grunnlag",
-      "verdi": "206997",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "HøyesteAv"
-        },
-        "opplysninger": [
-          "0194a772-ac88-7498-8d35-2b369c4554ce",
-          "0194b156-6417-7e23-afd0-ebd2e4d3cf46"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-6429-7dc9-9d29-faa47d168395",
-      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a76c",
-      "navn": "Fastsatt vanlig arbeidstid etter ordinær eller verneplikt",
-      "verdi": "33.45",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "HvisSannMedResultat"
-        },
-        "opplysninger": [
-          "01948d77-7a2f-79fc-bb68-98b4f019b9a4",
-          "0194a772-ac80-7fa1-8d71-e81d5ab282de",
-          "0194b156-6420-74bb-9393-fca65f3da29b"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-642a-74d5-b819-e50da68e6f3f",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a248",
-      "navn": "Maksimalt mulig grunnlag avgrenset til 90% av dagpengegrunnlaget",
-      "verdi": "186297.3",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Multiplikasjon"
-        },
-        "opplysninger": [
-          "0194a772-ac81-7054-b6ac-d372dc959211",
-          "0194b156-6420-74bb-9393-fca65f3da29f"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-642a-74d5-b819-e50da68e6f43",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a23f",
-      "navn": "Dagsats uten barnetillegg før samordning",
-      "verdi": "496.7928",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Multiplikasjon"
-        },
-        "opplysninger": [
-          "0194a772-ac82-7437-9616-36ad195958ba",
-          "0194b156-6420-74bb-9393-fca65f3da29f"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-6439-739e-976c-81d7a976b601",
-      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a76a",
-      "navn": "Fastsatt arbeidstid per uke før tap",
-      "verdi": "33.45",
-      "status": "Faktum",
-      "datatype": "desimaltall",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "MinstAv"
-        },
-        "opplysninger": [
-          "01946e2f-9174-7f60-8bfb-c08ab6f75e0c",
-          "0194a772-ac80-7fa1-8d71-e81d5ab282da",
-          "0194a772-ac88-7498-8d35-2b369c4554ca",
-          "0194b156-6429-7dc9-9d29-faa47d168395"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-643a-7c89-8794-392b2b6797af",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a24a",
-      "navn": "Maksimal mulig dagsats avgrenset til 90% av dagpengegrunnlaget",
-      "verdi": "716.5280769230769",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Divisjon"
-        },
-        "opplysninger": [
-          "0194a772-ac81-7054-b6ac-d372dc95920f",
-          "0194b156-642a-74d5-b819-e50da68e6f3f"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-643a-7c89-8794-392b2b6797b1",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a241",
-      "navn": "Avrundet dagsats uten barnetillegg før samordning",
-      "verdi": "497",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Avrund"
-        },
-        "opplysninger": [
-          "0194b156-642a-74d5-b819-e50da68e6f43"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-6444-7b10-a9a4-891971283d27",
-      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a76e",
-      "navn": "Tap av arbeidstid er minst terskel",
-      "verdi": "true",
-      "status": "Faktum",
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bda",
+      "navn": "Det er godkjent at bruker kun søker arbeid lokalt",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "SjekkAvTerskel"
-        },
-        "opplysninger": [
-          "01948d78-724f-7eb9-a437-beef0f71cf98",
-          "0194a772-ac80-7fa1-8d71-e81d5ab282d8",
-          "0194b156-6439-739e-976c-81d7a976b601"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-2667-7d7a-8849-336ca183c023",
+          "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bda",
+          "navn": "Det er godkjent at bruker kun søker arbeid lokalt",
+          "verdien": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "verdi": "false",
+          "datatype": "boolsk",
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "01943b06-1d11-7b0a-b571-a13ce5393d34"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-6444-7b10-a9a4-891971283d29",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a245",
-      "navn": "Dagsats med barnetillegg før samordning",
-      "verdi": "571",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Addisjon"
-        },
-        "opplysninger": [
-          "0194a772-ac89-7d3f-9e44-131154d4f19f",
-          "0194b156-643a-7c89-8794-392b2b6797b1"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-6444-7b10-a9a4-891971283d2b",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a24b",
-      "navn": "Avrundet maksimal mulig dagsats avgrenset til 90% av dagpengegrunnlaget",
-      "verdi": "717",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Avrund"
-        },
-        "opplysninger": [
-          "0194b156-643a-7c89-8794-392b2b6797af"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-6450-7865-a8d9-7b9c97e7597f",
-      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a76f",
-      "navn": "Krav til tap av arbeidsinntekt og arbeidstid",
-      "verdi": "true",
-      "status": "Faktum",
+      "opplysningTypeId": "0194881f-9441-7d1b-a06a-6727543a141e",
+      "navn": "Kan jobbe heltid og deltid",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Alle"
-        },
-        "opplysninger": [
-          "0194a772-ac88-7498-8d35-2b369c4554c6",
-          "0194a772-ac88-7498-8d35-2b369c4554c8",
-          "0194b156-6444-7b10-a9a4-891971283d27"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-285f-7e87-bd6f-166a11b583ef",
+          "opplysningTypeId": "0194881f-9441-7d1b-a06a-6727543a141e",
+          "navn": "Kan jobbe heltid og deltid",
+          "verdien": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "verdi": "true",
+          "datatype": "boolsk",
+          "kilde": {
+            "type": "System",
+            "registrert": "2025-01-06T10:50:46.826422",
+            "meldingId": "8e3fcf74-6df4-431f-9fd0-fb6be2570b21"
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-6450-7865-a8d9-7b9c97e75981",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a242",
-      "navn": "Andel av dagsats med barnetillegg som overstiger maks andel av dagpengegrunnlaget",
-      "verdi": "0",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Substraksjon"
-        },
-        "opplysninger": [
-          "0194b156-6444-7b10-a9a4-891971283d29",
-          "0194b156-6444-7b10-a9a4-891971283d2b"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-6451-794f-bdd5-53b6645060a7",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a240",
-      "navn": "Avrundet ukessats med barnetillegg før samordning",
-      "verdi": "2855",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Legacy",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Multiplikasjon"
-        },
-        "opplysninger": [
-          "0194a772-ac81-7054-b6ac-d372dc959215",
-          "0194b156-6444-7b10-a9a4-891971283d29"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-645c-750a-8ccb-c19e497de9d0",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a243",
-      "navn": "Andel av dagsats uten barnetillegg avkortet til maks andel av dagpengegrunnlaget",
-      "verdi": "497",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Substraksjon"
-        },
-        "opplysninger": [
-          "0194b156-643a-7c89-8794-392b2b6797b1",
-          "0194b156-6450-7865-a8d9-7b9c97e75981"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-646a-7527-a75b-25394ab4dafb",
-      "opplysningTypeId": "0194881f-9434-79e8-a64d-1a23cc5d86eb",
-      "navn": "Samordnet dagsats uten barnetillegg",
-      "verdi": "247",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Substraksjon"
-        },
-        "opplysninger": [
-          "0194a772-ac89-7d3f-9e44-131154d4f1a5",
-          "0194b156-645c-750a-8ccb-c19e497de9d0"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-646a-7527-a75b-25394ab4db05",
-      "opplysningTypeId": "0194881f-9434-79e8-a64d-1a23cc5d86ec",
-      "navn": "Samordnet dagsats er større enn 0",
-      "verdi": "true",
-      "status": "Faktum",
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bd9",
+      "navn": "Kan jobbe i hele Norge",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "StørreEnnEllerLik"
-        },
-        "opplysninger": [
-          "0194a772-ac89-7d3f-9e44-131154d4f1a5",
-          "0194b156-645c-750a-8ccb-c19e497de9d0"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-285f-7e87-bd6f-166a11b583f0",
+          "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bd9",
+          "navn": "Kan jobbe i hele Norge",
+          "verdien": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "verdi": "true",
+          "datatype": "boolsk",
+          "kilde": {
+            "type": "System",
+            "registrert": "2025-01-06T10:50:46.826626",
+            "meldingId": "8e3fcf74-6df4-431f-9fd0-fb6be2570b21"
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-6477-7686-818e-9c8ee4c469d2",
-      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a2f",
-      "navn": "Samordnet ukessats uten barnetillegg",
-      "verdi": "1235",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Multiplikasjon"
-        },
-        "opplysninger": [
-          "0194a772-ac81-7054-b6ac-d372dc959215",
-          "0194b156-646a-7527-a75b-25394ab4dafb"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-6477-7686-818e-9c8ee4c469d8",
-      "opplysningTypeId": "0194881f-9434-79e8-a64d-1a23cc5d86ef",
-      "navn": "Utfall etter samordning",
-      "verdi": "true",
-      "status": "Faktum",
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bdc",
+      "navn": "Kan ta alle typer arbeid",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "EnAv"
-        },
-        "opplysninger": [
-          "0194a772-ac8a-7d9b-8d36-6b636d29c00a",
-          "0194b156-646a-7527-a75b-25394ab4db05"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-285f-7e87-bd6f-166a11b583f1",
+          "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bdc",
+          "navn": "Kan ta alle typer arbeid",
+          "verdien": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "verdi": "true",
+          "datatype": "boolsk",
+          "kilde": {
+            "type": "System",
+            "registrert": "2025-01-06T10:50:46.826807",
+            "meldingId": "8e3fcf74-6df4-431f-9fd0-fb6be2570b21"
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-6487-79d5-b56f-93a8768d9bb4",
-      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a30",
-      "navn": "Minste mulige ukessats som som kan brukes",
-      "verdi": "1235",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "MinstAv"
-        },
-        "opplysninger": [
-          "0194a772-ac89-7d3f-9e44-131154d4f1a1",
-          "0194b156-6477-7686-818e-9c8ee4c469d2"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-6487-79d5-b56f-93a8768d9bb6",
-      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a31",
-      "navn": "Ukessats trukket ned for ytelser utenfor folketrygden",
-      "verdi": "1235",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Substraksjon"
-        },
-        "opplysninger": [
-          "0194a772-ac89-7d3f-9e44-131154d4f1a9",
-          "0194b156-6477-7686-818e-9c8ee4c469d2"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-6487-79d5-b56f-93a8768d9bbc",
-      "opplysningTypeId": "0194881f-9440-7e1c-9ec4-0f20650bc0cc",
-      "navn": "Krav på dagpenger",
-      "verdi": "true",
-      "status": "Faktum",
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bde",
+      "navn": "Villig til å bytte yrke",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": "2025-01-15",
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Alle"
-        },
-        "opplysninger": [
-          "01946e2f-6282-7e69-ad86-5fa12930c476",
-          "0194a772-ac7f-7819-9658-3e946e03804f",
-          "0194a772-ac87-7d12-a86c-e949c992462a",
-          "0194a772-ac89-7d3f-9e44-131154d4f199",
-          "0194a772-ac8d-7bd9-bd41-0e070242ec25",
-          "0194a772-ac95-7913-a299-28a6e87b31e7",
-          "0194a772-ac95-7913-a299-28a6e87b31f3",
-          "0194b156-63b3-7e7c-9895-d98400f6a82b",
-          "0194b156-63ca-711a-b32a-163326efcccd",
-          "0194b156-63f9-7b3e-b980-eae4f4b05fd8",
-          "0194b156-6450-7865-a8d9-7b9c97e7597f",
-          "0194b156-6477-7686-818e-9c8ee4c469d8"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-285f-7e87-bd6f-166a11b583f2",
+          "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bde",
+          "navn": "Villig til å bytte yrke",
+          "verdien": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "verdi": "true",
+          "datatype": "boolsk",
+          "kilde": {
+            "type": "System",
+            "registrert": "2025-01-06T10:50:46.827057",
+            "meldingId": "8e3fcf74-6df4-431f-9fd0-fb6be2570b21"
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-6497-71f9-b4bc-01917d36a869",
-      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a32",
-      "navn": "Samordnet ukessats med ytelser utenfor folketrygden",
-      "verdi": "1235",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "HøyesteAv"
-        },
-        "opplysninger": [
-          "0194b156-6487-79d5-b56f-93a8768d9bb4",
-          "0194b156-6487-79d5-b56f-93a8768d9bb6"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-64a6-7e5d-b98f-20c387b3d2bf",
-      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a33",
-      "navn": "Dagsats uten barnetillegg samordnet",
-      "verdi": "247",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Divisjon"
-        },
-        "opplysninger": [
-          "0194a772-ac81-7054-b6ac-d372dc959215",
-          "0194b156-6497-71f9-b4bc-01917d36a869"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-64bf-77c3-84b8-b8c0deb89bd8",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a24d",
-      "navn": "Samordnet dagsats med barnetillegg",
-      "verdi": "321",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Addisjon"
-        },
-        "opplysninger": [
-          "0194a772-ac89-7d3f-9e44-131154d4f19f",
-          "0194b156-64a6-7e5d-b98f-20c387b3d2bf"
-        ]
-      }
-    },
-    {
-      "id": "0194b156-64bf-77c3-84b8-b8c0deb89bde",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a250",
-      "navn": "Har samordnet",
-      "verdi": "true",
-      "status": "Faktum",
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bd8",
+      "navn": "Oppfyller kravet til heltid- og deltidsarbeid",
       "datatype": "boolsk",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "ErUlik"
-        },
-        "opplysninger": [
-          "0194b156-645c-750a-8ccb-c19e497de9d0",
-          "0194b156-64a6-7e5d-b98f-20c387b3d2bf"
-        ]
-      }
+      "opplysninger": [
+        {
+          "id": "01943b06-2860-74af-b829-a6edf6a46b17",
+          "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bd8",
+          "navn": "Oppfyller kravet til heltid- og deltidsarbeid",
+          "verdien": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "verdi": "true",
+          "datatype": "boolsk",
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "01943b06-2667-7d7a-8849-336ca183c021",
+              "01943b06-285f-7e87-bd6f-166a11b583ef"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-64d9-7c94-8091-12a679d4902d",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a24f",
-      "navn": "Dagsats med barnetillegg etter samordning og 90% regel",
-      "verdi": "321",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "MinstAv"
-        },
-        "opplysninger": [
-          "0194b156-6444-7b10-a9a4-891971283d2b",
-          "0194b156-64bf-77c3-84b8-b8c0deb89bd8"
-        ]
-      }
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bdb",
+      "navn": "Oppfyller kravet til mobilitet",
+      "datatype": "boolsk",
+      "opplysninger": [
+        {
+          "id": "01943b06-2860-74af-b829-a6edf6a46b19",
+          "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bdb",
+          "navn": "Oppfyller kravet til mobilitet",
+          "verdien": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "verdi": "true",
+          "datatype": "boolsk",
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "01943b06-2667-7d7a-8849-336ca183c023",
+              "01943b06-285f-7e87-bd6f-166a11b583f0"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-64f4-7f9a-9728-f5d39227cbc5",
-      "opplysningTypeId": "0194881f-943f-78d9-b874-00a4944c54ef",
-      "navn": "Egenandel",
-      "verdi": "963",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": true,
-      "formål": "Regel",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Multiplikasjon"
-        },
-        "opplysninger": [
-          "0194a772-ac81-7054-b6ac-d372dc95920d",
-          "0194b156-64d9-7c94-8091-12a679d4902d"
-        ]
-      }
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bdd",
+      "navn": "Oppfyller kravet til å være arbeidsfør",
+      "datatype": "boolsk",
+      "opplysninger": [
+        {
+          "id": "01943b06-2860-74af-b829-a6edf6a46b1b",
+          "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bdd",
+          "navn": "Oppfyller kravet til å være arbeidsfør",
+          "verdien": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "verdi": "true",
+          "datatype": "boolsk",
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "01943b06-285f-7e87-bd6f-166a11b583f1"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "0194b156-64f4-7f9a-9728-f5d39227cbc7",
-      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a24e",
-      "navn": "Ukessats med barnetillegg etter samordning",
-      "verdi": "1605",
-      "status": "Faktum",
-      "datatype": "penger",
-      "redigerbar": false,
-      "synlig": false,
-      "formål": "Legacy",
-      "gyldigFraOgMed": null,
-      "gyldigTilOgMed": null,
-      "kilde": null,
-      "utledetAv": {
-        "regel": {
-          "navn": "Multiplikasjon"
-        },
-        "opplysninger": [
-          "0194a772-ac81-7054-b6ac-d372dc959215",
-          "0194b156-64d9-7c94-8091-12a679d4902d"
-        ]
-      }
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bdf",
+      "navn": "Oppfyller kravet til å ta ethvert arbeid",
+      "datatype": "boolsk",
+      "opplysninger": [
+        {
+          "id": "01943b06-2860-74af-b829-a6edf6a46b1d",
+          "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bdf",
+          "navn": "Oppfyller kravet til å ta ethvert arbeid",
+          "verdien": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "verdi": "true",
+          "datatype": "boolsk",
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "01943b06-285f-7e87-bd6f-166a11b583f2"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877be2",
+      "navn": "Reell arbeidssøker",
+      "datatype": "boolsk",
+      "opplysninger": [
+        {
+          "id": "01943b06-2861-77f8-82c0-fa476e314a19",
+          "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877be2",
+          "navn": "Reell arbeidssøker",
+          "verdien": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "verdi": "true",
+          "datatype": "boolsk",
+          "utledetAv": {
+            "regel": {
+              "navn": "Alle"
+            },
+            "opplysninger": [
+              "01943b06-2860-74af-b829-a6edf6a46b17",
+              "01943b06-2860-74af-b829-a6edf6a46b19",
+              "01943b06-2860-74af-b829-a6edf6a46b1b",
+              "01943b06-2860-74af-b829-a6edf6a46b1d"
+            ]
+          }
+        }
+      ]
     }
   ],
-  "automatisk": false,
-  "gjenstående": {
-    "kvoter": null
-  }
+  "rettighetsperioder": [
+    {
+      "fraOgMed": "2025-01-06",
+      "harRett": false
+    }
+  ]
 }
