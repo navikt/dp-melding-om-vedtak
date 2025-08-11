@@ -48,6 +48,32 @@ internal class BehandlingKlientTest {
     }
 
     @Test
+    fun `Skal kalle klumpen endepunkt med riktig headers og parse response`() {
+        val behandlingId = UUID.fromString("01943b06-1a68-7dad-88e1-19e31cde711c")
+        val vedtakJson = "/json/klump.json".readFile()
+
+        val behandlingKlient =
+            BehandlingHttpKlient(
+                dpBehandlingApiUrl = "http://localhost",
+                tokenProvider = { "token" },
+                httpClient =
+                    lagHttpKlient(
+                        MockEngine { request ->
+                            request.url.encodedPath shouldBe "/$behandlingId/klumpen"
+                            request.headers["Authorization"] shouldBe "Bearer token"
+                            respond(
+                                content = vedtakJson,
+                                headers = headersOf("Content-Type" to listOf("application/json")),
+                            )
+                        },
+                    ),
+            )
+        runBlocking {
+            behandlingKlient.hentKlump(behandlingId, Saksbehandler("token")).isSuccess shouldBe true
+        }
+    }
+
+    @Test
     fun `Skal videre sende HttpProblemDTO ved feil`() {
         val behandlingId = UUID.fromString("01937743-812d-7a69-b492-d25eb9768c68")
 

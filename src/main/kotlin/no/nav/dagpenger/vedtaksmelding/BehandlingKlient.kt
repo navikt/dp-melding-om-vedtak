@@ -12,7 +12,6 @@ import io.ktor.http.HttpStatusCode
 import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Klient
-import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMapper
 import java.util.UUID
@@ -22,6 +21,11 @@ private val log = KotlinLogging.logger { }
 
 interface BehandlingKlient {
     suspend fun hentVedtak(
+        behandlingId: UUID,
+        klient: Klient,
+    ): Result<Vedtak>
+
+    suspend fun hentKlump(
         behandlingId: UUID,
         klient: Klient,
     ): Result<Vedtak>
@@ -55,13 +59,13 @@ internal class BehandlingHttpKlient(
                 }
             }
 
-    suspend fun hentKlumpJson(
+    private suspend fun hentKlumpJson(
         behandlingId: UUID,
-        saksbehandler: Saksbehandler,
+        klient: Klient,
     ): Result<String> =
         httpClient
             .get(urlString = "$dpBehandlingApiUrl/$behandlingId/klumpen") {
-                header(HttpHeaders.Authorization, "Bearer ${saksbehandler.token}")
+                header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(klient)}")
                 accept(ContentType.Application.Json)
             }.let { response ->
                 val responseTekst = response.bodyAsText()
@@ -77,6 +81,11 @@ internal class BehandlingHttpKlient(
                     }
                 }
             }
+
+    override suspend fun hentKlump(
+        behandlingId: UUID,
+        klient: Klient,
+    ): Result<Vedtak> = hentKlumpJson(behandlingId, klient).map { VedtakMapper(it).vedtak() }
 
     override suspend fun hentVedtak(
         behandlingId: UUID,
