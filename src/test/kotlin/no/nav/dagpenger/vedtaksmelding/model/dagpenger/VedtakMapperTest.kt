@@ -61,7 +61,7 @@ import org.junit.jupiter.api.Test
 class VedtakMapperTest {
     private val resourceRetriever = object {}.javaClass
     private val vedtak =
-        resourceRetriever.getResource("/json/vedtak.json")?.let { VedtakMapper(it.readText()).vedtak() }
+        resourceRetriever.getResource("/json/klump.json")?.let { VedtakMapper(it.readText()).vedtak() }
             ?: throw RuntimeException("Fant ikke ressurs")
 
     @Test
@@ -71,7 +71,7 @@ class VedtakMapperTest {
 
     @Test
     fun `hent brevKriterier`() {
-        vedtak.vilkår.size shouldBe 18
+        vedtak.vilkår.size shouldBe 5
     }
 
     @Test

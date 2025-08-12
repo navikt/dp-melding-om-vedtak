@@ -91,7 +91,7 @@ enum class OpplysningTyper(
         opplysningTekstId = "opplysning.aldersgrense",
     ),
     Grunnlag(
-        opplysningTypeId = null,
+        opplysningTypeId = UUID.fromString("0194881f-9410-7481-b263-4606fdd10cbd"),
         opplysningTekstId = "opplysning.grunnlag",
     ),
     DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel(

@@ -98,12 +98,12 @@ class VedtakMapper(
             ?: throw IllegalArgumentException("behandlingId mangler")
 
     private val utfall: Utfall =
-        vedtak.get("fastsatt")?.get("utfall")?.asBoolean()?.let { utfall ->
+        vedtak.get("rettighetsperioder")?.single()?.get("harRett")?.asBoolean()?.let { utfall ->
             when (utfall) {
                 true -> INNVILGET
                 false -> AVSLÅTT
             }
-        } ?: throw UtfallMangler("Utfall mangler i path: /fastsatt/utfall")
+        } ?: throw UtfallMangler("Utfall mangler i path: /rettighetsperioder/harRett")
 
     private val vilkår: Set<Vilkår> =
         vedtak
@@ -112,10 +112,11 @@ class VedtakMapper(
                 Vilkår(
                     navn = vilkårNode["navn"].asText(),
                     status =
-                        vilkårNode["status"].asText().let {
-                            when (it) {
-                                "Oppfylt" -> Vilkår.Status.OPPFYLT
-                                else -> Vilkår.Status.IKKE_OPPFYLT
+                        vilkårNode["perioder"].firstOrNull().let { node: JsonNode? ->
+                            when (node?.get("harRett")?.asBoolean()) {
+                                true -> Vilkår.Status.OPPFYLT
+                                false -> Vilkår.Status.IKKE_OPPFYLT
+                                null -> Vilkår.Status.IKKE_OPPFYLT
                             }
                         },
                 )
@@ -123,9 +124,8 @@ class VedtakMapper(
 
     private val vedtakOpplysninger: Set<Opplysning> =
         setOf(
-            vedtak.finnOpplysningAt(
-                opplysningTekstId = Grunnlag.opplysningTekstId,
-                jsonPointer = "/fastsatt/grunnlag/grunnlag",
+            vedtak.finnNoenAndreOpplysninger(
+                opplysningsType = Grunnlag,
                 datatype = HELTALL,
                 enhet = KRONER,
             ),
@@ -351,7 +351,8 @@ class VedtakMapper(
             datatype = datatype,
             enhet = enhet,
         ) { opplysning ->
-            opplysning.find { it["opplysningTypeId"].asText() == opplysningType.opplysningTypeId.toString() }?.findValue("verdi")?.asText()
+            opplysning.find { it["opplysningTypeId"].asText() == opplysningType.opplysningTypeId.toString() }
+                ?.findValue("verdi")?.asText()
         }
 
     private fun JsonNode.lagOpplysningerForSamordning(): Set<Opplysning> {
@@ -473,6 +474,7 @@ class VedtakMapper(
                         ),
                     )
                 }
+
                 "Permitteringsperiode" -> {
                     opplysninger.add(
                         Opplysning(
@@ -483,6 +485,7 @@ class VedtakMapper(
                         ),
                     )
                 }
+
                 "FiskePermitteringsperiode" -> {
                     opplysninger.add(
                         Opplysning(
@@ -493,6 +496,7 @@ class VedtakMapper(
                         ),
                     )
                 }
+
                 "Egenandel" ->
                     opplysninger.add(
                         Opplysning(
@@ -536,7 +540,7 @@ class VedtakMapper(
         }
     }
 
-    private fun JsonNode.finnOpplysningAt(
+    private fun JsonNode.finnOpplysningAtminus1(
         opplysningTekstId: String,
         jsonPointer: String,
         datatype: Datatype,
@@ -560,6 +564,56 @@ class VedtakMapper(
                 }
             }
         }
+
+    private fun JsonNode.finnOpplysningAt(
+        opplysningTekstId: String,
+        jsonPointer: String = "opplysninger",
+        datatype: Datatype,
+        enhet: Enhet = ENHETSLØS,
+        predicate: (JsonNode) -> String? = { node -> node.asText() },
+    ): Opplysning {
+        val get = this.get(jsonPointer)
+        val blah: Opplysning? =
+            get?.let {
+                val find = it.find { node -> node.get("opplysningTypeId").asText() == opplysningTekstId }
+                find?.let { node ->
+                    val single = node.get("opplysninger")?.single()
+                    single?.let { opplysning ->
+                        Opplysning(
+                            opplysningTekstId = opplysningTekstId,
+                            datatype = datatype,
+                            enhet = enhet,
+                            råVerdi = opplysning.get("verdi").asText(),
+                        )
+                    }
+                }
+            }
+        return blah ?: NULL_OPPLYSNING
+    }
+
+    private fun JsonNode.finnNoenAndreOpplysninger(
+        opplysningsType: OpplysningTyper,
+        datatype: Datatype,
+        enhet: Enhet = ENHETSLØS,
+    ): Opplysning {
+        val get = this.get("opplysninger")
+        val blah: Opplysning? =
+            get?.let {
+                val find = it.find { node -> node.get("opplysningTypeId").asText() == opplysningsType.opplysningTypeId.toString() }
+                find?.let { node ->
+                    val single = node.get("opplysninger")?.single()
+                    single?.let { opplysning ->
+                        Opplysning(
+                            opplysningTekstId = opplysningsType.opplysningTekstId,
+                            datatype = datatype,
+                            enhet = enhet,
+                            råVerdi = opplysning.get("verdi").asText(),
+                        )
+                    }
+                }
+            }
+        return blah ?: NULL_OPPLYSNING
+    }
 }
 
 class VilkårMangler(

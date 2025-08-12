@@ -16,7 +16,6 @@ import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.util.readFile
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.util.UUID
 
@@ -119,7 +118,6 @@ internal class BehandlingKlientTest {
         }
     }
 
-    @Disabled
     @Test
     fun `brukes for å hente ut en behandling manuelt, må ha saksbehandler token`() {
         fun String.tilHttpProblem(status: HttpStatusCode): HttpProblemDTO =
@@ -134,12 +132,11 @@ internal class BehandlingKlientTest {
                 )
             }
 
-        val behandlingId = UUID.fromString("01943b06-1a68-7dad-88e1-19e31cde711c")
+        val behandlingId = UUID.fromString("01946e2f-5a73-7f88-bc8a-8e0a5184a200")
 
         // saksbhehandler token, hentes fra azure-token-generator f,eks
         @Suppress("ktlint:standard:max-line-length")
-        val token =
-            ""
+        val token = ""
         val klient = lagHttpKlient(engine = CIO.create { }, expectSucces = false)
 
         runBlocking {
