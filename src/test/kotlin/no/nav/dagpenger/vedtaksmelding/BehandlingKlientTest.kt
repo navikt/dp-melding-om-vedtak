@@ -7,7 +7,6 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
-import no.nav.dagpenger.vedtaksmelding.k8.setAzureAuthEnv
 import no.nav.dagpenger.vedtaksmelding.util.readFile
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -95,31 +94,24 @@ internal class BehandlingKlientTest {
         @Suppress("ktlint:standard:max-line-length")
         val token = ""
 
-        // krever at man er logget inn paa naisdevice, dev-gcp
-        // k8s kontekst er satt til dev-gcp og i riktig namespace
-        setAzureAuthEnv(
-            app = "dp-melding-om-vedtak",
-            type = "azurerator.nais.io",
-        ) {
-            val tokenProvider = Configuration.dpBehandlingTokenProvider
-            val klient =
-                BehandlingHttpKlient(
-                    dpBehandlingApiUrl = "https://dp-behandling.intern.dev.nav.no/behandling",
-                    tokenProvider = tokenProvider,
-                )
-            runBlocking {
+        val tokenProvider = Configuration.dpBehandlingTokenProvider
+        val klient =
+            BehandlingHttpKlient(
+                dpBehandlingApiUrl = "https://dp-behandling.intern.dev.nav.no/behandling",
+                tokenProvider = tokenProvider,
+            )
+        runBlocking {
 //                val behandling =
 //                    klient.hentBehandling(behandling = behandlingId, saksbehandler = Saksbehandler(token))
 //                println(behandling)
 
-                klient
-                    .hentVedtak(behandlingId = behandlingId, klient = Saksbehandler(token))
-                    .onFailure { println(it) }
-                    .getOrThrow()
-                    .let { vedtak ->
-                        println(vedtak)
-                    }
-            }
+            klient
+                .hentVedtak(behandlingId = behandlingId, klient = Saksbehandler(token))
+                .onFailure { println(it) }
+                .getOrThrow()
+                .let { vedtak ->
+                    println(vedtak)
+                }
         }
     }
 }
