@@ -3,7 +3,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 plugins {
     id("common")
     application
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    alias(libs.plugins.shadow.jar)
 }
 dependencies {
     implementation(project(":openapi"))
@@ -29,15 +29,14 @@ dependencies {
     val kotlinxHtmlVersion = "0.12.0"
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinxHtmlVersion")
 
-    testImplementation("io.kotest:kotest-assertions-json:${libs.versions.kotest.get()}")
+    testImplementation(libs.kotest.assertions.json)
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.mockk)
     testImplementation(libs.mock.oauth2.server)
     testImplementation(libs.bundles.kotest.assertions)
     testImplementation(libs.bundles.postgres.test)
-    testImplementation("io.ktor:ktor-client-mock:${libs.versions.ktor.get()}")
+    testImplementation(libs.ktor.client.mock)
 
-    testImplementation("io.kubernetes:client-java:22.0.0")
     testImplementation("org.jsoup:jsoup:1.15.3")
 }
 
