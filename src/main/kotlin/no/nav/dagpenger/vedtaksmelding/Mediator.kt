@@ -1,7 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding
 
 import com.fasterxml.jackson.core.type.TypeReference
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakResponseDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO

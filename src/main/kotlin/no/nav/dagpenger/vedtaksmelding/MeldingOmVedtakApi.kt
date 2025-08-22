@@ -1,5 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding
 
+import io.github.oshai.kotlinlogging.KotlinLogging
+import io.github.oshai.kotlinlogging.withLoggingContext
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
@@ -13,8 +15,6 @@ import io.ktor.server.routing.RoutingContext
 import io.ktor.server.routing.post
 import io.ktor.server.routing.put
 import io.ktor.server.routing.routing
-import mu.KotlinLogging
-import mu.withLoggingContext
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseSistEndretTidspunktDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseTekstDTO

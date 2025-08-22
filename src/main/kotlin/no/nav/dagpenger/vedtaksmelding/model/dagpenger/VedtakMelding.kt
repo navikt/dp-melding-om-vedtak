@@ -1,6 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.HJELP_FRA_ANDRE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.PERSONOPPLYSNINGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.RETT_TIL_INNSYN
