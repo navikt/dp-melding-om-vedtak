@@ -1,6 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import java.util.UUID
 

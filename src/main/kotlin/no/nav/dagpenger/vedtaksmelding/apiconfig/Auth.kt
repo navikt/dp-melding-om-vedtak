@@ -1,6 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding.apiconfig
 
 import com.auth0.jwk.JwkProviderBuilder
+import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.http.auth.HttpAuthHeader
 import io.ktor.server.auth.AuthenticationConfig
 import io.ktor.server.auth.jwt.JWTAuthenticationProvider
@@ -10,7 +11,6 @@ import io.ktor.server.auth.jwt.jwt
 import io.ktor.server.auth.parseAuthorizationHeader
 import io.ktor.server.auth.principal
 import io.ktor.server.request.ApplicationRequest
-import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.Configuration
 import java.net.URL
 

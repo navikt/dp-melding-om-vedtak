@@ -1,8 +1,8 @@
 package no.nav.dagpenger.vedtaksmelding
 
+import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.server.cio.CIO
 import io.ktor.server.engine.embeddedServer
-import mu.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.db.PostgresDataSourceBuilder
 import no.nav.dagpenger.vedtaksmelding.db.PostgresDataSourceBuilder.runMigration
 import no.nav.dagpenger.vedtaksmelding.db.PostgresVedtaksmeldingRepository

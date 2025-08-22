@@ -1,5 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.apiconfig
 
+import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.jackson.JacksonConverter
@@ -16,7 +17,6 @@ import io.ktor.server.request.document
 import io.ktor.server.request.httpMethod
 import io.ktor.server.request.path
 import io.ktor.server.response.respond
-import mu.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
 import no.nav.dagpenger.vedtaksmelding.HentVedtakException
@@ -59,7 +59,6 @@ fun Application.apiConfig() {
             val queryParams = call.request.queryParameters.entries()
             "$status $method $path $queryParams $duration ms"
         }
-        this.logger = log
     }
 
     install(StatusPages) {
