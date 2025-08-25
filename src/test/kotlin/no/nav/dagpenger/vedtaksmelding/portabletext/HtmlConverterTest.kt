@@ -56,7 +56,7 @@ class HtmlConverterTest {
                     objectMapper.readValue(it, ResultDTO::class.java)
                 }.result
 
-        hentVedtak("/json/avslag.json")
+        hentVedtak("/json/avslag_resultat.json")
             .let { vedtak -> VedtakMelding.byggVedtaksmelding(vedtak, sanityTekster) }
             .let { vedtakMelding ->
                 HtmlConverter.toHtml(

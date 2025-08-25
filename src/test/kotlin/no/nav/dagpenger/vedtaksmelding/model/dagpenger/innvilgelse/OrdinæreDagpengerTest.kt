@@ -3,11 +3,8 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.Egenandel
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.ManglerBrevstøtte
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
@@ -26,11 +23,6 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_STANS_ÅRSAKER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_UTBETALING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.FLYTTALL
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.BARN
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
@@ -44,8 +36,7 @@ class OrdinæreDagpengerTest {
                 vedtak =
                     Vedtak(
                         behandlingId = behandlingId,
-                        vilkår = emptySet(),
-                        utfall = Utfall.AVSLÅTT,
+                        utfall = Vedtak.Utfall.AVSLÅTT,
                         opplysninger = emptySet(),
                     ),
                 alleBrevblokker = emptyList(),
@@ -57,8 +48,7 @@ class OrdinæreDagpengerTest {
                 vedtak =
                     Vedtak(
                         behandlingId = behandlingId,
-                        vilkår = emptySet(),
-                        utfall = Utfall.INNVILGET,
+                        utfall = Vedtak.Utfall.INNVILGET,
                         opplysninger = emptySet(),
                     ),
                 alleBrevblokker = emptyList(),
@@ -90,9 +80,11 @@ class OrdinæreDagpengerTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår = emptySet(),
-                    utfall = Utfall.INNVILGET,
-                    opplysninger = setOf(egenandel()),
+                    utfall = Vedtak.Utfall.INNVILGET,
+                    opplysninger =
+                        setOf(
+                            DagpengerOpplysning.Egenandel(3000),
+                        ),
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -123,9 +115,11 @@ class OrdinæreDagpengerTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår = emptySet(),
-                    utfall = Utfall.INNVILGET,
-                    opplysninger = setOf(barnetilleggOpplysning(), egenandel()),
+                    utfall = Vedtak.Utfall.INNVILGET,
+                    setOf(
+                        DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1),
+                        DagpengerOpplysning.Egenandel(3000),
+                    ),
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -134,12 +128,11 @@ class OrdinæreDagpengerTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår = emptySet(),
-                    utfall = Utfall.INNVILGET,
+                    utfall = Vedtak.Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            barnetilleggOpplysning("0"),
-                            egenandel(),
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(0),
+                            DagpengerOpplysning.Egenandel(3000),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -172,13 +165,14 @@ class OrdinæreDagpengerTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår = emptySet(),
-                    utfall = Utfall.INNVILGET,
+                    utfall = Vedtak.Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            barnetilleggOpplysning(),
-                            nittiProsentRegelOpplysning(),
-                            egenandel(),
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1),
+                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
+                                10,
+                            ),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -188,10 +182,15 @@ class OrdinæreDagpengerTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår = emptySet(),
-                    utfall = Utfall.INNVILGET,
+                    utfall = Vedtak.Utfall.INNVILGET,
                     opplysninger =
-                        setOf(barnetilleggOpplysning(), nittiProsentRegelOpplysning("0"), egenandel()),
+                        setOf(
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1),
+                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
+                                0,
+                            ),
+                        ),
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder - INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId
@@ -223,37 +222,17 @@ class OrdinæreDagpengerTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår = emptySet(),
-                    utfall = Utfall.INNVILGET,
+                    utfall = Vedtak.Utfall.INNVILGET,
                     opplysninger =
-                        setOf(nittiProsentRegelOpplysning(), barnetilleggOpplysning(), egenandel()),
+                        setOf(
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1),
+                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
+                                10,
+                            ),
+                        ),
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
-
-    private fun nittiProsentRegelOpplysning(verdi: String = "10") =
-        Opplysning(
-            opplysningTekstId =
-                AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget.opplysningTekstId,
-            råVerdi = verdi,
-            datatype = FLYTTALL,
-            enhet = KRONER,
-        )
-
-    private fun barnetilleggOpplysning(verdi: String = "1") =
-        Opplysning(
-            opplysningTekstId = AntallBarnSomGirRettTilBarnetillegg.opplysningTekstId,
-            råVerdi = verdi,
-            datatype = HELTALL,
-            enhet = BARN,
-        )
-
-    private fun egenandel() =
-        Opplysning(
-            opplysningTekstId = Egenandel.opplysningTekstId,
-            råVerdi = "3000",
-            datatype = HELTALL,
-            enhet = KRONER,
-        )
 }

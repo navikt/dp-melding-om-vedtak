@@ -22,7 +22,6 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_EGENANDEL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG
@@ -131,7 +130,7 @@ class VedtakHtmlTest {
             requireNotNull(alleBrevblokker) { "alleBrevblokker should not be null" }
             val avslagMelding =
                 AvslagMelding(
-                    vedtak = hentVedtak("/json/avslag.json"),
+                    vedtak = hentVedtak("/json/avslag_resultat.json"),
                     alleBrevblokker = alleBrevblokker,
                 )
 
@@ -189,7 +188,7 @@ class VedtakHtmlTest {
         runBlocking {
             val innvilgelseMelding =
                 InnvilgelseMelding(
-                    vedtak = hentVedtak("/json/innvilgelsesVedtak.json"),
+                    vedtak = hentVedtak("/json/innvigelse_ord_resultat.json"),
                     alleBrevblokker = sanityKlient.hentBrevBlokker(),
                 )
             innvilgelseMelding.hentOpplysninger()
@@ -208,7 +207,6 @@ class VedtakHtmlTest {
                     INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                     INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
                     INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
-                    INNVILGELSE_BARNETILLEGG.brevblokkId,
                     INNVILGELSE_GRUNNLAG.brevblokkId,
                     INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
                     INNVILGELSE_EGENANDEL.brevblokkId,

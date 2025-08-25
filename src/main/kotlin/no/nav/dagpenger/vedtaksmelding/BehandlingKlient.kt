@@ -20,7 +20,7 @@ private val sikkerlogg = KotlinLogging.logger("tjenestekall")
 private val log = KotlinLogging.logger { }
 
 interface BehandlingKlient {
-    suspend fun hentVedtak(
+    suspend fun hentBehandlingResultat(
         behandlingId: UUID,
         klient: Klient,
     ): Result<Vedtak>
@@ -31,33 +31,48 @@ internal class BehandlingHttpKlient(
     private val tokenProvider: (Klient) -> String,
     private val httpClient: HttpClient = lagHttpKlient(engine = CIO.create { }, expectSucces = false),
 ) : BehandlingKlient {
-    private suspend fun hentVedtakJson(
+    private suspend fun hentBehandlingResultatJson(
         behandlingId: UUID,
         klient: Klient,
-    ): Result<String> =
-        httpClient
-            .get(urlString = "$dpBehandlingApiUrl/$behandlingId/vedtak") {
+        subPath: String,
+    ): Result<String> {
+        val urlString = "$dpBehandlingApiUrl/$behandlingId/$subPath"
+        return httpClient
+            .get(urlString = urlString) {
                 header(HttpHeaders.Authorization, "Bearer ${tokenProvider.invoke(klient)}")
                 accept(ContentType.Application.Json)
             }.let { response ->
                 val responseTekst = response.bodyAsText()
                 when (response.status == HttpStatusCode.OK) {
                     true -> {
-                        sikkerlogg.info { "Hentet vedtak for behandling $behandlingId $responseTekst" }
+                        sikkerlogg.info { "Hentet behandlingResultat for behandling $urlString $behandlingId $responseTekst" }
                         Result.success(responseTekst)
                     }
 
                     false -> {
-                        log.error { "Feil ved henting av vedtak for behandling $behandlingId: $responseTekst" }
-                        Result.failure(HentVedtakException(response.status, responseTekst.tilHttpProblem(response.status)))
+                        log.error { "Feil ved henting av behandlingResultat for behandling $urlString $behandlingId: $responseTekst" }
+                        Result.failure(
+                            HentVedtakException(
+                                response.status,
+                                responseTekst.tilHttpProblem(response.status),
+                            ),
+                        )
                     }
                 }
             }
+    }
 
-    override suspend fun hentVedtak(
+    override suspend fun hentBehandlingResultat(
         behandlingId: UUID,
         klient: Klient,
-    ): Result<Vedtak> = hentVedtakJson(behandlingId, klient).map { VedtakMapper(it).vedtak() }
+    ): Result<Vedtak> =
+        hentBehandlingResultatJson(
+            behandlingId = behandlingId,
+            klient = klient,
+            subPath = "behandlingResultat",
+        ).map { json ->
+            VedtakMapper(json).vedtak()
+        }
 }
 
 private fun String.tilHttpProblem(status: HttpStatusCode): HttpProblemDTO =
