@@ -22,12 +22,10 @@ import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMapper
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagMelding
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
@@ -53,19 +51,15 @@ class MediatorTest {
         val vedtak =
             Vedtak(
                 behandlingId = behandlingId,
-                vilkår =
+                utfall = Vedtak.Utfall.AVSLÅTT,
+                opplysninger =
                     setOf(
-                        Vilkår(
-                            MINSTEINNTEKT.vilkårNavn,
-                            Vilkår.Status.IKKE_OPPFYLT,
-                        ),
+                        DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false),
                     ),
-                utfall = Utfall.AVSLÅTT,
-                opplysninger = emptySet(),
             )
         val behandlingKlient =
             mockk<BehandlingKlient>().also {
-                coEvery { it.hentVedtak(behandlingId, klient) } returns Result.success(vedtak)
+                coEvery { it.hentBehandlingResultat(behandlingId, klient) } returns Result.success(vedtak)
             }
         withMigratedDb { dataSource ->
             val repository = PostgresVedtaksmeldingRepository(dataSource)
@@ -90,10 +84,15 @@ class MediatorTest {
 
     @Test
     fun `Returnere rett vedtak ved bruk av hentEndeligVedtaksmelding `() {
-        val vedtak =
-            ("/json/vedtak.json").readFile().let {
-                VedtakMapper(it).vedtak()
-            }
+        val vedtak = VedtakMapper("/json/innvigelse_ord_resultat.json".readFile()).vedtak()
+        Vedtak(
+            behandlingId = behandlingId,
+            utfall = Vedtak.Utfall.AVSLÅTT,
+            opplysninger =
+                setOf(
+                    DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false),
+                ),
+        )
         val meldingOmVedtakDataDTO =
             MeldingOmVedtakDataDTO(
                 behandlingstype = BehandlingstypeDTO.RETT_TIL_DAGPENGER,
@@ -115,7 +114,7 @@ class MediatorTest {
 
         val behandlingKlient =
             mockk<BehandlingKlient>().also {
-                coEvery { it.hentVedtak(behandlingId, klient) } returns Result.success(vedtak)
+                coEvery { it.hentBehandlingResultat(behandlingId, klient) } returns Result.success(vedtak)
             }
 
         withMigratedDb {
@@ -140,19 +139,12 @@ class MediatorTest {
         val vedtak =
             Vedtak(
                 behandlingId = behandlingId,
-                vilkår =
-                    setOf(
-                        Vilkår(
-                            MINSTEINNTEKT.vilkårNavn,
-                            Vilkår.Status.IKKE_OPPFYLT,
-                        ),
-                    ),
-                utfall = Utfall.AVSLÅTT,
-                opplysninger = emptySet(),
+                utfall = Vedtak.Utfall.AVSLÅTT,
+                opplysninger = setOf(DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false)),
             )
         val behandlingKlient =
             mockk<BehandlingKlient>().also {
-                coEvery { it.hentVedtak(behandlingId, klient) } returns Result.success(vedtak)
+                coEvery { it.hentBehandlingResultat(behandlingId, klient) } returns Result.success(vedtak)
             }
 
         val mediator =
@@ -173,7 +165,7 @@ class MediatorTest {
         }
 
         coVerify(exactly = 1) {
-            behandlingKlient.hentVedtak(behandlingId, klient)
+            behandlingKlient.hentBehandlingResultat(behandlingId, klient)
         }
     }
 
@@ -183,7 +175,7 @@ class MediatorTest {
             Mediator(
                 behandlingKlient =
                     mockk<BehandlingKlient>().also {
-                        coEvery { it.hentVedtak(any(), any()) } throws RuntimeException("Noe gikk galt")
+                        coEvery { it.hentBehandlingResultat(any(), any()) } throws RuntimeException("Noe gikk galt")
                     },
                 klageBehandlingKlient = mockKlageBehandlingKlient,
                 sanityKlient = sanityKlient,

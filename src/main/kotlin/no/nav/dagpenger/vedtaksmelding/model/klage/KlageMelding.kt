@@ -1,11 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.model.klage
 
-import no.nav.dagpenger.vedtaksmelding.model.KlageOpplysningTyper.ErKlagenSkriftelig
-import no.nav.dagpenger.vedtaksmelding.model.KlageOpplysningTyper.ErKlagenUnderskrevet
-import no.nav.dagpenger.vedtaksmelding.model.KlageOpplysningTyper.KlageUtfall
-import no.nav.dagpenger.vedtaksmelding.model.KlageOpplysningTyper.KlagefristOppfylt
-import no.nav.dagpenger.vedtaksmelding.model.KlageOpplysningTyper.KlagenNevnerEndring
-import no.nav.dagpenger.vedtaksmelding.model.KlageOpplysningTyper.RettsligKlageinteresse
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.HJELP_FRA_ANDRE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.RETT_TIL_INNSYN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
@@ -22,7 +17,6 @@ import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_AVVIST
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Brev
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.portabletext.Child
 
@@ -56,82 +50,55 @@ class KlageMelding(
     }
 
     private fun opprettholdelse(): List<String> {
-        if (!klagevedtak.opplysninger.any {
-                it.opplysningTekstId == KlageUtfall.opplysningTekstId && it.råVerdi().uppercase() == "OPPRETTHOLDELSE"
-            }
-        ) {
-            return emptyList()
+        return if (!klagevedtak.any<KlageOpplysning.KlageUtfall> { it.verdi.uppercase() == "OPPRETTHOLDELSE" }) {
+            emptyList()
+        } else {
+            listOf(
+                KLAGE_OPPRETTHOLDELSE_DEL_1.brevblokkId,
+                KLAGE_OPPRETTHOLDELSE_DEL_2.brevblokkId,
+            ) + fasteAvsluttendeBlokker
         }
-        return listOf(
-            KLAGE_OPPRETTHOLDELSE_DEL_1.brevblokkId,
-            KLAGE_OPPRETTHOLDELSE_DEL_2.brevblokkId,
-        ) + fasteAvsluttendeBlokker
     }
 
     private fun avvist(): List<String> {
-        if (!klagevedtak.opplysninger.any {
-                it.opplysningTekstId == KlageUtfall.opplysningTekstId && it.råVerdi().uppercase() == "AVVIST"
+        if (!klagevedtak.any<KlageOpplysning.KlageUtfall> {
+                it.verdi.uppercase() == "AVVIST"
             }
         ) {
             return emptyList()
         }
+
         val brevBlokkIder = mutableListOf<String>()
         brevBlokkIder.add(KLAGE_AVVIST_INTRO.brevblokkId)
 
-        if ((
-                klagevedtak.opplysninger.any {
-                    it.opplysningTekstId == ErKlagenSkriftelig.opplysningTekstId && !it.råVerdi().toBoolean()
-                }
-            ) ||
-            (
-                klagevedtak.opplysninger.any {
-                    it.opplysningTekstId == ErKlagenUnderskrevet.opplysningTekstId && !it.råVerdi().toBoolean()
-                }
-            )
+        if (
+            klagevedtak.ikkeOppfylt<KlageOpplysning.ErKlagenSkriftelig>() ||
+            klagevedtak.ikkeOppfylt<KlageOpplysning.ErKlagenUnderskrevet>()
         ) {
             brevBlokkIder.add(KLAGE_AVVIST_SKRIFTLIG_OG_SIGNERT.brevblokkId)
         }
-        if (klagevedtak.opplysninger.any {
-                it.opplysningTekstId == KlagenNevnerEndring.opplysningTekstId && !it.råVerdi().toBoolean()
-            }
-        ) {
+
+        if (klagevedtak.ikkeOppfylt<KlageOpplysning.KlagenNevnerEndring>()) {
             brevBlokkIder.add(KLAGE_AVVIST_NEVNER_ENDRING.brevblokkId)
         }
-        if ((
-                klagevedtak.opplysninger.any {
-                    it.opplysningTekstId == ErKlagenSkriftelig.opplysningTekstId && !it.råVerdi().toBoolean()
-                }
-            ) ||
-            (
-                klagevedtak.opplysninger.any {
-                    it.opplysningTekstId == ErKlagenUnderskrevet.opplysningTekstId && !it.råVerdi().toBoolean()
-                }
-            ) ||
-            (
-                klagevedtak.opplysninger.any {
-                    it.opplysningTekstId == KlagenNevnerEndring.opplysningTekstId && !it.råVerdi().toBoolean()
-                }
-            )
+
+        if (
+            klagevedtak.ikkeOppfylt<KlageOpplysning.ErKlagenSkriftelig>() ||
+            klagevedtak.ikkeOppfylt<KlageOpplysning.ErKlagenUnderskrevet>() ||
+            klagevedtak.ikkeOppfylt<KlageOpplysning.KlagenNevnerEndring>()
         ) {
             brevBlokkIder.add(KLAGE_AVVIST_SKRIFTLIG_OG_NEVNER_ENDRING_HJEMMEL.brevblokkId)
         }
 
-        if (klagevedtak.opplysninger.any {
-                it.opplysningTekstId == KlagefristOppfylt.opplysningTekstId && !it.råVerdi().toBoolean()
-            }
-        ) {
+        if (klagevedtak.ikkeOppfylt<KlageOpplysning.KlagefristOppfylt>()) {
             brevBlokkIder.add(KLAGE_AVVIST_KLAGEFIRST.brevblokkId)
             brevBlokkIder.add(KLAGE_AVVIST_KLAGEFIRST_HJEMMEL.brevblokkId)
         }
 
-        if (klagevedtak.opplysninger.any {
-                it.opplysningTekstId == RettsligKlageinteresse.opplysningTekstId && !it.råVerdi().toBoolean()
-            }
-        ) {
+        if (klagevedtak.ikkeOppfylt<KlageOpplysning.RettsligKlageinteresse>()) {
             brevBlokkIder.add(KLAGE_AVVIST_RETTSLIG_KLAGEINTERESSE.brevblokkId)
             brevBlokkIder.add(KLAGE_AVVIST_RETTSLIG_KLAGEINTERESSE_HJEMMEL.brevblokkId)
         }
-
         return brevBlokkIder.toList() + fasteAvsluttendeBlokker
     }
 

@@ -1,17 +1,8 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse
 
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.Egenandel
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.ForeldrepengerDagsats
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.HarSamordnet
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.OmsorgspengerDagsats
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.OpplæringspengerDagsats
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.PleiepengerDagsats
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.SvangerskapspengerDagsats
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.SykepengerDagsats
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.UføreDagsats
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE
@@ -35,10 +26,6 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_STANS_ÅRSAKER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_UTBETALING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.BOOLSK
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Datatype.HELTALL
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning.Enhet.KRONER
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
@@ -68,13 +55,12 @@ class SamordningTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    vilkår = emptySet(),
-                    utfall = Utfall.INNVILGET,
+                    utfall = Vedtak.Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            samordnetOpplysning(),
-                            egenandel(),
-                            samordnetYtelseDagsats(SykepengerDagsats.opplysningTekstId),
+                            DagpengerOpplysning.HarSamordnet(true),
+                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.SykepengerDagsats(100),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -106,13 +92,12 @@ class SamordningTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    vilkår = emptySet(),
-                    utfall = Utfall.INNVILGET,
+                    utfall = Vedtak.Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            samordnetOpplysning(),
-                            egenandel(),
-                            samordnetYtelseDagsats(PleiepengerDagsats.opplysningTekstId),
+                            DagpengerOpplysning.HarSamordnet(true),
+                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.PleiepengerDagsats(100),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -144,13 +129,12 @@ class SamordningTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    vilkår = emptySet(),
-                    utfall = Utfall.INNVILGET,
+                    utfall = Vedtak.Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            samordnetOpplysning(),
-                            egenandel(),
-                            samordnetYtelseDagsats(OmsorgspengerDagsats.opplysningTekstId),
+                            DagpengerOpplysning.HarSamordnet(true),
+                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.OmsorgspengerDagsats(100),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -182,13 +166,12 @@ class SamordningTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    vilkår = emptySet(),
-                    utfall = Utfall.INNVILGET,
+                    utfall = Vedtak.Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            samordnetOpplysning(),
-                            egenandel(),
-                            samordnetYtelseDagsats(OpplæringspengerDagsats.opplysningTekstId),
+                            DagpengerOpplysning.HarSamordnet(true),
+                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.OpplæringspengerDagsats(100),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -220,13 +203,12 @@ class SamordningTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    vilkår = emptySet(),
-                    utfall = Utfall.INNVILGET,
+                    utfall = Vedtak.Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            samordnetOpplysning(),
-                            egenandel(),
-                            samordnetYtelseDagsats(UføreDagsats.opplysningTekstId),
+                            DagpengerOpplysning.HarSamordnet(true),
+                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.UføreDagsats(100),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -258,13 +240,12 @@ class SamordningTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    vilkår = emptySet(),
-                    utfall = Utfall.INNVILGET,
+                    utfall = Vedtak.Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            samordnetOpplysning(),
-                            egenandel(),
-                            samordnetYtelseDagsats(ForeldrepengerDagsats.opplysningTekstId),
+                            DagpengerOpplysning.HarSamordnet(true),
+                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.ForeldrepengerDagsats(100),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -296,13 +277,12 @@ class SamordningTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    vilkår = emptySet(),
-                    utfall = Utfall.INNVILGET,
+                    utfall = Vedtak.Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            samordnetOpplysning(),
-                            egenandel(),
-                            samordnetYtelseDagsats(SvangerskapspengerDagsats.opplysningTekstId),
+                            DagpengerOpplysning.HarSamordnet(true),
+                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.SvangerskapspengerDagsats(100),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -334,15 +314,14 @@ class SamordningTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    vilkår = emptySet(),
-                    utfall = Utfall.INNVILGET,
+                    utfall = Vedtak.Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            samordnetOpplysning(),
-                            egenandel(),
-                            samordnetYtelseDagsats(SykepengerDagsats.opplysningTekstId),
-                            samordnetYtelseDagsats(ForeldrepengerDagsats.opplysningTekstId),
-                            samordnetYtelseDagsats(SvangerskapspengerDagsats.opplysningTekstId),
+                            DagpengerOpplysning.HarSamordnet(true),
+                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.SykepengerDagsats(100),
+                            DagpengerOpplysning.ForeldrepengerDagsats(100),
+                            DagpengerOpplysning.SvangerskapspengerDagsats(100),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -374,35 +353,14 @@ class SamordningTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    vilkår = emptySet(),
-                    utfall = Utfall.INNVILGET,
-                    opplysninger = setOf(samordnetOpplysning(), egenandel()),
+                    utfall = Vedtak.Utfall.INNVILGET,
+                    opplysninger =
+                        setOf(
+                            DagpengerOpplysning.HarSamordnet(true),
+                            DagpengerOpplysning.Egenandel(3000),
+                        ),
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
     }
-
-    private fun samordnetOpplysning(verdi: String = "true") =
-        Opplysning(
-            opplysningTekstId = HarSamordnet.opplysningTekstId,
-            råVerdi = verdi,
-            datatype = BOOLSK,
-        )
-
-    private fun egenandel() =
-        Opplysning(
-            opplysningTekstId = Egenandel.opplysningTekstId,
-            råVerdi = "3000",
-            datatype = HELTALL,
-            enhet = KRONER,
-        )
-
-    private fun samordnetYtelseDagsats(
-        opplysningTekstId: String,
-        dagsats: Int = 100,
-    ) = Opplysning(
-        opplysningTekstId = opplysningTekstId,
-        råVerdi = dagsats.toString(),
-        datatype = BOOLSK,
-    )
 }

@@ -16,7 +16,7 @@ internal class BehandlingKlientTest {
     @Test
     fun `Skal kalle behandling endepunkt med riktig headers og parse response`() {
         val behandlingId = UUID.fromString("01937743-812d-7a69-b492-d25eb9768c68")
-        val vedtakJson = "/json/vedtak.json".readFile()
+        val vedtakJson = "/json/innvigelse_ord_resultat.json".readFile()
 
         val behandlingKlient =
             BehandlingHttpKlient(
@@ -25,7 +25,7 @@ internal class BehandlingKlientTest {
                 httpClient =
                     lagHttpKlient(
                         MockEngine { request ->
-                            request.url.encodedPath shouldBe "/$behandlingId/vedtak"
+                            request.url.encodedPath shouldBe "/$behandlingId/behandlingResultat"
                             request.headers["Authorization"] shouldBe "Bearer token"
                             respond(
                                 content = vedtakJson,
@@ -35,7 +35,7 @@ internal class BehandlingKlientTest {
                     ),
             )
         runBlocking {
-            behandlingKlient.hentVedtak(behandlingId, Saksbehandler("token")).isSuccess shouldBe true
+            behandlingKlient.hentBehandlingResultat(behandlingId, Saksbehandler("token")).isSuccess shouldBe true
         }
     }
 
@@ -70,7 +70,7 @@ internal class BehandlingKlientTest {
                     ),
             )
         runBlocking {
-            behandlingKlient.hentVedtak(behandlingId, Saksbehandler("token")).let {
+            behandlingKlient.hentBehandlingResultat(behandlingId, Saksbehandler("token")).let {
                 it.isFailure shouldBe true
                 it.exceptionOrNull().let { throwable ->
                     require(throwable is HentVedtakException)
@@ -106,7 +106,7 @@ internal class BehandlingKlientTest {
 //                println(behandling)
 
             klient
-                .hentVedtak(behandlingId = behandlingId, klient = Saksbehandler(token))
+                .hentBehandlingResultat(behandlingId = behandlingId, klient = Saksbehandler(token))
                 .onFailure { println(it) }
                 .getOrThrow()
                 .let { vedtak ->

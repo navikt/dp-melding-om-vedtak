@@ -2,9 +2,6 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.types.shouldBeInstanceOf
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.AVSLÅTT
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.INNVILGET
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.MINSTEINNTEKT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseMelding
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
@@ -20,14 +17,11 @@ class VedtakMeldingTest {
                 vedtak =
                     Vedtak(
                         behandlingId = behandlingId,
-                        vilkår =
+                        opplysninger =
                             setOf(
-                                Vilkår(
-                                    navn = MINSTEINNTEKT.vilkårNavn,
-                                    status = Vilkår.Status.IKKE_OPPFYLT,
-                                ),
+                                DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false),
                             ),
-                        utfall = AVSLÅTT,
+                        utfall = Vedtak.Utfall.AVSLÅTT,
                     ),
                 alleBrevblokker = emptyList(),
             ).shouldBeInstanceOf<AvslagMelding>()
@@ -37,8 +31,8 @@ class VedtakMeldingTest {
                 vedtak =
                     Vedtak(
                         behandlingId = behandlingId,
-                        vilkår = emptySet(),
-                        utfall = INNVILGET,
+                        opplysninger = emptySet(),
+                        utfall = Vedtak.Utfall.INNVILGET,
                     ),
                 alleBrevblokker = emptyList(),
             ).shouldBeInstanceOf<InnvilgelseMelding>()
@@ -51,8 +45,8 @@ class VedtakMeldingTest {
                 vedtak =
                     Vedtak(
                         behandlingId = behandlingId,
-                        vilkår = emptySet(),
-                        utfall = AVSLÅTT,
+                        opplysninger = emptySet(),
+                        utfall = Vedtak.Utfall.AVSLÅTT,
                     ),
                 alleBrevblokker = emptyList(),
             )

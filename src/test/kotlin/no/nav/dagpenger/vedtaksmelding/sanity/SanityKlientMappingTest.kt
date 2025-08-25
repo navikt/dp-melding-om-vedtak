@@ -6,9 +6,6 @@ import io.ktor.client.engine.mock.respond
 import io.ktor.http.headersOf
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.vedtaksmelding.lagHttpKlient
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.AntallBarnSomGirRettTilBarnetillegg
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.BarnetilleggIKroner
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningTyper.Prøvingsdato
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT_HJEMMEL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
@@ -23,7 +20,7 @@ class SanityKlientMappingTest {
             SanityKlient(
                 sanityUrl = "http://locahost/sanity",
                 httpKlient = lagHttpKlient(engine = lageMockEngine(), block = SanityKlient.httpClientConfig),
-            ).hentOpplysningTekstIder(listOf(AVSLAG_INNLEDNING.brevblokkId)) shouldBe listOf(Prøvingsdato.opplysningTekstId)
+            ).hentOpplysningTekstIder(listOf(AVSLAG_INNLEDNING.brevblokkId)) shouldBe listOf("opplysning.provingsdato")
         }
     }
 
@@ -35,8 +32,8 @@ class SanityKlientMappingTest {
                 httpKlient = lagHttpKlient(engine = lageMockEngine()),
             ).hentOpplysningTekstIder(listOf(INNVILGELSE_BARNETILLEGG.brevblokkId)) shouldBe
                 listOf(
-                    AntallBarnSomGirRettTilBarnetillegg.opplysningTekstId,
-                    BarnetilleggIKroner.opplysningTekstId,
+                    "opplysning.antall-barn-som-gir-rett-til-barnetillegg",
+                    "opplysning.barnetillegg-i-kroner",
                 )
         }
     }

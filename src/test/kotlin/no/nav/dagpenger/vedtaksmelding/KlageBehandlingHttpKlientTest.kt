@@ -16,11 +16,10 @@ class KlageBehandlingHttpKlientTest {
             tokenProvider = { "" },
         ).let {
             runBlocking {
-                it
-                    .hentVedtak(
-                        behandlingId = UUID.fromString("0196a5b8-3dab-779f-ba9c-a116e298b2b1"),
-                        klient = Saksbehandler(token = ""),
-                    ).getOrThrow()
+                it.hentVedtak(
+                    behandlingId = UUID.fromString("0196a5b8-3dab-779f-ba9c-a116e298b2b1"),
+                    klient = Saksbehandler(token = ""),
+                ).getOrThrow()
             }
         }
     }

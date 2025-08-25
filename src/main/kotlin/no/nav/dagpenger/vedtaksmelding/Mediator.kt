@@ -84,7 +84,7 @@ class Mediator(
             RETT_TIL_DAGPENGER -> {
                 val vedtak =
                     behandlingKlient
-                        .hentVedtak(
+                        .hentBehandlingResultat(
                             behandlingId = behandlingId,
                             klient = klient,
                         ).onFailure { throwable ->

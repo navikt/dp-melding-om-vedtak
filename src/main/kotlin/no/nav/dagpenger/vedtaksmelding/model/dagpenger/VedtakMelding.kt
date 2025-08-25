@@ -1,6 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
 import io.github.oshai.kotlinlogging.KotlinLogging
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.HJELP_FRA_ANDRE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.PERSONOPPLYSNINGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.RETT_TIL_INNSYN
@@ -10,11 +11,16 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevbl
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseMelding
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.Brev
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.portabletext.Child
 
 private val logger = KotlinLogging.logger {}
+
+inline fun <reified T : DagpengerOpplysning<*, Boolean>> Vedtak.ikkOppfyltBlokker(brevblokkIder: () -> List<String>): List<String> =
+    when (this.ikkeOppfylt<T>()) {
+        true -> brevblokkIder()
+        false -> emptyList()
+    }
 
 abstract class VedtakMelding(
     protected open val vedtak: Vedtak,

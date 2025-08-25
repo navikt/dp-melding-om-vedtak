@@ -1,7 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.model.klage
 
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.KlageOpplysningTyper
 import org.junit.jupiter.api.Test
 import java.util.UUID
 
@@ -14,11 +13,12 @@ class KlagevedtakMapperTest {
             vedtak.behandlingId shouldBe UUID.fromString("0196a5b8-3dab-779f-ba9c-a116e298b2b1")
             vedtak.fagsakId shouldBe "fagsakId"
             vedtak.opplysninger.size shouldBe 8
-            vedtak.opplysninger.single { it.opplysningTekstId == KlageOpplysningTyper.KlageMottattDato.opplysningTekstId }.let {
-                it.formatertVerdi shouldBe "7. mai 2025"
+            vedtak.filterIsInstance<KlageOpplysning.KlageMottattDato>().single().let {
+                it.formatertVerdi() shouldBe "7. mai 2025"
             }
-            vedtak.opplysninger.single { it.opplysningTekstId == KlageOpplysningTyper.PåklagetVedtakDato.opplysningTekstId }.let {
-                it.formatertVerdi shouldBe "3. februar 2025"
+
+            vedtak.filterIsInstance<KlageOpplysning.PåklagetVedtakDato>().single().let {
+                it.formatertVerdi() shouldBe "3. februar 2025"
             }
         }
     }

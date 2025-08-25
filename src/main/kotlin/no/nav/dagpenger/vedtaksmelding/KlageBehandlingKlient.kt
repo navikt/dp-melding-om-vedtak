@@ -58,7 +58,6 @@ internal class KlageBehandlingHttpKlient(
         behandlingId: UUID,
         klient: Saksbehandler,
     ): Result<KlageVedtak> {
-        // lag en tilsvarende KlageBehandlingMapper
         return hentVedtakJson(behandlingId, klient).map {
             KlagevedtakMapper(it).vedtak()
         }

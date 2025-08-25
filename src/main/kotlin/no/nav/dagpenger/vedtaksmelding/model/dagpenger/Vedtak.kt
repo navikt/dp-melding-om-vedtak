@@ -1,16 +1,36 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
 import io.github.oshai.kotlinlogging.KotlinLogging
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Opplysning
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningIkkeFunnet
 import java.util.UUID
+
+inline fun <reified T : DagpengerOpplysning<*, *>> Vedtak.finnOpplysning(): T? {
+    return this.opplysninger.filterIsInstance<T>().singleOrNull()
+}
+
+inline fun <reified T : DagpengerOpplysning<*, Number>> Vedtak.finnOpplysning(predicate: (Number) -> Boolean): T? {
+    return this.opplysninger.filterIsInstance<T>().singleOrNull { predicate(it.verdi) }
+}
+
+inline fun <reified T : DagpengerOpplysning<*, *>> Vedtak.hentOpplysning(): T {
+    return this.finnOpplysning<T>() ?: throw OpplysningIkkeFunnet("Opplysning av type ${T::class} mangler")
+}
+
+inline fun <reified T : DagpengerOpplysning<*, Boolean>> Vedtak.ikkeOppfylt(): Boolean {
+    return this.finnOpplysning<T>()?.let { !it.verdi } ?: false
+}
+
+inline fun <reified T : DagpengerOpplysning<*, Boolean>> Vedtak.oppfylt(): Boolean {
+    return this.finnOpplysning<T>()?.verdi ?: false
+}
 
 private val sikkerlogg = KotlinLogging.logger("tjenestekall")
 
 data class Vedtak(
     val behandlingId: UUID,
-    val vilkår: Set<Vilkår> = emptySet(),
     val utfall: Utfall,
-    val opplysninger: Set<Opplysning> = emptySet(),
+    val opplysninger: Set<DagpengerOpplysning<*, *>>,
 ) {
     fun finnOpplysning(opplysningTekstId: String) = this.opplysninger.singleOrNull { it.opplysningTekstId == opplysningTekstId }
 
@@ -24,11 +44,7 @@ data class Vedtak(
     }
 
     enum class Utfall {
-        INNVILGET,
         AVSLÅTT,
+        INNVILGET,
     }
-
-    class OpplysningIkkeFunnet(
-        message: String,
-    ) : RuntimeException(message)
 }

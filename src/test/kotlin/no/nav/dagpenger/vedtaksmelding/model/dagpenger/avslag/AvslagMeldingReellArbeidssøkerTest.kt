@@ -4,16 +4,8 @@ import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vilkår
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.MINSTEINNTEKT
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.REELL_ARBEIDSSØKER
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.REELL_ARBEIDSSØKER_ARBEIDSFØR
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.REELL_ARBEIDSSØKER_ETHVERT_ARBEID
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.REELL_ARBEIDSSØKER_HELTID_DELTID
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.REELL_ARBEIDSSØKER_MOBILITET
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VilkårTyper.REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_DEL_2
@@ -31,40 +23,12 @@ import org.junit.jupiter.api.Test
 class AvslagMeldingReellArbeidssøkerTest {
     private val behandlingId = UUIDv7.ny()
 
-    private val reellArbeidssøkerIkkeOppfylt =
-        Vilkår(
-            navn = REELL_ARBEIDSSØKER.vilkårNavn,
-            status = Vilkår.Status.IKKE_OPPFYLT,
-        )
-    private val heltidDeltidIkkeOppfylt =
-        Vilkår(
-            navn = REELL_ARBEIDSSØKER_HELTID_DELTID.vilkårNavn,
-            status = Vilkår.Status.IKKE_OPPFYLT,
-        )
-
-    private val mobilitetIkkeOppfylt =
-        Vilkår(
-            navn = REELL_ARBEIDSSØKER_MOBILITET.vilkårNavn,
-            status = Vilkår.Status.IKKE_OPPFYLT,
-        )
-
-    private val arbeidsførIkkeOppfylt =
-        Vilkår(
-            navn = REELL_ARBEIDSSØKER_ARBEIDSFØR.vilkårNavn,
-            status = Vilkår.Status.IKKE_OPPFYLT,
-        )
-
-    private val ethvertArbeidIkkeOppfylt =
-        Vilkår(
-            navn = REELL_ARBEIDSSØKER_ETHVERT_ARBEID.vilkårNavn,
-            status = Vilkår.Status.IKKE_OPPFYLT,
-        )
-
-    private val registrertArbeidssøkerIkkeOppfylt =
-        Vilkår(
-            navn = REELL_ARBEIDSSØKER_REGISTRERT_SOM_ARBEIDSSØKER.vilkårNavn,
-            status = Vilkår.Status.IKKE_OPPFYLT,
-        )
+    private val reellArbeidssøkerIkkeOppfylt = DagpengerOpplysning.KravTilArbeidssøker(false)
+    private val heltidDeltidIkkeOppfylt = DagpengerOpplysning.OppfyllerKravTilArbeidssøker(false)
+    private val mobilitetIkkeOppfylt = DagpengerOpplysning.OppfyllerKravTilMobilitet(false)
+    private val arbeidsførIkkeOppfylt = DagpengerOpplysning.OppfyllerKravTilArbeidsfør(false)
+    private val ethvertArbeidIkkeOppfylt = DagpengerOpplysning.OppfyllerKravetTilEthvertArbeid(false)
+    private val registrertArbeidssøkerIkkeOppfylt = DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false)
 
     @Test
     fun `Sjekker kriterier for brevstøtte`() {
@@ -73,9 +37,8 @@ class AvslagMeldingReellArbeidssøkerTest {
                 vedtak =
                     Vedtak(
                         behandlingId = behandlingId,
-                        vilkår = setOf(reellArbeidssøkerIkkeOppfylt),
-                        utfall = Utfall.AVSLÅTT,
-                        opplysninger = emptySet(),
+                        utfall = Vedtak.Utfall.AVSLÅTT,
+                        opplysninger = setOf(reellArbeidssøkerIkkeOppfylt),
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -85,8 +48,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 vedtak =
                     Vedtak(
                         behandlingId = behandlingId,
-                        vilkår = emptySet(),
-                        utfall = Utfall.AVSLÅTT,
+                        utfall = Vedtak.Utfall.AVSLÅTT,
                         opplysninger = emptySet(),
                     ),
                 alleBrevblokker = emptyList(),
@@ -100,9 +62,8 @@ class AvslagMeldingReellArbeidssøkerTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår = setOf(reellArbeidssøkerIkkeOppfylt, heltidDeltidIkkeOppfylt),
-                    utfall = Utfall.AVSLÅTT,
-                    opplysninger = emptySet(),
+                    utfall = Vedtak.Utfall.AVSLÅTT,
+                    opplysninger = setOf(reellArbeidssøkerIkkeOppfylt, heltidDeltidIkkeOppfylt),
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -117,18 +78,13 @@ class AvslagMeldingReellArbeidssøkerTest {
 
     @Test
     fun `Bugfix - Skal ikke legge til unntaksblokk når ikke blokk om heltid deltid eller hele norge inngår i brevblokklista`() {
-        val minsteinntektIkkeOppfylt =
-            Vilkår(
-                navn = MINSTEINNTEKT.vilkårNavn,
-                status = Vilkår.Status.IKKE_OPPFYLT,
-            )
+        val minsteinntektIkkeOppfylt = DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false)
         AvslagMelding(
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår = setOf(minsteinntektIkkeOppfylt),
-                    utfall = Utfall.AVSLÅTT,
-                    opplysninger = emptySet(),
+                    utfall = Vedtak.Utfall.AVSLÅTT,
+                    opplysninger = setOf(minsteinntektIkkeOppfylt),
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -145,9 +101,8 @@ class AvslagMeldingReellArbeidssøkerTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår = setOf(reellArbeidssøkerIkkeOppfylt, mobilitetIkkeOppfylt),
-                    utfall = Utfall.AVSLÅTT,
-                    opplysninger = emptySet(),
+                    utfall = Vedtak.Utfall.AVSLÅTT,
+                    opplysninger = setOf(reellArbeidssøkerIkkeOppfylt, mobilitetIkkeOppfylt),
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -166,9 +121,8 @@ class AvslagMeldingReellArbeidssøkerTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår = setOf(reellArbeidssøkerIkkeOppfylt, arbeidsførIkkeOppfylt),
-                    utfall = Utfall.AVSLÅTT,
-                    opplysninger = emptySet(),
+                    utfall = Vedtak.Utfall.AVSLÅTT,
+                    opplysninger = setOf(reellArbeidssøkerIkkeOppfylt, arbeidsførIkkeOppfylt),
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -186,9 +140,8 @@ class AvslagMeldingReellArbeidssøkerTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår = setOf(reellArbeidssøkerIkkeOppfylt, ethvertArbeidIkkeOppfylt),
-                    utfall = Utfall.AVSLÅTT,
-                    opplysninger = emptySet(),
+                    utfall = Vedtak.Utfall.AVSLÅTT,
+                    opplysninger = setOf(reellArbeidssøkerIkkeOppfylt, ethvertArbeidIkkeOppfylt),
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -206,9 +159,8 @@ class AvslagMeldingReellArbeidssøkerTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår = setOf(registrertArbeidssøkerIkkeOppfylt),
-                    utfall = Utfall.AVSLÅTT,
-                    opplysninger = emptySet(),
+                    utfall = Vedtak.Utfall.AVSLÅTT,
+                    opplysninger = setOf(registrertArbeidssøkerIkkeOppfylt),
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -226,7 +178,8 @@ class AvslagMeldingReellArbeidssøkerTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    vilkår =
+                    utfall = Vedtak.Utfall.AVSLÅTT,
+                    opplysninger =
                         setOf(
                             reellArbeidssøkerIkkeOppfylt,
                             heltidDeltidIkkeOppfylt,
@@ -235,8 +188,6 @@ class AvslagMeldingReellArbeidssøkerTest {
                             ethvertArbeidIkkeOppfylt,
                             registrertArbeidssøkerIkkeOppfylt,
                         ),
-                    utfall = Utfall.AVSLÅTT,
-                    opplysninger = emptySet(),
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -251,21 +202,5 @@ class AvslagMeldingReellArbeidssøkerTest {
                 AVSLAG_REELL_ARBEIDSSØKER_REGISTRERT_ARBEIDSSOKER.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
             ) + VedtakMelding.fasteAvsluttendeBlokker
-    }
-
-    @Test
-    fun `Manglende kriterier for brevstøtte`() {
-        shouldThrow<VedtakMelding.ManglerBrevstøtte> {
-            AvslagMelding(
-                vedtak =
-                    Vedtak(
-                        behandlingId = behandlingId,
-                        vilkår = emptySet(),
-                        utfall = Utfall.AVSLÅTT,
-                        opplysninger = emptySet(),
-                    ),
-                alleBrevblokker = emptyList(),
-            )
-        }
     }
 }
