@@ -12,7 +12,7 @@ import java.util.UUID
 
 private val logger = KotlinLogging.logger {}
 
-class OpplysningDataException(message: String) : RuntimeException(message)
+open class OpplysningDataException(message: String) : RuntimeException(message)
 
 class BehandlingResultatData(json: String) {
     companion object {
@@ -131,7 +131,8 @@ class BehandlingResultatData(json: String) {
 
     private fun JsonNode.isDato(): Boolean = toDateOrNull() != null
 
-    private fun JsonNode.asDato(): LocalDate = toDateOrNull() ?: throw IllegalArgumentException("Kan ikke konvertere $this til LocalDate")
+    private fun JsonNode.asDato(): LocalDate =
+        toDateOrNull() ?: throw IllegalArgumentException("Kan ikke konvertere $this til LocalDate")
 
     private fun JsonNode.toDateOrNull(): LocalDate? {
         return try {
@@ -146,7 +147,7 @@ class BehandlingResultatData(json: String) {
         opplysningNoder.firstOrNull { it["opplysningTypeId"].asText() == id.toString() }?.let { opplysningNode ->
             opplysningNode["perioder"].singleOrNull {
                 it["status"].asText() == "Ny"
-            }?.let { it["verdi"] } ?: throw IllegalArgumentException("Fant ingen ny periode for opplysning med id $id")
+            }?.let { it["verdi"] } ?: throw OpplysningDataException("Fant ingen ny periode for opplysning med id $id")
         }
             ?: throw OpplysningIkkeFunnet(id)
 
@@ -157,5 +158,5 @@ class BehandlingResultatData(json: String) {
     }
 
     data class OpplysningIkkeFunnet(val opplysningId: UUID) :
-        RuntimeException("Fant ikke opplysning med id $opplysningId")
+        OpplysningDataException("Fant ikke opplysning med id $opplysningId") :
 }
