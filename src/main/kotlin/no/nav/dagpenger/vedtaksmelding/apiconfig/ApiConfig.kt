@@ -21,6 +21,7 @@ import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
 import no.nav.dagpenger.vedtaksmelding.HentVedtakException
 import no.nav.dagpenger.vedtaksmelding.metrics.metrics
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningDataException
 import org.slf4j.event.Level
 import java.net.URI
 
@@ -64,6 +65,19 @@ fun Application.apiConfig() {
     install(StatusPages) {
         exception<Throwable> { call, cause ->
             when (cause) {
+                is OpplysningDataException -> {
+                    log.error { "Not implemented: ${cause.message}" }
+                    val problem =
+                        HttpProblemDTO(
+                            title = "Not implemented",
+                            detail = cause.message,
+                            status = HttpStatusCode.NotImplemented.value,
+                            instance = instanceTekst(call),
+                            type = URI.create("dagpenger.nav.no/saksbehandling:problem:not-implemented").toString(),
+                        )
+                    call.respond(HttpStatusCode.BadRequest, problem)
+                }
+
                 is IllegalAccessException -> {
                     log.warn { "Unauthorized: ${cause.message}" }
                     sikkerlogg.warn { "Unauthorized, se sikkerlogg for detaljer: ${cause.stackTrace}" }
