@@ -14,7 +14,7 @@ private val logger = KotlinLogging.logger {}
 
 class OpplysningDataException(message: String) : RuntimeException(message)
 
-class OpplysningData(json: String) {
+class BehandlingResultatData(json: String) {
     companion object {
         private val objectMapper: ObjectMapper =
             jacksonObjectMapper()
@@ -65,18 +65,15 @@ class OpplysningData(json: String) {
         }
     }
 
-    fun heltall(id: UUID): Int = heltallEllerNull(id) ?: throw IllegalArgumentException("Fant ingen opplysning med id $id")
-
-    fun heltallEllerNull(id: UUID): Int? {
-        return finnVerdiNode(id)?.let { verdi ->
-            when (verdi["datatype"].asText() == "heltall") {
-                true -> {
-                    verdi["verdi"].also { require(it.isInt) { "Forventet at heltall har int verdi, men var $it" } }
-                        .asInt()
-                }
-
-                false -> throw IllegalArgumentException("Ugyldig verdinode: $verdi")
+    fun heltall(id: UUID): Int {
+        val verdi = verdiNode(id)
+        return when (verdi["datatype"].asText() == "heltall") {
+            true -> {
+                verdi["verdi"].also { require(it.isInt) { "Forventet at heltall har int verdi, men var $it" } }
+                    .asInt()
             }
+
+            false -> throw IllegalArgumentException("Ugyldig verdinode: $verdi")
         }
     }
 
@@ -107,11 +104,7 @@ class OpplysningData(json: String) {
     }
 
     fun boolsk(id: UUID): Boolean {
-        return boolskEllerNull(id) ?: throw IllegalArgumentException("Fant ingen opplysning med id $id")
-    }
-
-    fun boolskEllerNull(id: UUID): Boolean? {
-        return finnVerdiNode(id)?.let { verdi ->
+        return verdiNode(id).let { verdi ->
             when (verdi.get("datatype").asText() == "boolsk") {
                 true -> {
                     verdi.get("verdi")
@@ -121,7 +114,7 @@ class OpplysningData(json: String) {
 
                 false -> throw IllegalArgumentException("Ugyldig verdinode: $verdi")
             }
-        }
+        } ?: throw IllegalArgumentException("Fant ingen opplysning med id $id")
     }
 
     fun dato(id: UUID): LocalDate {
@@ -144,24 +137,25 @@ class OpplysningData(json: String) {
         return try {
             LocalDate.parse(asText())
         } catch (e: Exception) {
-            logger.error { "Kan ikke konvertere $this til LocalDate" }
+            logger.error(e) { "Kan ikke konvertere $this til LocalDate" }
             null
         }
     }
 
-    private fun finnVerdiNode(id: UUID): JsonNode? {
-        return opplysningNoder.firstOrNull { it["opplysningTypeId"].asText() == id.toString() }?.let { opplysningNode ->
+    private fun verdiNode(id: UUID): JsonNode =
+        opplysningNoder.firstOrNull { it["opplysningTypeId"].asText() == id.toString() }?.let { opplysningNode ->
             opplysningNode["perioder"].singleOrNull {
                 it["status"].asText() == "Ny"
             }?.let { it["verdi"] } ?: throw IllegalArgumentException("Fant ingen ny periode for opplysning med id $id")
         }
-    }
-
-    private fun verdiNode(id: UUID): JsonNode = finnVerdiNode(id) ?: throw IllegalArgumentException("Fant ikke opplysning med id $id")
+            ?: throw OpplysningIkkeFunnet(id)
 
     fun behandlingId(): UUID = jsonNode["behandlingId"].let { UUID.fromString(it.asText()) }
 
     fun harRett(): Boolean {
         return jsonNode["rettighetsperioder"].first()["harRett"].asBoolean()
     }
+
+    data class OpplysningIkkeFunnet(val opplysningId: UUID) :
+        RuntimeException("Fant ikke opplysning med id $opplysningId")
 }
