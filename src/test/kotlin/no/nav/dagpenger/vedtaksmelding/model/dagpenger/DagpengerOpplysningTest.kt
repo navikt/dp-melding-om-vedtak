@@ -152,20 +152,20 @@ class DagpengerOpplysningTest {
                     DagpengerOpplysning.FørsteMånedAvOpptjeningsperiode.FørsteMånedOgÅrForInntektsperiode1(
                         YearMonth.of(
                             2024,
-                            1
-                        )
+                            1,
+                        ),
                     ),
                     DagpengerOpplysning.FørsteMånedAvOpptjeningsperiode.FørsteMånedOgÅrForInntektsperiode2(
                         YearMonth.of(
                             2023,
-                            1
-                        )
+                            1,
+                        ),
                     ),
                     DagpengerOpplysning.FørsteMånedAvOpptjeningsperiode.FørsteMånedOgÅrForInntektsperiode3(
                         YearMonth.of(
                             2022,
-                            1
-                        )
+                            1,
+                        ),
                     ),
                 )
         }
@@ -176,20 +176,20 @@ class DagpengerOpplysningTest {
                     DagpengerOpplysning.SisteMånedAvOpptjeningsperiode.SisteMånedOgÅrForInntektsperiode1(
                         YearMonth.of(
                             2024,
-                            12
-                        )
+                            12,
+                        ),
                     ),
                     DagpengerOpplysning.SisteMånedAvOpptjeningsperiode.SisteMånedOgÅrForInntektsperiode2(
                         YearMonth.of(
                             2023,
-                            12
-                        )
+                            12,
+                        ),
                     ),
                     DagpengerOpplysning.SisteMånedAvOpptjeningsperiode.SisteMånedOgÅrForInntektsperiode3(
                         YearMonth.of(
                             2022,
-                            12
-                        )
+                            12,
+                        ),
                     ),
                 )
         }

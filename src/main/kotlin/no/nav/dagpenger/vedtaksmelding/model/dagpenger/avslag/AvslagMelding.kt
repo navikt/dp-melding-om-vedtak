@@ -1,8 +1,8 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag
 
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.AVSLÅTT
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_ALDER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_ANDRE_FULLE_YTELSER
@@ -41,8 +41,8 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_UTDANNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_UTESTENGT_HJEMMEL
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.ikkOppfyltBlokker
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.finnOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.ikkOppfyltBlokker
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.ikkeOppfylt
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 
