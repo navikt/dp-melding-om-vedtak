@@ -12,7 +12,7 @@ fun Application.helsesjekker() {
             call.respondText("I'm alive!")
         }
         get("/isready") {
-            call.respondText("I'm ready!")
+            call.respondText("I'm ready !")
         }
     }
 }
