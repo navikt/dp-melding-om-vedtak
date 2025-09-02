@@ -1,10 +1,11 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse
 
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.INNVILGET
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.INNVILGET
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.finnOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN_VERNEPLIKT
@@ -42,7 +43,6 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT_FISK
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.finnOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.oppfylt
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 

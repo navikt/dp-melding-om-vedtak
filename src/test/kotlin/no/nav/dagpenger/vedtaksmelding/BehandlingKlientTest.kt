@@ -25,7 +25,7 @@ internal class BehandlingKlientTest {
                 httpClient =
                     lagHttpKlient(
                         MockEngine { request ->
-                            request.url.encodedPath shouldBe "/$behandlingId/behandlingResultat"
+                            request.url.encodedPath shouldBe "/$behandlingId/behandlingsresultat"
                             request.headers["Authorization"] shouldBe "Bearer token"
                             respond(
                                 content = vedtakJson,

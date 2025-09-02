@@ -69,7 +69,7 @@ internal class BehandlingHttpKlient(
         hentBehandlingResultatJson(
             behandlingId = behandlingId,
             klient = klient,
-            subPath = "behandlingResultat",
+            subPath = "behandlingsresultat",
         ).map { json ->
             VedtakMapper(json).vedtak()
         }
