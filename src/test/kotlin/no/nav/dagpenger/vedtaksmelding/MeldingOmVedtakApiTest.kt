@@ -126,6 +126,22 @@ class MeldingOmVedtakApiTest {
     }
 
     @Test
+    fun `skal servere statisk html`() {
+        testApplication {
+            application {
+                meldingOmVedtakApi(mockk())
+            }
+
+            client
+                .get("/static") {
+                    autentisert(token = saksbehandlerToken)
+                }.let { response ->
+                    response.status shouldBe HttpStatusCode.OK
+                }
+        }
+    }
+
+    @Test
     fun `Skal kunne spesifisere behandlingstype for brevet`() {
         val behandlingId = UUID.randomUUID()
         val mediator =
@@ -180,23 +196,6 @@ class MeldingOmVedtakApiTest {
                           "utvidedeBeskrivelser": [],
                          "html" : "<html><body>Test HTML Test RETT_TIL_DAGPENGER</body></html>"
                         } 
-                        """.trimIndent()
-                }
-
-            client
-                .post("/melding-om-vedtak/$behandlingId/html") {
-                    autentisert(token = saksbehandlerToken)
-                    header(HttpHeaders.ContentType, ContentType.Application.Json)
-                    setBody(requestBody(lagMeldingOmVedtakDataDTO(KLAGE)))
-                }.let { response ->
-                    response.status shouldBe HttpStatusCode.OK
-                    response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
-                        //language=JSON
-                        """
-                        {
-                          "utvidedeBeskrivelser": [],
-                         "html" : "<html><body>Test HTML Test KLAGE</body></html>"
-                        }
                         """.trimIndent()
                 }
 

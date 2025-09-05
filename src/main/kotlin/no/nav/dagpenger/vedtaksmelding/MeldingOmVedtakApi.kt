@@ -33,7 +33,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
         if (Configuration.isNotProd) {
             staticResources(
                 "/static",
-                "resources/static",
+                "static",
             )
         }
         authenticate("azureAd", "azureAd-M2M") {
