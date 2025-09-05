@@ -9,67 +9,117 @@
             background-color: #f9f9f9;
             margin: 0;
             padding: 20px;
+            display: flex;
+            justify-content: space-between;
         }
+
+        .container {
+            display: flex;
+            width: 100%;
+        }
+
         form {
             background: #ffffff;
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             max-width: 400px;
-            margin: 0 auto;
+            margin-right: 20px;
         }
-        label {
-            display: block;
+
+        .form-group {
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 10px;
-            font-weight: bold;
         }
-        input[type="text"] {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            margin-bottom: 15px;
+
+        .form-group label {
+            flex: 1;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .form-group input, .form-group textarea {
+            flex: 2;
+            padding: 6px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
         }
+
+        textarea {
+            resize: none;
+        }
+
         button {
             background-color: #007BFF;
             color: white;
-            padding: 10px 15px;
+            padding: 8px 12px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
+            width: 100%;
         }
+
         button:hover {
             background-color: #0056b3;
         }
-        pre {
-            background: #f4f4f4;
-            padding: 10px;
-            border-radius: 4px;
-            margin-top: 20px;
-            overflow-x: auto;
+
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #ccc;
+            display: none; /* Initially hidden */
+        }
+
+        .iframe-container {
+            flex-grow: 1;
         }
     </style>
 </head>
 <body>
-<form id="vedtakForm">
-    <label>JWT Token:
-        <textarea name="jwtToken" id="jwtToken" rows="4" style="width: 100%; resize: none;" required></textarea>
-    </label><br>
-    <label>Behandlingstype: <input type="text" name="behandlingstype" value="RETT_TIL_DAGPENGER" required></label><br>
-    <label>BehandlingId: <input type="text" name="behandlingId" id="behandlingId" required></label>
-    <label>Fornavn: <input type="text" name="fornavn"  value="fornavn" required></label><br>
-    <label>Mellomnavn: <input type="text" name="mellomnavn" value="mellomnavn"></label><br>
-    <label>Etternavn: <input type="text" name="etternavn"  value="etternavn" required></label><br>
-    <label>Fødselsnummer: <input type="text" name="fodselsnummer" required></label><br>
-    <label>SakId: <input type="text" name="sakId" value="sakid"></label><br>
-    <button type="submit">Send</button>
-</form>
-<pre id="result"></pre>
+<div class="container">
+    <form id="vedtakForm">
+        <div class="form-group">
+            <label for="jwtToken">JWT Token:</label>
+            <textarea name="jwtToken" id="jwtToken" rows="2" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="behandlingstype">Behandlingstype:</label>
+            <input type="text" name="behandlingstype" value="RETT_TIL_DAGPENGER" required>
+        </div>
+        <div class="form-group">
+            <label for="behandlingId">BehandlingId:</label>
+            <input type="text" name="behandlingId" id="behandlingId" required>
+        </div>
+        <div class="form-group">
+            <label for="fornavn">Fornavn:</label>
+            <input type="text" name="fornavn" value="fornavn" required>
+        </div>
+        <div class="form-group">
+            <label for="mellomnavn">Mellomnavn:</label>
+            <input type="text" name="mellomnavn" value="mellomnavn">
+        </div>
+        <div class="form-group">
+            <label for="etternavn">Etternavn:</label>
+            <input type="text" name="etternavn" value="etternavn" required>
+        </div>
+        <div class="form-group">
+            <label for="fodselsnummer">Fødselsnummer:</label>
+            <input type="text" name="fodselsnummer" required>
+        </div>
+        <div class="form-group">
+            <label for="sakId">SakId:</label>
+            <input type="text" name="sakId" value="sakid">
+        </div>
+        <button type="submit">Send</button>
+    </form>
+    <div class="iframe-container">
+        <iframe id="htmlWindow"></iframe>
+    </div>
+</div>
 <script>
-    // Predefined saksbehandler object
     const defaultSaksbehandler = {
         fornavn: "Test",
         etternavn: "Saksbehandler",
@@ -84,7 +134,7 @@
         e.preventDefault();
         const form = e.target;
         const jwtToken = form.jwtToken.value;
-        const behandlingId = form.behandlingId.value; // Dynamically get behandlingId from the form
+        const behandlingId = form.behandlingId.value;
         const data = {
             behandlingstype: form.behandlingstype.value,
             fornavn: form.fornavn.value,
@@ -94,6 +144,7 @@
             sakId: form.sakId.value || null,
             saksbehandler: defaultSaksbehandler
         };
+
         const response = await fetch(`/melding-om-vedtak/${behandlingId}/html`, {
             method: 'POST',
             headers: {
@@ -102,12 +153,17 @@
             },
             body: JSON.stringify(data)
         });
-        if (response.status === 404) {
-            window.location.href = '/error-page.html'; // Redirect to error page
-            return;
+
+        const htmlWindow = document.getElementById('htmlWindow');
+
+        if (response.status === 200) {
+            const result = await response.json();
+            htmlWindow.srcdoc = result.html; // Update iframe content
+            htmlWindow.style.display = 'block'; // Show iframe
+        } else {
+            htmlWindow.srcdoc = `<p>Error: Unable to load content. Status ${response.status}</p>`;
+            htmlWindow.style.display = 'block'; // Show iframe with error
         }
-        const result = await response.json();
-        document.getElementById('result').textContent = JSON.stringify(result, null, 2);
     });
 </script>
 </body>
