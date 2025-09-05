@@ -21,7 +21,7 @@ import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
 import no.nav.dagpenger.vedtaksmelding.HentVedtakException
 import no.nav.dagpenger.vedtaksmelding.metrics.metrics
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.OpplysningDataException
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.BehandlingResultatData
 import org.slf4j.event.Level
 import java.net.URI
 
@@ -65,8 +65,8 @@ fun Application.apiConfig() {
     install(StatusPages) {
         exception<Throwable> { call, cause ->
             when (cause) {
-                is OpplysningDataException -> {
-                    log.error { "Not implemented: ${cause.message}" }
+                is BehandlingResultatData.OpplysningDataException -> {
+                    log.error(cause) { "Not implemented: ${cause.message}" }
                     val problem =
                         HttpProblemDTO(
                             title = "Not implemented",
@@ -106,6 +106,7 @@ fun Application.apiConfig() {
                         )
                     call.respond(HttpStatusCode.BadRequest, problem)
                 }
+
                 is HentVedtakException -> {
                     call.respond(cause.statusCode, cause.httpProblem)
                 }
