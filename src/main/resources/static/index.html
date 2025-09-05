@@ -1,18 +1,70 @@
 <!DOCTYPE html>
 <html lang="NO">
 <head>
+    <meta charset="UTF-8">
     <title>MeldingOmVedtakDataDTO Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        form {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+    </style>
 </head>
 <body>
 <form id="vedtakForm">
-    <label>JWT Token: <input type="text" name="jwtToken" id="jwtToken" required></label><br>
-    <label>Behandlingstype: <input type="text" name="behandlingstype" required></label><br>
+    <label>JWT Token:
+        <textarea name="jwtToken" id="jwtToken" rows="4" style="width: 100%; resize: none;" required></textarea>
+    </label><br>
+    <label>Behandlingstype: <input type="text" name="behandlingstype" value="RETT_TIL_DAGPENGER" required></label><br>
     <label>BehandlingId: <input type="text" name="behandlingId" id="behandlingId" required></label>
-    <label>Fornavn: <input type="text" name="fornavn" required></label><br>
-    <label>Mellomnavn: <input type="text" name="mellomnavn"></label><br>
-    <label>Etternavn: <input type="text" name="etternavn" required></label><br>
+    <label>Fornavn: <input type="text" name="fornavn"  value="fornavn" required></label><br>
+    <label>Mellomnavn: <input type="text" name="mellomnavn" value="mellomnavn"></label><br>
+    <label>Etternavn: <input type="text" name="etternavn"  value="etternavn" required></label><br>
     <label>Fødselsnummer: <input type="text" name="fodselsnummer" required></label><br>
-    <label>SakId: <input type="text" name="sakId"></label><br>
+    <label>SakId: <input type="text" name="sakId" value="sakid"></label><br>
     <button type="submit">Send</button>
 </form>
 <pre id="result"></pre>
@@ -23,7 +75,7 @@
         etternavn: "Saksbehandler",
         enhet: {
             navn: "Testenhet",
-            id: "1234"
+            postadresse: "Testveien 1, 1234 Testby",
         },
         ident: "Z123456"
     };
