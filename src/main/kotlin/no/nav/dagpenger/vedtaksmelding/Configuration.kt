@@ -68,6 +68,8 @@ object Configuration {
     val isDev by lazy {
         properties.getOrElse(Key("NAIS_CLUSTER_NAME", stringType), "prod") == "dev-gcp"
     }
+    val isLocal by lazy { properties.getOrElse(Key("NAIS_CLUSTER_NAME", stringType), "local") == "local" }
+    val isNotProd by lazy { isDev || isLocal }
 
     val saksbehandlerADGruppe by lazy { properties[Key("GRUPPE_SAKSBEHANDLER", stringType)] }
     val sanityApiUrl by lazy { properties[Key("SANITY_API_URL", stringType)] }
