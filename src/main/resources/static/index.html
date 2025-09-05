@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="NO">
+<head>
+    <title>MeldingOmVedtakDataDTO Form</title>
+</head>
+<body>
+<form id="vedtakForm">
+    <label>JWT Token: <input type="text" name="jwtToken" id="jwtToken" required></label><br>
+    <label>Behandlingstype: <input type="text" name="behandlingstype" required></label><br>
+    <label>BehandlingId: <input type="text" name="behandlingId" id="behandlingId" required></label>
+    <label>Fornavn: <input type="text" name="fornavn" required></label><br>
+    <label>Mellomnavn: <input type="text" name="mellomnavn"></label><br>
+    <label>Etternavn: <input type="text" name="etternavn" required></label><br>
+    <label>Fødselsnummer: <input type="text" name="fodselsnummer" required></label><br>
+    <label>SakId: <input type="text" name="sakId"></label><br>
+    <button type="submit">Send</button>
+</form>
+<pre id="result"></pre>
+<script>
+    // Predefined saksbehandler object
+    const defaultSaksbehandler = {
+        fornavn: "Test",
+        etternavn: "Saksbehandler",
+        enhet: {
+            navn: "Testenhet",
+            id: "1234"
+        },
+        ident: "Z123456"
+    };
+
+    document.getElementById('vedtakForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const form = e.target;
+        const jwtToken = form.jwtToken.value;
+        const behandlingId = form.behandlingId.value; // Dynamically get behandlingId from the form
+        const data = {
+            behandlingstype: form.behandlingstype.value,
+            fornavn: form.fornavn.value,
+            mellomnavn: form.mellomnavn.value || null,
+            etternavn: form.etternavn.value,
+            fodselsnummer: form.fodselsnummer.value,
+            sakId: form.sakId.value || null,
+            saksbehandler: defaultSaksbehandler
+        };
+        const response = await fetch(`/melding-om-vedtak/${behandlingId}/html`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + jwtToken
+            },
+            body: JSON.stringify(data)
+        });
+        if (response.status === 404) {
+            window.location.href = '/error-page.html'; // Redirect to error page
+            return;
+        }
+        const result = await response.json();
+        document.getElementById('result').textContent = JSON.stringify(result, null, 2);
+    });
+</script>
+</body>
+</html>

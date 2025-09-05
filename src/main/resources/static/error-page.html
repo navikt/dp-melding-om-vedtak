@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="NO">
+<head>
+    <title>Error Page</title>
+</head>
+<body>
+<h1>An error occurred</h1>
+<p>The server returned the following error:</p>
+<pre id="errorResponse"></pre>
+<script>
+    // Extract the error response from the query string
+    const params = new URLSearchParams(window.location.search);
+    const errorResponse = params.get('error');
+
+    // Display the error response on the page
+    if (errorResponse) {
+        document.getElementById('errorResponse').textContent = decodeURIComponent(errorResponse);
+    } else {
+        document.getElementById('errorResponse').textContent = 'No error details available.';
+    }
+</script>
+</body>
+</html>
