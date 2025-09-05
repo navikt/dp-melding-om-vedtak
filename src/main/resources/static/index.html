@@ -161,7 +161,8 @@
             htmlWindow.srcdoc = result.html; // Update iframe content
             htmlWindow.style.display = 'block'; // Show iframe
         } else {
-            htmlWindow.srcdoc = `<p>Error: Unable to load content. Status ${response.status}</p>`;
+            const errorJson = await response.json();
+            htmlWindow.srcdoc = `<pre>${JSON.stringify(errorJson, null, 2)}</pre>`; // Show JSON error
             htmlWindow.style.display = 'block'; // Show iframe with error
         }
     });
