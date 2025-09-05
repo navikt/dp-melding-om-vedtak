@@ -12,8 +12,6 @@ import java.util.UUID
 
 private val logger = KotlinLogging.logger {}
 
-open class OpplysningDataException(message: String) : RuntimeException(message)
-
 class BehandlingResultatData(json: String) {
     companion object {
         private val objectMapper: ObjectMapper =
@@ -104,17 +102,21 @@ class BehandlingResultatData(json: String) {
     }
 
     fun boolsk(id: UUID): Boolean {
-        return verdiNode(id).let { verdi ->
-            when (verdi.get("datatype").asText() == "boolsk") {
+        val verdiNode = verdiNode(id)
+
+        return verdiNode.let { verdi ->
+            when (verdi["datatype"].asText() == "boolsk") {
                 true -> {
-                    verdi.get("verdi")
-                        .also { require(it.isBoolean) { "Forventet at boolsk har  boolsk verdi, men var $it" } }
-                        ?.asBoolean()
+                    verdi["verdi"]
+                        .also {
+                            require(it.isBoolean) { "Forventet at boolsk har  boolsk verdi, men var $it" }
+                        }
+                        .asBoolean()
                 }
 
                 false -> throw IllegalArgumentException("Ugyldig verdinode: $verdi")
             }
-        } ?: throw IllegalArgumentException("Fant ingen opplysning med id $id")
+        }
     }
 
     fun dato(id: UUID): LocalDate {
@@ -131,8 +133,7 @@ class BehandlingResultatData(json: String) {
 
     private fun JsonNode.isDato(): Boolean = toDateOrNull() != null
 
-    private fun JsonNode.asDato(): LocalDate =
-        toDateOrNull() ?: throw IllegalArgumentException("Kan ikke konvertere $this til LocalDate")
+    private fun JsonNode.asDato(): LocalDate = toDateOrNull() ?: throw IllegalArgumentException("Kan ikke konvertere $this til LocalDate")
 
     private fun JsonNode.toDateOrNull(): LocalDate? {
         return try {
@@ -143,13 +144,32 @@ class BehandlingResultatData(json: String) {
         }
     }
 
-    private fun verdiNode(id: UUID): JsonNode =
-        opplysningNoder.firstOrNull { it["opplysningTypeId"].asText() == id.toString() }?.let { opplysningNode ->
-            opplysningNode["perioder"].singleOrNull {
+    private fun verdiNode(id: UUID): JsonNode {
+        return opplysningNoder.filter {
+            it["opplysningTypeId"].asText() == id.toString()
+        }.also {
+            if (it.isEmpty()) {
+                throw OpplysningIkkeFunnet(id)
+            }
+
+            if (it.size > 1) {
+                throw OpplysningDataException("Fant flere enn en opplysning med id $id")
+            }
+        }.single().let { opplysningNode ->
+
+            opplysningNode["perioder"].filter {
                 it["status"].asText() == "Ny"
-            }?.let { it["verdi"] } ?: throw OpplysningDataException("Fant ingen ny periode for opplysning med id $id")
+            }.also {
+                if (it.isEmpty()) {
+                    throw NyPeriodeIkkeFunnet(id)
+                }
+
+                if (it.size > 1) {
+                    throw OpplysningDataException("Fanet flere enn en ny periode for opplysning med id $id")
+                }
+            }.single()["verdi"]
         }
-            ?: throw OpplysningIkkeFunnet(id)
+    }
 
     fun behandlingId(): UUID = jsonNode["behandlingId"].let { UUID.fromString(it.asText()) }
 
@@ -157,6 +177,11 @@ class BehandlingResultatData(json: String) {
         return jsonNode["rettighetsperioder"].first()["harRett"].asBoolean()
     }
 
+    open class OpplysningDataException(message: String) : RuntimeException(message)
+
     data class OpplysningIkkeFunnet(val opplysningId: UUID) :
-        OpplysningDataException("Fant ikke opplysning med id $opplysningId") :
+        OpplysningDataException("Fant ikke opplysning med id $opplysningId")
+
+    data class NyPeriodeIkkeFunnet(val opplysningId: UUID) :
+        OpplysningDataException("Fant ikke ny periode for opplysning med id $opplysningId")
 }

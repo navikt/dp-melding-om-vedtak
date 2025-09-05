@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDate
 
 @Suppress("ktlint:standard:max-line-length")
-class OpplysningDataTest {
+class BehandlingResulstatDataTest {
     @Test
     fun `skal kunne parse vedtak resultat data`() {
         val behandlingResultatData = BehandlingResultatData("/json/avslag_resultat.json".readFile())
