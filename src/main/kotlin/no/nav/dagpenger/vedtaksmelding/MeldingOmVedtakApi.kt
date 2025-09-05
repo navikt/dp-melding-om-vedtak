@@ -7,6 +7,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.auth.authenticate
+import io.ktor.server.http.content.staticResources
 import io.ktor.server.plugins.swagger.swaggerUI
 import io.ktor.server.request.receive
 import io.ktor.server.request.receiveText
@@ -29,25 +30,30 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
     apiConfig()
     routing {
         swaggerUI(path = "openapi", swaggerFile = "melding-om-vedtak-api.yaml")
+        if (Configuration.isNotProd) {
+            staticResources(
+                "/static",
+                "static",
+            )
+        }
         authenticate("azureAd", "azureAd-M2M") {
             post("/melding-om-vedtak/{behandlingId}/html") {
                 val behandlingId = call.parseUUID()
                 val klient = call.request.klient()
                 val meldingOmVedtakData = call.receive<MeldingOmVedtakDataDTO>()
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
-                    kotlin
-                        .runCatching {
-                            val meldingOmVedtakResponseDTO =
-                                mediator.hentVedtak(
-                                    behandlingId = behandlingId,
-                                    klient = klient,
-                                    meldingOmVedtakData = meldingOmVedtakData,
-                                )
-                            call.respond(meldingOmVedtakResponseDTO)
-                        }.onFailure { t ->
-                            logger.error(t) { "Feil ved henting av vedtaksmelding som html (hentVedtak). BehandlingId: $behandlingId" }
-                            throw t
-                        }
+                    runCatching {
+                        val meldingOmVedtakResponseDTO =
+                            mediator.hentVedtak(
+                                behandlingId = behandlingId,
+                                klient = klient,
+                                meldingOmVedtakData = meldingOmVedtakData,
+                            )
+                        call.respond(meldingOmVedtakResponseDTO)
+                    }.onFailure { t ->
+                        logger.error(t) { "Feil ved henting av vedtaksmelding som html (hentVedtak). BehandlingId: $behandlingId" }
+                        throw t
+                    }
                 }
             }
             post("/melding-om-vedtak/{behandlingId}/vedtaksmelding") {
@@ -56,21 +62,20 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
 
                 val meldingOmVedtakData = call.receive<MeldingOmVedtakDataDTO>()
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
-                    kotlin
-                        .runCatching {
-                            val vedtaksHtml =
-                                mediator.hentEndeligVedtak(
-                                    behandlingId = behandlingId,
-                                    klient = klient,
-                                    meldingOmVedtakData = meldingOmVedtakData,
-                                )
-                            call.respond(vedtaksHtml)
-                        }.onFailure { t ->
-                            logger.error(
-                                t,
-                            ) { "Feil ved henting av vedtaksmelding som html (hentEndeligVedtak). BehandlingId: $behandlingId" }
-                            throw t
-                        }
+                    runCatching {
+                        val vedtaksHtml =
+                            mediator.hentEndeligVedtak(
+                                behandlingId = behandlingId,
+                                klient = klient,
+                                meldingOmVedtakData = meldingOmVedtakData,
+                            )
+                        call.respond(vedtaksHtml)
+                    }.onFailure { t ->
+                        logger.error(
+                            t,
+                        ) { "Feil ved henting av vedtaksmelding som html (hentEndeligVedtak). BehandlingId: $behandlingId" }
+                        throw t
+                    }
                 }
             }
             put("/melding-om-vedtak/{behandlingId}/{brevblokkId}/utvidet-beskrivelse") {
