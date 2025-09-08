@@ -673,27 +673,19 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-943d-77a7-969c-147999f15459")
 
-            fun fra(opplysninger: Set<DagpengerOpplysning<*, *>>): AntallStønadsuker {
+            fun fra(opplysninger: Set<DagpengerOpplysning<*, *>>): AntallStønadsuker? {
                 val antallStønadsuker =
                     when (opplysninger.any { it is GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget && it.verdi }) {
                         true -> {
                             opplysninger.filterIsInstance<PeriodeSomGisVedVerneplikt>().singleOrNull()?.verdi
-                                ?: throw IllegalStateException(
-                                    "Forventet å finne nøyaktig en opplysning av typen" +
-                                        " GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget",
-                                )
                         }
 
                         false -> {
                             opplysninger.filterIsInstance<AntallStønadsukerSomGisVedOrdinæreDagpenger>().singleOrNull()
                                 ?.verdi
-                                ?: throw IllegalStateException(
-                                    "Forventet å finne nøyaktig en opplysning av typen" +
-                                        " AntallStønadsukerSomGisVedOrdinæreDagpenger",
-                                )
                         }
                     }
-                return AntallStønadsuker(antallStønadsuker)
+                return antallStønadsuker?.let { AntallStønadsuker(it) }
             }
         }
 

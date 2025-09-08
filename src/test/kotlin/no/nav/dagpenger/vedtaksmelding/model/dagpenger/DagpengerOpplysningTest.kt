@@ -126,6 +126,22 @@ class DagpengerOpplysningTest {
     }
 
     @Test
+    fun `AntallStønadsuker  kan være null`() {
+        DagpengerOpplysning.AntallStønadsuker.fra(
+            setOf<DagpengerOpplysning<*, *>>(
+                DagpengerOpplysning.GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget(true),
+                DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger(104),
+            ),
+        ) shouldBe null
+
+        DagpengerOpplysning.AntallStønadsuker.fra(
+            setOf<DagpengerOpplysning<*, *>>(
+                DagpengerOpplysning.PeriodeSomGisVedVerneplikt(26),
+            ),
+        ) shouldBe null
+    }
+
+    @Test
     fun `Skal kunne lage alle type opplysninger med verdi`() {
         val behandlingResultatData = BehandlingResultatData("/json/avslag_resultat.json".readFile())
 
