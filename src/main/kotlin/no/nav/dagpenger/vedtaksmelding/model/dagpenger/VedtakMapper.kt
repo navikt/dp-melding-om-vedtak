@@ -129,7 +129,7 @@ class VedtakMapper(
                 this.addIfPresent {
                     DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(behandlingResultatData)
                 }
-                DagpengerOpplysning.AntallStønadsuker.fra(this).let { this.add(it) }
+                DagpengerOpplysning.AntallStønadsuker.fra(this)?.let { this.add(it) }
             }
 
         val deriverteOpplysninger =
