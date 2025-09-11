@@ -10,6 +10,7 @@ import java.time.LocalDate
 import java.util.UUID
 
 private val logger = KotlinLogging.logger {}
+private val sikkerlogger = KotlinLogging.logger("tjenestekall")
 
 class KlagevedtakMapper(vedtakJson: String) {
     private val vedtak: JsonNode
@@ -23,11 +24,17 @@ class KlagevedtakMapper(vedtakJson: String) {
     }
 
     fun vedtak(): KlageVedtak {
-        return KlageVedtak(
-            behandlingId = behandlingId,
-            fagsakId = fagsakId,
-            opplysninger = vedtakOpplysninger,
-        )
+        return runCatching {
+            KlageVedtak(
+                behandlingId = behandlingId,
+                fagsakId = fagsakId,
+                opplysninger = vedtakOpplysninger,
+            )
+        }.onFailure {
+            sikkerlogger.error(it) {
+                "Feil ved mapping av klagevedtak for behandlingId $behandlingId. VedtakJson: $vedtak"
+            }
+        }.getOrThrow()
     }
 
     private val behandlingId =
