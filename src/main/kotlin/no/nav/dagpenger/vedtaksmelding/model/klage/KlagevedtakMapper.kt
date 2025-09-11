@@ -37,14 +37,15 @@ class KlagevedtakMapper(vedtakJson: String) {
         }.getOrThrow()
     }
 
-    private val behandlingId =
+    private val behandlingId by lazy {
         UUID.fromString(vedtak.get("behandlingId").asText())
             ?: throw IllegalArgumentException("behandlingId mangler")
+    }
 
     // TODO: FagsakId må hentes fra vedtakJson
     val fagsakId = "fagsakId"
 
-    private val vedtakOpplysninger: Set<KlageOpplysning<*, *>> =
+    private val vedtakOpplysninger: Set<KlageOpplysning<*, *>> by lazy {
         setOf(
             KlageOpplysning.KlageMottattDato(
                 verdi = vedtak.datoVerdi(KlageOpplysning.KlageMottattDato.opplysningNavnId),
@@ -71,6 +72,7 @@ class KlagevedtakMapper(vedtakJson: String) {
                 verdi = vedtak.boolskVerdi(KlageOpplysning.RettsligKlageinteresse.opplysningNavnId),
             ),
         )
+    }
 
     private fun JsonNode.utfallsverdi(opplysningNavnId: String): String {
         return this.get("utfallOpplysninger").find {
