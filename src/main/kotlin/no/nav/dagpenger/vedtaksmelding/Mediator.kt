@@ -126,7 +126,7 @@ class Mediator(
                 )
             }
 
-            MELDEKORT -> throw IllegalArgumentException("Meldekortbehandling har ikke støtte for vedtaksmelding")
+            MELDEKORT -> throw NotImplementedError("Meldekortbehandling har ikke støtte for vedtaksmelding")
         }
     }
 
