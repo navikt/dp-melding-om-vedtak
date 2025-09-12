@@ -63,19 +63,25 @@ fun Application.apiConfig() {
     }
 
     install(StatusPages) {
+        fun notImplementedProblemDTO(cause: Throwable): HttpProblemDTO {
+            log.error(cause) { "Not implemented: ${cause.message}" }
+            return HttpProblemDTO(
+                title = "Not implemented",
+                detail = cause.message,
+                status = HttpStatusCode.NotImplemented.value,
+                instance = "",
+                type = URI.create("dagpenger.nav.no/saksbehandling:problem:not-implemented").toString(),
+            )
+        }
+
         exception<Throwable> { call, cause ->
             when (cause) {
                 is BehandlingResultatData.OpplysningDataException -> {
-                    log.error(cause) { "Not implemented: ${cause.message}" }
-                    val problem =
-                        HttpProblemDTO(
-                            title = "Not implemented",
-                            detail = cause.message,
-                            status = HttpStatusCode.NotImplemented.value,
-                            instance = instanceTekst(call),
-                            type = URI.create("dagpenger.nav.no/saksbehandling:problem:not-implemented").toString(),
-                        )
-                    call.respond(HttpStatusCode.BadRequest, problem)
+                    call.respond(HttpStatusCode.BadRequest, notImplementedProblemDTO(cause))
+                }
+
+                is NotImplementedError -> {
+                    call.respond(HttpStatusCode.NotImplemented, notImplementedProblemDTO(cause))
                 }
 
                 is IllegalAccessException -> {
