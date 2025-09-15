@@ -35,11 +35,11 @@ data class Vedtak(
     fun finnOpplysning(opplysningTekstId: String) = this.opplysninger.singleOrNull { it.opplysningTekstId == opplysningTekstId }
 
     fun hentOpplysning(opplysningTekstId: String): Opplysning {
-        sikkerlogg.info { "Finn opplysning for behandlingId $behandlingId, opplysning $opplysningTekstId" }
+        sikkerlogg.debug { "Finn opplysning for behandlingId $behandlingId, opplysning $opplysningTekstId" }
         val opplysning =
             finnOpplysning(opplysningTekstId)
                 ?: throw OpplysningIkkeFunnet("Opplysning med tekstId $opplysningTekstId mangler for behandlingId $behandlingId")
-        sikkerlogg.info { "Opplysning for behandlingId $behandlingId, $opplysningTekstId: $opplysning" }
+        sikkerlogg.debug { "Opplysning for behandlingId $behandlingId, $opplysningTekstId: $opplysning" }
         return opplysning
     }
 
