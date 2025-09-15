@@ -61,7 +61,13 @@ class Mediator(
             klient = klient,
             behandlingstype = behanldingstype,
         ) {
-            vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
+            runCatching {
+                vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
+            }.onFailure {
+                logger.error { "Fant ikke hentet sanityinnhold fra database for behandling $behandlingId, henter på nytt fra sanity" }
+            }.getOrDefault(
+                sanityKlient.hentBrevBlokkerJson(),
+            )
         }
 
     private suspend fun hentVedtakOgByggVedtaksmelding(
@@ -102,6 +108,7 @@ class Mediator(
                                 alleBrevblokker = alleBrevblokker,
                             )
                         }
+
                         else -> {
                             throw it
                         }
