@@ -123,7 +123,6 @@ class VedtakHtmlTest {
             ) + KlageMelding.fasteAvsluttendeBlokker
     }
 
-
     @Test
     fun `Html av avslag minsteinntekt`() {
         runBlocking {
