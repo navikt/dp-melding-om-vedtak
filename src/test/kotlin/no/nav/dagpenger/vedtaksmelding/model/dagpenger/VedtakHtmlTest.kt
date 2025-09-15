@@ -124,6 +124,29 @@ class VedtakHtmlTest {
     }
 
     @Test
+    fun hubba() {
+        runBlocking {
+            val alleBrevblokker = sanityKlient.hentBrevBlokker()
+            val vedtakMelding =
+                VedtakMelding.byggVedtaksmelding(
+                    vedtak = hentVedtak("/json/hubba.json"),
+                    alleBrevblokker = alleBrevblokker,
+                )
+            val htmlInnhold =
+                HtmlConverter.toHtml(
+                    brevBlokker = vedtakMelding.hentBrevBlokker(),
+                    opplysninger = vedtakMelding.hentOpplysninger(),
+                    meldingOmVedtakData = meldingOmVedtakData,
+                    utvidetBeskrivelse = emptySet(),
+                )
+            writeStringToFile(
+                filePath = "build/temp/hubba.html",
+                content = htmlInnhold,
+            )
+        }
+    }
+
+    @Test
     fun `Html av avslag minsteinntekt`() {
         runBlocking {
             val alleBrevblokker = sanityKlient.hentBrevBlokker()

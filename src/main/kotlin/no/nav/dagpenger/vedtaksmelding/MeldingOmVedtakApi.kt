@@ -71,7 +71,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                             )
                         call.respond(vedtaksHtml)
                     }.onFailure { t ->
-                        logger.error(
+                        logger.warn(
                             t,
                         ) { "Feil ved henting av vedtaksmelding som html (hentEndeligVedtak). BehandlingId: $behandlingId" }
                         throw t

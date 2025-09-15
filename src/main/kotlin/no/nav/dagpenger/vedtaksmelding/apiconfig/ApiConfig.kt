@@ -64,7 +64,7 @@ fun Application.apiConfig() {
 
     install(StatusPages) {
         fun notImplementedProblemDTO(cause: Throwable): HttpProblemDTO {
-            log.error(cause) { "Not implemented: ${cause.message}" }
+            log.warn(cause) { "Not implemented: ${cause.message}" }
             return HttpProblemDTO(
                 title = "Not implemented",
                 detail = cause.message,
