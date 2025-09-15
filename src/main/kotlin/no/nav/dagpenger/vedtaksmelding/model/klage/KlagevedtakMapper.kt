@@ -46,45 +46,48 @@ class KlagevedtakMapper(vedtakJson: String) {
     val fagsakId = "fagsakId"
 
     private val vedtakOpplysninger: Set<KlageOpplysning<*, *>> by lazy {
-        setOf(
-            KlageOpplysning.KlageMottattDato(
-                verdi = vedtak.datoVerdi(KlageOpplysning.KlageMottattDato.opplysningNavnId),
-            ),
-            KlageOpplysning.PåklagetVedtakDato(
-                verdi = vedtak.datoVerdi(KlageOpplysning.PåklagetVedtakDato.opplysningNavnId),
-            ),
-            KlageOpplysning.KlageUtfall(
-                verdi = vedtak.utfallsverdi(KlageOpplysning.KlageUtfall.opplysningNavnId),
-            ),
-            KlageOpplysning.ErKlagenSkriftelig(
-                verdi = vedtak.boolskVerdi(KlageOpplysning.ErKlagenSkriftelig.opplysningNavnId),
-            ),
-            KlageOpplysning.ErKlagenUnderskrevet(
-                verdi = vedtak.boolskVerdi(KlageOpplysning.ErKlagenUnderskrevet.opplysningNavnId),
-            ),
-            KlageOpplysning.KlagenNevnerEndring(
-                verdi = vedtak.boolskVerdi(KlageOpplysning.KlagenNevnerEndring.opplysningNavnId),
-            ),
-            KlageOpplysning.KlagefristOppfylt(
-                verdi = vedtak.boolskVerdi(KlageOpplysning.KlagefristOppfylt.opplysningNavnId),
-            ),
-            KlageOpplysning.RettsligKlageinteresse(
-                verdi = vedtak.boolskVerdi(KlageOpplysning.RettsligKlageinteresse.opplysningNavnId),
-            ),
-        )
+        buildSet {
+            vedtak.utfallsverdi(KlageOpplysning.KlageUtfall.opplysningNavnId)?.let {
+                add(KlageOpplysning.KlageUtfall(it))
+            }
+
+            vedtak.datoVerdi(KlageOpplysning.KlageMottattDato.opplysningNavnId)?.let {
+                add(KlageOpplysning.KlageMottattDato(it))
+            }
+
+            vedtak.datoVerdi(KlageOpplysning.PåklagetVedtakDato.opplysningNavnId)?.let {
+                add(KlageOpplysning.PåklagetVedtakDato(it))
+            }
+
+            vedtak.boolskVerdi(KlageOpplysning.ErKlagenSkriftelig.opplysningNavnId)?.let {
+                add(KlageOpplysning.ErKlagenSkriftelig(it))
+            }
+            vedtak.boolskVerdi(KlageOpplysning.ErKlagenUnderskrevet.opplysningNavnId)?.let {
+                add(KlageOpplysning.ErKlagenUnderskrevet(it))
+            }
+
+            vedtak.boolskVerdi(KlageOpplysning.KlagenNevnerEndring.opplysningNavnId)?.let {
+                add(KlageOpplysning.KlagenNevnerEndring(it))
+            }
+            vedtak.boolskVerdi(KlageOpplysning.KlagefristOppfylt.opplysningNavnId)?.let {
+                add(KlageOpplysning.KlagefristOppfylt(it))
+            }
+            vedtak.boolskVerdi(KlageOpplysning.RettsligKlageinteresse.opplysningNavnId)?.let {
+                add(KlageOpplysning.RettsligKlageinteresse(it))
+            }
+        }
     }
 
-    private fun JsonNode.utfallsverdi(opplysningNavnId: String): String {
+    private fun JsonNode.utfallsverdi(opplysningNavnId: String): String? {
         return this.get("utfallOpplysninger").find {
             it.get("opplysningNavnId").asText() == opplysningNavnId
         }?.get("verdi")?.asText()
-            ?: throw IllegalArgumentException("Opplysning med navnId $opplysningNavnId mangler for behandlingId $behandlingId")
     }
 
-    private fun JsonNode.datoVerdi(opplysningNavnId: String): LocalDate {
-        this.hentVerdiNode(opplysningNavnId).let {
+    private fun JsonNode.datoVerdi(opplysningNavnId: String): LocalDate? {
+        return this.hentVerdiNode(opplysningNavnId)?.let {
             try {
-                return LocalDate.parse(it.get("verdi").asText())
+                LocalDate.parse(it.asText())
             } catch (e: Exception) {
                 val verdi = it.get("verdi")
                 logger.error(e) { "Kan ikke parse $verdi til LocalDate" }
@@ -93,22 +96,22 @@ class KlagevedtakMapper(vedtakJson: String) {
         }
     }
 
-    private fun JsonNode.boolskVerdi(opplysningNavnId: String): Boolean {
-        this.hentVerdiNode(opplysningNavnId).let {
-            try {
-                return it.get("verdi").asBoolean()
-            } catch (e: Exception) {
-                val verdi = it.get("verdi")
-                logger.error(e) { "Kan ikke parse $verdi til boolean" }
-                throw IllegalArgumentException("Kan ikke konvertere $verdi til boolean for behandlingId $behandlingId")
+    private fun JsonNode.boolskVerdi(opplysningNavnId: String): Boolean? {
+        return this.hentVerdiNode(opplysningNavnId)?.let {
+            when (it.isBoolean) {
+                true -> it.asBoolean()
+                false -> {
+                    val errorMessage = "Kan ikke konvertere $it til boolean for behandlingId $behandlingId"
+                    logger.error { "Kan ikke parse $it til boolean for behandlingId: $behandlingId" }
+                    throw IllegalArgumentException(errorMessage)
+                }
             }
         }
     }
 
-    private fun JsonNode.hentVerdiNode(opplysningNavnId: String): JsonNode {
+    private fun JsonNode.hentVerdiNode(opplysningNavnId: String): JsonNode? {
         return this.get("behandlingOpplysninger").find {
             it.get("opplysningNavnId").asText() == opplysningNavnId
-        }
-            ?: throw IllegalArgumentException("Opplysning med navnId $opplysningNavnId mangler for behandlingId $behandlingId")
+        }?.get("verdi")
     }
 }

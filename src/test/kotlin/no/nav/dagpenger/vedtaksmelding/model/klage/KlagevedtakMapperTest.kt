@@ -22,6 +22,24 @@ class KlagevedtakMapperTest {
             }
         }
     }
+
+    @Test
+    fun `Håndtere opplysninger uten verdi`() {
+        //language=JSON
+        val klageVedtakJson =
+            """
+            {
+              "behandlingId": "0196a5b8-3dab-779f-ba9c-a116e298b2b1",
+              "utfallOpplysninger": [],
+              "behandlingOpplysninger": []
+            }
+            """.trimIndent()
+        KlagevedtakMapper(
+            vedtakJson = klageVedtakJson,
+        ).vedtak().let { vedtak ->
+            vedtak.opplysninger.size shouldBe 0
+        }
+    }
 }
 
 private val klageVedtakJson =
