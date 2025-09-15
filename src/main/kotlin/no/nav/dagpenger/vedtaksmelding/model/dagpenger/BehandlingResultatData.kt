@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.github.oshai.kotlinlogging.KotlinLogging
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningDataException
 import java.time.LocalDate
 import java.util.UUID
 
@@ -149,7 +150,7 @@ class BehandlingResultatData(json: String) {
             it["opplysningTypeId"].asText() == id.toString()
         }.also {
             if (it.isEmpty()) {
-                throw OpplysningIkkeFunnet(id)
+                throw BehandlingResultatOpplysningIkkeFunnet(id)
             }
 
             if (it.size > 1) {
@@ -177,11 +178,9 @@ class BehandlingResultatData(json: String) {
         return jsonNode["rettighetsperioder"].first()["harRett"].asBoolean()
     }
 
-    open class OpplysningDataException(message: String) : RuntimeException(message)
-
-    data class OpplysningIkkeFunnet(val opplysningId: UUID) :
-        OpplysningDataException("Fant ikke opplysning med id $opplysningId")
+    data class BehandlingResultatOpplysningIkkeFunnet(val opplysningId: UUID) :
+        OpplysningDataException("Fant ikke behandling resultat opplysning med id $opplysningId")
 
     data class NyPeriodeIkkeFunnet(val opplysningId: UUID) :
-        OpplysningDataException("Fant ikke ny periode for opplysning med id $opplysningId")
+        OpplysningDataException("Fant ikke ny periode for behandling resultat opplysning med id $opplysningId")
 }

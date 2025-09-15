@@ -32,7 +32,7 @@ class VedtakMapper(
     private fun MutableSet<DagpengerOpplysning<*, *>>.addIfPresent(func: () -> DagpengerOpplysning<*, *>) {
         try {
             this.add(func())
-        } catch (e: BehandlingResultatData.OpplysningIkkeFunnet) {
+        } catch (e: BehandlingResultatData.BehandlingResultatOpplysningIkkeFunnet) {
             logger.debug { "Opplysning ikke funnet: ${e.message} for behandlingId: ${behandlingResultatData.behandlingId()}" }
         }
     }

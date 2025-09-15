@@ -6,6 +6,8 @@ interface Opplysning {
     fun formatertVerdi(): String
 }
 
+open class OpplysningDataException(message: String) : RuntimeException(message)
+
 class OpplysningIkkeFunnet(
     message: String,
 ) : RuntimeException(message)

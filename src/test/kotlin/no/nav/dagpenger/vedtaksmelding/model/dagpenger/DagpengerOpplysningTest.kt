@@ -74,19 +74,19 @@ class DagpengerOpplysningTest {
             DagpengerOpplysning.AntallStønadsuker.fra(it)
         }
 
-        shouldThrow<BehandlingResultatData.OpplysningIkkeFunnet> {
+        shouldThrow<BehandlingResultatData.BehandlingResultatOpplysningIkkeFunnet> {
             DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(behandlingResultatData)
         }
 
-        shouldThrow<BehandlingResultatData.OpplysningIkkeFunnet> {
+        shouldThrow<BehandlingResultatData.BehandlingResultatOpplysningIkkeFunnet> {
             DagpengerOpplysning.AntallPermitteringsuker(behandlingResultatData)
         }
 
-        shouldThrow<BehandlingResultatData.OpplysningIkkeFunnet> {
+        shouldThrow<BehandlingResultatData.BehandlingResultatOpplysningIkkeFunnet> {
             DagpengerOpplysning.AntallPermitteringsukerFisk(behandlingResultatData)
         }
 
-        shouldThrow<BehandlingResultatData.OpplysningIkkeFunnet> {
+        shouldThrow<BehandlingResultatData.BehandlingResultatOpplysningIkkeFunnet> {
             DagpengerOpplysning.OppfyllerKravetTilPermittering(behandlingResultatData)
         }
     }

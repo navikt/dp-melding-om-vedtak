@@ -21,7 +21,7 @@ import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
 import no.nav.dagpenger.vedtaksmelding.HentVedtakException
 import no.nav.dagpenger.vedtaksmelding.metrics.metrics
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.BehandlingResultatData
+import no.nav.dagpenger.vedtaksmelding.model.OpplysningDataException
 import org.slf4j.event.Level
 import java.net.URI
 
@@ -76,7 +76,7 @@ fun Application.apiConfig() {
 
         exception<Throwable> { call, cause ->
             when (cause) {
-                is BehandlingResultatData.OpplysningDataException -> {
+                is OpplysningDataException -> {
                     call.respond(HttpStatusCode.BadRequest, notImplementedProblemDTO(cause))
                 }
 
