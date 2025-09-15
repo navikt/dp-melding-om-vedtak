@@ -14,8 +14,14 @@ class EnhetTest {
     @Test
     fun `Heltall med enhet kroner skal formateres riktig`() {
         Enhet.KRONER.formatertVerdi(verdi = 10) shouldBe "10 kroner"
-
         Enhet.KRONER.formatertVerdi(verdi = 1000) shouldBe "1${nonBreakingSpace}000 kroner"
+    }
+
+    @Test
+    fun `Double med enhet kroner skal formateres riktig`() {
+        Enhet.KRONER.formatertVerdi(verdi = 10.49) shouldBe "10 kroner"
+        Enhet.KRONER.formatertVerdi(verdi = 10.51) shouldBe "11 kroner"
+        Enhet.KRONER.formatertVerdi(verdi = 10.50) shouldBe "11 kroner"
     }
 
     @Test

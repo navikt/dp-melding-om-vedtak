@@ -69,6 +69,8 @@ sealed class Enhet {
 
         override fun formatertVerdi(verdi: Int): String = formaterKroner(verdi)
 
+        override fun formatertVerdi(verdi: Double): String = formaterKroner(verdi)
+
         override fun formatertVerdi(verdi: Number): String = formaterKroner(verdi)
     }
 
