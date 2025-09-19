@@ -20,6 +20,8 @@ import no.nav.dagpenger.vedtaksmelding.db.PostgresDataSourceBuilder.dataSource
 import no.nav.dagpenger.vedtaksmelding.db.PostgresVedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MANUELL
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MELDEKORT
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
@@ -166,6 +168,52 @@ class MediatorTest {
 
         coVerify(exactly = 1) {
             behandlingKlient.hentBehandlingResultat(behandlingId, klient)
+        }
+    }
+
+    @Test
+    fun `Kaster feil hvis behandlingstype er MELDEKORT`() {
+        withMigratedDb { dataSource ->
+            val repository = PostgresVedtaksmeldingRepository(dataSource)
+            val mediator =
+                Mediator(
+                    behandlingKlient = mockk<BehandlingKlient>(),
+                    sanityKlient = sanityKlient,
+                    klageBehandlingKlient = mockKlageBehandlingKlient,
+                    vedtaksmeldingRepository = repository,
+                )
+            runBlocking {
+                shouldThrow<NotImplementedError> {
+                    mediator.hentVedtaksmelding(
+                        behandlingId = behandlingId,
+                        klient = klient,
+                        behanldingstype = MELDEKORT,
+                    )
+                }
+            }
+        }
+    }
+
+    @Test
+    fun `Kaster feil hvis behandlingstype er MANUELL`() {
+        withMigratedDb { dataSource ->
+            val repository = PostgresVedtaksmeldingRepository(dataSource)
+            val mediator =
+                Mediator(
+                    behandlingKlient = mockk<BehandlingKlient>(),
+                    sanityKlient = sanityKlient,
+                    klageBehandlingKlient = mockKlageBehandlingKlient,
+                    vedtaksmeldingRepository = repository,
+                )
+            runBlocking {
+                shouldThrow<NotImplementedError> {
+                    mediator.hentVedtaksmelding(
+                        behandlingId = behandlingId,
+                        klient = klient,
+                        behanldingstype = MANUELL,
+                    )
+                }
+            }
         }
     }
 

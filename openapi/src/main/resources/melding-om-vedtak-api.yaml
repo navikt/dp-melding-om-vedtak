@@ -300,8 +300,10 @@ components:
       type: string
       enum:
         - "RETT_TIL_DAGPENGER"
+        - "SØKNAD"
         - "KLAGE"
         - "MELDEKORT"
+        - "MANUELL"
     HttpProblem:
       type: object
       properties:
