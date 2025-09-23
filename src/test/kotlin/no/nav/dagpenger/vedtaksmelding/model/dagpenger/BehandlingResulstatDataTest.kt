@@ -9,19 +9,34 @@ import java.time.LocalDate
 class BehandlingResulstatDataTest {
     @Test
     fun `skal kunne parse vedtak resultat data`() {
-        val behandlingResultatData = BehandlingResultatData("/json/avslag_resultat.json".readFile())
+        val behandlingResultatData = BehandlingResultatData("/json/perioder.json".readFile())
 
         behandlingResultatData.flyttall(DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid.opplysningTypeId) shouldBe 50
-        behandlingResultatData.penger(DagpengerOpplysning.InntektskravSiste12Måneder.opplysningTypeId) shouldBe 186042
-        behandlingResultatData.tekst(DagpengerOpplysning.BruktBeregningsregelGrunnlag.opplysningTypeId) shouldBe "Gjennomsnittlig arbeidsinntekt siste 36 måneder"
+        behandlingResultatData.penger(DagpengerOpplysning.InntektskravSiste12Måneder.opplysningTypeId) shouldBe 195240
+        behandlingResultatData.tekst(DagpengerOpplysning.BruktBeregningsregelGrunnlag.opplysningTypeId) shouldBe "Inntekt etter avkortning og oppjustering siste 12 måneder"
         behandlingResultatData.boolsk(DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste6Måneder.opplysningTypeId) shouldBe true
-        behandlingResultatData.heltall(DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger.opplysningTypeId) shouldBe 0
+        behandlingResultatData.heltall(DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger.opplysningTypeId) shouldBe 52
         behandlingResultatData.dato(DagpengerOpplysning.FørsteMånedAvOpptjeningsperiode.opplysningTypeId) shouldBe
             LocalDate.of(
                 2022,
-                1,
+                8,
                 1,
             )
-        behandlingResultatData.provingsDato() shouldBe LocalDate.of(2025, 1, 29)
+
+        behandlingResultatData.perioder<Double>(DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid.opplysningTypeId)
+            .single().verdi shouldBe 50
+        behandlingResultatData.perioder<Number>(DagpengerOpplysning.InntektskravSiste12Måneder.opplysningTypeId)
+            .single().verdi shouldBe 195240
+        behandlingResultatData.perioder<String>(DagpengerOpplysning.BruktBeregningsregelGrunnlag.opplysningTypeId)
+            .single().verdi shouldBe "Inntekt etter avkortning og oppjustering siste 12 måneder"
+
+        behandlingResultatData.perioder<Boolean>(DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste6Måneder.opplysningTypeId)
+            .single().verdi shouldBe true
+
+        behandlingResultatData.perioder<Int>(DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger.opplysningTypeId)
+            .single().verdi shouldBe 52
+
+        behandlingResultatData.perioder<LocalDate>(DagpengerOpplysning.FørsteMånedAvOpptjeningsperiode.opplysningTypeId)
+            .single().verdi shouldBe LocalDate.of(2022, 8, 1)
     }
 }

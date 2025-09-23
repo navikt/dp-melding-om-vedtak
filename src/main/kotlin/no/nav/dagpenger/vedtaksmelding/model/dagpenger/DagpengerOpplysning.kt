@@ -11,6 +11,12 @@ interface DeriverbarOpplysning {
     val deriverteOpplysninger: Set<DagpengerOpplysning<*, *>>
 }
 
+data class Periode<V : Any>(
+    val fraOgMed: LocalDate?,
+    val tilOgMed: LocalDate?,
+    val verdi: V,
+)
+
 sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     open val verdi: V,
 ) : Opplysning {

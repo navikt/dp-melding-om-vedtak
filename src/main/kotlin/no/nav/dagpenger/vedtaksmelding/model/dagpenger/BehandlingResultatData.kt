@@ -102,6 +102,53 @@ class BehandlingResultatData(json: String) {
         }
     }
 
+    internal inline fun <reified V : Any> perioder(id: UUID): Set<Periode<V>> {
+        return opplysningNoder.singleOrNull {
+            it["opplysningTypeId"].asText() == id.toString()
+        }?.let {
+            it["perioder"].map { periodeNode ->
+                val gyldigFraOgMed = periodeNode.get("gyldigFraOgMed")?.asDato()
+                val gyldigTilOgMed = periodeNode.get("gyldigTilOgMed")?.asDato()
+                val verdiNode = periodeNode["verdi"]["verdi"]
+                val verdi: V =
+                    when (V::class) {
+                        Int::class -> {
+                            require(verdiNode.isInt) { "Forventet at heltall har int verdi, men var $verdiNode" }
+                            verdiNode.asInt() as V
+                        }
+
+                        Double::class -> {
+                            require(verdiNode.isNumber) { "Forventet at flyttall har double verdi, men var $verdiNode" }
+                            verdiNode.asDouble() as V
+                        }
+
+                        Boolean::class -> {
+                            require(verdiNode.isBoolean) { "Forventet at boolsk har boolean verdi, men var $verdiNode" }
+                            verdiNode.asBoolean() as V
+                        }
+
+                        String::class -> {
+                            require(verdiNode.isTextual) { "Forventet at tekst har tekst verdi, men var $verdiNode" }
+                            verdiNode.asText() as V
+                        }
+
+                        Number::class -> {
+                            require(verdiNode.isNumber) { "Forventet at penger har number verdi, men var $verdiNode" }
+                            (if (verdiNode.isInt) verdiNode.asInt() else verdiNode.asDouble()) as V
+                        }
+
+                        LocalDate::class -> {
+                            require(verdiNode.isDato()) { "Forventet at dato har riktig  dato verdi, men var $verdiNode" }
+                            verdiNode.asDato() as V
+                        }
+
+                        else -> throw IllegalArgumentException("Ukjent datatype for periodeverdi: $verdiNode")
+                    }
+                Periode(gyldigFraOgMed, gyldigTilOgMed, verdi)
+            }.toSet()
+        } ?: throw BehandlingResultatOpplysningIkkeFunnet(id)
+    }
+
     fun boolsk(id: UUID): Boolean {
         val verdiNode = verdiNode(id)
 
@@ -145,6 +192,10 @@ class BehandlingResultatData(json: String) {
         }
     }
 
+    fun perioder(): List<JsonNode?> {
+        return opplysningNoder.filter { it["perioder"].size() > 1 }
+    }
+
     private fun verdiNode(id: UUID): JsonNode {
         return opplysningNoder.filter {
             it["opplysningTypeId"].asText() == id.toString()
@@ -152,7 +203,6 @@ class BehandlingResultatData(json: String) {
             if (it.isEmpty()) {
                 throw BehandlingResultatOpplysningIkkeFunnet(id)
             }
-
             if (it.size > 1) {
                 throw OpplysningDataException("Fant flere enn en opplysning med id $id")
             }
@@ -166,7 +216,7 @@ class BehandlingResultatData(json: String) {
                 }
 
                 if (it.size > 1) {
-                    throw OpplysningDataException("Fanet flere enn en ny periode for opplysning med id $id")
+                    throw OpplysningDataException("fanet flere enn en ny periode for opplysning med id $id")
                 }
             }.single()["verdi"]
         }
