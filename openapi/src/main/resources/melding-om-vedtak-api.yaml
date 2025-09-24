@@ -165,7 +165,7 @@ paths:
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/UtvidetBeskrivelseTekst'
+              $ref: '#/components/schemas/UtvidetBeskrivelseTekst'
       responses:
         '200':
           description: Utvidet beskrivelse for brevblokk er lagret og returnerer sistEndretTidspunkt
@@ -222,8 +222,8 @@ components:
           items:
             $ref: '#/components/schemas/UtvidetBeskrivelse'
       required:
-      - html
-      - utvidedeBeskrivelser
+        - html
+        - utvidedeBeskrivelser
 
     UtvidetBeskrivelse:
       type: object
@@ -263,12 +263,15 @@ components:
           $ref: '#/components/schemas/Behandler'
         beslutter:
           $ref: '#/components/schemas/Behandler'
+        brevVariant:
+          $ref: '#/components/schemas/BrevVariant'
       required:
         - behandlingstype
         - fornavn
         - etternavn
         - fodselsnummer
         - saksbehandler
+        - brevVariant
 
     Behandler:
       type: object
@@ -278,14 +281,14 @@ components:
         etternavn:
           type: string
         ident:
-            type: string
+          type: string
         enhet:
           type: object
           properties:
             navn:
               type: string
             enhetNr:
-                type: string
+              type: string
             postadresse:
               type: string
           required:
@@ -296,6 +299,12 @@ components:
         - etternavn
         - enhet
 
+    BrevVariant:
+      type: string
+      default: "GENERERT"
+      enum:
+        - "GENERERT"
+        - "EGENDEFINERT"
     Behandlingstype:
       type: string
       enum:
