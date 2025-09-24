@@ -2,6 +2,7 @@ package no.nav.dagpenger.vedtaksmelding
 
 import com.fasterxml.jackson.core.type.TypeReference
 import io.github.oshai.kotlinlogging.KotlinLogging
+import no.nav.dagpenger.saksbehandling.api.models.BrevVariantDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakResponseDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
@@ -36,6 +37,28 @@ class Mediator(
     private val sanityKlient: SanityKlient,
     private val vedtaksmeldingRepository: VedtaksmeldingRepository,
 ) {
+    suspend fun hentForhåndsvisning(
+        behandlingId: UUID,
+        klient: Klient,
+        meldingOmVedtakData: MeldingOmVedtakDataDTO,
+    ): MeldingOmVedtakResponseDTO {
+        return when (meldingOmVedtakData.brevVariant) {
+            BrevVariantDTO.GENERERT -> hentGenerertForhåndsvisning(behandlingId, klient, meldingOmVedtakData)
+            BrevVariantDTO.EGENDEFINERT -> TODO()
+        }
+    }
+
+    suspend fun hentEndeligBrev(
+        behandlingId: UUID,
+        klient: Klient,
+        meldingOmVedtakData: MeldingOmVedtakDataDTO,
+    ): String {
+        return when (meldingOmVedtakData.brevVariant) {
+            BrevVariantDTO.GENERERT -> hentGenerertEndeligBrev(behandlingId, klient, meldingOmVedtakData)
+            BrevVariantDTO.EGENDEFINERT -> ""
+        }
+    }
+
     suspend fun hentVedtaksmelding(
         behandlingId: UUID,
         klient: Klient,
@@ -163,7 +186,7 @@ class Mediator(
             }
     }
 
-    suspend fun hentVedtak(
+    private suspend fun hentGenerertForhåndsvisning(
         behandlingId: UUID,
         klient: Klient,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
@@ -196,7 +219,7 @@ class Mediator(
         )
     }
 
-    suspend fun hentEndeligVedtak(
+    private suspend fun hentGenerertEndeligBrev(
         behandlingId: UUID,
         klient: Klient,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,

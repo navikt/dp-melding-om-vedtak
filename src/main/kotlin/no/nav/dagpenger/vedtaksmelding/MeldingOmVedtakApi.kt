@@ -44,7 +44,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
                     runCatching {
                         val meldingOmVedtakResponseDTO =
-                            mediator.hentVedtak(
+                            mediator.hentForhåndsvisning(
                                 behandlingId = behandlingId,
                                 klient = klient,
                                 meldingOmVedtakData = meldingOmVedtakData,
@@ -64,7 +64,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                 withLoggingContext("behandlingId" to behandlingId.toString()) {
                     runCatching {
                         val vedtaksHtml =
-                            mediator.hentEndeligVedtak(
+                            mediator.hentEndeligBrev(
                                 behandlingId = behandlingId,
                                 klient = klient,
                                 meldingOmVedtakData = meldingOmVedtakData,

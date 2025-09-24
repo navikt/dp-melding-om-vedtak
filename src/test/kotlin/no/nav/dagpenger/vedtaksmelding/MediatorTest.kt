@@ -130,7 +130,7 @@ class MediatorTest {
                     vedtaksmeldingRepository = repository,
                 )
             runBlocking {
-                val vedtakshtml = mediator.hentEndeligVedtak(behandlingId, klient, meldingOmVedtakDataDTO)
+                val vedtakshtml = mediator.hentEndeligBrev(behandlingId, klient, meldingOmVedtakDataDTO)
                 vedtakshtml shouldBe repository.hentVedaksmeldingHtml(behandlingId)
             }
         }
@@ -307,7 +307,7 @@ class MediatorTest {
         runBlocking {
             val utvidedebeskrivelser =
                 mediator
-                    .hentVedtak(
+                    .hentForhåndsvisning(
                         behandlingId = behandlingId,
                         klient = klient,
                         meldingOmVedtakData =

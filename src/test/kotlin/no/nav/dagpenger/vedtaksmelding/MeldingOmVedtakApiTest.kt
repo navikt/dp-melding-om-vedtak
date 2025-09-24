@@ -149,7 +149,7 @@ class MeldingOmVedtakApiTest {
         val mediator =
             mockk<Mediator>().also {
                 coEvery {
-                    it.hentVedtak(
+                    it.hentForhåndsvisning(
                         behandlingId = any(),
                         klient = any(),
                         meldingOmVedtakData = lagMeldingOmVedtakDataDTO(),
@@ -160,7 +160,7 @@ class MeldingOmVedtakApiTest {
                         utvidedeBeskrivelser = listOf(),
                     )
                 coEvery {
-                    it.hentVedtak(
+                    it.hentForhåndsvisning(
                         behandlingId = any(),
                         klient = any(),
                         meldingOmVedtakData = lagMeldingOmVedtakDataDTO(KLAGE),
@@ -171,14 +171,14 @@ class MeldingOmVedtakApiTest {
                         utvidedeBeskrivelser = listOf(),
                     )
                 coEvery {
-                    it.hentVedtak(
+                    it.hentForhåndsvisning(
                         behandlingId = any(),
                         klient = any(),
                         meldingOmVedtakData = lagMeldingOmVedtakDataDTO(MELDEKORT),
                     )
                 } throws IllegalArgumentException("Meldekortbehandling har ikke støtte for vedtaksmelding")
                 coEvery {
-                    it.hentVedtak(
+                    it.hentForhåndsvisning(
                         behandlingId = any(),
                         klient = any(),
                         meldingOmVedtakData = lagMeldingOmVedtakDataDTO(MANUELL),
@@ -317,7 +317,7 @@ class MeldingOmVedtakApiTest {
         val mediator =
             mockk<Mediator>().also {
                 coEvery {
-                    it.hentVedtak(
+                    it.hentForhåndsvisning(
                         behandlingId,
                         Saksbehandler(saksbehandlerToken),
                         meldingOmVedtakData = meldingOmVedtakData,
@@ -385,7 +385,7 @@ class MeldingOmVedtakApiTest {
         val mediator =
             mockk<Mediator>().also {
                 coEvery {
-                    it.hentEndeligVedtak(
+                    it.hentEndeligBrev(
                         behandlingId = behandlingId,
                         klient = capture(klientSlot),
                         meldingOmVedtakData = meldingOmVedtakData,
@@ -467,7 +467,7 @@ class MeldingOmVedtakApiTest {
         val mediator =
             mockk<Mediator>().also {
                 coEvery {
-                    it.hentVedtak(
+                    it.hentForhåndsvisning(
                         behandlingId,
                         any(),
                         any(),
@@ -532,7 +532,7 @@ class MeldingOmVedtakApiTest {
         val mediator =
             mockk<Mediator>(relaxed = true).also {
                 coEvery {
-                    it.hentVedtak(
+                    it.hentForhåndsvisning(
                         behandlingId = any(),
                         klient = any(),
                         meldingOmVedtakData = capture(slot),
