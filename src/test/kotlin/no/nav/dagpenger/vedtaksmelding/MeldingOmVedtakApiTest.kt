@@ -14,7 +14,9 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.testing.testApplication
+import io.mockk.Runs
 import io.mockk.coEvery
+import io.mockk.just
 import io.mockk.mockk
 import io.mockk.slot
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
@@ -255,7 +257,6 @@ class MeldingOmVedtakApiTest {
         brevVariant: BrevVariantDTO = BrevVariantDTO.GENERERT,
     ): MeldingOmVedtakDataDTO =
         MeldingOmVedtakDataDTO(
-            brevVariant = brevVariant,
             sakId = "sak123",
             behandlingstype = BehandlingstypeDTO.valueOf(behandlingstype.name),
             fornavn = "Test ForNavn",
@@ -527,48 +528,41 @@ class MeldingOmVedtakApiTest {
     }
 
     @Test
-    fun `Skal kunne sette brev variant, med default til GENERERT`() {
-        val slot = mutableListOf<MeldingOmVedtakDataDTO>()
+    fun `Skal kunne lagre brev-variant for en behandling`() {
         val mediator =
             mockk<Mediator>(relaxed = true).also {
                 coEvery {
-                    it.hentForhåndsvisning(
+                    it.lagreBrevVariant(
                         behandlingId = any(),
-                        klient = any(),
-                        meldingOmVedtakData = capture(slot),
+                        brevVariant = any(),
                     )
-                } returns
-                    MeldingOmVedtakResponseDTO(
-                        html = "<html><body>Test HTML Test ForNavn</body></html>",
-                        utvidedeBeskrivelser = listOf(),
-                    )
+                } just Runs
             }
         testApplication {
             application {
                 meldingOmVedtakApi(mediator)
             }
-
-            client.post("/melding-om-vedtak/$behandlingId/html") {
+            client.put("/melding-om-vedtak/$behandlingId/brev-variant") {
                 autentisert(token = saksbehandlerToken)
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
-                setBody(requestBody(lagMeldingOmVedtakDataDTO()))
+                setBody(requestBody(BrevVariantDTO.EGENDEFINERT))
+            }.let { response ->
+                response.status shouldBe HttpStatusCode.NoContent
             }
-            slot.first().brevVariant shouldBe BrevVariantDTO.GENERERT
-
-            client.post("/melding-om-vedtak/$behandlingId/html") {
-                autentisert(token = saksbehandlerToken)
-                header(HttpHeaders.ContentType, ContentType.Application.Json)
-                setBody(requestBody(lagMeldingOmVedtakDataDTO(brevVariant = BrevVariantDTO.EGENDEFINERT)))
-            }
-
-            slot.last().brevVariant shouldBe BrevVariantDTO.EGENDEFINERT
         }
+    }
+
+    private fun requestBody(brevVariant: BrevVariantDTO): String {
+        return """
+            {
+                "brevVariant" : "${brevVariant.name}"
+            }
+            """
     }
 
     private fun requestBody(meldingOmVedtakData: MeldingOmVedtakDataDTO = lagMeldingOmVedtakDataDTO()): String {
         return """
             {
-                "brevVariant": "${meldingOmVedtakData.brevVariant.value}",
                 "behandlingstype": "${meldingOmVedtakData.behandlingstype.value}",
                 "fornavn": "${meldingOmVedtakData.fornavn}",
                 "etternavn": "${meldingOmVedtakData.etternavn}",

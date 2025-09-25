@@ -2,13 +2,49 @@ openapi: 3.0.3
 info:
   title: Melding om vedtak API
   version: 1.0.0
-  description: Et API for å hente ut brevblokker som utgjør melding om vedtak.
+  description: Et API for å håndtere det å lage brev i dp-sak
 servers:
   - url: https://dp-melding-om-vedtak.intern.dev.nav.no
     description: dev
   - url: https://dp-melding-om-vedtak.intern.nav.no
     description: prod
 paths:
+  /melding-om-vedtak/{behandlingId}/brev-variant:
+    put:
+      summary: Lagrer brev-variant for behandling
+      description: Lagrer brev-variant for behandling, slik at dette kan hentes når brev skal produseres som forhåndsvisning eller endelig brev.
+      security:
+        - azureAd: [ ]
+      parameters:
+        - name: behandlingId
+          in: path
+          description: id for behandling
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrevVariantRequest'
+      responses:
+        '204':
+          description: Brev-variant er lagret
+        '404':
+          description: Behandlingen finnes ikke
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpProblem'
+        default:
+          description: Feil
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpProblem'
+
   /melding-om-vedtak/{behandlingId}/html:
     post:
       summary: Hent vedtak som HTML for en gitt behandlingId
@@ -49,10 +85,11 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/HttpProblem'
+
   /melding-om-vedtak/{behandlingId}/vedtaksmelding:
     post:
-      summary: Hent vedtaks HTML for en gitt behandlingId
-      description: Henter vedtaksHTML for en gitt behandlingId, bruker garantert samme Sanity innhold som da sa
+      summary: Henter endelig brev for en gitt behandling
+      description: Henter endelig brev for en gitt behandling. Garanterer bruk av samme Sanity innhold som da brevet ble laget vha html-endepunktet.
       security:
         - azureAd: [ ]
       parameters:
@@ -69,7 +106,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/MeldingOmVedtakData'
-
       responses:
         '200':
           description: OK
@@ -221,9 +257,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UtvidetBeskrivelse'
+        brevVariant:
+          $ref: '#/components/schemas/BrevVariant'
       required:
         - html
         - utvidedeBeskrivelser
+        - brevVariant
 
     UtvidetBeskrivelse:
       type: object
@@ -241,6 +280,14 @@ components:
         - brevblokkId
         - tekst
         - tittel
+
+    BrevVariantRequest:
+      type: object
+      properties:
+        brevVariant:
+          $ref: '#/components/schemas/BrevVariant'
+      required:
+        - brevVariant
 
     MeldingOmVedtakData:
       type: object
@@ -263,15 +310,12 @@ components:
           $ref: '#/components/schemas/Behandler'
         beslutter:
           $ref: '#/components/schemas/Behandler'
-        brevVariant:
-          $ref: '#/components/schemas/BrevVariant'
       required:
         - behandlingstype
         - fornavn
         - etternavn
         - fodselsnummer
         - saksbehandler
-        - brevVariant
 
     Behandler:
       type: object
@@ -305,6 +349,7 @@ components:
       enum:
         - "GENERERT"
         - "EGENDEFINERT"
+
     Behandlingstype:
       type: string
       enum:
@@ -313,6 +358,7 @@ components:
         - "KLAGE"
         - "MELDEKORT"
         - "MANUELL"
+
     HttpProblem:
       type: object
       properties:
@@ -327,6 +373,7 @@ components:
           type: string
         instance:
           type: string
+
   securitySchemes:
     azureAd:
       type: http

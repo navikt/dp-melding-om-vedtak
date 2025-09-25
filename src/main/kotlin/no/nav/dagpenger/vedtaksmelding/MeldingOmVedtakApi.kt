@@ -16,6 +16,7 @@ import io.ktor.server.routing.RoutingContext
 import io.ktor.server.routing.post
 import io.ktor.server.routing.put
 import io.ktor.server.routing.routing
+import no.nav.dagpenger.saksbehandling.api.models.BrevVariantRequestDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseSistEndretTidspunktDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseTekstDTO
@@ -37,6 +38,22 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
             )
         }
         authenticate("azureAd", "azureAd-M2M") {
+            put("/melding-om-vedtak/{behandlingId}/brev-variant") {
+                val behandlingId = call.parseUUID()
+                val brevVariantRequest = call.receive<BrevVariantRequestDTO>()
+                withLoggingContext("behandlingId" to behandlingId.toString()) {
+                    runCatching {
+                        mediator.lagreBrevVariant(
+                            behandlingId = behandlingId,
+                            brevVariant = brevVariantRequest.brevVariant,
+                        )
+                        call.respond(HttpStatusCode.NoContent)
+                    }.onFailure { t ->
+                        logger.error(t) { "Feil ved lagring av brev-variant for behandlingId: $behandlingId" }
+                        throw t
+                    }
+                }
+            }
             post("/melding-om-vedtak/{behandlingId}/html") {
                 val behandlingId = call.parseUUID()
                 val klient = call.request.klient()

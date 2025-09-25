@@ -37,24 +37,25 @@ class Mediator(
     private val sanityKlient: SanityKlient,
     private val vedtaksmeldingRepository: VedtaksmeldingRepository,
 ) {
+    fun lagreBrevVariant(
+        behandlingId: UUID,
+        brevVariant: BrevVariantDTO,
+    ) {
+        vedtaksmeldingRepository.lagreBrevVariant(
+            behandlingId = behandlingId,
+            brevVariant = brevVariant,
+        )
+    }
+
     suspend fun hentForhåndsvisning(
         behandlingId: UUID,
         klient: Klient,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): MeldingOmVedtakResponseDTO {
-        return runCatching {
-            when (meldingOmVedtakData.brevVariant) {
-                BrevVariantDTO.GENERERT -> {
-                    hentGenerertForhåndsvisning(behandlingId, klient, meldingOmVedtakData)
-                }
-
-                BrevVariantDTO.EGENDEFINERT -> {
-                    hentEgendefinertForhåndsvisning(behandlingId, meldingOmVedtakData)
-                }
-            }
-        }.onSuccess {
-            vedtaksmeldingRepository.lagreBrevVariant(behandlingId, meldingOmVedtakData.brevVariant)
-        }.getOrThrow()
+        return when (vedtaksmeldingRepository.hentBrevVariant(behandlingId)) {
+            BrevVariantDTO.GENERERT -> hentGenerertForhåndsvisning(behandlingId, klient, meldingOmVedtakData)
+            BrevVariantDTO.EGENDEFINERT -> hentEgendefinertForhåndsvisning(behandlingId, meldingOmVedtakData)
+        }
     }
 
     private fun hentEgendefinertForhåndsvisning(
@@ -84,6 +85,7 @@ class Mediator(
                         tittel = it.tittel,
                     )
                 },
+            brevVariant = BrevVariantDTO.EGENDEFINERT,
         )
     }
 
@@ -259,6 +261,7 @@ class Mediator(
                         tittel = it.tittel,
                     )
                 },
+            brevVariant = BrevVariantDTO.GENERERT,
         )
     }
 
@@ -273,12 +276,11 @@ class Mediator(
                 klient,
                 meldingOmVedtakData.behandlingstype.tilBehandlingstype(),
             ).let { vedtak ->
-
                 HtmlConverter.toHtml(
-                    vedtak.hentBrevBlokker(),
-                    vedtak.hentOpplysninger(),
-                    meldingOmVedtakData,
-                    hentUtvidedeBeskrivelser(behandlingId, vedtak).toSet(),
+                    brevBlokker = vedtak.hentBrevBlokker(),
+                    opplysninger = vedtak.hentOpplysninger(),
+                    meldingOmVedtakData = meldingOmVedtakData,
+                    utvidetBeskrivelse = hentUtvidedeBeskrivelser(behandlingId, vedtak).toSet(),
                 )
             }
         vedtaksmeldingRepository.lagreVedaksmeldingHtml(behandlingId, html)
