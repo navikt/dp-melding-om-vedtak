@@ -134,7 +134,7 @@ object HtmlConverter {
                     header(meldingOmVedtakData, sakId)
                     utvidetBeskrivelse.forEach {
                         div(classes = "melding-om-vedtak-tekst-blokk") {
-                            attributes["data-brevblokk-id"] = it.brevblokkId
+                            attributes["data-utvidet-beskrivelse-id"] = it.brevblokkId
                             it.tekst?.let { tekst ->
                                 unsafe {
                                     raw(tekst)
