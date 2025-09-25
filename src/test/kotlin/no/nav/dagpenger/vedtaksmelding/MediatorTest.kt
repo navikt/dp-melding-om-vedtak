@@ -4,15 +4,18 @@ import io.kotest.assertions.json.shouldEqualJson
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
+import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
+import io.mockk.just
 import io.mockk.mockk
 import io.mockk.spyk
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlingstypeDTO
+import no.nav.dagpenger.saksbehandling.api.models.BrevVariantDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.db.Postgres.withMigratedDb
@@ -244,6 +247,8 @@ class MediatorTest {
     fun `hent utvidet beskrivelse inkl tomme beskrivelser`() {
         val vedtaksmeldingRepository =
             mockk<VedtaksmeldingRepository>().also {
+                every { it.hentBrevVariant(any()) } returns BrevVariantDTO.GENERERT
+                every { it.lagreBrevVariant(any(), any()) } just Runs
                 coEvery { it.hentUtvidedeBeskrivelserFor(behandlingId) } returns
                     listOf(
                         UtvidetBeskrivelse(

@@ -42,37 +42,49 @@ class Mediator(
         klient: Klient,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): MeldingOmVedtakResponseDTO {
-        return when (meldingOmVedtakData.brevVariant) {
-            BrevVariantDTO.GENERERT -> hentGenerertForhåndsvisning(behandlingId, klient, meldingOmVedtakData)
-            BrevVariantDTO.EGENDEFINERT -> {
-                val utvidetBeskrivelse =
-                    vedtaksmeldingRepository.hentUtvidedeBeskrivelserFor(behandlingId).singleOrNull()
-                        ?: UtvidetBeskrivelse(
-                            behandlingId = behandlingId,
-                            brevblokkId = "brev.blokk.egendefinert",
-                            tekst = "",
-                            sistEndretTidspunkt = null,
-                            tittel = "Egendefinert",
-                        )
+        return runCatching {
+            when (meldingOmVedtakData.brevVariant) {
+                BrevVariantDTO.GENERERT -> {
+                    hentGenerertForhåndsvisning(behandlingId, klient, meldingOmVedtakData)
+                }
 
-                val utvidedeBeskrivelser = setOf(utvidetBeskrivelse)
-
-                // lage kobling til at denne behandling har egendefinert brev
-
-                MeldingOmVedtakResponseDTO(
-                    html = HtmlConverter.toHtml(meldingOmVedtakData, utvidedeBeskrivelser),
-                    utvidedeBeskrivelser =
-                        utvidedeBeskrivelser.map {
-                            UtvidetBeskrivelseDTO(
-                                brevblokkId = it.brevblokkId,
-                                tekst = it.tekst ?: "",
-                                sistEndretTidspunkt = it.sistEndretTidspunkt ?: LocalDateTime.now(),
-                                tittel = it.tittel,
-                            )
-                        },
-                )
+                BrevVariantDTO.EGENDEFINERT -> {
+                    hentEgendefinertForhåndsvisning(behandlingId, meldingOmVedtakData)
+                }
             }
-        }
+        }.onSuccess {
+            vedtaksmeldingRepository.lagreBrevVariant(behandlingId, meldingOmVedtakData.brevVariant)
+        }.getOrThrow()
+    }
+
+    private fun hentEgendefinertForhåndsvisning(
+        behandlingId: UUID,
+        meldingOmVedtakData: MeldingOmVedtakDataDTO,
+    ): MeldingOmVedtakResponseDTO {
+        val utvidetBeskrivelse =
+            vedtaksmeldingRepository.hentUtvidedeBeskrivelserFor(behandlingId).singleOrNull()
+                ?: UtvidetBeskrivelse(
+                    behandlingId = behandlingId,
+                    brevblokkId = "brev.blokk.egendefinert",
+                    tekst = "",
+                    sistEndretTidspunkt = null,
+                    tittel = "Egendefinert",
+                )
+
+        val utvidedeBeskrivelser = setOf(utvidetBeskrivelse)
+
+        return MeldingOmVedtakResponseDTO(
+            html = HtmlConverter.toHtml(meldingOmVedtakData, utvidedeBeskrivelser),
+            utvidedeBeskrivelser =
+                utvidedeBeskrivelser.map {
+                    UtvidetBeskrivelseDTO(
+                        brevblokkId = it.brevblokkId,
+                        tekst = it.tekst ?: "",
+                        sistEndretTidspunkt = it.sistEndretTidspunkt ?: LocalDateTime.now(),
+                        tittel = it.tittel,
+                    )
+                },
+        )
     }
 
     suspend fun hentEndeligBrev(
@@ -80,9 +92,13 @@ class Mediator(
         klient: Klient,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): String {
-        return when (meldingOmVedtakData.brevVariant) {
+        return when (vedtaksmeldingRepository.hentBrevVariant(behandlingId)) {
             BrevVariantDTO.GENERERT -> hentGenerertEndeligBrev(behandlingId, klient, meldingOmVedtakData)
-            BrevVariantDTO.EGENDEFINERT -> ""
+            BrevVariantDTO.EGENDEFINERT -> {
+                hentEgendefinertForhåndsvisning(behandlingId, meldingOmVedtakData).html.also {
+                    vedtaksmeldingRepository.lagreVedaksmeldingHtml(behandlingId, it)
+                }
+            }
         }
     }
 

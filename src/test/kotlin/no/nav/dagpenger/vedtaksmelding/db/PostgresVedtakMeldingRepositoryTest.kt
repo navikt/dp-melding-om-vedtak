@@ -3,6 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.db
 import io.kotest.matchers.date.shouldBeAfter
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
+import no.nav.dagpenger.saksbehandling.api.models.BrevVariantDTO
 import no.nav.dagpenger.vedtaksmelding.db.Postgres.withMigratedDb
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
@@ -141,6 +142,22 @@ class PostgresVedtakMeldingRepositoryTest {
 
             repository.lagreSanityInnhold(behandlingId, sanityInnholdUpdate)
             repository.hentSanityInnhold(behandlingId) shouldBe sanityInnholdUpdate
+        }
+    }
+
+    @Test
+    fun `Skal kunne lagre og hente brev variant`() {
+        val behandlingId = UUIDv7.ny()
+
+        withMigratedDb { dataSource ->
+            val repository = PostgresVedtaksmeldingRepository(dataSource)
+            repository.hentBrevVariant(behandlingId) shouldBe BrevVariantDTO.GENERERT
+
+            repository.lagreBrevVariant(behandlingId, BrevVariantDTO.EGENDEFINERT)
+            repository.hentBrevVariant(behandlingId) shouldBe BrevVariantDTO.EGENDEFINERT
+
+            repository.lagreBrevVariant(behandlingId, BrevVariantDTO.GENERERT)
+            repository.hentBrevVariant(behandlingId) shouldBe BrevVariantDTO.GENERERT
         }
     }
 

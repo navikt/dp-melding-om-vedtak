@@ -3,6 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.db
 import kotliquery.TransactionalSession
 import kotliquery.queryOf
 import kotliquery.sessionOf
+import no.nav.dagpenger.saksbehandling.api.models.BrevVariantDTO
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import org.postgresql.util.PGobject
 import java.time.LocalDateTime
@@ -179,6 +180,54 @@ class PostgresVedtaksmeldingRepository(
                 ).map { row -> row.string("vedtaksmelding_html") }.asSingle,
             ) ?: throw DataNotFoundException("Fant ikke vedtaksmelding html for behandlingId: $behandlingId")
         }
+
+    override fun lagreBrevVariant(
+        behandlingId: UUID,
+        brevVariant: BrevVariantDTO,
+    ) {
+        sessionOf(dataSource).use { session ->
+            session.run(
+                queryOf(
+                    //language=PostgreSQL
+                    statement =
+                        """
+                        INSERT INTO brev_variant_v1
+                            (behandling_id, brev_variant)
+                        VALUES
+                            (:behandling_id, :brev_variant)
+                        ON CONFLICT (behandling_id) DO UPDATE SET brev_variant = :brev_variant
+                        """.trimIndent(),
+                    paramMap =
+                        mapOf(
+                            "behandling_id" to behandlingId,
+                            "brev_variant" to brevVariant.name,
+                        ),
+                ).asUpdate,
+            )
+        }
+    }
+
+    override fun hentBrevVariant(behandlingId: UUID): BrevVariantDTO {
+        return sessionOf(dataSource).use { session ->
+            session.run(
+                queryOf(
+                    //language=PostgreSQL
+                    statement =
+                        """
+                        SELECT brev_variant
+                        FROM   brev_variant_v1
+                        WHERE  behandling_id = :behandling_id
+                        """.trimIndent(),
+                    paramMap =
+                        mapOf(
+                            "behandling_id" to behandlingId,
+                        ),
+                ).map { row ->
+                    BrevVariantDTO.valueOf(row.string("brev_variant"))
+                }.asSingle,
+            ) ?: BrevVariantDTO.GENERERT
+        }
+    }
 }
 
 private fun TransactionalSession.lagre(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime =

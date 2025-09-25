@@ -1,5 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.db
 
+import no.nav.dagpenger.saksbehandling.api.models.BrevVariantDTO
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import java.time.LocalDateTime
 import java.util.UUID
@@ -32,4 +33,11 @@ interface VedtaksmeldingRepository {
     )
 
     fun hentVedaksmeldingHtml(behandlingId: UUID): String
+
+    fun lagreBrevVariant(
+        behandlingId: UUID,
+        brevVariant: BrevVariantDTO,
+    )
+
+    fun hentBrevVariant(behandlingId: UUID): BrevVariantDTO
 }
