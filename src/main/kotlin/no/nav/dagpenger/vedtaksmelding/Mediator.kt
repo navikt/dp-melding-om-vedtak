@@ -44,7 +44,34 @@ class Mediator(
     ): MeldingOmVedtakResponseDTO {
         return when (meldingOmVedtakData.brevVariant) {
             BrevVariantDTO.GENERERT -> hentGenerertForhåndsvisning(behandlingId, klient, meldingOmVedtakData)
-            BrevVariantDTO.EGENDEFINERT -> TODO()
+            BrevVariantDTO.EGENDEFINERT -> {
+                val utvidetBeskrivelse =
+                    vedtaksmeldingRepository.hentUtvidedeBeskrivelserFor(behandlingId).singleOrNull()
+                        ?: UtvidetBeskrivelse(
+                            behandlingId = behandlingId,
+                            brevblokkId = "brev.blokk.egendefinert",
+                            tekst = "",
+                            sistEndretTidspunkt = null,
+                            tittel = "Egendefinert",
+                        )
+
+                val utvidedeBeskrivelser = setOf(utvidetBeskrivelse)
+
+                // lage kobling til at denne behandling har egendefinert brev
+
+                MeldingOmVedtakResponseDTO(
+                    html = HtmlConverter.toHtml(meldingOmVedtakData, utvidedeBeskrivelser),
+                    utvidedeBeskrivelser =
+                        utvidedeBeskrivelser.map {
+                            UtvidetBeskrivelseDTO(
+                                brevblokkId = it.brevblokkId,
+                                tekst = it.tekst ?: "",
+                                sistEndretTidspunkt = it.sistEndretTidspunkt ?: LocalDateTime.now(),
+                                tittel = it.tittel,
+                            )
+                        },
+                )
+            }
         }
     }
 

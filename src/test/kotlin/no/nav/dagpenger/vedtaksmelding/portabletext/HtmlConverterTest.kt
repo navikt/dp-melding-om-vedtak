@@ -24,6 +24,25 @@ class HtmlConverterTest {
     private fun hentVedtak(navn: String): Vedtak = navn.readFile().let { VedtakMapper(it).vedtak() }
 
     @Test
+    fun `Hubba`() {
+        HtmlConverter.toHtml(
+            meldingOmVedtakDTO,
+            utvidetBeskrivelse =
+                setOf(
+                    UtvidetBeskrivelse(
+                        behandlingId = UUIDv7.ny(),
+                        brevblokkId = "sfa",
+                        tekst = "<h1>Hubba</h1>",
+                        sistEndretTidspunkt = java.time.LocalDateTime.now(),
+                        tittel = "Hubba",
+                    ),
+                ),
+        ).also {
+            writeStringToFile("build/temp/hubba.html", it)
+        }
+    }
+
+    @Test
     fun `Skal bygge HTML med ulike tekst formattering`() {
         val sanityTekster =
             "/json/sanity.json"
