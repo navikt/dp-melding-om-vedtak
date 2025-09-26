@@ -56,7 +56,7 @@ class Mediator(
     ): MeldingOmVedtakResponseDTO {
         return when (vedtaksmeldingRepository.hentBrevVariant(behandlingId)) {
             BrevVariantDTO.GENERERT -> hentGenerertForhåndsvisning(behandlingId, klient, meldingOmVedtakData)
-            BrevVariantDTO.EGENDEFINERT -> hentEgendefinertForhåndsvisning(behandlingId, meldingOmVedtakData)
+            BrevVariantDTO.EGENDEFINERT -> hentEgendefinertBrev(behandlingId, meldingOmVedtakData)
         }
     }
 
@@ -68,7 +68,7 @@ class Mediator(
         return when (vedtaksmeldingRepository.hentBrevVariant(behandlingId)) {
             BrevVariantDTO.GENERERT -> hentGenerertEndeligBrev(behandlingId, klient, meldingOmVedtakData)
             BrevVariantDTO.EGENDEFINERT -> {
-                hentEgendefinertForhåndsvisning(behandlingId, meldingOmVedtakData).html.also {
+                hentEgendefinertBrev(behandlingId, meldingOmVedtakData).html.also {
                     vedtaksmeldingRepository.lagreVedaksmeldingHtml(behandlingId, it)
                 }
             }
@@ -183,18 +183,18 @@ class Mediator(
 
     private fun hentUtvidedeBeskrivelser(
         behandlingId: UUID,
-        vedtaksMelding: BrevKomponenter,
+        brevKomponenter: BrevKomponenter,
     ): List<UtvidetBeskrivelse> {
-        val tekstmapping =
+        val tekstMapping =
             vedtaksmeldingRepository.hentUtvidedeBeskrivelserFor(behandlingId).associateBy { it.brevblokkId }
-        return vedtaksMelding
+        return brevKomponenter
             .hentBrevBlokker()
             .filter { it.utvidetBeskrivelse }
             .map {
                 UtvidetBeskrivelse(
                     behandlingId = behandlingId,
                     brevblokkId = it.textId,
-                    tekst = tekstmapping[it.textId]?.tekst,
+                    tekst = tekstMapping[it.textId]?.tekst,
                     sistEndretTidspunkt = LocalDateTime.now(),
                     tittel = it.title,
                 )
@@ -203,12 +203,13 @@ class Mediator(
             }
     }
 
-    private fun hentEgendefinertForhåndsvisning(
+    private fun hentEgendefinertBrev(
         behandlingId: UUID,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): MeldingOmVedtakResponseDTO {
         val utvidetBeskrivelse =
-            vedtaksmeldingRepository.hentUtvidedeBeskrivelserFor(behandlingId).singleOrNull()
+            vedtaksmeldingRepository.hentUtvidedeBeskrivelserFor(behandlingId)
+                .singleOrNull { it.brevblokkId == "brev.blokk.egendefinert" }
                 ?: UtvidetBeskrivelse(
                     behandlingId = behandlingId,
                     brevblokkId = "brev.blokk.egendefinert",
@@ -239,7 +240,7 @@ class Mediator(
         klient: Klient,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): MeldingOmVedtakResponseDTO {
-        val vedtak =
+        val brevKomponenter =
             hentBrevKomponenterOgLagre(
                 behandlingId = behandlingId,
                 klient = klient,
@@ -248,15 +249,15 @@ class Mediator(
 
         val html =
             HtmlConverter.toHtml(
-                vedtak.hentBrevBlokker(),
-                vedtak.hentOpplysninger(),
-                meldingOmVedtakData,
+                brevBlokker = brevKomponenter.hentBrevBlokker(),
+                opplysninger = brevKomponenter.hentOpplysninger(),
+                meldingOmVedtakData = meldingOmVedtakData,
             )
 
         return MeldingOmVedtakResponseDTO(
             html = html,
             utvidedeBeskrivelser =
-                hentUtvidedeBeskrivelser(behandlingId, vedtak).map {
+                hentUtvidedeBeskrivelser(behandlingId, brevKomponenter).map {
                     UtvidetBeskrivelseDTO(
                         brevblokkId = it.brevblokkId,
                         tekst = it.tekst ?: "",
@@ -275,9 +276,9 @@ class Mediator(
     ): String {
         val html =
             hentEndeligeBrevKomponenter(
-                behandlingId,
-                klient,
-                meldingOmVedtakData.behandlingstype.tilBehandlingstype(),
+                behandlingId = behandlingId,
+                klient = klient,
+                behanldingstype = meldingOmVedtakData.behandlingstype.tilBehandlingstype(),
             ).let { vedtak ->
                 HtmlConverter.toHtml(
                     brevBlokker = vedtak.hentBrevBlokker(),
