@@ -3,7 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.AVSLÅTT
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_ALDER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_ANDRE_FULLE_YTELSER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
@@ -49,7 +49,7 @@ import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 class AvslagMelding(
     override val vedtak: Vedtak,
     alleBrevblokker: List<BrevBlokk>,
-) : VedtakMelding(vedtak) {
+) : Vedtaksmelding(vedtak) {
     override val harBrevstøtte: Boolean =
         vedtak.utfall == AVSLÅTT &&
             setOfNotNull<DagpengerOpplysning<*, Boolean>>(

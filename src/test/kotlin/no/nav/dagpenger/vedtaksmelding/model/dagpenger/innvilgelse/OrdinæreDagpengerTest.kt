@@ -5,8 +5,8 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.ManglerBrevstøtte
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.ManglerBrevstøtte
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE
@@ -74,7 +74,7 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =
@@ -109,7 +109,7 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =
@@ -159,7 +159,7 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =
@@ -216,7 +216,7 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
 
         InnvilgelseMelding(
             vedtak =

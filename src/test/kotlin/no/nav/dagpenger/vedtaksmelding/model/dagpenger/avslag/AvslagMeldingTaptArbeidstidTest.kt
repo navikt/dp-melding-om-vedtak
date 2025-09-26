@@ -3,7 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_TAPT_ARBEIDSTID_DEL_2
@@ -41,7 +41,7 @@ class AvslagMeldingTaptArbeidstidTest {
                 AVSLAG_TAPT_ARBEIDSTID_DEL_1.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_DEL_2.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_DEL_3_SISTE_6_MND.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
     }
 
     @Test
@@ -66,7 +66,7 @@ class AvslagMeldingTaptArbeidstidTest {
                 AVSLAG_TAPT_ARBEIDSTID_DEL_1.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_DEL_2.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_DEL_3_SISTE_12_MND.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
     }
 
     @Test
@@ -91,7 +91,7 @@ class AvslagMeldingTaptArbeidstidTest {
                 AVSLAG_TAPT_ARBEIDSTID_DEL_1.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_DEL_2.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_DEL_3_SISTE_36_MND.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
     }
 
     @Test
@@ -117,7 +117,7 @@ class AvslagMeldingTaptArbeidstidTest {
                 AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_1.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_2.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_3_SISTE_6_MND.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
     }
 
     @Test
@@ -143,7 +143,7 @@ class AvslagMeldingTaptArbeidstidTest {
                 AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_1.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_2.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_3_SISTE_12_MND.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
     }
 
     @Test
@@ -170,6 +170,6 @@ class AvslagMeldingTaptArbeidstidTest {
                 AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_1.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_2.brevblokkId,
                 AVSLAG_TAPT_ARBEIDSTID_PERMITTERT_FISK_DEL_3_SISTE_36_MND.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
     }
 }

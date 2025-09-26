@@ -17,10 +17,10 @@ import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MANUELL
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MELDEKORT
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.RETT_TIL_DAGPENGER
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.TomtVedtak
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageMelding
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Brev
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.BrevKomponenter
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter
 import no.nav.dagpenger.vedtaksmelding.sanity.ResultDTO
@@ -47,6 +47,8 @@ class Mediator(
         )
     }
 
+    fun lagreUtvidetBeskrivelse(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime = vedtaksmeldingRepository.lagre(utvidetBeskrivelse)
+
     suspend fun hentForhåndsvisning(
         behandlingId: UUID,
         klient: Klient,
@@ -56,6 +58,149 @@ class Mediator(
             BrevVariantDTO.GENERERT -> hentGenerertForhåndsvisning(behandlingId, klient, meldingOmVedtakData)
             BrevVariantDTO.EGENDEFINERT -> hentEgendefinertForhåndsvisning(behandlingId, meldingOmVedtakData)
         }
+    }
+
+    suspend fun hentEndeligBrev(
+        behandlingId: UUID,
+        klient: Klient,
+        meldingOmVedtakData: MeldingOmVedtakDataDTO,
+    ): String {
+        return when (vedtaksmeldingRepository.hentBrevVariant(behandlingId)) {
+            BrevVariantDTO.GENERERT -> hentGenerertEndeligBrev(behandlingId, klient, meldingOmVedtakData)
+            BrevVariantDTO.EGENDEFINERT -> {
+                hentEgendefinertForhåndsvisning(behandlingId, meldingOmVedtakData).html.also {
+                    vedtaksmeldingRepository.lagreVedaksmeldingHtml(behandlingId, it)
+                }
+            }
+        }
+    }
+
+    suspend fun hentBrevKomponenterOgLagre(
+        behandlingId: UUID,
+        klient: Klient,
+        behanldingstype: Behandlingstype,
+    ): BrevKomponenter {
+        val sanityInnhold = sanityKlient.hentBrevBlokkerJson()
+        vedtaksmeldingRepository.lagreSanityInnhold(behandlingId, sanityInnhold)
+        return hentBrevKomponenter(
+            behandlingId = behandlingId,
+            klient = klient,
+            behandlingstype = behanldingstype,
+        ) {
+            sanityInnhold
+        }
+    }
+
+    suspend fun hentEndeligeBrevKomponenter(
+        behandlingId: UUID,
+        klient: Klient,
+        behanldingstype: Behandlingstype,
+    ): BrevKomponenter =
+        hentBrevKomponenter(
+            behandlingId = behandlingId,
+            klient = klient,
+            behandlingstype = behanldingstype,
+        ) {
+            runCatching {
+                vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
+            }.onFailure {
+                logger.warn { "Fikk ikke hentet brevtekster fra database for behandling $behandlingId - henter på nytt fra Sanity" }
+            }.getOrDefault(
+                sanityKlient.hentBrevBlokkerJson(),
+            )
+        }
+
+    private suspend fun hentBrevKomponenter(
+        behandlingId: UUID,
+        klient: Klient,
+        behandlingstype: Behandlingstype,
+        sanitySupplier: suspend () -> String,
+    ): BrevKomponenter {
+        val sanityInnhold = sanitySupplier.invoke()
+
+        val alleBrevblokker: List<BrevBlokk> =
+            objectMapper
+                .readValue(
+                    sanityInnhold,
+                    object : TypeReference<ResultDTO>() {},
+                ).result
+
+        logger.info { "Henter brevkKomponenter for behandlingtype: $behandlingstype" }
+
+        return when (behandlingstype) {
+            RETT_TIL_DAGPENGER -> {
+                val vedtak =
+                    behandlingKlient
+                        .hentBehandlingResultat(
+                            behandlingId = behandlingId,
+                            klient = klient,
+                        ).onFailure { throwable ->
+                            logger.error { "Feil ved henting av behandlingsresultat for behandlingId $behandlingId: $throwable" }
+                        }.getOrThrow()
+
+                runCatching {
+                    Vedtaksmelding.byggVedtaksmelding(vedtak, alleBrevblokker)
+                }.getOrElse {
+                    when {
+                        Configuration.isDev -> {
+                            logger.error(it) { "Lager tomt vedtak i dev, men feil er: ${it.message}" }
+                            TomtVedtak(
+                                vedtak = vedtak,
+                                alleBrevblokker = alleBrevblokker,
+                            )
+                        }
+
+                        else -> {
+                            throw it
+                        }
+                    }
+                }
+            }
+
+            KLAGE -> {
+                val vedtak =
+                    klageBehandlingKlient
+                        .hentVedtak(
+                            behandlingId = behandlingId,
+                            // todo unsafe cast?
+                            klient = klient as Saksbehandler,
+                        ).onFailure { throwable ->
+                            logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
+                        }.getOrThrow()
+
+                KlageMelding(
+                    klagevedtak = vedtak,
+                    alleBrevBlokker = alleBrevblokker,
+                )
+            }
+
+            // TODO: Må kunne tilby egendefinert brev
+            MELDEKORT -> throw NotImplementedError("Meldekortbehandling har ikke støtte for vedtaksmelding")
+            // TODO: Må kunne tilby egendefinert brev
+            MANUELL -> throw NotImplementedError("Manuell behandling har ikke støtte for vedtaksmelding")
+        }
+    }
+
+    private fun hentUtvidedeBeskrivelser(
+        behandlingId: UUID,
+        vedtaksMelding: BrevKomponenter,
+    ): List<UtvidetBeskrivelse> {
+        val tekstmapping =
+            vedtaksmeldingRepository.hentUtvidedeBeskrivelserFor(behandlingId).associateBy { it.brevblokkId }
+        return vedtaksMelding
+            .hentBrevBlokker()
+            .filter { it.utvidetBeskrivelse }
+            .map {
+                UtvidetBeskrivelse(
+                    behandlingId = behandlingId,
+                    brevblokkId = it.textId,
+                    tekst = tekstmapping[it.textId]?.tekst,
+                    sistEndretTidspunkt = LocalDateTime.now(),
+                    tittel = it.title,
+                )
+            }.also {
+                sikkerlogger.info { "Hentet utvidede beskrivelser for behandlingId=$behandlingId: $it" }
+            }
     }
 
     private fun hentEgendefinertForhåndsvisning(
@@ -89,155 +234,13 @@ class Mediator(
         )
     }
 
-    suspend fun hentEndeligBrev(
-        behandlingId: UUID,
-        klient: Klient,
-        meldingOmVedtakData: MeldingOmVedtakDataDTO,
-    ): String {
-        return when (vedtaksmeldingRepository.hentBrevVariant(behandlingId)) {
-            BrevVariantDTO.GENERERT -> hentGenerertEndeligBrev(behandlingId, klient, meldingOmVedtakData)
-            BrevVariantDTO.EGENDEFINERT -> {
-                hentEgendefinertForhåndsvisning(behandlingId, meldingOmVedtakData).html.also {
-                    vedtaksmeldingRepository.lagreVedaksmeldingHtml(behandlingId, it)
-                }
-            }
-        }
-    }
-
-    suspend fun hentVedtaksmelding(
-        behandlingId: UUID,
-        klient: Klient,
-        behanldingstype: Behandlingstype,
-    ): Brev {
-        val sanityInnhold = sanityKlient.hentBrevBlokkerJson()
-        vedtaksmeldingRepository.lagreSanityInnhold(behandlingId, sanityInnhold)
-        return hentVedtakOgByggVedtaksmelding(
-            behandlingId = behandlingId,
-            klient = klient,
-            behandlingstype = behanldingstype,
-        ) {
-            sanityInnhold
-        }
-    }
-
-    suspend fun hentEndeligVedtaksmelding(
-        behandlingId: UUID,
-        klient: Klient,
-        behanldingstype: Behandlingstype,
-    ): Brev =
-        hentVedtakOgByggVedtaksmelding(
-            behandlingId = behandlingId,
-            klient = klient,
-            behandlingstype = behanldingstype,
-        ) {
-            runCatching {
-                vedtaksmeldingRepository.hentSanityInnhold(behandlingId)
-            }.onFailure {
-                logger.error { "Fant ikke hentet sanityinnhold fra database for behandling $behandlingId, henter på nytt fra sanity" }
-            }.getOrDefault(
-                sanityKlient.hentBrevBlokkerJson(),
-            )
-        }
-
-    private suspend fun hentVedtakOgByggVedtaksmelding(
-        behandlingId: UUID,
-        klient: Klient,
-        behandlingstype: Behandlingstype,
-        sanitySupplier: suspend () -> String,
-    ): Brev {
-        val sanityInnhold = sanitySupplier.invoke()
-
-        val alleBrevblokker: List<BrevBlokk> =
-            objectMapper
-                .readValue(
-                    sanityInnhold,
-                    object : TypeReference<ResultDTO>() {},
-                ).result
-
-        logger.info { "behandlingtype: $behandlingstype" }
-        return when (behandlingstype) {
-            RETT_TIL_DAGPENGER -> {
-                val vedtak =
-                    behandlingKlient
-                        .hentBehandlingResultat(
-                            behandlingId = behandlingId,
-                            klient = klient,
-                        ).onFailure { throwable ->
-                            logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
-                        }.getOrThrow()
-
-                runCatching {
-                    VedtakMelding.byggVedtaksmelding(vedtak, alleBrevblokker)
-                }.getOrElse {
-                    when {
-                        Configuration.isDev -> {
-                            logger.error(it) { "Lager tomt vedtak i dev men feil er: ${it.message}" }
-                            TomtVedtak(
-                                vedtak = vedtak,
-                                alleBrevblokker = alleBrevblokker,
-                            )
-                        }
-
-                        else -> {
-                            throw it
-                        }
-                    }
-                }
-            }
-
-            KLAGE -> {
-                val vedtak =
-                    klageBehandlingKlient
-                        .hentVedtak(
-                            behandlingId = behandlingId,
-                            // todo unsafe cast?
-                            klient = klient as Saksbehandler,
-                        ).onFailure { throwable ->
-                            logger.error { "Fikk ikke hentet vedtak for behandling $behandlingId: $throwable" }
-                        }.getOrThrow()
-
-                KlageMelding(
-                    klagevedtak = vedtak,
-                    alleBrevBlokker = alleBrevblokker,
-                )
-            }
-
-            MELDEKORT -> throw NotImplementedError("Meldekortbehandling har ikke støtte for vedtaksmelding")
-            MANUELL -> throw NotImplementedError("Manuell behandling har ikke støtte for vedtaksmelding")
-        }
-    }
-
-    fun lagreUtvidetBeskrivelse(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime = vedtaksmeldingRepository.lagre(utvidetBeskrivelse)
-
-    private fun hentUtvidedeBeskrivelser(
-        behandlingId: UUID,
-        vedtaksMelding: Brev,
-    ): List<UtvidetBeskrivelse> {
-        val tekstmapping =
-            vedtaksmeldingRepository.hentUtvidedeBeskrivelserFor(behandlingId).associateBy { it.brevblokkId }
-        return vedtaksMelding
-            .hentBrevBlokker()
-            .filter { it.utvidetBeskrivelse }
-            .map {
-                UtvidetBeskrivelse(
-                    behandlingId = behandlingId,
-                    brevblokkId = it.textId,
-                    tekst = tekstmapping[it.textId]?.tekst,
-                    sistEndretTidspunkt = LocalDateTime.now(),
-                    tittel = it.title,
-                )
-            }.also {
-                sikkerlogger.info { "Hentet utvidede beskrivelser for behandlingId=$behandlingId: $it" }
-            }
-    }
-
     private suspend fun hentGenerertForhåndsvisning(
         behandlingId: UUID,
         klient: Klient,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): MeldingOmVedtakResponseDTO {
         val vedtak =
-            hentVedtaksmelding(
+            hentBrevKomponenterOgLagre(
                 behandlingId = behandlingId,
                 klient = klient,
                 behanldingstype = meldingOmVedtakData.behandlingstype.tilBehandlingstype(),
@@ -271,7 +274,7 @@ class Mediator(
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): String {
         val html =
-            hentEndeligVedtaksmelding(
+            hentEndeligeBrevKomponenter(
                 behandlingId,
                 klient,
                 meldingOmVedtakData.behandlingstype.tilBehandlingstype(),

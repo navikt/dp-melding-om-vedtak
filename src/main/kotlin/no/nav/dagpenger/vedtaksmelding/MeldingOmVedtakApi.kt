@@ -68,7 +68,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                             )
                         call.respond(meldingOmVedtakResponseDTO)
                     }.onFailure { t ->
-                        logger.error(t) { "Feil ved henting av vedtaksmelding som html (hentVedtak). BehandlingId: $behandlingId" }
+                        logger.warn(t) { "Feil ved henting av html ved forhåndsvisning av brev for behandlingId: $behandlingId" }
                         throw t
                     }
                 }
@@ -90,7 +90,7 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                     }.onFailure { t ->
                         logger.warn(
                             t,
-                        ) { "Feil ved henting av vedtaksmelding som html (hentEndeligVedtak). BehandlingId: $behandlingId" }
+                        ) { "Feil ved henting av endelig brev for behandlingId: $behandlingId" }
                         throw t
                     }
                 }

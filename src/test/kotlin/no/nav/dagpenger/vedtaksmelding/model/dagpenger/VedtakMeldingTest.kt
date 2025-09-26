@@ -12,7 +12,7 @@ class VedtakMeldingTest {
 
     @Test
     fun `Skal lage riktig vedtaksmelding`() {
-        VedtakMelding
+        Vedtaksmelding
             .byggVedtaksmelding(
                 vedtak =
                     Vedtak(
@@ -26,7 +26,7 @@ class VedtakMeldingTest {
                 alleBrevblokker = emptyList(),
             ).shouldBeInstanceOf<AvslagMelding>()
 
-        VedtakMelding
+        Vedtaksmelding
             .byggVedtaksmelding(
                 vedtak =
                     Vedtak(
@@ -40,8 +40,8 @@ class VedtakMeldingTest {
 
     @Test
     fun `Skal feile dersom man ikke kan bygge en og bare en melding om vedtak`() {
-        shouldThrow<VedtakMelding.UkjentVedtakException> {
-            VedtakMelding.byggVedtaksmelding(
+        shouldThrow<Vedtaksmelding.UkjentVedtakException> {
+            Vedtaksmelding.byggVedtaksmelding(
                 vedtak =
                     Vedtak(
                         behandlingId = behandlingId,

@@ -5,7 +5,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_DEL_2
@@ -32,7 +32,7 @@ class AvslagMeldingReellArbeidssøkerTest {
 
     @Test
     fun `Sjekker kriterier for brevstøtte`() {
-        shouldNotThrow<VedtakMelding.ManglerBrevstøtte> {
+        shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
             AvslagMelding(
                 vedtak =
                     Vedtak(
@@ -43,7 +43,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 alleBrevblokker = emptyList(),
             )
         }
-        shouldThrow<VedtakMelding.ManglerBrevstøtte> {
+        shouldThrow<Vedtaksmelding.ManglerBrevstøtte> {
             AvslagMelding(
                 vedtak =
                     Vedtak(
@@ -73,7 +73,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 AVSLAG_REELL_ARBEIDSSØKER_HELTID_DELTID.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
     }
 
     @Test
@@ -92,7 +92,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_MINSTEINNTEKT_DEL_1.brevblokkId,
                 AVSLAG_MINSTEINNTEKT_DEL_2.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
     }
 
     @Test
@@ -112,7 +112,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 AVSLAG_REELL_ARBEIDSSØKER_HELE_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_UNNTAK_HELTID_DELTID_HELE_NORGE.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
     }
 
     @Test
@@ -131,7 +131,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_ARBEIDSFØR.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
     }
 
     @Test
@@ -150,7 +150,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
     }
 
     @Test
@@ -169,7 +169,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 AVSLAG_REELL_ARBEIDSSØKER_OVERSKRIFT.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_REGISTRERT_ARBEIDSSOKER.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
     }
 
     @Test
@@ -201,6 +201,6 @@ class AvslagMeldingReellArbeidssøkerTest {
                 AVSLAG_REELL_ARBEIDSSØKER_ETHVERT_ARBEID.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_REGISTRERT_ARBEIDSSOKER.brevblokkId,
                 AVSLAG_REELL_ARBEIDSSØKER_HJEMMEL.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
     }
 }

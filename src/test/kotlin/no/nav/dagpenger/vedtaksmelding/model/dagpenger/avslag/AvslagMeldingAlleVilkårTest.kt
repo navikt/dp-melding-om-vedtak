@@ -3,7 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_ALDER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_ANDRE_FULLE_YTELSER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
@@ -102,7 +102,7 @@ class AvslagMeldingAlleVilkårTest {
                 AVSLAG_ANDRE_FULLE_YTELSER.brevblokkId,
                 AVSLAG_STREIK_LOCKOUT_DEL_1.brevblokkId,
                 AVSLAG_STREIK_LOCKOUT_DEL_2.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
     }
 
     @Test
@@ -167,7 +167,7 @@ class AvslagMeldingAlleVilkårTest {
                 AVSLAG_ANDRE_FULLE_YTELSER.brevblokkId,
                 AVSLAG_STREIK_LOCKOUT_DEL_1.brevblokkId,
                 AVSLAG_STREIK_LOCKOUT_DEL_2.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
     }
 
     @Test
@@ -232,6 +232,6 @@ class AvslagMeldingAlleVilkårTest {
                 AVSLAG_ANDRE_FULLE_YTELSER.brevblokkId,
                 AVSLAG_STREIK_LOCKOUT_DEL_1.brevblokkId,
                 AVSLAG_STREIK_LOCKOUT_DEL_2.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
     }
 }

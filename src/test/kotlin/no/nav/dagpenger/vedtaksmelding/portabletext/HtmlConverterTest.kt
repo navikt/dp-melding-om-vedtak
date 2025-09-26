@@ -10,7 +10,7 @@ import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMapper
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_DEL_1
 import no.nav.dagpenger.vedtaksmelding.sanity.ResultDTO
 import no.nav.dagpenger.vedtaksmelding.util.finnUtvidetBeskrivelseNode
@@ -76,7 +76,7 @@ class HtmlConverterTest {
                 }.result
 
         hentVedtak("/json/avslag_resultat.json")
-            .let { vedtak -> VedtakMelding.byggVedtaksmelding(vedtak, sanityTekster) }
+            .let { vedtak -> Vedtaksmelding.byggVedtaksmelding(vedtak, sanityTekster) }
             .let { vedtakMelding ->
                 HtmlConverter.toHtml(
                     brevBlokker = vedtakMelding.hentBrevBlokker(),

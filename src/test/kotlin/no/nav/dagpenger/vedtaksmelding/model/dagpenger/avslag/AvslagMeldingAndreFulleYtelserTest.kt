@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_ANDRE_FULLE_YTELSER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test
 class AvslagMeldingAndreFulleYtelserTest {
     @Test
     fun `Brevstøtte for avslag grunnet for lite tapt arbeidstid`() {
-        shouldNotThrow<VedtakMelding.ManglerBrevstøtte> {
+        shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
             AvslagMelding(
                 vedtak =
                     Vedtak(
@@ -43,6 +43,6 @@ class AvslagMeldingAndreFulleYtelserTest {
             listOf(
                 AVSLAG_INNLEDNING.brevblokkId,
                 AVSLAG_ANDRE_FULLE_YTELSER.brevblokkId,
-            ) + VedtakMelding.fasteAvsluttendeBlokker
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
     }
 }

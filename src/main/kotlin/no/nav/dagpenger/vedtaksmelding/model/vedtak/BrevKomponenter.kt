@@ -3,7 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.model.vedtak
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 
-interface Brev {
+interface BrevKomponenter {
     fun brevBlokkIder(): List<String>
 
     fun hentBrevBlokker(): List<BrevBlokk>

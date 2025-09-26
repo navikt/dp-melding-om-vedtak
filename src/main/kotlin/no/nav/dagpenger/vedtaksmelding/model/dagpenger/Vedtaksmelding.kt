@@ -2,15 +2,15 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
 import io.github.oshai.kotlinlogging.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.HJELP_FRA_ANDRE
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.PERSONOPPLYSNINGER
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.RETT_TIL_INNSYN
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.SPØRSMÅL
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.VEILEDNING_FRA_NAV
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevblokker.HJELP_FRA_ANDRE
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevblokker.PERSONOPPLYSNINGER
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevblokker.RETT_TIL_INNSYN
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevblokker.SPØRSMÅL
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevblokker.VEILEDNING_FRA_NAV
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseMelding
-import no.nav.dagpenger.vedtaksmelding.model.vedtak.Brev
+import no.nav.dagpenger.vedtaksmelding.model.vedtak.BrevKomponenter
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.portabletext.Child
 
@@ -22,9 +22,9 @@ inline fun <reified T : DagpengerOpplysning<*, Boolean>> Vedtak.ikkOppfyltBlokke
         false -> emptyList()
     }
 
-abstract class VedtakMelding(
+abstract class Vedtaksmelding(
     protected open val vedtak: Vedtak,
-) : Brev {
+) : BrevKomponenter {
     abstract val harBrevstøtte: Boolean
 
     protected abstract val brevBlokkIder: List<String>
@@ -59,9 +59,9 @@ abstract class VedtakMelding(
         fun byggVedtaksmelding(
             vedtak: Vedtak,
             alleBrevblokker: List<BrevBlokk>,
-        ): VedtakMelding =
+        ): Vedtaksmelding =
             try {
-                mutableSetOf<Result<VedtakMelding>>()
+                mutableSetOf<Result<Vedtaksmelding>>()
                     .apply {
                         add(kotlin.runCatching { AvslagMelding(vedtak, alleBrevblokker) })
                         add(kotlin.runCatching { InnvilgelseMelding(vedtak, alleBrevblokker) })

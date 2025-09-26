@@ -29,8 +29,8 @@ import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMapper
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagMelding
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
@@ -52,7 +52,7 @@ class MediatorTest {
     private val mockKlageBehandlingKlient = mockk<KlageBehandlingKlient>()
 
     @Test
-    fun `Returnere rett vedtak ved bruk av hentVedtaksmelding `() {
+    fun `Forhåndsvisning - Henter avslag-melding når vedtak har utfall AVSLÅTT`() {
         val vedtak =
             Vedtak(
                 behandlingId = behandlingId,
@@ -77,10 +77,10 @@ class MediatorTest {
                 )
             runBlocking {
                 mediator
-                    .hentVedtaksmelding(
-                        behandlingId,
-                        klient,
-                        Behandlingstype.RETT_TIL_DAGPENGER,
+                    .hentBrevKomponenterOgLagre(
+                        behandlingId = behandlingId,
+                        klient = klient,
+                        behanldingstype = Behandlingstype.RETT_TIL_DAGPENGER,
                     ).shouldBeInstanceOf<AvslagMelding>()
             }
             repository.hentSanityInnhold(behandlingId) shouldEqualJson resource
@@ -88,7 +88,7 @@ class MediatorTest {
     }
 
     @Test
-    fun `Returnere rett vedtak ved bruk av hentEndeligVedtaksmelding `() {
+    fun `Endelig brev - Henter avslag-melding når vedtak har utfall AVSLÅTT`() {
         val vedtak = VedtakMapper("/json/innvigelse_ord_resultat.json".readFile()).vedtak()
         Vedtak(
             behandlingId = behandlingId,
@@ -140,7 +140,7 @@ class MediatorTest {
     }
 
     @Test
-    fun `skal sende ett eller annet vedtak`() {
+    fun `Skal kalle regelmotor når man henter brev-komponenter`() {
         val vedtak =
             Vedtak(
                 behandlingId = behandlingId,
@@ -162,10 +162,10 @@ class MediatorTest {
 
         runBlocking {
             mediator
-                .hentVedtaksmelding(
+                .hentBrevKomponenterOgLagre(
                     behandlingId = behandlingId,
                     klient = klient,
-                    Behandlingstype.RETT_TIL_DAGPENGER,
+                    behanldingstype = Behandlingstype.RETT_TIL_DAGPENGER,
                 ).shouldBeInstanceOf<AvslagMelding>()
         }
 
@@ -187,7 +187,7 @@ class MediatorTest {
                 )
             runBlocking {
                 shouldThrow<NotImplementedError> {
-                    mediator.hentVedtaksmelding(
+                    mediator.hentBrevKomponenterOgLagre(
                         behandlingId = behandlingId,
                         klient = klient,
                         behanldingstype = MELDEKORT,
@@ -210,7 +210,7 @@ class MediatorTest {
                 )
             runBlocking {
                 shouldThrow<NotImplementedError> {
-                    mediator.hentVedtaksmelding(
+                    mediator.hentBrevKomponenterOgLagre(
                         behandlingId = behandlingId,
                         klient = klient,
                         behanldingstype = MANUELL,
@@ -221,7 +221,7 @@ class MediatorTest {
     }
 
     @Test
-    fun `Kaster feil dersom vi ikke får hentet vedtak fra dp-behandling`() {
+    fun `Kaster feil dersom vi ikke får hentet vedtak fra behandlingsklient`() {
         val mediator =
             Mediator(
                 behandlingKlient =
@@ -234,7 +234,7 @@ class MediatorTest {
             )
         runBlocking {
             shouldThrow<RuntimeException> {
-                mediator.hentVedtaksmelding(
+                mediator.hentBrevKomponenterOgLagre(
                     behandlingId = behandlingId,
                     klient = klient,
                     Behandlingstype.RETT_TIL_DAGPENGER,
@@ -244,7 +244,7 @@ class MediatorTest {
     }
 
     @Test
-    fun `hent utvidet beskrivelse inkl tomme beskrivelser`() {
+    fun `Henter utvidet beskrivelse inkludert tomme beskrivelser`() {
         val vedtaksmeldingRepository =
             mockk<VedtaksmeldingRepository>().also {
                 every { it.hentBrevVariant(any()) } returns BrevVariantDTO.GENERERT
@@ -274,8 +274,8 @@ class MediatorTest {
                     vedtaksmeldingRepository = vedtaksmeldingRepository,
                 ),
             ).also {
-                coEvery { it.hentVedtaksmelding(behandlingId, klient, behanldingstype = any()) } returns
-                    mockk<VedtakMelding>(relaxed = true).also {
+                coEvery { it.hentBrevKomponenterOgLagre(behandlingId, klient, behanldingstype = any()) } returns
+                    mockk<Vedtaksmelding>(relaxed = true).also {
                         coEvery { it.hentBrevBlokker() } returns
                             listOf(
                                 BrevBlokk(
