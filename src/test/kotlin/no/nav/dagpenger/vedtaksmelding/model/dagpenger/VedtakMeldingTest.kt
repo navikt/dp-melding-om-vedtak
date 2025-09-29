@@ -21,7 +21,7 @@ class VedtakMeldingTest {
                             setOf(
                                 DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false),
                             ),
-                        utfall = Vedtak.Utfall.AVSLÅTT,
+                        vedtakType = Vedtak.VedtakType.AVSLAG_DAGPENGER,
                     ),
                 alleBrevblokker = emptyList(),
             ).shouldBeInstanceOf<AvslagMelding>()
@@ -32,7 +32,7 @@ class VedtakMeldingTest {
                     Vedtak(
                         behandlingId = behandlingId,
                         opplysninger = emptySet(),
-                        utfall = Vedtak.Utfall.INNVILGET,
+                        vedtakType = Vedtak.VedtakType.INNVILGELSE_DAGPENGER,
                     ),
                 alleBrevblokker = emptyList(),
             ).shouldBeInstanceOf<InnvilgelseMelding>()
@@ -46,7 +46,7 @@ class VedtakMeldingTest {
                     Vedtak(
                         behandlingId = behandlingId,
                         opplysninger = emptySet(),
-                        utfall = Vedtak.Utfall.AVSLÅTT,
+                        vedtakType = Vedtak.VedtakType.AVSLAG_DAGPENGER,
                     ),
                 alleBrevblokker = emptyList(),
             )

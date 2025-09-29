@@ -3,7 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.INNVILGET
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.VedtakType.INNVILGELSE_DAGPENGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.finnOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT
@@ -50,7 +50,7 @@ class InnvilgelseMelding(
     override val vedtak: Vedtak,
     alleBrevblokker: List<BrevBlokk>,
 ) : Vedtaksmelding(vedtak) {
-    override val harBrevstøtte: Boolean = vedtak.utfall == INNVILGET
+    override val harBrevstøtte: Boolean = vedtak.vedtakType == INNVILGELSE_DAGPENGER
 
     init {
         require(this.harBrevstøtte) {

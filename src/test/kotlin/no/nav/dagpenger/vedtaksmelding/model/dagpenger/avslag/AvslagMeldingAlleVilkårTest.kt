@@ -49,7 +49,7 @@ class AvslagMeldingAlleVilkårTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    utfall = Vedtak.Utfall.AVSLÅTT,
+                    vedtakType = Vedtak.VedtakType.AVSLAG_DAGPENGER,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste12Måneder(true),
@@ -111,7 +111,7 @@ class AvslagMeldingAlleVilkårTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    utfall = Vedtak.Utfall.AVSLÅTT,
+                    vedtakType = Vedtak.VedtakType.AVSLAG_DAGPENGER,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste6Måneder(true),
@@ -176,7 +176,7 @@ class AvslagMeldingAlleVilkårTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    utfall = Vedtak.Utfall.AVSLÅTT,
+                    vedtakType = Vedtak.VedtakType.AVSLAG_DAGPENGER,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste36Måneder(true),

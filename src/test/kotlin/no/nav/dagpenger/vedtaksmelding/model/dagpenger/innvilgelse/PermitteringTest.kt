@@ -50,7 +50,7 @@ class PermitteringTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    utfall = Vedtak.Utfall.INNVILGET,
+                    vedtakType = Vedtak.VedtakType.INNVILGELSE_DAGPENGER,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.Egenandel(3000),

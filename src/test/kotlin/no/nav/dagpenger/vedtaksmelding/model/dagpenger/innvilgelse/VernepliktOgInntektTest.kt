@@ -48,7 +48,7 @@ class VernepliktOgInntektTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    utfall = Vedtak.Utfall.INNVILGET,
+                    vedtakType = Vedtak.VedtakType.INNVILGELSE_DAGPENGER,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(true),

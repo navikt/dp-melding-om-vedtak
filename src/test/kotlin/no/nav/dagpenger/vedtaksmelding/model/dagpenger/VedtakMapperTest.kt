@@ -21,7 +21,7 @@ class VedtakMapperTest {
     fun `SKal kunne hente opplssninger for permittering`() {
         val vedtak = VedtakMapper("/json/innvigelse_permittering_resultat.json".readFile()).vedtak()
         vedtak.behandlingId shouldBe UUID.fromString("0198c683-0770-734f-8ae2-34dfa8a714e5")
-        vedtak.utfall shouldBe Vedtak.Utfall.INNVILGET
+        vedtak.vedtakType shouldBe Vedtak.VedtakType.INNVILGELSE_DAGPENGER
         vedtak.also {
             it.hentOpplysning<DagpengerOpplysning.OppfyllerKravetTilPermittering>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.AntallPermitteringsuker>() shouldNotBe null
@@ -33,7 +33,7 @@ class VedtakMapperTest {
     fun `SKal kunne hente opplssninger for permittering fiske industri`() {
         val vedtak = VedtakMapper("/json/innvigelse_permittering_resultat.json".readFile()).vedtak()
         vedtak.behandlingId shouldBe UUID.fromString("0198c683-0770-734f-8ae2-34dfa8a714e5")
-        vedtak.utfall shouldBe Vedtak.Utfall.INNVILGET
+        vedtak.vedtakType shouldBe Vedtak.VedtakType.INNVILGELSE_DAGPENGER
         vedtak.also {
             it.hentOpplysning<DagpengerOpplysning.AntallPermitteringsukerFisk>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri>() shouldNotBe null
@@ -51,7 +51,7 @@ class VedtakMapperTest {
     fun `Skal kunne lage alle type ordinære opplysninger, behandlingId og utfall for innvigelse ordinær`() {
         val vedtak = VedtakMapper("/json/innvigelse_ord_resultat.json".readFile()).vedtak()
         vedtak.behandlingId shouldBe UUID.fromString("0198eba3-b1c3-7d50-a7ee-f0f8cd1cbf6b")
-        vedtak.utfall shouldBe Vedtak.Utfall.INNVILGET
+        vedtak.vedtakType shouldBe Vedtak.VedtakType.INNVILGELSE_DAGPENGER
         vedtak.also {
             it.hentOpplysning<DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.InntektskravSiste12Måneder>() shouldNotBe null

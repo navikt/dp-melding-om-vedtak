@@ -56,7 +56,7 @@ class MediatorTest {
         val vedtak =
             Vedtak(
                 behandlingId = behandlingId,
-                utfall = Vedtak.Utfall.AVSLÅTT,
+                vedtakType = Vedtak.VedtakType.AVSLAG_DAGPENGER,
                 opplysninger =
                     setOf(
                         DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false),
@@ -92,7 +92,7 @@ class MediatorTest {
         val vedtak = VedtakMapper("/json/innvigelse_ord_resultat.json".readFile()).vedtak()
         Vedtak(
             behandlingId = behandlingId,
-            utfall = Vedtak.Utfall.AVSLÅTT,
+            vedtakType = Vedtak.VedtakType.AVSLAG_DAGPENGER,
             opplysninger =
                 setOf(
                     DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false),
@@ -144,7 +144,7 @@ class MediatorTest {
         val vedtak =
             Vedtak(
                 behandlingId = behandlingId,
-                utfall = Vedtak.Utfall.AVSLÅTT,
+                vedtakType = Vedtak.VedtakType.AVSLAG_DAGPENGER,
                 opplysninger = setOf(DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false)),
             )
         val behandlingKlient =

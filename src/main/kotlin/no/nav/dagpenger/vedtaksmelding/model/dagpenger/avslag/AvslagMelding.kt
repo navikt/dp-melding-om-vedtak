@@ -2,7 +2,7 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag
 
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.AVSLÅTT
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.VedtakType.AVSLAG_DAGPENGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_ALDER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_ANDRE_FULLE_YTELSER
@@ -51,7 +51,7 @@ class AvslagMelding(
     alleBrevblokker: List<BrevBlokk>,
 ) : Vedtaksmelding(vedtak) {
     override val harBrevstøtte: Boolean =
-        vedtak.utfall == AVSLÅTT &&
+        vedtak.vedtakType == AVSLAG_DAGPENGER &&
             setOfNotNull<DagpengerOpplysning<*, Boolean>>(
                 vedtak.finnOpplysning<DagpengerOpplysning.OppfyllerKravTilMinsteinntekt>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.KravTilAlder>(),

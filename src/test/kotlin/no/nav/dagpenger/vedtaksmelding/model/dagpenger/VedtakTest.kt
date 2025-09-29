@@ -9,7 +9,7 @@ class VedtakTest {
     fun `En boolsk opplysninger oppfylt dersom opplysningen finnes og har verdi true`() {
         Vedtak(
             behandlingId = UUID.randomUUID(),
-            utfall = Vedtak.Utfall.INNVILGET,
+            vedtakType = Vedtak.VedtakType.INNVILGELSE_DAGPENGER,
             opplysninger =
                 setOf(
                     DagpengerOpplysning.HarSamordnet(true),
@@ -27,7 +27,7 @@ class VedtakTest {
     fun `En boolsk opplysning er ikke oppfylt dersom opplysningen finnes og har verdi false`() {
         Vedtak(
             behandlingId = UUID.randomUUID(),
-            utfall = Vedtak.Utfall.INNVILGET,
+            vedtakType = Vedtak.VedtakType.INNVILGELSE_DAGPENGER,
             opplysninger =
                 setOf(
                     DagpengerOpplysning.HarSamordnet(true),

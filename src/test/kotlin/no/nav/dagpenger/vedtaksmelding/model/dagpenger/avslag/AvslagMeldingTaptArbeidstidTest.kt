@@ -25,7 +25,7 @@ class AvslagMeldingTaptArbeidstidTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    utfall = Vedtak.Utfall.AVSLÅTT,
+                    vedtakType = Vedtak.VedtakType.AVSLAG_DAGPENGER,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.KravTilTaptArbeidstid(false),
@@ -50,7 +50,7 @@ class AvslagMeldingTaptArbeidstidTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    utfall = Vedtak.Utfall.AVSLÅTT,
+                    vedtakType = Vedtak.VedtakType.AVSLAG_DAGPENGER,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.KravTilTaptArbeidstid(false),
@@ -75,7 +75,7 @@ class AvslagMeldingTaptArbeidstidTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    utfall = Vedtak.Utfall.AVSLÅTT,
+                    vedtakType = Vedtak.VedtakType.AVSLAG_DAGPENGER,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.KravTilTaptArbeidstid(false),
@@ -100,7 +100,7 @@ class AvslagMeldingTaptArbeidstidTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    utfall = Vedtak.Utfall.AVSLÅTT,
+                    vedtakType = Vedtak.VedtakType.AVSLAG_DAGPENGER,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.KravTilTaptArbeidstid(false),
@@ -126,7 +126,7 @@ class AvslagMeldingTaptArbeidstidTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    utfall = Vedtak.Utfall.AVSLÅTT,
+                    vedtakType = Vedtak.VedtakType.AVSLAG_DAGPENGER,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.KravTilTaptArbeidstid(false),
@@ -153,7 +153,7 @@ class AvslagMeldingTaptArbeidstidTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
 //                    vilkår = setOf(arbeidstidIkkeOppfylt, permitteringFiskVilkår),
-                    utfall = Vedtak.Utfall.AVSLÅTT,
+                    vedtakType = Vedtak.VedtakType.AVSLAG_DAGPENGER,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.KravTilTaptArbeidstid(false),

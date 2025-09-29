@@ -5811,7 +5811,8 @@
   "rettighetsperioder": [
     {
       "fraOgMed": "2025-01-29",
-      "harRett": false
+      "harRett": false,
+      "opprinnelse": "Ny"
     }
   ]
 }

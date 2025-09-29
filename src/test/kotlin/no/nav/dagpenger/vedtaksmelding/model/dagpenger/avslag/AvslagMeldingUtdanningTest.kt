@@ -16,7 +16,7 @@ class AvslagMeldingUtdanningTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-                    utfall = Vedtak.Utfall.AVSLÅTT,
+                    vedtakType = Vedtak.VedtakType.AVSLAG_DAGPENGER,
                     opplysninger = setOf(DagpengerOpplysning.KravTilUtdanning(false)),
                 ),
             alleBrevblokker = emptyList(),

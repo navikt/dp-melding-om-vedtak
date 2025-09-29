@@ -8,6 +8,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.github.oshai.kotlinlogging.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningDataException
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.VedtakType
 import java.time.LocalDate
 import java.util.UUID
 
@@ -174,8 +175,26 @@ class BehandlingResultatData(json: String) {
 
     fun behandlingId(): UUID = jsonNode["behandlingId"].let { UUID.fromString(it.asText()) }
 
-    fun harRett(): Boolean {
-        return jsonNode["rettighetsperioder"].first()["harRett"].asBoolean()
+    fun vedtakType(): VedtakType? {
+        val innvilgelseDagpenger: Boolean =
+            jsonNode["behandletHendelse"]["type"].asText() == "Søknad" &&
+                jsonNode["rettighetsperioder"].any { it["opprinnelse"].asText() == "Ny" && it["harRett"].asBoolean() }
+        val avslagDagpenger: Boolean =
+            jsonNode["behandletHendelse"]["type"].asText() == "Søknad" &&
+                !jsonNode["rettighetsperioder"].any { it["opprinnelse"].asText() == "Ny" && it["harRett"].asBoolean() }
+        val stansDagpenger =
+            jsonNode["behandletHendelse"]["type"].asText() != "Søknad" &&
+                jsonNode["rettighetsperioder"].lastOrNull { it["opprinnelse"].asText() == "Ny" } != null &&
+                jsonNode["rettighetsperioder"].last { it["opprinnelse"].asText() == "Ny" }["harRett"].asBoolean() == false
+        if (innvilgelseDagpenger) {
+            return VedtakType.INNVILGELSE_DAGPENGER
+        } else if (avslagDagpenger) {
+            return VedtakType.AVSLAG_DAGPENGER
+        } else if (stansDagpenger) {
+            return VedtakType.STANS_DAGPENGER
+        } else {
+            return null
+        }
     }
 
     data class BehandlingResultatOpplysningIkkeFunnet(val opplysningId: UUID) :

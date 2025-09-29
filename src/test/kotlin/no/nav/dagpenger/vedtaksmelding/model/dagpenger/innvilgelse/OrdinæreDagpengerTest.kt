@@ -36,7 +36,7 @@ class OrdinæreDagpengerTest {
                 vedtak =
                     Vedtak(
                         behandlingId = behandlingId,
-                        utfall = Vedtak.Utfall.AVSLÅTT,
+                        vedtakType = Vedtak.VedtakType.AVSLAG_DAGPENGER,
                         opplysninger = emptySet(),
                     ),
                 alleBrevblokker = emptyList(),
@@ -48,7 +48,7 @@ class OrdinæreDagpengerTest {
                 vedtak =
                     Vedtak(
                         behandlingId = behandlingId,
-                        utfall = Vedtak.Utfall.INNVILGET,
+                        vedtakType = Vedtak.VedtakType.INNVILGELSE_DAGPENGER,
                         opplysninger = emptySet(),
                     ),
                 alleBrevblokker = emptyList(),
@@ -80,7 +80,7 @@ class OrdinæreDagpengerTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    utfall = Vedtak.Utfall.INNVILGET,
+                    vedtakType = Vedtak.VedtakType.INNVILGELSE_DAGPENGER,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.Egenandel(3000),
@@ -115,7 +115,7 @@ class OrdinæreDagpengerTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    utfall = Vedtak.Utfall.INNVILGET,
+                    vedtakType = Vedtak.VedtakType.INNVILGELSE_DAGPENGER,
                     setOf(
                         DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1),
                         DagpengerOpplysning.Egenandel(3000),
@@ -128,7 +128,7 @@ class OrdinæreDagpengerTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    utfall = Vedtak.Utfall.INNVILGET,
+                    vedtakType = Vedtak.VedtakType.INNVILGELSE_DAGPENGER,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(0),
@@ -165,7 +165,7 @@ class OrdinæreDagpengerTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    utfall = Vedtak.Utfall.INNVILGET,
+                    vedtakType = Vedtak.VedtakType.INNVILGELSE_DAGPENGER,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1),
@@ -182,7 +182,7 @@ class OrdinæreDagpengerTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    utfall = Vedtak.Utfall.INNVILGET,
+                    vedtakType = Vedtak.VedtakType.INNVILGELSE_DAGPENGER,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1),
@@ -222,7 +222,7 @@ class OrdinæreDagpengerTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-                    utfall = Vedtak.Utfall.INNVILGET,
+                    vedtakType = Vedtak.VedtakType.INNVILGELSE_DAGPENGER,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1),
