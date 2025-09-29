@@ -35,7 +35,7 @@ class BehandlingResultatData(json: String) {
 
     fun provingsDato(): LocalDate {
         return rettighetsPerioder.singleOrNull()?.fraOgMed
-            ?: throw OpplysningDataException("Kunne ikke finne en og bare en rettighetsperiode")
+            ?: throw OpplysningDataException("Kunne ikke finne èn og bare èn rettighetsperiode")
     }
 
     private fun hentRettighetsPerioder(): Set<RettighetPeriode> {
@@ -56,7 +56,7 @@ class BehandlingResultatData(json: String) {
 
         return when (verdi["datatype"].asText() == "desimaltall") {
             true -> {
-                verdi["verdi"].also { require(it.isNumber) { "Forventet at desimaltall har  number verdi, men var $it" } }
+                verdi["verdi"].also { require(it.isNumber) { "Forventet at desimaltall har number verdi, men var $it" } }
                     .asDouble()
             }
 
@@ -95,7 +95,7 @@ class BehandlingResultatData(json: String) {
 
         return when (verdi["datatype"].asText() == "tekst") {
             true -> {
-                verdi["verdi"].also { require(it.isTextual) { "Forventet at tekst  verdi, men var $it" } }.asText()
+                verdi["verdi"].also { require(it.isTextual) { "Forventet tekstlig verdi, men var $it" } }.asText()
             }
 
             false -> throw IllegalArgumentException("Ugyldig verdinode: $verdi")
@@ -110,7 +110,7 @@ class BehandlingResultatData(json: String) {
                 true -> {
                     verdi["verdi"]
                         .also {
-                            require(it.isBoolean) { "Forventet at boolsk har  boolsk verdi, men var $it" }
+                            require(it.isBoolean) { "Forventet at boolsk har boolsk verdi, men var $it" }
                         }
                         .asBoolean()
                 }
@@ -124,7 +124,7 @@ class BehandlingResultatData(json: String) {
         val verdi = verdiNode(id)
         return when (verdi["datatype"].asText() == "dato") {
             true -> {
-                verdi["verdi"].also { require(it.isDato()) { "Forventet at dato har riktig  dato verdi, men var $it" } }
+                verdi["verdi"].also { require(it.isDato()) { "Forventet at dato har riktig dato verdi, men var $it" } }
                     .asDato()
             }
 
@@ -154,7 +154,7 @@ class BehandlingResultatData(json: String) {
             }
 
             if (it.size > 1) {
-                throw OpplysningDataException("Fant flere enn en opplysning med id $id")
+                throw OpplysningDataException("Fant flere enn èn opplysning med id $id")
             }
         }.single().let { opplysningNode ->
 
@@ -166,7 +166,7 @@ class BehandlingResultatData(json: String) {
                 }
 
                 if (it.size > 1) {
-                    throw OpplysningDataException("Fanet flere enn en ny periode for opplysning med id $id")
+                    throw OpplysningDataException("Fant flere enn èn ny periode for opplysning med id $id")
                 }
             }.single()["verdi"]
         }
