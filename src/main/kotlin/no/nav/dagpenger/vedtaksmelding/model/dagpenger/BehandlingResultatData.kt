@@ -175,6 +175,7 @@ class BehandlingResultatData(json: String) {
 
     fun behandlingId(): UUID = jsonNode["behandlingId"].let { UUID.fromString(it.asText()) }
 
+    // TODO: Denne er ikkje heilt gooood...?
     fun vedtakType(): VedtakType? {
         val innvilgelseDagpenger: Boolean =
             jsonNode["behandletHendelse"]["type"].asText() == "Søknad" &&
