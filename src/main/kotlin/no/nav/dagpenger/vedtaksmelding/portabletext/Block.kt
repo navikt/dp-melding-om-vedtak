@@ -20,11 +20,6 @@ data class BrevBlokk(
     val innhold: List<Block>,
 )
 
-data class BrevBlokk2(
-    val title: String,
-    val textId: String,
-)
-
 data class Block(
     val _type: String,
     @JsonDeserialize(using = Child.ListChildDeserializer::class)
