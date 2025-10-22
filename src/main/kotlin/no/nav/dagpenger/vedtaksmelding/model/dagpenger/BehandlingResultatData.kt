@@ -185,7 +185,8 @@ class BehandlingResultatData(json: String) {
                 !jsonNode["rettighetsperioder"].any { it["opprinnelse"].asText() == "Ny" && it["harRett"].asBoolean() }
         val stansDagpenger =
             jsonNode["behandletHendelse"]["type"].asText() != "Søknad" &&
-                jsonNode["rettighetsperioder"].lastOrNull { it["opprinnelse"].asText() == "Ny" } != null &&
+                jsonNode["rettighetsperioder"].filter { it["opprinnelse"].asText() == "Ny" }.size == 1 &&
+//                jsonNode["rettighetsperioder"].lastOrNull { it["opprinnelse"].asText() == "Ny" } != null &&
                 jsonNode["rettighetsperioder"].last { it["opprinnelse"].asText() == "Ny" }["harRett"].asBoolean() == false
         if (innvilgelseDagpenger) {
             return VedtakType.INNVILGELSE_DAGPENGER

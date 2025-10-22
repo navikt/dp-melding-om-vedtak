@@ -5,6 +5,8 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.VedtakType.STANS_DAGPENGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.finnOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_OVERSKRIFT
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_VIRKNINGSDATO
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 
 class StansMelding(
@@ -43,7 +45,7 @@ class StansMelding(
 
     override val brevBlokkIder: List<String>
         get() {
-            return innledendeBrevblokk
+            return innledendeBrevblokker
         }
 
     override val brevBlokker: List<BrevBlokk> =
@@ -51,5 +53,8 @@ class StansMelding(
             val brevBlokkMap = alleBrevblokker.associateBy { it.textId }
             brevBlokkIder().mapNotNull { id -> brevBlokkMap[id] }
         }
-    private val innledendeBrevblokk = listOf(StansBrevblokker.STANS_INNLEDNING.brevblokkId)
+    private val innledendeBrevblokker = listOf(
+        STANS_OVERSKRIFT.brevblokkId,
+        STANS_VIRKNINGSDATO.brevblokkId,
+        )
 }
