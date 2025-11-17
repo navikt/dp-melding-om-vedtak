@@ -358,6 +358,7 @@ components:
         - "KLAGE"
         - "MELDEKORT"
         - "MANUELL"
+        - "INNSENDING"
 
     HttpProblem:
       type: object

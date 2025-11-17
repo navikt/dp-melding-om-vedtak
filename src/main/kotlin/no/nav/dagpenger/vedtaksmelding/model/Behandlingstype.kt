@@ -7,6 +7,7 @@ enum class Behandlingstype {
     KLAGE,
     MELDEKORT,
     MANUELL,
+    INNSENDING,
     ;
 
     companion object {
@@ -17,6 +18,7 @@ enum class Behandlingstype {
                 BehandlingstypeDTO.KLAGE -> KLAGE
                 BehandlingstypeDTO.MELDEKORT -> MELDEKORT
                 BehandlingstypeDTO.MANUELL -> MANUELL
+                BehandlingstypeDTO.INNSENDING -> INNSENDING
             }
     }
 }

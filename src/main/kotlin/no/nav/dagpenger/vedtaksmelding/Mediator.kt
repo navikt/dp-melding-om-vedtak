@@ -12,6 +12,7 @@ import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.Companion.tilBehandlingstype
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.INNSENDING
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.KLAGE
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MANUELL
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MELDEKORT
@@ -175,9 +176,10 @@ class Mediator(
             }
 
             // TODO: Må kunne tilby egendefinert brev
-            MELDEKORT -> throw NotImplementedError("Meldekortbehandling har ikke støtte for vedtaksmelding")
+            MELDEKORT -> throw NotImplementedError("Meldekort-behandling har ikke støtte for vedtaksmelding")
             // TODO: Må kunne tilby egendefinert brev
             MANUELL -> throw NotImplementedError("Manuell behandling har ikke støtte for vedtaksmelding")
+            INNSENDING -> throw NotImplementedError("Innsending-behandling har ikke støtte for vedtaksmelding")
         }
     }
 
