@@ -68,6 +68,7 @@ class VedtakMapperTest {
             it.hentOpplysning<DagpengerOpplysning.UtbetaltArbeidsinntektPeriode3>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger>() shouldNotBe null
             it.hentOpplysning<AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.BarnetilleggIKroner>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.FørsteMånedAvOpptjeningsperiode>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.SisteMånedAvOpptjeningsperiode>() shouldNotBe null

@@ -76,6 +76,7 @@ class VedtakMapper(
                         behandlingResultatData,
                     )
                 }
+                this.addIfPresent { DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(behandlingResultatData) }
                 this.addIfPresent { DagpengerOpplysning.BarnetilleggIKroner(behandlingResultatData) }
                 this.addIfPresent { DagpengerOpplysning.FørsteMånedAvOpptjeningsperiode(behandlingResultatData) }
                 this.addIfPresent { DagpengerOpplysning.SisteMånedAvOpptjeningsperiode(behandlingResultatData) }
