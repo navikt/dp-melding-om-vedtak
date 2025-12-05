@@ -25,21 +25,22 @@ class HtmlConverterTest {
 
     @Test
     fun `Hubba`() {
-        HtmlConverter.toHtml(
-            meldingOmVedtakDTO,
-            utvidetBeskrivelse =
-                setOf(
-                    UtvidetBeskrivelse(
-                        behandlingId = UUIDv7.ny(),
-                        brevblokkId = "sfa",
-                        tekst = "<h1>Hubba</h1>",
-                        sistEndretTidspunkt = java.time.LocalDateTime.now(),
-                        tittel = "Hubba",
+        HtmlConverter
+            .toHtml(
+                meldingOmVedtakDTO,
+                utvidetBeskrivelse =
+                    setOf(
+                        UtvidetBeskrivelse(
+                            behandlingId = UUIDv7.ny(),
+                            brevblokkId = "sfa",
+                            tekst = "<h1>Hubba</h1>",
+                            sistEndretTidspunkt = java.time.LocalDateTime.now(),
+                            tittel = "Hubba",
+                        ),
                     ),
-                ),
-        ).also {
-            writeStringToFile("build/temp/hubba.html", it)
-        }
+            ).also {
+                writeStringToFile("build/temp/hubba.html", it)
+            }
     }
 
     @Test

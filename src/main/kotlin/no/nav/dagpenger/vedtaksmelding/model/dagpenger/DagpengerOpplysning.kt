@@ -312,7 +312,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
 
     class FørsteMånedAvOpptjeningsperiode(
         override val verdi: LocalDate,
-    ) : DagpengerOpplysning<Enhet.ENHETSLØS, LocalDate>(verdi), DeriverbarOpplysning {
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, LocalDate>(verdi),
+        DeriverbarOpplysning {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9413-77ce-92ec-d29700f04247")
         }
@@ -353,7 +354,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
 
     class SisteMånedAvOpptjeningsperiode(
         override val verdi: LocalDate,
-    ) : DagpengerOpplysning<Enhet.ENHETSLØS, LocalDate>(verdi), DeriverbarOpplysning {
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, LocalDate>(verdi),
+        DeriverbarOpplysning {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9414-7823-8d29-0e25b7feb7d0")
         }
@@ -681,7 +683,9 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
                         }
 
                         false -> {
-                            opplysninger.filterIsInstance<AntallStønadsukerSomGisVedOrdinæreDagpenger>().singleOrNull()
+                            opplysninger
+                                .filterIsInstance<AntallStønadsukerSomGisVedOrdinæreDagpenger>()
+                                .singleOrNull()
                                 ?.verdi
                         }
                     }
@@ -1106,11 +1110,10 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
-    override fun equals(other: Any?): Boolean {
-        return this.opplysningTekstId == (other as? DagpengerOpplysning<*, *>)?.opplysningTekstId &&
+    override fun equals(other: Any?): Boolean =
+        this.opplysningTekstId == (other as? DagpengerOpplysning<*, *>)?.opplysningTekstId &&
             this.verdi == other.verdi &&
             this.enhet == other.enhet
-    }
 
     override fun hashCode(): Int {
         var result = opplysningTekstId.hashCode()
@@ -1119,7 +1122,5 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         return result
     }
 
-    override fun toString(): String {
-        return "Opplysning(opplysningTekstId='$opplysningTekstId', verdi=$verdi, enhet=$enhet)"
-    }
+    override fun toString(): String = "Opplysning(opplysningTekstId='$opplysningTekstId', verdi=$verdi, enhet=$enhet)"
 }

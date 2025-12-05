@@ -16,7 +16,9 @@ sealed class KlageOpplysning<E : Enhet, V : Any>(
 
     override fun formatertVerdi(): String = enhet.formatertVerdi(verdi)
 
-    data class KlageMottattDato(override val verdi: LocalDate) : KlageOpplysning<Enhet.ENHETSLØS, LocalDate>(verdi) {
+    data class KlageMottattDato(
+        override val verdi: LocalDate,
+    ) : KlageOpplysning<Enhet.ENHETSLØS, LocalDate>(verdi) {
         companion object {
             val opplysningNavnId: String = "KLAGE_MOTTATT"
         }
@@ -25,7 +27,9 @@ sealed class KlageOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.ENHETSLØS
     }
 
-    data class PåklagetVedtakDato(override val verdi: LocalDate) : KlageOpplysning<Enhet.ENHETSLØS, LocalDate>(verdi) {
+    data class PåklagetVedtakDato(
+        override val verdi: LocalDate,
+    ) : KlageOpplysning<Enhet.ENHETSLØS, LocalDate>(verdi) {
         companion object {
             val opplysningNavnId: String = "KLAGEN_GJELDER_VEDTAKSDATO"
         }
@@ -34,7 +38,9 @@ sealed class KlageOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.ENHETSLØS
     }
 
-    data class KlageUtfall(override val verdi: String) : KlageOpplysning<Enhet.ENHETSLØS, String>(verdi) {
+    data class KlageUtfall(
+        override val verdi: String,
+    ) : KlageOpplysning<Enhet.ENHETSLØS, String>(verdi) {
         companion object {
             val opplysningNavnId: String = "UTFALL"
         }
@@ -43,7 +49,9 @@ sealed class KlageOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.ENHETSLØS
     }
 
-    data class ErKlagenSkriftelig(override val verdi: Boolean) : KlageOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
+    data class ErKlagenSkriftelig(
+        override val verdi: Boolean,
+    ) : KlageOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
         companion object {
             val opplysningNavnId: String = "ER_KLAGEN_SKRIFTLIG"
         }
@@ -52,7 +60,9 @@ sealed class KlageOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.ENHETSLØS
     }
 
-    data class ErKlagenUnderskrevet(override val verdi: Boolean) : KlageOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
+    data class ErKlagenUnderskrevet(
+        override val verdi: Boolean,
+    ) : KlageOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
         companion object {
             val opplysningNavnId: String = "ER_KLAGEN_UNDERSKREVET"
         }
@@ -61,7 +71,9 @@ sealed class KlageOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.ENHETSLØS
     }
 
-    data class KlagenNevnerEndring(override val verdi: Boolean) : KlageOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
+    data class KlagenNevnerEndring(
+        override val verdi: Boolean,
+    ) : KlageOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
         companion object {
             val opplysningNavnId: String = "KLAGEN_NEVNER_ENDRING"
         }
@@ -70,7 +82,9 @@ sealed class KlageOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.ENHETSLØS
     }
 
-    data class RettsligKlageinteresse(override val verdi: Boolean) : KlageOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
+    data class RettsligKlageinteresse(
+        override val verdi: Boolean,
+    ) : KlageOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
         companion object {
             val opplysningNavnId: String = "RETTSLIG_KLAGEINTERESSE"
         }
@@ -79,7 +93,9 @@ sealed class KlageOpplysning<E : Enhet, V : Any>(
         override val enhet: Enhet.ENHETSLØS = Enhet.ENHETSLØS
     }
 
-    data class KlagefristOppfylt(override val verdi: Boolean) : KlageOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
+    data class KlagefristOppfylt(
+        override val verdi: Boolean,
+    ) : KlageOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
         companion object {
             val opplysningNavnId: String = "KLAGEFRIST_OPPFYLT"
         }

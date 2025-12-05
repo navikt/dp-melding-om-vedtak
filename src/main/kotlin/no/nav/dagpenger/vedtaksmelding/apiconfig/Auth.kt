@@ -24,14 +24,13 @@ data class Saksbehandler(
     val token: String,
 ) : Klient()
 
-internal fun ApplicationRequest.klient(): Klient {
-    return this.call.principal<JWTPrincipal>()?.let {
+internal fun ApplicationRequest.klient(): Klient =
+    this.call.principal<JWTPrincipal>()?.let {
         when (it.payload.claims["idtyp"]?.asString() == "app") {
             true -> Maskin
             false -> Saksbehandler(this.jwt())
         }
     } ?: throw IllegalArgumentException("Ugyldig token eller manglende JWT i forespørselen")
-}
 
 internal fun ApplicationRequest.jwt(): String =
     this.parseAuthorizationHeader().let { authHeader ->

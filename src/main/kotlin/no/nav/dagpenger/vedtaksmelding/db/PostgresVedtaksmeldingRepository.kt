@@ -207,8 +207,8 @@ class PostgresVedtaksmeldingRepository(
         }
     }
 
-    override fun hentBrevVariant(behandlingId: UUID): BrevVariantDTO {
-        return sessionOf(dataSource).use { session ->
+    override fun hentBrevVariant(behandlingId: UUID): BrevVariantDTO =
+        sessionOf(dataSource).use { session ->
             session.run(
                 queryOf(
                     //language=PostgreSQL
@@ -227,7 +227,6 @@ class PostgresVedtaksmeldingRepository(
                 }.asSingle,
             ) ?: BrevVariantDTO.GENERERT
         }
-    }
 }
 
 private fun TransactionalSession.lagre(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime =

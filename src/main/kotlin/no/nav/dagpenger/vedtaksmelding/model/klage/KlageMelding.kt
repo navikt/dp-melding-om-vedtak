@@ -38,8 +38,9 @@ class KlageMelding(
 
     override fun hentBrevBlokker(): List<BrevBlokk> = brevBlokker
 
-    override fun hentOpplysninger(): List<Opplysning> {
-        return brevBlokker.asSequence()
+    override fun hentOpplysninger(): List<Opplysning> =
+        brevBlokker
+            .asSequence()
             .filter { it.textId in brevBlokkIder() }
             .flatMap { it.innhold }
             .flatMap { it.children }
@@ -47,10 +48,9 @@ class KlageMelding(
             .map { it.behandlingOpplysning.textId }
             .map { klagevedtak.hentOpplysning(it) }
             .toList()
-    }
 
-    private fun opprettholdelse(): List<String> {
-        return if (!klagevedtak.any<KlageOpplysning.KlageUtfall> { it.verdi.uppercase() == "OPPRETTHOLDELSE" }) {
+    private fun opprettholdelse(): List<String> =
+        if (!klagevedtak.any<KlageOpplysning.KlageUtfall> { it.verdi.uppercase() == "OPPRETTHOLDELSE" }) {
             emptyList()
         } else {
             listOf(
@@ -58,7 +58,6 @@ class KlageMelding(
                 KLAGE_OPPRETTHOLDELSE_DEL_2.brevblokkId,
             ) + fasteAvsluttendeBlokker
         }
-    }
 
     private fun avvist(): List<String> {
         if (!klagevedtak.any<KlageOpplysning.KlageUtfall> {

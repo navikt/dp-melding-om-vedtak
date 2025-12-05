@@ -249,11 +249,10 @@ class AvslagMelding(
     private fun gjelderPermitteringFisk(): Boolean =
         vedtak.finnOpplysning<DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri>() != null
 
-    private fun harBrukBeregningsregelArbeidstidSiste6Mnd(): Boolean {
-        return vedtak.opplysninger.any {
+    private fun harBrukBeregningsregelArbeidstidSiste6Mnd(): Boolean =
+        vedtak.opplysninger.any {
             it is DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste6Måneder && it.verdi
         }
-    }
 
     private fun harBrukBeregningsregelArbeidstidSiste12Mnd(): Boolean =
         vedtak.opplysninger.any {

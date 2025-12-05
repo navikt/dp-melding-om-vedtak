@@ -7,18 +7,17 @@ private val logger = KotlinLogging.logger {}
 class VedtakMapper(
     vedtakJson: String,
 ) {
-    fun vedtak(): Vedtak {
-        return Vedtak(
+    fun vedtak(): Vedtak =
+        Vedtak(
             behandlingId = behandlingResultatData.behandlingId(),
             utfall = utfall(),
             opplysninger = this.build(),
         )
-    }
 
     private val behandlingResultatData = BehandlingResultatData(vedtakJson)
 
-    private fun utfall(): Vedtak.Utfall {
-        return when {
+    private fun utfall(): Vedtak.Utfall =
+        when {
             behandlingResultatData.harRett() -> {
                 Vedtak.Utfall.INNVILGET
             }
@@ -27,7 +26,6 @@ class VedtakMapper(
                 Vedtak.Utfall.AVSLÅTT
             }
         }
-    }
 
     private fun MutableSet<DagpengerOpplysning<*, *>>.addIfPresent(func: () -> DagpengerOpplysning<*, *>) {
         try {

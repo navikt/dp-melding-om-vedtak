@@ -54,19 +54,18 @@ class Mediator(
         behandlingId: UUID,
         klient: Klient,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
-    ): MeldingOmVedtakResponseDTO {
-        return when (vedtaksmeldingRepository.hentBrevVariant(behandlingId)) {
+    ): MeldingOmVedtakResponseDTO =
+        when (vedtaksmeldingRepository.hentBrevVariant(behandlingId)) {
             BrevVariantDTO.GENERERT -> hentGenerertForhåndsvisning(behandlingId, klient, meldingOmVedtakData)
             BrevVariantDTO.EGENDEFINERT -> hentEgendefinertBrev(behandlingId, meldingOmVedtakData)
         }
-    }
 
     suspend fun hentEndeligBrev(
         behandlingId: UUID,
         klient: Klient,
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
-    ): String {
-        return when (vedtaksmeldingRepository.hentBrevVariant(behandlingId)) {
+    ): String =
+        when (vedtaksmeldingRepository.hentBrevVariant(behandlingId)) {
             BrevVariantDTO.GENERERT -> hentGenerertEndeligBrev(behandlingId, klient, meldingOmVedtakData)
             BrevVariantDTO.EGENDEFINERT -> {
                 hentEgendefinertBrev(behandlingId, meldingOmVedtakData).html.also {
@@ -74,7 +73,6 @@ class Mediator(
                 }
             }
         }
-    }
 
     suspend fun hentBrevKomponenterOgLagre(
         behandlingId: UUID,
@@ -210,7 +208,8 @@ class Mediator(
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
     ): MeldingOmVedtakResponseDTO {
         val utvidetBeskrivelse =
-            vedtaksmeldingRepository.hentUtvidedeBeskrivelserFor(behandlingId)
+            vedtaksmeldingRepository
+                .hentUtvidedeBeskrivelserFor(behandlingId)
                 .singleOrNull { it.brevblokkId == "brev.blokk.egendefinert" }
                 ?: UtvidetBeskrivelse(
                     behandlingId = behandlingId,

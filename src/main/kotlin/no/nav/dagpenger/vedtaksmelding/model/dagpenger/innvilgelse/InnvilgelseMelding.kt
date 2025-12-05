@@ -89,13 +89,13 @@ class InnvilgelseMelding(
             brevBlokkIder().mapNotNull { id -> brevBlokkMap[id] }
         }
 
-    private fun nittiProsentRegel(): List<String> {
-        return vedtak.finnOpplysning<AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget> {
-            it.toDouble() > 0
-        }?.let {
-            listOf(INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId)
-        } ?: emptyList()
-    }
+    private fun nittiProsentRegel(): List<String> =
+        vedtak
+            .finnOpplysning<AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget> {
+                it.toDouble() > 0
+            }?.let {
+                listOf(INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId)
+            } ?: emptyList()
 
     private fun samordnet(): List<String> {
         if (!vedtak.oppfylt<DagpengerOpplysning.HarSamordnet>()) {

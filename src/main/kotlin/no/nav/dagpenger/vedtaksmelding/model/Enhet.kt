@@ -8,8 +8,8 @@ import java.util.Locale
 sealed class Enhet {
     val norskFormat = Locale.of("nb", "NO")
 
-    fun formatertVerdi(verdi: Any): String {
-        return when (verdi) {
+    fun formatertVerdi(verdi: Any): String =
+        when (verdi) {
             is String -> formatertVerdi(verdi)
             is Double -> formatertVerdi(verdi)
             is Int -> formatertVerdi(verdi)
@@ -21,7 +21,6 @@ sealed class Enhet {
                 "Kan ikke formatere verdi av type ${verdi::class.simpleName} med enhet ${this::class.simpleName}",
             )
         }
-    }
 
     protected open fun formatertVerdi(verdi: String): String = verdi
 
@@ -48,9 +47,8 @@ sealed class Enhet {
         }
     }
 
-    protected fun formaterDato(verdi: LocalDate): String {
-        return "${verdi.dayOfMonth}. " + verdi.format(DateTimeFormatter.ofPattern("MMMM yyyy", norskFormat))
-    }
+    protected fun formaterDato(verdi: LocalDate): String =
+        "${verdi.dayOfMonth}. " + verdi.format(DateTimeFormatter.ofPattern("MMMM yyyy", norskFormat))
 
     protected fun erHeltall(desimaltall: Double) = desimaltall % 1 == 0.0
 
@@ -59,9 +57,7 @@ sealed class Enhet {
 
         override fun formatertVerdi(verdi: LocalDate): String = formaterDato(verdi)
 
-        override fun formatertVerdi(verdi: YearMonth): String {
-            return verdi.format(DateTimeFormatter.ofPattern("MMMM yyyy", norskFormat))
-        }
+        override fun formatertVerdi(verdi: YearMonth): String = verdi.format(DateTimeFormatter.ofPattern("MMMM yyyy", norskFormat))
     }
 
     data object KRONER : Enhet() {
@@ -86,13 +82,12 @@ sealed class Enhet {
             return scaled % 1 == 0.0 && desimaltall % 1 != 0.0
         }
 
-        private fun formaterTimer(desimaltall: Double): String {
-            return when {
+        private fun formaterTimer(desimaltall: Double): String =
+            when {
                 erHeltall(desimaltall) -> String.format(norskFormat, format = "%,.0f", desimaltall)
                 har1Desimal(desimaltall) -> String.format(norskFormat, format = "%,.1f", desimaltall)
                 else -> String.format(norskFormat, format = "%,.2f", desimaltall)
             }
-        }
 
         override fun formatertVerdi(verdi: Double): String = formaterTimer(verdi)
     }

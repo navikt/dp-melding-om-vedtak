@@ -4,21 +4,22 @@ import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningIkkeFunnet
 import java.util.UUID
 
-inline fun <reified T : KlageOpplysning<*, *>> KlageVedtak.any(predicate: (T) -> Boolean): Boolean {
-    return this.opplysninger.filterIsInstance<T>().any { predicate(it) }
-}
+inline fun <reified T : KlageOpplysning<*, *>> KlageVedtak.any(predicate: (T) -> Boolean): Boolean =
+    this.opplysninger.filterIsInstance<T>().any {
+        predicate(it)
+    }
 
-inline fun <reified T : KlageOpplysning<*, Boolean>> KlageVedtak.oppfylt(): Boolean {
-    return this.opplysninger.filterIsInstance<T>().any { it.verdi }
-}
+inline fun <reified T : KlageOpplysning<*, Boolean>> KlageVedtak.oppfylt(): Boolean =
+    this.opplysninger.filterIsInstance<T>().any {
+        it.verdi
+    }
 
-inline fun <reified T : KlageOpplysning<*, Boolean>> KlageVedtak.ikkeOppfylt(): Boolean {
-    return this.opplysninger.filterIsInstance<T>().any { !it.verdi }
-}
+inline fun <reified T : KlageOpplysning<*, Boolean>> KlageVedtak.ikkeOppfylt(): Boolean =
+    this.opplysninger.filterIsInstance<T>().any {
+        !it.verdi
+    }
 
-inline fun <reified T : KlageOpplysning<*, *>> KlageVedtak.filterIsInstance(): List<T> {
-    return this.opplysninger.filterIsInstance<T>()
-}
+inline fun <reified T : KlageOpplysning<*, *>> KlageVedtak.filterIsInstance(): List<T> = this.opplysninger.filterIsInstance<T>()
 
 data class KlageVedtak(
     val behandlingId: UUID,

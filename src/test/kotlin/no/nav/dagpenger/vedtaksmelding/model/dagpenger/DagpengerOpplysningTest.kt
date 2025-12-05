@@ -151,7 +151,8 @@ class DagpengerOpplysningTest {
         DagpengerOpplysning.ArbeidsinntektSiste12Måneder(behandlingResultatData).verdi shouldBe 0
         DagpengerOpplysning.ArbeidsinntektSiste36Måneder(behandlingResultatData).verdi shouldBe 55550
         DagpengerOpplysning.AntallGSomGisSomGrunnlagVedVerneplikt(behandlingResultatData).verdi shouldBe 3
-        DagpengerOpplysning.BruktBeregningsregelGrunnlag(behandlingResultatData).verdi shouldBe "Gjennomsnittlig arbeidsinntekt siste 36 måneder"
+        DagpengerOpplysning.BruktBeregningsregelGrunnlag(behandlingResultatData).verdi shouldBe
+            "Gjennomsnittlig arbeidsinntekt siste 36 måneder"
         DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste6Måneder(behandlingResultatData).verdi shouldBe true
         DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste12Måneder(behandlingResultatData).verdi shouldBe false
         DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste36Måneder(behandlingResultatData).verdi shouldBe false
@@ -159,10 +160,10 @@ class DagpengerOpplysningTest {
         DagpengerOpplysning.UtbetaltArbeidsinntektPeriode2(behandlingResultatData).verdi shouldBe 5555
         DagpengerOpplysning.UtbetaltArbeidsinntektPeriode3(behandlingResultatData).verdi shouldBe 49995
         DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger(behandlingResultatData).verdi shouldBe 0
-        DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
-            behandlingResultatData,
-        )
-            .verdi shouldBe 0
+        DagpengerOpplysning
+            .AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
+                behandlingResultatData,
+            ).verdi shouldBe 0
         DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(behandlingResultatData).verdi shouldBe 1
         DagpengerOpplysning.BarnetilleggIKroner(behandlingResultatData).verdi shouldBe 37
         DagpengerOpplysning.FørsteMånedAvOpptjeningsperiode(behandlingResultatData).also {

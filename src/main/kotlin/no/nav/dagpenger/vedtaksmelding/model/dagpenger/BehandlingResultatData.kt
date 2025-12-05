@@ -13,7 +13,9 @@ import java.util.UUID
 
 private val logger = KotlinLogging.logger {}
 
-class BehandlingResultatData(json: String) {
+class BehandlingResultatData(
+    json: String,
+) {
     companion object {
         private val objectMapper: ObjectMapper =
             jacksonObjectMapper()
@@ -33,10 +35,9 @@ class BehandlingResultatData(json: String) {
 
     private val rettighetsPerioder: Set<RettighetPeriode> = hentRettighetsPerioder()
 
-    fun provingsDato(): LocalDate {
-        return rettighetsPerioder.singleOrNull()?.fraOgMed
+    fun provingsDato(): LocalDate =
+        rettighetsPerioder.singleOrNull()?.fraOgMed
             ?: throw OpplysningDataException("Kunne ikke finne èn og bare èn rettighetsperiode")
-    }
 
     private fun hentRettighetsPerioder(): Set<RettighetPeriode> {
         val nodes = jsonNode["rettighetsperioder"]
@@ -56,7 +57,8 @@ class BehandlingResultatData(json: String) {
 
         return when (verdi["datatype"].asText() == "desimaltall") {
             true -> {
-                verdi["verdi"].also { require(it.isNumber) { "Forventet at desimaltall har number verdi, men var $it" } }
+                verdi["verdi"]
+                    .also { require(it.isNumber) { "Forventet at desimaltall har number verdi, men var $it" } }
                     .asDouble()
             }
 
@@ -68,7 +70,8 @@ class BehandlingResultatData(json: String) {
         val verdi = verdiNode(id)
         return when (verdi["datatype"].asText() == "heltall") {
             true -> {
-                verdi["verdi"].also { require(it.isInt) { "Forventet at heltall har int verdi, men var $it" } }
+                verdi["verdi"]
+                    .also { require(it.isInt) { "Forventet at heltall har int verdi, men var $it" } }
                     .asInt()
             }
 
@@ -111,8 +114,7 @@ class BehandlingResultatData(json: String) {
                     verdi["verdi"]
                         .also {
                             require(it.isBoolean) { "Forventet at boolsk har boolsk verdi, men var $it" }
-                        }
-                        .asBoolean()
+                        }.asBoolean()
                 }
 
                 false -> throw IllegalArgumentException("Ugyldig verdinode: $verdi")
@@ -124,7 +126,8 @@ class BehandlingResultatData(json: String) {
         val verdi = verdiNode(id)
         return when (verdi["datatype"].asText() == "dato") {
             true -> {
-                verdi["verdi"].also { require(it.isDato()) { "Forventet at dato har riktig dato verdi, men var $it" } }
+                verdi["verdi"]
+                    .also { require(it.isDato()) { "Forventet at dato har riktig dato verdi, men var $it" } }
                     .asDato()
             }
 
@@ -136,51 +139,52 @@ class BehandlingResultatData(json: String) {
 
     private fun JsonNode.asDato(): LocalDate = toDateOrNull() ?: throw IllegalArgumentException("Kan ikke konvertere $this til LocalDate")
 
-    private fun JsonNode.toDateOrNull(): LocalDate? {
-        return try {
+    private fun JsonNode.toDateOrNull(): LocalDate? =
+        try {
             LocalDate.parse(asText())
         } catch (e: Exception) {
             logger.error(e) { "Kan ikke konvertere $this til LocalDate" }
             null
         }
-    }
 
-    private fun verdiNode(id: UUID): JsonNode {
-        return opplysningNoder.filter {
-            it["opplysningTypeId"].asText() == id.toString()
-        }.also {
-            if (it.isEmpty()) {
-                throw BehandlingResultatOpplysningIkkeFunnet(id)
-            }
-
-            if (it.size > 1) {
-                throw OpplysningDataException("Fant flere enn èn opplysning med id $id")
-            }
-        }.single().let { opplysningNode ->
-
-            opplysningNode["perioder"].filter {
-                it["status"].asText() == "Ny"
+    private fun verdiNode(id: UUID): JsonNode =
+        opplysningNoder
+            .filter {
+                it["opplysningTypeId"].asText() == id.toString()
             }.also {
                 if (it.isEmpty()) {
-                    throw NyPeriodeIkkeFunnet(id)
+                    throw BehandlingResultatOpplysningIkkeFunnet(id)
                 }
 
                 if (it.size > 1) {
-                    throw OpplysningDataException("Fant flere enn èn ny periode for opplysning med id $id")
+                    throw OpplysningDataException("Fant flere enn èn opplysning med id $id")
                 }
-            }.single()["verdi"]
-        }
-    }
+            }.single()
+            .let { opplysningNode ->
+
+                opplysningNode["perioder"]
+                    .filter {
+                        it["status"].asText() == "Ny"
+                    }.also {
+                        if (it.isEmpty()) {
+                            throw NyPeriodeIkkeFunnet(id)
+                        }
+
+                        if (it.size > 1) {
+                            throw OpplysningDataException("Fant flere enn èn ny periode for opplysning med id $id")
+                        }
+                    }.single()["verdi"]
+            }
 
     fun behandlingId(): UUID = jsonNode["behandlingId"].let { UUID.fromString(it.asText()) }
 
-    fun harRett(): Boolean {
-        return jsonNode["rettighetsperioder"].first()["harRett"].asBoolean()
-    }
+    fun harRett(): Boolean = jsonNode["rettighetsperioder"].first()["harRett"].asBoolean()
 
-    data class BehandlingResultatOpplysningIkkeFunnet(val opplysningId: UUID) :
-        OpplysningDataException("Fant ikke behandling resultat opplysning med id $opplysningId")
+    data class BehandlingResultatOpplysningIkkeFunnet(
+        val opplysningId: UUID,
+    ) : OpplysningDataException("Fant ikke behandling resultat opplysning med id $opplysningId")
 
-    data class NyPeriodeIkkeFunnet(val opplysningId: UUID) :
-        OpplysningDataException("Fant ikke ny periode for behandling resultat opplysning med id $opplysningId")
+    data class NyPeriodeIkkeFunnet(
+        val opplysningId: UUID,
+    ) : OpplysningDataException("Fant ikke ny periode for behandling resultat opplysning med id $opplysningId")
 }

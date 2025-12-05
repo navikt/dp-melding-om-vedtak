@@ -570,26 +570,26 @@ class MeldingOmVedtakApiTest {
             application {
                 meldingOmVedtakApi(mediator)
             }
-            client.put("/melding-om-vedtak/$behandlingId/brev-variant") {
-                autentisert(token = saksbehandlerToken)
-                header(HttpHeaders.ContentType, ContentType.Application.Json)
-                setBody(requestBody(BrevVariantDTO.EGENDEFINERT))
-            }.let { response ->
-                response.status shouldBe HttpStatusCode.NoContent
-            }
+            client
+                .put("/melding-om-vedtak/$behandlingId/brev-variant") {
+                    autentisert(token = saksbehandlerToken)
+                    header(HttpHeaders.ContentType, ContentType.Application.Json)
+                    setBody(requestBody(BrevVariantDTO.EGENDEFINERT))
+                }.let { response ->
+                    response.status shouldBe HttpStatusCode.NoContent
+                }
         }
     }
 
-    private fun requestBody(brevVariant: BrevVariantDTO): String {
-        return """
+    private fun requestBody(brevVariant: BrevVariantDTO): String =
+        """
             {
                 "brevVariant" : "${brevVariant.name}"
             }
             """
-    }
 
-    private fun requestBody(meldingOmVedtakData: MeldingOmVedtakDataDTO = lagMeldingOmVedtakDataDTO()): String {
-        return """
+    private fun requestBody(meldingOmVedtakData: MeldingOmVedtakDataDTO = lagMeldingOmVedtakDataDTO()): String =
+        """
             {
                 "behandlingstype": "${meldingOmVedtakData.behandlingstype.value}",
                 "fornavn": "${meldingOmVedtakData.fornavn}",
@@ -614,7 +614,6 @@ class MeldingOmVedtakApiTest {
                 }
             }
             """
-    }
 
     private fun HttpRequestBuilder.autentisert(token: String) {
         header(HttpHeaders.Authorization, "Bearer $token")

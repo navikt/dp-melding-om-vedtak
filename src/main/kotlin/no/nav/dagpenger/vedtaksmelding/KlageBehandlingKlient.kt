@@ -57,11 +57,10 @@ internal class KlageBehandlingHttpKlient(
     override suspend fun hentVedtak(
         behandlingId: UUID,
         klient: Saksbehandler,
-    ): Result<KlageVedtak> {
-        return hentVedtakJson(behandlingId, klient).map {
+    ): Result<KlageVedtak> =
+        hentVedtakJson(behandlingId, klient).map {
             KlagevedtakMapper(it).vedtak()
         }
-    }
 }
 
 private fun String.tilHttpProblem(status: HttpStatusCode): HttpProblemDTO =

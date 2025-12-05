@@ -12,7 +12,9 @@ import java.util.UUID
 private val logger = KotlinLogging.logger {}
 private val sikkerlogger = KotlinLogging.logger("tjenestekall")
 
-class KlagevedtakMapper(vedtakJson: String) {
+class KlagevedtakMapper(
+    vedtakJson: String,
+) {
     private val vedtak: JsonNode
     private val objectMapper: ObjectMapper =
         jacksonObjectMapper()
@@ -23,8 +25,8 @@ class KlagevedtakMapper(vedtakJson: String) {
         vedtak = objectMapper.readTree(vedtakJson)
     }
 
-    fun vedtak(): KlageVedtak {
-        return runCatching {
+    fun vedtak(): KlageVedtak =
+        runCatching {
             KlageVedtak(
                 behandlingId = behandlingId,
                 fagsakId = fagsakId,
@@ -35,7 +37,6 @@ class KlagevedtakMapper(vedtakJson: String) {
                 "Feil ved mapping av klagevedtak for behandlingId $behandlingId. VedtakJson: $vedtak"
             }
         }.getOrThrow()
-    }
 
     private val behandlingId by lazy {
         UUID.fromString(vedtak.get("behandlingId").asText())
@@ -78,14 +79,16 @@ class KlagevedtakMapper(vedtakJson: String) {
         }
     }
 
-    private fun JsonNode.utfallsverdi(opplysningNavnId: String): String? {
-        return this.get("utfallOpplysninger").find {
-            it.get("opplysningNavnId").asText() == opplysningNavnId
-        }?.get("verdi")?.asText()
-    }
+    private fun JsonNode.utfallsverdi(opplysningNavnId: String): String? =
+        this
+            .get("utfallOpplysninger")
+            .find {
+                it.get("opplysningNavnId").asText() == opplysningNavnId
+            }?.get("verdi")
+            ?.asText()
 
-    private fun JsonNode.datoVerdi(opplysningNavnId: String): LocalDate? {
-        return this.hentVerdiNode(opplysningNavnId)?.let {
+    private fun JsonNode.datoVerdi(opplysningNavnId: String): LocalDate? =
+        this.hentVerdiNode(opplysningNavnId)?.let {
             try {
                 LocalDate.parse(it.asText())
             } catch (e: Exception) {
@@ -94,10 +97,9 @@ class KlagevedtakMapper(vedtakJson: String) {
                 throw IllegalArgumentException("Kan ikke konvertere $verdi til LocalDate for behandlingId $behandlingId")
             }
         }
-    }
 
-    private fun JsonNode.boolskVerdi(opplysningNavnId: String): Boolean? {
-        return this.hentVerdiNode(opplysningNavnId)?.let {
+    private fun JsonNode.boolskVerdi(opplysningNavnId: String): Boolean? =
+        this.hentVerdiNode(opplysningNavnId)?.let {
             when (it.isBoolean) {
                 true -> it.asBoolean()
                 false -> {
@@ -107,11 +109,11 @@ class KlagevedtakMapper(vedtakJson: String) {
                 }
             }
         }
-    }
 
-    private fun JsonNode.hentVerdiNode(opplysningNavnId: String): JsonNode? {
-        return this.get("behandlingOpplysninger").find {
-            it.get("opplysningNavnId").asText() == opplysningNavnId
-        }?.get("verdi")
-    }
+    private fun JsonNode.hentVerdiNode(opplysningNavnId: String): JsonNode? =
+        this
+            .get("behandlingOpplysninger")
+            .find {
+                it.get("opplysningNavnId").asText() == opplysningNavnId
+            }?.get("verdi")
 }
