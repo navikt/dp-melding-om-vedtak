@@ -42,6 +42,8 @@ spec:
           namespace: teamdagpenger
         - application: dp-saksbehandling
           namespace: teamdagpenger
+        - application: logging
+          namespace: nais-system
   env:
     - name: JDK_JAVA_OPTIONS
       value: -XX:+UseParallelGC -XX:ActiveProcessorCount=4
