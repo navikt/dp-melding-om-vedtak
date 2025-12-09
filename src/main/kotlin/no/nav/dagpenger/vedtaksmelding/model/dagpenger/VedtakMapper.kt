@@ -1,6 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
 import io.github.oshai.kotlinlogging.KotlinLogging
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 
 private val logger = KotlinLogging.logger {}
 
@@ -10,7 +11,7 @@ class VedtakMapper(
     fun vedtak(): Vedtak =
         Vedtak(
             behandlingId = behandlingResultatData.behandlingId(),
-            utfall = utfall(),
+            utfall = behandlingResultatData.utfall(),
             opplysninger = this.build(),
         )
 
@@ -27,7 +28,7 @@ class VedtakMapper(
             }
         }
 
-    private fun MutableSet<DagpengerOpplysning<*, *>>.addIfPresent(func: () -> DagpengerOpplysning<*, *>) {
+    private fun MutableSet<Opplysning>.addIfPresent(func: () -> Opplysning) {
         try {
             this.add(func())
         } catch (e: BehandlingResultatData.BehandlingResultatOpplysningIkkeFunnet) {
@@ -35,7 +36,7 @@ class VedtakMapper(
         }
     }
 
-    private fun build(): Set<DagpengerOpplysning<*, *>> {
+    private fun build(): Set<Opplysning> {
         val opplysningerFraData =
             buildSet {
                 this.addIfPresent { DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid(behandlingResultatData) }
@@ -81,8 +82,13 @@ class VedtakMapper(
                 this.addIfPresent { DagpengerOpplysning.SeksGangerGrunnbeløp(behandlingResultatData) }
                 this.addIfPresent { DagpengerOpplysning.Aldersgrense(behandlingResultatData) }
                 this.addIfPresent { DagpengerOpplysning.Grunnlag(behandlingResultatData) }
+//                this.addIfPresent {
+//                    DagpengerOpplysning.DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel(
+//                        behandlingResultatData,
+//                    )
+//                }
                 this.addIfPresent {
-                    DagpengerOpplysning.DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel(
+                    PeriodisertDagpengerOpplysning.DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel(
                         behandlingResultatData,
                     )
                 }

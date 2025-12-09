@@ -20,7 +20,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
 
     protected abstract val enhet: E
 
-    override fun formatertVerdi(): String = enhet.formatertVerdi(verdi)
+    open fun formatertVerdi(): String = enhet.formatertVerdi(verdi)
 
     class KravTilProsentvisTapAvArbeidstid(
         override val verdi: Double,
@@ -675,7 +675,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-943d-77a7-969c-147999f15459")
 
-            fun fra(opplysninger: Set<DagpengerOpplysning<*, *>>): AntallStønadsuker? {
+            fun fra(opplysninger: Set<Opplysning>): AntallStønadsuker? {
                 val antallStønadsuker =
                     when (opplysninger.any { it is GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget && it.verdi }) {
                         true -> {

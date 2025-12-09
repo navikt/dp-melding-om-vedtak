@@ -1,6 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
 import io.kotest.matchers.shouldBe
+import no.nav.dagpenger.vedtaksmelding.model.Enhet
 import no.nav.dagpenger.vedtaksmelding.util.readFile
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
@@ -24,5 +25,22 @@ class BehandlingResulstatDataTest {
                 1,
             )
         behandlingResultatData.provingsDato() shouldBe LocalDate.of(2025, 1, 29)
+    }
+
+    @Test
+    fun `skal kunne parse behandling resultat data med periodiserte data`() {
+        val behandlingResultatData = BehandlingResultatData("/json/periodisert.json".readFile())
+
+        behandlingResultatData.pengePerioder(
+            PeriodisertDagpengerOpplysning.DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel.opplysningTypeId,
+        ) shouldBe
+            listOf(
+                PeriodisertDagpengerOpplysning.Periode(
+                    fom = LocalDate.of(2025, 11, 4),
+                    tom = LocalDate.of(2025, 12, 8),
+                    verdi = 996,
+                    enhet = Enhet.KRONER,
+                ),
+            )
     }
 }

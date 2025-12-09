@@ -33,7 +33,10 @@ import kotlinx.html.span
 import kotlinx.html.stream.createHTML
 import kotlinx.html.style
 import kotlinx.html.svg
+import kotlinx.html.table
+import kotlinx.html.td
 import kotlinx.html.title
+import kotlinx.html.tr
 import kotlinx.html.u
 import kotlinx.html.ul
 import kotlinx.html.unsafe
@@ -42,6 +45,9 @@ import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.PeriodisertDagpengerOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageOpplysning
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -124,7 +130,6 @@ object HtmlConverter {
         meldingOmVedtakData: MeldingOmVedtakDataDTO,
         utvidetBeskrivelse: Set<UtvidetBeskrivelse> = emptySet(),
     ): String {
-        val currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.of("no", "NO")))
         val sakId = meldingOmVedtakData.sakId ?: "TBD"
 
         return createHTML(prettyPrint = true, xhtmlCompatible = true).html {
@@ -155,7 +160,6 @@ object HtmlConverter {
         utvidetBeskrivelse: Set<UtvidetBeskrivelse> = emptySet(),
     ): String {
         val mapping: Map<String, Opplysning> = opplysninger.associateBy { it.opplysningTekstId }
-        val currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.of("no", "NO")))
         val sakId = meldingOmVedtakData.sakId ?: "TBD"
 
         fun groupBlocks(blocks: List<Block>): List<List<Block>> {
@@ -328,7 +332,25 @@ object HtmlConverter {
                     mapping[textId]
                         ?: throw RuntimeException("Opplysning ikke funnet $textId")
                 span("melding-om-vedtak-opplysning-verdi") {
-                    +opplysning.formatertVerdi()
+                    when (opplysning) {
+                        is KlageOpplysning<*, *> -> +opplysning.formatertVerdi()
+                        is DagpengerOpplysning<*, *> -> +opplysning.formatertVerdi()
+                        is PeriodisertDagpengerOpplysning<*, *> -> {
+                            table("melding-om-vedtak-opplysning-verdi-tabell") {
+                                opplysning.perioder.forEach { periode ->
+                                    val tomTekst = periode.tom?.format(DateTimeFormatter.ofPattern("d.M.yyyy")) ?: "nåværende"
+                                    tr {
+                                        td {
+                                            +("Fra ${periode.fom.format(DateTimeFormatter.ofPattern("d.M.yyyy"))} til $tomTekst")
+                                        }
+                                        td {
+                                            +periode.formatertVerdi()
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

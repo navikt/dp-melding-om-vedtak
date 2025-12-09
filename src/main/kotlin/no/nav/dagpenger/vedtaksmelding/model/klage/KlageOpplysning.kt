@@ -14,7 +14,7 @@ sealed class KlageOpplysning<E : Enhet, V : Any>(
 
     protected abstract val enhet: E
 
-    override fun formatertVerdi(): String = enhet.formatertVerdi(verdi)
+    fun formatertVerdi(): String = enhet.formatertVerdi(verdi)
 
     data class KlageMottattDato(
         override val verdi: LocalDate,

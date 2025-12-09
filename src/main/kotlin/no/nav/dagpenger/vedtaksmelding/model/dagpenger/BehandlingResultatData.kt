@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.github.oshai.kotlinlogging.KotlinLogging
+import no.nav.dagpenger.vedtaksmelding.model.Enhet
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningDataException
 import java.time.LocalDate
 import java.util.UUID
@@ -23,7 +24,7 @@ class BehandlingResultatData(
                 .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
     }
 
-    private data class RettighetPeriode(
+    data class RettighetPeriode(
         val fraOgMed: LocalDate,
         val tilOgMed: LocalDate? = null,
         val harRett: Boolean,
@@ -36,10 +37,13 @@ class BehandlingResultatData(
     private val rettighetsPerioder: Set<RettighetPeriode> = hentRettighetsPerioder()
 
     fun provingsDato(): LocalDate =
-        rettighetsPerioder.singleOrNull()?.fraOgMed
-            ?: throw OpplysningDataException("Kunne ikke finne èn og bare èn rettighetsperiode")
+        periodeNode(UUID.fromString("0194881f-91d1-7df2-ba1d-4533f37fcc76"))
+            .last {
+                it["opprinnelse"].asText() == "Ny"
+            }["verdi"]["verdi"]
+            .asDato()
 
-    private fun hentRettighetsPerioder(): Set<RettighetPeriode> {
+    fun hentRettighetsPerioder(): Set<RettighetPeriode> {
         val nodes = jsonNode["rettighetsperioder"]
         return try {
             objectMapper.convertValue(
@@ -78,6 +82,26 @@ class BehandlingResultatData(
             false -> throw IllegalArgumentException("Ugyldig verdinode: $verdi")
         }
     }
+
+    fun pengePerioder(id: UUID): List<PeriodisertDagpengerOpplysning.Periode<Enhet.KRONER, Number>> {
+        val periodeNode = periodeNode(id)
+        val nyePerioder = periodeNode.filter { it["opprinnelse"].asText() == "Ny" }
+        return nyePerioder.map {
+            PeriodisertDagpengerOpplysning.Periode<Enhet.KRONER, Number>(
+                fom = it["gyldigFraOgMed"].asDato(),
+                tom = it["gyldigTilOgMed"].toDateOrNull(),
+                verdi = it.requireVerdiAvType(Enhet.KRONER),
+                enhet = Enhet.KRONER,
+            )
+        }
+    }
+
+    private fun JsonNode.asNumber(): Number =
+        when {
+            isInt -> asInt()
+            isDouble -> asDouble()
+            else -> throw IllegalArgumentException("Kan ikke konvertere $this til Number")
+        }
 
     fun penger(id: UUID): Number {
         val verdi = verdiNode(id)
@@ -147,7 +171,7 @@ class BehandlingResultatData(
             null
         }
 
-    private fun verdiNode(id: UUID): JsonNode =
+    fun periodeNode(id: UUID): JsonNode =
         opplysningNoder
             .filter {
                 it["opplysningTypeId"].asText() == id.toString()
@@ -159,26 +183,35 @@ class BehandlingResultatData(
                 if (it.size > 1) {
                     throw OpplysningDataException("Fant flere enn èn opplysning med id $id")
                 }
-            }.single()
-            .let { opplysningNode ->
+            }.single()["perioder"]
 
-                opplysningNode["perioder"]
-                    .filter {
-                        it["status"].asText() == "Ny"
-                    }.also {
-                        if (it.isEmpty()) {
-                            throw NyPeriodeIkkeFunnet(id)
-                        }
+    private fun verdiNode(id: UUID): JsonNode =
+        periodeNode(id)
+            .filter {
+                it["opprinnelse"].asText() == "Ny"
+            }.also {
+                if (it.isEmpty()) {
+                    throw NyPeriodeIkkeFunnet(id)
+                }
 
-                        if (it.size > 1) {
-                            throw OpplysningDataException("Fant flere enn èn ny periode for opplysning med id $id")
-                        }
-                    }.single()["verdi"]
-            }
+                if (it.size > 1) {
+                    logger.warn { "Fant flere enn èn ny periode for opplysning med id $id" }
+                }
+            }.last()["verdi"]
 
     fun behandlingId(): UUID = jsonNode["behandlingId"].let { UUID.fromString(it.asText()) }
 
     fun harRett(): Boolean = jsonNode["rettighetsperioder"].first()["harRett"].asBoolean()
+
+    fun utfall(): Vedtak.Utfall {
+        val node = jsonNode["førteTil"]
+        return when (node.asText()) {
+            "Innvilgelse" -> Vedtak.Utfall.INNVILGET
+            else -> {
+                throw IllegalArgumentException("Kan ikke konvertere $node til Utfall")
+            }
+        }
+    }
 
     data class BehandlingResultatOpplysningIkkeFunnet(
         val opplysningId: UUID,
@@ -187,4 +220,29 @@ class BehandlingResultatData(
     data class NyPeriodeIkkeFunnet(
         val opplysningId: UUID,
     ) : OpplysningDataException("Fant ikke ny periode for behandling resultat opplysning med id $opplysningId")
+
+    @Suppress("UNCHECKED_CAST")
+    private fun <V : Any> JsonNode.requireVerdiAvType(enhet: Enhet): V =
+        this["verdi"]
+            .also {
+                require(it.isObject) { "Forventet verdi objekt men var $it" }
+            }.let { verdi ->
+                val dataType = verdi["datatype"].asText()
+                when (enhet) {
+                    Enhet.BARN -> TODO()
+                    Enhet.ENHETSLØS -> TODO()
+                    Enhet.HELTALL -> TODO()
+                    Enhet.KRONER -> {
+                        require(dataType == "penger") {
+                            "Forventet datatype penger men var $verdi"
+                        }
+                        verdi["verdi"].let {
+                            it.asNumber() as V
+                        }
+                    }
+
+                    Enhet.TIMER -> TODO()
+                    Enhet.UKER -> TODO()
+                }
+            }
 }

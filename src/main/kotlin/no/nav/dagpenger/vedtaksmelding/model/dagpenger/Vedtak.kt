@@ -27,7 +27,7 @@ private val sikkerlogg = KotlinLogging.logger("tjenestekall")
 data class Vedtak(
     val behandlingId: UUID,
     val utfall: Utfall,
-    val opplysninger: Set<DagpengerOpplysning<*, *>>,
+    val opplysninger: Set<Opplysning>,
 ) {
     fun finnOpplysning(opplysningTekstId: String) = this.opplysninger.singleOrNull { it.opplysningTekstId == opplysningTekstId }
 
