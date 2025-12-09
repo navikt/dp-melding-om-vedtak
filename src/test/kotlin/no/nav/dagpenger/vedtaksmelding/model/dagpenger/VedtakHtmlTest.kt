@@ -185,6 +185,31 @@ class VedtakHtmlTest {
     }
 
     @Test
+    fun `Html av innvilgelse med periodisert dagsats`() {
+        runBlocking {
+            val innvilgelseMelding =
+                InnvilgelseMelding(
+                    vedtak = hentVedtak("/json/periodisert.json"),
+                    alleBrevblokker = sanityKlient.hentBrevBlokker(),
+                )
+            innvilgelseMelding.hentOpplysninger()
+            val brevBlokker = innvilgelseMelding.hentBrevBlokker()
+            val htmlInnhold =
+                HtmlConverter.toHtml(
+                    brevBlokker = brevBlokker,
+                    opplysninger = innvilgelseMelding.hentOpplysninger(),
+                    meldingOmVedtakData = meldingOmVedtakData,
+                )
+
+            writeStringToFile(
+                filePath = "build/temp/periodisert.html",
+                content =
+                htmlInnhold,
+            )
+        }
+    }
+
+    @Test
     fun `Html av innvilgelse`() {
         runBlocking {
             val innvilgelseMelding =

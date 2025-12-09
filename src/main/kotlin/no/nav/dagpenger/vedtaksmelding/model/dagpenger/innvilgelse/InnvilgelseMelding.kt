@@ -184,7 +184,10 @@ class InnvilgelseMelding(
         when {
             erInnvilgetSomPermittert() -> listOf(INNVILGELSE_PERMITTERT.brevblokkId)
             erInnvilgetSomPermittertIFiskeindustri() -> listOf(INNVILGELSE_PERMITTERT_FISK.brevblokkId)
-            else -> listOf(INNVILGELSE_ORDINÆR.brevblokkId)
+            else ->
+                listOf(
+                    INNVILGELSE_ORDINÆR.brevblokkId,
+                )
         }
 
     private fun medEllerUtenEgenandel(): List<String> =
