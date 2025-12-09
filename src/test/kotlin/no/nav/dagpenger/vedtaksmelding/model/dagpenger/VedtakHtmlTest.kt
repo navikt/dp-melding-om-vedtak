@@ -189,7 +189,7 @@ class VedtakHtmlTest {
         runBlocking {
             val innvilgelseMelding =
                 InnvilgelseMelding(
-                    vedtak = hentVedtak("/json/periodisert.json"),
+                    vedtak = hentVedtak("/json/innvigelse_ord_resultat.json"),
                     alleBrevblokker = sanityKlient.hentBrevBlokker(),
                 )
             innvilgelseMelding.hentOpplysninger()

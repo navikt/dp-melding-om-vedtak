@@ -1,6 +1,5 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
-import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -34,27 +33,12 @@ class BehandlingResultatData(
 
     val opplysningNoder = jsonNode["opplysninger"]
 
-    private val rettighetsPerioder: Set<RettighetPeriode> = hentRettighetsPerioder()
-
     fun provingsDato(): LocalDate =
         periodeNode(UUID.fromString("0194881f-91d1-7df2-ba1d-4533f37fcc76"))
             .last {
                 it["opprinnelse"].asText() == "Ny"
             }["verdi"]["verdi"]
             .asDato()
-
-    fun hentRettighetsPerioder(): Set<RettighetPeriode> {
-        val nodes = jsonNode["rettighetsperioder"]
-        return try {
-            objectMapper.convertValue(
-                nodes,
-                object : TypeReference<Set<RettighetPeriode>>() {},
-            )
-        } catch (e: Exception) {
-            logger.error(e) { "Fant ikke rettighetsperioder" }
-            throw OpplysningDataException("Fant ikke rettighetsperioder")
-        }
-    }
 
     fun flyttall(id: UUID): Double {
         val verdi = verdiNode(id)
@@ -87,7 +71,7 @@ class BehandlingResultatData(
         val periodeNode = periodeNode(id)
         val nyePerioder = periodeNode.filter { it["opprinnelse"].asText() == "Ny" }
         return nyePerioder.map {
-            PeriodisertDagpengerOpplysning.Periode<Enhet.KRONER, Number>(
+            PeriodisertDagpengerOpplysning.Periode(
                 fom = it["gyldigFraOgMed"].asDato(),
                 tom = it["gyldigTilOgMed"].toDateOrNull(),
                 verdi = it.requireVerdiAvType(Enhet.KRONER),
@@ -163,12 +147,14 @@ class BehandlingResultatData(
 
     private fun JsonNode.asDato(): LocalDate = toDateOrNull() ?: throw IllegalArgumentException("Kan ikke konvertere $this til LocalDate")
 
-    private fun JsonNode.toDateOrNull(): LocalDate? =
-        try {
-            LocalDate.parse(asText())
-        } catch (e: Exception) {
-            logger.error(e) { "Kan ikke konvertere $this til LocalDate" }
-            null
+    private fun JsonNode?.toDateOrNull(): LocalDate? =
+        this?.let {
+            try {
+                LocalDate.parse(asText())
+            } catch (e: Exception) {
+                logger.error(e) { "Kan ikke konvertere $this til LocalDate" }
+                null
+            }
         }
 
     fun periodeNode(id: UUID): JsonNode =
@@ -204,9 +190,13 @@ class BehandlingResultatData(
     fun harRett(): Boolean = jsonNode["rettighetsperioder"].first()["harRett"].asBoolean()
 
     fun utfall(): Vedtak.Utfall {
-        val node = jsonNode["førteTil"]
+        val node =
+            jsonNode["førteTil"].also {
+                require(it != null && it.isTextual) { "Forventet at førteTil er tekst node,, men var $it" }
+            }
         return when (node.asText()) {
             "Innvilgelse" -> Vedtak.Utfall.INNVILGET
+            "Avslag" -> Vedtak.Utfall.AVSLÅTT
             else -> {
                 throw IllegalArgumentException("Kan ikke konvertere $node til Utfall")
             }

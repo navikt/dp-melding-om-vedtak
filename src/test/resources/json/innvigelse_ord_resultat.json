@@ -757,7 +757,7 @@
         {
           "id": "0198eba3-b1c3-7d50-a7ee-f0f8cd1cbf66",
           "opprettet": "2025-08-27T15:07:10.403117",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 15536441,
             "datatype": "heltall"
@@ -777,7 +777,7 @@
         {
           "id": "0198eba3-b1c3-7d50-a7ee-f0f8cd1cbf68",
           "opprettet": "2025-08-27T15:07:10.40316",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "4d90a9a5-bb9a-4587-be26-f905c304c851",
             "datatype": "tekst"
@@ -797,7 +797,7 @@
         {
           "id": "0198eba3-b1c3-7d50-a7ee-f0f8cd1cbf6a",
           "opprettet": "2025-08-27T15:07:10.40317",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": "SøknadInnsendtHendelse",
@@ -818,7 +818,7 @@
         {
           "id": "0198eba3-b1ca-715c-8cd4-ad01eb8f092c",
           "opprettet": "2025-08-27T15:07:10.410308",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 67,
             "datatype": "heltall"
@@ -833,7 +833,7 @@
         {
           "id": "0198eba3-b2c9-7a43-859e-2594ed616f2a",
           "opprettet": "2025-08-27T15:07:10.665157",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "2025-08-27",
             "datatype": "dato"
@@ -861,7 +861,7 @@
         {
           "id": "0198eba3-b2c9-7a43-859e-2594ed616f2b",
           "opprettet": "2025-08-27T15:07:10.665265",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "2025-08-27",
             "datatype": "dato"
@@ -889,7 +889,7 @@
         {
           "id": "0198eba3-b2c9-7a43-859e-2594ed616f2c",
           "opprettet": "2025-08-27T15:07:10.665292",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "2002-09-22",
             "datatype": "dato"
@@ -909,7 +909,7 @@
         {
           "id": "0198eba3-b2ca-78a2-9351-7ba09832610c",
           "opprettet": "2025-08-27T15:07:10.666256",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "2025-08-27",
             "datatype": "dato"
@@ -933,7 +933,7 @@
         {
           "id": "0198eba3-b2ca-78a2-9351-7ba09832610d",
           "opprettet": "2025-08-27T15:07:10.666307",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "2069-09-22",
             "datatype": "dato"
@@ -957,7 +957,7 @@
         {
           "id": "0198eba3-b2ca-78a2-9351-7ba09832610f",
           "opprettet": "2025-08-27T15:07:10.666693",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": "2025-08-27",
@@ -981,7 +981,7 @@
         {
           "id": "0198eba3-b2ca-78a2-9351-7ba098326110",
           "opprettet": "2025-08-27T15:07:10.66673",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "2069-09-30",
             "datatype": "dato"
@@ -1004,7 +1004,7 @@
         {
           "id": "0198eba3-b2cb-7ca8-b075-f6d55b1a9688",
           "opprettet": "2025-08-27T15:07:10.667083",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": true,
@@ -1029,7 +1029,7 @@
         {
           "id": "0198eba3-b2cb-7ca8-b075-f6d55b1a968a",
           "opprettet": "2025-08-27T15:07:10.66746",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": "2025-08-05",
@@ -1053,7 +1053,7 @@
         {
           "id": "0198eba3-b2cb-7ca8-b075-f6d55b1a968b",
           "opprettet": "2025-08-27T15:07:10.667484",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 36,
@@ -1077,7 +1077,7 @@
         {
           "id": "0198eba3-b2cb-7ca8-b075-f6d55b1a968c",
           "opprettet": "2025-08-27T15:07:10.667784",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 130160,
@@ -1101,7 +1101,7 @@
         {
           "id": "0198eba3-b2cb-7ca8-b075-f6d55b1a968d",
           "opprettet": "2025-08-27T15:07:10.667826",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 1.5,
@@ -1125,7 +1125,7 @@
         {
           "id": "0198eba3-b2cb-7ca8-b075-f6d55b1a968e",
           "opprettet": "2025-08-27T15:07:10.667842",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 3,
@@ -1149,7 +1149,7 @@
         {
           "id": "0198eba3-b2cb-7ca8-b075-f6d55b1a968f",
           "opprettet": "2025-08-27T15:07:10.667852",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1164,7 +1164,7 @@
         {
           "id": "0198eba3-b2cc-7677-b656-5d1a50a99280",
           "opprettet": "2025-08-27T15:07:10.668506",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": "2025-08-05",
@@ -1188,7 +1188,7 @@
         {
           "id": "0198eba3-b2cc-7677-b656-5d1a50a99281",
           "opprettet": "2025-08-27T15:07:10.668647",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 195240,
@@ -1213,7 +1213,7 @@
         {
           "id": "0198eba3-b2cc-7677-b656-5d1a50a99282",
           "opprettet": "2025-08-27T15:07:10.668676",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 390480,
@@ -1238,7 +1238,7 @@
         {
           "id": "0198eba3-b2cc-7677-b656-5d1a50a99283",
           "opprettet": "2025-08-27T15:07:10.668689",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -1253,7 +1253,7 @@
         {
           "id": "0198eba3-b2cc-7677-b656-5d1a50a99284",
           "opprettet": "2025-08-27T15:07:10.668699",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -1268,7 +1268,7 @@
         {
           "id": "0198eba3-b2cc-7677-b656-5d1a50a99285",
           "opprettet": "2025-08-27T15:07:10.668709",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -1283,7 +1283,7 @@
         {
           "id": "0198eba3-b2cc-7677-b656-5d1a50a99286",
           "opprettet": "2025-08-27T15:07:10.668719",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 18.75,
             "datatype": "desimaltall"
@@ -1298,7 +1298,7 @@
         {
           "id": "0198eba3-b2cd-7ba6-bbd0-24a1ba53a1bd",
           "opprettet": "2025-08-27T15:07:10.66925",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": "2025-07-31",
@@ -1323,7 +1323,7 @@
         {
           "id": "0198eba3-b2cd-7ba6-bbd0-24a1ba53a1bf",
           "opprettet": "2025-08-27T15:07:10.66972",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": "2022-08-01",
@@ -1348,7 +1348,7 @@
         {
           "id": "0198eba3-b783-7c4e-b895-a4fa8a1112e3",
           "opprettet": "2025-08-27T15:07:11.875348",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1376,7 +1376,7 @@
         {
           "id": "0198eba3-b783-7c4e-b895-a4fa8a1112e4",
           "opprettet": "2025-08-27T15:07:11.875412",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1404,7 +1404,7 @@
         {
           "id": "0198eba3-b783-7c4e-b895-a4fa8a1112e5",
           "opprettet": "2025-08-27T15:07:11.875467",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1432,7 +1432,7 @@
         {
           "id": "0198eba3-b783-7c4e-b895-a4fa8a1112e6",
           "opprettet": "2025-08-27T15:07:11.875535",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1460,7 +1460,7 @@
         {
           "id": "0198eba3-b783-7c4e-b895-a4fa8a1112e7",
           "opprettet": "2025-08-27T15:07:11.875574",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 40,
             "datatype": "desimaltall"
@@ -1488,7 +1488,7 @@
         {
           "id": "0198eba3-b783-7c4e-b895-a4fa8a1112e8",
           "opprettet": "2025-08-27T15:07:11.875624",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1516,7 +1516,7 @@
         {
           "id": "0198eba3-b783-7c4e-b895-a4fa8a1112e9",
           "opprettet": "2025-08-27T15:07:11.875662",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -1544,7 +1544,7 @@
         {
           "id": "0198eba3-b783-7c4e-b895-a4fa8a1112ea",
           "opprettet": "2025-08-27T15:07:11.875696",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -1572,7 +1572,7 @@
         {
           "id": "0198eba3-b783-7c4e-b895-a4fa8a1112eb",
           "opprettet": "2025-08-27T15:07:11.875731",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -1600,7 +1600,7 @@
         {
           "id": "0198eba3-b783-7c4e-b895-a4fa8a1112ec",
           "opprettet": "2025-08-27T15:07:11.875783",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -1628,7 +1628,7 @@
         {
           "id": "0198eba3-b783-7c4e-b895-a4fa8a1112ed",
           "opprettet": "2025-08-27T15:07:11.875827",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": true,
@@ -1657,7 +1657,7 @@
         {
           "id": "0198eba3-b783-7c4e-b895-a4fa8a1112ee",
           "opprettet": "2025-08-27T15:07:11.875876",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": "01K3NT7DRSASXAFZZRMVGTJFG1",
@@ -1688,7 +1688,7 @@
         {
           "id": "0198eba3-b784-7e78-9e3f-3dc6fcd5e496",
           "opprettet": "2025-08-27T15:07:11.876936",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": "01K3NT7DRSASXAFZZRMVGTJFG1",
@@ -1712,7 +1712,7 @@
         {
           "id": "0198eba3-b785-7a80-a4be-d7223afbe861",
           "opprettet": "2025-08-27T15:07:11.877002",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1736,7 +1736,7 @@
         {
           "id": "0198eba3-b785-7a80-a4be-d7223afbe862",
           "opprettet": "2025-08-27T15:07:11.877053",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1760,7 +1760,7 @@
         {
           "id": "0198eba3-b785-7a80-a4be-d7223afbe863",
           "opprettet": "2025-08-27T15:07:11.877092",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1784,7 +1784,7 @@
         {
           "id": "0198eba3-b785-7a80-a4be-d7223afbe864",
           "opprettet": "2025-08-27T15:07:11.877119",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1807,7 +1807,7 @@
         {
           "id": "0198eba3-b785-7a80-a4be-d7223afbe865",
           "opprettet": "2025-08-27T15:07:11.877158",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1831,7 +1831,7 @@
         {
           "id": "0198eba3-b785-7a80-a4be-d7223afbe866",
           "opprettet": "2025-08-27T15:07:11.877194",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": true,
@@ -1855,7 +1855,7 @@
         {
           "id": "0198eba3-b785-7a80-a4be-d7223afbe867",
           "opprettet": "2025-08-27T15:07:11.877241",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -1881,7 +1881,7 @@
         {
           "id": "0198eba3-b785-7a80-a4be-d7223afbe868",
           "opprettet": "2025-08-27T15:07:11.877274",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -1904,7 +1904,7 @@
         {
           "id": "0198eba3-b786-7fdd-bb9a-ae36865fc659",
           "opprettet": "2025-08-27T15:07:11.878102",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 0,
@@ -1928,7 +1928,7 @@
         {
           "id": "0198eba3-b786-7fdd-bb9a-ae36865fc65a",
           "opprettet": "2025-08-27T15:07:11.878792",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 850000,
@@ -1952,7 +1952,7 @@
         {
           "id": "0198eba3-b786-7fdd-bb9a-ae36865fc65b",
           "opprettet": "2025-08-27T15:07:11.878867",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1979,7 +1979,7 @@
         {
           "id": "0198eba3-b786-7fdd-bb9a-ae36865fc65c",
           "opprettet": "2025-08-27T15:07:11.878898",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -2003,7 +2003,7 @@
         {
           "id": "0198eba3-b787-766a-876c-4a901d17f93c",
           "opprettet": "2025-08-27T15:07:11.879514",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": false,
@@ -2028,7 +2028,7 @@
         {
           "id": "0198eba3-b787-766a-876c-4a901d17f93d",
           "opprettet": "2025-08-27T15:07:11.879571",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": true,
@@ -2053,7 +2053,7 @@
         {
           "id": "0198eba3-b787-766a-876c-4a901d17f93e",
           "opprettet": "2025-08-27T15:07:11.879627",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -2079,7 +2079,7 @@
         {
           "id": "0198eba3-b788-7ba4-a9f1-3b0b35bc8817",
           "opprettet": "2025-08-27T15:07:11.880048",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": true,
@@ -2104,7 +2104,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e419",
           "opprettet": "2025-08-27T15:07:11.881076",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -2119,7 +2119,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e41a",
           "opprettet": "2025-08-27T15:07:11.881113",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2134,7 +2134,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e41b",
           "opprettet": "2025-08-27T15:07:11.881134",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -2149,7 +2149,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e41c",
           "opprettet": "2025-08-27T15:07:11.881277",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 130160,
@@ -2173,7 +2173,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e41d",
           "opprettet": "2025-08-27T15:07:11.881334",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": "01K3NT7DRSASXAFZZRMVGTJFG1",
@@ -2197,7 +2197,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e41e",
           "opprettet": "2025-08-27T15:07:11.881365",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 6,
@@ -2221,7 +2221,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e41f",
           "opprettet": "2025-08-27T15:07:11.881401",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 3,
             "datatype": "desimaltall"
@@ -2236,7 +2236,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e420",
           "opprettet": "2025-08-27T15:07:11.881446",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 3,
@@ -2260,7 +2260,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e421",
           "opprettet": "2025-08-27T15:07:11.88147",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -2275,7 +2275,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e422",
           "opprettet": "2025-08-27T15:07:11.881549",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 0.0024,
@@ -2299,7 +2299,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e423",
           "opprettet": "2025-08-27T15:07:11.881648",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 37,
@@ -2323,7 +2323,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e424",
           "opprettet": "2025-08-27T15:07:11.88168",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 0.9,
@@ -2347,7 +2347,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e425",
           "opprettet": "2025-08-27T15:07:11.881713",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 260,
@@ -2371,7 +2371,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e426",
           "opprettet": "2025-08-27T15:07:11.881737",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -2386,7 +2386,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e427",
           "opprettet": "2025-08-27T15:07:11.881761",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -2401,7 +2401,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e428",
           "opprettet": "2025-08-27T15:07:11.881785",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -2416,7 +2416,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e429",
           "opprettet": "2025-08-27T15:07:11.881812",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -2431,7 +2431,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e42a",
           "opprettet": "2025-08-27T15:07:11.881849",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2446,7 +2446,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e42b",
           "opprettet": "2025-08-27T15:07:11.881891",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -2461,7 +2461,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e42c",
           "opprettet": "2025-08-27T15:07:11.881917",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -2476,7 +2476,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e42d",
           "opprettet": "2025-08-27T15:07:11.881942",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -2491,7 +2491,7 @@
         {
           "id": "0198eba3-b789-76a3-ab56-e5d99b88e42e",
           "opprettet": "2025-08-27T15:07:11.881968",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -2506,7 +2506,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632dafc",
           "opprettet": "2025-08-27T15:07:11.882025",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2521,7 +2521,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632dafd",
           "opprettet": "2025-08-27T15:07:11.882056",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2536,7 +2536,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632dafe",
           "opprettet": "2025-08-27T15:07:11.882087",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "desimaltall"
@@ -2551,7 +2551,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632daff",
           "opprettet": "2025-08-27T15:07:11.882128",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 40,
@@ -2575,7 +2575,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632db00",
           "opprettet": "2025-08-27T15:07:11.882163",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 37.5,
@@ -2599,7 +2599,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632db01",
           "opprettet": "2025-08-27T15:07:11.88219",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 37.5,
             "datatype": "desimaltall"
@@ -2614,7 +2614,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632db02",
           "opprettet": "2025-08-27T15:07:11.882218",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "desimaltall"
@@ -2629,7 +2629,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632db03",
           "opprettet": "2025-08-27T15:07:11.882275",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 40,
@@ -2653,7 +2653,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632db04",
           "opprettet": "2025-08-27T15:07:11.88231",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 50,
@@ -2677,7 +2677,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632db05",
           "opprettet": "2025-08-27T15:07:11.88234",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -2692,7 +2692,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632db06",
           "opprettet": "2025-08-27T15:07:11.88237",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2707,7 +2707,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632db07",
           "opprettet": "2025-08-27T15:07:11.8824",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2722,7 +2722,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632db08",
           "opprettet": "2025-08-27T15:07:11.882445",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -2737,7 +2737,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632db09",
           "opprettet": "2025-08-27T15:07:11.882478",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2752,7 +2752,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632db0a",
           "opprettet": "2025-08-27T15:07:11.882507",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2767,7 +2767,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632db0b",
           "opprettet": "2025-08-27T15:07:11.882538",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2782,7 +2782,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632db0c",
           "opprettet": "2025-08-27T15:07:11.882569",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2797,7 +2797,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632db0d",
           "opprettet": "2025-08-27T15:07:11.8826",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2812,7 +2812,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632db0e",
           "opprettet": "2025-08-27T15:07:11.882632",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2827,7 +2827,7 @@
         {
           "id": "0198eba3-b78a-7aa0-8724-ec852632db0f",
           "opprettet": "2025-08-27T15:07:11.88267",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2842,7 +2842,7 @@
         {
           "id": "0198eba3-b78b-721b-ba02-1587f2b1e005",
           "opprettet": "2025-08-27T15:07:11.883937",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -2865,7 +2865,7 @@
         {
           "id": "0198eba3-b78c-7603-9418-7efe4997d639",
           "opprettet": "2025-08-27T15:07:11.884955",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": "01K3NT7DRSASXAFZZRMVGTJFG1",
@@ -2890,7 +2890,7 @@
         {
           "id": "0198eba3-b78d-70a2-8f0a-7ef2e466314c",
           "opprettet": "2025-08-27T15:07:11.885067",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 780960,
@@ -2915,7 +2915,7 @@
         {
           "id": "0198eba3-b78d-70a2-8f0a-7ef2e466314d",
           "opprettet": "2025-08-27T15:07:11.885119",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 390480,
@@ -2940,7 +2940,7 @@
         {
           "id": "0198eba3-b78d-70a2-8f0a-7ef2e466314e",
           "opprettet": "2025-08-27T15:07:11.885163",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2963,7 +2963,7 @@
         {
           "id": "0198eba3-b78d-70a2-8f0a-7ef2e466314f",
           "opprettet": "2025-08-27T15:07:11.885216",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -2987,7 +2987,7 @@
         {
           "id": "0198eba3-b78d-70a2-8f0a-7ef2e4663150",
           "opprettet": "2025-08-27T15:07:11.885278",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 37.5,
             "datatype": "desimaltall"
@@ -3011,7 +3011,7 @@
         {
           "id": "0198eba3-b78d-70a2-8f0a-7ef2e4663151",
           "opprettet": "2025-08-27T15:07:11.885369",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 50,
@@ -3037,7 +3037,7 @@
         {
           "id": "0198eba3-b78d-70a2-8f0a-7ef2e4663152",
           "opprettet": "2025-08-27T15:07:11.885422",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -3062,7 +3062,7 @@
         {
           "id": "0198eba3-b78d-70a2-8f0a-7ef2e4663153",
           "opprettet": "2025-08-27T15:07:11.885513",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -3090,7 +3090,7 @@
         {
           "id": "0198eba3-b78d-70a2-8f0a-7ef2e4663154",
           "opprettet": "2025-08-27T15:07:11.885572",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -3113,7 +3113,7 @@
         {
           "id": "0198eba3-b78f-7fda-a041-3568c1185536",
           "opprettet": "2025-08-27T15:07:11.887613",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 0,
@@ -3137,7 +3137,7 @@
         {
           "id": "0198eba3-b790-7edd-a032-b789ebcbab81",
           "opprettet": "2025-08-27T15:07:11.888051",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 274321.3623335019,
@@ -3161,7 +3161,7 @@
         {
           "id": "0198eba3-b790-7edd-a032-b789ebcbab82",
           "opprettet": "2025-08-27T15:07:11.888773",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 690010.6165873775,
@@ -3185,7 +3185,7 @@
         {
           "id": "0198eba3-b790-7edd-a032-b789ebcbab83",
           "opprettet": "2025-08-27T15:07:11.888886",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 0,
@@ -3211,7 +3211,7 @@
         {
           "id": "0198eba3-b791-75ea-95af-df4fa027fd29",
           "opprettet": "2025-08-27T15:07:11.889143",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -3236,7 +3236,7 @@
         {
           "id": "0198eba3-b792-78c6-a50d-dc3c19d29a18",
           "opprettet": "2025-08-27T15:07:11.8907",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 0,
@@ -3261,7 +3261,7 @@
         {
           "id": "0198eba3-b792-78c6-a50d-dc3c19d29a19",
           "opprettet": "2025-08-27T15:07:11.890777",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 0,
@@ -3286,7 +3286,7 @@
         {
           "id": "0198eba3-b792-78c6-a50d-dc3c19d29a1a",
           "opprettet": "2025-08-27T15:07:11.890842",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 274321.3623335019,
@@ -3311,7 +3311,7 @@
         {
           "id": "0198eba3-b792-78c6-a50d-dc3c19d29a1b",
           "opprettet": "2025-08-27T15:07:11.890922",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 690010.6165873775,
@@ -3336,7 +3336,7 @@
         {
           "id": "0198eba3-b793-7bae-aba4-36378d3861dd",
           "opprettet": "2025-08-27T15:07:11.891127",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -3365,7 +3365,7 @@
         {
           "id": "0198eba3-b794-7596-8fe8-903b9409d38d",
           "opprettet": "2025-08-27T15:07:11.892931",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 964331.9789208794,
@@ -3391,7 +3391,7 @@
         {
           "id": "0198eba3-b796-761d-9a10-b8e6311f9eb3",
           "opprettet": "2025-08-27T15:07:11.894614",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 321443.9929736265,
@@ -3416,7 +3416,7 @@
         {
           "id": "0198eba3-b798-7563-8f7b-dbb186302dbd",
           "opprettet": "2025-08-27T15:07:11.896113",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 321443.9929736265,
@@ -3441,7 +3441,7 @@
         {
           "id": "0198eba3-b799-7461-8cf4-b9b0c4a903a7",
           "opprettet": "2025-08-27T15:07:11.897638",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 321444,
@@ -3465,7 +3465,7 @@
         {
           "id": "0198eba3-b79a-7314-8f33-159f3d6fa3ec",
           "opprettet": "2025-08-27T15:07:11.898862",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 321444,
@@ -3490,7 +3490,7 @@
         {
           "id": "0198eba3-b79a-7314-8f33-159f3d6fa3ed",
           "opprettet": "2025-08-27T15:07:11.898975",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": false,
@@ -3515,7 +3515,7 @@
         {
           "id": "0198eba3-b79c-7f06-8299-c99a34cc4385",
           "opprettet": "2025-08-27T15:07:11.900228",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 771.4656,
@@ -3540,7 +3540,7 @@
         {
           "id": "0198eba3-b79c-7f06-8299-c99a34cc4386",
           "opprettet": "2025-08-27T15:07:11.900304",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 289299.6,
@@ -3565,7 +3565,7 @@
         {
           "id": "0198eba3-b79c-7f06-8299-c99a34cc4387",
           "opprettet": "2025-08-27T15:07:11.900363",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 37.5,
@@ -3591,7 +3591,7 @@
         {
           "id": "0198eba3-b79d-7664-90af-384709ed5364",
           "opprettet": "2025-08-27T15:07:11.901665",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 771,
@@ -3615,7 +3615,7 @@
         {
           "id": "0198eba3-b79d-7664-90af-384709ed5365",
           "opprettet": "2025-08-27T15:07:11.901821",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 1112.6907692307693,
@@ -3640,7 +3640,7 @@
         {
           "id": "0198eba3-b79d-7664-90af-384709ed5366",
           "opprettet": "2025-08-27T15:07:11.901891",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 37.5,
@@ -3667,7 +3667,7 @@
         {
           "id": "0198eba3-b79f-7bd9-9253-d20ea1209549",
           "opprettet": "2025-08-27T15:07:11.903213",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 1113,
@@ -3691,7 +3691,7 @@
         {
           "id": "0198eba3-b79f-7bd9-9253-d20ea120954a",
           "opprettet": "2025-08-27T15:07:11.903298",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": true,
@@ -3717,7 +3717,7 @@
         {
           "id": "0198eba3-bbbb-7ec8-bcc2-6cb8c74fbb97",
           "opprettet": "2025-08-27T15:07:12.95547",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -3745,7 +3745,7 @@
         {
           "id": "0198eba3-bbbb-7ec8-bcc2-6cb8c74fbb98",
           "opprettet": "2025-08-27T15:07:12.955656",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": [],
             "datatype": "barn"
@@ -3773,7 +3773,7 @@
         {
           "id": "0198eba3-bbbb-7ec8-bcc2-6cb8c74fbb99",
           "opprettet": "2025-08-27T15:07:12.955751",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -3801,7 +3801,7 @@
         {
           "id": "0198eba3-bbbb-7ec8-bcc2-6cb8c74fbb9a",
           "opprettet": "2025-08-27T15:07:12.955841",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -3829,7 +3829,7 @@
         {
           "id": "0198eba3-bbbb-7ec8-bcc2-6cb8c74fbb9b",
           "opprettet": "2025-08-27T15:07:12.955944",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": false,
@@ -3858,7 +3858,7 @@
         {
           "id": "0198eba3-bbbc-7256-8707-87167f7c368c",
           "opprettet": "2025-08-27T15:07:12.95603",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": false,
@@ -3887,7 +3887,7 @@
         {
           "id": "0198eba3-bbbc-7256-8707-87167f7c368d",
           "opprettet": "2025-08-27T15:07:12.95611",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": false,
@@ -3916,7 +3916,7 @@
         {
           "id": "0198eba3-bbbc-7256-8707-87167f7c368e",
           "opprettet": "2025-08-27T15:07:12.956246",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": false,
@@ -3945,7 +3945,7 @@
         {
           "id": "0198eba3-bbbc-7256-8707-87167f7c368f",
           "opprettet": "2025-08-27T15:07:12.95637",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": false,
@@ -3974,7 +3974,7 @@
         {
           "id": "0198eba3-bbbc-7256-8707-87167f7c3690",
           "opprettet": "2025-08-27T15:07:12.956467",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": false,
@@ -4003,7 +4003,7 @@
         {
           "id": "0198eba3-bbbe-7bf7-b86d-8e3e3cf7653e",
           "opprettet": "2025-08-27T15:07:12.958408",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -4026,7 +4026,7 @@
         {
           "id": "0198eba3-bbbe-7bf7-b86d-8e3e3cf7653f",
           "opprettet": "2025-08-27T15:07:12.958666",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 1,
             "datatype": "heltall"
@@ -4049,7 +4049,7 @@
         {
           "id": "0198eba3-bbbe-7bf7-b86d-8e3e3cf76540",
           "opprettet": "2025-08-27T15:07:12.958802",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": false,
@@ -4079,7 +4079,7 @@
         {
           "id": "0198eba3-bbbf-7159-be76-fcacfaaa611b",
           "opprettet": "2025-08-27T15:07:12.959036",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -4102,7 +4102,7 @@
         {
           "id": "0198eba3-bbbf-7159-be76-fcacfaaa611c",
           "opprettet": "2025-08-27T15:07:12.959156",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -4125,7 +4125,7 @@
         {
           "id": "0198eba3-bbbf-7159-be76-fcacfaaa611d",
           "opprettet": "2025-08-27T15:07:12.959324",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -4148,7 +4148,7 @@
         {
           "id": "0198eba3-bbc0-7b8e-aa9f-0970976ae2e2",
           "opprettet": "2025-08-27T15:07:12.960557",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -4172,7 +4172,7 @@
         {
           "id": "0198eba3-bbc0-7b8e-aa9f-0970976ae2e3",
           "opprettet": "2025-08-27T15:07:12.960733",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 0,
@@ -4197,7 +4197,7 @@
         {
           "id": "0198eba3-bbc0-7b8e-aa9f-0970976ae2e4",
           "opprettet": "2025-08-27T15:07:12.960844",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": true,
@@ -4224,7 +4224,7 @@
         {
           "id": "0198eba3-bbc0-7b8e-aa9f-0970976ae2e5",
           "opprettet": "2025-08-27T15:07:12.960942",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -4248,7 +4248,7 @@
         {
           "id": "0198eba3-bbc2-7260-9808-2fcfc9adbdf4",
           "opprettet": "2025-08-27T15:07:12.962078",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -4272,7 +4272,7 @@
         {
           "id": "0198eba3-bbc2-7260-9808-2fcfc9adbdf5",
           "opprettet": "2025-08-27T15:07:12.96226",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 771,
@@ -4297,7 +4297,7 @@
         {
           "id": "0198eba3-bbc2-7260-9808-2fcfc9adbdf6",
           "opprettet": "2025-08-27T15:07:12.962341",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": false,
@@ -4322,7 +4322,7 @@
         {
           "id": "0198eba3-bbc2-7260-9808-2fcfc9adbdf7",
           "opprettet": "2025-08-27T15:07:12.962417",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -4346,7 +4346,7 @@
         {
           "id": "0198eba3-bbc3-721f-a40f-5b3fdb0df97d",
           "opprettet": "2025-08-27T15:07:12.963987",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": false,
@@ -4371,7 +4371,7 @@
         {
           "id": "0198eba3-bbc4-7f5f-bae6-dd7544c4ce0d",
           "opprettet": "2025-08-27T15:07:12.964289",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": false,
@@ -4396,7 +4396,7 @@
         {
           "id": "0198eba3-bbc4-7f5f-bae6-dd7544c4ce0e",
           "opprettet": "2025-08-27T15:07:12.96438",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": false,
@@ -4421,7 +4421,7 @@
         {
           "id": "0198eba3-bbc4-7f5f-bae6-dd7544c4ce0f",
           "opprettet": "2025-08-27T15:07:12.964601",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": "Gjennomsnittlig inntekt etter avkortning og oppjustering siste 36 måneder",
@@ -4445,7 +4445,7 @@
         {
           "id": "0198eba3-bbc4-7f5f-bae6-dd7544c4ce10",
           "opprettet": "2025-08-27T15:07:12.964972",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 0,
@@ -4469,7 +4469,7 @@
         {
           "id": "0198eba3-bbc5-7ba8-96dd-9bf6c13794c8",
           "opprettet": "2025-08-27T15:07:12.965241",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 250000,
@@ -4493,7 +4493,7 @@
         {
           "id": "0198eba3-bbc5-7ba8-96dd-9bf6c13794c9",
           "opprettet": "2025-08-27T15:07:12.965626",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 600000,
@@ -4517,7 +4517,7 @@
         {
           "id": "0198eba3-bbc5-7ba8-96dd-9bf6c13794ca",
           "opprettet": "2025-08-27T15:07:12.965784",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 0,
@@ -4542,7 +4542,7 @@
         {
           "id": "0198eba3-bbc5-7ba8-96dd-9bf6c13794cb",
           "opprettet": "2025-08-27T15:07:12.965941",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 5,
@@ -4566,7 +4566,7 @@
         {
           "id": "0198eba3-bbc6-7c08-9993-61cb341b8bfc",
           "opprettet": "2025-08-27T15:07:12.966121",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 0.03,
@@ -4590,7 +4590,7 @@
         {
           "id": "0198eba3-bbc6-7c08-9993-61cb341b8bfd",
           "opprettet": "2025-08-27T15:07:12.966244",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -4605,7 +4605,7 @@
         {
           "id": "0198eba3-bbc6-7c08-9993-61cb341b8bfe",
           "opprettet": "2025-08-27T15:07:12.96634",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -4620,7 +4620,7 @@
         {
           "id": "0198eba3-bbc6-7c08-9993-61cb341b8bff",
           "opprettet": "2025-08-27T15:07:12.966463",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -4635,7 +4635,7 @@
         {
           "id": "0198eba3-bbc6-7c08-9993-61cb341b8c00",
           "opprettet": "2025-08-27T15:07:12.966555",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -4650,7 +4650,7 @@
         {
           "id": "0198eba3-bbc6-7c08-9993-61cb341b8c01",
           "opprettet": "2025-08-27T15:07:12.966654",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -4665,7 +4665,7 @@
         {
           "id": "0198eba3-bbc6-7c08-9993-61cb341b8c02",
           "opprettet": "2025-08-27T15:07:12.966736",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -4680,7 +4680,7 @@
         {
           "id": "0198eba3-bbc6-7c08-9993-61cb341b8c03",
           "opprettet": "2025-08-27T15:07:12.966863",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 2,
@@ -4704,7 +4704,7 @@
         {
           "id": "0198eba3-bbc7-712d-a970-39c39eaecfc3",
           "opprettet": "2025-08-27T15:07:12.967013",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 104,
@@ -4728,7 +4728,7 @@
         {
           "id": "0198eba3-bbc7-712d-a970-39c39eaecfc4",
           "opprettet": "2025-08-27T15:07:12.967155",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 52,
@@ -4752,7 +4752,7 @@
         {
           "id": "0198eba3-bbc8-7781-9183-ccfe78408278",
           "opprettet": "2025-08-27T15:07:12.968288",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 283333.3333333333,
@@ -4777,7 +4777,7 @@
         {
           "id": "0198eba3-bbc8-7781-9183-ccfe78408279",
           "opprettet": "2025-08-27T15:07:12.968503",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 2,
@@ -4801,7 +4801,7 @@
         {
           "id": "0198eba3-bbc8-7781-9183-ccfe7840827a",
           "opprettet": "2025-08-27T15:07:12.968644",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 0,
@@ -4825,7 +4825,7 @@
         {
           "id": "0198eba3-bbc8-7781-9183-ccfe7840827b",
           "opprettet": "2025-08-27T15:07:12.968785",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 5,
@@ -4849,7 +4849,7 @@
         {
           "id": "0198eba3-bbc8-7781-9183-ccfe7840827c",
           "opprettet": "2025-08-27T15:07:12.968903",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -4864,7 +4864,7 @@
         {
           "id": "0198eba3-bbc9-7b80-95b2-df9b03354f99",
           "opprettet": "2025-08-27T15:07:12.969035",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 3,
@@ -4888,7 +4888,7 @@
         {
           "id": "0198eba3-bbc9-7b80-95b2-df9b03354f9a",
           "opprettet": "2025-08-27T15:07:12.969143",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -4903,7 +4903,7 @@
         {
           "id": "0198eba3-bbc9-7b80-95b2-df9b03354f9b",
           "opprettet": "2025-08-27T15:07:12.969278",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -4918,7 +4918,7 @@
         {
           "id": "0198eba3-bbc9-7b80-95b2-df9b03354f9c",
           "opprettet": "2025-08-27T15:07:12.969385",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -4933,7 +4933,7 @@
         {
           "id": "0198eba3-bbc9-7b80-95b2-df9b03354f9d",
           "opprettet": "2025-08-27T15:07:12.969529",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -4948,7 +4948,7 @@
         {
           "id": "0198eba3-bbc9-7b80-95b2-df9b03354f9e",
           "opprettet": "2025-08-27T15:07:12.969652",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -4963,7 +4963,7 @@
         {
           "id": "0198eba3-bbc9-7b80-95b2-df9b03354f9f",
           "opprettet": "2025-08-27T15:07:12.969763",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -4978,7 +4978,7 @@
         {
           "id": "0198eba3-bbc9-7b80-95b2-df9b03354fa0",
           "opprettet": "2025-08-27T15:07:12.969901",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 26,
@@ -5002,7 +5002,7 @@
         {
           "id": "0198eba3-bbcd-7d68-8a0e-8c398c65d6f2",
           "opprettet": "2025-08-27T15:07:12.973064",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": false,
@@ -5028,7 +5028,7 @@
         {
           "id": "0198eba3-bbcd-7d68-8a0e-8c398c65d6f3",
           "opprettet": "2025-08-27T15:07:12.973347",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 771,
@@ -5053,7 +5053,7 @@
         {
           "id": "0198eba3-bbcd-7d68-8a0e-8c398c65d6f4",
           "opprettet": "2025-08-27T15:07:12.973567",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 3904.8,
@@ -5078,7 +5078,7 @@
         {
           "id": "0198eba3-bbcd-7d68-8a0e-8c398c65d6f5",
           "opprettet": "2025-08-27T15:07:12.973776",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -5106,7 +5106,7 @@
         {
           "id": "0198eba3-bbcd-7d68-8a0e-8c398c65d6f6",
           "opprettet": "2025-08-27T15:07:12.973944",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 3855,
@@ -5131,7 +5131,7 @@
         {
           "id": "0198eba3-bbce-7d63-bcc9-05b9e87b2c55",
           "opprettet": "2025-08-27T15:07:12.974095",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 260320,
@@ -5156,7 +5156,7 @@
         {
           "id": "0198eba3-bbce-7d63-bcc9-05b9e87b2c56",
           "opprettet": "2025-08-27T15:07:12.974245",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 260320,
@@ -5181,7 +5181,7 @@
         {
           "id": "0198eba3-bbd0-714a-b534-0499ceac6e59",
           "opprettet": "2025-08-27T15:07:12.976996",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 771,
@@ -5206,7 +5206,7 @@
         {
           "id": "0198eba3-bbd1-78cd-bfff-13ca71424ab2",
           "opprettet": "2025-08-27T15:07:12.977133",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": false,
@@ -5231,7 +5231,7 @@
         {
           "id": "0198eba3-bbd1-78cd-bfff-13ca71424ab3",
           "opprettet": "2025-08-27T15:07:12.977233",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": true,
@@ -5256,7 +5256,7 @@
         {
           "id": "0198eba3-bbd1-78cd-bfff-13ca71424ab4",
           "opprettet": "2025-08-27T15:07:12.977309",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": true,
@@ -5281,7 +5281,7 @@
         {
           "id": "0198eba3-bbd3-7687-a4ff-f45eb9ab484f",
           "opprettet": "2025-08-27T15:07:12.979045",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 3855,
@@ -5306,7 +5306,7 @@
         {
           "id": "0198eba3-bbd3-7687-a4ff-f45eb9ab4850",
           "opprettet": "2025-08-27T15:07:12.979153",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 52,
@@ -5332,7 +5332,7 @@
         {
           "id": "0198eba3-bbd3-7687-a4ff-f45eb9ab4851",
           "opprettet": "2025-08-27T15:07:12.979273",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 104,
@@ -5358,7 +5358,7 @@
         {
           "id": "0198eba3-bbd3-7687-a4ff-f45eb9ab4852",
           "opprettet": "2025-08-27T15:07:12.979411",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": true,
@@ -5383,7 +5383,7 @@
         {
           "id": "0198eba3-bbd5-7c60-8723-6ac17f2256ab",
           "opprettet": "2025-08-27T15:07:12.98176",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 3855,
@@ -5408,7 +5408,7 @@
         {
           "id": "0198eba3-bbd6-7036-9160-dbd41d6b2036",
           "opprettet": "2025-08-27T15:07:12.982091",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 3855,
@@ -5433,7 +5433,7 @@
         {
           "id": "0198eba3-bbd6-7036-9160-dbd41d6b2037",
           "opprettet": "2025-08-27T15:07:12.982265",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 104,
@@ -5458,7 +5458,7 @@
         {
           "id": "0198eba3-bbd8-7ae3-86d0-cb64935d294d",
           "opprettet": "2025-08-27T15:07:12.984601",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 3855,
@@ -5483,7 +5483,7 @@
         {
           "id": "0198eba3-bbd8-7ae3-86d0-cb64935d294e",
           "opprettet": "2025-08-27T15:07:12.984773",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 104,
@@ -5509,7 +5509,7 @@
         {
           "id": "0198eba3-bbd8-7ae3-86d0-cb64935d294f",
           "opprettet": "2025-08-27T15:07:12.984968",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 520,
@@ -5534,7 +5534,7 @@
         {
           "id": "0198eba3-bbdb-72c7-9fe0-b74e24b97efe",
           "opprettet": "2025-08-27T15:07:12.987925",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 771,
@@ -5559,7 +5559,7 @@
         {
           "id": "0198eba3-bbdd-7ece-a0ef-907295e75f30",
           "opprettet": "2025-08-27T15:07:12.989753",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 771,
@@ -5584,7 +5584,7 @@
         {
           "id": "0198eba3-bbdd-7ece-a0ef-907295e75f31",
           "opprettet": "2025-08-27T15:07:12.989922",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": false,
@@ -5609,7 +5609,7 @@
         {
           "id": "0198eba3-bbdf-7f43-a086-3ac1c2d9a312",
           "opprettet": "2025-08-27T15:07:12.991679",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 771,
@@ -5634,7 +5634,7 @@
         {
           "id": "0198eba3-bbe1-7c1a-9b5c-06b3cd78de3e",
           "opprettet": "2025-08-27T15:07:12.993363",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 3855,
@@ -5659,7 +5659,7 @@
         {
           "id": "0198eba3-bbe1-7c1a-9b5c-06b3cd78de3f",
           "opprettet": "2025-08-27T15:07:12.993504",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 2313,
@@ -5684,7 +5684,7 @@
         {
           "id": "0198eba3-bbe4-7dd2-963c-bef556c55689",
           "opprettet": "2025-08-27T15:07:12.996231",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-08-27",
           "verdi": {
             "verdi": 2313,
@@ -5710,7 +5710,7 @@
         {
           "id": "0198eba3-be20-7147-a000-d6ea77108f71",
           "opprettet": "2025-08-27T15:07:13.568535",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -5730,7 +5730,7 @@
         {
           "id": "0198eba3-be23-7f36-a29a-9f6f56647021",
           "opprettet": "2025-08-27T15:07:13.571309",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -5758,5 +5758,6 @@
       "fraOgMed": "2025-08-27",
       "harRett": true
     }
-  ]
+  ],
+  "førteTil": "Innvilgelse"
 }

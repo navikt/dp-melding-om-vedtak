@@ -445,23 +445,6 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
-    class DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel(
-        override val verdi: Number,
-    ) : DagpengerOpplysning<Enhet.KRONER, Number>(verdi) {
-        companion object {
-            val opplysningTypeId: UUID = UUID.fromString("0194881f-9428-74d5-b160-f63a4c61a24f")
-        }
-
-        override val opplysningTekstId = "opplysning.dagsats-med-barnetillegg-etter-samordning-og-90-prosent-regel"
-        override val enhet = Enhet.KRONER
-
-        constructor(behandlingResultatData: BehandlingResultatData) : this(
-            behandlingResultatData.penger(
-                opplysningTypeId,
-            ),
-        )
-    }
-
     // todo Her er opplysninger som mangler opplysningTypeId
     class Prøvingsdato(
         override val verdi: LocalDate,

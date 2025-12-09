@@ -5,14 +5,14 @@ import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningIkkeFunnet
 import java.util.UUID
 
-inline fun <reified T : DagpengerOpplysning<*, *>> Vedtak.finnOpplysning(): T? = this.opplysninger.filterIsInstance<T>().singleOrNull()
+inline fun <reified T : Opplysning> Vedtak.finnOpplysning(): T? = this.opplysninger.filterIsInstance<T>().singleOrNull()
 
 inline fun <reified T : DagpengerOpplysning<*, Number>> Vedtak.finnOpplysning(predicate: (Number) -> Boolean): T? =
     this.opplysninger.filterIsInstance<T>().singleOrNull {
         predicate(it.verdi)
     }
 
-inline fun <reified T : DagpengerOpplysning<*, *>> Vedtak.hentOpplysning(): T =
+inline fun <reified T : Opplysning> Vedtak.hentOpplysning(): T =
     this.finnOpplysning<T>() ?: throw OpplysningIkkeFunnet("Opplysning av type ${T::class} mangler")
 
 inline fun <reified T : DagpengerOpplysning<*, Boolean>> Vedtak.ikkeOppfylt(): Boolean =

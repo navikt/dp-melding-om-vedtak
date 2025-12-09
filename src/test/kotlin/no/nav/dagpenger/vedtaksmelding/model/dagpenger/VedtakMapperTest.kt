@@ -1,9 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
-import no.nav.dagpenger.vedtaksmelding.model.OpplysningDataException
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning.FørsteMånedAvOpptjeningsperiode.FørsteMånedOgÅrForInntektsperiode1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning.FørsteMånedAvOpptjeningsperiode.FørsteMånedOgÅrForInntektsperiode2
@@ -18,7 +16,7 @@ import java.util.UUID
 
 class VedtakMapperTest {
     @Test
-    fun `SKal kunne hente opplssninger for permittering`() {
+    fun `Skal kunne hente opplysninger for permittering`() {
         val vedtak = VedtakMapper("/json/innvigelse_permittering_resultat.json".readFile()).vedtak()
         vedtak.behandlingId shouldBe UUID.fromString("0198c683-0770-734f-8ae2-34dfa8a714e5")
         vedtak.utfall shouldBe Vedtak.Utfall.INNVILGET
@@ -37,13 +35,6 @@ class VedtakMapperTest {
         vedtak.also {
             it.hentOpplysning<DagpengerOpplysning.AntallPermitteringsukerFisk>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri>() shouldNotBe null
-        }
-    }
-
-    @Test
-    fun `skal feile behandlinger med flere rettighetsperioder `() {
-        shouldThrow<OpplysningDataException> {
-            VedtakMapper("/json/flere_rettigheter_resultat.json".readFile()).vedtak()
         }
     }
 
@@ -75,7 +66,7 @@ class VedtakMapperTest {
             it.hentOpplysning<DagpengerOpplysning.SeksGangerGrunnbeløp>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.Aldersgrense>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.Grunnlag>() shouldNotBe null
-            it.hentOpplysning<DagpengerOpplysning.DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel>() shouldNotBe null
+            it.hentOpplysning<PeriodisertDagpengerOpplysning.DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.Prøvingsdato>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.FastsattVanligArbeidstidPerUke>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.FastsattNyArbeidstidPerUke>() shouldNotBe null

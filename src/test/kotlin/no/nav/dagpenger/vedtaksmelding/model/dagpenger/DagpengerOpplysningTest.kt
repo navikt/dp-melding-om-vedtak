@@ -37,7 +37,7 @@ class DagpengerOpplysningTest {
             DagpengerOpplysning.SeksGangerGrunnbeløp(behandlingResultatData),
             DagpengerOpplysning.Aldersgrense(behandlingResultatData),
             DagpengerOpplysning.Grunnlag(behandlingResultatData),
-            DagpengerOpplysning.DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel(behandlingResultatData),
+            PeriodisertDagpengerOpplysning.DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel(behandlingResultatData),
             DagpengerOpplysning.Prøvingsdato(behandlingResultatData),
             DagpengerOpplysning.FastsattVanligArbeidstidPerUke(behandlingResultatData),
             DagpengerOpplysning.FastsattNyArbeidstidPerUke(behandlingResultatData),
@@ -218,7 +218,13 @@ class DagpengerOpplysningTest {
         DagpengerOpplysning.SeksGangerGrunnbeløp(behandlingResultatData).verdi shouldBe 744168
         DagpengerOpplysning.Aldersgrense(behandlingResultatData).verdi shouldBe 67
         DagpengerOpplysning.Grunnlag(behandlingResultatData).verdi shouldBe 372084
-        DagpengerOpplysning.DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel(behandlingResultatData).verdi shouldBe 930
+        PeriodisertDagpengerOpplysning
+            .DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel(
+                behandlingResultatData,
+            ).perioder
+            .single()
+            .verdi shouldBe
+            930
         DagpengerOpplysning.Prøvingsdato(behandlingResultatData).verdi shouldBe LocalDate.of(2025, 1, 29)
         DagpengerOpplysning.FastsattVanligArbeidstidPerUke(behandlingResultatData).verdi shouldBe 37.5
         DagpengerOpplysning.FastsattNyArbeidstidPerUke(behandlingResultatData).verdi shouldBe 0

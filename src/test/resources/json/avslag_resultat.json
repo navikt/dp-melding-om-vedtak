@@ -717,7 +717,7 @@
         {
           "id": "0194b207-d65a-7aa4-9fb1-b22189a404d5",
           "opprettet": "2025-01-29T13:27:25.658467",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 15258281,
             "datatype": "heltall"
@@ -737,7 +737,7 @@
         {
           "id": "0194b207-d65a-7aa4-9fb1-b22189a404d7",
           "opprettet": "2025-01-29T13:27:25.65849",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "87aced5c-6fd0-441d-92c6-7f1d722b0a37",
             "datatype": "tekst"
@@ -757,7 +757,7 @@
         {
           "id": "0194b207-d833-7857-8291-a605ef554737",
           "opprettet": "2025-01-29T13:27:26.13147",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -777,7 +777,7 @@
         {
           "id": "0194b207-d833-7857-8291-a605ef554738",
           "opprettet": "2025-01-29T13:27:26.131556",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -797,7 +797,7 @@
         {
           "id": "0194b207-d833-7857-8291-a605ef554739",
           "opprettet": "2025-01-29T13:27:26.131588",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -817,7 +817,7 @@
         {
           "id": "0194b207-d833-7857-8291-a605ef55473a",
           "opprettet": "2025-01-29T13:27:26.131634",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -837,7 +837,7 @@
         {
           "id": "0194b207-d833-7857-8291-a605ef55473b",
           "opprettet": "2025-01-29T13:27:26.131734",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "2025-01-29",
             "datatype": "dato"
@@ -865,7 +865,7 @@
         {
           "id": "0194b207-d833-7857-8291-a605ef55473c",
           "opprettet": "2025-01-29T13:27:26.131778",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "2025-01-29",
             "datatype": "dato"
@@ -893,7 +893,7 @@
         {
           "id": "0194b207-d833-7857-8291-a605ef55473d",
           "opprettet": "2025-01-29T13:27:26.131829",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "1972-11-12",
             "datatype": "dato"
@@ -913,7 +913,7 @@
         {
           "id": "0194b207-d834-70af-9d58-76f49fa47e71",
           "opprettet": "2025-01-29T13:27:26.132536",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -939,7 +939,7 @@
         {
           "id": "0194b207-d834-70af-9d58-76f49fa47e73",
           "opprettet": "2025-01-29T13:27:26.132621",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "2025-01-29",
             "datatype": "dato"
@@ -963,7 +963,7 @@
         {
           "id": "0194b207-d834-70af-9d58-76f49fa47e79",
           "opprettet": "2025-01-29T13:27:26.132881",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -987,7 +987,7 @@
         {
           "id": "0194b207-d834-70af-9d58-76f49fa47e7b",
           "opprettet": "2025-01-29T13:27:26.132913",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "2025-01-29",
             "datatype": "dato"
@@ -1010,7 +1010,7 @@
         {
           "id": "0194b207-d835-774d-b040-9dbaea62a949",
           "opprettet": "2025-01-29T13:27:26.133222",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1036,7 +1036,7 @@
         {
           "id": "0194b207-d835-774d-b040-9dbaea62a94b",
           "opprettet": "2025-01-29T13:27:26.133299",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 67,
             "datatype": "heltall"
@@ -1059,7 +1059,7 @@
         {
           "id": "0194b207-d835-774d-b040-9dbaea62a951",
           "opprettet": "2025-01-29T13:27:26.133578",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "2039-11-12",
             "datatype": "dato"
@@ -1083,7 +1083,7 @@
         {
           "id": "0194b207-d835-774d-b040-9dbaea62a957",
           "opprettet": "2025-01-29T13:27:26.133811",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "2039-11-30",
             "datatype": "dato"
@@ -1106,7 +1106,7 @@
         {
           "id": "0194b207-d835-774d-b040-9dbaea62a95d",
           "opprettet": "2025-01-29T13:27:26.133963",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1130,7 +1130,7 @@
         {
           "id": "0194b207-d836-796c-98e9-68e3f8cf79a0",
           "opprettet": "2025-01-29T13:27:26.134675",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "2025-01-05",
             "datatype": "dato"
@@ -1153,7 +1153,7 @@
         {
           "id": "0194b207-d836-796c-98e9-68e3f8cf79a2",
           "opprettet": "2025-01-29T13:27:26.134783",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 36,
             "datatype": "heltall"
@@ -1176,7 +1176,7 @@
         {
           "id": "0194b207-d83a-7120-bf0e-b5f82685a079",
           "opprettet": "2025-01-29T13:27:26.138152",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 124028,
             "datatype": "penger"
@@ -1199,7 +1199,7 @@
         {
           "id": "0194b207-d83b-7d40-a1a9-8cb38e42a4f8",
           "opprettet": "2025-01-29T13:27:26.139465",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 1.5,
             "datatype": "desimaltall"
@@ -1222,7 +1222,7 @@
         {
           "id": "0194b207-d83b-7d40-a1a9-8cb38e42a4fa",
           "opprettet": "2025-01-29T13:27:26.139518",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 3,
             "datatype": "desimaltall"
@@ -1245,7 +1245,7 @@
         {
           "id": "0194b207-d83c-7edd-ad87-b89087ca87e3",
           "opprettet": "2025-01-29T13:27:26.140914",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "2025-01-06",
             "datatype": "dato"
@@ -1268,7 +1268,7 @@
         {
           "id": "0194b207-d83d-7201-b69a-bc1ada40998b",
           "opprettet": "2025-01-29T13:27:26.141266",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 186042,
             "datatype": "penger"
@@ -1292,7 +1292,7 @@
         {
           "id": "0194b207-d83d-7201-b69a-bc1ada40998d",
           "opprettet": "2025-01-29T13:27:26.141346",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 372084,
             "datatype": "penger"
@@ -1316,7 +1316,7 @@
         {
           "id": "0194b207-d83d-7201-b69a-bc1ada409994",
           "opprettet": "2025-01-29T13:27:26.141708",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "2024-12-31",
             "datatype": "dato"
@@ -1340,7 +1340,7 @@
         {
           "id": "0194b207-d83e-7179-b5aa-322bcb429d05",
           "opprettet": "2025-01-29T13:27:26.142032",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "2022-01-01",
             "datatype": "dato"
@@ -1364,7 +1364,7 @@
         {
           "id": "0194b208-70dd-72b5-831d-fc4275c6be7f",
           "opprettet": "2025-01-29T13:28:05.213033",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1392,7 +1392,7 @@
         {
           "id": "0194b208-70dd-72b5-831d-fc4275c6be80",
           "opprettet": "2025-01-29T13:28:05.213096",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-01-29",
           "verdi": {
             "verdi": true,
@@ -1421,7 +1421,7 @@
         {
           "id": "0194b208-70dd-72b5-831d-fc4275c6be81",
           "opprettet": "2025-01-29T13:28:05.213135",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "01JJS0GVNYD37EY7S45EEDCNZV",
             "datatype": "tekst"
@@ -1451,7 +1451,7 @@
         {
           "id": "0194b208-70de-71cc-861f-2ac390305059",
           "opprettet": "2025-01-29T13:28:05.214404",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-01-29",
           "verdi": {
             "verdi": true,
@@ -1475,7 +1475,7 @@
         {
           "id": "0194b208-70de-71cc-861f-2ac39030505b",
           "opprettet": "2025-01-29T13:28:05.214537",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "01JJS0GVNYD37EY7S45EEDCNZV",
             "datatype": "tekst"
@@ -1498,7 +1498,7 @@
         {
           "id": "0194b208-70e1-7f8c-86fd-bc3d14736aac",
           "opprettet": "2025-01-29T13:28:05.217873",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -1521,7 +1521,7 @@
         {
           "id": "0194b208-70e2-70d6-8509-c9cf4db73431",
           "opprettet": "2025-01-29T13:28:05.218587",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 55550,
             "datatype": "penger"
@@ -1544,7 +1544,7 @@
         {
           "id": "0194b208-70e2-70d6-8509-c9cf4db73438",
           "opprettet": "2025-01-29T13:28:05.218926",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -1568,7 +1568,7 @@
         {
           "id": "0194b208-70e2-70d6-8509-c9cf4db7343a",
           "opprettet": "2025-01-29T13:28:05.218955",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -1592,7 +1592,7 @@
         {
           "id": "0194b208-70e3-70e5-a7e2-4746ec1e6ed0",
           "opprettet": "2025-01-29T13:28:05.219164",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -1616,7 +1616,7 @@
         {
           "id": "0194b208-70e5-77e1-ae2f-ef35b6c4ca08",
           "opprettet": "2025-01-29T13:28:05.221118",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 18.75,
             "datatype": "desimaltall"
@@ -1639,7 +1639,7 @@
         {
           "id": "0194b208-70e5-77e1-ae2f-ef35b6c4ca0a",
           "opprettet": "2025-01-29T13:28:05.221134",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -1662,7 +1662,7 @@
         {
           "id": "0194b208-70e5-77e1-ae2f-ef35b6c4ca0c",
           "opprettet": "2025-01-29T13:28:05.221148",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -1685,7 +1685,7 @@
         {
           "id": "0194b208-70e5-77e1-ae2f-ef35b6c4ca0e",
           "opprettet": "2025-01-29T13:28:05.221163",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -1708,7 +1708,7 @@
         {
           "id": "0194b208-73db-7f6b-96ad-072bc37783c0",
           "opprettet": "2025-01-29T13:28:05.979143",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 40,
             "datatype": "desimaltall"
@@ -1736,7 +1736,7 @@
         {
           "id": "0194b208-73db-7f6b-96ad-072bc37783c1",
           "opprettet": "2025-01-29T13:28:05.979204",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1756,7 +1756,7 @@
         {
           "id": "0194b208-73db-7f6b-96ad-072bc37783c2",
           "opprettet": "2025-01-29T13:28:05.979223",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1776,7 +1776,7 @@
         {
           "id": "0194b208-73db-7f6b-96ad-072bc37783c3",
           "opprettet": "2025-01-29T13:28:05.979274",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1796,7 +1796,7 @@
         {
           "id": "0194b208-73db-7f6b-96ad-072bc37783c4",
           "opprettet": "2025-01-29T13:28:05.979296",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1816,7 +1816,7 @@
         {
           "id": "0194b208-73df-7310-8fd2-f378b19b186a",
           "opprettet": "2025-01-29T13:28:05.983885",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1840,7 +1840,7 @@
         {
           "id": "0194b208-73e2-77dc-9596-89f4fc5fa663",
           "opprettet": "2025-01-29T13:28:05.986562",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1864,7 +1864,7 @@
         {
           "id": "0194b208-73e2-77dc-9596-89f4fc5fa665",
           "opprettet": "2025-01-29T13:28:05.986619",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1888,7 +1888,7 @@
         {
           "id": "0194b208-73e2-77dc-9596-89f4fc5fa667",
           "opprettet": "2025-01-29T13:28:05.986673",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1912,7 +1912,7 @@
         {
           "id": "0194b208-73e2-77dc-9596-89f4fc5fa669",
           "opprettet": "2025-01-29T13:28:05.986701",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1935,7 +1935,7 @@
         {
           "id": "0194b208-73e6-7e64-8a8f-0fad72ca6e46",
           "opprettet": "2025-01-29T13:28:05.990156",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-01-29",
           "verdi": {
             "verdi": true,
@@ -1964,7 +1964,7 @@
         {
           "id": "0194b296-7d3a-7720-a507-7679b241272c",
           "opprettet": "2025-01-29T16:03:14.490952",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -1984,7 +1984,7 @@
         {
           "id": "0194b296-7d3b-7adc-bd66-3ab89fbbd02c",
           "opprettet": "2025-01-29T16:03:14.491947",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -2008,7 +2008,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5bd0",
           "opprettet": "2025-01-29T16:03:14.49334",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -2031,7 +2031,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5bd2",
           "opprettet": "2025-01-29T16:03:14.493355",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -2054,7 +2054,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5bd4",
           "opprettet": "2025-01-29T16:03:14.493365",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2077,7 +2077,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5bd6",
           "opprettet": "2025-01-29T16:03:14.493374",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -2100,7 +2100,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5bd8",
           "opprettet": "2025-01-29T16:03:14.493383",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2123,7 +2123,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5bda",
           "opprettet": "2025-01-29T16:03:14.493391",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2146,7 +2146,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5bdc",
           "opprettet": "2025-01-29T16:03:14.493403",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -2169,7 +2169,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5bde",
           "opprettet": "2025-01-29T16:03:14.493411",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2192,7 +2192,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5be0",
           "opprettet": "2025-01-29T16:03:14.493423",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "desimaltall"
@@ -2215,7 +2215,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5be2",
           "opprettet": "2025-01-29T16:03:14.493432",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 40,
             "datatype": "desimaltall"
@@ -2238,7 +2238,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5be4",
           "opprettet": "2025-01-29T16:03:14.493586",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 124028,
             "datatype": "penger"
@@ -2261,7 +2261,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5be6",
           "opprettet": "2025-01-29T16:03:14.493612",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 3,
             "datatype": "desimaltall"
@@ -2284,7 +2284,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5be8",
           "opprettet": "2025-01-29T16:03:14.493637",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -2307,7 +2307,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5bea",
           "opprettet": "2025-01-29T16:03:14.493698",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "01JJS0GVNYD37EY7S45EEDCNZV",
             "datatype": "tekst"
@@ -2330,7 +2330,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5bec",
           "opprettet": "2025-01-29T16:03:14.493711",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 6,
             "datatype": "desimaltall"
@@ -2353,7 +2353,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5bee",
           "opprettet": "2025-01-29T16:03:14.493722",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 3,
             "datatype": "desimaltall"
@@ -2376,7 +2376,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5bf0",
           "opprettet": "2025-01-29T16:03:14.493732",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 37.5,
             "datatype": "desimaltall"
@@ -2399,7 +2399,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5bf2",
           "opprettet": "2025-01-29T16:03:14.493743",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 37.5,
             "datatype": "desimaltall"
@@ -2422,7 +2422,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5bf4",
           "opprettet": "2025-01-29T16:03:14.493754",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "desimaltall"
@@ -2445,7 +2445,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5bf6",
           "opprettet": "2025-01-29T16:03:14.493764",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 50,
             "datatype": "desimaltall"
@@ -2468,7 +2468,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5bf8",
           "opprettet": "2025-01-29T16:03:14.493774",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -2491,7 +2491,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5bfa",
           "opprettet": "2025-01-29T16:03:14.493785",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2514,7 +2514,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5bfc",
           "opprettet": "2025-01-29T16:03:14.493795",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2537,7 +2537,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5bfe",
           "opprettet": "2025-01-29T16:03:14.493806",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2560,7 +2560,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5c00",
           "opprettet": "2025-01-29T16:03:14.493816",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2583,7 +2583,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5c02",
           "opprettet": "2025-01-29T16:03:14.493827",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2606,7 +2606,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5c04",
           "opprettet": "2025-01-29T16:03:14.493838",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2629,7 +2629,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5c06",
           "opprettet": "2025-01-29T16:03:14.493848",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2652,7 +2652,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5c08",
           "opprettet": "2025-01-29T16:03:14.493866",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2675,7 +2675,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5c0a",
           "opprettet": "2025-01-29T16:03:14.493878",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -2698,7 +2698,7 @@
         {
           "id": "0194b296-7d3d-705d-86a9-d6e511bf5c0c",
           "opprettet": "2025-01-29T16:03:14.493904",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0.0024,
             "datatype": "desimaltall"
@@ -2721,7 +2721,7 @@
         {
           "id": "0194b296-7d3e-7472-8334-561fcb8ef701",
           "opprettet": "2025-01-29T16:03:14.494006",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 37,
             "datatype": "penger"
@@ -2744,7 +2744,7 @@
         {
           "id": "0194b296-7d3e-7472-8334-561fcb8ef703",
           "opprettet": "2025-01-29T16:03:14.494038",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0.9,
             "datatype": "desimaltall"
@@ -2767,7 +2767,7 @@
         {
           "id": "0194b296-7d3e-7472-8334-561fcb8ef705",
           "opprettet": "2025-01-29T16:03:14.494053",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 260,
             "datatype": "heltall"
@@ -2790,7 +2790,7 @@
         {
           "id": "0194b296-7d3e-7472-8334-561fcb8ef707",
           "opprettet": "2025-01-29T16:03:14.494076",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -2813,7 +2813,7 @@
         {
           "id": "0194b296-7d3e-7472-8334-561fcb8ef709",
           "opprettet": "2025-01-29T16:03:14.494091",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -2836,7 +2836,7 @@
         {
           "id": "0194b296-7d3e-7472-8334-561fcb8ef70b",
           "opprettet": "2025-01-29T16:03:14.494106",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -2859,7 +2859,7 @@
         {
           "id": "0194b296-7d3e-7472-8334-561fcb8ef70d",
           "opprettet": "2025-01-29T16:03:14.49412",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -2882,7 +2882,7 @@
         {
           "id": "0194b296-7d3e-7472-8334-561fcb8ef70f",
           "opprettet": "2025-01-29T16:03:14.494134",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -2905,7 +2905,7 @@
         {
           "id": "0194b296-7d3e-7472-8334-561fcb8ef711",
           "opprettet": "2025-01-29T16:03:14.494149",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -2928,7 +2928,7 @@
         {
           "id": "0194b296-7d3e-7472-8334-561fcb8ef713",
           "opprettet": "2025-01-29T16:03:14.494164",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -2951,7 +2951,7 @@
         {
           "id": "0194b296-7d40-731b-84a9-3a6a684bcf99",
           "opprettet": "2025-01-29T16:03:14.496251",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -2975,7 +2975,7 @@
         {
           "id": "0194b296-7d40-731b-84a9-3a6a684bcf9b",
           "opprettet": "2025-01-29T16:03:14.496275",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -2998,7 +2998,7 @@
         {
           "id": "0194b296-7d40-731b-84a9-3a6a684bcf9d",
           "opprettet": "2025-01-29T16:03:14.496293",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -3022,7 +3022,7 @@
         {
           "id": "0194b296-7d40-731b-84a9-3a6a684bcf9f",
           "opprettet": "2025-01-29T16:03:14.496305",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -3045,7 +3045,7 @@
         {
           "id": "0194b296-7d40-731b-84a9-3a6a684bcfa1",
           "opprettet": "2025-01-29T16:03:14.496359",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 372084,
             "datatype": "penger"
@@ -3069,7 +3069,7 @@
         {
           "id": "0194b296-7d41-7c0f-90d1-15b28e9bfddf",
           "opprettet": "2025-01-29T16:03:14.497214",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "01JJS0GVNYD37EY7S45EEDCNZV",
             "datatype": "tekst"
@@ -3093,7 +3093,7 @@
         {
           "id": "0194b296-7d41-7c0f-90d1-15b28e9bfde1",
           "opprettet": "2025-01-29T16:03:14.497282",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 744168,
             "datatype": "penger"
@@ -3117,7 +3117,7 @@
         {
           "id": "0194b296-7d41-7c0f-90d1-15b28e9bfde3",
           "opprettet": "2025-01-29T16:03:14.497308",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 37.5,
             "datatype": "desimaltall"
@@ -3141,7 +3141,7 @@
         {
           "id": "0194b296-7d41-7c0f-90d1-15b28e9bfde5",
           "opprettet": "2025-01-29T16:03:14.497328",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -3166,7 +3166,7 @@
         {
           "id": "0194b296-7d41-7c0f-90d1-15b28e9bfde7",
           "opprettet": "2025-01-29T16:03:14.497352",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -3194,7 +3194,7 @@
         {
           "id": "0194b296-7d41-7c0f-90d1-15b28e9bfde9",
           "opprettet": "2025-01-29T16:03:14.497366",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -3217,7 +3217,7 @@
         {
           "id": "0194b296-7d41-7c0f-90d1-15b28e9bfdeb",
           "opprettet": "2025-01-29T16:03:14.497415",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -3246,7 +3246,7 @@
         {
           "id": "0194b296-7d44-7e40-912c-db82252c1aa7",
           "opprettet": "2025-01-29T16:03:14.500875",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -3270,7 +3270,7 @@
         {
           "id": "0194b296-7d44-7e40-912c-db82252c1aa9",
           "opprettet": "2025-01-29T16:03:14.500894",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -3294,7 +3294,7 @@
         {
           "id": "0194b296-7d44-7e40-912c-db82252c1aab",
           "opprettet": "2025-01-29T16:03:14.500916",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 372084,
             "datatype": "penger"
@@ -3319,7 +3319,7 @@
         {
           "id": "0194b296-7d45-7911-842c-9452b94524ee",
           "opprettet": "2025-01-29T16:03:14.501081",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -3342,7 +3342,7 @@
         {
           "id": "0194b296-7d45-7911-842c-9452b94524f0",
           "opprettet": "2025-01-29T16:03:14.501224",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 6180.427711545879,
             "datatype": "penger"
@@ -3365,7 +3365,7 @@
         {
           "id": "0194b296-7d45-7911-842c-9452b94524f2",
           "opprettet": "2025-01-29T16:03:14.501428",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 55918.81657389788,
             "datatype": "penger"
@@ -3388,7 +3388,7 @@
         {
           "id": "0194b296-7d48-790d-a5b0-96170377b865",
           "opprettet": "2025-01-29T16:03:14.504715",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -3412,7 +3412,7 @@
         {
           "id": "0194b296-7d48-790d-a5b0-96170377b867",
           "opprettet": "2025-01-29T16:03:14.504737",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -3436,7 +3436,7 @@
         {
           "id": "0194b296-7d48-790d-a5b0-96170377b869",
           "opprettet": "2025-01-29T16:03:14.504758",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 6180.427711545879,
             "datatype": "penger"
@@ -3460,7 +3460,7 @@
         {
           "id": "0194b296-7d48-790d-a5b0-96170377b86b",
           "opprettet": "2025-01-29T16:03:14.504778",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 55918.81657389788,
             "datatype": "penger"
@@ -3484,7 +3484,7 @@
         {
           "id": "0194b296-7d4d-74e2-8689-3a7a9557e220",
           "opprettet": "2025-01-29T16:03:14.509072",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 62099.24428544376,
             "datatype": "penger"
@@ -3509,7 +3509,7 @@
         {
           "id": "0194b296-7d51-7ad6-81c1-75bd5cace1e7",
           "opprettet": "2025-01-29T16:03:14.513136",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 20699.74809514792,
             "datatype": "penger"
@@ -3533,7 +3533,7 @@
         {
           "id": "0194b296-7d54-71a3-9332-e775ce2697c7",
           "opprettet": "2025-01-29T16:03:14.516453",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 20699.74809514792,
             "datatype": "penger"
@@ -3557,7 +3557,7 @@
         {
           "id": "0194b296-7d57-7e76-af05-80247e005286",
           "opprettet": "2025-01-29T16:03:14.519853",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 20700,
             "datatype": "penger"
@@ -3580,7 +3580,7 @@
         {
           "id": "0194b296-7d5a-7ea0-9db4-c5479e0bbcc8",
           "opprettet": "2025-01-29T16:03:14.522833",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -3604,7 +3604,7 @@
         {
           "id": "0194b296-7d5a-7ea0-9db4-c5479e0bbcca",
           "opprettet": "2025-01-29T16:03:14.522868",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 372084,
             "datatype": "penger"
@@ -3628,7 +3628,7 @@
         {
           "id": "0194b296-7d5d-78a9-a010-a40878476f4e",
           "opprettet": "2025-01-29T16:03:14.525668",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 37.5,
             "datatype": "desimaltall"
@@ -3653,7 +3653,7 @@
         {
           "id": "0194b296-7d5d-78a9-a010-a40878476f50",
           "opprettet": "2025-01-29T16:03:14.525723",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 893.0016,
             "datatype": "penger"
@@ -3677,7 +3677,7 @@
         {
           "id": "0194b296-7d5d-78a9-a010-a40878476f52",
           "opprettet": "2025-01-29T16:03:14.525749",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 334875.6,
             "datatype": "penger"
@@ -3701,7 +3701,7 @@
         {
           "id": "0194b296-7d60-7489-96e8-37941e05d0eb",
           "opprettet": "2025-01-29T16:03:14.528443",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 37.5,
             "datatype": "desimaltall"
@@ -3727,7 +3727,7 @@
         {
           "id": "0194b296-7d60-7489-96e8-37941e05d0ed",
           "opprettet": "2025-01-29T16:03:14.528542",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 893,
             "datatype": "penger"
@@ -3750,7 +3750,7 @@
         {
           "id": "0194b296-7d60-7489-96e8-37941e05d0ef",
           "opprettet": "2025-01-29T16:03:14.52862",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 1287.983076923077,
             "datatype": "penger"
@@ -3774,7 +3774,7 @@
         {
           "id": "0194b296-7d64-7e71-a215-8d1f6ce76433",
           "opprettet": "2025-01-29T16:03:14.53278",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -3799,7 +3799,7 @@
         {
           "id": "0194b296-7d64-7e71-a215-8d1f6ce76435",
           "opprettet": "2025-01-29T16:03:14.532914",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 1288,
             "datatype": "penger"
@@ -3822,7 +3822,7 @@
         {
           "id": "0194b296-7d69-7f4b-a8bb-f0221a3e4982",
           "opprettet": "2025-01-29T16:03:14.537827",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -3847,7 +3847,7 @@
         {
           "id": "0194b296-7f64-77f1-8a51-37bba4601fb4",
           "opprettet": "2025-01-29T16:03:15.044816",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -3867,7 +3867,7 @@
         {
           "id": "0194b296-7f64-77f1-8a51-37bba4601fb5",
           "opprettet": "2025-01-29T16:03:15.044882",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": [
               {
@@ -3903,7 +3903,7 @@
         {
           "id": "0194b296-7f6a-7762-a68d-d295a284612d",
           "opprettet": "2025-01-29T16:03:15.050121",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -3926,7 +3926,7 @@
         {
           "id": "0194b296-7f6a-7762-a68d-d295a284612f",
           "opprettet": "2025-01-29T16:03:15.050154",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -3949,7 +3949,7 @@
         {
           "id": "0194b296-7f6a-7762-a68d-d295a2846131",
           "opprettet": "2025-01-29T16:03:15.050178",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 1,
             "datatype": "heltall"
@@ -3972,7 +3972,7 @@
         {
           "id": "0194b296-7f6f-7ef2-ae6a-ec6a24dddb56",
           "opprettet": "2025-01-29T16:03:15.05515",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -3996,7 +3996,7 @@
         {
           "id": "0194b296-7f6f-7ef2-ae6a-ec6a24dddb58",
           "opprettet": "2025-01-29T16:03:15.055194",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 37,
             "datatype": "penger"
@@ -4020,7 +4020,7 @@
         {
           "id": "0194b296-7f73-7983-8ed6-d4037a326269",
           "opprettet": "2025-01-29T16:03:15.059693",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -4044,7 +4044,7 @@
         {
           "id": "0194b296-7f73-7983-8ed6-d4037a32626b",
           "opprettet": "2025-01-29T16:03:15.059765",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 930,
             "datatype": "penger"
@@ -4068,7 +4068,7 @@
         {
           "id": "0194b296-7f73-7983-8ed6-d4037a32626d",
           "opprettet": "2025-01-29T16:03:15.059789",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -4092,7 +4092,7 @@
         {
           "id": "0194b296-7f83-7648-a1e7-cb080e3e5fde",
           "opprettet": "2025-01-29T16:03:15.075987",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -4116,7 +4116,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d26c",
           "opprettet": "2025-01-29T16:03:15.076014",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -4140,7 +4140,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d26e",
           "opprettet": "2025-01-29T16:03:15.076037",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -4164,7 +4164,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d270",
           "opprettet": "2025-01-29T16:03:15.076065",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": "Gjennomsnittlig arbeidsinntekt siste 36 måneder",
             "datatype": "tekst"
@@ -4187,7 +4187,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d272",
           "opprettet": "2025-01-29T16:03:15.076316",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -4210,7 +4210,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d274",
           "opprettet": "2025-01-29T16:03:15.076416",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 5555,
             "datatype": "penger"
@@ -4233,7 +4233,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d276",
           "opprettet": "2025-01-29T16:03:15.076514",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 49995,
             "datatype": "penger"
@@ -4256,7 +4256,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d278",
           "opprettet": "2025-01-29T16:03:15.076564",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -4280,7 +4280,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d27a",
           "opprettet": "2025-01-29T16:03:15.076581",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 5,
             "datatype": "heltall"
@@ -4303,7 +4303,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d27c",
           "opprettet": "2025-01-29T16:03:15.076595",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0.03,
             "datatype": "desimaltall"
@@ -4326,7 +4326,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d27e",
           "opprettet": "2025-01-29T16:03:15.076608",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -4349,7 +4349,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d280",
           "opprettet": "2025-01-29T16:03:15.076626",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -4372,7 +4372,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d282",
           "opprettet": "2025-01-29T16:03:15.076642",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -4395,7 +4395,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d284",
           "opprettet": "2025-01-29T16:03:15.076655",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -4418,7 +4418,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d286",
           "opprettet": "2025-01-29T16:03:15.076668",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -4441,7 +4441,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d288",
           "opprettet": "2025-01-29T16:03:15.076682",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -4464,7 +4464,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d28a",
           "opprettet": "2025-01-29T16:03:15.076699",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 3,
             "datatype": "desimaltall"
@@ -4487,7 +4487,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d28c",
           "opprettet": "2025-01-29T16:03:15.07672",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 2,
             "datatype": "desimaltall"
@@ -4510,7 +4510,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d28e",
           "opprettet": "2025-01-29T16:03:15.076738",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 104,
             "datatype": "heltall"
@@ -4533,7 +4533,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d290",
           "opprettet": "2025-01-29T16:03:15.076753",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 52,
             "datatype": "heltall"
@@ -4556,7 +4556,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d292",
           "opprettet": "2025-01-29T16:03:15.076765",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 3,
             "datatype": "desimaltall"
@@ -4579,7 +4579,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d294",
           "opprettet": "2025-01-29T16:03:15.076776",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 2,
             "datatype": "desimaltall"
@@ -4602,7 +4602,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d296",
           "opprettet": "2025-01-29T16:03:15.076789",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "heltall"
@@ -4625,7 +4625,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d298",
           "opprettet": "2025-01-29T16:03:15.0768",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 5,
             "datatype": "heltall"
@@ -4648,7 +4648,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d29a",
           "opprettet": "2025-01-29T16:03:15.076812",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -4671,7 +4671,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d29c",
           "opprettet": "2025-01-29T16:03:15.076824",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -4694,7 +4694,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d29e",
           "opprettet": "2025-01-29T16:03:15.076837",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -4717,7 +4717,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d2a0",
           "opprettet": "2025-01-29T16:03:15.076848",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -4740,7 +4740,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d2a2",
           "opprettet": "2025-01-29T16:03:15.076861",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -4763,7 +4763,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d2a4",
           "opprettet": "2025-01-29T16:03:15.076872",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -4786,7 +4786,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d2a6",
           "opprettet": "2025-01-29T16:03:15.076884",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -4809,7 +4809,7 @@
         {
           "id": "0194b296-7f84-7b6c-a653-45502c20d2a8",
           "opprettet": "2025-01-29T16:03:15.076903",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 26,
             "datatype": "heltall"
@@ -4832,7 +4832,7 @@
         {
           "id": "0194b296-7f90-7fe3-9f0d-2550b457577b",
           "opprettet": "2025-01-29T16:03:15.088417",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -4857,7 +4857,7 @@
         {
           "id": "0194b296-7f90-7fe3-9f0d-2550b457577d",
           "opprettet": "2025-01-29T16:03:15.088461",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 893,
             "datatype": "penger"
@@ -4881,7 +4881,7 @@
         {
           "id": "0194b296-7f90-7fe3-9f0d-2550b457577f",
           "opprettet": "2025-01-29T16:03:15.088506",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 3720.84,
             "datatype": "penger"
@@ -4905,7 +4905,7 @@
         {
           "id": "0194b296-7f90-7fe3-9f0d-2550b4575781",
           "opprettet": "2025-01-29T16:03:15.088549",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "penger"
@@ -4933,7 +4933,7 @@
         {
           "id": "0194b296-7f90-7fe3-9f0d-2550b4575783",
           "opprettet": "2025-01-29T16:03:15.088575",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 4650,
             "datatype": "penger"
@@ -4957,7 +4957,7 @@
         {
           "id": "0194b296-7f90-7fe3-9f0d-2550b4575785",
           "opprettet": "2025-01-29T16:03:15.088596",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 248056,
             "datatype": "penger"
@@ -4981,7 +4981,7 @@
         {
           "id": "0194b296-7f90-7fe3-9f0d-2550b4575787",
           "opprettet": "2025-01-29T16:03:15.088629",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 18516.66666666667,
             "datatype": "penger"
@@ -5005,7 +5005,7 @@
         {
           "id": "0194b296-7f90-7fe3-9f0d-2550b4575789",
           "opprettet": "2025-01-29T16:03:15.088653",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 248056,
             "datatype": "penger"
@@ -5029,7 +5029,7 @@
         {
           "id": "0194b296-7f9d-7706-ab3e-d37d59547253",
           "opprettet": "2025-01-29T16:03:15.101549",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 893,
             "datatype": "penger"
@@ -5053,7 +5053,7 @@
         {
           "id": "0194b296-7f9d-7706-ab3e-d37d59547255",
           "opprettet": "2025-01-29T16:03:15.101585",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -5077,7 +5077,7 @@
         {
           "id": "0194b296-7f9d-7706-ab3e-d37d59547257",
           "opprettet": "2025-01-29T16:03:15.101612",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -5101,7 +5101,7 @@
         {
           "id": "0194b296-7f9d-7706-ab3e-d37d59547259",
           "opprettet": "2025-01-29T16:03:15.101631",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -5125,7 +5125,7 @@
         {
           "id": "0194b296-7fae-7df2-9adb-c1aa34fcbb61",
           "opprettet": "2025-01-29T16:03:15.118421",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 4465,
             "datatype": "penger"
@@ -5149,7 +5149,7 @@
         {
           "id": "0194b296-7fae-7df2-9adb-c1aa34fcbb63",
           "opprettet": "2025-01-29T16:03:15.118449",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 52,
             "datatype": "heltall"
@@ -5174,7 +5174,7 @@
         {
           "id": "0194b296-7fae-7df2-9adb-c1aa34fcbb65",
           "opprettet": "2025-01-29T16:03:15.118468",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 52,
             "datatype": "heltall"
@@ -5199,7 +5199,7 @@
         {
           "id": "0194b296-7fae-7df2-9adb-c1aa34fcbb67",
           "opprettet": "2025-01-29T16:03:15.11849",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -5223,7 +5223,7 @@
         {
           "id": "0194b296-7fbd-7556-9378-e73e0e34cffa",
           "opprettet": "2025-01-29T16:03:15.133404",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 3720.84,
             "datatype": "penger"
@@ -5247,7 +5247,7 @@
         {
           "id": "0194b296-7fbd-7556-9378-e73e0e34cffc",
           "opprettet": "2025-01-29T16:03:15.133464",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 4465,
             "datatype": "penger"
@@ -5271,7 +5271,7 @@
         {
           "id": "0194b296-7fbd-7556-9378-e73e0e34cffe",
           "opprettet": "2025-01-29T16:03:15.133486",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 52,
             "datatype": "heltall"
@@ -5295,7 +5295,7 @@
         {
           "id": "0194b296-7fbd-7556-9378-e73e0e34d000",
           "opprettet": "2025-01-29T16:03:15.133531",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-01-29",
           "verdi": {
             "verdi": true,
@@ -5330,7 +5330,7 @@
         {
           "id": "0194b296-7fd1-7bd5-be26-141ca23cb4d7",
           "opprettet": "2025-01-29T16:03:15.153779",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 4465,
             "datatype": "penger"
@@ -5354,7 +5354,7 @@
         {
           "id": "0194b296-7fd1-7bd5-be26-141ca23cb4d9",
           "opprettet": "2025-01-29T16:03:15.153809",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 0,
             "datatype": "heltall"
@@ -5379,7 +5379,7 @@
         {
           "id": "0194b296-7fd1-7bd5-be26-141ca23cb4db",
           "opprettet": "2025-01-29T16:03:15.153831",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 260,
             "datatype": "heltall"
@@ -5403,7 +5403,7 @@
         {
           "id": "0194b296-7fe6-7e20-81e5-f9db7b879d7f",
           "opprettet": "2025-01-29T16:03:15.174224",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 893,
             "datatype": "penger"
@@ -5427,7 +5427,7 @@
         {
           "id": "0194b296-8002-7a83-ac5e-3697da125325",
           "opprettet": "2025-01-29T16:03:15.202629",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 930,
             "datatype": "penger"
@@ -5451,7 +5451,7 @@
         {
           "id": "0194b296-8002-7a83-ac5e-3697da125327",
           "opprettet": "2025-01-29T16:03:15.202682",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -5475,7 +5475,8 @@
         {
           "id": "0194b296-8025-7a85-92b1-c7e8907004c7",
           "opprettet": "2025-01-29T16:03:15.237948",
-          "status": "Ny",
+          "opprinnelse": "Ny",
+          "gyldigFraOgMed": "2025-01-29",
           "verdi": {
             "verdi": 930,
             "datatype": "penger"
@@ -5499,7 +5500,7 @@
         {
           "id": "0194b296-8049-7d32-8fa9-b3eaba19aa17",
           "opprettet": "2025-01-29T16:03:15.27302",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 2790,
             "datatype": "penger"
@@ -5523,7 +5524,7 @@
         {
           "id": "0194b296-8049-7d32-8fa9-b3eaba19aa19",
           "opprettet": "2025-01-29T16:03:15.273093",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": 4650,
             "datatype": "penger"
@@ -5547,7 +5548,7 @@
         {
           "id": "0194b296-871d-71b7-9b22-a92e1fcd295f",
           "opprettet": "2025-01-29T16:03:17.02177",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -5567,7 +5568,7 @@
         {
           "id": "0194b296-871d-71b7-9b22-a92e1fcd2960",
           "opprettet": "2025-01-29T16:03:17.021803",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -5587,7 +5588,7 @@
         {
           "id": "0194b296-871d-71b7-9b22-a92e1fcd2961",
           "opprettet": "2025-01-29T16:03:17.02188",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -5615,7 +5616,7 @@
         {
           "id": "0194b296-871d-71b7-9b22-a92e1fcd2962",
           "opprettet": "2025-01-29T16:03:17.021931",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -5643,7 +5644,7 @@
         {
           "id": "0194b296-871d-71b7-9b22-a92e1fcd2963",
           "opprettet": "2025-01-29T16:03:17.021984",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -5671,7 +5672,7 @@
         {
           "id": "0194b296-871e-76bf-b90d-30a0729eaeb9",
           "opprettet": "2025-01-29T16:03:17.022022",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -5699,7 +5700,7 @@
         {
           "id": "0194b296-871e-76bf-b90d-30a0729eaeba",
           "opprettet": "2025-01-29T16:03:17.022055",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -5727,7 +5728,7 @@
         {
           "id": "0194b296-871e-76bf-b90d-30a0729eaebb",
           "opprettet": "2025-01-29T16:03:17.022086",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -5755,7 +5756,7 @@
         {
           "id": "0194b296-8751-7c5a-9214-124e37e15c2d",
           "opprettet": "2025-01-29T16:03:17.073119",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -5784,7 +5785,7 @@
         {
           "id": "0194b296-8751-7c5a-9214-124e37e15c2f",
           "opprettet": "2025-01-29T16:03:17.073165",
-          "status": "Ny",
+          "opprinnelse": "Ny",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"
@@ -5813,5 +5814,6 @@
       "fraOgMed": "2025-01-29",
       "harRett": false
     }
-  ]
+  ],
+  "førteTil": "Avslag"
 }
