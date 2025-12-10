@@ -9,5 +9,6 @@ object PdfGenerator {
     private val url = "http://dp-behov-pdf-generator/convert-html-to-pdf"
 
     suspend fun convertHtmlToPdf(html: String): ByteArray = httpClient.post(url) { setBody(html) }.bodyAsBytes()
+
     private val httpClient = HttpClient { }
 }
