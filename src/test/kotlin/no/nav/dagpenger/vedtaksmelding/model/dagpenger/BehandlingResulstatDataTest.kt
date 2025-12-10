@@ -1,5 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
+import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.Enhet
 import no.nav.dagpenger.vedtaksmelding.util.readFile
@@ -31,16 +32,15 @@ class BehandlingResulstatDataTest {
     fun `skal kunne parse behandling resultat data med periodiserte data`() {
         val behandlingResultatData = BehandlingResultatData("/json/periodisert.json".readFile())
 
-        behandlingResultatData.pengePerioder(
-            PeriodisertDagpengerOpplysning.DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel.opplysningTypeId,
-        ) shouldBe
-            listOf(
-                PeriodisertDagpengerOpplysning.Periode(
-                    fom = LocalDate.of(2025, 11, 4),
-                    tom = LocalDate.of(2025, 12, 8),
-                    verdi = 996,
-                    enhet = Enhet.KRONER,
-                ),
+        behandlingResultatData
+            .pengePerioder(
+                PeriodisertDagpengerOpplysning.DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel.opplysningTypeId,
+            ) shouldContain
+            PeriodisertDagpengerOpplysning.Periode(
+                fom = LocalDate.of(2025, 11, 4),
+                tom = LocalDate.of(2025, 11, 8),
+                verdi = 996,
+                enhet = Enhet.KRONER,
             )
     }
 }

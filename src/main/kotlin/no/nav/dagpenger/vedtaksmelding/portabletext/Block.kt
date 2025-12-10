@@ -18,6 +18,7 @@ data class BrevBlokk(
     val title: String,
     val textId: String,
     val innhold: List<Block>,
+    val language: String,
 )
 
 data class Block(

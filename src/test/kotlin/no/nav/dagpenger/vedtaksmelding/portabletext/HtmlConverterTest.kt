@@ -51,7 +51,7 @@ class HtmlConverterTest {
                 .let {
                     objectMapper.readValue(it, ResultDTO::class.java)
                 }.result
-                .filter { it.textId.contains("hubba.bubba") }
+                .filter { it.textId.contains("hubba.bubba") && it.language == "nb" }
 
         sanityTekster.size shouldBe 1
 

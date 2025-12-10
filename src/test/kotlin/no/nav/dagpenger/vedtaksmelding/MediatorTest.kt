@@ -308,6 +308,7 @@ class MediatorTest {
                                     utvidetBeskrivelse = true,
                                     innhold = emptyList(),
                                     _type = "brevblokk",
+                                    language = "nb",
                                 ),
                                 BrevBlokk(
                                     textId = "brev.blokk.rett-til-aa-random",
@@ -315,6 +316,7 @@ class MediatorTest {
                                     utvidetBeskrivelse = true,
                                     innhold = emptyList(),
                                     _type = "brevblokk",
+                                    language = "nb",
                                 ),
                                 BrevBlokk(
                                     textId = "brev.blokk.rett-til-ikke-innhold",
@@ -322,6 +324,7 @@ class MediatorTest {
                                     utvidetBeskrivelse = true,
                                     innhold = emptyList(),
                                     _type = "brevblokk",
+                                    language = "nb",
                                 ),
                                 BrevBlokk(
                                     textId = "brev.blokk.rett-til-ikke-utvidet",
@@ -329,6 +332,7 @@ class MediatorTest {
                                     utvidetBeskrivelse = false,
                                     innhold = emptyList(),
                                     _type = "brevblokk",
+                                    language = "nb",
                                 ),
                             )
                     }
