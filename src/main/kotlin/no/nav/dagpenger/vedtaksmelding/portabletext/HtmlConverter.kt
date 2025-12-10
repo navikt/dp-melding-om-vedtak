@@ -349,24 +349,7 @@ object HtmlConverter {
                     }
 
                     is PeriodisertDagpengerOpplysning<*, *> -> {
-                        table("melding-om-vedtak-opplysning-verdi-tabell") {
-                            thead {
-                                tr {
-                                    th { +"Periode" }
-                                    th { +"Dagpenger per dag" }
-                                }
-                            }
-                            tbody {
-                                opplysning.perioder.forEach { periode ->
-                                    val fomFormatert = periode.fom.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
-                                    val tomFormatert = periode.tom?.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) ?: "nåværende"
-                                    tr {
-                                        td { +"$fomFormatert – $tomFormatert" }
-                                        td { +periode.formatertVerdi() }
-                                    }
-                                }
-                            }
-                        }
+                        this.renderPeriodisertOpplysning(opplysning)
                     }
                 }
             }
@@ -423,6 +406,36 @@ object HtmlConverter {
     ) {
         li {
             b(block)
+        }
+    }
+}
+
+internal fun FlowContent.renderPeriodisertOpplysning(opplysning: PeriodisertDagpengerOpplysning<*, *>) {
+    when (opplysning) {
+        is PeriodisertDagpengerOpplysning.DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel ->
+            this.renderHtml(
+                opplysning,
+            )
+    }
+}
+
+internal fun FlowContent.renderHtml(opplysning: PeriodisertDagpengerOpplysning<*, *>) {
+    table("melding-om-vedtak-opplysning-verdi-tabell") {
+        thead {
+            tr {
+                th { +"Periode" }
+                th { +"Dagpenger per dag" }
+            }
+        }
+        tbody {
+            opplysning.perioder.forEach { periode ->
+                val fomFormatert = periode.fom.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+                val tomFormatert = periode.tom?.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) ?: "nåværende"
+                tr {
+                    td { +"$fomFormatert – $tomFormatert" }
+                    td { +periode.formatertVerdi() }
+                }
+            }
         }
     }
 }
