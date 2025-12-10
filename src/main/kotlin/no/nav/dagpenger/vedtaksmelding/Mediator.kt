@@ -291,4 +291,13 @@ class Mediator(
         vedtaksmeldingRepository.lagreVedaksmeldingHtml(behandlingId, html)
         return html
     }
+
+    suspend fun hentPdfForhåndsvisning(
+        behandlingId: UUID,
+        klient: Klient,
+        meldingOmVedtakData: MeldingOmVedtakDataDTO,
+    ): ByteArray =
+        hentForhåndsvisning(behandlingId, klient, meldingOmVedtakData).let {
+            PdfGenerator.convertHtmlToPdf(it.html)
+        }
 }

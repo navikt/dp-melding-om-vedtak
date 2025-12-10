@@ -113,6 +113,13 @@
             <label for="sakId">SakId:</label>
             <input type="text" name="sakId" value="sakid">
         </div>
+        <div class="form-group">
+            <label for="outputFormat">Format:</label>
+            <select name="outputFormat" id="outputFormat" required>
+                <option value="html" selected>HTML</option>
+                <option value="pdf">PDF</option>
+            </select>
+        </div>
         <button type="submit">Send</button>
     </form>
     <div class="iframe-container">
@@ -145,25 +152,47 @@
             saksbehandler: defaultSaksbehandler
         };
 
-        const response = await fetch(`/melding-om-vedtak/${behandlingId}/html`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + jwtToken
-            },
-            body: JSON.stringify(data)
-        });
-
         const htmlWindow = document.getElementById('htmlWindow');
 
-        if (response.status === 200) {
-            const result = await response.json();
-            htmlWindow.srcdoc = result.html; // Update iframe content
-            htmlWindow.style.display = 'block'; // Show iframe
-        } else {
-            const errorJson = await response.json();
-            htmlWindow.srcdoc = `<pre>${JSON.stringify(errorJson, null, 2)}</pre>`; // Show JSON error
-            htmlWindow.style.display = 'block'; // Show iframe with error
+        if (outputFormat === 'html') {
+            const response = await fetch(`/melding-om-vedtak/${behandlingId}/html`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + jwtToken
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.status === 200) {
+                const result = await response.json();
+                htmlWindow.srcdoc = result.html;
+                htmlWindow.style.display = 'block';
+            } else {
+                const errorJson = await response.json();
+                htmlWindow.srcdoc = `<pre>${JSON.stringify(errorJson, null, 2)}</pre>`;
+                htmlWindow.style.display = 'block';
+            }
+        } else if (outputFormat === 'pdf') {
+            const response = await fetch(`/melding-om-vedtak/${behandlingId}/pdf`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + jwtToken
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.status === 200) {
+                const blob = await response.blob();
+                const pdfUrl = URL.createObjectURL(blob);
+                htmlWindow.src = pdfUrl;
+                htmlWindow.style.display = 'block';
+            } else {
+                const errorJson = await response.json();
+                htmlWindow.srcdoc = `<pre>${JSON.stringify(errorJson, null, 2)}</pre>`;
+                htmlWindow.style.display = 'block';
+            }
         }
     });
 </script>

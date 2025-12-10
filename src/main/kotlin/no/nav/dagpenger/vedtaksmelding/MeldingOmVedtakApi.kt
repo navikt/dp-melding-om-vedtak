@@ -73,6 +73,26 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                     }
                 }
             }
+
+            post("/melding-om-vedtak/{behandlingId}/pdf") {
+                val behandlingId = call.parseUUID()
+                val klient = call.request.klient()
+                val meldingOmVedtakData = call.receive<MeldingOmVedtakDataDTO>()
+                withLoggingContext("behandlingId" to behandlingId.toString()) {
+                    runCatching {
+                        val meldingOmVedtakResponseDTO =
+                            mediator.hentPdfForhåndsvisning(
+                                behandlingId = behandlingId,
+                                klient = klient,
+                                meldingOmVedtakData = meldingOmVedtakData,
+                            )
+                        call.respond(meldingOmVedtakResponseDTO)
+                    }.onFailure { t ->
+                        logger.warn(t) { "Feil ved henting av pdf ved forhåndsvisning av brev for behandlingId: $behandlingId" }
+                        throw t
+                    }
+                }
+            }
             post("/melding-om-vedtak/{behandlingId}/vedtaksmelding") {
                 val behandlingId = call.parseUUID()
                 val klient = call.request.klient()

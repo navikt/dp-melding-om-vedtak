@@ -42,6 +42,8 @@ spec:
           namespace: teamdagpenger
         - application: dp-saksbehandling
           namespace: teamdagpenger
+        - application: dp-behov-pdf-generator
+          namespace: teamdagpenger
         - application: logging
           namespace: nais-system
   env:
