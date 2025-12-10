@@ -10,7 +10,7 @@ enum class InnvilgelseBrevblokker(
     INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE(brevblokkId = "brev.blokk.begrunnelse-innvilgelsesdato"),
     INNVILGELSE_DAGPENGEPERIODE(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger"),
     INNVILGELSE_DAGPENGEPERIODE_VERNEPLIKT(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-verneplikt"),
-    INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE(brevblokkId = "brev.blokk.slik-har-vi-beregnet-dagpengene-dine"),
+    INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE(brevblokkId = "brev.blokk.slik-har-vi-beregnet-dagpengene-dine-overskrift"),
     INNVILGELSE_ARBEIDSTIDEN_DIN(brevblokkId = "brev.blokk.arbeidstiden-din"),
     INNVILGELSE_ARBEIDSTIDEN_DIN_VERNEPLIKT(brevblokkId = "brev.blokk.arbeidstiden-din-verneplikt"),
     INNVILGELSE_EGENANDEL(brevblokkId = "brev.blokk.egenandel"),
