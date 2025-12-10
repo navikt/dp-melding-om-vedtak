@@ -6,6 +6,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGSATS_TABELL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_EGENANDEL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING
@@ -35,6 +36,7 @@ class SamordningTest {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,
+                INNVILGELSE_DAGSATS_TABELL.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
@@ -72,6 +74,7 @@ class SamordningTest {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,
+                INNVILGELSE_DAGSATS_TABELL.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
@@ -109,6 +112,7 @@ class SamordningTest {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,
+                INNVILGELSE_DAGSATS_TABELL.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
@@ -146,6 +150,7 @@ class SamordningTest {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,
+                INNVILGELSE_DAGSATS_TABELL.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
@@ -183,6 +188,7 @@ class SamordningTest {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,
+                INNVILGELSE_DAGSATS_TABELL.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
@@ -220,6 +226,7 @@ class SamordningTest {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,
+                INNVILGELSE_DAGSATS_TABELL.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
@@ -257,6 +264,7 @@ class SamordningTest {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,
+                INNVILGELSE_DAGSATS_TABELL.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
@@ -294,6 +302,7 @@ class SamordningTest {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,
+                INNVILGELSE_DAGSATS_TABELL.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
@@ -333,6 +342,7 @@ class SamordningTest {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,
+                INNVILGELSE_DAGSATS_TABELL.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 INNVILGELSE_DAGPENGEPERIODE.brevblokkId,

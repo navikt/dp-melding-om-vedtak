@@ -10,6 +10,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.ManglerBre
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGSATS_TABELL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_EGENANDEL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING
@@ -61,6 +62,7 @@ class OrdinæreDagpengerTest {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,
+                INNVILGELSE_DAGSATS_TABELL.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
@@ -95,6 +97,7 @@ class OrdinæreDagpengerTest {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,
+                INNVILGELSE_DAGSATS_TABELL.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
@@ -144,6 +147,7 @@ class OrdinæreDagpengerTest {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,
+                INNVILGELSE_DAGSATS_TABELL.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
@@ -201,6 +205,7 @@ class OrdinæreDagpengerTest {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,
+                INNVILGELSE_DAGSATS_TABELL.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
