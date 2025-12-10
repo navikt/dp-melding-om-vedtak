@@ -34,7 +34,10 @@ import kotlinx.html.stream.createHTML
 import kotlinx.html.style
 import kotlinx.html.svg
 import kotlinx.html.table
+import kotlinx.html.tbody
 import kotlinx.html.td
+import kotlinx.html.th
+import kotlinx.html.thead
 import kotlinx.html.title
 import kotlinx.html.tr
 import kotlinx.html.u
@@ -51,6 +54,7 @@ import no.nav.dagpenger.vedtaksmelding.model.klage.KlageOpplysning
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+import kotlin.text.format
 
 @Suppress("ktlint:standard:max-line-length")
 object HtmlConverter {
@@ -331,21 +335,34 @@ object HtmlConverter {
                 val opplysning =
                     mapping[textId]
                         ?: throw RuntimeException("Opplysning ikke funnet $textId")
-                span("melding-om-vedtak-opplysning-verdi") {
-                    when (opplysning) {
-                        is KlageOpplysning<*, *> -> +opplysning.formatertVerdi()
-                        is DagpengerOpplysning<*, *> -> +opplysning.formatertVerdi()
-                        is PeriodisertDagpengerOpplysning<*, *> -> {
-                            table("melding-om-vedtak-opplysning-verdi-tabell") {
+                when (opplysning) {
+                    is KlageOpplysning<*, *> -> {
+                        span("melding-om-vedtak-opplysning-verdi") {
+                            +opplysning.formatertVerdi()
+                        }
+                    }
+
+                    is DagpengerOpplysning<*, *> -> {
+                        span("melding-om-vedtak-opplysning-verdi") {
+                            +opplysning.formatertVerdi()
+                        }
+                    }
+
+                    is PeriodisertDagpengerOpplysning<*, *> -> {
+                        table("melding-om-vedtak-opplysning-verdi-tabell") {
+                            thead {
+                                tr {
+                                    th { +"Periode" }
+                                    th { +"Dagpenger per dag" }
+                                }
+                            }
+                            tbody {
                                 opplysning.perioder.forEach { periode ->
-                                    val tomTekst = periode.tom?.format(DateTimeFormatter.ofPattern("d.M.yyyy")) ?: "nåværende"
+                                    val fomFormatert = periode.fom.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+                                    val tomFormatert = periode.tom?.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) ?: "nåværende"
                                     tr {
-                                        td {
-                                            +("Fra ${periode.fom.format(DateTimeFormatter.ofPattern("d.M.yyyy"))} til $tomTekst")
-                                        }
-                                        td {
-                                            +periode.formatertVerdi()
-                                        }
+                                        td { +"$fomFormatert – $tomFormatert" }
+                                        td { +periode.formatertVerdi() }
                                     }
                                 }
                             }

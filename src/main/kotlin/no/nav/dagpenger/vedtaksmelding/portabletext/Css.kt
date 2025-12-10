@@ -3,6 +3,45 @@ package no.nav.dagpenger.vedtaksmelding.portabletext
 fun css(saksId: String): String {
     //language=CSS
     return """
+        
+             .melding-om-vedtak-opplysning-verdi-tabell td:nth-child(2) {
+                  text-align: right;
+              }
+              
+             .melding-om-vedtak-opplysning-verdi-tabell {
+             width: 100%;
+             border-collapse: collapse;
+             margin-top: 1em;
+             margin-bottom: 1em;
+           }
+           
+           .melding-om-vedtak-opplysning-verdi-tabell th {
+               border: 1px solid #ccc;
+               padding: 8px;
+               text-align: left;
+               font-size: 11px;
+               line-height: 16px;
+               font-weight: bold;
+               background-color: #f2f2f2;
+           }
+           .melding-om-vedtak-opplysning-verdi-tabell td {
+             border: 1px solid #ccc;
+             padding: 8px;
+             text-align: left;
+             font-size: 11px;
+             line-height: 16px;
+           }
+           
+           .melding-om-vedtak-opplysning-verdi-tabell th {
+               border: 1px solid #ccc;
+               padding: 8px;
+               text-align: left;
+               font-size: 11px;
+               line-height: 16px;
+               font-weight: bold;
+               background-color: #f2f2f2;
+           }
+           
             @media screen {
               /*https://aksel.nav.no/monster-maler/brev/visuelle-retningslinjer-for-brev*/
              .melding-om-vedtak {
@@ -118,6 +157,19 @@ fun css(saksId: String): String {
             }
 
            @media print {
+           
+               .melding-om-vedtak-opplysning-verdi-tabell th {
+                   font-size: 11pt;
+                   line-height: 16pt;
+                   font-weight: bold;
+                   background-color: #f2f2f2;
+               }
+           
+               .melding-om-vedtak-opplysning-verdi-tabell td {
+                   font-size: 11pt;
+                   line-height: 16pt;
+               }
+               
              .melding-om-vedtak {
                  font-family: 'Source Sans 3', sans-serif;
                  font-size: 11pt;

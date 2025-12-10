@@ -5605,9 +5605,30 @@
           "status": "Ny",
           "opprinnelse": "Ny",
           "gyldigFraOgMed": "2025-11-04",
-          "gyldigTilOgMed": "2025-12-08",
+          "gyldigTilOgMed": "2025-11-08",
           "verdi": {
             "verdi": 996,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "MinstAv"
+            },
+            "opplysninger": [
+              "019afe1d-9e17-7455-8df6-05668e1cc639",
+              "019afe1e-ece5-701b-9b14-11f0fa8cd869"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2025.12.08-13.01-580a3ec"
+          }
+        },
+        {
+          "id": "019afe1e-ecee-799e-9af3-c89a0ab2bf71",
+          "opprettet": "2025-12-08T14:20:30.958596",
+          "status": "Ny",
+          "opprinnelse": "Ny",
+          "gyldigFraOgMed": "2025-11-09",
+          "verdi": {
+            "verdi": 1996,
             "datatype": "penger"
           },
           "utledetAv": {
