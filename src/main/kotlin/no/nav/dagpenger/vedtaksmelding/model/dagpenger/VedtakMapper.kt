@@ -16,16 +16,7 @@ class VedtakMapper(
 
     private val behandlingResultatData = BehandlingResultatData(vedtakJson)
 
-    private fun utfall(): Vedtak.Utfall =
-        when {
-            behandlingResultatData.harRett() -> {
-                Vedtak.Utfall.INNVILGET
-            }
-
-            else -> {
-                Vedtak.Utfall.AVSLÅTT
-            }
-        }
+    private fun utfall(): Vedtak.Utfall = behandlingResultatData.utfall()
 
     private fun MutableSet<DagpengerOpplysning<*, *>>.addIfPresent(func: () -> DagpengerOpplysning<*, *>) {
         try {
