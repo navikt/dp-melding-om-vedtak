@@ -13,7 +13,7 @@ import java.util.UUID
 
 private val logger = KotlinLogging.logger {}
 
-class BehandlingResultatData(
+class BehandlingsresultatData(
     json: String,
 ) {
     companion object {
@@ -23,28 +23,44 @@ class BehandlingResultatData(
                 .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
     }
 
-    private data class RettighetPeriode(
+    private data class Rettighetsperiode(
         val fraOgMed: LocalDate,
         val tilOgMed: LocalDate? = null,
         val harRett: Boolean,
+        val opprinnelse: String,
     )
 
     private val jsonNode = objectMapper.readTree(json)
 
     val opplysningNoder = jsonNode["opplysninger"]
 
-    private val rettighetsPerioder: Set<RettighetPeriode> = hentRettighetsPerioder()
+    private val rettighetsperioder: List<Rettighetsperiode> = rettighetsperioder().sortedBy { it.fraOgMed }
 
-    fun provingsDato(): LocalDate =
-        rettighetsPerioder.singleOrNull()?.fraOgMed
-            ?: throw OpplysningDataException("Kunne ikke finne èn og bare èn rettighetsperiode")
+    fun virkningsdato(): LocalDate {
+        val nyeRettighetsperioder = rettighetsperioder.filter { it.opprinnelse == "Ny" }
+        return when (utfall()) {
+            Vedtak.Utfall.AVSLÅTT -> {
+                nyeRettighetsperioder
+                    .firstOrNull { !it.harRett }
+                    ?.fraOgMed
+                    ?: throw ManglendeVirkningsdato("Fant ingen rettighetsperiode med harRett = false for avslått vedtak")
+            }
 
-    private fun hentRettighetsPerioder(): Set<RettighetPeriode> {
+            Vedtak.Utfall.INNVILGET -> {
+                nyeRettighetsperioder
+                    .firstOrNull { it.harRett }
+                    ?.fraOgMed
+                    ?: throw ManglendeVirkningsdato("Fant ingen rettighetsperiode med harRett = true for innvilget vedtak")
+            }
+        }
+    }
+
+    private fun rettighetsperioder(): List<Rettighetsperiode> {
         val nodes = jsonNode["rettighetsperioder"]
         return try {
             objectMapper.convertValue(
                 nodes,
-                object : TypeReference<Set<RettighetPeriode>>() {},
+                object : TypeReference<List<Rettighetsperiode>>() {},
             )
         } catch (e: Exception) {
             logger.error(e) { "Fant ikke rettighetsperioder" }
@@ -157,28 +173,51 @@ class BehandlingResultatData(
                 }
 
                 if (it.size > 1) {
-                    throw OpplysningDataException("Fant flere enn èn opplysning med id $id")
+                    throw OpplysningDataException("Fant flere enn èn opplysningstype med id $id")
                 }
             }.single()
             .let { opplysningNode ->
 
                 opplysningNode["perioder"]
                     .filter {
-                        it["status"].asText() == "Ny"
+                        it.periodeInkludererVirkningsdato(virkningsdato())
                     }.also {
                         if (it.isEmpty()) {
                             throw NyPeriodeIkkeFunnet(id)
                         }
 
                         if (it.size > 1) {
-                            throw OpplysningDataException("Fant flere enn èn ny periode for opplysning med id $id")
+                            throw OpplysningDataException("Fant flere enn èn periode for opplysning med id $id")
                         }
                     }.single()["verdi"]
             }
 
+    private fun JsonNode.periodeInkludererVirkningsdato(virkningsdato: LocalDate): Boolean {
+        val fraOgMedNode = this.get("gyldigFraOgMed")
+        val tilOgMedNode = this.get("gyldigTilOgMed")
+
+        if (fraOgMedNode == null || fraOgMedNode.isNull) {
+            return true
+        }
+
+        val fraOgMed = fraOgMedNode.asDato()
+        val tilOgMed = if (tilOgMedNode == null || tilOgMedNode.isNull) null else tilOgMedNode.asDato()
+
+        return virkningsdato >= fraOgMed && (tilOgMed == null || virkningsdato <= tilOgMed)
+    }
+
     fun behandlingId(): UUID = jsonNode["behandlingId"].let { UUID.fromString(it.asText()) }
 
-    fun harRett(): Boolean = jsonNode["rettighetsperioder"].first()["harRett"].asBoolean()
+    fun utfall(): Vedtak.Utfall {
+        val førteTil = jsonNode["førteTil"].asText()
+        return when (førteTil) {
+            "Innvilgelse" -> Vedtak.Utfall.INNVILGET
+            "Avslag" -> Vedtak.Utfall.AVSLÅTT
+            else -> {
+                throw UtfallIkkeStøttet(førteTil)
+            }
+        }
+    }
 
     data class BehandlingResultatOpplysningIkkeFunnet(
         val opplysningId: UUID,
@@ -187,4 +226,12 @@ class BehandlingResultatData(
     data class NyPeriodeIkkeFunnet(
         val opplysningId: UUID,
     ) : OpplysningDataException("Fant ikke ny periode for behandling resultat opplysning med id $opplysningId")
+
+    data class UtfallIkkeStøttet(
+        val førteTil: String,
+    ) : OpplysningDataException("førteTil '$førteTil' er ikke støttet")
+
+    class ManglendeVirkningsdato(
+        message: String,
+    ) : OpplysningDataException(message)
 }
