@@ -18,7 +18,7 @@ import java.util.UUID
 
 class VedtakMapperTest {
     @Test
-    fun `SKal kunne hente opplssninger for permittering`() {
+    fun `Skal kunne hente opplysninger for permittering`() {
         val vedtak = VedtakMapper("/json/innvigelse_permittering_resultat.json".readFile()).vedtak()
         vedtak.behandlingId shouldBe UUID.fromString("0198c683-0770-734f-8ae2-34dfa8a714e5")
         vedtak.utfall shouldBe Vedtak.Utfall.INNVILGET
@@ -30,7 +30,7 @@ class VedtakMapperTest {
 
     @Test
     @Disabled("Må ha testdata")
-    fun `SKal kunne hente opplssninger for permittering fiske industri`() {
+    fun `Skal kunne hente opplysninger for permittering i fiskeindustri`() {
         val vedtak = VedtakMapper("/json/innvigelse_permittering_resultat.json".readFile()).vedtak()
         vedtak.behandlingId shouldBe UUID.fromString("0198c683-0770-734f-8ae2-34dfa8a714e5")
         vedtak.utfall shouldBe Vedtak.Utfall.INNVILGET
@@ -41,7 +41,7 @@ class VedtakMapperTest {
     }
 
     @Test
-    fun `skal feile behandlinger med flere rettighetsperioder `() {
+    fun `Skal feile behandlinger med flere rettighetsperioder `() {
         shouldThrow<OpplysningDataException> {
             VedtakMapper("/json/flere_rettigheter_resultat.json".readFile()).vedtak()
         }

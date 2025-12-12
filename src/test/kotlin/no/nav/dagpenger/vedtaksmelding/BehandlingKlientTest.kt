@@ -14,7 +14,7 @@ import java.util.UUID
 
 internal class BehandlingKlientTest {
     @Test
-    fun `Skal kalle behandling endepunkt med riktig headers og parse response`() {
+    fun `Skal kalle behandling-endepunkt med riktige headers og parse response`() {
         val behandlingId = UUID.fromString("01937743-812d-7a69-b492-d25eb9768c68")
         val vedtakJson = "/json/innvigelse_ord_resultat.json".readFile()
 
@@ -40,7 +40,7 @@ internal class BehandlingKlientTest {
     }
 
     @Test
-    fun `Skal videre sende HttpProblemDTO ved feil`() {
+    fun `Skal videresende HttpProblemDTO ved feil`() {
         val behandlingId = UUID.fromString("01937743-812d-7a69-b492-d25eb9768c68")
 
         val behandlingKlient =

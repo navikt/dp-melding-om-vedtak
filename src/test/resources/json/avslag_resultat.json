@@ -5,6 +5,14 @@
     "id": "87aced5c-6fd0-441d-92c6-7f1d722b0a37",
     "type": "Søknad"
   },
+  "førteTil": "Avslag",
+  "rettighetsperioder": [
+    {
+      "fraOgMed": "2025-01-29",
+      "harRett": false,
+      "opprinnelse":"Ny"
+    }
+  ],
   "ident": "12917296403",
   "vilkår": [
     {
@@ -5806,12 +5814,6 @@
           }
         }
       ]
-    }
-  ],
-  "rettighetsperioder": [
-    {
-      "fraOgMed": "2025-01-29",
-      "harRett": false
     }
   ]
 }

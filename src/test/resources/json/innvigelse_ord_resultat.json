@@ -5,6 +5,14 @@
     "id": "4d90a9a5-bb9a-4587-be26-f905c304c851",
     "type": "Søknad"
   },
+  "førteTil": "Innvilgelse",
+  "rettighetsperioder": [
+    {
+      "fraOgMed": "2025-08-27",
+      "harRett": true,
+      "opprinnelse": "Ny"
+    }
+  ],
   "ident": "22890298994",
   "vilkår": [
     {
@@ -5751,12 +5759,6 @@
           }
         }
       ]
-    }
-  ],
-  "rettighetsperioder": [
-    {
-      "fraOgMed": "2025-08-27",
-      "harRett": true
     }
   ]
 }

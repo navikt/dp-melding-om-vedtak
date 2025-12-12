@@ -11,36 +11,36 @@ import java.time.LocalDate
 class BehandlingResulstatDataTest {
     @Test
     fun `skal kunne parse vedtak resultat data`() {
-        val behandlingResultatData = BehandlingResultatData("/json/avslag_resultat.json".readFile())
+        val behandlingsresultatData = BehandlingsresultatData("/json/avslag_resultat.json".readFile())
 
-        behandlingResultatData.flyttall(DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid.opplysningTypeId) shouldBe 50
-        behandlingResultatData.penger(DagpengerOpplysning.InntektskravSiste12Måneder.opplysningTypeId) shouldBe 186042
-        behandlingResultatData.tekst(DagpengerOpplysning.BruktBeregningsregelGrunnlag.opplysningTypeId) shouldBe
+        behandlingsresultatData.flyttall(DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid.opplysningTypeId) shouldBe 50
+        behandlingsresultatData.penger(DagpengerOpplysning.InntektskravSiste12Måneder.opplysningTypeId) shouldBe 186042
+        behandlingsresultatData.tekst(DagpengerOpplysning.BruktBeregningsregelGrunnlag.opplysningTypeId) shouldBe
             "Gjennomsnittlig arbeidsinntekt siste 36 måneder"
-        behandlingResultatData.boolsk(DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste6Måneder.opplysningTypeId) shouldBe true
-        behandlingResultatData.heltall(DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger.opplysningTypeId) shouldBe 0
-        behandlingResultatData.dato(DagpengerOpplysning.FørsteMånedAvOpptjeningsperiode.opplysningTypeId) shouldBe
+        behandlingsresultatData.boolsk(DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste6Måneder.opplysningTypeId) shouldBe true
+        behandlingsresultatData.heltall(DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger.opplysningTypeId) shouldBe 0
+        behandlingsresultatData.dato(DagpengerOpplysning.FørsteMånedAvOpptjeningsperiode.opplysningTypeId) shouldBe
             LocalDate.of(
                 2022,
                 1,
                 1,
             )
-        behandlingResultatData.provingsDato() shouldBe LocalDate.of(2025, 1, 29)
+        behandlingsresultatData.virkningsdato() shouldBe LocalDate.of(2025, 1, 29)
     }
 
     @Test
     fun `Skal hente ut ufall basert på førteTil`() {
-        BehandlingResultatData(tomBehandlingResulstat(førteTil = "Innvilgelse")).utfall() shouldBe Vedtak.Utfall.INNVILGET
-        BehandlingResultatData(tomBehandlingResulstat(førteTil = "Avslag")).utfall() shouldBe Vedtak.Utfall.AVSLÅTT
+        BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Innvilgelse")).utfall() shouldBe Vedtak.Utfall.INNVILGET
+        BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Avslag")).utfall() shouldBe Vedtak.Utfall.AVSLÅTT
 
-        shouldThrow<BehandlingResultatData.UtfallIkkeStøttet> {
-            BehandlingResultatData(tomBehandlingResulstat(førteTil = "Gjenopptak")).utfall()
+        shouldThrow<BehandlingsresultatData.UtfallIkkeStøttet> {
+            BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Gjenopptak")).utfall()
         }
-        shouldThrow<BehandlingResultatData.UtfallIkkeStøttet> {
-            BehandlingResultatData(tomBehandlingResulstat(førteTil = "Endring")).utfall()
+        shouldThrow<BehandlingsresultatData.UtfallIkkeStøttet> {
+            BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Endring")).utfall()
         }
-        shouldThrow<BehandlingResultatData.UtfallIkkeStøttet> {
-            BehandlingResultatData(tomBehandlingResulstat(førteTil = "Stans")).utfall()
+        shouldThrow<BehandlingsresultatData.UtfallIkkeStøttet> {
+            BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Stans")).utfall()
         }
     }
 
@@ -79,7 +79,7 @@ class BehandlingResulstatDataTest {
               "førteTil": "Innvilgelse"
             }
             """.trimIndent()
-        BehandlingResultatData(behandlingResultatJson).provingsDato() shouldBe LocalDate.of(2024, 10, 30)
+        BehandlingsresultatData(behandlingResultatJson).virkningsdato() shouldBe LocalDate.of(2024, 10, 30)
     }
 
     @Test
@@ -117,7 +117,7 @@ class BehandlingResulstatDataTest {
               "førteTil": "Avslag"
             }
             """.trimIndent()
-        BehandlingResultatData(behandlingResultatJson).provingsDato() shouldBe LocalDate.of(2024, 10, 30)
+        BehandlingsresultatData(behandlingResultatJson).virkningsdato() shouldBe LocalDate.of(2024, 10, 30)
     }
 
     private fun tomBehandlingResulstat(førteTil: String): String {
