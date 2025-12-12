@@ -472,6 +472,15 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(behandlingsresultatData.virkningsdato())
     }
 
+    class Virkningsdato(
+        override val verdi: LocalDate,
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, LocalDate>(verdi) {
+        override val opplysningTekstId = "opplysning.virkningsdato"
+        override val enhet = Enhet.ENHETSLØS
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(behandlingsresultatData.virkningsdato())
+    }
+
     class FastsattVanligArbeidstidPerUke(
         override val verdi: Double,
     ) : DagpengerOpplysning<Enhet.TIMER, Double>(verdi) {

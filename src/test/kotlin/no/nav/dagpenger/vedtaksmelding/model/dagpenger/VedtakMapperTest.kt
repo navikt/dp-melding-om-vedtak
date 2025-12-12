@@ -68,6 +68,7 @@ class VedtakMapperTest {
             it.hentOpplysning<DagpengerOpplysning.Grunnlag>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.Prøvingsdato>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.Virkningsdato>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.FastsattVanligArbeidstidPerUke>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.FastsattNyArbeidstidPerUke>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.HarSamordnet>() shouldNotBe null

@@ -78,6 +78,7 @@ class VedtakMapper(
                     )
                 }
                 this.addIfPresent { DagpengerOpplysning.Prøvingsdato(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.Virkningsdato(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.FastsattVanligArbeidstidPerUke(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.FastsattNyArbeidstidPerUke(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.HarSamordnet(behandlingsresultatData) }
