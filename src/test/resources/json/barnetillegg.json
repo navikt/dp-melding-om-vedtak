@@ -938,33 +938,6 @@
       ]
     },
     {
-      "opplysningTypeId": "0194881f-91d1-7df2-ba1d-4533f37fcc76",
-      "navn": "Prøvingsdato",
-      "datatype": "dato",
-      "perioder": [
-        {
-          "id": "019a9106-376a-7e0a-a16b-cb4c32f4bc30",
-          "opprettet": "2025-11-17T09:54:55.082253",
-          "status": "Ny",
-          "opprinnelse": "Ny",
-          "gyldigFraOgMed": "2025-11-03",
-          "verdi": {
-            "verdi": "2025-11-03",
-            "datatype": "dato"
-          },
-          "kilde": {
-            "type": "Saksbehandler",
-            "registrert": "2025-11-17T09:54:55.045182",
-            "ident": "Z990436",
-            "begrunnelse": {
-              "verdi": "Innvilges dagpenger fra ønsket dato.",
-              "sistEndret": "2025-11-17T09:54:55.045167"
-            }
-          }
-        }
-      ]
-    },
-    {
       "opplysningTypeId": "0194881f-940b-76ff-acf5-ba7bcb367237",
       "navn": "Oppfyller kravet til alder",
       "datatype": "boolsk",

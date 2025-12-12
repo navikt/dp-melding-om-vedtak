@@ -989,29 +989,6 @@
       ]
     },
     {
-      "opplysningTypeId": "0194881f-91d1-7df2-ba1d-4533f37fcc76",
-      "navn": "Prøvingsdato",
-      "perioder": [
-        {
-          "id": "0194b207-d834-70af-9d58-76f49fa47e7b",
-          "opprettet": "2025-01-29T13:27:26.132913",
-          "status": "Ny",
-          "verdi": {
-            "verdi": "2025-01-29",
-            "datatype": "dato"
-          },
-          "utledetAv": {
-            "regel": {
-              "navn": "SisteAv"
-            },
-            "opplysninger": [
-              "0194b207-d834-70af-9d58-76f49fa47e73"
-            ]
-          }
-        }
-      ]
-    },
-    {
       "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d8b",
       "navn": "Rettighetstype",
       "perioder": [

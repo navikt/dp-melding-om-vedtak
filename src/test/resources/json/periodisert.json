@@ -1162,33 +1162,6 @@
       ]
     },
     {
-      "opplysningTypeId": "0194881f-91d1-7df2-ba1d-4533f37fcc76",
-      "navn": "Prøvingsdato",
-      "datatype": "dato",
-      "perioder": [
-        {
-          "id": "019afe1d-9288-75c0-9c56-fd685414b80c",
-          "opprettet": "2025-12-08T14:19:02.28043",
-          "status": "Ny",
-          "opprinnelse": "Ny",
-          "gyldigFraOgMed": "2025-11-04",
-          "verdi": {
-            "verdi": "2025-11-04",
-            "datatype": "dato"
-          },
-          "kilde": {
-            "type": "Saksbehandler",
-            "registrert": "2025-12-08T14:19:02.212276",
-            "ident": "Z993212",
-            "begrunnelse": {
-              "verdi": "Ikke relevant",
-              "sistEndret": "2025-12-08T14:19:02.212264"
-            }
-          }
-        }
-      ]
-    },
-    {
       "opplysningTypeId": "0194881f-940b-76ff-acf5-ba7bcb367237",
       "navn": "Oppfyller kravet til alder",
       "datatype": "boolsk",

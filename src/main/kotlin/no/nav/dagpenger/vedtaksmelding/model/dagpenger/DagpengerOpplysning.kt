@@ -463,15 +463,6 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     }
 
     // todo Her er opplysninger som mangler opplysningTypeId
-    class Prøvingsdato(
-        override val verdi: LocalDate,
-    ) : DagpengerOpplysning<Enhet.ENHETSLØS, LocalDate>(verdi) {
-        override val opplysningTekstId = "opplysning.provingsdato"
-        override val enhet = Enhet.ENHETSLØS
-
-        constructor(behandlingsresultatData: BehandlingsresultatData) : this(behandlingsresultatData.virkningsdato())
-    }
-
     class Virkningsdato(
         override val verdi: LocalDate,
     ) : DagpengerOpplysning<Enhet.ENHETSLØS, LocalDate>(verdi) {

@@ -20,7 +20,7 @@ class SanityKlientMappingTest {
             SanityKlient(
                 sanityUrl = "http://locahost/sanity",
                 httpKlient = lagHttpKlient(engine = lageMockEngine(), block = SanityKlient.httpClientConfig),
-            ).hentOpplysningTekstIder(listOf(AVSLAG_INNLEDNING.brevblokkId)) shouldBe listOf("opplysning.provingsdato")
+            ).hentOpplysningTekstIder(listOf(AVSLAG_INNLEDNING.brevblokkId)) shouldBe listOf("opplysning.virkningsdato")
         }
     }
 

@@ -92,7 +92,7 @@ class BehandlingsresultatDataTest {
     }
 
     @Test
-    fun `Ved innvilgelse er prøvingsdato gitt av eldste rettighetsperiode med harRett = true og opprinnelse ny`() {
+    fun `Ved innvilgelse er virkningsdato gitt av eldste rettighetsperiode med harRett = true og opprinnelse ny`() {
         val behandlingResultatJson =
             """
             {
@@ -130,7 +130,7 @@ class BehandlingsresultatDataTest {
     }
 
     @Test
-    fun `Ved Avslag er prøvingsdato gitt av eldste rettighetsperiode med harRett = false og opprinnelse ny`() {
+    fun `Ved Avslag er virkningsdato gitt av eldste rettighetsperiode med harRett = false og opprinnelse ny`() {
         val behandlingResultatJson =
             """
             {

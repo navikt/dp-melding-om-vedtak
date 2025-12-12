@@ -1005,30 +1005,6 @@
       ]
     },
     {
-      "opplysningTypeId": "0194881f-91d1-7df2-ba1d-4533f37fcc76",
-      "navn": "Prøvingsdato",
-      "perioder": [
-        {
-          "id": "0198c683-089b-7f2d-86f1-d4c31e11c77c",
-          "opprettet": "2025-08-20T10:05:32.955379",
-          "status": "Ny",
-          "gyldigFraOgMed": "2025-08-20",
-          "verdi": {
-            "verdi": "2025-08-20",
-            "datatype": "dato"
-          },
-          "utledetAv": {
-            "regel": {
-              "navn": "SisteAv"
-            },
-            "opplysninger": [
-              "0198c683-089b-7f2d-86f1-d4c31e11c779"
-            ]
-          }
-        }
-      ]
-    },
-    {
       "opplysningTypeId": "0194881f-940b-76ff-acf5-ba7bcb367236",
       "navn": "Siste mulige dag bruker kan oppfylle alderskrav",
       "perioder": [
