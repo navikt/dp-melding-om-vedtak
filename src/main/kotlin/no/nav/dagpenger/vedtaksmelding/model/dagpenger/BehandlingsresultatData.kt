@@ -23,7 +23,7 @@ class BehandlingsresultatData(
                 .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
     }
 
-    private data class RettighetPeriode(
+    private data class Rettighetsperiode(
         val fraOgMed: LocalDate,
         val tilOgMed: LocalDate? = null,
         val harRett: Boolean,
@@ -34,20 +34,20 @@ class BehandlingsresultatData(
 
     val opplysningNoder = jsonNode["opplysninger"]
 
-    private val rettighetsPerioder: List<RettighetPeriode> = rettighetsperioder().sortedBy { it.fraOgMed }
+    private val rettighetsperioder: List<Rettighetsperiode> = rettighetsperioder().sortedBy { it.fraOgMed }
 
     fun virkningsdato(): LocalDate {
-        val nyeRettighetsPerioder = rettighetsPerioder.filter { it.opprinnelse == "Ny" }
+        val nyeRettighetsperioder = rettighetsperioder.filter { it.opprinnelse == "Ny" }
         return when (utfall()) {
             Vedtak.Utfall.AVSLÅTT -> {
-                nyeRettighetsPerioder
+                nyeRettighetsperioder
                     .firstOrNull { !it.harRett }
                     ?.fraOgMed
                     ?: throw ManglendeVirkningsdato("Fant ingen rettighetsperiode med harRett = false for avslått vedtak")
             }
 
             Vedtak.Utfall.INNVILGET -> {
-                nyeRettighetsPerioder
+                nyeRettighetsperioder
                     .firstOrNull { it.harRett }
                     ?.fraOgMed
                     ?: throw ManglendeVirkningsdato("Fant ingen rettighetsperiode med harRett = true for innvilget vedtak")
@@ -55,12 +55,12 @@ class BehandlingsresultatData(
         }
     }
 
-    private fun rettighetsperioder(): List<RettighetPeriode> {
+    private fun rettighetsperioder(): List<Rettighetsperiode> {
         val nodes = jsonNode["rettighetsperioder"]
         return try {
             objectMapper.convertValue(
                 nodes,
-                object : TypeReference<List<RettighetPeriode>>() {},
+                object : TypeReference<List<Rettighetsperiode>>() {},
             )
         } catch (e: Exception) {
             logger.error(e) { "Fant ikke rettighetsperioder" }
