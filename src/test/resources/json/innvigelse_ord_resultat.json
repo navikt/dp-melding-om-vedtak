@@ -103,7 +103,7 @@
       },
       "perioder": [
         {
-          "fraOgMed": "2025-08-27",
+          "gyldigFraOgMed": "2025-08-27",
           "harRett": true
         }
       ],
@@ -189,7 +189,7 @@
       },
       "perioder": [
         {
-          "fraOgMed": "2025-08-27",
+          "gyldigFraOgMed": "2025-08-27",
           "harRett": true
         }
       ],
@@ -314,7 +314,7 @@
       },
       "perioder": [
         {
-          "fraOgMed": "2025-08-27",
+          "gyldigFraOgMed": "2025-08-27",
           "harRett": true
         }
       ],
@@ -369,7 +369,7 @@
       },
       "perioder": [
         {
-          "fraOgMed": "2025-08-27",
+          "gyldigFraOgMed": "2025-08-27",
           "harRett": true
         }
       ],

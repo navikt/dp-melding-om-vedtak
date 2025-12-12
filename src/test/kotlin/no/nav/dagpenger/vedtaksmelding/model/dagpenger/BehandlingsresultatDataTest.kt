@@ -10,7 +10,7 @@ import java.time.LocalDate
 import java.util.UUID
 
 @Suppress("ktlint:standard:max-line-length")
-class BehandlingResulstatDataTest {
+class BehandlingsresultatDataTest {
     companion object {
         private val testOpplysningId = UUID.fromString("12345678-1234-1234-1234-123456789012")
 
@@ -20,7 +20,7 @@ class BehandlingResulstatDataTest {
             periodeTilOgMed: String? = null,
             verdi: Int,
         ): BehandlingsresultatData {
-            val tilOgMedFelt = if (periodeTilOgMed != null) """"tilOgMed": "$periodeTilOgMed",""" else ""
+            val tilOgMedFelt = if (periodeTilOgMed != null) """"gyldigTilOgMed": "$periodeTilOgMed",""" else ""
 
             @Language("JSON")
             val json =
@@ -40,7 +40,7 @@ class BehandlingResulstatDataTest {
                       "opplysningTypeId": "$testOpplysningId",
                       "perioder": [
                         {
-                          "fraOgMed": "$periodeFraOgMed",
+                          "gyldigFraOgMed": "$periodeFraOgMed",
                           $tilOgMedFelt
                           "verdi": {
                             "datatype": "heltall",
@@ -250,16 +250,16 @@ class BehandlingResulstatDataTest {
                   "opplysningTypeId": "$testOpplysningId",
                   "perioder": [
                     {
-                      "fraOgMed": "2025-01-01",
-                      "tilOgMed": "2025-12-31",
+                      "gyldigFraOgMed": "2025-01-01",
+                      "gyldigTilOgMed": "2025-12-31",
                       "verdi": {
                         "datatype": "heltall",
                         "verdi": 100
                       }
                     },
                     {
-                      "fraOgMed": "2025-06-01",
-                      "tilOgMed": "2025-06-30",
+                      "gyldigFraOgMed": "2025-06-01",
+                      "gyldigTilOgMed": "2025-06-30",
                       "verdi": {
                         "datatype": "heltall",
                         "verdi": 200

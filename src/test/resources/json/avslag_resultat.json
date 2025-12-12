@@ -181,7 +181,7 @@
       },
       "perioder": [
         {
-          "fraOgMed": "2025-01-29",
+          "gyldigFraOgMed": "2025-01-29",
           "harRett": true
         }
       ],

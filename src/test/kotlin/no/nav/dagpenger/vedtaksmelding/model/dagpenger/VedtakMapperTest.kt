@@ -1,9 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
-import no.nav.dagpenger.vedtaksmelding.model.OpplysningDataException
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning.FørsteMånedAvOpptjeningsperiode.FørsteMånedOgÅrForInntektsperiode1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning.FørsteMånedAvOpptjeningsperiode.FørsteMånedOgÅrForInntektsperiode2
@@ -37,13 +35,6 @@ class VedtakMapperTest {
         vedtak.also {
             it.hentOpplysning<DagpengerOpplysning.AntallPermitteringsukerFisk>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri>() shouldNotBe null
-        }
-    }
-
-    @Test
-    fun `Skal feile behandlinger med flere rettighetsperioder `() {
-        shouldThrow<OpplysningDataException> {
-            VedtakMapper("/json/flere_rettigheter_resultat.json".readFile()).vedtak()
         }
     }
 

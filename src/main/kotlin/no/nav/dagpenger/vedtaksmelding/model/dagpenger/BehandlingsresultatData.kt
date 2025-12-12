@@ -173,7 +173,7 @@ class BehandlingsresultatData(
                 }
 
                 if (it.size > 1) {
-                    throw OpplysningDataException("Fant flere enn èn opplysning med id $id")
+                    throw OpplysningDataException("Fant flere enn èn opplysningstype med id $id")
                 }
             }.single()
             .let { opplysningNode ->
@@ -193,8 +193,8 @@ class BehandlingsresultatData(
             }
 
     private fun JsonNode.periodeInkludererVirkningsdato(virkningsdato: LocalDate): Boolean {
-        val fraOgMedNode = this.get("fraOgMed")
-        val tilOgMedNode = this.get("tilOgMed")
+        val fraOgMedNode = this.get("gyldigFraOgMed")
+        val tilOgMedNode = this.get("gyldigTilOgMed")
 
         if (fraOgMedNode == null || fraOgMedNode.isNull) {
             return true
