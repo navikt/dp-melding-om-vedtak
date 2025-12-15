@@ -126,7 +126,7 @@ class DagpengerOpplysningTest {
     }
 
     @Test
-    fun `AntallStønadsuker  kan være null`() {
+    fun `AntallStønadsuker kan være null`() {
         DagpengerOpplysning.AntallStønadsuker.fra(
             setOf<DagpengerOpplysning<*, *>>(
                 DagpengerOpplysning.GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget(true),
@@ -139,6 +139,21 @@ class DagpengerOpplysningTest {
                 DagpengerOpplysning.PeriodeSomGisVedVerneplikt(26),
             ),
         ) shouldBe null
+    }
+
+    @Test
+    fun `Siste dag med rett kan være null`() {
+        val behandlingsresultatData = BehandlingsresultatData("/json/innvigelse_ord_resultat.json".readFile())
+        DagpengerOpplysning.SisteDagMedRett.fra(behandlingsresultatData) shouldBe null
+    }
+
+    @Test
+    fun `Siste dag med rett blir satt på bakgrunn av rettighetsperiode`() {
+        val behandlingsresultatData = BehandlingsresultatData("/json/innvigelse_ord_resultat_til_og_med_dato.json".readFile())
+        DagpengerOpplysning.SisteDagMedRett.fra(behandlingsresultatData).also {
+            requireNotNull(it) { "Forventet ikke null" }
+            it.verdi shouldBe LocalDate.of(2025, 9, 9)
+        }
     }
 
     @Test

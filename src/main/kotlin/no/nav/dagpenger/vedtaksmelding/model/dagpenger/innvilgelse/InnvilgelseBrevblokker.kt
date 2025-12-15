@@ -4,6 +4,7 @@ enum class InnvilgelseBrevblokker(
     val brevblokkId: String,
 ) {
     INNVILGELSE_ORDINÆR(brevblokkId = "brev.blokk.innvilgelse-ordinaer"),
+    INNVILGELSE_ORDINÆR_FOM_TOM(brevblokkId = "brev.blokk.innvilgelse-ordinaer-fom-tom"),
     INNVILGELSE_MED_EGENANDEL(brevblokkId = "brev.blokk.innvilgelse-med-egenandel"),
     INNVILGELSE_UTEN_EGENANDEL(brevblokkId = "brev.blokk.innvilgelse-uten-egenandel"),
     INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE(brevblokkId = "brev.blokk.begrunnelse-innvilgelsesdato"),

@@ -24,6 +24,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_NITTI_PROSENT_REGEL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR_FOM_TOM
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_PERMITTERT_FISK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_FORELDREPENGER
@@ -69,18 +70,18 @@ class InnvilgelseMelding(
                     INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                     INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
                 )
-            return innledning() +
-                medEllerUtenEgenandel() +
-                virkningsdato() +
-                dagpengeperiode() +
-                ekstrablokkerPermittertOgPermittertFisk() +
+            return innledningBlokker() +
+                medEllerUtenEgenandelBlokker() +
+                virkningsdatoBlokker() +
+                dagpengeperiodeBlokker() +
+                permittertOgPermittertFiskBlokker() +
                 listOf(INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId) +
-                barnetillegg() +
-                nittiProsentRegel() +
-                samordnet() +
-                grunnlag() +
-                arbeidstidenDin() +
-                egenandel() +
+                barnetilleggBlokker() +
+                nittiProsentRegelBlokker() +
+                samordnetBlokker() +
+                grunnlagBlokker() +
+                arbeidstidenDinBlokker() +
+                egenandelBlokker() +
                 avsluttendeBrevblokker
         }
     override val brevBlokker: List<BrevBlokk> =
@@ -89,7 +90,7 @@ class InnvilgelseMelding(
             brevBlokkIder().mapNotNull { id -> brevBlokkMap[id] }
         }
 
-    private fun nittiProsentRegel(): List<String> =
+    private fun nittiProsentRegelBlokker(): List<String> =
         vedtak
             .finnOpplysning<AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget> {
                 it.toDouble() > 0
@@ -97,7 +98,7 @@ class InnvilgelseMelding(
                 listOf(INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId)
             } ?: emptyList()
 
-    private fun samordnet(): List<String> {
+    private fun samordnetBlokker(): List<String> {
         if (!vedtak.oppfylt<DagpengerOpplysning.HarSamordnet>()) {
             return emptyList()
         }
@@ -148,7 +149,7 @@ class InnvilgelseMelding(
         return samordningBlokker
     }
 
-    private fun barnetillegg(): List<String> =
+    private fun barnetilleggBlokker(): List<String> =
         vedtak.opplysninger
             .find {
                 it is DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg && it.verdi > 0
@@ -156,7 +157,7 @@ class InnvilgelseMelding(
                 listOf(INNVILGELSE_BARNETILLEGG.brevblokkId)
             } ?: emptyList()
 
-    private fun grunnlag(): List<String> {
+    private fun grunnlagBlokker(): List<String> {
         val grunnlagBlokker = mutableListOf<String>()
         val kravTilMinsteinntektOppfylt = vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravTilMinsteinntekt>()
 
@@ -173,38 +174,43 @@ class InnvilgelseMelding(
         return grunnlagBlokker.toList()
     }
 
-    private fun arbeidstidenDin(): List<String> =
+    private fun arbeidstidenDinBlokker(): List<String> =
         if (erInnvilgetMedVerneplikt()) {
             listOf(INNVILGELSE_ARBEIDSTIDEN_DIN_VERNEPLIKT.brevblokkId)
         } else {
             listOf(INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId)
         }
 
-    private fun innledning(): List<String> =
+    private fun innledningBlokker(): List<String> =
         when {
             erInnvilgetSomPermittert() -> listOf(INNVILGELSE_PERMITTERT.brevblokkId)
             erInnvilgetSomPermittertIFiskeindustri() -> listOf(INNVILGELSE_PERMITTERT_FISK.brevblokkId)
-            else -> listOf(INNVILGELSE_ORDINÆR.brevblokkId)
+            else -> {
+                when (vedtak.finnOpplysning("opplysning.siste-dag-med-rett")) {
+                    null -> listOf(INNVILGELSE_ORDINÆR.brevblokkId)
+                    else -> listOf(INNVILGELSE_ORDINÆR_FOM_TOM.brevblokkId)
+                }
+            }
         }
 
-    private fun medEllerUtenEgenandel(): List<String> =
+    private fun medEllerUtenEgenandelBlokker(): List<String> =
         vedtak.finnOpplysning<DagpengerOpplysning.Egenandel> { it.toDouble() > 0.0 }?.let {
             listOf(InnvilgelseBrevblokker.INNVILGELSE_MED_EGENANDEL.brevblokkId)
         } ?: listOf(INNVILGELSE_UTEN_EGENANDEL.brevblokkId)
 
-    private fun egenandel(): List<String> =
+    private fun egenandelBlokker(): List<String> =
         vedtak.finnOpplysning<DagpengerOpplysning.Egenandel> { it.toDouble() > 0.0 }?.let {
             listOf(INNVILGELSE_EGENANDEL.brevblokkId)
         } ?: emptyList()
 
-    private fun virkningsdato(): List<String> =
+    private fun virkningsdatoBlokker(): List<String> =
         when {
             erInnvilgetSomPermittert() -> listOf(INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT.brevblokkId)
             erInnvilgetSomPermittertIFiskeindustri() -> listOf(INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT_FISK.brevblokkId)
             else -> listOf(INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId)
         }
 
-    private fun dagpengeperiode(): List<String> =
+    private fun dagpengeperiodeBlokker(): List<String> =
         when {
             erInnvilgetMedVerneplikt() -> listOf(INNVILGELSE_DAGPENGEPERIODE_VERNEPLIKT.brevblokkId)
             erInnvilgetSomPermittert() -> listOf(INNVILGELSE_DAGPENGEPERIODE_PERMITTERT.brevblokkId)
@@ -217,7 +223,7 @@ class InnvilgelseMelding(
             else -> listOf(INNVILGELSE_DAGPENGEPERIODE.brevblokkId)
         }
 
-    private fun ekstrablokkerPermittertOgPermittertFisk(): List<String> =
+    private fun permittertOgPermittertFiskBlokker(): List<String> =
         when {
             erInnvilgetSomPermittert() || erInnvilgetSomPermittertIFiskeindustri() ->
                 listOf(

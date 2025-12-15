@@ -40,7 +40,7 @@ class VedtakMapperTest {
 
     @Test
     fun `Skal kunne lage alle type ordinære opplysninger, behandlingId og utfall for innvigelse ordinær`() {
-        val vedtak = VedtakMapper("/json/innvigelse_ord_resultat.json".readFile()).vedtak()
+        val vedtak = VedtakMapper("/json/innvigelse_ord_resultat_til_og_med_dato.json".readFile()).vedtak()
         vedtak.behandlingId shouldBe UUID.fromString("0198eba3-b1c3-7d50-a7ee-f0f8cd1cbf6b")
         vedtak.utfall shouldBe Vedtak.Utfall.INNVILGET
         vedtak.also {
@@ -111,6 +111,7 @@ class VedtakMapperTest {
             // nullable opplysninger
             it.hentOpplysning<DagpengerOpplysning.GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.ErInnvilgetMedVerneplikt>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.SisteDagMedRett>() shouldNotBe null
         }
     }
 }

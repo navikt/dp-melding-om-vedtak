@@ -462,16 +462,6 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
-    // todo Her er opplysninger som mangler opplysningTypeId
-    class Virkningsdato(
-        override val verdi: LocalDate,
-    ) : DagpengerOpplysning<Enhet.ENHETSLØS, LocalDate>(verdi) {
-        override val opplysningTekstId = "opplysning.virkningsdato"
-        override val enhet = Enhet.ENHETSLØS
-
-        constructor(behandlingsresultatData: BehandlingsresultatData) : this(behandlingsresultatData.virkningsdato())
-    }
-
     class FastsattVanligArbeidstidPerUke(
         override val verdi: Double,
     ) : DagpengerOpplysning<Enhet.TIMER, Double>(verdi) {
@@ -1108,6 +1098,30 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
                 opplysningTypeId,
             ),
         )
+    }
+
+    // todo Her er opplysninger som mangler opplysningTypeId
+    class Virkningsdato(
+        override val verdi: LocalDate,
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, LocalDate>(verdi) {
+        override val opplysningTekstId = "opplysning.virkningsdato"
+        override val enhet = Enhet.ENHETSLØS
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(behandlingsresultatData.virkningsdato())
+    }
+
+    class SisteDagMedRett(
+        override val verdi: LocalDate,
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, LocalDate>(verdi) {
+        override val opplysningTekstId = "opplysning.siste-dag-med-rett"
+        override val enhet = Enhet.ENHETSLØS
+
+        companion object {
+            fun fra(behandlingsresultatData: BehandlingsresultatData): SisteDagMedRett? =
+                behandlingsresultatData.sisteDagMedRett()?.let {
+                    SisteDagMedRett(it)
+                }
+        }
     }
 
     override fun equals(other: Any?): Boolean =

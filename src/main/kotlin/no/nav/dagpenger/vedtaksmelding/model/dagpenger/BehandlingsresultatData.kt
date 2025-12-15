@@ -55,6 +55,18 @@ class BehandlingsresultatData(
         }
     }
 
+    fun sisteDagMedRett(): LocalDate? {
+        val nyeRettighetsperioder = rettighetsperioder.filter { it.opprinnelse == "Ny" }
+        return when (utfall()) {
+            Vedtak.Utfall.INNVILGET -> {
+                nyeRettighetsperioder
+                    .firstOrNull { it.harRett }
+                    ?.tilOgMed
+            }
+            else -> null
+        }
+    }
+
     private fun rettighetsperioder(): List<Rettighetsperiode> {
         val nodes = jsonNode["rettighetsperioder"]
         return try {

@@ -18,6 +18,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_NITTI_PROSENT_REGEL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR_FOM_TOM
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SKATTEKORT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_STANS_ÅRSAKER
@@ -25,6 +26,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
+import java.time.LocalDate
 
 class OrdinæreDagpengerTest {
     private val behandlingId = UUIDv7.ny()
@@ -91,7 +93,7 @@ class OrdinæreDagpengerTest {
     }
 
     @Test
-    fun `Rikig brevblokker for innvilgelse av ordinære dagpenger med barnetillegg-opplysning`() {
+    fun `Rikige brevblokker for innvilgelse av ordinære dagpenger med barnetillegg-opplysning`() {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,
@@ -140,7 +142,7 @@ class OrdinæreDagpengerTest {
     }
 
     @Test
-    fun `Rikig brevblokker for innvilgelse av ordinære dagpenger med barnetillegg og nittiProsentRegel`() {
+    fun `Rikige brevblokker for innvilgelse av ordinære dagpenger med barnetillegg og nittiProsentRegel`() {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,
@@ -197,7 +199,7 @@ class OrdinæreDagpengerTest {
     }
 
     @Test
-    fun `Rikig brevblokker rekkefølge for innvilgelse med barnetillegg, nittiProsentRegel`() {
+    fun `Rikige brevblokker rekkefølge for innvilgelse med barnetillegg og nittiProsentRegel`() {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,
@@ -230,6 +232,41 @@ class OrdinæreDagpengerTest {
                             DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
                                 10,
                             ),
+                        ),
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Rikige brevblokker rekkefølge for innvilgelse med til-og-med dato`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                INNVILGELSE_ORDINÆR_FOM_TOM.brevblokkId,
+                INNVILGELSE_MED_EGENANDEL.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
+
+        InnvilgelseMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    utfall = Vedtak.Utfall.INNVILGET,
+                    opplysninger =
+                        setOf(
+                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.SisteDagMedRett(LocalDate.of(2025, 9, 10)),
                         ),
                 ),
             alleBrevblokker = emptyList(),
