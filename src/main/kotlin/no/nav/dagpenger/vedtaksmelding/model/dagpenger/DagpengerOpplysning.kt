@@ -1066,6 +1066,23 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
+    class GodkjentLokalArbeidssøker(
+        override val verdi: Boolean,
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("0194881f-9442-707b-a6ee-e96c06877bda")
+        }
+
+        override val enhet: Enhet.ENHETSLØS = Enhet.ENHETSLØS
+        override val opplysningTekstId: String = "opplysning.godkjent-lokal-arbeidssoker"
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            behandlingsresultatData.boolsk(
+                opplysningTypeId,
+            ),
+        )
+    }
+
     class OppfyllerKravetTilPermittering(
         override val verdi: Boolean,
     ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {

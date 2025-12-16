@@ -13,6 +13,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_EGENANDEL
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GODKJENT_LOKAL_ARBEIDSSØKER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MED_EGENANDEL
@@ -270,6 +271,42 @@ class OrdinæreDagpengerTest {
                         setOf(
                             DagpengerOpplysning.Egenandel(3000),
                             DagpengerOpplysning.SisteDagMedRett(LocalDate.of(2025, 9, 10)),
+                        ),
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Rikige brevblokker rekkefølge for innvilgelse med godkjent lokal arbeidssøker`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                INNVILGELSE_ORDINÆR.brevblokkId,
+                INNVILGELSE_MED_EGENANDEL.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_GODKJENT_LOKAL_ARBEIDSSØKER.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
+
+        InnvilgelseMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    utfall = Vedtak.Utfall.INNVILGET,
+                    opplysninger =
+                        setOf(
+                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.GodkjentLokalArbeidssøker(true),
                         ),
                 ),
             alleBrevblokker = emptyList(),
