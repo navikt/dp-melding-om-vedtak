@@ -5,7 +5,8 @@ enum class InnvilgelseBrevblokker(
 ) {
     INNVILGELSE_ORDINÆR(brevblokkId = "brev.blokk.innvilgelse-ordinaer"),
     INNVILGELSE_ORDINÆR_FOM_TOM(brevblokkId = "brev.blokk.innvilgelse-ordinaer-fom-tom"),
-    INNVILGELSE_GODKJENT_LOKAL_ARBEIDSSØKER(brevblokkId = "brev.blokk.innvilgelse-godkjent-lokal-arbeidssoker"),
+    INNVILGELSE_GODKJENT_LOKAL_ARBEIDSSØKER_DEL_1(brevblokkId = "brev.blokk.innvilgelse-godkjent-lokal-arbeidssoker-del-1"),
+    INNVILGELSE_GODKJENT_LOKAL_ARBEIDSSØKER_DEL_2(brevblokkId = "brev.blokk.innvilgelse-godkjent-lokal-arbeidssoker-del-2"),
     INNVILGELSE_MED_EGENANDEL(brevblokkId = "brev.blokk.innvilgelse-med-egenandel"),
     INNVILGELSE_UTEN_EGENANDEL(brevblokkId = "brev.blokk.innvilgelse-uten-egenandel"),
     INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE(brevblokkId = "brev.blokk.begrunnelse-innvilgelsesdato"),

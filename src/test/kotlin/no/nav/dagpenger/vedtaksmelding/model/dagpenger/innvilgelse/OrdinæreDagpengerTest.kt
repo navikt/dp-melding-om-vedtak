@@ -13,7 +13,8 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_EGENANDEL
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GODKJENT_LOKAL_ARBEIDSSØKER
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GODKJENT_LOKAL_ARBEIDSSØKER_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GODKJENT_LOKAL_ARBEIDSSØKER_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MED_EGENANDEL
@@ -288,7 +289,8 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
                 INNVILGELSE_GRUNNLAG.brevblokkId,
                 INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
-                INNVILGELSE_GODKJENT_LOKAL_ARBEIDSSØKER.brevblokkId,
+                INNVILGELSE_GODKJENT_LOKAL_ARBEIDSSØKER_DEL_1.brevblokkId,
+                INNVILGELSE_GODKJENT_LOKAL_ARBEIDSSØKER_DEL_2.brevblokkId,
                 INNVILGELSE_EGENANDEL.brevblokkId,
                 INNVILGELSE_MELDEKORT.brevblokkId,
                 INNVILGELSE_UTBETALING.brevblokkId,
