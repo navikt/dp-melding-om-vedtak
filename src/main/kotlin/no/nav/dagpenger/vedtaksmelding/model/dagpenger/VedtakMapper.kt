@@ -108,6 +108,7 @@ class VedtakMapper(
                 this.addIfPresent { DagpengerOpplysning.KravTilUtdanning(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerMedlemskap(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.GodkjentLokalArbeidssøker(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.GodkjentKunDeltidssøker(behandlingsresultatData) }
                 this.addIfPresent {
                     DagpengerOpplysning.GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget(
                         behandlingsresultatData,

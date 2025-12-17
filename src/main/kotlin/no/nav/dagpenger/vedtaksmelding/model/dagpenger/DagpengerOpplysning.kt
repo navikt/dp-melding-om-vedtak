@@ -1083,6 +1083,23 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
+    class GodkjentKunDeltidssøker(
+        override val verdi: Boolean,
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("0194881f-9441-7d1b-a06a-6727543a141f")
+        }
+
+        override val enhet: Enhet.ENHETSLØS = Enhet.ENHETSLØS
+        override val opplysningTekstId: String = "opplysning.godkjent-kun-deltidssoker"
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            behandlingsresultatData.boolsk(
+                opplysningTypeId,
+            ),
+        )
+    }
+
     class OppfyllerKravetTilPermittering(
         override val verdi: Boolean,
     ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
