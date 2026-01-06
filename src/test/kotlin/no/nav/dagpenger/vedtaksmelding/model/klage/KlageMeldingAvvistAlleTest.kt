@@ -33,7 +33,7 @@ class KlageMeldingAvvistAlleTest {
                     KLAGE_AVVIST_KLAGEFIRST_HJEMMEL.brevblokkId,
                     KLAGE_AVVIST_RETTSLIG_KLAGEINTERESSE.brevblokkId,
                     KLAGE_AVVIST_RETTSLIG_KLAGEINTERESSE_HJEMMEL.brevblokkId,
-                ) + KlageMelding.fasteAvsluttendeBlokker
+                ) + KlageMelding.fasteAvsluttendeBlokkerVedtak
         }
     }
 }

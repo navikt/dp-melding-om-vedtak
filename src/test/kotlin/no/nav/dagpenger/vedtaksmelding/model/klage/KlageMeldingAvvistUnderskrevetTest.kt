@@ -24,7 +24,7 @@ class KlageMeldingAvvistUnderskrevetTest {
                     KLAGE_AVVIST_INTRO.brevblokkId,
                     KLAGE_AVVIST_SKRIFTLIG_OG_SIGNERT.brevblokkId,
                     KLAGE_AVVIST_SKRIFTLIG_OG_NEVNER_ENDRING_HJEMMEL.brevblokkId,
-                ) + KlageMelding.fasteAvsluttendeBlokker
+                ) + KlageMelding.fasteAvsluttendeBlokkerVedtak
         }
     }
 }

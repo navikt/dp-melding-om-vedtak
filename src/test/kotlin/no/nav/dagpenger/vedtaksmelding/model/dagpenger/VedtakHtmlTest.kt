@@ -121,7 +121,7 @@ class VedtakHtmlTest {
             listOf(
                 KLAGE_OPPRETTHOLDELSE_DEL_1.brevblokkId,
                 KLAGE_OPPRETTHOLDELSE_DEL_2.brevblokkId,
-            ) + KlageMelding.fasteAvsluttendeBlokker
+            ) + KlageMelding.fasteAvsluttendeBlokkerOpprettholdelse
     }
 
     @Test

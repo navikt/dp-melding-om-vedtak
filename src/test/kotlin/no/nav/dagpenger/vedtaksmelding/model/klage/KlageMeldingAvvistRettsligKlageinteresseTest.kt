@@ -24,7 +24,7 @@ class KlageMeldingAvvistRettsligKlageinteresseTest {
                     KLAGE_AVVIST_INTRO.brevblokkId,
                     KLAGE_AVVIST_RETTSLIG_KLAGEINTERESSE.brevblokkId,
                     KLAGE_AVVIST_RETTSLIG_KLAGEINTERESSE_HJEMMEL.brevblokkId,
-                ) + KlageMelding.fasteAvsluttendeBlokker
+                ) + KlageMelding.fasteAvsluttendeBlokkerVedtak
         }
     }
 }

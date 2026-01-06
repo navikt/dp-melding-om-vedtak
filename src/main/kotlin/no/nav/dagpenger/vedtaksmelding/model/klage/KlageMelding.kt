@@ -56,7 +56,7 @@ class KlageMelding(
             listOf(
                 KLAGE_OPPRETTHOLDELSE_DEL_1.brevblokkId,
                 KLAGE_OPPRETTHOLDELSE_DEL_2.brevblokkId,
-            ) + fasteAvsluttendeBlokker
+            ) + fasteAvsluttendeBlokkerOpprettholdelse
         }
 
     private fun avvist(): List<String> {
@@ -98,11 +98,11 @@ class KlageMelding(
             brevBlokkIder.add(KLAGE_AVVIST_RETTSLIG_KLAGEINTERESSE.brevblokkId)
             brevBlokkIder.add(KLAGE_AVVIST_RETTSLIG_KLAGEINTERESSE_HJEMMEL.brevblokkId)
         }
-        return brevBlokkIder.toList() + fasteAvsluttendeBlokker
+        return brevBlokkIder.toList() + fasteAvsluttendeBlokkerVedtak
     }
 
     companion object {
-        val fasteAvsluttendeBlokker =
+        val fasteAvsluttendeBlokkerVedtak =
             listOf(
                 RETT_TIL_INNSYN.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
@@ -110,5 +110,6 @@ class KlageMelding(
                 RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
+        val fasteAvsluttendeBlokkerOpprettholdelse = listOf(SPØRSMÅL.brevBlokkId)
     }
 }

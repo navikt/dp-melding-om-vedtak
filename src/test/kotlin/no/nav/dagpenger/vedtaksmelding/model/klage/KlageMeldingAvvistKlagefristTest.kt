@@ -24,7 +24,7 @@ class KlageMeldingAvvistKlagefristTest {
                     KLAGE_AVVIST_INTRO.brevblokkId,
                     KLAGE_AVVIST_KLAGEFIRST.brevblokkId,
                     KLAGE_AVVIST_KLAGEFIRST_HJEMMEL.brevblokkId,
-                ) + KlageMelding.fasteAvsluttendeBlokker
+                ) + KlageMelding.fasteAvsluttendeBlokkerVedtak
         }
     }
 }
