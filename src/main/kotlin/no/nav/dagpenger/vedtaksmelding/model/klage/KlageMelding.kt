@@ -16,6 +16,7 @@ import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_AVVIST
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_AVVIST_SKRIFTLIG_OG_SIGNERT
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_3
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.BrevKomponenter
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.portabletext.Child
@@ -56,6 +57,7 @@ class KlageMelding(
             listOf(
                 KLAGE_OPPRETTHOLDELSE_DEL_1.brevblokkId,
                 KLAGE_OPPRETTHOLDELSE_DEL_2.brevblokkId,
+                KLAGE_OPPRETTHOLDELSE_DEL_3.brevblokkId,
             ) + fasteAvsluttendeBlokkerOpprettholdelse
         }
 

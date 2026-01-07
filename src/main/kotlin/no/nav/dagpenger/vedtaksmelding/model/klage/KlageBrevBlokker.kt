@@ -5,6 +5,7 @@ enum class KlageBrevBlokker(
 ) {
     KLAGE_OPPRETTHOLDELSE_DEL_1("brev.blokk.klage-opprettholdelse-del-1"),
     KLAGE_OPPRETTHOLDELSE_DEL_2("brev.blokk.klage-opprettholdelse-del-2"),
+    KLAGE_OPPRETTHOLDELSE_DEL_3("brev.blokk.klage-opprettholdelse-del-3"),
 
     KLAGE_AVVIST_INTRO("brev.blokk.klage-avvist-intro"),
     KLAGE_AVVIST_SKRIFTLIG_OG_SIGNERT("brev.blokk.klage-avvist-skriftlig-og-signert"),

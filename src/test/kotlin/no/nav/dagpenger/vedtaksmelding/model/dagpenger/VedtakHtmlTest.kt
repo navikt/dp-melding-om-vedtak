@@ -39,6 +39,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseMelding
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_3
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageMelding
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlagevedtakMapper
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
@@ -121,6 +122,7 @@ class VedtakHtmlTest {
             listOf(
                 KLAGE_OPPRETTHOLDELSE_DEL_1.brevblokkId,
                 KLAGE_OPPRETTHOLDELSE_DEL_2.brevblokkId,
+                KLAGE_OPPRETTHOLDELSE_DEL_3.brevblokkId,
             ) + KlageMelding.fasteAvsluttendeBlokkerOpprettholdelse
     }
 
