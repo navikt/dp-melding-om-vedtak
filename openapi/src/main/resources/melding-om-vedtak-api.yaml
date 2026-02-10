@@ -359,6 +359,7 @@ components:
         - "MELDEKORT"
         - "MANUELL"
         - "INNSENDING"
+        - "OMGJØRING"
 
     HttpProblem:
       type: object
