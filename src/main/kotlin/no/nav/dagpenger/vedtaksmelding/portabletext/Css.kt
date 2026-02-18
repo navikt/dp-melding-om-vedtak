@@ -7,7 +7,6 @@ fun css(saksId: String): String {
               /*https://aksel.nav.no/monster-maler/brev/visuelle-retningslinjer-for-brev*/
              .melding-om-vedtak {
                width: 595px; /* A4 bredde */
-               height: 842px; /* A4 høyde */
                padding: 64px 64px 74px;
              
                box-shadow: var(--a-shadow-medium);
