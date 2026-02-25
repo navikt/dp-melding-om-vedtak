@@ -129,6 +129,47 @@ paths:
               schema:
                 $ref: '#/components/schemas/HttpProblem'
 
+  /melding-om-vedtak/{behandlingId}/automatisk-avslag:
+    post:
+      summary: Lager og henter automatisk avslagsbrev for en gitt behandling
+      description: Lager et automatisk avslagsbrev (HTML) for en gitt behandlingId. Brukes ved automatisk vedtaksfatting via maskin-til-maskin-autentisering.
+      security:
+        - azureAd: [ ]
+      parameters:
+        - name: behandlingId
+          in: path
+          description: id for behandling
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutomatiskAvslag'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: HTML for automatisk avslagsbrev
+        '404':
+          description: Behandlingen finnes ikke
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpProblem'
+        default:
+          description: Feil
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpProblem'
+
   /melding-om-vedtak/{behandlingId}/{brevblokkId}/utvidet-beskrivelse:
     put:
       summary: Lagrer utvidet beskrivelse for en gitt brevblokk i meldingen om vedtak
@@ -360,6 +401,27 @@ components:
         - "MANUELL"
         - "INNSENDING"
         - "OMGJØRING"
+
+    AutomatiskAvslag:
+      type: object
+      properties:
+        fornavn:
+          type: string
+        etternavn:
+          type: string
+        fodselsnummer:
+          type: string
+          pattern: '^[0-9]{11}$'
+          description: "Må være et gyldig fødselsnummer med nøyaktig 11 sifre."
+        mellomnavn:
+          type: string
+        sakId:
+          type: string
+      required:
+        - fornavn
+        - etternavn
+        - fodselsnummer
+        - sakId
 
     HttpProblem:
       type: object

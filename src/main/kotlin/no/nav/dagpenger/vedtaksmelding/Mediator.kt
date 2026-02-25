@@ -2,12 +2,14 @@ package no.nav.dagpenger.vedtaksmelding
 
 import com.fasterxml.jackson.core.type.TypeReference
 import io.github.oshai.kotlinlogging.KotlinLogging
+import no.nav.dagpenger.saksbehandling.api.models.AutomatiskAvslagDTO
 import no.nav.dagpenger.saksbehandling.api.models.BrevVariantDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakResponseDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseDTO
 import no.nav.dagpenger.vedtaksmelding.Configuration.objectMapper
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Klient
+import no.nav.dagpenger.vedtaksmelding.apiconfig.Maskin
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
@@ -50,6 +52,39 @@ class Mediator(
     }
 
     fun lagreUtvidetBeskrivelse(utvidetBeskrivelse: UtvidetBeskrivelse): LocalDateTime = vedtaksmeldingRepository.lagre(utvidetBeskrivelse)
+
+    suspend fun hentAutomatiskAvslagBrev(
+        behandlingId: UUID,
+        automatiskAvslag: AutomatiskAvslagDTO,
+    ): String {
+        val sanityInnhold = sanityKlient.hentBrevBlokkerJson()
+        val alleBrevblokker: List<BrevBlokk> =
+            objectMapper
+                .readValue(
+                    sanityInnhold,
+                    object : TypeReference<ResultDTO>() {},
+                ).result
+
+        val vedtak =
+            behandlingKlient
+                .hentBehandlingResultat(
+                    behandlingId = behandlingId,
+                    klient = Maskin,
+                ).onFailure { throwable ->
+                    logger.error { "Feil ved henting av behandlingsresultat for automatisk avslag, behandlingId $behandlingId: $throwable" }
+                }.getOrThrow()
+
+        val vedtaksmelding = Vedtaksmelding.byggVedtaksmelding(vedtak, alleBrevblokker)
+
+        val html =
+            HtmlConverter.toAutomatiskAvslagHtml(
+                brevBlokker = vedtaksmelding.hentBrevBlokker(),
+                opplysninger = vedtaksmelding.hentOpplysninger(),
+                automatiskAvslag = automatiskAvslag,
+            )
+        vedtaksmeldingRepository.lagreVedaksmeldingHtml(behandlingId, html)
+        return html
+    }
 
     suspend fun hentForhåndsvisning(
         behandlingId: UUID,

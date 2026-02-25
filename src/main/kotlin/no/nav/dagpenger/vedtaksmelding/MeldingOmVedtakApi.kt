@@ -12,10 +12,12 @@ import io.ktor.server.plugins.swagger.swaggerUI
 import io.ktor.server.request.receive
 import io.ktor.server.request.receiveText
 import io.ktor.server.response.respond
+import io.ktor.server.response.respondText
 import io.ktor.server.routing.RoutingContext
 import io.ktor.server.routing.post
 import io.ktor.server.routing.put
 import io.ktor.server.routing.routing
+import no.nav.dagpenger.saksbehandling.api.models.AutomatiskAvslagDTO
 import no.nav.dagpenger.saksbehandling.api.models.BrevVariantRequestDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.saksbehandling.api.models.UtvidetBeskrivelseSistEndretTidspunktDTO
@@ -91,6 +93,23 @@ fun Application.meldingOmVedtakApi(mediator: Mediator) {
                         logger.warn(
                             t,
                         ) { "Feil ved henting av endelig brev for behandlingId: $behandlingId" }
+                        throw t
+                    }
+                }
+            }
+            post("/melding-om-vedtak/{behandlingId}/automatisk-avslag") {
+                val behandlingId = call.parseUUID()
+                val automatiskAvslag = call.receive<AutomatiskAvslagDTO>()
+                withLoggingContext("behandlingId" to behandlingId.toString()) {
+                    runCatching {
+                        val html =
+                            mediator.hentAutomatiskAvslagBrev(
+                                behandlingId = behandlingId,
+                                automatiskAvslag = automatiskAvslag,
+                            )
+                        call.respondText(html, ContentType.Text.Plain)
+                    }.onFailure { t ->
+                        logger.warn(t) { "Feil ved henting av automatisk avslagsbrev for behandlingId: $behandlingId" }
                         throw t
                     }
                 }
