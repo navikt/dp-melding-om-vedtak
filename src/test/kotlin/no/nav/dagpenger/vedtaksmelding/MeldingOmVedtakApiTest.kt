@@ -19,6 +19,7 @@ import io.mockk.coEvery
 import io.mockk.just
 import io.mockk.mockk
 import io.mockk.slot
+import no.nav.dagpenger.saksbehandling.api.models.AutomatiskAvslagDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlingstypeDTO
@@ -577,6 +578,88 @@ class MeldingOmVedtakApiTest {
                     setBody(requestBody(BrevVariantDTO.EGENDEFINERT))
                 }.let { response ->
                     response.status shouldBe HttpStatusCode.NoContent
+                }
+        }
+    }
+
+    @Test
+    fun `Skal returnere html for automatisk avslag med M2M token`() {
+        val behandlingId = UUID.randomUUID()
+        val mediator =
+            mockk<Mediator>().also {
+                coEvery {
+                    it.hentAutomatiskAvslagBrev(
+                        behandlingId = behandlingId,
+                        automatiskAvslag =
+                            AutomatiskAvslagDTO(
+                                fornavn = "Ola",
+                                etternavn = "Nordmann",
+                                fodselsnummer = "12345678901",
+                                sakId = "SAK-123",
+                            ),
+                    )
+                } returns "<html><body>Automatisk avslag</body></html>"
+            }
+        testApplication {
+            application {
+                meldingOmVedtakApi(mediator)
+            }
+
+            client
+                .post("/melding-om-vedtak/$behandlingId/automatisk-avslag") {
+                    autentisert(token = maskinToken)
+                    header(HttpHeaders.ContentType, ContentType.Application.Json)
+                    setBody(
+                        """
+                        {
+                            "fornavn": "Ola",
+                            "etternavn": "Nordmann",
+                            "fodselsnummer": "12345678901",
+                            "sakId": "SAK-123"
+                        }
+                        """.trimIndent(),
+                    )
+                }.let { response ->
+                    response.status shouldBe HttpStatusCode.OK
+                    response.bodyAsText() shouldBe "<html><body>Automatisk avslag</body></html>"
+                }
+        }
+    }
+
+    @Test
+    fun `Skal returnere html for automatisk avslag med saksbehandler token`() {
+        val behandlingId = UUID.randomUUID()
+        val mediator =
+            mockk<Mediator>().also {
+                coEvery {
+                    it.hentAutomatiskAvslagBrev(
+                        behandlingId = behandlingId,
+                        automatiskAvslag = any(),
+                    )
+                } returns "<html><body>Automatisk avslag</body></html>"
+            }
+        testApplication {
+            application {
+                meldingOmVedtakApi(mediator)
+            }
+
+            client
+                .post("/melding-om-vedtak/$behandlingId/automatisk-avslag") {
+                    autentisert(token = saksbehandlerToken)
+                    header(HttpHeaders.ContentType, ContentType.Application.Json)
+                    setBody(
+                        """
+                        {
+                            "fornavn": "Kari",
+                            "etternavn": "Hansen",
+                            "fodselsnummer": "98765432109",
+                            "sakId": "SAK-456"
+                        }
+                        """.trimIndent(),
+                    )
+                }.let { response ->
+                    response.status shouldBe HttpStatusCode.OK
+                    response.bodyAsText() shouldBe "<html><body>Automatisk avslag</body></html>"
                 }
         }
     }

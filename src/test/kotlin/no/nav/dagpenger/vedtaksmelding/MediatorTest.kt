@@ -12,11 +12,13 @@ import io.mockk.just
 import io.mockk.mockk
 import io.mockk.spyk
 import kotlinx.coroutines.runBlocking
+import no.nav.dagpenger.saksbehandling.api.models.AutomatiskAvslagDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlingstypeDTO
 import no.nav.dagpenger.saksbehandling.api.models.BrevVariantDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
+import no.nav.dagpenger.vedtaksmelding.apiconfig.Maskin
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.db.Postgres.withMigratedDb
 import no.nav.dagpenger.vedtaksmelding.db.PostgresDataSourceBuilder.dataSource
@@ -361,6 +363,48 @@ class MediatorTest {
                 .single {
                     it.brevblokkId == "brev.blokk.rett-til-aa-random"
                 }.tekst shouldBe "random test"
+        }
+    }
+
+    @Test
+    fun `hentAutomatiskAvslagBrev - Henter avslag-html med automatisk footer og lagrer i repository`() {
+        val vedtak =
+            Vedtak(
+                behandlingId = behandlingId,
+                utfall = Vedtak.Utfall.AVSLÅTT,
+                opplysninger =
+                    setOf(
+                        DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false),
+                    ),
+            )
+        val behandlingKlient =
+            mockk<BehandlingKlient>().also {
+                coEvery { it.hentBehandlingResultat(behandlingId, Maskin) } returns Result.success(vedtak)
+            }
+        val automatiskAvslag =
+            AutomatiskAvslagDTO(
+                fornavn = "Ola",
+                etternavn = "Nordmann",
+                fodselsnummer = "12345678901",
+                sakId = "SAK-789",
+            )
+
+        withMigratedDb { dataSource ->
+            val repository = PostgresVedtaksmeldingRepository(dataSource)
+            val mediator =
+                Mediator(
+                    behandlingKlient = behandlingKlient,
+                    sanityKlient = sanityKlient,
+                    klageBehandlingKlient = mockKlageBehandlingKlient,
+                    vedtaksmeldingRepository = repository,
+                )
+            runBlocking {
+                val html = mediator.hentAutomatiskAvslagBrev(behandlingId, automatiskAvslag)
+                html shouldBe repository.hentVedaksmeldingHtml(behandlingId)
+                html.contains("Vedtaket er automatisk behandlet") shouldBe true
+                html.contains("Ola Nordmann") shouldBe true
+            }
+            coVerify(exactly = 1) { behandlingKlient.hentBehandlingResultat(behandlingId, Maskin) }
         }
     }
 }

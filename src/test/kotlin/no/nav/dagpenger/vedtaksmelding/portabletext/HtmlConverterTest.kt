@@ -2,6 +2,9 @@ package no.nav.dagpenger.vedtaksmelding.portabletext
 
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldContain
+import io.kotest.matchers.string.shouldNotContain
+import no.nav.dagpenger.saksbehandling.api.models.AutomatiskAvslagDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlingstypeDTO.RETT_TIL_DAGPENGER
@@ -17,6 +20,7 @@ import no.nav.dagpenger.vedtaksmelding.util.finnUtvidetBeskrivelseNode
 import no.nav.dagpenger.vedtaksmelding.util.readFile
 import no.nav.dagpenger.vedtaksmelding.util.writeStringToFile
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
+import org.jsoup.Jsoup
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
@@ -105,6 +109,88 @@ Dette er linje 4
                 )
             } finnUtvidetBeskrivelseNode AVSLAG_MINSTEINNTEKT_DEL_1.brevblokkId shouldBe
             """<p data-utvidet-beskrivelse-id="brev.blokk.avslag-minsteinntekt-del-1">Dette er en test linje med &lt;, &gt; og &amp;<br>Dette er linje 2<br> <br>Dette er linje 3<br><br><br>Dette er linje 4</p>"""
+    }
+
+    @Test
+    fun `toAutomatiskAvslagHtml skal inneholde header med navn, fødselsnummer og sakId`() {
+        val sanityTekster =
+            "/json/sanity.json"
+                .readFile()
+                .let {
+                    objectMapper.readValue(it, ResultDTO::class.java)
+                }.result
+
+        val vedtaksmelding =
+            Vedtaksmelding.byggVedtaksmelding(
+                hentVedtak("/json/avslag_resultat.json"),
+                sanityTekster,
+            )
+
+        val automatiskAvslag =
+            AutomatiskAvslagDTO(
+                fornavn = "Ola",
+                etternavn = "Nordmann",
+                fodselsnummer = "12345678901",
+                sakId = "SAK-123",
+            )
+
+        val html =
+            HtmlConverter.toAutomatiskAvslagHtml(
+                brevBlokker = vedtaksmelding.hentBrevBlokker(),
+                opplysninger = vedtaksmelding.hentOpplysninger(),
+                automatiskAvslag = automatiskAvslag,
+            )
+
+        val document = Jsoup.parse(html)
+
+        // Header inneholder korrekt data
+        html shouldContain "Navn: Ola Nordmann"
+        html shouldContain "12345678901"
+        html shouldContain "SAK-123"
+
+        // Footer inneholder automatisk vedtak tekst, ikke saksbehandler/beslutter
+        html shouldContain "Vedtaket er automatisk behandlet"
+        html shouldContain "NAV"
+        html shouldNotContain "Saksbehandler"
+        html shouldNotContain "Beslutter"
+
+        // Brevblokker er med
+        val brevblokkElements = document.select("[data-brevblokk-id]")
+        brevblokkElements.size shouldBe vedtaksmelding.hentBrevBlokker().size
+    }
+
+    @Test
+    fun `toAutomatiskAvslagHtml skal håndtere mellomnavn`() {
+        val sanityTekster =
+            "/json/sanity.json"
+                .readFile()
+                .let {
+                    objectMapper.readValue(it, ResultDTO::class.java)
+                }.result
+
+        val vedtaksmelding =
+            Vedtaksmelding.byggVedtaksmelding(
+                hentVedtak("/json/avslag_resultat.json"),
+                sanityTekster,
+            )
+
+        val automatiskAvslag =
+            AutomatiskAvslagDTO(
+                fornavn = "Ola",
+                mellomnavn = "Hansen",
+                etternavn = "Nordmann",
+                fodselsnummer = "12345678901",
+                sakId = "SAK-456",
+            )
+
+        val html =
+            HtmlConverter.toAutomatiskAvslagHtml(
+                brevBlokker = vedtaksmelding.hentBrevBlokker(),
+                opplysninger = vedtaksmelding.hentOpplysninger(),
+                automatiskAvslag = automatiskAvslag,
+            )
+
+        html shouldContain "Navn: Ola Hansen Nordmann"
     }
 
     private val meldingOmVedtakDTO =
