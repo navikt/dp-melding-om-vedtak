@@ -368,15 +368,7 @@ class MediatorTest {
 
     @Test
     fun `hentAutomatiskAvslagBrev - Henter avslag-html med automatisk footer og lagrer i repository`() {
-        val vedtak =
-            Vedtak(
-                behandlingId = behandlingId,
-                utfall = Vedtak.Utfall.AVSLÅTT,
-                opplysninger =
-                    setOf(
-                        DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false),
-                    ),
-            )
+        val vedtak = VedtakMapper("/json/avslag_resultat.json".readFile()).vedtak()
         val behandlingKlient =
             mockk<BehandlingKlient>().also {
                 coEvery { it.hentBehandlingResultat(behandlingId, Maskin) } returns Result.success(vedtak)
