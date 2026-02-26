@@ -157,6 +157,8 @@ Dette er linje 4
         // Brevblokker er med
         val brevblokkElements = document.select("[data-brevblokk-id]")
         brevblokkElements.size shouldBe vedtaksmelding.hentBrevBlokker().size
+
+        writeStringToFile("build/temp/automatisk-avslag.html", html)
     }
 
     @Test
