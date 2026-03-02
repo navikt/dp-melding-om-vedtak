@@ -156,12 +156,6 @@ class DagpengerOpplysningTest {
         }
     }
 
-//    @Test
-//    fun `Antall hele stønadsuker som gjenstår kan være null`() {
-//        val behandlingsresultatData = BehandlingsresultatData("/json/innvigelse_ord_resultat.json".readFile())
-//        DagpengerOpplysning.AntallHeleStønadsukerSomGjenstår.fra(behandlingsresultatData) shouldBe null
-//    }
-
     @Test
     fun `Skal kunne lage alle type opplysninger med verdi`() {
         val behandlingsresultatData = BehandlingsresultatData("/json/avslag_resultat.json".readFile())

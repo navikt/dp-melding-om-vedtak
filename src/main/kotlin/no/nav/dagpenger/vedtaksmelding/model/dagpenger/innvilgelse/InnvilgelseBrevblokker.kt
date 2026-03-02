@@ -54,6 +54,15 @@ enum class InnvilgelseBrevblokker(
     INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_2(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert-fisk-del-2"),
 
     GJENOPPTAK_INNLEDNING(brevblokkId = "brev.blokk.gjenopptak-innledning"),
+    GJENOPPTAK_EGENANDEL(brevblokkId = "brev.blokk.gjenopptak-egenandel"),
+    GJENOPPTAK_EGENANDEL_INNLEDNING(brevblokkId = "brev.blokk.gjenopptak-egenandel-innledning"),
     GJENOPPTAK_DAGPENGEPERIODE(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak"),
-    GJENOPPTAK_REBEREGNING(brevblokkId = "brev.blokk.gjenopptak-reberegning"),
+    GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak-med-tom-dato-del-1"),
+    GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_2(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak-med-tom-dato-del-2"),
+    GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_3(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak-med-tom-dato-del-3"),
+    GJENOPPTAK_REBEREGNING_UTFØRT(brevblokkId = "brev.blokk.gjenopptak-reberegning-utfort"),
+    GJENOPPTAK_REBEREGNING_UGUNST(brevblokkId = "brev.blokk.gjenopptak-reberegning-ugunst"),
+    GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1(brevblokkId = "brev.blokk.gjenopptak-reberegning-ikke-rett-del-1"),
+    GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2(brevblokkId = "brev.blokk.gjenopptak-reberegning-ikke-rett-del-2"),
+    GJENOPPTAK_ARBEIDSTIDEN_DIN(brevblokkId = "brev.blokk.gjenopptak-arbeidstiden-din"),
 }

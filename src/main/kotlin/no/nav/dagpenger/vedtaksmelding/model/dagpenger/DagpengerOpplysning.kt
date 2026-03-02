@@ -1168,7 +1168,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
-    // todo Her er opplysninger som mangler opplysningTypeId
+    // Under følger opplysninger som ikke har opplysningTypeId, men er konstruert på bakgrunn av andre opplysninger.
     class Virkningsdato(
         override val verdi: LocalDate,
     ) : DagpengerOpplysning<Enhet.ENHETSLØS, LocalDate>(verdi) {
@@ -1191,26 +1191,6 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
                 }
         }
     }
-
-//    class AntallHeleStønadsukerSomGjenstår(
-//        override val verdi: Int,
-//    ) : DagpengerOpplysning<Enhet.UKER, Int>(verdi) {
-//        override val enhet: Enhet.UKER = Enhet.UKER
-//        override val opplysningTekstId: String = "opplysning.antall-hele-stonadsuker-som-gjenstaar"
-//
-//        companion object {
-//            val opplysningTypeIdForAntallDager: UUID = UUID.fromString("01992956-e349-76b1-8f68-c9d481df3a32")
-//
-//            fun fra(behandlingsresultatData: BehandlingsresultatData): AntallHeleStønadsukerSomGjenstår? {
-//
-//                val antallStønadsdagerSomGjenstår =
-//                    behandlingsresultatData.heltall(
-//                        opplysningTypeIdForAntallDager,
-//                    )
-//                return AntallHeleStønadsukerSomGjenstår(antallStønadsdagerSomGjenstår.mod(5))
-//            }
-//        }
-//    }
 
     override fun equals(other: Any?): Boolean =
         this.opplysningTekstId == (other as? DagpengerOpplysning<*, *>)?.opplysningTekstId &&

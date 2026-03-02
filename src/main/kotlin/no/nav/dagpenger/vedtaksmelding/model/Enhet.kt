@@ -76,7 +76,24 @@ sealed class Enhet {
 
     data object UKER : Enhet()
 
-    data object DAGER : Enhet()
+    data object DAGER : Enhet() {
+        override fun formatertVerdi(verdi: Int): String {
+            val ukeVerdi = verdi.div(5)
+            val dagVerdi = verdi.mod(5)
+            return when (verdi) {
+                0 -> "0 dager"
+                1 -> "1 dag"
+                in 2..4 -> "$verdi dager"
+                5 -> "1 uke"
+                in 6..9 -> "1 uke og $dagVerdi dager"
+                else ->
+                    when (dagVerdi) {
+                        0 -> "$ukeVerdi uker"
+                        else -> "$ukeVerdi uker og $dagVerdi dager"
+                    }
+            }
+        }
+    }
 
     data object TIMER : Enhet() {
         private fun har1Desimal(desimaltall: Double): Boolean {
