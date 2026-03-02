@@ -91,6 +91,8 @@ class VedtakMapper(
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.PeriodeSomGisVedVerneplikt(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.Egenandel(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.EgenandelGjenstående(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.AntallStønadsdagerSomGjenstår(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.KravTilArbeidssøker(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravTilMobilitet(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravTilArbeidsfør(behandlingsresultatData) }

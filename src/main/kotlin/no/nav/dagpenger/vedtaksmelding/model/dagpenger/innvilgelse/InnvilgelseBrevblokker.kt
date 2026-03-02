@@ -52,4 +52,8 @@ enum class InnvilgelseBrevblokker(
     INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT_FISK(brevblokkId = "brev.blokk.begrunnelse-innvilgelsesdato-permittert-fisk"),
     INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_1(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert-fisk-del-1"),
     INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_2(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert-fisk-del-2"),
+
+    GJENOPPTAK_INNLEDNING(brevblokkId = "brev.blokk.gjenopptak-innledning"),
+    GJENOPPTAK_DAGPENGEPERIODE(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak"),
+    GJENOPPTAK_REBEREGNING(brevblokkId = "brev.blokk.gjenopptak-reberegning"),
 }

@@ -794,6 +794,40 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
+    class EgenandelGjenstående(
+        override val verdi: Number,
+    ) : DagpengerOpplysning<Enhet.KRONER, Number>(verdi) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("01997b70-a12c-7622-bff8-82a20687e640")
+        }
+
+        override val enhet: Enhet.KRONER = Enhet.KRONER
+        override val opplysningTekstId: String = "opplysning.egenandel-gjenstaaende"
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            behandlingsresultatData.penger(
+                opplysningTypeId,
+            ),
+        )
+    }
+
+    class AntallStønadsdagerSomGjenstår(
+        override val verdi: Int,
+    ) : DagpengerOpplysning<Enhet.DAGER, Int>(verdi) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("01992956-e349-76b1-8f68-c9d481df3a32")
+        }
+
+        override val enhet: Enhet.DAGER = Enhet.DAGER
+        override val opplysningTekstId: String = "opplysning.opplysning.antall-stonadsdager-som-gjenstaar"
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            behandlingsresultatData.heltall(
+                opplysningTypeId,
+            ),
+        )
+    }
+
     class KravTilArbeidssøker(
         override val verdi: Boolean,
     ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
@@ -1157,6 +1191,26 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
                 }
         }
     }
+
+//    class AntallHeleStønadsukerSomGjenstår(
+//        override val verdi: Int,
+//    ) : DagpengerOpplysning<Enhet.UKER, Int>(verdi) {
+//        override val enhet: Enhet.UKER = Enhet.UKER
+//        override val opplysningTekstId: String = "opplysning.antall-hele-stonadsuker-som-gjenstaar"
+//
+//        companion object {
+//            val opplysningTypeIdForAntallDager: UUID = UUID.fromString("01992956-e349-76b1-8f68-c9d481df3a32")
+//
+//            fun fra(behandlingsresultatData: BehandlingsresultatData): AntallHeleStønadsukerSomGjenstår? {
+//
+//                val antallStønadsdagerSomGjenstår =
+//                    behandlingsresultatData.heltall(
+//                        opplysningTypeIdForAntallDager,
+//                    )
+//                return AntallHeleStønadsukerSomGjenstår(antallStønadsdagerSomGjenstår.mod(5))
+//            }
+//        }
+//    }
 
     override fun equals(other: Any?): Boolean =
         this.opplysningTekstId == (other as? DagpengerOpplysning<*, *>)?.opplysningTekstId &&

@@ -43,5 +43,6 @@ data class Vedtak(
     enum class Utfall {
         AVSLÅTT,
         INNVILGET,
+        GJENOPPTAK,
     }
 }

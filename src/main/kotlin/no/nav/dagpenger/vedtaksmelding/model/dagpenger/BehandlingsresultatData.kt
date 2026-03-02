@@ -43,14 +43,19 @@ class BehandlingsresultatData(
                 nyeRettighetsperioder
                     .firstOrNull { !it.harRett }
                     ?.fraOgMed
-                    ?: throw ManglendeVirkningsdato("Fant ingen rettighetsperiode med harRett = false for avslått vedtak")
+                    ?: throw ManglendeVirkningsdato("Fant ingen ny rettighetsperiode med harRett = false for avslag dagpenger")
             }
-
             Vedtak.Utfall.INNVILGET -> {
                 nyeRettighetsperioder
                     .firstOrNull { it.harRett }
                     ?.fraOgMed
-                    ?: throw ManglendeVirkningsdato("Fant ingen rettighetsperiode med harRett = true for innvilget vedtak")
+                    ?: throw ManglendeVirkningsdato("Fant ingen ny rettighetsperiode med harRett = true for innvilgelse dagpenger")
+            }
+            Vedtak.Utfall.GJENOPPTAK -> {
+                nyeRettighetsperioder
+                    .firstOrNull { it.harRett }
+                    ?.fraOgMed
+                    ?: throw ManglendeVirkningsdato("Fant ingen ny rettighetsperiode med harRett = true for gjenopptak dagpenger")
             }
         }
     }
@@ -225,6 +230,7 @@ class BehandlingsresultatData(
         return when (førteTil) {
             "Innvilgelse" -> Vedtak.Utfall.INNVILGET
             "Avslag" -> Vedtak.Utfall.AVSLÅTT
+            "Gjenopptak" -> Vedtak.Utfall.GJENOPPTAK
             else -> {
                 throw UtfallIkkeStøttet(førteTil)
             }

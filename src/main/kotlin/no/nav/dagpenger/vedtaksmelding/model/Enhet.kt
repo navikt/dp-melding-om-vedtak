@@ -76,6 +76,8 @@ sealed class Enhet {
 
     data object UKER : Enhet()
 
+    data object DAGER : Enhet()
+
     data object TIMER : Enhet() {
         private fun har1Desimal(desimaltall: Double): Boolean {
             val scaled = desimaltall * 10
