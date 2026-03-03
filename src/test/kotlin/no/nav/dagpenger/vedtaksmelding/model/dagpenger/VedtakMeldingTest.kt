@@ -3,6 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.types.shouldBeInstanceOf
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.gjenopptak.GjenopptakMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseMelding
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
@@ -36,6 +37,17 @@ class VedtakMeldingTest {
                     ),
                 alleBrevblokker = emptyList(),
             ).shouldBeInstanceOf<InnvilgelseMelding>()
+
+        Vedtaksmelding
+            .byggVedtaksmelding(
+                vedtak =
+                    Vedtak(
+                        behandlingId = behandlingId,
+                        opplysninger = emptySet(),
+                        utfall = Vedtak.Utfall.GJENOPPTAK,
+                    ),
+                alleBrevblokker = emptyList(),
+            ).shouldBeInstanceOf<GjenopptakMelding>()
     }
 
     @Test

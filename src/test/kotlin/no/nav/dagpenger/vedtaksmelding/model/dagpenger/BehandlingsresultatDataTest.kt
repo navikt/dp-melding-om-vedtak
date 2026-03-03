@@ -57,7 +57,7 @@ class BehandlingsresultatDataTest {
     }
 
     @Test
-    fun `skal kunne parse vedtak resultat data`() {
+    fun `Skal kunne parse behandlingsresultatdata for avslag`() {
         val behandlingsresultatData = BehandlingsresultatData("/json/avslag_resultat.json".readFile())
 
         behandlingsresultatData.flyttall(DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid.opplysningTypeId) shouldBe 50
@@ -79,10 +79,8 @@ class BehandlingsresultatDataTest {
     fun `Skal hente ut ufall basert på førteTil`() {
         BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Innvilgelse")).utfall() shouldBe Vedtak.Utfall.INNVILGET
         BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Avslag")).utfall() shouldBe Vedtak.Utfall.AVSLÅTT
+        BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Gjenopptak")).utfall() shouldBe Vedtak.Utfall.GJENOPPTAK
 
-        shouldThrow<BehandlingsresultatData.UtfallIkkeStøttet> {
-            BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Gjenopptak")).utfall()
-        }
         shouldThrow<BehandlingsresultatData.UtfallIkkeStøttet> {
             BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Endring")).utfall()
         }
@@ -92,7 +90,7 @@ class BehandlingsresultatDataTest {
     }
 
     @Test
-    fun `Ved innvilgelse er virkningsdato gitt av eldste rettighetsperiode med harRett = true og opprinnelse ny`() {
+    fun `Ved innvilgelse er virkningsdato gitt av eldste rettighetsperiode med harRett = true og opprinnelse = Ny`() {
         val behandlingResultatJson =
             """
             {
@@ -124,6 +122,44 @@ class BehandlingsresultatDataTest {
                 }
               ],
               "førteTil": "Innvilgelse"
+            }
+            """.trimIndent()
+        BehandlingsresultatData(behandlingResultatJson).virkningsdato() shouldBe LocalDate.of(2024, 10, 30)
+    }
+
+    @Test
+    fun `Ved gjenopptak er virkningsdato gitt av eldste rettighetsperiode med harRett = true og opprinnelse = Ny`() {
+        val behandlingResultatJson =
+            """
+            {
+              "opplysninger": [],
+              "rettighetsperioder": [
+                {
+                  "fraOgMed": "2023-10-30",
+                  "tilOgMed": "2023-11-03",
+                  "harRett": false,
+                  "opprinnelse": "Ny"
+                },
+                {
+                  "fraOgMed": "2025-10-30",
+                  "tilOgMed": "2025-11-03",
+                  "harRett": true,
+                  "opprinnelse": "Ny"
+                },
+                {
+                  "fraOgMed": "2024-10-30",
+                  "tilOgMed": "2024-11-03",
+                  "harRett": true,
+                  "opprinnelse": "Ny"
+                },
+                {
+                  "fraOgMed": "2023-10-30",
+                  "tilOgMed": "2023-11-03",
+                  "harRett": true,
+                  "opprinnelse": "Arvet"
+                }
+              ],
+              "førteTil": "Gjenopptak"
             }
             """.trimIndent()
         BehandlingsresultatData(behandlingResultatJson).virkningsdato() shouldBe LocalDate.of(2024, 10, 30)
@@ -168,7 +204,7 @@ class BehandlingsresultatDataTest {
     }
 
     @Test
-    fun `skal finne opplysning når virkningsdato er lik fraOgMed`() {
+    fun `Skal finne opplysning når virkningsdato er lik fraOgMed`() {
         val data =
             lagBehandlingsresultatData(
                 virkningsdato = "2025-01-29",
@@ -179,7 +215,7 @@ class BehandlingsresultatDataTest {
     }
 
     @Test
-    fun `skal finne opplysning når virkningsdato er innenfor periode med tilOgMed`() {
+    fun `Skal finne opplysning når virkningsdato er innenfor periode med tilOgMed`() {
         val data =
             lagBehandlingsresultatData(
                 virkningsdato = "2025-01-29",
@@ -191,7 +227,7 @@ class BehandlingsresultatDataTest {
     }
 
     @Test
-    fun `skal finne opplysning når virkningsdato er lik tilOgMed`() {
+    fun `Skal finne opplysning når virkningsdato er lik tilOgMed`() {
         val data =
             lagBehandlingsresultatData(
                 virkningsdato = "2025-12-31",
@@ -203,7 +239,7 @@ class BehandlingsresultatDataTest {
     }
 
     @Test
-    fun `skal ikke finne opplysning når virkningsdato er før fraOgMed`() {
+    fun `Skal ikke finne opplysning når virkningsdato er før fraOgMed`() {
         val data =
             lagBehandlingsresultatData(
                 virkningsdato = "2025-01-29",
@@ -211,7 +247,7 @@ class BehandlingsresultatDataTest {
                 periodeTilOgMed = "2025-12-31",
                 verdi = 55,
             )
-        shouldThrow<BehandlingsresultatData.NyPeriodeIkkeFunnet> {
+        shouldThrow<BehandlingsresultatData.PeriodeIkkeFunnet> {
             data.heltall(testOpplysningId)
         }
     }
@@ -225,7 +261,7 @@ class BehandlingsresultatDataTest {
                 periodeTilOgMed = "2025-12-30",
                 verdi = 33,
             )
-        shouldThrow<BehandlingsresultatData.NyPeriodeIkkeFunnet> {
+        shouldThrow<BehandlingsresultatData.PeriodeIkkeFunnet> {
             data.heltall(testOpplysningId)
         }
     }

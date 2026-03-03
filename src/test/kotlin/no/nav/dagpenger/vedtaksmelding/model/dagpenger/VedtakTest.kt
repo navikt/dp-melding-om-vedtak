@@ -6,7 +6,7 @@ import java.util.UUID
 
 class VedtakTest {
     @Test
-    fun `En boolsk opplysninger oppfylt dersom opplysningen finnes og har verdi true`() {
+    fun `En boolsk opplysning er oppfylt dersom opplysningen finnes og har verdi true`() {
         Vedtak(
             behandlingId = UUID.randomUUID(),
             utfall = Vedtak.Utfall.INNVILGET,

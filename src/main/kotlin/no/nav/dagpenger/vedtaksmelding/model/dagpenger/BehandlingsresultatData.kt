@@ -40,22 +40,29 @@ class BehandlingsresultatData(
         val nyeRettighetsperioder = rettighetsperioder.filter { it.opprinnelse == "Ny" }
         return when (utfall()) {
             Vedtak.Utfall.AVSLÅTT -> {
+                // Ved ny rettighet, hentes første periode med opprinnelse "Ny".
+                // Ved gjenopptak, hentes siste periode uten rett, siden opplysningene vil ha opprinnelse "Arvet".
                 nyeRettighetsperioder
                     .firstOrNull { !it.harRett }
                     ?.fraOgMed
-                    ?: throw ManglendeVirkningsdato("Fant ingen ny rettighetsperiode med harRett = false for avslag dagpenger")
+                    ?: rettighetsperioder
+                        .lastOrNull()
+                        ?.fraOgMed
+                    ?: throw ManglendeVirkningsdato("Fant ingen rettighetsperiode med harRett = false for avslag om dagpenger")
             }
+
             Vedtak.Utfall.INNVILGET -> {
                 nyeRettighetsperioder
                     .firstOrNull { it.harRett }
                     ?.fraOgMed
-                    ?: throw ManglendeVirkningsdato("Fant ingen ny rettighetsperiode med harRett = true for innvilgelse dagpenger")
+                    ?: throw ManglendeVirkningsdato("Fant ingen ny rettighetsperiode med harRett = true for innvilgelse av dagpenger")
             }
+
             Vedtak.Utfall.GJENOPPTAK -> {
                 nyeRettighetsperioder
                     .firstOrNull { it.harRett }
                     ?.fraOgMed
-                    ?: throw ManglendeVirkningsdato("Fant ingen ny rettighetsperiode med harRett = true for gjenopptak dagpenger")
+                    ?: throw ManglendeVirkningsdato("Fant ingen ny rettighetsperiode med harRett = true for gjenopptak av dagpenger")
             }
         }
     }
@@ -68,6 +75,7 @@ class BehandlingsresultatData(
                     .firstOrNull { it.harRett }
                     ?.tilOgMed
             }
+
             else -> null
         }
     }
@@ -180,17 +188,17 @@ class BehandlingsresultatData(
             null
         }
 
-    private fun verdiNode(id: UUID): JsonNode =
+    private fun verdiNode(opplysningTypeId: UUID): JsonNode =
         opplysningNoder
             .filter {
-                it["opplysningTypeId"].asText() == id.toString()
+                it["opplysningTypeId"].asText() == opplysningTypeId.toString()
             }.also {
                 if (it.isEmpty()) {
-                    throw BehandlingResultatOpplysningIkkeFunnet(id)
+                    throw BehandlingResultatOpplysningIkkeFunnet(opplysningTypeId)
                 }
 
                 if (it.size > 1) {
-                    throw OpplysningDataException("Fant flere enn èn opplysningstype med id $id")
+                    throw OpplysningDataException("Fant flere enn èn opplysningstype med opplysningTypeId $opplysningTypeId")
                 }
             }.single()
             .let { opplysningNode ->
@@ -200,11 +208,16 @@ class BehandlingsresultatData(
                         it.periodeInkludererVirkningsdato(virkningsdato())
                     }.also {
                         if (it.isEmpty()) {
-                            throw NyPeriodeIkkeFunnet(id)
+                            throw PeriodeIkkeFunnet(
+                                opplysningTypeId = opplysningTypeId,
+                                virkningsdato = virkningsdato(),
+                            )
                         }
 
                         if (it.size > 1) {
-                            throw OpplysningDataException("Fant flere enn èn periode for opplysning med id $id")
+                            throw OpplysningDataException(
+                                "Fant flere enn èn periode for opplysning med opplysningTypeId $opplysningTypeId og virkningsdato ${virkningsdato()}",
+                            )
                         }
                     }.single()["verdi"]
             }
@@ -238,12 +251,13 @@ class BehandlingsresultatData(
     }
 
     data class BehandlingResultatOpplysningIkkeFunnet(
-        val opplysningId: UUID,
-    ) : OpplysningDataException("Fant ikke behandling resultat opplysning med id $opplysningId")
+        val opplysningTypeId: UUID,
+    ) : OpplysningDataException("Fant ikke opplysning med opplysningTypeId $opplysningTypeId")
 
-    data class NyPeriodeIkkeFunnet(
-        val opplysningId: UUID,
-    ) : OpplysningDataException("Fant ikke ny periode for behandling resultat opplysning med id $opplysningId")
+    data class PeriodeIkkeFunnet(
+        val opplysningTypeId: UUID,
+        val virkningsdato: LocalDate,
+    ) : OpplysningDataException("Fant ikke periode for opplysningTypeId $opplysningTypeId og virkningsdato $virkningsdato")
 
     data class UtfallIkkeStøttet(
         val førteTil: String,
