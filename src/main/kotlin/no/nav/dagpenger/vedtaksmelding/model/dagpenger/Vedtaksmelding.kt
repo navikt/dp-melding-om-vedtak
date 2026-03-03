@@ -9,6 +9,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevb
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevblokker.SPØRSMÅL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevblokker.VEILEDNING_FRA_NAV
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.gjenopptak.GjenopptakMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseMelding
 import no.nav.dagpenger.vedtaksmelding.model.vedtak.BrevKomponenter
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
@@ -65,6 +66,7 @@ abstract class Vedtaksmelding(
                     .apply {
                         add(kotlin.runCatching { AvslagMelding(vedtak, alleBrevblokker) })
                         add(kotlin.runCatching { InnvilgelseMelding(vedtak, alleBrevblokker) })
+                        add(kotlin.runCatching { GjenopptakMelding(vedtak, alleBrevblokker) })
                     }.single { it.isSuccess }
                     .getOrThrow()
             } catch (e: Exception) {

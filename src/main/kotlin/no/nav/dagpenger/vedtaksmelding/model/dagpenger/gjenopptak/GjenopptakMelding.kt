@@ -1,13 +1,11 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger.gjenopptak
 
-import kotlin.collections.plus
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.INNVILGET
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.GJENOPPTAK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.finnOpplysning
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1
@@ -49,16 +47,17 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT_FISK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.oppfylt
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
+import kotlin.collections.plus
 
 class GjenopptakMelding(
     override val vedtak: Vedtak,
     alleBrevblokker: List<BrevBlokk>,
 ) : Vedtaksmelding(vedtak) {
-    override val harBrevstøtte: Boolean = vedtak.utfall == INNVILGET
+    override val harBrevstøtte: Boolean = vedtak.utfall == GJENOPPTAK
 
     init {
         require(this.harBrevstøtte) {
-            throw ManglerBrevstøtte("Innvilgelse for behandling ${this.vedtak.behandlingId} mangler brevstøtte")
+            throw ManglerBrevstøtte("Innvilgelse av gjenopptak for behandling ${this.vedtak.behandlingId} mangler brevstøtte")
         }
     }
 
@@ -79,12 +78,12 @@ class GjenopptakMelding(
                 dagpengeperiodeBlokker() +
                 reberegningBlokker() +
 
-                    // TODO: sjekk kritieriene for når disse skal inn
-                    listOf(INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId) +
-                    barnetilleggBlokker() +
-                    nittiProsentRegelBlokker() +
-                    samordnetBlokker() +
-                    grunnlagBlokker() +
+                // TODO: sjekk kritieriene for når disse skal inn
+                listOf(INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId) +
+                barnetilleggBlokker() +
+                nittiProsentRegelBlokker() +
+                samordnetBlokker() +
+                grunnlagBlokker() +
 
                 listOf(GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId) +
                 gjenståendeEgenandelBlokker() +
@@ -140,7 +139,7 @@ class GjenopptakMelding(
     // Reberegning utført: Grunnlag-opplysningen (typeid 0194881f-9410-7481-b263-4606fdd10cbd) har en periode med opprinnelse "Ny"
     // Hva med info ang. rett til reberegning?
     private fun reberegningBlokker(): List<String> =
-        when (1==1) {
+        when (1 == 1) {
             true -> listOf(GJENOPPTAK_REBEREGNING_UTFØRT.brevblokkId)
             false -> listOf(GJENOPPTAK_REBEREGNING_UGUNST.brevblokkId)
             else -> listOf(GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1.brevblokkId, GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2.brevblokkId)
