@@ -73,28 +73,28 @@ class GjenopptakMelding(
                     INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
                 )
             return innledningBlokker() +
-                gjenståendeEgenandelInnledning() +
-                virkningsdatoBlokker() +
-                dagpengeperiodeBlokker() +
-                reberegningBlokker() +
+                    gjenståendeEgenandelInnledning() +
+                    virkningsdatoBlokker() +
+                    dagpengeperiodeBlokker() +
+                    reberegningBlokker() +
 
-                // TODO: Skal bare vises hvis en av beregningsopplysningene under har endret seg (opprinnelse Ny)
-                listOf(INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId) +
-                // TODO: Skal bare vises hvis antall barn med barnetillegg har endret seg (opprinnelse Ny)
-                barnetilleggBlokker() +
-                // TODO: Skal bare vises hvis 90%-opplysningen har endret seg (opprinnelse Ny)
-                nittiProsentRegelBlokker() +
-                // TODO: Skal bare vises hvis noen av samordningsopplysningene har endret seg (opprinnelse Ny)
-                samordnetBlokker() +
+                    // TODO: Skal bare vises hvis en av beregningsopplysningene under har endret seg (opprinnelse Ny)
+                    listOf(INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId) +
+                    // TODO: Skal bare vises hvis antall barn med barnetillegg har endret seg (opprinnelse Ny)
+                    barnetilleggBlokker() +
+                    // TODO: Skal bare vises hvis 90%-opplysningen har endret seg (opprinnelse Ny)
+                    nittiProsentRegelBlokker() +
+                    // TODO: Skal bare vises hvis noen av samordningsopplysningene har endret seg (opprinnelse Ny)
+                    samordnetBlokker() +
 
-                grunnlagBlokker() +
-                listOf(GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId) +
-                gjenståendeEgenandelBlokker() +
+                    grunnlagBlokker() +
+                    listOf(GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId) +
+                    gjenståendeEgenandelBlokker() +
 
-                fasteBrevblokker +
+                    fasteBrevblokker +
 
-                // TODO: Skal denne blokka inn her, eller burde den vært høyere opp?
-                reellArbeidssøkerBlokker()
+                    // TODO: Skal denne blokka inn her, eller burde den vært høyere opp?
+                    reellArbeidssøkerBlokker()
         }
     override val brevBlokker: List<BrevBlokk> =
         run {
@@ -148,13 +148,13 @@ class GjenopptakMelding(
     // Hva med info ang. rett til reberegning?
     private fun reberegningBlokker(): List<String> =
         when (1 == 1) {
-            true -> listOf(GJENOPPTAK_REBEREGNING_UTFØRT.brevblokkId)
+            true -> listOf(
+                GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1.brevblokkId,
+                GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2.brevblokkId,
+            )
+
             false -> listOf(GJENOPPTAK_REBEREGNING_UGUNST.brevblokkId)
-            else ->
-                listOf(
-                    GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1.brevblokkId,
-                    GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2.brevblokkId,
-                )
+            else -> listOf(GJENOPPTAK_REBEREGNING_UTFØRT.brevblokkId)
         }
 
     private fun nittiProsentRegelBlokker(): List<String> =
@@ -224,11 +224,16 @@ class GjenopptakMelding(
                 listOf(INNVILGELSE_BARNETILLEGG.brevblokkId)
             } ?: emptyList()
 
-    private fun grunnlagBlokker(): List<String> =
-        when {
-            erInnvilgetMedVerneplikt() -> listOf(INNVILGELSE_GRUNNLAG_VERNEPLIKT.brevblokkId)
-            else -> listOf(INNVILGELSE_GRUNNLAG.brevblokkId)
+    private fun grunnlagBlokker(): List<String> {
+        // TODO: hvorfor funker ikke dette??
+        vedtak.finnOpplysning<DagpengerOpplysning.GrunnlagErReberegnet> { it.verdi }?.let {
+            return when {
+                erInnvilgetMedVerneplikt() -> listOf(INNVILGELSE_GRUNNLAG_VERNEPLIKT.brevblokkId)
+                else -> listOf(INNVILGELSE_GRUNNLAG.brevblokkId)
+            }
         }
+        return emptyList()
+    }
 
     private fun gjenståendeEgenandelBlokker(): List<String> =
         vedtak.finnOpplysning<DagpengerOpplysning.EgenandelGjenstående> { it.toDouble() > 0.0 }?.let {
@@ -253,5 +258,6 @@ class GjenopptakMelding(
 
     private fun erInnvilgetSomPermittert() = vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermittering>()
 
-    private fun erInnvilgetSomPermittertIFiskeindustri() = vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri>()
+    private fun erInnvilgetSomPermittertIFiskeindustri() =
+        vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri>()
 }

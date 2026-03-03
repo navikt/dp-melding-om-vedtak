@@ -188,6 +188,27 @@ class BehandlingsresultatData(
             null
         }
 
+    internal fun periodeMedOpprinnelseNyFinnes(opplysningTypeId: UUID): Boolean {
+        return opplysningNoder
+            .filter {
+                it["opplysningTypeId"].asText() == opplysningTypeId.toString()
+            }.also {
+                if (it.isEmpty()) {
+                    throw BehandlingResultatOpplysningIkkeFunnet(opplysningTypeId)
+                }
+
+                if (it.size > 1) {
+                    throw OpplysningDataException("Fant flere enn èn opplysningstype med opplysningTypeId $opplysningTypeId")
+                }
+            }.single()
+            .let { opplysningNode ->
+                opplysningNode["perioder"]
+                    .any {
+                        it["opprinnelse"].asText() == "Ny"
+                    }
+            }
+    }
+
     private fun verdiNode(opplysningTypeId: UUID): JsonNode =
         opplysningNoder
             .filter {

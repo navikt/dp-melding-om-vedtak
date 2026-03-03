@@ -21,6 +21,8 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_EGENANDEL_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE
@@ -54,6 +56,10 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_UTFØRT
 
 class VedtakHtmlTest {
     private val sanityKlient =
@@ -229,6 +235,56 @@ class VedtakHtmlTest {
                 )
             writeStringToFile(
                 filePath = "build/temp/innvilgelse.html",
+                content =
+                htmlInnhold,
+            )
+        }
+    }
+
+    @Test
+    fun `Html av gjenopptak innvilgelse`() {
+        runBlocking {
+            val innvilgelseMelding =
+                InnvilgelseMelding(
+                    vedtak = hentVedtak("/json/gjenopptak_innvilgelse_ikke_reberegning.json"),
+                    alleBrevblokker = sanityKlient.hentBrevBlokker(),
+                )
+            innvilgelseMelding.hentOpplysninger()
+            val brevBlokker = innvilgelseMelding.hentBrevBlokker()
+            val htmlInnhold =
+                HtmlConverter.toHtml(
+                    brevBlokker = brevBlokker,
+                    opplysninger = innvilgelseMelding.hentOpplysninger(),
+                    meldingOmVedtakData = meldingOmVedtakData,
+                )
+
+            htmlInnhold brevblokkRekkefølgeShouldBe
+                listOf(
+                    INNVILGELSE_ORDINÆR.brevblokkId,
+                    GJENOPPTAK_INNLEDNING.brevblokkId,
+                    GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId,
+                    INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                    GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
+                    // TODO: reberegning-blokker må fikses iht avklaring med PJ's
+                    GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1.brevblokkId,
+                    GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2.brevblokkId,
+
+
+                    INNVILGELSE_MELDEKORT.brevblokkId,
+                    INNVILGELSE_UTBETALING.brevblokkId,
+                    INNVILGELSE_SKATTEKORT.brevblokkId,
+                    INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                    INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                    INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                    RETT_TIL_INNSYN.brevBlokkId,
+                    PERSONOPPLYSNINGER.brevBlokkId,
+                    HJELP_FRA_ANDRE.brevBlokkId,
+                    VEILEDNING_FRA_NAV.brevBlokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
+                    SPØRSMÅL.brevBlokkId,
+                )
+            writeStringToFile(
+                filePath = "build/temp/gjenopptak.html",
                 content =
                 htmlInnhold,
             )

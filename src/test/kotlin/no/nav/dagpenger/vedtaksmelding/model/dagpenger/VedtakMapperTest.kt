@@ -114,4 +114,83 @@ class VedtakMapperTest {
             it.hentOpplysning<DagpengerOpplysning.SisteDagMedRett>() shouldNotBe null
         }
     }
+
+    @Test
+    fun `Skal kunne lage alle type opplysninger, behandlingId og utfall for innvigelse av gjenopptak ordinær`() {
+        val vedtak = VedtakMapper("/json/gjenopptak_innvilgelse_ikke_reberegning.json".readFile()).vedtak()
+        vedtak.behandlingId shouldBe UUID.fromString("019cb369-13ae-70d4-a61f-07d53216c198")
+        vedtak.utfall shouldBe Vedtak.Utfall.GJENOPPTAK
+        vedtak.also {
+            it.hentOpplysning<DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.InntektskravSiste12Måneder>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.InntektskravSiste36Måneder>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.ArbeidsinntektSiste12Måneder>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.ArbeidsinntektSiste36Måneder>() shouldNotBe null
+//            it.hentOpplysning<DagpengerOpplysning.AntallGSomGisSomGrunnlagVedVerneplikt>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.BruktBeregningsregelGrunnlag>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste6Måneder>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste12Måneder>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste36Måneder>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.UtbetaltArbeidsinntektPeriode1>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.UtbetaltArbeidsinntektPeriode2>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.UtbetaltArbeidsinntektPeriode3>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger>() shouldNotBe null
+            it.hentOpplysning<AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.BarnetilleggIKroner>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.FørsteMånedAvOpptjeningsperiode>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.SisteMånedAvOpptjeningsperiode>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.SeksGangerGrunnbeløp>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.Aldersgrense>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.Grunnlag>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.Virkningsdato>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.FastsattVanligArbeidstidPerUke>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.FastsattNyArbeidstidPerUke>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.HarSamordnet>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.SykepengerDagsats>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.PleiepengerDagsats>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.OmsorgspengerDagsats>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.OpplæringspengerDagsats>() shouldNotBe null
+//            it.hentOpplysning<DagpengerOpplysning.UføreDagsats>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.ForeldrepengerDagsats>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.SvangerskapspengerDagsats>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.OppfyllerKravTilMinsteinntekt>() shouldNotBe null
+//            it.hentOpplysning<DagpengerOpplysning.PeriodeSomGisVedVerneplikt>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.Egenandel>() shouldNotBe null
+// TODO: Denne må finnes!! Eller kan den vrære fraværende hvis ingen meldekort er beregnet? Se tråd hos PJ's
+//            it.hentOpplysning<DagpengerOpplysning.EgenandelGjenstående>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.KravTilArbeidssøker>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.OppfyllerKravTilMobilitet>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.OppfyllerKravTilArbeidsfør>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.OppfyllerKravTilArbeidssøker>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.OppfyllerKravetTilEthvertArbeid>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.OppfyllerKravetTilIkkeUtestengt>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.OppfyllerKravetTilOpphold>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.IkkeFulleYtelser>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.KravTilTapAvArbeidsinntektOgArbeidstid>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.KravTilTaptArbeidstid>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.KravTilTapAvArbeidsinntekt>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.IkkeStreikEllerLockout>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.KravTilAlder>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.KravTilUtdanning>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.OppfyllerMedlemskap>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.AntallStønadsuker>() shouldNotBe null
+
+            // Deriverte opplysninger
+            it.hentOpplysning<FørsteMånedOgÅrForInntektsperiode1>() shouldNotBe null
+            it.hentOpplysning<FørsteMånedOgÅrForInntektsperiode2>() shouldNotBe null
+            it.hentOpplysning<FørsteMånedOgÅrForInntektsperiode3>() shouldNotBe null
+
+            it.hentOpplysning<SisteMånedOgÅrForInntektsperiode1>() shouldNotBe null
+            it.hentOpplysning<SisteMånedOgÅrForInntektsperiode2>() shouldNotBe null
+            it.hentOpplysning<SisteMånedOgÅrForInntektsperiode3>() shouldNotBe null
+
+            // nullable opplysninger
+            it.hentOpplysning<DagpengerOpplysning.GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.ErInnvilgetMedVerneplikt>() shouldNotBe null
+//            it.hentOpplysning<DagpengerOpplysning.SisteDagMedRett>() shouldNotBe null
+        }
+    }
 }

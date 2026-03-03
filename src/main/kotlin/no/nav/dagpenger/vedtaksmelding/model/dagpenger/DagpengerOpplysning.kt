@@ -1,11 +1,11 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
 import io.github.oshai.kotlinlogging.KotlinLogging
-import no.nav.dagpenger.vedtaksmelding.model.Enhet
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import java.time.LocalDate
 import java.time.YearMonth
 import java.util.UUID
+import no.nav.dagpenger.vedtaksmelding.model.Enhet
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 
 interface DeriverbarOpplysning {
     val deriverteOpplysninger: Set<DagpengerOpplysning<*, *>>
@@ -134,7 +134,11 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet: Enhet.ENHETSLØS = Enhet.ENHETSLØS
         override val opplysningTekstId: String = "opplysning.brukt-beregningsregel-grunnlag"
 
-        constructor(behandlingsresultatData: BehandlingsresultatData) : this(behandlingsresultatData.tekst(opplysningTypeId))
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            behandlingsresultatData.tekst(
+                opplysningTypeId
+            )
+        )
 
         override fun formatertVerdi(): String = this.verdi.lowercase()
     }
@@ -321,7 +325,11 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.første-måned-av-opptjeningsperiode"
         override val enhet: Enhet.ENHETSLØS = Enhet.ENHETSLØS
 
-        constructor(behandlingsresultatData: BehandlingsresultatData) : this(behandlingsresultatData.dato(opplysningTypeId))
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            behandlingsresultatData.dato(
+                opplysningTypeId
+            )
+        )
 
         override val deriverteOpplysninger: Set<DagpengerOpplysning<Enhet.ENHETSLØS, YearMonth>> =
             setOf(
@@ -363,7 +371,11 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.siste-avsluttende-kalendermaaned"
         override val enhet: Enhet.ENHETSLØS = Enhet.ENHETSLØS
 
-        constructor(behandlingsresultatData: BehandlingsresultatData) : this(behandlingsresultatData.dato(opplysningTypeId))
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            behandlingsresultatData.dato(
+                opplysningTypeId
+            )
+        )
 
         override val deriverteOpplysninger: Set<DagpengerOpplysning<Enhet.ENHETSLØS, YearMonth>> =
             setOf(
@@ -794,6 +806,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
+    // TODO: Vurder om man må hente egenandel hvis denne ikke finnes.
     class EgenandelGjenstående(
         override val verdi: Number,
     ) : DagpengerOpplysning<Enhet.KRONER, Number>(verdi) {
@@ -1192,10 +1205,25 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         }
     }
 
+    class GrunnlagErReberegnet(
+        override val verdi: Boolean,
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
+        override val opplysningTekstId = "opplysning.reberegnet-grunnlag"
+        override val enhet = Enhet.ENHETSLØS
+
+        companion object {
+            fun fra(behandlingsresultatData: BehandlingsresultatData): GrunnlagErReberegnet =
+                GrunnlagErReberegnet(verdi = behandlingsresultatData.periodeMedOpprinnelseNyFinnes(
+                    opplysningTypeId = Grunnlag.opplysningTypeId,
+                    )
+                )
+        }
+    }
+
     override fun equals(other: Any?): Boolean =
         this.opplysningTekstId == (other as? DagpengerOpplysning<*, *>)?.opplysningTekstId &&
-            this.verdi == other.verdi &&
-            this.enhet == other.enhet
+                this.verdi == other.verdi &&
+                this.enhet == other.enhet
 
     override fun hashCode(): Int {
         var result = opplysningTekstId.hashCode()
