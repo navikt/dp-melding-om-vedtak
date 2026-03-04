@@ -92,12 +92,10 @@ class GjenopptakMelding(
 
                 grunnlagBlokker() +
                 listOf(GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId) +
+                reellArbeidssøkerBlokker() +
                 gjenståendeEgenandelBlokker() +
 
-                fasteBrevblokker +
-
-                // TODO: Skal denne blokka inn her, eller burde den vært høyere opp?
-                reellArbeidssøkerBlokker()
+                fasteBrevblokker
         }
     override val brevBlokker: List<BrevBlokk> =
         run {
