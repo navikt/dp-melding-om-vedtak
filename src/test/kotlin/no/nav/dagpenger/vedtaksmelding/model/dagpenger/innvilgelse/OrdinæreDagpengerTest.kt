@@ -48,6 +48,17 @@ class OrdinæreDagpengerTest {
                 alleBrevblokker = emptyList(),
             )
         }
+        shouldThrow<ManglerBrevstøtte> {
+            InnvilgelseMelding(
+                vedtak =
+                    Vedtak(
+                        behandlingId = behandlingId,
+                        utfall = Vedtak.Utfall.GJENOPPTAK,
+                        opplysninger = emptySet(),
+                    ),
+                alleBrevblokker = emptyList(),
+            )
+        }
 
         shouldNotThrowAny {
             InnvilgelseMelding(

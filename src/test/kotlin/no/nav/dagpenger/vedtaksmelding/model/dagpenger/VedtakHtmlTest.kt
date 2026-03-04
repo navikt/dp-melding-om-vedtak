@@ -21,8 +21,12 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_MINSTEINNTEKT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagMelding
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_EGENANDEL_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.gjenopptak.GjenopptakMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_ARBEIDSTIDEN_DIN
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE
@@ -56,10 +60,6 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_UTFØRT
 
 class VedtakHtmlTest {
     private val sanityKlient =
@@ -242,19 +242,19 @@ class VedtakHtmlTest {
     }
 
     @Test
-    fun `Html av gjenopptak innvilgelse`() {
+    fun `Html av gjenopptak innvilgelse når bruker ikke har hatt forbruk av dagpengeteller`() {
         runBlocking {
-            val innvilgelseMelding =
-                InnvilgelseMelding(
-                    vedtak = hentVedtak("/json/gjenopptak_innvilgelse_ikke_reberegning.json"),
+            val gjenopptakMelding =
+                GjenopptakMelding(
+                    vedtak = hentVedtak("/json/gjenopptak_innvilgelse_ikke_reberegning_ikke_forbruk.json"),
                     alleBrevblokker = sanityKlient.hentBrevBlokker(),
                 )
-            innvilgelseMelding.hentOpplysninger()
-            val brevBlokker = innvilgelseMelding.hentBrevBlokker()
+            gjenopptakMelding.hentOpplysninger()
+            val brevBlokker = gjenopptakMelding.hentBrevBlokker()
             val htmlInnhold =
                 HtmlConverter.toHtml(
                     brevBlokker = brevBlokker,
-                    opplysninger = innvilgelseMelding.hentOpplysninger(),
+                    opplysninger = gjenopptakMelding.hentOpplysninger(),
                     meldingOmVedtakData = meldingOmVedtakData,
                 )
 
@@ -262,14 +262,14 @@ class VedtakHtmlTest {
                 listOf(
                     INNVILGELSE_ORDINÆR.brevblokkId,
                     GJENOPPTAK_INNLEDNING.brevblokkId,
-                    GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId,
+                    INNVILGELSE_MED_EGENANDEL.brevblokkId,
                     INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
-                    GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
+                    GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK.brevblokkId,
                     // TODO: reberegning-blokker må fikses iht avklaring med PJ's
+                    //       https://nav-it.slack.com/archives/C063581H0PR/p1772452686918929
                     GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1.brevblokkId,
                     GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2.brevblokkId,
-
-
+                    GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
                     INNVILGELSE_MELDEKORT.brevblokkId,
                     INNVILGELSE_UTBETALING.brevblokkId,
                     INNVILGELSE_SKATTEKORT.brevblokkId,

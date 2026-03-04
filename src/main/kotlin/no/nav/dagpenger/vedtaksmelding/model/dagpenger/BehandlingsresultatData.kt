@@ -188,8 +188,8 @@ class BehandlingsresultatData(
             null
         }
 
-    internal fun periodeMedOpprinnelseNyFinnes(opplysningTypeId: UUID): Boolean {
-        return opplysningNoder
+    internal fun periodeMedOpprinnelseNyFinnes(opplysningTypeId: UUID): Boolean =
+        opplysningNoder
             .filter {
                 it["opplysningTypeId"].asText() == opplysningTypeId.toString()
             }.also {
@@ -207,7 +207,6 @@ class BehandlingsresultatData(
                         it["opprinnelse"].asText() == "Ny"
                     }
             }
-    }
 
     private fun verdiNode(opplysningTypeId: UUID): JsonNode =
         opplysningNoder

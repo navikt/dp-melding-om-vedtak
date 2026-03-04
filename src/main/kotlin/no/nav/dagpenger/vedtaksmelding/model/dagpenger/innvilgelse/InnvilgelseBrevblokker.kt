@@ -57,6 +57,7 @@ enum class InnvilgelseBrevblokker(
     GJENOPPTAK_EGENANDEL(brevblokkId = "brev.blokk.gjenopptak-egenandel"),
     GJENOPPTAK_EGENANDEL_INNLEDNING(brevblokkId = "brev.blokk.gjenopptak-egenandel-innledning"),
     GJENOPPTAK_DAGPENGEPERIODE(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak"),
+    GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak-uten-forbruk"),
     GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1(
         brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak-med-tom-dato-del-1",
     ),

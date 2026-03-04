@@ -1,11 +1,11 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
 import io.github.oshai.kotlinlogging.KotlinLogging
+import no.nav.dagpenger.vedtaksmelding.model.Enhet
+import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 import java.time.LocalDate
 import java.time.YearMonth
 import java.util.UUID
-import no.nav.dagpenger.vedtaksmelding.model.Enhet
-import no.nav.dagpenger.vedtaksmelding.model.Opplysning
 
 interface DeriverbarOpplysning {
     val deriverteOpplysninger: Set<DagpengerOpplysning<*, *>>
@@ -136,8 +136,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
             behandlingsresultatData.tekst(
-                opplysningTypeId
-            )
+                opplysningTypeId,
+            ),
         )
 
         override fun formatertVerdi(): String = this.verdi.lowercase()
@@ -327,8 +327,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
             behandlingsresultatData.dato(
-                opplysningTypeId
-            )
+                opplysningTypeId,
+            ),
         )
 
         override val deriverteOpplysninger: Set<DagpengerOpplysning<Enhet.ENHETSLØS, YearMonth>> =
@@ -373,8 +373,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
             behandlingsresultatData.dato(
-                opplysningTypeId
-            )
+                opplysningTypeId,
+            ),
         )
 
         override val deriverteOpplysninger: Set<DagpengerOpplysning<Enhet.ENHETSLØS, YearMonth>> =
@@ -1213,17 +1213,19 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
 
         companion object {
             fun fra(behandlingsresultatData: BehandlingsresultatData): GrunnlagErReberegnet =
-                GrunnlagErReberegnet(verdi = behandlingsresultatData.periodeMedOpprinnelseNyFinnes(
-                    opplysningTypeId = Grunnlag.opplysningTypeId,
-                    )
+                GrunnlagErReberegnet(
+                    verdi =
+                        behandlingsresultatData.periodeMedOpprinnelseNyFinnes(
+                            opplysningTypeId = Grunnlag.opplysningTypeId,
+                        ),
                 )
         }
     }
 
     override fun equals(other: Any?): Boolean =
         this.opplysningTekstId == (other as? DagpengerOpplysning<*, *>)?.opplysningTekstId &&
-                this.verdi == other.verdi &&
-                this.enhet == other.enhet
+            this.verdi == other.verdi &&
+            this.enhet == other.enhet
 
     override fun hashCode(): Int {
         var result = opplysningTekstId.hashCode()

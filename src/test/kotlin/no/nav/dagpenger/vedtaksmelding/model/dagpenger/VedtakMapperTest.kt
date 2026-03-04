@@ -117,7 +117,7 @@ class VedtakMapperTest {
 
     @Test
     fun `Skal kunne lage alle type opplysninger, behandlingId og utfall for innvigelse av gjenopptak ordinær`() {
-        val vedtak = VedtakMapper("/json/gjenopptak_innvilgelse_ikke_reberegning.json".readFile()).vedtak()
+        val vedtak = VedtakMapper("/json/gjenopptak_innvilgelse_ikke_reberegning_ikke_forbruk.json".readFile()).vedtak()
         vedtak.behandlingId shouldBe UUID.fromString("019cb369-13ae-70d4-a61f-07d53216c198")
         vedtak.utfall shouldBe Vedtak.Utfall.GJENOPPTAK
         vedtak.also {
@@ -158,7 +158,8 @@ class VedtakMapperTest {
             it.hentOpplysning<DagpengerOpplysning.OppfyllerKravTilMinsteinntekt>() shouldNotBe null
 //            it.hentOpplysning<DagpengerOpplysning.PeriodeSomGisVedVerneplikt>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.Egenandel>() shouldNotBe null
-// TODO: Denne må finnes!! Eller kan den vrære fraværende hvis ingen meldekort er beregnet? Se tråd hos PJ's
+// TODO: Denne må finnes!! Eller kan den være fraværende hvis ingen meldekort er beregnet? Er det da et gjenopptak?
+//       Se tråd hos PJ's: https://nav-it.slack.com/archives/C063581H0PR/p1772440810600219
 //            it.hentOpplysning<DagpengerOpplysning.EgenandelGjenstående>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.KravTilArbeidssøker>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.OppfyllerKravTilMobilitet>() shouldNotBe null
@@ -190,6 +191,7 @@ class VedtakMapperTest {
             // nullable opplysninger
             it.hentOpplysning<DagpengerOpplysning.GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.ErInnvilgetMedVerneplikt>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.GrunnlagErReberegnet>() shouldNotBe null
 //            it.hentOpplysning<DagpengerOpplysning.SisteDagMedRett>() shouldNotBe null
         }
     }
