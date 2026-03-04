@@ -1222,6 +1222,40 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         }
     }
 
+    class AntallBarnSomGirRettTilBarnetilleggErEndret(
+        override val verdi: Boolean,
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
+        override val opplysningTekstId = "opplysning.antall-barn-endret"
+        override val enhet = Enhet.ENHETSLØS
+
+        companion object {
+            fun fra(behandlingsresultatData: BehandlingsresultatData): AntallBarnSomGirRettTilBarnetilleggErEndret =
+                AntallBarnSomGirRettTilBarnetilleggErEndret(
+                    verdi =
+                        behandlingsresultatData.periodeMedOpprinnelseNyFinnes(
+                            opplysningTypeId = AntallBarnSomGirRettTilBarnetillegg.opplysningTypeId,
+                        ),
+                )
+        }
+    }
+
+    class NittiProsentregelErEndret(
+        override val verdi: Boolean,
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
+        override val opplysningTekstId = "opplysning.nittiprosentregel-endret"
+        override val enhet = Enhet.ENHETSLØS
+
+        companion object {
+            fun fra(behandlingsresultatData: BehandlingsresultatData): NittiProsentregelErEndret =
+                NittiProsentregelErEndret(
+                    verdi =
+                        behandlingsresultatData.periodeMedOpprinnelseNyFinnes(
+                            opplysningTypeId = AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget.opplysningTypeId,
+                        ),
+                )
+        }
+    }
+
     override fun equals(other: Any?): Boolean =
         this.opplysningTekstId == (other as? DagpengerOpplysning<*, *>)?.opplysningTekstId &&
             this.verdi == other.verdi &&

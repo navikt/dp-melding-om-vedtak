@@ -24,6 +24,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_UTFØRT
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GODKJENT_LOKAL_ELLER_DELTID_ARBEIDSSØKER_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GODKJENT_LOKAL_ELLER_DELTID_ARBEIDSSØKER_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG
@@ -31,6 +32,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MED_EGENANDEL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_NITTI_PROSENT_REGEL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR_FOM_TOM
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_PERMITTERT
@@ -170,7 +172,7 @@ class GjenopptakOrdinæreDagpengerTest {
     }
 
     @Test
-    fun `Riktige brevblokker når det ikke er reberegnet grunnlag og det er forbrukt av dagpengeperioden`() {
+    fun `Riktige brevblokker når det ikke er reberegnet grunnlag og forbruk av periode`() {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,
@@ -213,7 +215,7 @@ class GjenopptakOrdinæreDagpengerTest {
     }
 
     @Test
-    fun `Riktige brevblokker når det ikke er reberegnet grunnlag og det er forbrukt av dagpengeperioden - permittert`() {
+    fun `Riktige brevblokker når det ikke er reberegnet grunnlag og forbruk av periode - permittert`() {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_PERMITTERT.brevblokkId,
@@ -257,7 +259,7 @@ class GjenopptakOrdinæreDagpengerTest {
     }
 
     @Test
-    fun `Riktige brevblokker når det ikke er reberegnet grunnlag og det er forbrukt av dagpengeperioden - permittert fisk`() {
+    fun `Riktige brevblokker når det ikke er reberegnet grunnlag og forbruk av periode - permittert fisk`() {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_PERMITTERT_FISK.brevblokkId,
@@ -301,7 +303,7 @@ class GjenopptakOrdinæreDagpengerTest {
     }
 
     @Test
-    fun `Riktige brevblokker når det er reberegnet grunnlag og det er forbrukt av dagpengeperioden`() {
+    fun `Riktige brevblokker ved reberegnet grunnlag og forbruk av periode`() {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,
@@ -345,7 +347,101 @@ class GjenopptakOrdinæreDagpengerTest {
     }
 
     @Test
-    fun `Riktige brevblokker når det ikke er reberegnet grunnlag og det er forbrukt av dagpengeperioden - godkjent lokal arbeidssøker`() {
+    fun `Riktige brevblokker ved reberegnet grunnlag, forbruk av periode og antall barn er endret`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                INNVILGELSE_ORDINÆR.brevblokkId,
+                GJENOPPTAK_INNLEDNING.brevblokkId,
+                GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
+                GJENOPPTAK_REBEREGNING_UTFØRT.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_BARNETILLEGG.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
+                GJENOPPTAK_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_INNSYN.brevBlokkId,
+                PERSONOPPLYSNINGER.brevBlokkId,
+                HJELP_FRA_ANDRE.brevBlokkId,
+                VEILEDNING_FRA_NAV.brevBlokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
+                SPØRSMÅL.brevBlokkId,
+            )
+        GjenopptakMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    utfall = Vedtak.Utfall.GJENOPPTAK,
+                    opplysninger =
+                        setOf(
+                            DagpengerOpplysning.Egenandel(verdi = 3000),
+                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000),
+                            DagpengerOpplysning.GrunnlagErReberegnet(verdi = true),
+                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259),
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(verdi = 3),
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetilleggErEndret(verdi = true),
+                        ),
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Riktige brevblokker ved reberegnet grunnlag, forbruk av periode og bruk av nittiprosentregel er endret`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                INNVILGELSE_ORDINÆR.brevblokkId,
+                GJENOPPTAK_INNLEDNING.brevblokkId,
+                GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
+                GJENOPPTAK_REBEREGNING_UTFØRT.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
+                GJENOPPTAK_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_INNSYN.brevBlokkId,
+                PERSONOPPLYSNINGER.brevBlokkId,
+                HJELP_FRA_ANDRE.brevBlokkId,
+                VEILEDNING_FRA_NAV.brevBlokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
+                SPØRSMÅL.brevBlokkId,
+            )
+        GjenopptakMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    utfall = Vedtak.Utfall.GJENOPPTAK,
+                    opplysninger =
+                        setOf(
+                            DagpengerOpplysning.Egenandel(verdi = 3000),
+                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000),
+                            DagpengerOpplysning.GrunnlagErReberegnet(verdi = true),
+                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259),
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(verdi = 3),
+                            DagpengerOpplysning.NittiProsentregelErEndret(verdi = true),
+                        ),
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Riktige brevblokker når det ikke er reberegnet grunnlag, forbruk av periode og godkjent lokal arbeidssøker`() {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,
@@ -391,7 +487,7 @@ class GjenopptakOrdinæreDagpengerTest {
     }
 
     @Test
-    fun `Riktige brevblokker når det ikke er reberegnet grunnlag og det er forbrukt av dagpengeperioden - godkjent deltidssøker`() {
+    fun `Riktige brevblokker når det ikke er reberegnet grunnlag, forbruk av periode og godkjent deltidssøker`() {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR.brevblokkId,

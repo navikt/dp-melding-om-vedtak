@@ -1,12 +1,10 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger.gjenopptak
 
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.GJENOPPTAK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.finnOpplysning
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.ikkeOppfylt
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1
@@ -142,6 +140,7 @@ class GjenopptakMelding(
                     listOf(GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK.brevblokkId)
                 }
             }
+
             else ->
                 listOf(
                     GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1.brevblokkId,
@@ -151,7 +150,7 @@ class GjenopptakMelding(
         }
 
     private fun reberegningBlokker(): List<String> =
-        if (!vedtak.ikkeOppfylt<DagpengerOpplysning.GrunnlagErReberegnet>()) {
+        if (vedtak.oppfylt<DagpengerOpplysning.GrunnlagErReberegnet>()) {
             listOf(GJENOPPTAK_REBEREGNING_UTFØRT.brevblokkId)
         } else {
             // TODO: Avklare med PJ's hvordan vi skal hente ut info om reberegning.
@@ -163,24 +162,40 @@ class GjenopptakMelding(
                         GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1.brevblokkId,
                         GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2.brevblokkId,
                     )
+
                 false -> listOf(GJENOPPTAK_REBEREGNING_UGUNST.brevblokkId)
             }
         }
 
     private fun beregningBlokker(): List<String> =
-        if (!vedtak.ikkeOppfylt<DagpengerOpplysning.GrunnlagErReberegnet>()) {
+        if (vedtak.oppfylt<DagpengerOpplysning.GrunnlagErReberegnet>() ||
+            barnetilleggBlokker().size > 0 ||
+            nittiProsentRegelBlokker().size > 0 ||
+            samordningBlokker().size > 0
+        ) {
             listOf(INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId)
         } else {
             emptyList()
         }
 
+    private fun barnetilleggBlokker(): List<String> =
+        if (vedtak.oppfylt<DagpengerOpplysning.AntallBarnSomGirRettTilBarnetilleggErEndret>()) {
+            vedtak.opplysninger
+                .find {
+                    it is DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg && it.verdi > 0
+                }?.let {
+                    listOf(INNVILGELSE_BARNETILLEGG.brevblokkId)
+                } ?: emptyList()
+        } else {
+            emptyList()
+        }
+
     private fun nittiProsentRegelBlokker(): List<String> =
-        vedtak
-            .finnOpplysning<AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget> {
-                it.toDouble() > 0
-            }?.let {
-                listOf(INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId)
-            } ?: emptyList()
+        if (vedtak.oppfylt<DagpengerOpplysning.NittiProsentregelErEndret>()) {
+            listOf(INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId)
+        } else {
+            emptyList()
+        }
 
     private fun samordningBlokker(): List<String> {
         if (!vedtak.oppfylt<DagpengerOpplysning.HarSamordnet>()) {
@@ -233,22 +248,14 @@ class GjenopptakMelding(
         return samordningBlokker
     }
 
-    private fun barnetilleggBlokker(): List<String> =
-        vedtak.opplysninger
-            .find {
-                it is DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg && it.verdi > 0
-            }?.let {
-                listOf(INNVILGELSE_BARNETILLEGG.brevblokkId)
-            } ?: emptyList()
-
     private fun grunnlagBlokker(): List<String> =
-        if (vedtak.ikkeOppfylt<DagpengerOpplysning.GrunnlagErReberegnet>()) {
-            emptyList()
-        } else {
+        if (vedtak.oppfylt<DagpengerOpplysning.GrunnlagErReberegnet>()) {
             when {
                 erInnvilgetMedVerneplikt() -> listOf(INNVILGELSE_GRUNNLAG_VERNEPLIKT.brevblokkId)
                 else -> listOf(INNVILGELSE_GRUNNLAG.brevblokkId)
             }
+        } else {
+            emptyList()
         }
 
     private fun gjenståendeEgenandelBlokker(): List<String> =
