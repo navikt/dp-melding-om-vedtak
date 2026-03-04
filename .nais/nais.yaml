@@ -25,7 +25,6 @@ spec:
     inbound:
       rules:
         - application: dp-saksbehandling
-        - application: dp-saksbehandling-frontend
         {{#if wonderwalled}}
         - application: wonderwalled-azure
           namespace: nais
