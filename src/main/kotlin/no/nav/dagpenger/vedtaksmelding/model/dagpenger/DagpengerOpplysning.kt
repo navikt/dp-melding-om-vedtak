@@ -831,7 +831,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         }
 
         override val enhet: Enhet.DAGER = Enhet.DAGER
-        override val opplysningTekstId: String = "opplysning.opplysning.antall-stonadsdager-som-gjenstaar"
+        override val opplysningTekstId: String = "opplysning.antall-stonadsdager-som-gjenstaar"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
             behandlingsresultatData.heltallLast(
