@@ -69,7 +69,6 @@ enum class InnvilgelseBrevblokker(
     ),
     GJENOPPTAK_REBEREGNING_UTFØRT(brevblokkId = "brev.blokk.gjenopptak-reberegning-utfort"),
     GJENOPPTAK_REBEREGNING_UGUNST(brevblokkId = "brev.blokk.gjenopptak-reberegning-ugunst"),
-    GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1(brevblokkId = "brev.blokk.gjenopptak-reberegning-ikke-rett-del-1"),
-    GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2(brevblokkId = "brev.blokk.gjenopptak-reberegning-ikke-rett-del-2"),
+    GJENOPPTAK_REBEREGNING_IKKE_RETT(brevblokkId = "brev.blokk.gjenopptak-reberegning-ikke-rett"),
     GJENOPPTAK_ARBEIDSTIDEN_DIN(brevblokkId = "brev.blokk.gjenopptak-arbeidstiden-din"),
 }

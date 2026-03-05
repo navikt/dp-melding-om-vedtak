@@ -14,8 +14,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_EGENANDEL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_EGENANDEL_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_UGUNST
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_UTFØRT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
@@ -162,12 +161,7 @@ class GjenopptakMelding(
             // Reberegning utført: Grunnlag-opplysningen (typeid 0194881f-9410-7481-b263-4606fdd10cbd) har en periode med opprinnelse "Ny"
             // Hva med info ang. rett til reberegning?
             when (1 == 1) {
-                true ->
-                    listOf(
-                        GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1.brevblokkId,
-                        GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2.brevblokkId,
-                    )
-
+                true -> listOf(GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId)
                 false -> listOf(GJENOPPTAK_REBEREGNING_UGUNST.brevblokkId)
             }
         }

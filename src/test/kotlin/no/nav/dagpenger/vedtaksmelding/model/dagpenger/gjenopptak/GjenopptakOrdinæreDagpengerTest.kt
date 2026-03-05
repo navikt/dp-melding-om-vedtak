@@ -21,8 +21,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_EGENANDEL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_EGENANDEL_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_UTFØRT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GODKJENT_LOKAL_ELLER_DELTID_ARBEIDSSØKER_DEL_1
@@ -97,8 +96,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK.brevblokkId,
-                GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1.brevblokkId,
-                GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2.brevblokkId,
+                GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
                 GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
                 INNVILGELSE_MELDEKORT.brevblokkId,
                 INNVILGELSE_UTBETALING.brevblokkId,
@@ -139,8 +137,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1.brevblokkId,
                 GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_2.brevblokkId,
                 GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_3.brevblokkId,
-                GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1.brevblokkId,
-                GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2.brevblokkId,
+                GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
                 GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
                 INNVILGELSE_MELDEKORT.brevblokkId,
                 INNVILGELSE_UTBETALING.brevblokkId,
@@ -180,8 +177,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
-                GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1.brevblokkId,
-                GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2.brevblokkId,
+                GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
                 GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
                 GJENOPPTAK_EGENANDEL.brevblokkId,
                 INNVILGELSE_MELDEKORT.brevblokkId,
@@ -223,8 +219,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT.brevblokkId,
                 GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
-                GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1.brevblokkId,
-                GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2.brevblokkId,
+                GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
                 GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
                 GJENOPPTAK_EGENANDEL.brevblokkId,
                 INNVILGELSE_MELDEKORT.brevblokkId,
@@ -267,8 +262,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT_FISK.brevblokkId,
                 GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
-                GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1.brevblokkId,
-                GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2.brevblokkId,
+                GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
                 GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
                 GJENOPPTAK_EGENANDEL.brevblokkId,
                 INNVILGELSE_MELDEKORT.brevblokkId,
@@ -449,8 +443,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
-                GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1.brevblokkId,
-                GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2.brevblokkId,
+                GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
                 GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
                 INNVILGELSE_GODKJENT_LOKAL_ELLER_DELTID_ARBEIDSSØKER_DEL_1.brevblokkId,
                 INNVILGELSE_GODKJENT_LOKAL_ELLER_DELTID_ARBEIDSSØKER_DEL_2.brevblokkId,
@@ -495,8 +488,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
-                GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_1.brevblokkId,
-                GJENOPPTAK_REBEREGNING_IKKE_RETT_DEL_2.brevblokkId,
+                GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
                 GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
                 INNVILGELSE_GODKJENT_LOKAL_ELLER_DELTID_ARBEIDSSØKER_DEL_1.brevblokkId,
                 INNVILGELSE_GODKJENT_LOKAL_ELLER_DELTID_ARBEIDSSØKER_DEL_2.brevblokkId,
