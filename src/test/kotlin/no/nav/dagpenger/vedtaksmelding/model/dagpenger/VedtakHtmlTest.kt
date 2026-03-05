@@ -23,8 +23,8 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.gjenopptak.GjenopptakMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_ARBEIDSTIDEN_DIN
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_EGENANDEL_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
@@ -311,9 +311,8 @@ class VedtakHtmlTest {
                 listOf(
                     INNVILGELSE_ORDINÆR.brevblokkId,
                     GJENOPPTAK_INNLEDNING.brevblokkId,
-                    GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId,
                     INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
-                    GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK.brevblokkId,
+                    GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
                     // TODO: reberegning-blokker må fikses iht avklaring med PJ's
                     //       https://nav-it.slack.com/archives/C063581H0PR/p1772452686918929
                     GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
