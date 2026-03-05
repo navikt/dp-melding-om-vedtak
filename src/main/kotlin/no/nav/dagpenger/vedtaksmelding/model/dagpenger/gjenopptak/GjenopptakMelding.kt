@@ -118,10 +118,15 @@ class GjenopptakMelding(
             }
         }
 
-    private fun gjenståendeEgenandelInnledning(): List<String> =
-        vedtak.finnOpplysning<DagpengerOpplysning.EgenandelGjenstående> { it.toDouble() > 0.0 }?.let {
-            listOf(GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId)
-        } ?: listOf(INNVILGELSE_MED_EGENANDEL.brevblokkId)
+    private fun gjenståendeEgenandelInnledning(): List<String> {
+        vedtak.finnOpplysning<DagpengerOpplysning.EgenandelGjenstående> {
+            return when (it.toDouble()) {
+                0.0 -> emptyList()
+                else -> listOf(GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId)
+            }
+        }
+        return listOf(INNVILGELSE_MED_EGENANDEL.brevblokkId)
+    }
 
     private fun virkningsdatoBlokker(): List<String> =
         when {
