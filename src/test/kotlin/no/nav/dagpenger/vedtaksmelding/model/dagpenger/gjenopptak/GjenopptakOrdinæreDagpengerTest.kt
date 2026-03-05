@@ -19,8 +19,9 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_3
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_EGENANDEL
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_EGENANDEL_INNLEDNING
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING_EGENANDEL
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING_SAMME_PERIODE
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING_VIRKNINGSDATO
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_UTFØRT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
@@ -32,7 +33,6 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_NITTI_PROSENT_REGEL
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR_FOM_TOM
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_PERMITTERT_FISK
@@ -91,8 +91,8 @@ class GjenopptakOrdinæreDagpengerTest {
     fun `Riktige brevblokker når det ikke er reberegnet grunnlag og ikke forbrukt av dagpengeperioden`() {
         val forventedeBrevblokkIder =
             listOf(
-                INNVILGELSE_ORDINÆR.brevblokkId,
-                GJENOPPTAK_INNLEDNING.brevblokkId,
+                GJENOPPTAK_INNLEDNING_VIRKNINGSDATO.brevblokkId,
+                GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK.brevblokkId,
@@ -131,7 +131,7 @@ class GjenopptakOrdinæreDagpengerTest {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_ORDINÆR_FOM_TOM.brevblokkId,
-                GJENOPPTAK_INNLEDNING.brevblokkId,
+                GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1.brevblokkId,
@@ -172,9 +172,9 @@ class GjenopptakOrdinæreDagpengerTest {
     fun `Riktige brevblokker når det ikke er reberegnet grunnlag og forbruk av periode`() {
         val forventedeBrevblokkIder =
             listOf(
-                INNVILGELSE_ORDINÆR.brevblokkId,
-                GJENOPPTAK_INNLEDNING.brevblokkId,
-                GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId,
+                GJENOPPTAK_INNLEDNING_VIRKNINGSDATO.brevblokkId,
+                GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                GJENOPPTAK_INNLEDNING_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
                 GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
@@ -215,8 +215,8 @@ class GjenopptakOrdinæreDagpengerTest {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_PERMITTERT.brevblokkId,
-                GJENOPPTAK_INNLEDNING.brevblokkId,
-                GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId,
+                GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                GJENOPPTAK_INNLEDNING_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT.brevblokkId,
                 GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
                 GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
@@ -258,8 +258,8 @@ class GjenopptakOrdinæreDagpengerTest {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_PERMITTERT_FISK.brevblokkId,
-                GJENOPPTAK_INNLEDNING.brevblokkId,
-                GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId,
+                GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                GJENOPPTAK_INNLEDNING_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT_FISK.brevblokkId,
                 GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
                 GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
@@ -300,9 +300,9 @@ class GjenopptakOrdinæreDagpengerTest {
     fun `Riktige brevblokker ved reberegnet grunnlag og forbruk av periode`() {
         val forventedeBrevblokkIder =
             listOf(
-                INNVILGELSE_ORDINÆR.brevblokkId,
-                GJENOPPTAK_INNLEDNING.brevblokkId,
-                GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId,
+                GJENOPPTAK_INNLEDNING_VIRKNINGSDATO.brevblokkId,
+                GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                GJENOPPTAK_INNLEDNING_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
                 GJENOPPTAK_REBEREGNING_UTFØRT.brevblokkId,
@@ -344,9 +344,9 @@ class GjenopptakOrdinæreDagpengerTest {
     fun `Riktige brevblokker ved reberegnet grunnlag, forbruk av periode og antall barn er endret`() {
         val forventedeBrevblokkIder =
             listOf(
-                INNVILGELSE_ORDINÆR.brevblokkId,
-                GJENOPPTAK_INNLEDNING.brevblokkId,
-                GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId,
+                GJENOPPTAK_INNLEDNING_VIRKNINGSDATO.brevblokkId,
+                GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                GJENOPPTAK_INNLEDNING_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
                 GJENOPPTAK_REBEREGNING_UTFØRT.brevblokkId,
@@ -391,9 +391,9 @@ class GjenopptakOrdinæreDagpengerTest {
     fun `Riktige brevblokker ved reberegnet grunnlag, forbruk av periode og bruk av nittiprosentregel er endret`() {
         val forventedeBrevblokkIder =
             listOf(
-                INNVILGELSE_ORDINÆR.brevblokkId,
-                GJENOPPTAK_INNLEDNING.brevblokkId,
-                GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId,
+                GJENOPPTAK_INNLEDNING_VIRKNINGSDATO.brevblokkId,
+                GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                GJENOPPTAK_INNLEDNING_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
                 GJENOPPTAK_REBEREGNING_UTFØRT.brevblokkId,
@@ -438,9 +438,9 @@ class GjenopptakOrdinæreDagpengerTest {
     fun `Riktige brevblokker når det ikke er reberegnet grunnlag, forbruk av periode og godkjent lokal arbeidssøker`() {
         val forventedeBrevblokkIder =
             listOf(
-                INNVILGELSE_ORDINÆR.brevblokkId,
-                GJENOPPTAK_INNLEDNING.brevblokkId,
-                GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId,
+                GJENOPPTAK_INNLEDNING_VIRKNINGSDATO.brevblokkId,
+                GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                GJENOPPTAK_INNLEDNING_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
                 GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
@@ -483,9 +483,9 @@ class GjenopptakOrdinæreDagpengerTest {
     fun `Riktige brevblokker når det ikke er reberegnet grunnlag, forbruk av periode og godkjent deltidssøker`() {
         val forventedeBrevblokkIder =
             listOf(
-                INNVILGELSE_ORDINÆR.brevblokkId,
-                GJENOPPTAK_INNLEDNING.brevblokkId,
-                GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId,
+                GJENOPPTAK_INNLEDNING_VIRKNINGSDATO.brevblokkId,
+                GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                GJENOPPTAK_INNLEDNING_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
                 GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,

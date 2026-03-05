@@ -25,7 +25,8 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.gjenopptak.GjenopptakMeld
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING_SAMME_PERIODE
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING_VIRKNINGSDATO
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
@@ -260,8 +261,8 @@ class VedtakHtmlTest {
 
             htmlInnhold brevblokkRekkefølgeShouldBe
                 listOf(
-                    INNVILGELSE_ORDINÆR.brevblokkId,
-                    GJENOPPTAK_INNLEDNING.brevblokkId,
+                    GJENOPPTAK_INNLEDNING_VIRKNINGSDATO.brevblokkId,
+                    GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
                     INNVILGELSE_MED_EGENANDEL.brevblokkId,
                     INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                     GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK.brevblokkId,
@@ -309,8 +310,8 @@ class VedtakHtmlTest {
 
             htmlInnhold brevblokkRekkefølgeShouldBe
                 listOf(
-                    INNVILGELSE_ORDINÆR.brevblokkId,
-                    GJENOPPTAK_INNLEDNING.brevblokkId,
+                    GJENOPPTAK_INNLEDNING_VIRKNINGSDATO.brevblokkId,
+                    GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
                     INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                     GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
                     // TODO: reberegning-blokker må fikses iht avklaring med PJ's

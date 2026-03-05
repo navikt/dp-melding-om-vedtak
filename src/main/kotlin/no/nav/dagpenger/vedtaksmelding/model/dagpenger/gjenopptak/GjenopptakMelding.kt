@@ -12,8 +12,9 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_3
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_EGENANDEL
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_EGENANDEL_INNLEDNING
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING_EGENANDEL
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING_SAMME_PERIODE
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING_VIRKNINGSDATO
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_UGUNST
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_UTFØRT
@@ -27,7 +28,6 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_NITTI_PROSENT_REGEL
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR_FOM_TOM
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_PERMITTERT_FISK
@@ -102,17 +102,13 @@ class GjenopptakMelding(
 
     private fun innledningBlokker(): List<String> =
         when {
-            erInnvilgetSomPermittert() -> listOf(INNVILGELSE_PERMITTERT.brevblokkId, GJENOPPTAK_INNLEDNING.brevblokkId)
+            erInnvilgetSomPermittert() -> listOf(INNVILGELSE_PERMITTERT.brevblokkId, GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId)
             erInnvilgetSomPermittertIFiskeindustri() ->
-                listOf(
-                    INNVILGELSE_PERMITTERT_FISK.brevblokkId,
-                    GJENOPPTAK_INNLEDNING.brevblokkId,
-                )
-
+                listOf(INNVILGELSE_PERMITTERT_FISK.brevblokkId, GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId)
             else -> {
                 when (vedtak.finnOpplysning("opplysning.siste-dag-med-rett")) {
-                    null -> listOf(INNVILGELSE_ORDINÆR.brevblokkId, GJENOPPTAK_INNLEDNING.brevblokkId)
-                    else -> listOf(INNVILGELSE_ORDINÆR_FOM_TOM.brevblokkId, GJENOPPTAK_INNLEDNING.brevblokkId)
+                    null -> listOf(GJENOPPTAK_INNLEDNING_VIRKNINGSDATO.brevblokkId, GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId)
+                    else -> listOf(INNVILGELSE_ORDINÆR_FOM_TOM.brevblokkId, GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId)
                 }
             }
         }
@@ -121,7 +117,7 @@ class GjenopptakMelding(
         vedtak.finnOpplysning<DagpengerOpplysning.EgenandelGjenstående> {
             return when (it.toDouble()) {
                 0.0 -> emptyList()
-                else -> listOf(GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId)
+                else -> listOf(GJENOPPTAK_INNLEDNING_EGENANDEL.brevblokkId)
             }
         }
         return listOf(INNVILGELSE_MED_EGENANDEL.brevblokkId)
