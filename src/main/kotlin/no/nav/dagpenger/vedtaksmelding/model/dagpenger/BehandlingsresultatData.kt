@@ -120,8 +120,35 @@ class BehandlingsresultatData(
         }
     }
 
+    fun heltallLast(id: UUID): Int {
+        val verdi = verdiNodeLast(id)
+        return when (verdi["datatype"].asText() == "heltall") {
+            true -> {
+                verdi["verdi"]
+                    .also { require(it.isInt) { "Forventet at heltall har int verdi, men var $it" } }
+                    .asInt()
+            }
+
+            false -> throw IllegalArgumentException("Ugyldig verdinode: $verdi")
+        }
+    }
+
     fun penger(id: UUID): Number {
         val verdi = verdiNode(id)
+
+        return when (verdi["datatype"].asText() == "penger") {
+            true -> {
+                val node = verdi["verdi"]
+                require(node.isNumber) { "Forventet at penger har number verdi, men var $node" }
+                if (node.isInt) node.asInt() else node.asDouble()
+            }
+
+            false -> throw IllegalArgumentException("Ugyldig verdinode: $verdi")
+        }
+    }
+
+    fun pengerLast(id: UUID): Number {
+        val verdi = verdiNodeLast(id)
 
         return when (verdi["datatype"].asText() == "penger") {
             true -> {
@@ -242,6 +269,23 @@ class BehandlingsresultatData(
                     }.single()["verdi"]
             }
 
+    private fun verdiNodeLast(opplysningTypeId: UUID): JsonNode =
+        opplysningNoder
+            .filter {
+                it["opplysningTypeId"].asText() == opplysningTypeId.toString()
+            }.also {
+                if (it.isEmpty()) {
+                    throw BehandlingResultatOpplysningIkkeFunnet(opplysningTypeId)
+                }
+
+                if (it.size > 1) {
+                    throw OpplysningDataException("Fant flere enn èn opplysningstype med opplysningTypeId $opplysningTypeId")
+                }
+            }.single()
+            .let { opplysningNode ->
+                opplysningNode["perioder"].last()["verdi"]
+            }
+
     private fun JsonNode.periodeInkludererVirkningsdato(virkningsdato: LocalDate): Boolean {
         val fraOgMedNode = this.get("gyldigFraOgMed")
         val tilOgMedNode = this.get("gyldigTilOgMed")
@@ -278,6 +322,10 @@ class BehandlingsresultatData(
         val opplysningTypeId: UUID,
         val virkningsdato: LocalDate,
     ) : OpplysningDataException("Fant ikke periode for opplysningTypeId $opplysningTypeId og virkningsdato $virkningsdato")
+
+    data class IngenPeriodeFunnet(
+        val opplysningTypeId: UUID,
+    ) : OpplysningDataException("Fant ikke periode for opplysningTypeId $opplysningTypeId")
 
     data class UtfallIkkeStøttet(
         val førteTil: String,

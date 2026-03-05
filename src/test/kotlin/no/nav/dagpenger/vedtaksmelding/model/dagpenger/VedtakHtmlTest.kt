@@ -24,6 +24,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.gjenopptak.GjenopptakMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_EGENANDEL_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
@@ -283,6 +284,55 @@ class VedtakHtmlTest {
                 )
             writeStringToFile(
                 filePath = "build/temp/gjenopptak.html",
+                content =
+                htmlInnhold,
+            )
+        }
+    }
+
+    @Test
+    fun `Html av gjenopptak innvilgelse når bruker har hatt forbruk av dagpengeteller og ingen egenandel igjen`() {
+        runBlocking {
+            val gjenopptakMelding =
+                GjenopptakMelding(
+                    vedtak = hentVedtak("/json/gjenopptak_innvilgelse_ikke_reberegning_forbruk.json"),
+                    alleBrevblokker = sanityKlient.hentBrevBlokker(),
+                )
+            gjenopptakMelding.hentOpplysninger()
+            val brevBlokker = gjenopptakMelding.hentBrevBlokker()
+            val htmlInnhold =
+                HtmlConverter.toHtml(
+                    brevBlokker = brevBlokker,
+                    opplysninger = gjenopptakMelding.hentOpplysninger(),
+                    meldingOmVedtakData = meldingOmVedtakData,
+                )
+
+            htmlInnhold brevblokkRekkefølgeShouldBe
+                listOf(
+                    INNVILGELSE_ORDINÆR.brevblokkId,
+                    GJENOPPTAK_INNLEDNING.brevblokkId,
+                    GJENOPPTAK_EGENANDEL_INNLEDNING.brevblokkId,
+                    INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                    GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK.brevblokkId,
+                    // TODO: reberegning-blokker må fikses iht avklaring med PJ's
+                    //       https://nav-it.slack.com/archives/C063581H0PR/p1772452686918929
+                    GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
+                    GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
+                    INNVILGELSE_MELDEKORT.brevblokkId,
+                    INNVILGELSE_UTBETALING.brevblokkId,
+                    INNVILGELSE_SKATTEKORT.brevblokkId,
+                    INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                    INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                    INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                    RETT_TIL_INNSYN.brevBlokkId,
+                    PERSONOPPLYSNINGER.brevBlokkId,
+                    HJELP_FRA_ANDRE.brevBlokkId,
+                    VEILEDNING_FRA_NAV.brevBlokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
+                    SPØRSMÅL.brevBlokkId,
+                )
+            writeStringToFile(
+                filePath = "build/temp/gjenopptak2.html",
                 content =
                 htmlInnhold,
             )

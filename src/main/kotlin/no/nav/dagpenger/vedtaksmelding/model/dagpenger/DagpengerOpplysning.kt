@@ -806,7 +806,6 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
-    // TODO: Vurder om man må hente egenandel hvis denne ikke finnes.
     class EgenandelGjenstående(
         override val verdi: Number,
     ) : DagpengerOpplysning<Enhet.KRONER, Number>(verdi) {
@@ -818,7 +817,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.egenandel-gjenstaaende"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
+            behandlingsresultatData.pengerLast(
                 opplysningTypeId,
             ),
         )
@@ -835,7 +834,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.opplysning.antall-stonadsdager-som-gjenstaar"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.heltall(
+            behandlingsresultatData.heltallLast(
                 opplysningTypeId,
             ),
         )
