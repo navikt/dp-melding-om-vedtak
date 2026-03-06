@@ -112,11 +112,10 @@ class VedtakMapper(
                 this.addIfPresent { DagpengerOpplysning.GodkjentLokalArbeidssøker(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.GodkjentKunDeltidssøker(behandlingsresultatData) }
                 this.addIfPresent {
-                    DagpengerOpplysning.GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget(
+                    DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(
                         behandlingsresultatData,
                     )
                 }
-                this.addIfPresent { DagpengerOpplysning.ErInnvilgetMedVerneplikt(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.AntallPermitteringsuker(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.AntallPermitteringsukerFisk(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilPermittering(behandlingsresultatData) }

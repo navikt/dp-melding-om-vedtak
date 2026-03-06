@@ -49,7 +49,7 @@ class VernepliktTest {
                     utfall = Vedtak.Utfall.INNVILGET,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.ErInnvilgetMedVerneplikt(true),
+                            DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(true),
                             DagpengerOpplysning.Egenandel(1000),
                         ),
                 ),

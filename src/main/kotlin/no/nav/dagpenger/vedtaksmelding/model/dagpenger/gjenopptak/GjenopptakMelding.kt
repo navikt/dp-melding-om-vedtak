@@ -268,7 +268,7 @@ class GjenopptakMelding(
 
     private fun godkjentKunDeltidssøker() = vedtak.oppfylt<DagpengerOpplysning.GodkjentKunDeltidssøker>()
 
-    private fun erInnvilgetMedVerneplikt() = vedtak.oppfylt<DagpengerOpplysning.ErInnvilgetMedVerneplikt>()
+    private fun erInnvilgetMedVerneplikt() = vedtak.oppfylt<DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget>()
 
     private fun erInnvilgetSomPermittert() = vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermittering>()
 

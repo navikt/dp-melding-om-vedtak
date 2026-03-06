@@ -109,8 +109,7 @@ class VedtakMapperTest {
             it.hentOpplysning<SisteMånedOgÅrForInntektsperiode3>() shouldNotBe null
 
             // nullable opplysninger
-            it.hentOpplysning<DagpengerOpplysning.GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget>() shouldNotBe null
-            it.hentOpplysning<DagpengerOpplysning.ErInnvilgetMedVerneplikt>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.SisteDagMedRett>() shouldNotBe null
         }
     }
@@ -189,8 +188,7 @@ class VedtakMapperTest {
             it.hentOpplysning<SisteMånedOgÅrForInntektsperiode3>() shouldNotBe null
 
             // nullable opplysninger
-            it.hentOpplysning<DagpengerOpplysning.GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget>() shouldNotBe null
-            it.hentOpplysning<DagpengerOpplysning.ErInnvilgetMedVerneplikt>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.GrunnlagErReberegnet>() shouldNotBe null
 //            it.hentOpplysning<DagpengerOpplysning.SisteDagMedRett>() shouldNotBe null
         }

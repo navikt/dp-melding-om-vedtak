@@ -52,7 +52,7 @@ class VernepliktOgInntektTest {
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(true),
-                            DagpengerOpplysning.ErInnvilgetMedVerneplikt(true),
+                            DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(true),
                             DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger(52),
                             DagpengerOpplysning.Egenandel(3000),
                         ),

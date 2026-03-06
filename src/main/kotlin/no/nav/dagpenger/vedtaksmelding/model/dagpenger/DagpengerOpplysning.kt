@@ -642,26 +642,6 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
-    // todo sjekke denne
-    // hos pjs er dette  "Grunnlaget for verneplikt er høyere enn dagpengegrunnlaget"
-    // Kan være null
-    class ErInnvilgetMedVerneplikt(
-        override val verdi: Boolean,
-    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
-        companion object {
-            val opplysningTypeId: UUID = UUID.fromString("0194881f-9421-766c-9dc6-41fe6c9a1e05")
-        }
-
-        override val opplysningTekstId = "opplysning.er-innvilget-med-verneplikt"
-        override val enhet = Enhet.ENHETSLØS
-
-        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-        )
-    }
-
     // Denne er komplisert og settes basert på kvote. Dersom både verneplikt-kvote og dagpenger-kvote finnes,
     // tar verneplikt-kvoten presedens.
     // i dp-behandling: Dersom KravTilMinsteinntektId("0194881f-9413-77ce-92ec-d29700f0424c") er true,
@@ -678,7 +658,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
 
             fun fra(opplysninger: Set<DagpengerOpplysning<*, *>>): AntallStønadsuker? {
                 val antallStønadsuker =
-                    when (opplysninger.any { it is GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget && it.verdi }) {
+                    when (opplysninger.any { it is GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget && it.verdi }) {
                         true -> {
                             opplysninger.filterIsInstance<PeriodeSomGisVedVerneplikt>().singleOrNull()?.verdi
                         }
@@ -716,7 +696,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     }
 
     // todo kan være nullable
-    class GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget(
+    class GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(
         override val verdi: Boolean,
     ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
         companion object {
@@ -1236,6 +1216,28 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
                 )
         }
     }
+
+//    class SamordningErEndret(
+//        override val verdi: Boolean,
+//    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
+//        override val opplysningTekstId = "opplysning.samordning-endret"
+//        override val enhet = Enhet.ENHETSLØS
+//
+//        companion object {
+//            fun fra(behandlingsresultatData: BehandlingsresultatData): SamordningErEndret {
+//                val samordningErEndret =
+//                    behandlingsresultatData.periodeMedOpprinnelseNyFinnes(SykepengerDagsats.opplysningTypeId) ||
+//                        behandlingsresultatData.periodeMedOpprinnelseNyFinnes(PleiepengerDagsats.opplysningTypeId) ||
+//                        behandlingsresultatData.periodeMedOpprinnelseNyFinnes(OmsorgspengerDagsats.opplysningTypeId) ||
+//                        behandlingsresultatData.periodeMedOpprinnelseNyFinnes(OpplæringspengerDagsats.opplysningTypeId) ||
+//                        behandlingsresultatData.periodeMedOpprinnelseNyFinnes(UføreDagsats.opplysningTypeId) ||
+//                        behandlingsresultatData.periodeMedOpprinnelseNyFinnes(ForeldrepengerDagsats.opplysningTypeId) ||
+//                        behandlingsresultatData.periodeMedOpprinnelseNyFinnes(SvangerskapspengerDagsats.opplysningTypeId)
+//
+//                return SamordningErEndret(verdi = samordningErEndret)
+//            }
+//        }
+//    }
 
     class NittiProsentregelErEndret(
         override val verdi: Boolean,

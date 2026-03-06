@@ -68,8 +68,7 @@ class DagpengerOpplysningTest {
             DagpengerOpplysning.KravTilAlder(behandlingsresultatData),
             DagpengerOpplysning.KravTilUtdanning(behandlingsresultatData),
             DagpengerOpplysning.OppfyllerMedlemskap(behandlingsresultatData),
-            DagpengerOpplysning.GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget(behandlingsresultatData),
-            DagpengerOpplysning.ErInnvilgetMedVerneplikt(behandlingsresultatData),
+            DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(behandlingsresultatData),
         ).also {
             DagpengerOpplysning.AntallStønadsuker.fra(it)
         }
@@ -111,7 +110,7 @@ class DagpengerOpplysningTest {
     fun `AntallStønadsuker blir satt basert på andre opplysninger`() {
         DagpengerOpplysning.AntallStønadsuker.fra(
             setOf<DagpengerOpplysning<*, *>>(
-                DagpengerOpplysning.GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget(true),
+                DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(true),
                 DagpengerOpplysning.PeriodeSomGisVedVerneplikt(26),
                 DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger(104),
             ),
@@ -129,7 +128,7 @@ class DagpengerOpplysningTest {
     fun `AntallStønadsuker kan være null`() {
         DagpengerOpplysning.AntallStønadsuker.fra(
             setOf<DagpengerOpplysning<*, *>>(
-                DagpengerOpplysning.GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget(true),
+                DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(true),
                 DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger(104),
             ),
         ) shouldBe null
@@ -229,7 +228,7 @@ class DagpengerOpplysningTest {
                     ),
                 )
         }
-        DagpengerOpplysning.GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget(behandlingsresultatData).verdi shouldBe true
+        DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(behandlingsresultatData).verdi shouldBe true
         DagpengerOpplysning.SeksGangerGrunnbeløp(behandlingsresultatData).verdi shouldBe 744168
         DagpengerOpplysning.Aldersgrense(behandlingsresultatData).verdi shouldBe 67
         DagpengerOpplysning.Grunnlag(behandlingsresultatData).verdi shouldBe 372084
@@ -245,7 +244,6 @@ class DagpengerOpplysningTest {
         DagpengerOpplysning.UføreDagsats(behandlingsresultatData).verdi shouldBe 0
         DagpengerOpplysning.ForeldrepengerDagsats(behandlingsresultatData).verdi shouldBe 0
         DagpengerOpplysning.SvangerskapspengerDagsats(behandlingsresultatData).verdi shouldBe 0
-        DagpengerOpplysning.ErInnvilgetMedVerneplikt(behandlingsresultatData).verdi shouldBe true
         DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(behandlingsresultatData).verdi shouldBe false
         DagpengerOpplysning.PeriodeSomGisVedVerneplikt(behandlingsresultatData).verdi shouldBe 26
         DagpengerOpplysning.Egenandel(behandlingsresultatData).verdi shouldBe 2790
