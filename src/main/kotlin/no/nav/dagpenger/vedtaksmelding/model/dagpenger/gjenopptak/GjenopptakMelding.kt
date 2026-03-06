@@ -1,6 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger.gjenopptak
 
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.GJENOPPTAK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
@@ -80,9 +81,7 @@ class GjenopptakMelding(
                 beregningBlokker() +
                 barnetilleggBlokker() +
                 nittiProsentRegelBlokker() +
-                // TODO: Skal bare vises hvis noen av samordningsopplysningene har endret seg (opprinnelse Ny)
                 samordningBlokker() +
-
                 grunnlagBlokker() +
                 listOf(GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId) +
                 reellArbeidssøkerBlokker() +
@@ -98,13 +97,28 @@ class GjenopptakMelding(
 
     private fun innledningBlokker(): List<String> =
         when {
-            erInnvilgetSomPermittert() -> listOf(INNVILGELSE_PERMITTERT.brevblokkId, GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId)
+            erInnvilgetSomPermittert() ->
+                listOf(
+                    INNVILGELSE_PERMITTERT.brevblokkId,
+                    GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                )
+
             erInnvilgetSomPermittertIFiskeindustri() ->
                 listOf(INNVILGELSE_PERMITTERT_FISK.brevblokkId, GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId)
+
             else -> {
                 when (vedtak.finnOpplysning("opplysning.siste-dag-med-rett")) {
-                    null -> listOf(GJENOPPTAK_INNLEDNING_VIRKNINGSDATO.brevblokkId, GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId)
-                    else -> listOf(INNVILGELSE_ORDINÆR_FOM_TOM.brevblokkId, GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId)
+                    null ->
+                        listOf(
+                            GJENOPPTAK_INNLEDNING_VIRKNINGSDATO.brevblokkId,
+                            GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                        )
+
+                    else ->
+                        listOf(
+                            INNVILGELSE_ORDINÆR_FOM_TOM.brevblokkId,
+                            GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                        )
                 }
             }
         }
@@ -126,7 +140,8 @@ class GjenopptakMelding(
             else -> listOf(INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId)
         }
 
-    // TODO: legg til funksjonalitet for verneplikt, permittering og fisk.
+    // TODO PERM/FISK: Blokker for permittering og permittering fisk. De må ha egne blokker pga egne tellere.
+    //                 Verneplikt kan bruke samme blokk som ordinær.
     private fun dagpengeperiodeBlokker(): List<String> =
         when (vedtak.finnOpplysning("opplysning.siste-dag-med-rett")) {
             null -> {
@@ -149,9 +164,7 @@ class GjenopptakMelding(
         if (vedtak.oppfylt<DagpengerOpplysning.GrunnlagErReberegnet>()) {
             listOf(GJENOPPTAK_REBEREGNING_UTFØRT.brevblokkId)
         } else {
-            // TODO: Avklare med PJ's hvordan vi skal hente ut info om reberegning.
-            // Reberegning utført: Grunnlag-opplysningen (typeid 0194881f-9410-7481-b263-4606fdd10cbd) har en periode med opprinnelse "Ny"
-            // Hva med info ang. rett til reberegning?
+            // TODO: PJ's - Hvordan hente info om "ikke rett til reberegning" og "reberegning til ugunst".
             when (1 == 1) {
                 true -> listOf(GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId)
                 false -> listOf(GJENOPPTAK_REBEREGNING_UGUNST.brevblokkId)
@@ -170,23 +183,20 @@ class GjenopptakMelding(
         }
 
     private fun barnetilleggBlokker(): List<String> =
-        if (vedtak.oppfylt<DagpengerOpplysning.AntallBarnSomGirRettTilBarnetilleggErEndret>()) {
-            vedtak.opplysninger
-                .find {
-                    it is DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg && it.verdi > 0
-                }?.let {
-                    listOf(INNVILGELSE_BARNETILLEGG.brevblokkId)
-                } ?: emptyList()
-        } else {
-            emptyList()
-        }
+        vedtak.opplysninger
+            .find {
+                it is DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg && it.verdi > 0
+            }?.let {
+                listOf(INNVILGELSE_BARNETILLEGG.brevblokkId)
+            } ?: emptyList()
 
     private fun nittiProsentRegelBlokker(): List<String> =
-        if (vedtak.oppfylt<DagpengerOpplysning.NittiProsentregelErEndret>()) {
-            listOf(INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId)
-        } else {
-            emptyList()
-        }
+        vedtak
+            .finnOpplysning<AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget> {
+                it.toDouble() > 0
+            }?.let {
+                listOf(INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId)
+            } ?: emptyList()
 
     private fun samordningBlokker(): List<String> {
         if (!vedtak.oppfylt<DagpengerOpplysning.HarSamordnet>()) {

@@ -36,6 +36,9 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR_FOM_TOM
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_PERMITTERT_FISK
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_GENERISK
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_OMSORGSPENGER
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_PLEIEPENGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SKATTEKORT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_STANS_ÅRSAKER
@@ -341,7 +344,7 @@ class GjenopptakOrdinæreDagpengerTest {
     }
 
     @Test
-    fun `Riktige brevblokker ved reberegnet grunnlag, forbruk av periode og antall barn er endret`() {
+    fun `Riktige brevblokker ved reberegnet grunnlag, forbruk av periode og barnetillegg`() {
         val forventedeBrevblokkIder =
             listOf(
                 GJENOPPTAK_INNLEDNING_VIRKNINGSDATO.brevblokkId,
@@ -380,7 +383,6 @@ class GjenopptakOrdinæreDagpengerTest {
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = true),
                             DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259),
                             DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(verdi = 3),
-                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetilleggErEndret(verdi = true),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -388,7 +390,7 @@ class GjenopptakOrdinæreDagpengerTest {
     }
 
     @Test
-    fun `Riktige brevblokker ved reberegnet grunnlag, forbruk av periode og bruk av nittiprosentregel er endret`() {
+    fun `Riktige brevblokker ved reberegnet grunnlag, forbruk av periode, barnetillegg og bruk av nittiprosentregel`() {
         val forventedeBrevblokkIder =
             listOf(
                 GJENOPPTAK_INNLEDNING_VIRKNINGSDATO.brevblokkId,
@@ -398,6 +400,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
                 GJENOPPTAK_REBEREGNING_UTFØRT.brevblokkId,
                 INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_BARNETILLEGG.brevblokkId,
                 INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId,
                 INNVILGELSE_GRUNNLAG.brevblokkId,
                 GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
@@ -427,7 +430,149 @@ class GjenopptakOrdinæreDagpengerTest {
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = true),
                             DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259),
                             DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(verdi = 3),
-                            DagpengerOpplysning.NittiProsentregelErEndret(verdi = true),
+                            DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(verdi = 50),
+                        ),
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Riktige brevblokker ved reberegnet grunnlag, forbruk av periode og samordning med pleiepenger`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                GJENOPPTAK_INNLEDNING_VIRKNINGSDATO.brevblokkId,
+                GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
+                GJENOPPTAK_REBEREGNING_UTFØRT.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_SAMORDNET_PLEIEPENGER.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_INNSYN.brevBlokkId,
+                PERSONOPPLYSNINGER.brevBlokkId,
+                HJELP_FRA_ANDRE.brevBlokkId,
+                VEILEDNING_FRA_NAV.brevBlokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
+                SPØRSMÅL.brevBlokkId,
+            )
+        GjenopptakMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    utfall = Vedtak.Utfall.GJENOPPTAK,
+                    opplysninger =
+                        setOf(
+                            DagpengerOpplysning.GrunnlagErReberegnet(verdi = true),
+                            DagpengerOpplysning.EgenandelGjenstående(verdi = 0),
+                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259),
+                            DagpengerOpplysning.HarSamordnet(verdi = true),
+                            DagpengerOpplysning.PleiepengerDagsats(verdi = 260),
+                        ),
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Riktige brevblokker ved reberegnet grunnlag, forbruk av periode og samordning med flere ytelser`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                GJENOPPTAK_INNLEDNING_VIRKNINGSDATO.brevblokkId,
+                GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                GJENOPPTAK_INNLEDNING_EGENANDEL.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
+                GJENOPPTAK_REBEREGNING_UTFØRT.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_BARNETILLEGG.brevblokkId,
+                INNVILGELSE_SAMORDNET_GENERISK.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
+                GJENOPPTAK_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_INNSYN.brevBlokkId,
+                PERSONOPPLYSNINGER.brevBlokkId,
+                HJELP_FRA_ANDRE.brevBlokkId,
+                VEILEDNING_FRA_NAV.brevBlokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
+                SPØRSMÅL.brevBlokkId,
+            )
+        GjenopptakMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    utfall = Vedtak.Utfall.GJENOPPTAK,
+                    opplysninger =
+                        setOf(
+                            DagpengerOpplysning.Egenandel(verdi = 3000),
+                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000),
+                            DagpengerOpplysning.GrunnlagErReberegnet(verdi = true),
+                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259),
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(verdi = 3),
+                            DagpengerOpplysning.HarSamordnet(verdi = true),
+                            DagpengerOpplysning.PleiepengerDagsats(verdi = 260),
+                            DagpengerOpplysning.SykepengerDagsats(verdi = 100),
+                        ),
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Riktige brevblokker ved reberegnet grunnlag, barnetillegg, nittiprosentregel og samordning`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                GJENOPPTAK_INNLEDNING_VIRKNINGSDATO.brevblokkId,
+                GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
+                GJENOPPTAK_REBEREGNING_UTFØRT.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_BARNETILLEGG.brevblokkId,
+                INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId,
+                INNVILGELSE_SAMORDNET_OMSORGSPENGER.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_INNSYN.brevBlokkId,
+                PERSONOPPLYSNINGER.brevBlokkId,
+                HJELP_FRA_ANDRE.brevBlokkId,
+                VEILEDNING_FRA_NAV.brevBlokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
+                SPØRSMÅL.brevBlokkId,
+            )
+        GjenopptakMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    utfall = Vedtak.Utfall.GJENOPPTAK,
+                    opplysninger =
+                        setOf(
+                            DagpengerOpplysning.GrunnlagErReberegnet(verdi = true),
+                            DagpengerOpplysning.EgenandelGjenstående(verdi = 0),
+                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259),
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(verdi = 3),
+                            DagpengerOpplysning.HarSamordnet(verdi = true),
+                            DagpengerOpplysning.OmsorgspengerDagsats(verdi = 260),
+                            DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(verdi = 100),
                         ),
                 ),
             alleBrevblokker = emptyList(),

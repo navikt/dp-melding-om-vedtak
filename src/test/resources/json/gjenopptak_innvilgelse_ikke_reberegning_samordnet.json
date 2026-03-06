@@ -356,7 +356,7 @@
           "opprettet": "2026-02-26T07:50:55.458538",
           "opprinnelse": "Arvet",
           "verdi": {
-            "verdi": 0,
+            "verdi": 300,
             "datatype": "penger"
           }
         }
@@ -6011,7 +6011,7 @@
           "opprinnelse": "Arvet",
           "gyldigFraOgMed": "2025-08-26",
           "verdi": {
-            "verdi": 0,
+            "verdi": 1,
             "datatype": "heltall"
           },
           "utledetAv": {
@@ -7099,7 +7099,7 @@
           "opprinnelse": "Ny",
           "gyldigFraOgMed": "2026-02-16",
           "verdi": {
-            "verdi": false,
+            "verdi": true,
             "datatype": "boolsk"
           },
           "utledetAv": {

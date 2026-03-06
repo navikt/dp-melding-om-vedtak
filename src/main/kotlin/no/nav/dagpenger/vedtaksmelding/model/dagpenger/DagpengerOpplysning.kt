@@ -1200,62 +1200,6 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         }
     }
 
-    class AntallBarnSomGirRettTilBarnetilleggErEndret(
-        override val verdi: Boolean,
-    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
-        override val opplysningTekstId = "opplysning.antall-barn-endret"
-        override val enhet = Enhet.ENHETSLØS
-
-        companion object {
-            fun fra(behandlingsresultatData: BehandlingsresultatData): AntallBarnSomGirRettTilBarnetilleggErEndret =
-                AntallBarnSomGirRettTilBarnetilleggErEndret(
-                    verdi =
-                        behandlingsresultatData.periodeMedOpprinnelseNyFinnes(
-                            opplysningTypeId = AntallBarnSomGirRettTilBarnetillegg.opplysningTypeId,
-                        ),
-                )
-        }
-    }
-
-//    class SamordningErEndret(
-//        override val verdi: Boolean,
-//    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
-//        override val opplysningTekstId = "opplysning.samordning-endret"
-//        override val enhet = Enhet.ENHETSLØS
-//
-//        companion object {
-//            fun fra(behandlingsresultatData: BehandlingsresultatData): SamordningErEndret {
-//                val samordningErEndret =
-//                    behandlingsresultatData.periodeMedOpprinnelseNyFinnes(SykepengerDagsats.opplysningTypeId) ||
-//                        behandlingsresultatData.periodeMedOpprinnelseNyFinnes(PleiepengerDagsats.opplysningTypeId) ||
-//                        behandlingsresultatData.periodeMedOpprinnelseNyFinnes(OmsorgspengerDagsats.opplysningTypeId) ||
-//                        behandlingsresultatData.periodeMedOpprinnelseNyFinnes(OpplæringspengerDagsats.opplysningTypeId) ||
-//                        behandlingsresultatData.periodeMedOpprinnelseNyFinnes(UføreDagsats.opplysningTypeId) ||
-//                        behandlingsresultatData.periodeMedOpprinnelseNyFinnes(ForeldrepengerDagsats.opplysningTypeId) ||
-//                        behandlingsresultatData.periodeMedOpprinnelseNyFinnes(SvangerskapspengerDagsats.opplysningTypeId)
-//
-//                return SamordningErEndret(verdi = samordningErEndret)
-//            }
-//        }
-//    }
-
-    class NittiProsentregelErEndret(
-        override val verdi: Boolean,
-    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
-        override val opplysningTekstId = "opplysning.nittiprosentregel-endret"
-        override val enhet = Enhet.ENHETSLØS
-
-        companion object {
-            fun fra(behandlingsresultatData: BehandlingsresultatData): NittiProsentregelErEndret =
-                NittiProsentregelErEndret(
-                    verdi =
-                        behandlingsresultatData.periodeMedOpprinnelseNyFinnes(
-                            opplysningTypeId = AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget.opplysningTypeId,
-                        ),
-                )
-        }
-    }
-
     override fun equals(other: Any?): Boolean =
         this.opplysningTekstId == (other as? DagpengerOpplysning<*, *>)?.opplysningTekstId &&
             this.verdi == other.verdi &&

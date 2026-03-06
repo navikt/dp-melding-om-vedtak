@@ -125,7 +125,6 @@ class VedtakMapperTest {
             it.hentOpplysning<DagpengerOpplysning.InntektskravSiste36Måneder>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.ArbeidsinntektSiste12Måneder>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.ArbeidsinntektSiste36Måneder>() shouldNotBe null
-//            it.hentOpplysning<DagpengerOpplysning.AntallGSomGisSomGrunnlagVedVerneplikt>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.BruktBeregningsregelGrunnlag>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste6Måneder>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste12Måneder>() shouldNotBe null
@@ -151,11 +150,9 @@ class VedtakMapperTest {
             it.hentOpplysning<DagpengerOpplysning.PleiepengerDagsats>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.OmsorgspengerDagsats>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.OpplæringspengerDagsats>() shouldNotBe null
-//            it.hentOpplysning<DagpengerOpplysning.UføreDagsats>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.ForeldrepengerDagsats>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.SvangerskapspengerDagsats>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.OppfyllerKravTilMinsteinntekt>() shouldNotBe null
-//            it.hentOpplysning<DagpengerOpplysning.PeriodeSomGisVedVerneplikt>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.Egenandel>() shouldNotBe null
 // TODO: Denne må finnes!! Eller kan den være fraværende hvis ingen meldekort er beregnet? Er det da et gjenopptak?
 //       Se tråd hos PJ's: https://nav-it.slack.com/archives/C063581H0PR/p1772440810600219
@@ -190,7 +187,6 @@ class VedtakMapperTest {
             // nullable opplysninger
             it.hentOpplysning<DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.GrunnlagErReberegnet>() shouldNotBe null
-//            it.hentOpplysning<DagpengerOpplysning.SisteDagMedRett>() shouldNotBe null
         }
     }
 }
