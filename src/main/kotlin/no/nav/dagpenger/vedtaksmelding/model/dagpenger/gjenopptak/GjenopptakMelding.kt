@@ -77,12 +77,8 @@ class GjenopptakMelding(
                 virkningsdatoBlokker() +
                 dagpengeperiodeBlokker() +
                 reberegningBlokker() +
-
-                // TODO: Skal bare vises hvis en av beregningsopplysningene under har endret seg (opprinnelse Ny)
                 beregningBlokker() +
-                // TODO: Skal bare vises hvis antall barn med barnetillegg har endret seg (opprinnelse Ny)
                 barnetilleggBlokker() +
-                // TODO: Skal bare vises hvis 90%-opplysningen har endret seg (opprinnelse Ny)
                 nittiProsentRegelBlokker() +
                 // TODO: Skal bare vises hvis noen av samordningsopplysningene har endret seg (opprinnelse Ny)
                 samordningBlokker() +

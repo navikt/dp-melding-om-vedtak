@@ -662,14 +662,13 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
-    // todo denne må deriveres fra andre opplysninger i vedtaket
-    // Denne er komplisert, Settes basert på om kvote. Dersom både verneplikt kvote  og  dagpenger kvote finnes
-    // tar verneplikt kvoten presedens.
-    // i dp-behandling: Dersom KravTilMinsteinntektId("0194881f-9413-77ce-92ec-d29700f0424c") er true
+    // Denne er komplisert og settes basert på kvote. Dersom både verneplikt-kvote og dagpenger-kvote finnes,
+    // tar verneplikt-kvoten presedens.
+    // i dp-behandling: Dersom KravTilMinsteinntektId("0194881f-9413-77ce-92ec-d29700f0424c") er true,
     // settes dagpenger kvoten til AntallStønadsukerSomGisVedOrdinæreDagpenger(vårt navn, id: "0194881f-943d-77a7-969c-147999f15459")
     //
-    // Hos oss : Dersom grunnlagForVernepliktErGunstigst er true settes verneplikt kvoten  til vernepliktPeriode(0194881f-9421-766c-9dc6-41fe6c9a1e01)
-    // Dersom  GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget er true, så settes AntallStønadsuker til
+    // Hos oss : Dersom grunnlagForVernepliktErGunstigst er true, settes verneplikt-kvoten til vernepliktPeriode(0194881f-9421-766c-9dc6-41fe6c9a1e01)
+    // Dersom  GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget er true, settes AntallStønadsuker til
     // PeriodeSomGisVedVerneplikt ellers til AntallStønadsukerSomGisVedOrdinæreDagpenger
     class AntallStønadsuker(
         override val verdi: Int,

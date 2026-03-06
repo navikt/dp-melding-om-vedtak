@@ -75,7 +75,11 @@ class BehandlingsresultatData(
                     .firstOrNull { it.harRett }
                     ?.tilOgMed
             }
-
+            Vedtak.Utfall.GJENOPPTAK -> {
+                nyeRettighetsperioder
+                    .firstOrNull { it.harRett }
+                    ?.tilOgMed
+            }
             else -> null
         }
     }
