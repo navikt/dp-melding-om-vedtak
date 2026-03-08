@@ -156,6 +156,15 @@ class DagpengerOpplysningTest {
     }
 
     @Test
+    fun `GrunnlagErReberegnet blir satt på bakgrunn av opprinnelse Ny`() {
+        val behandlingsresultatData = BehandlingsresultatData("/json/gjenopptak_innvilgelse_reberegning_og_forbruk.json".readFile())
+        DagpengerOpplysning.GrunnlagErReberegnet.fra(behandlingsresultatData).also {
+            requireNotNull(it) { "Forventet ikke null" }
+            it.verdi shouldBe true
+        }
+    }
+
+    @Test
     fun `Skal kunne lage alle type opplysninger med verdi`() {
         val behandlingsresultatData = BehandlingsresultatData("/json/avslag_resultat.json".readFile())
 
