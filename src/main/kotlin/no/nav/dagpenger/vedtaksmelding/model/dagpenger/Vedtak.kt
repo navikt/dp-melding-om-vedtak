@@ -12,11 +12,6 @@ inline fun <reified T : DagpengerOpplysning<*, Number>> Vedtak.finnOpplysning(pr
         predicate(it.verdi)
     }
 
-// inline fun <reified T : DagpengerOpplysning<*, Boolean>> Vedtak.finnOpplysning(predicate: (Boolean) -> Boolean): T? =
-//    this.opplysninger.filterIsInstance<T>().singleOrNull {
-//        predicate(it.verdi)
-//    }
-
 inline fun <reified T : DagpengerOpplysning<*, *>> Vedtak.hentOpplysning(): T =
     this.finnOpplysning<T>() ?: throw OpplysningIkkeFunnet("Opplysning av type ${T::class} mangler")
 
@@ -48,6 +43,7 @@ data class Vedtak(
     enum class Utfall {
         AVSLÅTT,
         INNVILGET,
+        STANS,
         GJENOPPTAK,
     }
 }
