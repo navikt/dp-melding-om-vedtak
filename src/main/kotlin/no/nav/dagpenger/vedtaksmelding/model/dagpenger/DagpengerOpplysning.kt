@@ -1207,13 +1207,13 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.ENHETSLØS
 
         companion object {
-            fun fra(behandlingsresultatData: BehandlingsresultatData): GrunnlagErReberegnet =
-                GrunnlagErReberegnet(
-                    verdi =
-                        behandlingsresultatData.periodeMedOpprinnelseNyFinnes(
-                            opplysningTypeId = Grunnlag.opplysningTypeId,
-                        ),
-                )
+            fun fra(behandlingsresultatData: BehandlingsresultatData): GrunnlagErReberegnet? =
+                behandlingsresultatData
+                    .periodeMedOpprinnelseNyFinnes(
+                        opplysningTypeId = Grunnlag.opplysningTypeId,
+                    )?.let {
+                        GrunnlagErReberegnet(verdi = it)
+                    }
         }
     }
 

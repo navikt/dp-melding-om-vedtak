@@ -156,6 +156,29 @@ class DagpengerOpplysningTest {
     }
 
     @Test
+    fun `GrunnlagErReberegnet kan være null`() {
+        val behandlingsresultatData =
+            BehandlingsresultatData(
+                // language=json
+                """
+                {
+                  "behandlingId": "0194b207-d65a-7aa4-9fb1-b22189a404d8",
+                  "førteTil": "Avslag",
+                  "rettighetsperioder": [
+                    {
+                      "fraOgMed": "2025-06-15",
+                      "harRett": false,
+                      "opprinnelse": "Ny"
+                    }
+                  ],
+                  "opplysninger": []
+                }
+                """.trimIndent(),
+            )
+        DagpengerOpplysning.GrunnlagErReberegnet.fra(behandlingsresultatData) shouldBe null
+    }
+
+    @Test
     fun `GrunnlagErReberegnet blir satt på bakgrunn av opprinnelse Ny`() {
         val behandlingsresultatData = BehandlingsresultatData("/json/gjenopptak_innvilgelse_reberegning_og_forbruk.json".readFile())
         DagpengerOpplysning.GrunnlagErReberegnet.fra(behandlingsresultatData).also {

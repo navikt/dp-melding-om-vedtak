@@ -226,20 +226,11 @@ class BehandlingsresultatData(
             null
         }
 
-    internal fun periodeMedOpprinnelseNyFinnes(opplysningTypeId: UUID): Boolean =
+    internal fun periodeMedOpprinnelseNyFinnes(opplysningTypeId: UUID): Boolean? =
         opplysningNoder
-            .filter {
+            .singleOrNull {
                 it["opplysningTypeId"].asText() == opplysningTypeId.toString()
-            }.also {
-                if (it.isEmpty()) {
-                    throw BehandlingResultatOpplysningIkkeFunnet(opplysningTypeId)
-                }
-
-                if (it.size > 1) {
-                    throw OpplysningDataException("Fant flere enn èn opplysningstype med opplysningTypeId $opplysningTypeId")
-                }
-            }.single()
-            .let { opplysningNode ->
+            }?.let { opplysningNode ->
                 opplysningNode["perioder"]
                     .any {
                         it["opprinnelse"].asText() == "Ny"
@@ -334,10 +325,6 @@ class BehandlingsresultatData(
         val opplysningTypeId: UUID,
         val virkningsdato: LocalDate,
     ) : OpplysningDataException("Fant ikke periode for opplysningTypeId $opplysningTypeId og virkningsdato $virkningsdato")
-
-    data class IngenPeriodeFunnet(
-        val opplysningTypeId: UUID,
-    ) : OpplysningDataException("Fant ikke periode for opplysningTypeId $opplysningTypeId")
 
     data class UtfallIkkeStøttet(
         val førteTil: String,
