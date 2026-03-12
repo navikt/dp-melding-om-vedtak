@@ -80,12 +80,10 @@ class BehandlingsresultatDataTest {
         BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Innvilgelse")).utfall() shouldBe Vedtak.Utfall.INNVILGET
         BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Avslag")).utfall() shouldBe Vedtak.Utfall.AVSLÅTT
         BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Gjenopptak")).utfall() shouldBe Vedtak.Utfall.GJENOPPTAK
+        BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Stans")).utfall() shouldBe Vedtak.Utfall.STANS
 
         shouldThrow<BehandlingsresultatData.UtfallIkkeStøttet> {
             BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Endring")).utfall()
-        }
-        shouldThrow<BehandlingsresultatData.UtfallIkkeStøttet> {
-            BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Stans")).utfall()
         }
     }
 

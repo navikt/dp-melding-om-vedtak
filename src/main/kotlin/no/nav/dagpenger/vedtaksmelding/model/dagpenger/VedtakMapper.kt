@@ -109,7 +109,7 @@ class VedtakMapper(
                 this.addIfPresent { DagpengerOpplysning.KravTilAlder(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.KravTilUtdanning(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerMedlemskap(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.ErIkkeDød(behandlingsresultatData) }
+// TODO                this.addIfPresent { DagpengerOpplysning.ErIkkeDød(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.GodkjentLokalArbeidssøker(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.GodkjentKunDeltidssøker(behandlingsresultatData) }
                 this.addIfPresent {

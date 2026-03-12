@@ -6,8 +6,10 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.STANS
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.finnOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.ikkOppfyltBlokker
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_DØDSFALL_DEL_1
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_DØDSFALL_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_ANDRE_FULLE_YTELSER_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_ANDRE_FULLE_YTELSER_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_IKKE_REGISTRERT_ARBEIDSSØKER_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_IKKE_REGISTRERT_ARBEIDSSØKER_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_OPPHOLD_UTLANDET_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_OPPHOLD_UTLANDET_DEL_2
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
@@ -18,21 +20,26 @@ class StansMelding(
 ) : Vedtaksmelding(vedtak) {
     override val harBrevstøtte: Boolean =
         vedtak.utfall == STANS &&
-                setOfNotNull<DagpengerOpplysning<*, Boolean>>(
-                    vedtak.finnOpplysning<DagpengerOpplysning.OppfyllerKravetTilOpphold>(),
-                ).any {
-                    !it.verdi
-                }
+            setOfNotNull<DagpengerOpplysning<*, Boolean>>(
+                vedtak.finnOpplysning<DagpengerOpplysning.OppfyllerKravetTilOpphold>(),
+                vedtak.finnOpplysning<DagpengerOpplysning.IkkeFulleYtelser>(),
+                vedtak.finnOpplysning<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>(),
+            ).any {
+                !it.verdi
+            }
 
     init {
         require(this.harBrevstøtte) {
-            throw ManglerBrevstøtte("Avslag for behandling ${this.vedtak.behandlingId}. Mangler brevstøtte.")
+            throw ManglerBrevstøtte("Stans for behandling ${this.vedtak.behandlingId}. Mangler brevstøtte.")
         }
     }
+
     override val brevBlokkIder: List<String>
         get() {
             return listOf(StansBrevblokker.STANS_INNLEDNING.brevblokkId) +
-                    blokkerStansOppholdUtland()
+                blokkerOppholdUtland() +
+                blokkerAndreFulleYtelser() +
+                blokkerIkkeRegistrertArbeidssøker()
         }
 
     override val brevBlokker: List<BrevBlokk> =
@@ -41,7 +48,7 @@ class StansMelding(
             brevBlokkIder().mapNotNull { id -> brevBlokkMap[id] }
         }
 
-    private fun blokkerStansOppholdUtland(): List<String> =
+    private fun blokkerOppholdUtland(): List<String> =
         vedtak.ikkOppfyltBlokker<DagpengerOpplysning.OppfyllerKravetTilOpphold> {
             listOf(
                 STANS_OPPHOLD_UTLANDET_DEL_1.brevblokkId,
@@ -49,12 +56,27 @@ class StansMelding(
             )
         }
 
-
-    private fun blokkerStansDødsfall(): List<String> =
-        vedtak.ikkOppfyltBlokker<DagpengerOpplysning.ErIkkeDød> {
+    private fun blokkerAndreFulleYtelser(): List<String> =
+        vedtak.ikkOppfyltBlokker<DagpengerOpplysning.IkkeFulleYtelser> {
             listOf(
-                STANS_DØDSFALL_DEL_1.brevblokkId,
-                STANS_DØDSFALL_DEL_2.brevblokkId,
+                STANS_ANDRE_FULLE_YTELSER_DEL_1.brevblokkId,
+                STANS_ANDRE_FULLE_YTELSER_DEL_2.brevblokkId,
             )
         }
+
+    private fun blokkerIkkeRegistrertArbeidssøker(): List<String> =
+        vedtak.ikkOppfyltBlokker<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker> {
+            listOf(
+                STANS_IKKE_REGISTRERT_ARBEIDSSØKER_DEL_1.brevblokkId,
+                STANS_IKKE_REGISTRERT_ARBEIDSSØKER_DEL_2.brevblokkId,
+            )
+        }
+// TODO
+//    private fun blokkerStansDødsfall(): List<String> =
+//        vedtak.ikkOppfyltBlokker<DagpengerOpplysning.ErIkkeDød> {
+//            listOf(
+//                STANS_DØDSFALL_DEL_1.brevblokkId,
+//                STANS_DØDSFALL_DEL_2.brevblokkId,
+//            )
+//        }
 }

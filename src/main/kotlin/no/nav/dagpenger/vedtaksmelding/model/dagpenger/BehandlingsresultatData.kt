@@ -65,7 +65,7 @@ class BehandlingsresultatData(
                     ?: throw ManglendeVirkningsdato("Fant ingen ny rettighetsperiode med harRett = true for gjenopptak av dagpenger")
             }
 
-            Vedtak.Utfall.STANS ->  {
+            Vedtak.Utfall.STANS -> {
                 nyeRettighetsperioder
                     .firstOrNull { !it.harRett }
                     ?.fraOgMed
@@ -328,7 +328,7 @@ class BehandlingsresultatData(
 
     data class UtfallIkkeStøttet(
         val førteTil: String,
-    ) : OpplysningDataException("førteTil '$førteTil' er ikke støttet")
+    ) : OpplysningDataException("Behandlingsresultat som førte til '$førteTil' har ikke brevstøtte")
 
     class ManglendeVirkningsdato(
         message: String,
