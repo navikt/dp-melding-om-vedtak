@@ -262,6 +262,23 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
+    class KravetTilAntallUkerFørGjenopptak(
+        override val verdi: Int,
+    ) : DagpengerOpplysning<Enhet.UKER, Int>(verdi) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("019a2ff0-1674-716f-91dd-a454cbff8b19")
+        }
+
+        override val enhet: Enhet.UKER = Enhet.UKER
+        override val opplysningTekstId: String = "opplysning.kravet-til-antall-uker-foer-gjenopptak"
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            behandlingsresultatData.heltall(
+                opplysningTypeId,
+            ),
+        )
+    }
+
     class AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
         override val verdi: Number,
     ) : DagpengerOpplysning<Enhet.KRONER, Number>(verdi) {
@@ -1151,6 +1168,23 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
 
         override val enhet: Enhet.ENHETSLØS = Enhet.ENHETSLØS
         override val opplysningTekstId: String = "opplysning.oppfyller-kravet-til-permittering-fiskeindustri"
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            behandlingsresultatData.boolsk(
+                opplysningTypeId,
+            ),
+        )
+    }
+
+    class OppfyllerKravetTilReberegningAvGrunnlag(
+        override val verdi: Boolean,
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("019ce147-cbd3-78a9-8dba-0cc7d10df505")
+        }
+
+        override val enhet: Enhet.ENHETSLØS = Enhet.ENHETSLØS
+        override val opplysningTekstId: String = "opplysning.oppfyller-kravet-til-reberegning-av-grunnlag"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
             behandlingsresultatData.boolsk(

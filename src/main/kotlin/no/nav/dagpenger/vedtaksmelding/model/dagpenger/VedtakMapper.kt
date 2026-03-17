@@ -122,6 +122,8 @@ class VedtakMapper(
                 this.addIfPresent {
                     DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(behandlingsresultatData)
                 }
+                this.addIfPresent { DagpengerOpplysning.KravetTilAntallUkerFørGjenopptak(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilReberegningAvGrunnlag(behandlingsresultatData) }
                 DagpengerOpplysning.AntallStønadsuker.fra(this)?.let { this.add(it) }
                 DagpengerOpplysning.SisteDagMedRett.fra(behandlingsresultatData)?.let { this.add(it) }
                 DagpengerOpplysning.GrunnlagErReberegnet.fra(behandlingsresultatData)?.let { this.add(it) }
