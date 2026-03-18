@@ -400,7 +400,7 @@ components:
         - "MELDEKORT"
         - "MANUELL"
         - "INNSENDING"
-        - "OMGJØRING"
+        - "REVURDERING"
 
     AutomatiskAvslag:
       type: object

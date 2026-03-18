@@ -18,8 +18,8 @@ import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.INNSENDING
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.KLAGE
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MANUELL
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MELDEKORT
-import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.OMGJØRING
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.RETT_TIL_DAGPENGER
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.REVURDERING
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.TomtVedtak
@@ -214,7 +214,7 @@ class Mediator(
             // TODO: Må kunne tilby egendefinert brev
             MANUELL -> throw NotImplementedError("Manuell behandling har ikke støtte for vedtaksmelding")
             INNSENDING -> throw NotImplementedError("Innsending-behandling har ikke støtte for vedtaksmelding")
-            OMGJØRING -> throw NotImplementedError("Omgjøring-behandling har ikke støtte for vedtaksmelding")
+            REVURDERING -> throw NotImplementedError("Revurdering-behandling har ikke støtte for vedtaksmelding")
         }
     }
 
