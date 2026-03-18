@@ -25055,6 +25055,119 @@
           }
         }
       ]
+    },
+    {
+      "opplysningTypeId": "019a2ff0-1674-716f-91dd-a454cbff8b19",
+      "navn": "Kravet til antall uker før gjenopptak",
+      "datatype": "heltall",
+      "perioder": [
+        {
+          "id": "019cfc07-6d5d-7349-8e1b-ec47e639114c",
+          "opprettet": "2026-03-17T14:41:11.133252",
+          "opprinnelse": "Ny",
+          "verdi": {
+            "verdi": 52,
+            "enhet": "uker",
+            "datatype": "heltall"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "019cf5e9-6e7e-7988-9ae5-b91341d5cef0",
+      "navn": "Antall uker med arbeid for nytt grunnlag",
+      "datatype": "heltall",
+      "perioder": [
+        {
+          "id": "019cfc07-6d5d-7349-8e1b-ec47e639114d",
+          "opprettet": "2026-03-17T14:41:11.133252",
+          "opprinnelse": "Ny",
+          "verdi": {
+            "verdi": 12,
+            "enhet": "uker",
+            "datatype": "heltall"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "019a3001-3cfe-7eae-857b-355c070ce2ec",
+      "navn": "Siste mulige dato for gjenopptak",
+      "datatype": "dato",
+      "perioder": [
+        {
+          "id": "019cfc07-6d60-7716-afec-819244efc69b",
+          "opprettet": "2026-03-17T14:41:11.136373",
+          "opprinnelse": "Ny",
+          "gyldigFraOgMed": "2026-02-27",
+          "verdi": {
+            "verdi": "2027-02-26",
+            "datatype": "dato"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "LeggTilUker"
+            },
+            "opplysninger": [
+              "019cfc07-6d5c-7b8d-b8e6-41d5a2098bdd",
+              "019cfc07-6d5d-7349-8e1b-ec47e639114c"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.03.17-13.25-2a93e46"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "019ce147-cbd3-78a9-8dba-0cc7d10df505",
+      "navn": "Har hatt opphold med arbeid i 12 uker eller mer",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019cfc21-1b6c-7525-9a04-6c7f92c63913",
+          "opprettet": "2026-03-17T15:09:14.09275",
+          "opprinnelse": "Ny",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "Saksbehandler",
+            "registrert": "2026-03-17T15:09:13.818796",
+            "ident": "Z994714",
+            "begrunnelse": {
+              "verdi": "Joda",
+              "sistEndret": "2026-03-17T15:09:13.818756"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "019a2fda-4ad6-7711-89ec-38dec1b86293",
+      "navn": "Oppfyller kravet for gjenopptak av stønadsperiode",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019cfc22-0270-7262-8f88-5aa0a176f528",
+          "opprettet": "2026-03-17T15:10:13.23246",
+          "opprinnelse": "Ny",
+          "gyldigFraOgMed": "2026-03-16",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "FørEllerLik"
+            },
+            "opplysninger": [
+              "019cfc07-6d60-7716-afec-819244efc69b",
+              "019cfc22-0250-798e-8426-d109960e6b2b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.03.17-13.59-d4119a1"
+          }
+        }
+      ]
     }
   ],
   "utbetalinger": [

@@ -279,6 +279,23 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
+    class KravetTilAntallUkerArbeidForReberegningAvGrunnlag(
+        override val verdi: Int,
+    ) : DagpengerOpplysning<Enhet.UKER, Int>(verdi) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("019cf5e9-6e7e-7988-9ae5-b91341d5cef0")
+        }
+
+        override val enhet: Enhet.UKER = Enhet.UKER
+        override val opplysningTekstId: String = "opplysning.kravet-til-antall-uker-arbeid-for-reberegning-av-grunnlag"
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            behandlingsresultatData.heltall(
+                opplysningTypeId,
+            ),
+        )
+    }
+
     class AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
         override val verdi: Number,
     ) : DagpengerOpplysning<Enhet.KRONER, Number>(verdi) {
