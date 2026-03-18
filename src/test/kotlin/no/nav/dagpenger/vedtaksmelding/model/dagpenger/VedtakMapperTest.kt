@@ -174,6 +174,8 @@ class VedtakMapperTest {
             it.hentOpplysning<DagpengerOpplysning.KravTilUtdanning>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.OppfyllerMedlemskap>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.AntallStønadsuker>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.KravetTilAntallUkerFørGjenopptak>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.KravetTilAntallUkerArbeidForReberegningAvGrunnlag>() shouldNotBe null
 
             // Deriverte opplysninger
             it.hentOpplysning<FørsteMånedOgÅrForInntektsperiode1>() shouldNotBe null
