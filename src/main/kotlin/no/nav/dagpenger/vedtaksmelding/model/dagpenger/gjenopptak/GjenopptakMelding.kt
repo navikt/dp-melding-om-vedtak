@@ -164,10 +164,9 @@ class GjenopptakMelding(
         if (vedtak.oppfylt<DagpengerOpplysning.GrunnlagErReberegnet>()) {
             listOf(GJENOPPTAK_REBEREGNING_UTFØRT.brevblokkId)
         } else {
-            // TODO: PJ's - Hvordan hente info om "ikke rett til reberegning" og "reberegning til ugunst".
-            when (1 == 1) {
-                true -> listOf(GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId)
-                false -> listOf(GJENOPPTAK_REBEREGNING_UGUNST.brevblokkId)
+            when (oppfyllerKravetTilReberegningAvGrunnlag()) {
+                true -> listOf(GJENOPPTAK_REBEREGNING_UGUNST.brevblokkId)
+                false -> listOf(GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId)
             }
         }
 
@@ -283,4 +282,6 @@ class GjenopptakMelding(
     private fun erInnvilgetSomPermittert() = vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermittering>()
 
     private fun erInnvilgetSomPermittertIFiskeindustri() = vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri>()
+
+    private fun oppfyllerKravetTilReberegningAvGrunnlag() = vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilReberegningAvGrunnlag>()
 }
