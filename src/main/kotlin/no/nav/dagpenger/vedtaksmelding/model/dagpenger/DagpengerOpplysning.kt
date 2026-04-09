@@ -676,10 +676,55 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
+    class UnderretningOmVedtaketIkkeErKommetFram(
+        override val verdi: Boolean,
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("019c5676-5c44-73d4-bc65-aee9d9257aa1")
+        }
+
+        override val opplysningTekstId = "opplysning.underretting-om-vedtaket-ikke-er-kommet-fram"
+        override val enhet = Enhet.ENHETSLØS
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+        )
+    }
+
+    class VedtaketMåAnsesUgyldig(
+        override val verdi: Boolean,
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("019c5676-7c80-7217-a232-15318ff258c5")
+        }
+
+        override val opplysningTekstId = "opplysning.vedtaket-maa-anses-ugyldig"
+        override val enhet = Enhet.ENHETSLØS
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+        )
+    }
+
+    class VedtaketErIkkeTilSkade(
+        override val verdi: Boolean,
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("019c5673-ae11-7a8a-ae77-170f6ac20944")
+        }
+
+        override val opplysningTekstId = "opplysning.vedtaket-er-ikke-til-skade"
+        override val enhet = Enhet.ENHETSLØS
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+        )
+    }
+
     // Denne er komplisert og settes basert på kvote. Dersom både verneplikt-kvote og dagpenger-kvote finnes,
     // tar verneplikt-kvoten presedens.
     // i dp-behandling: Dersom KravTilMinsteinntektId("0194881f-9413-77ce-92ec-d29700f0424c") er true,
-    // settes dagpenger kvoten til AntallStønadsukerSomGisVedOrdinæreDagpenger(vårt navn, id: "0194881f-943d-77a7-969c-147999f15459")
+    // settes dagpenger kvoten til AntallStønadsEEukerSomGisVedOrdinæreDagpenger(vårt navn, id: "0194881f-943d-77a7-969c-147999f15459")
     //
     // Hos oss : Dersom grunnlagForVernepliktErGunstigst er true, settes verneplikt-kvoten til vernepliktPeriode(0194881f-9421-766c-9dc6-41fe6c9a1e01)
     // Dersom  GrunnlagetForVernepliktErHoyereEnnDagpengeGrunnlaget er true, settes AntallStønadsuker til
@@ -1247,6 +1292,57 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
                         opplysningTypeId = Grunnlag.opplysningTypeId,
                     )?.let {
                         GrunnlagErReberegnet(verdi = it)
+                    }
+        }
+    }
+
+    class AntallStønadsukerErEndret(
+        override val verdi: Boolean,
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
+        override val opplysningTekstId = "opplysning.dagpengeperiode-er-endret"
+        override val enhet = Enhet.ENHETSLØS
+
+        companion object {
+            fun fra(behandlingsresultatData: BehandlingsresultatData): AntallStønadsukerErEndret? =
+                behandlingsresultatData
+                    .periodeMedOpprinnelseNyFinnes(
+                        opplysningTypeId = AntallStønadsuker.opplysningTypeId,
+                    )?.let {
+                        AntallStønadsukerErEndret(verdi = it)
+                    }
+        }
+    }
+
+    class DagsatsErEndret(
+        override val verdi: Boolean,
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
+        override val opplysningTekstId = "opplysning.dagsats-er-endret"
+        override val enhet = Enhet.ENHETSLØS
+
+        companion object {
+            fun fra(behandlingsresultatData: BehandlingsresultatData): DagsatsErEndret? =
+                behandlingsresultatData
+                    .periodeMedOpprinnelseNyFinnes(
+                        opplysningTypeId = DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel.opplysningTypeId,
+                    )?.let {
+                        DagsatsErEndret(verdi = it)
+                    }
+        }
+    }
+
+    class FastsattVanligArbeidstidPerUkeErEndret(
+        override val verdi: Boolean,
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
+        override val opplysningTekstId = "opplysning.dagsats-er-endret"
+        override val enhet = Enhet.ENHETSLØS
+
+        companion object {
+            fun fra(behandlingsresultatData: BehandlingsresultatData): FastsattVanligArbeidstidPerUkeErEndret? =
+                behandlingsresultatData
+                    .periodeMedOpprinnelseNyFinnes(
+                        opplysningTypeId = FastsattVanligArbeidstidPerUke.opplysningTypeId,
+                    )?.let {
+                        FastsattVanligArbeidstidPerUkeErEndret(verdi = it)
                     }
         }
     }

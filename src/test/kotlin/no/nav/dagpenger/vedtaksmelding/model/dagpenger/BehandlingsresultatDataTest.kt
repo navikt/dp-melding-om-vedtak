@@ -22,33 +22,39 @@ class BehandlingsresultatDataTest {
         ): BehandlingsresultatData {
             val tilOgMedFelt = if (periodeTilOgMed != null) """"gyldigTilOgMed": "$periodeTilOgMed",""" else ""
 
-            @Language("JSON")
+            //language=JSON
             val json =
                 """
                 {
-                  "behandlingId": "0194b207-d65a-7aa4-9fb1-b22189a404d8",
-                  "førteTil": "Innvilgelse",
-                  "rettighetsperioder": [
-                    {
-                      "fraOgMed": "$virkningsdato",
-                      "harRett": true,
-                      "opprinnelse": "Ny"
-                    }
-                  ],
-                  "opplysninger": [
-                    {
-                      "opplysningTypeId": "$testOpplysningId",
-                      "perioder": [
+                    "behandlingId": "0194b207-d65a-7aa4-9fb1-b22189a404d8",
+                    "behandletHendelse": {
+                        "datatype": "UUID",
+                        "id": "019c74d6-8e86-7074-80fe-2526d30b225f",
+                        "type": "Søknad",
+                        "skjedde": "2026-02-19"
+                    },
+                    "førteTil": "Innvilgelse",
+                    "rettighetsperioder": [
                         {
-                          "gyldigFraOgMed": "$periodeFraOgMed",
-                          $tilOgMedFelt
-                          "verdi": {
-                            "datatype": "heltall",
-                            "verdi": $verdi
-                          }
+                          "fraOgMed": "$virkningsdato",
+                          "harRett": true,
+                          "opprinnelse": "Ny"
                         }
-                      ]
-                    }
+                    ],
+                    "opplysninger": [
+                        {
+                          "opplysningTypeId": "$testOpplysningId",
+                          "perioder": [
+                            {
+                              "gyldigFraOgMed": "$periodeFraOgMed",
+                              $tilOgMedFelt
+                              "verdi": {
+                                "datatype": "heltall",
+                                "verdi": $verdi
+                              }
+                            }
+                          ]
+                        }
                   ]
                 }
                 """.trimIndent()
@@ -77,23 +83,30 @@ class BehandlingsresultatDataTest {
 
     @Test
     fun `Skal hente ut ufall basert på førteTil`() {
-        BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Innvilgelse")).utfall() shouldBe Vedtak.Utfall.INNVILGET
-        BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Avslag")).utfall() shouldBe Vedtak.Utfall.AVSLÅTT
-        BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Gjenopptak")).utfall() shouldBe Vedtak.Utfall.GJENOPPTAK
+        BehandlingsresultatData(tomtBehandlingsresultat(førteTil = "Innvilgelse")).utfall() shouldBe Vedtak.Utfall.INNVILGET
+        BehandlingsresultatData(tomtBehandlingsresultat(førteTil = "Avslag")).utfall() shouldBe Vedtak.Utfall.AVSLÅTT
+        BehandlingsresultatData(tomtBehandlingsresultat(førteTil = "Gjenopptak")).utfall() shouldBe Vedtak.Utfall.GJENOPPTAK
 
         shouldThrow<BehandlingsresultatData.UtfallIkkeStøttet> {
-            BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Endring")).utfall()
+            BehandlingsresultatData(tomtBehandlingsresultat(førteTil = "Endring")).utfall()
         }
         shouldThrow<BehandlingsresultatData.UtfallIkkeStøttet> {
-            BehandlingsresultatData(tomBehandlingResulstat(førteTil = "Stans")).utfall()
+            BehandlingsresultatData(tomtBehandlingsresultat(førteTil = "Stans")).utfall()
         }
     }
 
     @Test
     fun `Ved innvilgelse er virkningsdato gitt av eldste rettighetsperiode med harRett = true og opprinnelse = Ny`() {
+        //language=JSON
         val behandlingResultatJson =
             """
             {
+              "behandletHendelse": {
+                "datatype": "UUID",
+                "id": "019c74d6-8e86-7074-80fe-2526d30b225f",
+                "type": "Søknad",
+                "skjedde": "2026-02-19"
+              },
               "opplysninger": [],
               "rettighetsperioder": [
                 {
@@ -129,9 +142,16 @@ class BehandlingsresultatDataTest {
 
     @Test
     fun `Ved gjenopptak er virkningsdato gitt av eldste rettighetsperiode med harRett = true og opprinnelse = Ny`() {
+        //language=JSON
         val behandlingResultatJson =
             """
             {
+              "behandletHendelse": {
+                "datatype": "UUID",
+                "id": "019c74d6-8e86-7074-80fe-2526d30b225f",
+                "type": "Søknad",
+                "skjedde": "2026-02-19"
+              },
               "opplysninger": [],
               "rettighetsperioder": [
                 {
@@ -167,9 +187,16 @@ class BehandlingsresultatDataTest {
 
     @Test
     fun `Ved Avslag er virkningsdato gitt av eldste rettighetsperiode med harRett = false og opprinnelse ny`() {
+        //language=JSON
         val behandlingResultatJson =
             """
             {
+              "behandletHendelse": {
+                "datatype": "UUID",
+                "id": "019c74d6-8e86-7074-80fe-2526d30b225f",
+                "type": "Søknad",
+                "skjedde": "2026-02-19"
+              },
               "opplysninger": [],
               "rettighetsperioder": [
                 {
@@ -273,6 +300,12 @@ class BehandlingsresultatDataTest {
             """
             {
               "behandlingId": "0194b207-d65a-7aa4-9fb1-b22189a404d8",
+              "behandletHendelse": {
+                "datatype": "UUID",
+                "id": "019c74d6-8e86-7074-80fe-2526d30b225f",
+                "type": "Søknad",
+                "skjedde": "2026-02-19"
+              },
               "førteTil": "Innvilgelse",
               "rettighetsperioder": [
                 {
@@ -313,11 +346,16 @@ class BehandlingsresultatDataTest {
         }
     }
 
-    private fun tomBehandlingResulstat(førteTil: String): String {
+    private fun tomtBehandlingsresultat(førteTil: String): String {
         @Language("JSON")
         return """
             {
-            
+              "behandletHendelse": {
+                "datatype": "UUID",
+                "id": "019c74d6-8e86-7074-80fe-2526d30b225f",
+                "type": "Søknad",
+                "skjedde": "2026-02-19"
+              },
               "opplysninger": [],
               "rettighetsperioder": [
                 {

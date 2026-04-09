@@ -72,4 +72,7 @@ enum class InnvilgelseBrevblokker(
     GJENOPPTAK_REBEREGNING_UGUNST(brevblokkId = "brev.blokk.gjenopptak-reberegning-ugunst"),
     GJENOPPTAK_REBEREGNING_IKKE_RETT(brevblokkId = "brev.blokk.gjenopptak-reberegning-ikke-rett"),
     GJENOPPTAK_ARBEIDSTIDEN_DIN(brevblokkId = "brev.blokk.gjenopptak-arbeidstiden-din"),
+
+    OMGJØRING_OVERSKRIFT(brevblokkId = "brev.blokk.omgjoring-overskrift"),
+    OMGJØRING_BEGRUNNELSE(brevblokkId = "brev.blokk.omgjoring-begrunnelse"),
 }

@@ -125,9 +125,15 @@ class VedtakMapper(
                 this.addIfPresent { DagpengerOpplysning.KravetTilAntallUkerFørGjenopptak(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.KravetTilAntallUkerArbeidForReberegningAvGrunnlag(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilReberegningAvGrunnlag(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.VedtaketMåAnsesUgyldig(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.VedtaketErIkkeTilSkade(behandlingsresultatData) }
                 DagpengerOpplysning.AntallStønadsuker.fra(this)?.let { this.add(it) }
                 DagpengerOpplysning.SisteDagMedRett.fra(behandlingsresultatData)?.let { this.add(it) }
                 DagpengerOpplysning.GrunnlagErReberegnet.fra(behandlingsresultatData)?.let { this.add(it) }
+                DagpengerOpplysning.AntallStønadsukerErEndret.fra(behandlingsresultatData)?.let { this.add(it) }
+                DagpengerOpplysning.DagsatsErEndret.fra(behandlingsresultatData)?.let { this.add(it) }
+                DagpengerOpplysning.FastsattVanligArbeidstidPerUkeErEndret.fra(behandlingsresultatData)?.let { this.add(it) }
             }
 
         val deriverteOpplysninger =

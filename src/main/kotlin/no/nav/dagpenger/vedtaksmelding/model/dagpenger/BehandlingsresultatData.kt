@@ -64,6 +64,18 @@ class BehandlingsresultatData(
                     ?.fraOgMed
                     ?: throw ManglendeVirkningsdato("Fant ingen ny rettighetsperiode med harRett = true for gjenopptak av dagpenger")
             }
+
+            // Ved omgjøring hentes første rettighetsperiode med opprinnelse "Ny" hvis det finnes.
+            // Hvis det ikke finnes noen nye perioder, hentes siste rettighetsperiode. PS: P.t. støttes ikke avslag
+            Vedtak.Utfall.OMGJØRING -> {
+                nyeRettighetsperioder
+                    .firstOrNull { it.harRett }
+                    ?.fraOgMed
+                    ?: rettighetsperioder
+                        .lastOrNull { it.harRett }
+                        ?.fraOgMed
+                    ?: throw ManglendeVirkningsdato("Fant ingen rettighetsperiode med harRett = true for omgjøring av dagpenger")
+            }
         }
     }
 
@@ -299,13 +311,28 @@ class BehandlingsresultatData(
 
     fun utfall(): Vedtak.Utfall {
         val førteTil = jsonNode["førteTil"].asText()
+        val behandletHendelseType = jsonNode["behandletHendelse"]["type"].asText()
         return when (førteTil) {
-            "Innvilgelse" -> Vedtak.Utfall.INNVILGET
-            "Avslag" -> Vedtak.Utfall.AVSLÅTT
-            "Gjenopptak" -> Vedtak.Utfall.GJENOPPTAK
-            else -> {
-                throw UtfallIkkeStøttet(førteTil)
+            "Innvilgelse" -> {
+                when (behandletHendelseType) {
+                    "Søknad" -> Vedtak.Utfall.INNVILGET
+                    "Omgjøring" -> Vedtak.Utfall.OMGJØRING
+                    else -> throw UtfallIkkeStøttet(førteTil = førteTil, behandletHendelseType = behandletHendelseType)
+                }
             }
+            "Avslag" -> {
+                when (behandletHendelseType) {
+                    "Søknad" -> Vedtak.Utfall.AVSLÅTT
+                    else -> throw UtfallIkkeStøttet(førteTil = førteTil, behandletHendelseType = behandletHendelseType)
+                }
+            }
+            "Gjenopptak" -> {
+                when (behandletHendelseType) {
+                    "Søknad" -> Vedtak.Utfall.GJENOPPTAK
+                    else -> throw UtfallIkkeStøttet(førteTil = førteTil, behandletHendelseType = behandletHendelseType)
+                }
+            }
+            else -> throw UtfallIkkeStøttet(førteTil = førteTil, behandletHendelseType = behandletHendelseType)
         }
     }
 
@@ -320,7 +347,8 @@ class BehandlingsresultatData(
 
     data class UtfallIkkeStøttet(
         val førteTil: String,
-    ) : OpplysningDataException("førteTil '$førteTil' er ikke støttet")
+        val behandletHendelseType: String,
+    ) : OpplysningDataException("Behandling av hendelsetype '$behandletHendelseType' med førteTil '$førteTil' er ikke støttet")
 
     class ManglendeVirkningsdato(
         message: String,
