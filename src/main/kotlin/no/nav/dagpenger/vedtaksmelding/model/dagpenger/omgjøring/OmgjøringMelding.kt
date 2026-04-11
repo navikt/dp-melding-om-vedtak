@@ -3,7 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger.omgjøring
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.OMGJØRING
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.OMGJORT_MED_INNVILGELSE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.finnOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT
@@ -50,7 +50,7 @@ class OmgjøringMelding(
     alleBrevblokker: List<BrevBlokk>,
 ) : Vedtaksmelding(vedtak) {
     override val harBrevstøtte: Boolean =
-        vedtak.utfall == OMGJØRING &&
+        vedtak.utfall == OMGJORT_MED_INNVILGELSE &&
             (
                 vedtak.oppfylt<DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram>() ||
                     vedtak.oppfylt<DagpengerOpplysning.VedtaketMåAnsesUgyldig>() ||
@@ -75,7 +75,6 @@ class OmgjøringMelding(
                     INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
                 )
             return innledningBlokker() +
-//                medEllerUtenEgenandelBlokker() +
                 dagpengeperiodeBlokker() +
                 permittertOgPermittertFiskBlokker() +
                 dagsatsBlokker() +
@@ -93,6 +92,12 @@ class OmgjøringMelding(
             val brevBlokkMap = alleBrevblokker.associateBy { it.textId }
             brevBlokkIder().mapNotNull { id -> brevBlokkMap[id] }
         }
+
+    private fun innledningBlokker(): List<String> =
+        listOf(
+            OMGJØRING_OVERSKRIFT.brevblokkId,
+            OMGJØRING_BEGRUNNELSE.brevblokkId,
+        )
 
     private fun nittiProsentRegelBlokker(): List<String> =
         vedtak
@@ -205,12 +210,6 @@ class OmgjøringMelding(
             emptyList()
         }
 
-    private fun innledningBlokker(): List<String> =
-        listOf(
-            OMGJØRING_OVERSKRIFT.brevblokkId,
-            OMGJØRING_BEGRUNNELSE.brevblokkId,
-        )
-
     private fun reellArbeidssøkerBlokker(): List<String> =
         if (godkjentLokalArbeidssøker() || godkjentKunDeltidssøker()) {
             listOf(
@@ -220,16 +219,6 @@ class OmgjøringMelding(
         } else {
             emptyList()
         }
-
-//    private fun medEllerUtenEgenandelBlokker(): List<String> {
-//        vedtak.finnOpplysning<DagpengerOpplysning.EgenandelGjenstående> {
-//            return when (it.toDouble()) {
-//                0.0 -> emptyList()
-//                else -> listOf(INNVILGELSE_MED_EGENANDEL.brevblokkId)
-//            }
-//        }
-//        return listOf(INNVILGELSE_MED_EGENANDEL.brevblokkId)
-//    }
 
     private fun egenandelBlokker(): List<String> {
         vedtak.finnOpplysning<DagpengerOpplysning.EgenandelGjenstående>

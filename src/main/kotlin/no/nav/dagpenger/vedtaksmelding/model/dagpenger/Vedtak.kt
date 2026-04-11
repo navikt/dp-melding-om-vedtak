@@ -49,6 +49,6 @@ data class Vedtak(
         AVSLÅTT,
         INNVILGET,
         GJENOPPTAK,
-        OMGJØRING,
+        OMGJORT_MED_INNVILGELSE,
     }
 }

@@ -65,9 +65,9 @@ class BehandlingsresultatData(
                     ?: throw ManglendeVirkningsdato("Fant ingen ny rettighetsperiode med harRett = true for gjenopptak av dagpenger")
             }
 
-            // Ved omgjøring hentes første rettighetsperiode med opprinnelse "Ny" hvis det finnes.
-            // Hvis det ikke finnes noen nye perioder, hentes siste rettighetsperiode. PS: P.t. støttes ikke avslag
-            Vedtak.Utfall.OMGJØRING -> {
+            // Ved omgjøring uten klage hentes første rettighetsperiode med opprinnelse "Ny" hvis det finnes.
+            // Hvis det ikke finnes noen nye perioder, hentes siste rettighetsperiode.
+            Vedtak.Utfall.OMGJORT_MED_INNVILGELSE -> {
                 nyeRettighetsperioder
                     .firstOrNull { it.harRett }
                     ?.fraOgMed
@@ -84,12 +84,12 @@ class BehandlingsresultatData(
         return when (utfall()) {
             Vedtak.Utfall.INNVILGET -> {
                 nyeRettighetsperioder
-                    .firstOrNull { it.harRett }
+                    .lastOrNull { it.harRett }
                     ?.tilOgMed
             }
             Vedtak.Utfall.GJENOPPTAK -> {
                 nyeRettighetsperioder
-                    .firstOrNull { it.harRett }
+                    .lastOrNull { it.harRett }
                     ?.tilOgMed
             }
             else -> null
@@ -316,7 +316,7 @@ class BehandlingsresultatData(
             "Innvilgelse" -> {
                 when (behandletHendelseType) {
                     "Søknad" -> Vedtak.Utfall.INNVILGET
-                    "Omgjøring" -> Vedtak.Utfall.OMGJØRING
+                    "Omgjøring" -> Vedtak.Utfall.OMGJORT_MED_INNVILGELSE
                     else -> throw UtfallIkkeStøttet(førteTil = førteTil, behandletHendelseType = behandletHendelseType)
                 }
             }
