@@ -1,0 +1,5584 @@
+{
+  "behandlingId": "019c7552-bf14-70c1-b5a9-5ccb73172093",
+  "behandletHendelse": {
+    "datatype": "UUID",
+    "id": "019c74d6-8e86-7074-80fe-2526d30b225f",
+    "type": "Omgjøring",
+    "skjedde": "2026-02-19"
+  },
+  "behandlingskjedeId": "019c7061-77ca-71ed-88a7-999348d13284",
+  "basertPå": "019c74d2-a40c-7582-a827-e8d7074d2a13",
+  "automatisk": false,
+  "ident": "06889399919",
+  "rettighetsperioder": [
+    {
+      "fraOgMed": "2026-02-18",
+      "harRett": true,
+      "opprinnelse": "Ny"
+    }
+  ],
+  "opprettet": "2026-02-19T10:54:43.334184",
+  "sistEndret": "2026-04-09T14:14:32.494793",
+  "opplysninger": [
+    {
+      "opplysningTypeId": "0194881f-9462-78af-8977-46092bb030eb",
+      "navn": "fagsakId",
+      "datatype": "heltall",
+      "perioder": [
+        {
+          "id": "019c7061-77ca-71ed-88a7-999348d13283",
+          "opprettet": "2026-02-18T11:52:41.802448",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 15758553,
+            "datatype": "heltall"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:41.80224",
+            "meldingId": "02ebdfa2-b8a5-45c6-b924-309f21a822e3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-91d1-7df2-ba1d-4533f37fcc77",
+      "navn": "søknadId",
+      "datatype": "tekst",
+      "perioder": [
+        {
+          "id": "019c7061-77d2-7634-8f50-48b2b320942b",
+          "opprettet": "2026-02-18T11:52:41.810673",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": "3b09cc1b-3fe2-41f4-858f-3557b7a1d9ca",
+            "datatype": "tekst"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:41.810571",
+            "meldingId": "02ebdfa2-b8a5-45c6-b924-309f21a822e3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "01958ef2-e237-77c4-89e1-de91256e2e4a",
+      "navn": "hendelseType",
+      "datatype": "tekst",
+      "perioder": [
+        {
+          "id": "019c7061-77d2-7634-8f50-48b2b320942d",
+          "opprettet": "2026-02-18T11:52:41.810993",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "gyldigTilOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": "SøknadInnsendtHendelse",
+            "datatype": "tekst"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:41.810991",
+            "meldingId": "02ebdfa2-b8a5-45c6-b924-309f21a822e3"
+          }
+        },
+        {
+          "id": "019c7552-bf16-723b-92c1-ec91810fb604",
+          "opprettet": "2026-02-19T10:54:43.094947",
+          "opprinnelse": "Ny",
+          "gyldigFraOgMed": "2026-02-19",
+          "gyldigTilOgMed": "2026-02-19",
+          "verdi": {
+            "verdi": "OmgjøringHendelse",
+            "datatype": "tekst"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-19T10:54:43.092722",
+            "meldingId": "019c7552-be9e-7270-86e8-a91b7ef8ab05"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-940b-76ff-acf5-ba7bcb367234",
+      "navn": "Aldersgrense",
+      "datatype": "heltall",
+      "perioder": [
+        {
+          "id": "019c7061-77e6-743b-b6e8-978e95c73154",
+          "opprettet": "2026-02-18T11:52:41.830991",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 67,
+            "enhet": "år",
+            "datatype": "heltall"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "019c091e-e7aa-7e15-b339-b6276276ebf2",
+      "navn": "Har satt frem skriftlig søknad",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-77e7-731a-be4a-6d4e98465ffd",
+          "opprettet": "2026-02-18T11:52:41.831016",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "019c0920-8b11-729a-866d-9f271f03ef2e",
+      "navn": "Ønsker dagpenger ved framsatt søknad",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-77e7-731a-be4a-6d4e98465ffe",
+          "opprettet": "2026-02-18T11:52:41.831023",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "019bc5f8-5c56-7f36-bff1-b10c8165764d",
+      "navn": "Mot bedre vitende har gitt uriktige opplysninger",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-77e7-731a-be4a-6d4e98465fff",
+          "opprettet": "2026-02-18T11:52:41.831028",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "019bc5f8-8af4-73c7-8b15-6feecd7810d2",
+      "navn": "Holder tilbake opplysninger som er viktige for rettigheter eller plikter etter denne loven",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-77e7-731a-be4a-6d4e98466000",
+          "opprettet": "2026-02-18T11:52:41.831031",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "019bc5f8-c377-740f-9df6-3c743b5144b1",
+      "navn": "Uten rimelig grunn unnlater å etterkomme pålegg som er gitt med hjemmel i denne loven",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-77e7-731a-be4a-6d4e98466001",
+          "opprettet": "2026-02-18T11:52:41.831035",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "019c092a-7759-700a-9f7d-f4415b91e8db",
+      "navn": "Oppfyller kravet til framsatt søknad",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-77e7-731a-be4a-6d4e98466003",
+          "opprettet": "2026-02-18T11:52:41.831492",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Alle"
+            },
+            "opplysninger": [
+              "019c7061-77e7-731a-be4a-6d4e98465ffd",
+              "019c7061-77e7-731a-be4a-6d4e98465ffe"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "019bc5f8-fdf3-7240-afaf-52c0486eddc5",
+      "navn": "Har gitt fullstendige og riktige opplysninger",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-77e7-731a-be4a-6d4e98466004",
+          "opprettet": "2026-02-18T11:52:41.831652",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "IngenAv"
+            },
+            "opplysninger": [
+              "019c7061-77e7-731a-be4a-6d4e98465fff",
+              "019c7061-77e7-731a-be4a-6d4e98466000",
+              "019c7061-77e7-731a-be4a-6d4e98466001"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-91d1-7df2-ba1d-4533f37fcc73",
+      "navn": "Søknadsdato",
+      "datatype": "dato",
+      "perioder": [
+        {
+          "id": "019c7061-7afe-7f2e-b86d-03e796d029b7",
+          "opprettet": "2026-02-18T11:52:42.622827",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": "2026-02-18",
+            "datatype": "dato"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:42.586998",
+            "meldingId": "3a6c4aba-31a0-464b-b109-b803373104b1"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-77d2-7634-8f50-48b2b320942b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-91d1-7df2-ba1d-4533f37fcc74",
+      "navn": "Ønsker dagpenger fra dato",
+      "datatype": "dato",
+      "perioder": [
+        {
+          "id": "019c7061-7afe-7f2e-b86d-03e796d029b8",
+          "opprettet": "2026-02-18T11:52:42.622894",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": "2026-02-18",
+            "datatype": "dato"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:42.587525",
+            "meldingId": "3a6c4aba-31a0-464b-b109-b803373104b1"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-77d2-7634-8f50-48b2b320942b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-940b-76ff-acf5-ba7bcb367233",
+      "navn": "Fødselsdato",
+      "datatype": "dato",
+      "perioder": [
+        {
+          "id": "019c7061-7afe-7f2e-b86d-03e796d029b9",
+          "opprettet": "2026-02-18T11:52:42.622933",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": "1993-08-06",
+            "datatype": "dato"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:42.587948",
+            "meldingId": "3a6c4aba-31a0-464b-b109-b803373104b1"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-91d1-7df2-ba1d-4533f37fcc75",
+      "navn": "Søknadstidspunkt",
+      "datatype": "dato",
+      "perioder": [
+        {
+          "id": "019c7061-7b00-70e5-bbdf-222f5e5e01e3",
+          "opprettet": "2026-02-18T11:52:42.624657",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": "2026-02-18",
+            "datatype": "dato"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "SisteAv"
+            },
+            "opplysninger": [
+              "019c7061-7afe-7f2e-b86d-03e796d029b7",
+              "019c7061-7afe-7f2e-b86d-03e796d029b8"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-940b-76ff-acf5-ba7bcb367235",
+      "navn": "Dato søker når maks alder",
+      "datatype": "dato",
+      "perioder": [
+        {
+          "id": "019c7061-7b00-70e5-bbdf-222f5e5e01e4",
+          "opprettet": "2026-02-18T11:52:42.624824",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": "2060-08-06",
+            "datatype": "dato"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "LeggTilÅr"
+            },
+            "opplysninger": [
+              "019c7061-77e6-743b-b6e8-978e95c73154",
+              "019c7061-7afe-7f2e-b86d-03e796d029b9"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-91d1-7df2-ba1d-4533f37fcc76",
+      "navn": "Prøvingsdato",
+      "datatype": "dato",
+      "perioder": [
+        {
+          "id": "019c7061-7b01-778f-a6b0-76c15e69aa90",
+          "opprettet": "2026-02-18T11:52:42.625125",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": "2026-02-18",
+            "datatype": "dato"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "SisteAv"
+            },
+            "opplysninger": [
+              "019c7061-7b00-70e5-bbdf-222f5e5e01e3"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-940b-76ff-acf5-ba7bcb367236",
+      "navn": "Siste mulige dag bruker kan oppfylle alderskrav",
+      "datatype": "dato",
+      "perioder": [
+        {
+          "id": "019c7061-7b01-778f-a6b0-76c15e69aa91",
+          "opprettet": "2026-02-18T11:52:42.625323",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": "2060-08-31",
+            "datatype": "dato"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "SisteDagIMåned"
+            },
+            "opplysninger": [
+              "019c7061-7b00-70e5-bbdf-222f5e5e01e4"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-940b-76ff-acf5-ba7bcb367237",
+      "navn": "Oppfyller kravet til alder",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-7b01-778f-a6b0-76c15e69aa93",
+          "opprettet": "2026-02-18T11:52:42.625651",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "FørEllerLik"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90",
+              "019c7061-7b01-778f-a6b0-76c15e69aa91"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9414-7823-8d29-0e25b7feb7ce",
+      "navn": "Lovpålagt rapporteringsfrist for A-ordningen",
+      "datatype": "dato",
+      "perioder": [
+        {
+          "id": "019c7061-7b03-7787-9f3d-9611dd4e4ad1",
+          "opprettet": "2026-02-18T11:52:42.627767",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": "2026-02-05",
+            "datatype": "dato"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04246",
+      "navn": "Maks lengde på opptjeningsperiode",
+      "datatype": "heltall",
+      "perioder": [
+        {
+          "id": "019c7061-7b03-7787-9f3d-9611dd4e4ad2",
+          "opprettet": "2026-02-18T11:52:42.627867",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 36,
+            "enhet": "måneder",
+            "datatype": "heltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04243",
+      "navn": "Grunnbeløp",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-7b13-7d4c-a8c6-963a84a0bdac",
+          "opprettet": "2026-02-18T11:52:42.64389",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 130160,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f0423f",
+      "navn": "Antall G for krav til 12 mnd arbeidsinntekt",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-7b1c-74dc-8943-efb0c09195e1",
+          "opprettet": "2026-02-18T11:52:42.652213",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 1.5,
+            "enhet": "G",
+            "datatype": "desimaltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04240",
+      "navn": "Antall G for krav til 36 mnd arbeidsinntekt",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-7b1c-74dc-8943-efb0c09195e2",
+          "opprettet": "2026-02-18T11:52:42.652434",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 3,
+            "enhet": "G",
+            "datatype": "desimaltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194ff86-a035-7eb0-9c60-21899f7cc0c1",
+      "navn": "Kravet til reell arbeidssøker er relevant",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-7b1c-74dc-8943-efb0c09195e3",
+          "opprettet": "2026-02-18T11:52:42.652457",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9414-7823-8d29-0e25b7feb7cf",
+      "navn": "Arbeidsgivers rapporteringsfrist",
+      "datatype": "dato",
+      "perioder": [
+        {
+          "id": "019c7061-7b21-70d1-9b6a-36d9876cea3d",
+          "opprettet": "2026-02-18T11:52:42.657689",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": "2026-02-05",
+            "datatype": "dato"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "FørsteArbeidsdag"
+            },
+            "opplysninger": [
+              "019c7061-7b03-7787-9f3d-9611dd4e4ad1"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04248",
+      "navn": "Inntektskrav for siste 12 måneder",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-7b22-7e54-bde5-4f2535c484d9",
+          "opprettet": "2026-02-18T11:52:42.65884",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 195240,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Multiplikasjon"
+            },
+            "opplysninger": [
+              "019c7061-7b13-7d4c-a8c6-963a84a0bdac",
+              "019c7061-7b1c-74dc-8943-efb0c09195e1"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04249",
+      "navn": "Inntektskrav for siste 36 måneder",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-7b22-7e54-bde5-4f2535c484da",
+          "opprettet": "2026-02-18T11:52:42.658962",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 390480,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Multiplikasjon"
+            },
+            "opplysninger": [
+              "019c7061-7b13-7d4c-a8c6-963a84a0bdac",
+              "019c7061-7b1c-74dc-8943-efb0c09195e2"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a769",
+      "navn": "Minimum vanlig arbeidstid",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-7b23-7ce0-ac1b-ccb37af6d777",
+          "opprettet": "2026-02-18T11:52:42.659016",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 18.75,
+            "enhet": "timer",
+            "datatype": "desimaltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Utgangspunkt"
+            },
+            "opplysninger": [
+              "019c7061-77d2-7634-8f50-48b2b320942b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9414-7823-8d29-0e25b7feb7d0",
+      "navn": "Siste avsluttende kalendermåned",
+      "datatype": "dato",
+      "perioder": [
+        {
+          "id": "019c7061-7b23-7ce0-ac1b-ccb37af6d779",
+          "opprettet": "2026-02-18T11:52:42.659772",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": "2026-01-31",
+            "datatype": "dato"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "SisteavsluttendeKalenderMåned"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90",
+              "019c7061-7b21-70d1-9b6a-36d9876cea3d"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04247",
+      "navn": "Første måned av opptjeningsperiode",
+      "datatype": "dato",
+      "perioder": [
+        {
+          "id": "019c7061-7b24-757b-ad69-2277cf948463",
+          "opprettet": "2026-02-18T11:52:42.660298",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": "2023-02-01",
+            "datatype": "dato"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "TrekkFraMåned"
+            },
+            "opplysninger": [
+              "019c7061-7b03-7787-9f3d-9611dd4e4ad2",
+              "019c7061-7b23-7ce0-ac1b-ccb37af6d779"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9441-7d1b-a06a-6727543a141e",
+      "navn": "Kan jobbe heltid og deltid",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82d1-7037-bd41-a15eb88d543a",
+          "opprettet": "2026-02-18T11:52:44.62545",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:44.573128",
+            "meldingId": "7571b144-3c71-4ecd-a683-f49d72c6e7c0"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-77d2-7634-8f50-48b2b320942b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bd9",
+      "navn": "Kan jobbe i hele Norge",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82d1-7037-bd41-a15eb88d543b",
+          "opprettet": "2026-02-18T11:52:44.625516",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:44.573407",
+            "meldingId": "7571b144-3c71-4ecd-a683-f49d72c6e7c0"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-77d2-7634-8f50-48b2b320942b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bdc",
+      "navn": "Kan ta alle typer arbeid",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82d1-7037-bd41-a15eb88d543c",
+          "opprettet": "2026-02-18T11:52:44.625558",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:44.573645",
+            "meldingId": "7571b144-3c71-4ecd-a683-f49d72c6e7c0"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-77d2-7634-8f50-48b2b320942b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bde",
+      "navn": "Villig til å bytte yrke",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82d1-7037-bd41-a15eb88d543d",
+          "opprettet": "2026-02-18T11:52:44.625596",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:44.573911",
+            "meldingId": "7571b144-3c71-4ecd-a683-f49d72c6e7c0"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-77d2-7634-8f50-48b2b320942b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a75f",
+      "navn": "Ønsket arbeidstid",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-82d1-7037-bd41-a15eb88d543e",
+          "opprettet": "2026-02-18T11:52:44.625629",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 40,
+            "datatype": "desimaltall"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:44.574136",
+            "meldingId": "7571b144-3c71-4ecd-a683-f49d72c6e7c0"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-77d2-7634-8f50-48b2b320942b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d85",
+      "navn": "Har rett til ordinære dagpenger gjennom arbeidsforhold",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82d1-7037-bd41-a15eb88d543f",
+          "opprettet": "2026-02-18T11:52:44.625656",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:44.574392",
+            "meldingId": "7571b144-3c71-4ecd-a683-f49d72c6e7c0"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-77d2-7634-8f50-48b2b320942b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d86",
+      "navn": "Bruker er permittert",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82d1-7037-bd41-a15eb88d5440",
+          "opprettet": "2026-02-18T11:52:44.625684",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:44.574587",
+            "meldingId": "7571b144-3c71-4ecd-a683-f49d72c6e7c0"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-77d2-7634-8f50-48b2b320942b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d87",
+      "navn": "Forskutterte lønnsgarantimidler i form av dagpenger",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82d1-7037-bd41-a15eb88d5441",
+          "opprettet": "2026-02-18T11:52:44.625713",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:44.57484",
+            "meldingId": "7571b144-3c71-4ecd-a683-f49d72c6e7c0"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-77d2-7634-8f50-48b2b320942b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d88",
+      "navn": "Permittert fra fiskeindustrien",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82d1-7037-bd41-a15eb88d5442",
+          "opprettet": "2026-02-18T11:52:44.62579",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:44.575036",
+            "meldingId": "7571b144-3c71-4ecd-a683-f49d72c6e7c0"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-77d2-7634-8f50-48b2b320942b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "01948d3c-4bea-7802-9d18-5342a5e2be99",
+      "navn": "Avtjent verneplikt",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82d1-7037-bd41-a15eb88d5443",
+          "opprettet": "2026-02-18T11:52:44.625828",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:44.5752",
+            "meldingId": "7571b144-3c71-4ecd-a683-f49d72c6e7c0"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-77d2-7634-8f50-48b2b320942b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877be0",
+      "navn": "Registrert som arbeidssøker",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82d1-7037-bd41-a15eb88d5444",
+          "opprettet": "2026-02-18T11:52:44.625865",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:44.57542",
+            "meldingId": "7571b144-3c71-4ecd-a683-f49d72c6e7c0"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04244",
+      "navn": "Inntektsopplysninger",
+      "datatype": "inntekt",
+      "perioder": [
+        {
+          "id": "019c7061-82d1-7037-bd41-a15eb88d5445",
+          "opprettet": "2026-02-18T11:52:44.6259",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": "01KHR630F1BN7H8TV5ZJHYQ8JZ",
+            "datatype": "tekst"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:44.575638",
+            "meldingId": "7571b144-3c71-4ecd-a683-f49d72c6e7c0"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90",
+              "019c7061-7b23-7ce0-ac1b-ccb37af6d779",
+              "019c7061-7b24-757b-ad69-2277cf948463"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04245",
+      "navn": "Brutto arbeidsinntekt",
+      "datatype": "inntekt",
+      "perioder": [
+        {
+          "id": "019c7061-82d3-7612-9ed4-ca0544228053",
+          "opprettet": "2026-02-18T11:52:44.627627",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": "01KHR630F1BN7H8TV5ZJHYQ8JZ",
+            "datatype": "tekst"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "FiltrerRelevanteInntekter"
+            },
+            "opplysninger": [
+              "019c7061-82d1-7037-bd41-a15eb88d5445"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9441-7d1b-a06a-6727543a141f",
+      "navn": "Det er godkjent at bruker kun søker deltidsarbeid",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82d3-7612-9ed4-ca0544228054",
+          "opprettet": "2026-02-18T11:52:44.627677",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Utgangspunkt"
+            },
+            "opplysninger": [
+              "019c7061-82d1-7037-bd41-a15eb88d543a"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bda",
+      "navn": "Det er godkjent at bruker kun søker arbeid lokalt",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82d3-7612-9ed4-ca0544228055",
+          "opprettet": "2026-02-18T11:52:44.627699",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Utgangspunkt"
+            },
+            "opplysninger": [
+              "019c7061-82d1-7037-bd41-a15eb88d543b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194929e-2036-7ac1-ada3-5cbe05a83f08",
+      "navn": "Har helsemessige begrensninger og kan ikke ta alle typer arbeid",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82d3-7612-9ed4-ca0544228056",
+          "opprettet": "2026-02-18T11:52:44.627719",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Utgangspunkt"
+            },
+            "opplysninger": [
+              "019c7061-82d1-7037-bd41-a15eb88d543c"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bdf",
+      "navn": "Oppfyller kravet til å ta ethvert arbeid",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82d3-7612-9ed4-ca0544228057",
+          "opprettet": "2026-02-18T11:52:44.627879",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "019c7061-82d1-7037-bd41-a15eb88d543d"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a76d",
+      "navn": "Villig til å jobbe minimum arbeidstid",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82d3-7612-9ed4-ca0544228058",
+          "opprettet": "2026-02-18T11:52:44.627964",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "StørreEnnEllerLik"
+            },
+            "opplysninger": [
+              "019c7061-7b23-7ce0-ac1b-ccb37af6d777",
+              "019c7061-82d1-7037-bd41-a15eb88d543e"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877be1",
+      "navn": "Oppfyller kravet til å være registrert som arbeidssøker",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82d4-79ea-815c-6069f8376fe7",
+          "opprettet": "2026-02-18T11:52:44.628006",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "ErSann"
+            },
+            "opplysninger": [
+              "019c7061-82d1-7037-bd41-a15eb88d5444"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d89",
+      "navn": "Har rett til ordinære dagpenger uten arbeidsforhold",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82d4-79ea-815c-6069f8376fe8",
+          "opprettet": "2026-02-18T11:52:44.628047",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "IngenAv"
+            },
+            "opplysninger": [
+              "019c7061-82d1-7037-bd41-a15eb88d543f",
+              "019c7061-82d1-7037-bd41-a15eb88d5440",
+              "019c7061-82d1-7037-bd41-a15eb88d5441",
+              "019c7061-82d1-7037-bd41-a15eb88d5442"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "01980cf4-9010-7bcf-b578-ca5a825d64ef",
+      "navn": "Skal kravet til verneplikt vurderes",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82d4-79ea-815c-6069f8376fe9",
+          "opprettet": "2026-02-18T11:52:44.62807",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "ErSann"
+            },
+            "opplysninger": [
+              "019c7061-82d1-7037-bd41-a15eb88d5443"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "01948d43-e218-76f1-b29b-7e604241d98a",
+      "navn": "Oppfyller kravet til verneplikt",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82d4-79ea-815c-6069f8376fea",
+          "opprettet": "2026-02-18T11:52:44.628091",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "ErSann"
+            },
+            "opplysninger": [
+              "019c7061-82d1-7037-bd41-a15eb88d5443"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04241",
+      "navn": "Arbeidsinntekt siste 12 måneder",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-82dd-7b24-bea5-3a8a8d053fdd",
+          "opprettet": "2026-02-18T11:52:44.637104",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 420000,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "SummerPeriode"
+            },
+            "opplysninger": [
+              "019c7061-82d3-7612-9ed4-ca0544228053"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f04242",
+      "navn": "Arbeidsinntekt siste 36 måneder",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-82de-74c4-ad74-083c5c7512bb",
+          "opprettet": "2026-02-18T11:52:44.638527",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 1260000,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "SummerPeriode"
+            },
+            "opplysninger": [
+              "019c7061-82d3-7612-9ed4-ca0544228053"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bd8",
+      "navn": "Oppfyller kravet til heltid- og deltidsarbeid",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82de-74c4-ad74-083c5c7512bc",
+          "opprettet": "2026-02-18T11:52:44.638619",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "019c7061-82d1-7037-bd41-a15eb88d543a",
+              "019c7061-82d3-7612-9ed4-ca0544228054"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bdb",
+      "navn": "Oppfyller kravet til mobilitet",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82de-74c4-ad74-083c5c7512bd",
+          "opprettet": "2026-02-18T11:52:44.638649",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "019c7061-82d1-7037-bd41-a15eb88d543b",
+              "019c7061-82d3-7612-9ed4-ca0544228055"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877bdd",
+      "navn": "Oppfyller kravet til å være arbeidsfør",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82de-74c4-ad74-083c5c7512be",
+          "opprettet": "2026-02-18T11:52:44.63868",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "019c7061-82d1-7037-bd41-a15eb88d543c",
+              "019c7061-82d3-7612-9ed4-ca0544228056"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d8a",
+      "navn": "Ordinære dagpenger",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82de-74c4-ad74-083c5c7512bf",
+          "opprettet": "2026-02-18T11:52:44.638712",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "019c7061-82d1-7037-bd41-a15eb88d543f",
+              "019c7061-82d4-79ea-815c-6069f8376fe8"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f0424a",
+      "navn": "Arbeidsinntekt er over kravet for siste 12 måneder",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82df-7316-9665-b67a7b09cc08",
+          "opprettet": "2026-02-18T11:52:44.639514",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "StørreEnnEllerLik"
+            },
+            "opplysninger": [
+              "019c7061-7b22-7e54-bde5-4f2535c484d9",
+              "019c7061-82dd-7b24-bea5-3a8a8d053fdd"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f0424b",
+      "navn": "Arbeidsinntekt er over kravet for siste 36 måneder",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82df-7316-9665-b67a7b09cc09",
+          "opprettet": "2026-02-18T11:52:44.639567",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "StørreEnnEllerLik"
+            },
+            "opplysninger": [
+              "019c7061-7b22-7e54-bde5-4f2535c484da",
+              "019c7061-82de-74c4-ad74-083c5c7512bb"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9442-707b-a6ee-e96c06877be2",
+      "navn": "Reell arbeidssøker",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82df-7316-9665-b67a7b09cc0a",
+          "opprettet": "2026-02-18T11:52:44.639636",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Alle"
+            },
+            "opplysninger": [
+              "019c7061-82d3-7612-9ed4-ca0544228057",
+              "019c7061-82d3-7612-9ed4-ca0544228058",
+              "019c7061-82de-74c4-ad74-083c5c7512bc",
+              "019c7061-82de-74c4-ad74-083c5c7512bd",
+              "019c7061-82de-74c4-ad74-083c5c7512be"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9444-7a73-a458-0af81c034d8b",
+      "navn": "Rettighetstype",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82df-7316-9665-b67a7b09cc0b",
+          "opprettet": "2026-02-18T11:52:44.639682",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "019c7061-82d1-7037-bd41-a15eb88d5440",
+              "019c7061-82d1-7037-bd41-a15eb88d5441",
+              "019c7061-82d1-7037-bd41-a15eb88d5442",
+              "019c7061-82de-74c4-ad74-083c5c7512bf"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9413-77ce-92ec-d29700f0424c",
+      "navn": "Oppfyller kravet til minsteinntekt",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82e0-760a-8ac5-f6521b9e7076",
+          "opprettet": "2026-02-18T11:52:44.640269",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "019c7061-82df-7316-9665-b67a7b09cc08",
+              "019c7061-82df-7316-9665-b67a7b09cc09"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-943f-78d9-b874-00a4944c54f1",
+      "navn": "Oppfyller vilkåret om å ikke motta andre fulle ytelser",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82e3-7f7e-908a-404e369c536f",
+          "opprettet": "2026-02-18T11:52:44.643016",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9443-72b4-8b30-5f6cdb24d54c",
+      "navn": "Bruker er medlem av folketrygden",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82e3-7f7e-908a-404e369c5370",
+          "opprettet": "2026-02-18T11:52:44.643047",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45d4",
+      "navn": "Sykepenger dagsats",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-82e3-7f7e-908a-404e369c5371",
+          "opprettet": "2026-02-18T11:52:44.64306",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 0,
+            "datatype": "penger"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45d5",
+      "navn": "Pleiepenger dagsats",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-82e3-7f7e-908a-404e369c5372",
+          "opprettet": "2026-02-18T11:52:44.643072",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 0,
+            "datatype": "penger"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45d6",
+      "navn": "Omsorgspenger dagsats",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-82e3-7f7e-908a-404e369c5373",
+          "opprettet": "2026-02-18T11:52:44.643087",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 0,
+            "datatype": "penger"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45d7",
+      "navn": "Opplæringspenger dagsats",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-82e3-7f7e-908a-404e369c5374",
+          "opprettet": "2026-02-18T11:52:44.643099",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 0,
+            "datatype": "penger"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45d1",
+      "navn": "Uføretrygd etter lovens kapittel 12",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82e3-7f7e-908a-404e369c5375",
+          "opprettet": "2026-02-18T11:52:44.643111",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45d9",
+      "navn": "Foreldrepenger dagsats",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-82e3-7f7e-908a-404e369c5376",
+          "opprettet": "2026-02-18T11:52:44.643123",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 0,
+            "datatype": "penger"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45da",
+      "navn": "Svangerskapspenger dagsats",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-82e3-7f7e-908a-404e369c5377",
+          "opprettet": "2026-02-18T11:52:44.643134",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 0,
+            "datatype": "penger"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-91df-746a-a8ac-4a6b2b30685d",
+      "navn": "Brukeren deltar i streik eller er omfattet av lock-out",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82e3-7f7e-908a-404e369c5378",
+          "opprettet": "2026-02-18T11:52:44.643146",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-91df-746a-a8ac-4a6b2b30685e",
+      "navn": "Brukeren er ledig ved samme bedrift eller arbeidsplass, og blir påvirket av utfallet",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82e3-7f7e-908a-404e369c5379",
+          "opprettet": "2026-02-18T11:52:44.643159",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a76b",
+      "navn": "Ny arbeidstid per uke",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-82e3-7f7e-908a-404e369c537a",
+          "opprettet": "2026-02-18T11:52:44.643171",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 0,
+            "enhet": "timer",
+            "datatype": "desimaltall"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "019522d6-846d-7173-a892-67f10016d8d2",
+      "navn": "Ordinært krav til prosentvis tap av arbeidstid",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-82e3-7f7e-908a-404e369c537b",
+          "opprettet": "2026-02-18T11:52:44.643235",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 50,
+            "enhet": "prosent",
+            "datatype": "desimaltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a764",
+      "navn": "Beregningsregel: Arbeidstid siste 6 måneder",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82e3-7f7e-908a-404e369c537c",
+          "opprettet": "2026-02-18T11:52:44.643251",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a765",
+      "navn": "Beregningsregel: Arbeidstid siste 12 måneder",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82e8-70a7-90b4-d7e80ac3b28a",
+          "opprettet": "2026-02-18T11:52:44.648949",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a766",
+      "navn": "Beregningsregel: Arbeidstid siste 36 måneder",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82e8-70a7-90b4-d7e80ac3b28b",
+          "opprettet": "2026-02-18T11:52:44.648986",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0196b4a7-23b5-7b2c-aa95-e4167d900de8",
+      "navn": "Arbeidstidsreduksjonen er ikke brukt tidligere i en full stønadsperiode",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82e9-7f16-a6bf-57288c2d14ab",
+          "opprettet": "2026-02-18T11:52:44.649006",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b527",
+      "navn": "Deltar i arbeidsmarkedstiltak",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82e9-7f16-a6bf-57288c2d14ac",
+          "opprettet": "2026-02-18T11:52:44.649025",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b528",
+      "navn": "Deltar i opplæring for innvandrere",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82e9-7f16-a6bf-57288c2d14ad",
+          "opprettet": "2026-02-18T11:52:44.649044",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b529",
+      "navn": "Deltar i grunnskoleopplæring, videregående opplæring og opplæring i grunnleggende ferdigheter",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82e9-7f16-a6bf-57288c2d14ae",
+          "opprettet": "2026-02-18T11:52:44.649064",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b52a",
+      "navn": "Deltar i høyere yrkesfaglig utdanning",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82e9-7f16-a6bf-57288c2d14af",
+          "opprettet": "2026-02-18T11:52:44.649085",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b52b",
+      "navn": "Deltar i høyere utdanning",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82e9-7f16-a6bf-57288c2d14b0",
+          "opprettet": "2026-02-18T11:52:44.649107",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b52c",
+      "navn": "Deltar på kurs mv",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82e9-7f16-a6bf-57288c2d14b1",
+          "opprettet": "2026-02-18T11:52:44.649129",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9447-7e36-a569-3e9f42bff9f6",
+      "navn": "Bruker er utestengt fra dagpenger",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82e9-7f16-a6bf-57288c2d14b2",
+          "opprettet": "2026-02-18T11:52:44.649154",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9443-72b4-8b30-5f6cdb24d54d",
+      "navn": "Oppfyller kravet til medlemskap",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82ea-7970-8f02-2cfa90589110",
+          "opprettet": "2026-02-18T11:52:44.650463",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "ErSann"
+            },
+            "opplysninger": [
+              "019c7061-82e3-7f7e-908a-404e369c5370"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0196afaf-afbd-7079-b2cf-3669ad9d86aa",
+      "navn": "Uføretrygden er gitt med virkningstidspunkt i inneværende år eller innenfor de to siste kalenderår",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82ea-7970-8f02-2cfa90589111",
+          "opprettet": "2026-02-18T11:52:44.650516",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "ErSann"
+            },
+            "opplysninger": [
+              "019c7061-82e3-7f7e-908a-404e369c5375"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-91df-746a-a8ac-4a6b2b30685f",
+      "navn": "Brukeren er ikke påvirket av streik eller lock-out",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82ea-7970-8f02-2cfa90589112",
+          "opprettet": "2026-02-18T11:52:44.650558",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "IngenAv"
+            },
+            "opplysninger": [
+              "019c7061-82e3-7f7e-908a-404e369c5378",
+              "019c7061-82e3-7f7e-908a-404e369c5379"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a762",
+      "navn": "Krav til prosentvis tap av arbeidstid",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-82ea-7970-8f02-2cfa90589113",
+          "opprettet": "2026-02-18T11:52:44.650807",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 50,
+            "enhet": "prosent",
+            "datatype": "desimaltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "HvisSannMedResultat"
+            },
+            "opplysninger": [
+              "019c7061-82d1-7037-bd41-a15eb88d5442",
+              "019c7061-82e3-7f7e-908a-404e369c537b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a763",
+      "navn": "Beregningsregel: Tapt arbeidstid",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82ea-7970-8f02-2cfa90589114",
+          "opprettet": "2026-02-18T11:52:44.650867",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "019c7061-82e3-7f7e-908a-404e369c537c",
+              "019c7061-82e8-70a7-90b4-d7e80ac3b28a",
+              "019c7061-82e8-70a7-90b4-d7e80ac3b28b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b523",
+      "navn": "Godkjent unntak for utdanning eller opplæring?",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82ea-7970-8f02-2cfa90589115",
+          "opprettet": "2026-02-18T11:52:44.650906",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "019c7061-82e9-7f16-a6bf-57288c2d14ac",
+              "019c7061-82e9-7f16-a6bf-57288c2d14ad",
+              "019c7061-82e9-7f16-a6bf-57288c2d14ae",
+              "019c7061-82e9-7f16-a6bf-57288c2d14af",
+              "019c7061-82e9-7f16-a6bf-57288c2d14b0",
+              "019c7061-82e9-7f16-a6bf-57288c2d14b1"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9447-7e36-a569-3e9f42bff9f7",
+      "navn": "Oppfyller krav til ikke utestengt",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-82ea-7970-8f02-2cfa90589116",
+          "opprettet": "2026-02-18T11:52:44.650936",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "IngenAv"
+            },
+            "opplysninger": [
+              "019c7061-82e9-7f16-a6bf-57288c2d14b2"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0196afc0-6807-7fa3-83e4-cf7f621f3a7e",
+      "navn": "Sum hvis Uføre ikke skal samordnes",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-82eb-72b8-964c-03f9ea2c6389",
+          "opprettet": "2026-02-18T11:52:44.651865",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 0,
+            "datatype": "penger"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0196afbf-e32d-775a-ad10-f476e26dcb6f",
+      "navn": "Uførebeløp som skal samordnes",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-82ec-7505-8b17-9bb901e4b6b6",
+          "opprettet": "2026-02-18T11:52:44.652774",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 0,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "HvisSannMedResultat"
+            },
+            "opplysninger": [
+              "019c7061-82ea-7970-8f02-2cfa90589111",
+              "019c7061-82eb-72b8-964c-03f9ea2c6389"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9434-79e8-a64d-1a23cc5d86e9",
+      "navn": "Sum andre ytelser",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-82ed-7b65-ac47-1bc62f7418ae",
+          "opprettet": "2026-02-18T11:52:44.653982",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 0,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Addisjon"
+            },
+            "opplysninger": [
+              "019c7061-82e3-7f7e-908a-404e369c5371",
+              "019c7061-82e3-7f7e-908a-404e369c5372",
+              "019c7061-82e3-7f7e-908a-404e369c5373",
+              "019c7061-82e3-7f7e-908a-404e369c5374",
+              "019c7061-82e3-7f7e-908a-404e369c5376",
+              "019c7061-82e3-7f7e-908a-404e369c5377",
+              "019c7061-82ec-7505-8b17-9bb901e4b6b6"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0196ab10-0cff-7301-99d6-65be50a50201",
+      "navn": "Bostedsland er Norge",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d7e-7458-b740-c4754c483073",
+          "opprettet": "2026-02-18T11:52:47.358321",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:47.316289",
+            "meldingId": "426ad88d-d973-4349-a0cd-843ce165ebc8"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-77d2-7634-8f50-48b2b320942b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a75e",
+      "navn": "Har krav på lønn fra arbeidsgiver",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d7e-7458-b740-c4754c483074",
+          "opprettet": "2026-02-18T11:52:47.358412",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:47.316565",
+            "meldingId": "426ad88d-d973-4349-a0cd-843ce165ebc8"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-77d2-7634-8f50-48b2b320942b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b522",
+      "navn": "Brukeren er under utdanning eller opplæring",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d7e-7458-b740-c4754c483075",
+          "opprettet": "2026-02-18T11:52:47.358499",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:47.316799",
+            "meldingId": "426ad88d-d973-4349-a0cd-843ce165ebc8"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-77d2-7634-8f50-48b2b320942b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45d2",
+      "navn": "Foreldrepenger etter lovens kapittel 14",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d7e-7458-b740-c4754c483076",
+          "opprettet": "2026-02-18T11:52:47.358557",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:47.317065",
+            "meldingId": "426ad88d-d973-4349-a0cd-843ce165ebc8"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45cf",
+      "navn": "Omsorgspenger etter lovens kapittel 9",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d7e-7458-b740-c4754c483077",
+          "opprettet": "2026-02-18T11:52:47.358599",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:47.317242",
+            "meldingId": "426ad88d-d973-4349-a0cd-843ce165ebc8"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45ce",
+      "navn": "Pleiepenger etter lovens kapittel 9",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d7e-7458-b740-c4754c483078",
+          "opprettet": "2026-02-18T11:52:47.358663",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:47.317417",
+            "meldingId": "426ad88d-d973-4349-a0cd-843ce165ebc8"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45d3",
+      "navn": "Svangerskapspenger etter lovens kapittel 14",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d7e-7458-b740-c4754c483079",
+          "opprettet": "2026-02-18T11:52:47.358715",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:47.317594",
+            "meldingId": "426ad88d-d973-4349-a0cd-843ce165ebc8"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45d0",
+      "navn": "Opplæringspenger etter lovens kapittel 9",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d7e-7458-b740-c4754c48307a",
+          "opprettet": "2026-02-18T11:52:47.358846",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:47.317845",
+            "meldingId": "426ad88d-d973-4349-a0cd-843ce165ebc8"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9433-70e9-a85b-c246150c45cd",
+      "navn": "Sykepenger etter lovens kapittel 8",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d7e-7458-b740-c4754c48307b",
+          "opprettet": "2026-02-18T11:52:47.358914",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:47.318103",
+            "meldingId": "426ad88d-d973-4349-a0cd-843ce165ebc8"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9443-72b4-8b30-5f6cdb24d549",
+      "navn": "Bruker oppholder seg i Norge",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d84-715b-9cc3-a18b374c382d",
+          "opprettet": "2026-02-18T11:52:47.364809",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "ErSann"
+            },
+            "opplysninger": [
+              "019c7061-8d7e-7458-b740-c4754c483073"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9434-79e8-a64d-1a23cc5d86ea",
+      "navn": "Medlem har reduserte ytelser fra folketrygden (Samordning)",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d84-715b-9cc3-a18b374c382e",
+          "opprettet": "2026-02-18T11:52:47.364902",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "019c7061-82ea-7970-8f02-2cfa90589111",
+              "019c7061-8d7e-7458-b740-c4754c483076",
+              "019c7061-8d7e-7458-b740-c4754c483077",
+              "019c7061-8d7e-7458-b740-c4754c483078",
+              "019c7061-8d7e-7458-b740-c4754c483079",
+              "019c7061-8d7e-7458-b740-c4754c48307a",
+              "019c7061-8d7e-7458-b740-c4754c48307b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a761",
+      "navn": "Oppfyller vilkåret til tap av arbeidsinntekt",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d84-715b-9cc3-a18b374c382f",
+          "opprettet": "2026-02-18T11:52:47.364941",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "IngenAv"
+            },
+            "opplysninger": [
+              "019c7061-8d7e-7458-b740-c4754c483074"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b524",
+      "navn": "Har svart ja på spørsmål om utdanning eller opplæring",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d84-715b-9cc3-a18b374c3830",
+          "opprettet": "2026-02-18T11:52:47.36498",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "ErSann"
+            },
+            "opplysninger": [
+              "019c7061-8d7e-7458-b740-c4754c483075"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b525",
+      "navn": "Har svart nei på spørsmål om utdanning eller opplæring",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d85-7254-beb9-605d54571660",
+          "opprettet": "2026-02-18T11:52:47.365135",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "ErUsann"
+            },
+            "opplysninger": [
+              "019c7061-8d7e-7458-b740-c4754c483075"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9443-72b4-8b30-5f6cdb24d54a",
+      "navn": "Oppfyller unntak for opphold i Norge",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d86-729c-8273-a5d121d5e4c5",
+          "opprettet": "2026-02-18T11:52:47.366025",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Utgangspunkt"
+            },
+            "opplysninger": [
+              "019c7061-8d84-715b-9cc3-a18b374c382d"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b526",
+      "navn": "Oppfyller kravet på unntak for utdanning eller opplæring",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d86-729c-8273-a5d121d5e4c6",
+          "opprettet": "2026-02-18T11:52:47.366078",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Alle"
+            },
+            "opplysninger": [
+              "019c7061-82ea-7970-8f02-2cfa90589115",
+              "019c7061-8d84-715b-9cc3-a18b374c3830"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9443-72b4-8b30-5f6cdb24d54b",
+      "navn": "Oppfyller kravet til opphold i Norge eller unntak",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d87-7688-b100-afa75df1feac",
+          "opprettet": "2026-02-18T11:52:47.367616",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "019c7061-8d84-715b-9cc3-a18b374c382d",
+              "019c7061-8d86-729c-8273-a5d121d5e4c5"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9445-734c-a7ee-045edf29b52d",
+      "navn": "Oppfyller krav til utdanning eller opplæring",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d87-7688-b100-afa75df1fead",
+          "opprettet": "2026-02-18T11:52:47.367821",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "019c7061-8d85-7254-beb9-605d54571660",
+              "019c7061-8d86-729c-8273-a5d121d5e4c6"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9443-72b4-8b30-5f6cdb24d54e",
+      "navn": "Kravet til opphold i Norge er oppfylt",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d89-71de-9558-5db31ad67dc1",
+          "opprettet": "2026-02-18T11:52:47.369404",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Alle"
+            },
+            "opplysninger": [
+              "019c7061-82ea-7970-8f02-2cfa90589110",
+              "019c7061-8d87-7688-b100-afa75df1feac"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-940f-7af9-9387-052e028b29ee",
+      "navn": "Grunnbeløp for grunnlag",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d8c-71b3-b0e1-433743bae8b2",
+          "opprettet": "2026-02-18T11:52:47.37269",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 130160,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-940f-7af9-9387-052e028b29ed",
+      "navn": "Tellende inntekt",
+      "datatype": "inntekt",
+      "perioder": [
+        {
+          "id": "019c7061-8d8c-71b3-b0e1-433743bae8b3",
+          "opprettet": "2026-02-18T11:52:47.372867",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": "01KHR630F1BN7H8TV5ZJHYQ8JZ",
+            "datatype": "tekst"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "FiltrerRelevanteInntekter"
+            },
+            "opplysninger": [
+              "019c7061-82d1-7037-bd41-a15eb88d5445"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10ca7",
+      "navn": "Faktor for maksimalt mulig grunnlag",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-8d8c-71b3-b0e1-433743bae8b4",
+          "opprettet": "2026-02-18T11:52:47.372944",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 6,
+            "datatype": "desimaltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10ca9",
+      "navn": "Antall år i 36 måneder",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-8d8c-71b3-b0e1-433743bae8b5",
+          "opprettet": "2026-02-18T11:52:47.372979",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 3,
+            "enhet": "år",
+            "datatype": "desimaltall"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a23e",
+      "navn": "Faktor for utregning av dagsats etter dagpengegrunnlaget",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-8d8e-7be2-81ac-e72ea8fbb7c7",
+          "opprettet": "2026-02-18T11:52:47.374258",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 0.0024,
+            "enhet": "G",
+            "datatype": "desimaltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a23d",
+      "navn": "Barnetilleggets størrelse i kroner per dag for hvert barn",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d90-7f25-9b20-f23dc2856afe",
+          "opprettet": "2026-02-18T11:52:47.376315",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 38,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a246",
+      "navn": "90% av grunnlag for dagpenger",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-8d90-7f25-9b20-f23dc2856aff",
+          "opprettet": "2026-02-18T11:52:47.376644",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 0.9,
+            "datatype": "desimaltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a247",
+      "navn": "Antall arbeidsdager per år",
+      "datatype": "heltall",
+      "perioder": [
+        {
+          "id": "019c7061-8d90-7f25-9b20-f23dc2856b00",
+          "opprettet": "2026-02-18T11:52:47.376769",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 260,
+            "enhet": "dager",
+            "datatype": "heltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a249",
+      "navn": "Antall arbeidsdager per uke",
+      "datatype": "heltall",
+      "perioder": [
+        {
+          "id": "019c7061-8d90-7f25-9b20-f23dc2856b01",
+          "opprettet": "2026-02-18T11:52:47.376834",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 5,
+            "enhet": "dager",
+            "datatype": "heltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a2b",
+      "navn": "Hvor mange prosent av G skal brukes som terskel ved samordning",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-8d90-7f25-9b20-f23dc2856b02",
+          "opprettet": "2026-02-18T11:52:47.376918",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 0.03,
+            "enhet": "prosent",
+            "datatype": "desimaltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942e-7cb0-aa59-05ea449d88e7",
+      "navn": "Pensjon fra en offentlig tjenestepensjonsordning beløp",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d90-7f25-9b20-f23dc2856b03",
+          "opprettet": "2026-02-18T11:52:47.376971",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 0,
+            "datatype": "penger"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942e-7cb0-aa59-05ea449d88e8",
+      "navn": "Uførepensjon fra offentlig pensjonsordning beløp",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d91-7ade-bd96-be0f2c17723b",
+          "opprettet": "2026-02-18T11:52:47.377009",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 0,
+            "datatype": "penger"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a26",
+      "navn": "Vartpenger beløp",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d91-7ade-bd96-be0f2c17723c",
+          "opprettet": "2026-02-18T11:52:47.377067",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 0,
+            "datatype": "penger"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a27",
+      "navn": "Ventelønn beløp",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d91-7ade-bd96-be0f2c17723d",
+          "opprettet": "2026-02-18T11:52:47.377118",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 0,
+            "datatype": "penger"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a28",
+      "navn": "Etterlønn beløp",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d91-7ade-bd96-be0f2c17723e",
+          "opprettet": "2026-02-18T11:52:47.377173",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 0,
+            "datatype": "penger"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a29",
+      "navn": "Garantilott fra Garantikassen for fiskere beløp",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d91-7ade-bd96-be0f2c17723f",
+          "opprettet": "2026-02-18T11:52:47.37723",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 0,
+            "datatype": "penger"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f1544f",
+      "navn": "Terskelfaktor for 12 måneder",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-8d91-7ade-bd96-be0f2c177240",
+          "opprettet": "2026-02-18T11:52:47.377486",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 2,
+            "enhet": "G",
+            "datatype": "desimaltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15450",
+      "navn": "Terskelfaktor for 36 måneder",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-8d91-7ade-bd96-be0f2c177241",
+          "opprettet": "2026-02-18T11:52:47.377581",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 2,
+            "enhet": "G",
+            "datatype": "desimaltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15449",
+      "navn": "Antall dager som skal regnes med i hver uke",
+      "datatype": "heltall",
+      "perioder": [
+        {
+          "id": "019c7061-8d91-7ade-bd96-be0f2c177242",
+          "opprettet": "2026-02-18T11:52:47.377682",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 5,
+            "enhet": "dager",
+            "datatype": "heltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-943f-78d9-b874-00a4944c54f0",
+      "navn": "Antall dagsats for egenandel",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-8d91-7ade-bd96-be0f2c177243",
+          "opprettet": "2026-02-18T11:52:47.377796",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 3,
+            "enhet": "dager",
+            "datatype": "desimaltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942e-7cb0-aa59-05ea449d88e1",
+      "navn": "Mottar pensjon fra en offentlig tjenestepensjonsordning",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d91-7ade-bd96-be0f2c177244",
+          "opprettet": "2026-02-18T11:52:47.377858",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942e-7cb0-aa59-05ea449d88e2",
+      "navn": "Mottar redusert uførepensjon fra offentlig pensjonsordning",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d92-7eef-89b7-65fd4b0f0b10",
+          "opprettet": "2026-02-18T11:52:47.378019",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942e-7cb0-aa59-05ea449d88e3",
+      "navn": "Mottar vartpenger",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d92-7eef-89b7-65fd4b0f0b11",
+          "opprettet": "2026-02-18T11:52:47.378069",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942e-7cb0-aa59-05ea449d88e4",
+      "navn": "Mottar ventelønn",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d92-7eef-89b7-65fd4b0f0b12",
+          "opprettet": "2026-02-18T11:52:47.378113",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942e-7cb0-aa59-05ea449d88e5",
+      "navn": "Mottar etterlønn",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d92-7eef-89b7-65fd4b0f0b13",
+          "opprettet": "2026-02-18T11:52:47.378158",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942e-7cb0-aa59-05ea449d88e6",
+      "navn": "Mottar garantilott fra Garantikassen for fiskere.",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d92-7eef-89b7-65fd4b0f0b14",
+          "opprettet": "2026-02-18T11:52:47.378186",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a768",
+      "navn": "Maksimal vanlig arbeidstid",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-8d92-7eef-89b7-65fd4b0f0b15",
+          "opprettet": "2026-02-18T11:52:47.378287",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 40,
+            "enhet": "timer",
+            "datatype": "desimaltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a767",
+      "navn": "Beregnet vanlig arbeidstid per uke før tap",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-8d92-7eef-89b7-65fd4b0f0b16",
+          "opprettet": "2026-02-18T11:52:47.378341",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 38.0,
+            "enhet": "timer",
+            "datatype": "desimaltall"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9434-79e8-a64d-1a23cc5d86ed",
+      "navn": "Antall timer arbeidstiden skal samordnes mot",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-8d92-7eef-89b7-65fd4b0f0b17",
+          "opprettet": "2026-02-18T11:52:47.378385",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 0,
+            "enhet": "timer",
+            "datatype": "desimaltall"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-940f-7af9-9387-052e028b29ec",
+      "navn": "Oppjustert inntekt",
+      "datatype": "inntekt",
+      "perioder": [
+        {
+          "id": "019c7061-8d97-7b48-9120-a32fe8b3706a",
+          "opprettet": "2026-02-18T11:52:47.383309",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": "01KHR630F1BN7H8TV5ZJHYQ8JZ",
+            "datatype": "tekst"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppjuster"
+            },
+            "opplysninger": [
+              "019c7061-8d8c-71b3-b0e1-433743bae8b2",
+              "019c7061-8d8c-71b3-b0e1-433743bae8b3"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10ca8",
+      "navn": "6 ganger grunnbeløp",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d97-7b48-9120-a32fe8b3706b",
+          "opprettet": "2026-02-18T11:52:47.383397",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 780960,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Multiplikasjon"
+            },
+            "opplysninger": [
+              "019c7061-8d8c-71b3-b0e1-433743bae8b2",
+              "019c7061-8d8c-71b3-b0e1-433743bae8b4"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cad",
+      "navn": "Utbetalt inntekt periode 1",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d97-7b48-9120-a32fe8b3706c",
+          "opprettet": "2026-02-18T11:52:47.383638",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 420000,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "SummerPeriode"
+            },
+            "opplysninger": [
+              "019c7061-8d8c-71b3-b0e1-433743bae8b3"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cae",
+      "navn": "Utbetalt inntekt periode 2",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d97-7b48-9120-a32fe8b3706d",
+          "opprettet": "2026-02-18T11:52:47.383856",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 420000,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "SummerPeriode"
+            },
+            "opplysninger": [
+              "019c7061-8d8c-71b3-b0e1-433743bae8b3"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10caf",
+      "navn": "Utbetalt inntekt periode 3",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d98-7492-93d6-484d9911722f",
+          "opprettet": "2026-02-18T11:52:47.384048",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 420000,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "SummerPeriode"
+            },
+            "opplysninger": [
+              "019c7061-8d8c-71b3-b0e1-433743bae8b3"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a2c",
+      "navn": "Beløp tilsvarende nedre terskel av G",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d98-7492-93d6-484d99117230",
+          "opprettet": "2026-02-18T11:52:47.384131",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 3904.8,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Multiplikasjon"
+            },
+            "opplysninger": [
+              "019c7061-8d8c-71b3-b0e1-433743bae8b2",
+              "019c7061-8d90-7f25-9b20-f23dc2856b02"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a2e",
+      "navn": "Sum av ytelser utenfor folketrygden",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d98-7492-93d6-484d99117231",
+          "opprettet": "2026-02-18T11:52:47.384375",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 0,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "SumAv"
+            },
+            "opplysninger": [
+              "019c7061-8d90-7f25-9b20-f23dc2856b03",
+              "019c7061-8d91-7ade-bd96-be0f2c17723b",
+              "019c7061-8d91-7ade-bd96-be0f2c17723c",
+              "019c7061-8d91-7ade-bd96-be0f2c17723d",
+              "019c7061-8d91-7ade-bd96-be0f2c17723e",
+              "019c7061-8d91-7ade-bd96-be0f2c17723f"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f1544c",
+      "navn": "Terskel for 12 måneder",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d98-7492-93d6-484d99117232",
+          "opprettet": "2026-02-18T11:52:47.384521",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 260320,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Multiplikasjon"
+            },
+            "opplysninger": [
+              "019c7061-7b13-7d4c-a8c6-963a84a0bdac",
+              "019c7061-8d91-7ade-bd96-be0f2c177240"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15451",
+      "navn": "Snittinntekt siste 36 måneder",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d98-7492-93d6-484d99117233",
+          "opprettet": "2026-02-18T11:52:47.384967",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 420000,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Divisjon"
+            },
+            "opplysninger": [
+              "019c7061-82de-74c4-ad74-083c5c7512bb",
+              "019c7061-8d8c-71b3-b0e1-433743bae8b5"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f1544d",
+      "navn": "Terskel for 36 måneder",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d99-769b-bf76-57b418846a3d",
+          "opprettet": "2026-02-18T11:52:47.385056",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 260320,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Multiplikasjon"
+            },
+            "opplysninger": [
+              "019c7061-7b13-7d4c-a8c6-963a84a0bdac",
+              "019c7061-8d91-7ade-bd96-be0f2c177241"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9434-79e8-a64d-1a23cc5d86ee",
+      "navn": "Samordnet fastsatt arbeidstid",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-8d99-769b-bf76-57b418846a3e",
+          "opprettet": "2026-02-18T11:52:47.385228",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": 38.0,
+            "enhet": "timer",
+            "datatype": "desimaltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Substraksjon"
+            },
+            "opplysninger": [
+              "019c7061-8d92-7eef-89b7-65fd4b0f0b16",
+              "019c7061-8d92-7eef-89b7-65fd4b0f0b17"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb0",
+      "navn": "Inntektperiode 1",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d9c-792c-ba2d-5be36ea5d2d9",
+          "opprettet": "2026-02-18T11:52:47.388197",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 425191.2471377431,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "SummerPeriode"
+            },
+            "opplysninger": [
+              "019c7061-8d97-7b48-9120-a32fe8b3706a"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb1",
+      "navn": "Inntektperiode 2",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d9c-792c-ba2d-5be36ea5d2da",
+          "opprettet": "2026-02-18T11:52:47.388932",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 445788.7135933001,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "SummerPeriode"
+            },
+            "opplysninger": [
+              "019c7061-8d97-7b48-9120-a32fe8b3706a"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb2",
+      "navn": "Inntektperiode 3",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d9d-74f4-8834-29180d324f1b",
+          "opprettet": "2026-02-18T11:52:47.389369",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 468242.4030172436,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "SummerPeriode"
+            },
+            "opplysninger": [
+              "019c7061-8d97-7b48-9120-a32fe8b3706a"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15454",
+      "navn": "Over terskel for 12 måneder",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d9d-74f4-8834-29180d324f1c",
+          "opprettet": "2026-02-18T11:52:47.389499",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "StørreEnnEllerLik"
+            },
+            "opplysninger": [
+              "019c7061-82dd-7b24-bea5-3a8a8d053fdd",
+              "019c7061-8d98-7492-93d6-484d99117232"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15455",
+      "navn": "Over terskel for 36 måneder",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8d9d-74f4-8834-29180d324f1d",
+          "opprettet": "2026-02-18T11:52:47.389567",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "StørreEnnEllerLik"
+            },
+            "opplysninger": [
+              "019c7061-8d98-7492-93d6-484d99117233",
+              "019c7061-8d99-769b-bf76-57b418846a3d"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10caa",
+      "navn": "Inntekt etter avkortning og oppjustering siste 12 måneder",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8d9f-77dc-b4d1-ece6bf202d0c",
+          "opprettet": "2026-02-18T11:52:47.391926",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 425191.2471377431,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "MinstAv"
+            },
+            "opplysninger": [
+              "019c7061-8d97-7b48-9120-a32fe8b3706b",
+              "019c7061-8d9c-792c-ba2d-5be36ea5d2d9"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb3",
+      "navn": "Avkortet inntektperiode 1",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8da0-797c-ab1d-a2a74e70a396",
+          "opprettet": "2026-02-18T11:52:47.392011",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 425191.2471377431,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "MinstAv"
+            },
+            "opplysninger": [
+              "019c7061-8d97-7b48-9120-a32fe8b3706b",
+              "019c7061-8d9c-792c-ba2d-5be36ea5d2d9"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb4",
+      "navn": "Avkortet inntektperiode 2",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8da0-797c-ab1d-a2a74e70a397",
+          "opprettet": "2026-02-18T11:52:47.392056",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 445788.7135933001,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "MinstAv"
+            },
+            "opplysninger": [
+              "019c7061-8d97-7b48-9120-a32fe8b3706b",
+              "019c7061-8d9c-792c-ba2d-5be36ea5d2da"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb5",
+      "navn": "Avkortet inntektperiode 3",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8da0-797c-ab1d-a2a74e70a398",
+          "opprettet": "2026-02-18T11:52:47.392096",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 468242.4030172436,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "MinstAv"
+            },
+            "opplysninger": [
+              "019c7061-8d97-7b48-9120-a32fe8b3706b",
+              "019c7061-8d9d-74f4-8834-29180d324f1b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb6",
+      "navn": "Har avkortet grunnlaget i periode 1",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8da0-797c-ab1d-a2a74e70a399",
+          "opprettet": "2026-02-18T11:52:47.392243",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "StørreEnn"
+            },
+            "opplysninger": [
+              "019c7061-8d97-7b48-9120-a32fe8b3706b",
+              "019c7061-8d9c-792c-ba2d-5be36ea5d2d9"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb7",
+      "navn": "Har avkortet grunnlaget i periode 2",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8da0-797c-ab1d-a2a74e70a39a",
+          "opprettet": "2026-02-18T11:52:47.392297",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "StørreEnn"
+            },
+            "opplysninger": [
+              "019c7061-8d97-7b48-9120-a32fe8b3706b",
+              "019c7061-8d9c-792c-ba2d-5be36ea5d2da"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb8",
+      "navn": "Har avkortet grunnlaget i periode 3",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8da0-797c-ab1d-a2a74e70a39b",
+          "opprettet": "2026-02-18T11:52:47.392345",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "StørreEnn"
+            },
+            "opplysninger": [
+              "019c7061-8d97-7b48-9120-a32fe8b3706b",
+              "019c7061-8d9d-74f4-8834-29180d324f1b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f1544b",
+      "navn": "Lang dagpengeperiode",
+      "datatype": "heltall",
+      "perioder": [
+        {
+          "id": "019c7061-8da0-797c-ab1d-a2a74e70a39c",
+          "opprettet": "2026-02-18T11:52:47.392449",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 104,
+            "enhet": "uker",
+            "datatype": "heltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Oppslag"
+            },
+            "opplysninger": [
+              "019c7061-7b01-778f-a6b0-76c15e69aa90"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cab",
+      "navn": "Inntekt siste 36 måneder",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8da2-7a0f-b681-41eb13b8fa76",
+          "opprettet": "2026-02-18T11:52:47.394381",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 1339222.3637482869,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "SumAv"
+            },
+            "opplysninger": [
+              "019c7061-8da0-797c-ab1d-a2a74e70a396",
+              "019c7061-8da0-797c-ab1d-a2a74e70a397",
+              "019c7061-8da0-797c-ab1d-a2a74e70a398"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cb9",
+      "navn": "Har avkortet grunnlag",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8da2-7a0f-b681-41eb13b8fa77",
+          "opprettet": "2026-02-18T11:52:47.394488",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "019c7061-8da0-797c-ab1d-a2a74e70a399",
+              "019c7061-8da0-797c-ab1d-a2a74e70a39a",
+              "019c7061-8da0-797c-ab1d-a2a74e70a39b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15452",
+      "navn": "Stønadsuker ved siste 12 måneder",
+      "datatype": "heltall",
+      "perioder": [
+        {
+          "id": "019c7061-8da2-7a0f-b681-41eb13b8fa78",
+          "opprettet": "2026-02-18T11:52:47.394557",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 104,
+            "enhet": "uker",
+            "datatype": "heltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "HvisSannMedResultat"
+            },
+            "opplysninger": [
+              "019c7061-8d9d-74f4-8834-29180d324f1c",
+              "019c7061-8da0-797c-ab1d-a2a74e70a39c"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15453",
+      "navn": "Stønadsuker ved siste 36 måneder",
+      "datatype": "heltall",
+      "perioder": [
+        {
+          "id": "019c7061-8da2-7a0f-b681-41eb13b8fa79",
+          "opprettet": "2026-02-18T11:52:47.394625",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 104,
+            "enhet": "uker",
+            "datatype": "heltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "HvisSannMedResultat"
+            },
+            "opplysninger": [
+              "019c7061-8d9d-74f4-8834-29180d324f1d",
+              "019c7061-8da0-797c-ab1d-a2a74e70a39c"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cac",
+      "navn": "Gjennomsnittlig inntekt etter avkortning og oppjustering siste 36 måneder",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8da6-77a7-9abd-1f86d393229a",
+          "opprettet": "2026-02-18T11:52:47.398133",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 446407.45458276226,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Divisjon"
+            },
+            "opplysninger": [
+              "019c7061-8d8c-71b3-b0e1-433743bae8b5",
+              "019c7061-8da2-7a0f-b681-41eb13b8fa76"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15456",
+      "navn": "Antall stønadsuker",
+      "datatype": "heltall",
+      "perioder": [
+        {
+          "id": "019c7061-8da6-77a7-9abd-1f86d393229b",
+          "opprettet": "2026-02-18T11:52:47.398356",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 104,
+            "enhet": "uker",
+            "datatype": "heltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "HøyesteAv"
+            },
+            "opplysninger": [
+              "019c7061-8da2-7a0f-b681-41eb13b8fa78",
+              "019c7061-8da2-7a0f-b681-41eb13b8fa79"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cbb",
+      "navn": "Uavrundet grunnlag",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8da8-7285-a9d6-df9a62ea7f1b",
+          "opprettet": "2026-02-18T11:52:47.400886",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 446407.45458276226,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "HøyesteAv"
+            },
+            "opplysninger": [
+              "019c7061-8d9f-77dc-b4d1-ece6bf202d0c",
+              "019c7061-8da6-77a7-9abd-1f86d393229a"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15459",
+      "navn": "Antall stønadsuker (stønadsperiode)",
+      "datatype": "heltall",
+      "perioder": [
+        {
+          "id": "019c7061-8da8-7285-a9d6-df9a62ea7f1c",
+          "opprettet": "2026-02-18T11:52:47.40098",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 104,
+            "enhet": "uker",
+            "datatype": "heltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "HvisSannMedResultat"
+            },
+            "opplysninger": [
+              "019c7061-82e0-760a-8ac5-f6521b9e7076",
+              "019c7061-8da6-77a7-9abd-1f86d393229b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-943d-77a7-969c-147999f15457",
+      "navn": "Antall stønadsdager",
+      "datatype": "heltall",
+      "perioder": [
+        {
+          "id": "019c7061-8da9-7deb-8e71-7064bb03d2d5",
+          "opprettet": "2026-02-18T11:52:47.401087",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 520,
+            "enhet": "dager",
+            "datatype": "heltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Multiplikasjon"
+            },
+            "opplysninger": [
+              "019c7061-8d91-7ade-bd96-be0f2c177242",
+              "019c7061-8da6-77a7-9abd-1f86d393229b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cbc",
+      "navn": "Grunnlag ved ordinære dagpenger",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8dab-7d0c-bd3f-1586cbe9e0fc",
+          "opprettet": "2026-02-18T11:52:47.403835",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 446407,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Avrund"
+            },
+            "opplysninger": [
+              "019c7061-8da8-7285-a9d6-df9a62ea7f1b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cba",
+      "navn": "Brukt beregningsregel",
+      "datatype": "tekst",
+      "perioder": [
+        {
+          "id": "019c7061-8dac-77b1-a958-795c5dd344b1",
+          "opprettet": "2026-02-18T11:52:47.404086",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": "Gjennomsnittlig inntekt etter avkortning og oppjustering siste 36 måneder",
+            "datatype": "tekst"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Brukt"
+            },
+            "opplysninger": [
+              "019c7061-8da8-7285-a9d6-df9a62ea7f1b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9421-766c-9dc6-41fe6c9a1e03",
+      "navn": "Grunnlag for verneplikt hvis kravet er oppfylt",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8dae-7598-886d-e32898656691",
+          "opprettet": "2026-02-18T11:52:47.406117",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 446407,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "HvisSannMedResultat"
+            },
+            "opplysninger": [
+              "019c7061-82d4-79ea-815c-6069f8376fe9",
+              "019c7061-8dab-7d0c-bd3f-1586cbe9e0fc"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9410-7481-b263-4606fdd10cbd",
+      "navn": "Dagpengegrunnlag",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8db0-7ea4-9154-edf426c6c58e",
+          "opprettet": "2026-02-18T11:52:47.408091",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 446407,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "HøyesteAv"
+            },
+            "opplysninger": [
+              "019c7061-8dab-7d0c-bd3f-1586cbe9e0fc",
+              "019c7061-8dae-7598-886d-e32898656691"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9421-766c-9dc6-41fe6c9a1e05",
+      "navn": "Grunnlaget for verneplikt er høyere enn dagpengegrunnlaget",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8db0-7ea4-9154-edf426c6c58f",
+          "opprettet": "2026-02-18T11:52:47.408175",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "StørreEnn"
+            },
+            "opplysninger": [
+              "019c7061-8dab-7d0c-bd3f-1586cbe9e0fc",
+              "019c7061-8dae-7598-886d-e32898656691"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a23f",
+      "navn": "Dagsats uten barnetillegg før samordning",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8db1-74ec-9243-9609e011354c",
+          "opprettet": "2026-02-18T11:52:47.409858",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 1071.3768,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Multiplikasjon"
+            },
+            "opplysninger": [
+              "019c7061-8d8e-7be2-81ac-e72ea8fbb7c7",
+              "019c7061-8db0-7ea4-9154-edf426c6c58e"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a248",
+      "navn": "Maksimalt mulig grunnlag avgrenset til 90% av dagpengegrunnlaget",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8db1-74ec-9243-9609e011354d",
+          "opprettet": "2026-02-18T11:52:47.40992",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 401766.3,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Multiplikasjon"
+            },
+            "opplysninger": [
+              "019c7061-8d90-7f25-9b20-f23dc2856aff",
+              "019c7061-8db0-7ea4-9154-edf426c6c58e"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a76c",
+      "navn": "Fastsatt vanlig arbeidstid etter ordinær eller verneplikt",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-8db1-74ec-9243-9609e011354e",
+          "opprettet": "2026-02-18T11:52:47.409967",
+          "opprinnelse": "Ny",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 38.0,
+            "enhet": "timer",
+            "datatype": "desimaltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "HvisSannMedResultat"
+            },
+            "opplysninger": [
+              "019c7061-8d92-7eef-89b7-65fd4b0f0b16",
+              "019c7061-8db0-7ea4-9154-edf426c6c58f"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a241",
+      "navn": "Dagsats uten barnetillegg før samordning",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8db3-7e70-8ee4-596b853f34c7",
+          "opprettet": "2026-02-18T11:52:47.411765",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 1071,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Avrund"
+            },
+            "opplysninger": [
+              "019c7061-8db1-74ec-9243-9609e011354c"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a24a",
+      "navn": "Maksimal mulig dagsats avgrenset til 90% av dagpengegrunnlaget",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8db3-7e70-8ee4-596b853f34c8",
+          "opprettet": "2026-02-18T11:52:47.411919",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 1545.255,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Divisjon"
+            },
+            "opplysninger": [
+              "019c7061-8d90-7f25-9b20-f23dc2856b00",
+              "019c7061-8db1-74ec-9243-9609e011354d"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a76a",
+      "navn": "Fastsatt arbeidstid per uke før tap",
+      "datatype": "desimaltall",
+      "perioder": [
+        {
+          "id": "019c7061-8db3-7e70-8ee4-596b853f34c9",
+          "opprettet": "2026-02-18T11:52:47.41198",
+          "opprinnelse": "Ny",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 38.0,
+            "enhet": "timer",
+            "datatype": "desimaltall"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "MinstAv"
+            },
+            "opplysninger": [
+              "019c7061-82d1-7037-bd41-a15eb88d543e",
+              "019c7061-8d92-7eef-89b7-65fd4b0f0b15",
+              "019c7061-8d99-769b-bf76-57b418846a3e",
+              "019c7061-8db1-74ec-9243-9609e011354e"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a24b",
+      "navn": "Avrundet maksimal mulig dagsats avgrenset til 90% av dagpengegrunnlaget",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8db5-79cc-8c10-d92dee07db38",
+          "opprettet": "2026-02-18T11:52:47.41375",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 1545,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Avrund"
+            },
+            "opplysninger": [
+              "019c7061-8db3-7e70-8ee4-596b853f34c8"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a76e",
+      "navn": "Oppfyller vilkåret om tap av arbeidstid",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8db5-79cc-8c10-d92dee07db39",
+          "opprettet": "2026-02-18T11:52:47.413919",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "SjekkAvTerskel"
+            },
+            "opplysninger": [
+              "019c7061-82e3-7f7e-908a-404e369c537a",
+              "019c7061-82ea-7970-8f02-2cfa90589113",
+              "019c7061-8db3-7e70-8ee4-596b853f34c9"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9435-72a8-b1ce-9575cbc2a76f",
+      "navn": "Oppfyller vilkåret om tap av arbeidsinntekt og arbeidstid",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8db7-7ee2-bf95-d65cd8435a19",
+          "opprettet": "2026-02-18T11:52:47.415976",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Alle"
+            },
+            "opplysninger": [
+              "019c7061-82e9-7f16-a6bf-57288c2d14ab",
+              "019c7061-82ea-7970-8f02-2cfa90589114",
+              "019c7061-8d84-715b-9cc3-a18b374c382f",
+              "019c7061-8db5-79cc-8c10-d92dee07db39"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a23b",
+      "navn": "Barn",
+      "datatype": "barn",
+      "perioder": [
+        {
+          "id": "019c7061-8ee0-7dc8-b389-18f74fa1ad0a",
+          "opprettet": "2026-02-18T11:52:47.712687",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "søknadBarnId": "117fe183-0982-4adf-8cba-a309c0f8766d",
+            "verdi": [],
+            "datatype": "barn"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:47.673471",
+            "meldingId": "e57f2207-eafc-4c82-8e96-3fd685964a02"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "innhentMed"
+            },
+            "opplysninger": [
+              "019c7061-77d2-7634-8f50-48b2b320942b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942e-7cb0-aa59-05ea449d88e0",
+      "navn": "Oppgitt andre ytelser utenfor NAV i søknaden",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8ee0-7dc8-b389-18f74fa1ad0b",
+          "opprettet": "2026-02-18T11:52:47.712851",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "System",
+            "registrert": "2026-02-18T11:52:47.675502",
+            "meldingId": "e57f2207-eafc-4c82-8e96-3fd685964a02"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a23c",
+      "navn": "Antall barn som gir rett til barnetillegg",
+      "datatype": "heltall",
+      "perioder": [
+        {
+          "id": "019d722a-5de8-7b31-870e-0a5e978a6e52",
+          "opprettet": "2026-04-09T14:14:32.424587",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 1,
+            "datatype": "heltall"
+          },
+          "kilde": {
+            "type": "Saksbehandler",
+            "registrert": "2026-04-09T14:14:32.350774",
+            "ident": "Z994854",
+            "begrunnelse": {
+              "verdi": "TEST",
+              "sistEndret": "2026-04-09T14:14:32.350751"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a2d",
+      "navn": "Skal samordnes med ytelser utenfor folketrygden",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7061-8ee4-7178-876c-b543a6140af7",
+          "opprettet": "2026-02-18T11:52:47.716571",
+          "opprinnelse": "Arvet",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "019c7061-8d91-7ade-bd96-be0f2c177244",
+              "019c7061-8d92-7eef-89b7-65fd4b0f0b10",
+              "019c7061-8d92-7eef-89b7-65fd4b0f0b11",
+              "019c7061-8d92-7eef-89b7-65fd4b0f0b12",
+              "019c7061-8d92-7eef-89b7-65fd4b0f0b13",
+              "019c7061-8d92-7eef-89b7-65fd4b0f0b14",
+              "019c7061-8ee0-7dc8-b389-18f74fa1ad0b"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a244",
+      "navn": "Sum av barnetillegg",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019d722a-5dee-7013-a282-16d3fcc1b2c7",
+          "opprettet": "2026-04-09T14:14:32.430007",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 38,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Multiplikasjon"
+            },
+            "opplysninger": [
+              "019c7061-8d90-7f25-9b20-f23dc2856afe",
+              "019d722a-5de8-7b31-870e-0a5e978a6e52"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.04.09-10.42-7de3795"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a245",
+      "navn": "Dagsats med barnetillegg før samordning",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019d722a-5df1-7760-b782-a2eab077c6bf",
+          "opprettet": "2026-04-09T14:14:32.433383",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 1109,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Addisjon"
+            },
+            "opplysninger": [
+              "019c7061-8db3-7e70-8ee4-596b853f34c7",
+              "019d722a-5dee-7013-a282-16d3fcc1b2c7"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.04.09-10.42-7de3795"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a24c",
+      "navn": "Har barnetillegg",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019d722a-5df1-7760-b782-a2eab077c6c0",
+          "opprettet": "2026-04-09T14:14:32.433942",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "StørreEnnEllerLik"
+            },
+            "opplysninger": [
+              "019c7061-8d90-7f25-9b20-f23dc2856afe",
+              "019d722a-5dee-7013-a282-16d3fcc1b2c7"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.04.09-10.42-7de3795"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a242",
+      "navn": "Andel av dagsats med barnetillegg som overstiger maks andel av dagpengegrunnlaget",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019d722a-5df4-7450-816e-552b179142b0",
+          "opprettet": "2026-04-09T14:14:32.436994",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 0,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Substraksjon"
+            },
+            "opplysninger": [
+              "019c7061-8db5-79cc-8c10-d92dee07db38",
+              "019d722a-5df1-7760-b782-a2eab077c6bf"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.04.09-10.42-7de3795"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a240",
+      "navn": "Avrundet ukessats med barnetillegg før samordning",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019d722a-5df5-709e-9b8e-745fc80808bb",
+          "opprettet": "2026-04-09T14:14:32.437543",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 5545,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Multiplikasjon"
+            },
+            "opplysninger": [
+              "019c7061-8d90-7f25-9b20-f23dc2856b01",
+              "019d722a-5df1-7760-b782-a2eab077c6bf"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.04.09-10.42-7de3795"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a243",
+      "navn": "Andel av dagsats uten barnetillegg avkortet til maks andel av dagpengegrunnlaget",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019d722a-5df8-71f8-bd02-545067a2eb20",
+          "opprettet": "2026-04-09T14:14:32.440484",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 1071,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Substraksjon"
+            },
+            "opplysninger": [
+              "019c7061-8db3-7e70-8ee4-596b853f34c7",
+              "019d722a-5df4-7450-816e-552b179142b0"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.04.09-10.42-7de3795"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9434-79e8-a64d-1a23cc5d86eb",
+      "navn": "Samordnet dagsats uten barnetillegg",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019d722a-5dff-747f-89a4-08c5e76bbe99",
+          "opprettet": "2026-04-09T14:14:32.447947",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 1071,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Substraksjon"
+            },
+            "opplysninger": [
+              "019c7061-82ed-7b65-ac47-1bc62f7418ae",
+              "019d722a-5df8-71f8-bd02-545067a2eb20"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.04.09-10.42-7de3795"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9434-79e8-a64d-1a23cc5d86ec",
+      "navn": "Samordnet dagsats er større enn 0",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019d722a-5e00-73ba-a31e-10fe8da3d201",
+          "opprettet": "2026-04-09T14:14:32.448722",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "StørreEnnEllerLik"
+            },
+            "opplysninger": [
+              "019c7061-82ed-7b65-ac47-1bc62f7418ae",
+              "019d722a-5df8-71f8-bd02-545067a2eb20"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.04.09-10.42-7de3795"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a2f",
+      "navn": "Samordnet ukessats uten barnetillegg",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019d722a-5e04-71d0-a802-ccebcb90f2c6",
+          "opprettet": "2026-04-09T14:14:32.452945",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 5355,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Multiplikasjon"
+            },
+            "opplysninger": [
+              "019c7061-8d90-7f25-9b20-f23dc2856b01",
+              "019d722a-5dff-747f-89a4-08c5e76bbe99"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.04.09-10.42-7de3795"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9434-79e8-a64d-1a23cc5d86ef",
+      "navn": "Utfall etter samordning",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019d722a-5e05-75dc-9cc2-56df139c6f7c",
+          "opprettet": "2026-04-09T14:14:32.453743",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "019d722a-5df1-7760-b782-a2eab077c6c0",
+              "019d722a-5e00-73ba-a31e-10fe8da3d201"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.04.09-10.42-7de3795"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a30",
+      "navn": "Minste mulige ukessats som som kan brukes",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019d722a-5e09-7e0d-96e8-c39cc3102575",
+          "opprettet": "2026-04-09T14:14:32.457618",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 3904.8,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "MinstAv"
+            },
+            "opplysninger": [
+              "019c7061-8d98-7492-93d6-484d99117230",
+              "019d722a-5e04-71d0-a802-ccebcb90f2c6"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.04.09-10.42-7de3795"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a31",
+      "navn": "Ukessats trukket ned for ytelser utenfor folketrygden",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019d722a-5e0a-7c92-87ea-db8fce7c216a",
+          "opprettet": "2026-04-09T14:14:32.458547",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 5355,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Substraksjon"
+            },
+            "opplysninger": [
+              "019c7061-8d98-7492-93d6-484d99117231",
+              "019d722a-5e04-71d0-a802-ccebcb90f2c6"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.04.09-10.42-7de3795"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a32",
+      "navn": "Samordnet ukessats med ytelser utenfor folketrygden",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019d722a-5e0e-71f3-9d75-1fdba13a3d96",
+          "opprettet": "2026-04-09T14:14:32.462132",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 5355,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "HøyesteAv"
+            },
+            "opplysninger": [
+              "019d722a-5e09-7e0d-96e8-c39cc3102575",
+              "019d722a-5e0a-7c92-87ea-db8fce7c216a"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.04.09-10.42-7de3795"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-942f-7bde-ab16-68ffd19e9a33",
+      "navn": "Dagsats uten barnetillegg samordnet",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019d722a-5e12-7001-bf82-a99671855a1f",
+          "opprettet": "2026-04-09T14:14:32.466874",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 1071,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Divisjon"
+            },
+            "opplysninger": [
+              "019c7061-8d90-7f25-9b20-f23dc2856b01",
+              "019d722a-5e0e-71f3-9d75-1fdba13a3d96"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.04.09-10.42-7de3795"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a24d",
+      "navn": "Samordnet dagsats med barnetillegg",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019d722a-5e16-7b72-bab3-976800bfa868",
+          "opprettet": "2026-04-09T14:14:32.470658",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 1109,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Addisjon"
+            },
+            "opplysninger": [
+              "019d722a-5dee-7013-a282-16d3fcc1b2c7",
+              "019d722a-5e12-7001-bf82-a99671855a1f"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.04.09-10.42-7de3795"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a250",
+      "navn": "Har samordnet",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019d722a-5e17-7690-8ebe-49820d4473f9",
+          "opprettet": "2026-04-09T14:14:32.471517",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "ErUlik"
+            },
+            "opplysninger": [
+              "019d722a-5df8-71f8-bd02-545067a2eb20",
+              "019d722a-5e12-7001-bf82-a99671855a1f"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.04.09-10.42-7de3795"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a24f",
+      "navn": "Dagsats med barnetillegg etter samordning og 90 % regel",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019d722a-5e1b-7f9a-8fac-9bad14ccc5c3",
+          "opprettet": "2026-04-09T14:14:32.47508",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 1109,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "MinstAv"
+            },
+            "opplysninger": [
+              "019c7061-8db5-79cc-8c10-d92dee07db38",
+              "019d722a-5e16-7b72-bab3-976800bfa868"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.04.09-10.42-7de3795"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-9428-74d5-b160-f63a4c61a24e",
+      "navn": "Ukessats med barnetillegg etter samordning",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019d722a-5e1e-7cc8-8b4a-302a5744d3ad",
+          "opprettet": "2026-04-09T14:14:32.478702",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 5545,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Multiplikasjon"
+            },
+            "opplysninger": [
+              "019c7061-8d90-7f25-9b20-f23dc2856b01",
+              "019d722a-5e1b-7f9a-8fac-9bad14ccc5c3"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.04.09-10.42-7de3795"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "019523aa-7941-7dd2-8c43-0644d7b43f57",
+      "navn": "Tre ganger dagsats",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8efb-7c76-b481-bfb7705e7862",
+          "opprettet": "2026-02-18T11:52:47.73936",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 3213,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "Multiplikasjon"
+            },
+            "opplysninger": [
+              "019c7061-8d91-7ade-bd96-be0f2c177243",
+              "019c7061-8ef9-72f2-a8c9-d045aad1ae1d"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "0194881f-943f-78d9-b874-00a4944c54ef",
+      "navn": "Egenandel",
+      "datatype": "penger",
+      "perioder": [
+        {
+          "id": "019c7061-8efc-781b-bcd7-26f15eb6a7a0",
+          "opprettet": "2026-02-18T11:52:47.740869",
+          "opprinnelse": "Arvet",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": 3213,
+            "datatype": "penger"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "HvisSannMedResultat"
+            },
+            "opplysninger": [
+              "019c7061-82d1-7037-bd41-a15eb88d5442",
+              "019c7061-8efb-7c76-b481-bfb7705e7862"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.02.18-09.18-a4ab1d3"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "01990a09-0eab-7957-b88f-14484a50e194",
+      "navn": "Har løpende rett på dagpenger",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019d722a-5e2d-7dd6-9352-149b5621d194",
+          "opprettet": "2026-04-09T14:14:32.493991",
+          "opprinnelse": "Ny",
+          "gyldigFraOgMed": "2026-02-18",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "019c5676-5c44-73d4-bc65-aee9d9257aa1",
+      "navn": "Underretning om vedtaket ikke er kommet fram til vedkommende og vedtaket heller ikke er offentlig kunngjort",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7552-bf5d-736c-9882-27507299194d",
+          "opprettet": "2026-02-19T10:54:43.165562",
+          "opprinnelse": "Ny",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "019c5676-7c80-7217-a232-15318ff258c5",
+      "navn": "Vedtaket må anses ugyldig",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019c7552-bf5d-736c-9882-27507299194e",
+          "opprettet": "2026-02-19T10:54:43.165816",
+          "opprinnelse": "Ny",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "019c5673-ae11-7a8a-ae77-170f6ac20944",
+      "navn": "Endringen ikke er til skade for noen som vedtaket retter seg mot eller direkte tilgodeser",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019d7223-48df-73ac-a22e-4f78bd6ff75e",
+          "opprettet": "2026-04-09T14:06:48.287511",
+          "opprinnelse": "Ny",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "kilde": {
+            "type": "Saksbehandler",
+            "registrert": "2026-04-09T14:06:48.140064",
+            "ident": "Z994854",
+            "begrunnelse": {
+              "verdi": "TEST",
+              "sistEndret": "2026-04-09T14:06:48.140025"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "019d0068-8037-7d91-bfff-de88f9e87fd3",
+      "navn": "Skal kravet til gjenopptak vurderes",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019d7223-4900-781f-a1f7-84d08f87edb1",
+          "opprettet": "2026-04-09T14:06:48.320832",
+          "opprinnelse": "Ny",
+          "verdi": {
+            "verdi": false,
+            "datatype": "boolsk"
+          }
+        }
+      ]
+    },
+    {
+      "opplysningTypeId": "019c5676-a923-7e31-83b9-0e77e5a3cdcb",
+      "navn": "Et forvaltningsorgan kan omgjøre sitt eget vedtak uten at det er påklaget",
+      "datatype": "boolsk",
+      "perioder": [
+        {
+          "id": "019d7223-4916-7210-8d9a-bbe14c6c09dc",
+          "opprettet": "2026-04-09T14:06:48.342234",
+          "opprinnelse": "Ny",
+          "verdi": {
+            "verdi": true,
+            "datatype": "boolsk"
+          },
+          "utledetAv": {
+            "regel": {
+              "navn": "EnAv"
+            },
+            "opplysninger": [
+              "019c7552-bf5d-736c-9882-27507299194d",
+              "019c7552-bf5d-736c-9882-27507299194e",
+              "019d7223-48df-73ac-a22e-4f78bd6ff75e"
+            ],
+            "versjon": "europe-north1-docker.pkg.dev/nais-management-233d/teamdagpenger/dp-behandling:2026.04.09-10.42-7de3795"
+          }
+        }
+      ]
+    }
+  ],
+  "utbetalinger": [],
+  "behandletAv": [],
+  "førteTil": "Innvilgelse"
+}

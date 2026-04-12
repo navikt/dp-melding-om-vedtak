@@ -498,7 +498,7 @@ class VedtakHtmlTest {
         runBlocking {
             val omgjøringMelding =
                 OmgjøringMelding(
-                    vedtak = hentVedtak("/json/omgjoring_innvilgelse.json"),
+                    vedtak = hentVedtak("/json/omgjoring_innvilgelse_endret_antall_barn.json"),
                     alleBrevblokker = sanityKlient.hentBrevBlokker(),
                 )
             omgjøringMelding.hentOpplysninger()
@@ -532,7 +532,54 @@ class VedtakHtmlTest {
                     SPØRSMÅL.brevBlokkId,
                 )
             writeStringToFile(
-                filePath = "build/temp/omgjoring.html",
+                filePath = "build/temp/omgjoring_barn.html",
+                content =
+                htmlInnhold,
+            )
+        }
+    }
+
+    @Test
+    fun `Html av omgjøring innvilgelse når det er lagt til et barn og endret antall stønadsuker`() {
+        runBlocking {
+            val omgjøringMelding =
+                OmgjøringMelding(
+                    vedtak = hentVedtak("/json/omgjoring_innvilgelse_endret_antall_barn_og_stonadsuker.json"),
+                    alleBrevblokker = sanityKlient.hentBrevBlokker(),
+                )
+            omgjøringMelding.hentOpplysninger()
+            val brevBlokker = omgjøringMelding.hentBrevBlokker()
+            val htmlInnhold =
+                HtmlConverter.toHtml(
+                    brevBlokker = brevBlokker,
+                    opplysninger = omgjøringMelding.hentOpplysninger(),
+                    meldingOmVedtakData = meldingOmVedtakData,
+                )
+
+            htmlInnhold brevblokkRekkefølgeShouldBe
+                listOf(
+                    OMGJØRING_OVERSKRIFT.brevblokkId,
+                    OMGJØRING_BEGRUNNELSE.brevblokkId,
+                    INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                    INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                    INNVILGELSE_BARNETILLEGG.brevblokkId,
+                    INNVILGELSE_GRUNNLAG.brevblokkId,
+                    INNVILGELSE_EGENANDEL.brevblokkId,
+                    INNVILGELSE_MELDEKORT.brevblokkId,
+                    INNVILGELSE_UTBETALING.brevblokkId,
+                    INNVILGELSE_SKATTEKORT.brevblokkId,
+                    INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                    INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                    INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                    RETT_TIL_INNSYN.brevBlokkId,
+                    PERSONOPPLYSNINGER.brevBlokkId,
+                    HJELP_FRA_ANDRE.brevBlokkId,
+                    VEILEDNING_FRA_NAV.brevBlokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
+                    SPØRSMÅL.brevBlokkId,
+                )
+            writeStringToFile(
+                filePath = "build/temp/omgjoring_barn_og_stonadsuker.html",
                 content =
                 htmlInnhold,
             )

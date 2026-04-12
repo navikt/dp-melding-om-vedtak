@@ -296,4 +296,32 @@ class DagpengerOpplysningTest {
         DagpengerOpplysning.KravTilUtdanning(behandlingsresultatData).verdi shouldBe true
         DagpengerOpplysning.OppfyllerMedlemskap(behandlingsresultatData).verdi shouldBe true
     }
+
+    @Test
+    fun `FastsattVanligArbeidstidPerUkeErEndret blir satt på bakgrunn av opprinnelse Ny`() {
+        val behandlingsresultatData = BehandlingsresultatData("/json/omgjoring_innvilgelse_endret_arbeidstid.json".readFile())
+        DagpengerOpplysning.FastsattVanligArbeidstidPerUkeErEndret.fra(behandlingsresultatData).also {
+            requireNotNull(it) { "Forventet ikke null" }
+            it.verdi shouldBe true
+        }
+    }
+
+    @Test
+    fun `DagsatsErEndret blir satt på bakgrunn av opprinnelse Ny`() {
+        val behandlingsresultatData = BehandlingsresultatData("/json/omgjoring_innvilgelse_endret_antall_barn.json".readFile())
+        DagpengerOpplysning.DagsatsErEndret.fra(behandlingsresultatData).also {
+            requireNotNull(it) { "Forventet ikke null" }
+            it.verdi shouldBe true
+        }
+    }
+
+    @Test
+    fun `AntallStønadsukerErEndret blir satt på bakgrunn av opprinnelse Ny`() {
+        val behandlingsresultatData =
+            BehandlingsresultatData("/json/omgjoring_innvilgelse_endret_antall_barn_og_stonadsuker.json".readFile())
+        DagpengerOpplysning.AntallStønadsukerErEndret.fra(behandlingsresultatData).also {
+            requireNotNull(it) { "Forventet ikke null" }
+            it.verdi shouldBe true
+        }
+    }
 }

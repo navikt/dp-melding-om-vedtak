@@ -1299,7 +1299,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class AntallStønadsukerErEndret(
         override val verdi: Boolean,
     ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
-        override val opplysningTekstId = "opplysning.dagpengeperiode-er-endret"
+        override val opplysningTekstId = "opplysning.antall-stonadsuker-er-endret"
         override val enhet = Enhet.ENHETSLØS
 
         companion object {
@@ -1333,7 +1333,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class FastsattVanligArbeidstidPerUkeErEndret(
         override val verdi: Boolean,
     ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
-        override val opplysningTekstId = "opplysning.dagsats-er-endret"
+        override val opplysningTekstId = "opplysning.fastsatt-vanlig-arbeidstid-per-uke-er-endret"
         override val enhet = Enhet.ENHETSLØS
 
         companion object {

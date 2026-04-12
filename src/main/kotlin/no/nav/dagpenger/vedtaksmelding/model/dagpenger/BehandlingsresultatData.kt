@@ -8,6 +8,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.github.oshai.kotlinlogging.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningDataException
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.GJENOPPTAK
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.INNVILGET
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.OMGJORT_MED_INNVILGELSE
 import java.time.LocalDate
 import java.util.UUID
 
@@ -51,14 +54,14 @@ class BehandlingsresultatData(
                     ?: throw ManglendeVirkningsdato("Fant ingen rettighetsperiode med harRett = false for avslag om dagpenger")
             }
 
-            Vedtak.Utfall.INNVILGET -> {
+            INNVILGET -> {
                 nyeRettighetsperioder
                     .firstOrNull { it.harRett }
                     ?.fraOgMed
                     ?: throw ManglendeVirkningsdato("Fant ingen ny rettighetsperiode med harRett = true for innvilgelse av dagpenger")
             }
 
-            Vedtak.Utfall.GJENOPPTAK -> {
+            GJENOPPTAK -> {
                 nyeRettighetsperioder
                     .firstOrNull { it.harRett }
                     ?.fraOgMed
@@ -67,7 +70,7 @@ class BehandlingsresultatData(
 
             // Ved omgjøring uten klage hentes første rettighetsperiode med opprinnelse "Ny" hvis det finnes.
             // Hvis det ikke finnes noen nye perioder, hentes siste rettighetsperiode.
-            Vedtak.Utfall.OMGJORT_MED_INNVILGELSE -> {
+            OMGJORT_MED_INNVILGELSE -> {
                 nyeRettighetsperioder
                     .firstOrNull { it.harRett }
                     ?.fraOgMed
@@ -82,12 +85,7 @@ class BehandlingsresultatData(
     fun sisteDagMedRett(): LocalDate? {
         val nyeRettighetsperioder = rettighetsperioder.filter { it.opprinnelse == "Ny" }
         return when (utfall()) {
-            Vedtak.Utfall.INNVILGET -> {
-                nyeRettighetsperioder
-                    .lastOrNull { it.harRett }
-                    ?.tilOgMed
-            }
-            Vedtak.Utfall.GJENOPPTAK -> {
+            INNVILGET, GJENOPPTAK, OMGJORT_MED_INNVILGELSE -> {
                 nyeRettighetsperioder
                     .lastOrNull { it.harRett }
                     ?.tilOgMed
@@ -315,8 +313,8 @@ class BehandlingsresultatData(
         return when (førteTil) {
             "Innvilgelse" -> {
                 when (behandletHendelseType) {
-                    "Søknad" -> Vedtak.Utfall.INNVILGET
-                    "Omgjøring" -> Vedtak.Utfall.OMGJORT_MED_INNVILGELSE
+                    "Søknad" -> INNVILGET
+                    "Omgjøring" -> OMGJORT_MED_INNVILGELSE
                     else -> throw UtfallIkkeStøttet(førteTil = førteTil, behandletHendelseType = behandletHendelseType)
                 }
             }
@@ -328,7 +326,7 @@ class BehandlingsresultatData(
             }
             "Gjenopptak" -> {
                 when (behandletHendelseType) {
-                    "Søknad" -> Vedtak.Utfall.GJENOPPTAK
+                    "Søknad" -> GJENOPPTAK
                     else -> throw UtfallIkkeStøttet(førteTil = førteTil, behandletHendelseType = behandletHendelseType)
                 }
             }
