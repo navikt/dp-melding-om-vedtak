@@ -35,6 +35,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.omgjøring.OmgjøringMelding
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
 import no.nav.dagpenger.vedtaksmelding.util.readFile
@@ -170,6 +171,36 @@ class MediatorTest {
                     klient = klient,
                     behanldingstype = Behandlingstype.RETT_TIL_DAGPENGER,
                 ).shouldBeInstanceOf<AvslagMelding>()
+        }
+
+        coVerify(exactly = 1) {
+            behandlingKlient.hentBehandlingResultat(behandlingId, klient)
+        }
+    }
+
+    @Test
+    fun `Skal ha støtte for behandlingstype REVURDERING`() {
+        val vedtak = VedtakMapper("/json/omgjoring_innvilgelse_endret_antall_barn.json".readFile()).vedtak()
+        val behandlingKlient =
+            mockk<BehandlingKlient>().also {
+                coEvery { it.hentBehandlingResultat(behandlingId, klient) } returns Result.success(vedtak)
+            }
+
+        val mediator =
+            Mediator(
+                behandlingKlient = behandlingKlient,
+                sanityKlient = sanityKlient,
+                klageBehandlingKlient = mockKlageBehandlingKlient,
+                vedtaksmeldingRepository = mockk<VedtaksmeldingRepository>(relaxed = true),
+            )
+
+        runBlocking {
+            mediator
+                .hentBrevKomponenterOgLagre(
+                    behandlingId = behandlingId,
+                    klient = klient,
+                    behanldingstype = Behandlingstype.REVURDERING,
+                ).shouldBeInstanceOf<OmgjøringMelding>()
         }
 
         coVerify(exactly = 1) {
