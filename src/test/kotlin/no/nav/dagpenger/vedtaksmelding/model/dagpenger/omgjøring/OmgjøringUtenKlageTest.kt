@@ -57,9 +57,7 @@ class OmgjøringUtenKlageTest {
                         utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                         opplysninger =
                             setOf(
-                                DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = false),
-                                DagpengerOpplysning.VedtaketMåAnsesUgyldig(verdi = false),
-                                DagpengerOpplysning.VedtaketErIkkeTilSkade(verdi = false),
+                                DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = false),
                             ),
                     ),
                 alleBrevblokker = emptyList(),
@@ -73,51 +71,7 @@ class OmgjøringUtenKlageTest {
                         utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                         opplysninger =
                             setOf(
-                                DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
-                                DagpengerOpplysning.VedtaketMåAnsesUgyldig(verdi = true),
-                                DagpengerOpplysning.VedtaketErIkkeTilSkade(verdi = true),
-                            ),
-                    ),
-                alleBrevblokker = emptyList(),
-            )
-        }
-        shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
-            OmgjøringMelding(
-                vedtak =
-                    Vedtak(
-                        behandlingId = behandlingId,
-                        utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
-                        opplysninger =
-                            setOf(
-                                DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
-                            ),
-                    ),
-                alleBrevblokker = emptyList(),
-            )
-        }
-        shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
-            OmgjøringMelding(
-                vedtak =
-                    Vedtak(
-                        behandlingId = behandlingId,
-                        utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
-                        opplysninger =
-                            setOf(
-                                DagpengerOpplysning.VedtaketMåAnsesUgyldig(verdi = true),
-                            ),
-                    ),
-                alleBrevblokker = emptyList(),
-            )
-        }
-        shouldNotThrow<Vedtaksmelding.ManglerBrevstøtte> {
-            OmgjøringMelding(
-                vedtak =
-                    Vedtak(
-                        behandlingId = behandlingId,
-                        utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
-                        opplysninger =
-                            setOf(
-                                DagpengerOpplysning.VedtaketErIkkeTilSkade(verdi = true),
+                                DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
                             ),
                     ),
                 alleBrevblokker = emptyList(),
@@ -152,7 +106,7 @@ class OmgjøringUtenKlageTest {
                     utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
+                            DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
                             DagpengerOpplysning.AntallStønadsukerErEndret(verdi = true),
                         ),
                 ),
@@ -188,7 +142,7 @@ class OmgjøringUtenKlageTest {
                     utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
+                            DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
                             DagpengerOpplysning.AntallStønadsukerErEndret(verdi = true),
                             DagpengerOpplysning.SisteDagMedRett(verdi = LocalDate.now().plusWeeks(4)),
                         ),
@@ -225,7 +179,7 @@ class OmgjøringUtenKlageTest {
                     utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
+                            DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
                             DagpengerOpplysning.SisteDagMedRett(verdi = LocalDate.now().plusWeeks(4)),
                         ),
                 ),
@@ -261,7 +215,7 @@ class OmgjøringUtenKlageTest {
                     utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
+                            DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
                             DagpengerOpplysning.DagsatsErEndret(verdi = true),
                             DagpengerOpplysning.Egenandel(verdi = 3000),
                             DagpengerOpplysning.EgenandelGjenstående(verdi = 0),
@@ -300,7 +254,7 @@ class OmgjøringUtenKlageTest {
                     utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
+                            DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
                             DagpengerOpplysning.DagsatsErEndret(verdi = true),
                             DagpengerOpplysning.Egenandel(verdi = 3000),
                             DagpengerOpplysning.EgenandelGjenstående(verdi = 1000),
@@ -339,7 +293,7 @@ class OmgjøringUtenKlageTest {
                     utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
+                            DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
                             DagpengerOpplysning.DagsatsErEndret(verdi = true),
                             DagpengerOpplysning.HarSamordnet(verdi = true),
                             DagpengerOpplysning.SykepengerDagsats(verdi = 500),
@@ -378,7 +332,7 @@ class OmgjøringUtenKlageTest {
                     utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
+                            DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
                             DagpengerOpplysning.DagsatsErEndret(verdi = true),
                             DagpengerOpplysning.HarSamordnet(verdi = true),
                             DagpengerOpplysning.PleiepengerDagsats(verdi = 500),
@@ -417,7 +371,7 @@ class OmgjøringUtenKlageTest {
                     utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
+                            DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
                             DagpengerOpplysning.DagsatsErEndret(verdi = true),
                             DagpengerOpplysning.HarSamordnet(verdi = true),
                             DagpengerOpplysning.OmsorgspengerDagsats(verdi = 500),
@@ -456,7 +410,7 @@ class OmgjøringUtenKlageTest {
                     utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
+                            DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
                             DagpengerOpplysning.DagsatsErEndret(verdi = true),
                             DagpengerOpplysning.HarSamordnet(verdi = true),
                             DagpengerOpplysning.OpplæringspengerDagsats(verdi = 500),
@@ -495,7 +449,7 @@ class OmgjøringUtenKlageTest {
                     utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
+                            DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
                             DagpengerOpplysning.DagsatsErEndret(verdi = true),
                             DagpengerOpplysning.HarSamordnet(verdi = true),
                             DagpengerOpplysning.UføreDagsats(verdi = 500),
@@ -534,7 +488,7 @@ class OmgjøringUtenKlageTest {
                     utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
+                            DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
                             DagpengerOpplysning.DagsatsErEndret(verdi = true),
                             DagpengerOpplysning.HarSamordnet(verdi = true),
                             DagpengerOpplysning.ForeldrepengerDagsats(verdi = 500),
@@ -573,7 +527,7 @@ class OmgjøringUtenKlageTest {
                     utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
+                            DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
                             DagpengerOpplysning.DagsatsErEndret(verdi = true),
                             DagpengerOpplysning.HarSamordnet(verdi = true),
                             DagpengerOpplysning.SvangerskapspengerDagsats(verdi = 500),
@@ -612,7 +566,7 @@ class OmgjøringUtenKlageTest {
                     utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
+                            DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
                             DagpengerOpplysning.DagsatsErEndret(verdi = true),
                             DagpengerOpplysning.HarSamordnet(verdi = true),
                             DagpengerOpplysning.SvangerskapspengerDagsats(verdi = 200),
@@ -651,7 +605,7 @@ class OmgjøringUtenKlageTest {
                     utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
+                            DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
                             DagpengerOpplysning.GodkjentLokalArbeidssøker(verdi = true),
                         ),
                 ),
@@ -687,7 +641,7 @@ class OmgjøringUtenKlageTest {
                     utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
+                            DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
                             DagpengerOpplysning.GodkjentKunDeltidssøker(verdi = true),
                         ),
                 ),
@@ -724,7 +678,7 @@ class OmgjøringUtenKlageTest {
                     utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
+                            DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
                             DagpengerOpplysning.DagsatsErEndret(verdi = true),
                             DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(verdi = 2),
                         ),
@@ -763,7 +717,7 @@ class OmgjøringUtenKlageTest {
                     utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
+                            DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
                             DagpengerOpplysning.DagsatsErEndret(verdi = true),
                             DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(verdi = 2),
                             DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
@@ -802,7 +756,7 @@ class OmgjøringUtenKlageTest {
                     utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram(verdi = true),
+                            DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
                             DagpengerOpplysning.FastsattVanligArbeidstidPerUkeErEndret(verdi = true),
                         ),
                 ),

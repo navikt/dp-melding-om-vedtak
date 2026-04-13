@@ -676,44 +676,14 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
-    class UnderretningOmVedtaketIkkeErKommetFram(
+    class EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(
         override val verdi: Boolean,
     ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
         companion object {
-            val opplysningTypeId: UUID = UUID.fromString("019c5676-5c44-73d4-bc65-aee9d9257aa1")
+            val opplysningTypeId: UUID = UUID.fromString("019c5676-a923-7e31-83b9-0e77e5a3cdcb")
         }
 
-        override val opplysningTekstId = "opplysning.underretting-om-vedtaket-ikke-er-kommet-fram"
-        override val enhet = Enhet.ENHETSLØS
-
-        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
-        )
-    }
-
-    class VedtaketMåAnsesUgyldig(
-        override val verdi: Boolean,
-    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
-        companion object {
-            val opplysningTypeId: UUID = UUID.fromString("019c5676-7c80-7217-a232-15318ff258c5")
-        }
-
-        override val opplysningTekstId = "opplysning.vedtaket-maa-anses-ugyldig"
-        override val enhet = Enhet.ENHETSLØS
-
-        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
-        )
-    }
-
-    class VedtaketErIkkeTilSkade(
-        override val verdi: Boolean,
-    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
-        companion object {
-            val opplysningTypeId: UUID = UUID.fromString("019c5673-ae11-7a8a-ae77-170f6ac20944")
-        }
-
-        override val opplysningTekstId = "opplysning.vedtaket-er-ikke-til-skade"
+        override val opplysningTekstId = "opplysning.et-forvaltningsorgan-kan-omgjore-sitt-eget-vedtak-uten-at-det-er-paaklaget"
         override val enhet = Enhet.ENHETSLØS
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(

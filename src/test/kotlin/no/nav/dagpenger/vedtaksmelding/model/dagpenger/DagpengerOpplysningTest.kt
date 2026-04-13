@@ -156,6 +156,16 @@ class DagpengerOpplysningTest {
     }
 
     @Test
+    fun `Siste dag med rett blir satt på bakgrunn av siste rettighetsperiode, hvis flere`() {
+        val behandlingsresultatData =
+            BehandlingsresultatData("/json/innvigelse_ord_resultat_til_og_med_dato_og_flere_rettighetsperioder.json".readFile())
+        DagpengerOpplysning.SisteDagMedRett.fra(behandlingsresultatData).also {
+            requireNotNull(it) { "Forventet ikke null" }
+            it.verdi shouldBe LocalDate.of(2025, 9, 26)
+        }
+    }
+
+    @Test
     fun `GrunnlagErReberegnet kan være null`() {
         val behandlingsresultatData =
             BehandlingsresultatData(

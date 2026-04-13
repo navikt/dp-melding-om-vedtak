@@ -51,11 +51,7 @@ class OmgjøringMelding(
 ) : Vedtaksmelding(vedtak) {
     override val harBrevstøtte: Boolean =
         vedtak.utfall == OMGJORT_MED_INNVILGELSE &&
-            (
-                vedtak.oppfylt<DagpengerOpplysning.UnderretningOmVedtaketIkkeErKommetFram>() ||
-                    vedtak.oppfylt<DagpengerOpplysning.VedtaketMåAnsesUgyldig>() ||
-                    vedtak.oppfylt<DagpengerOpplysning.VedtaketErIkkeTilSkade>()
-            )
+            vedtak.oppfylt<DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget>()
 
     init {
         require(this.harBrevstøtte) {
