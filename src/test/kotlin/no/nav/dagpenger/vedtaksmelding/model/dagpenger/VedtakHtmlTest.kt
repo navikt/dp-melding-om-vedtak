@@ -636,4 +636,50 @@ class VedtakHtmlTest {
             )
         }
     }
+
+    @Test
+    fun `Html av omgjøring innvilgelse med tom-dato når det er endret virkningsdato og arbeidstid`() {
+        runBlocking {
+            val omgjøringMelding =
+                OmgjøringMelding(
+                    vedtak = hentVedtak("/json/omgjoring_innvilgelse_endret_virkningsdato_med_til_og_med_og_arbeidstid.json"),
+                    alleBrevblokker = sanityKlient.hentBrevBlokker(),
+                )
+            omgjøringMelding.hentOpplysninger()
+            val brevBlokker = omgjøringMelding.hentBrevBlokker()
+            val htmlInnhold =
+                HtmlConverter.toHtml(
+                    brevBlokker = brevBlokker,
+                    opplysninger = omgjøringMelding.hentOpplysninger(),
+                    meldingOmVedtakData = meldingOmVedtakData,
+                )
+
+            htmlInnhold brevblokkRekkefølgeShouldBe
+                listOf(
+                    OMGJØRING_OVERSKRIFT.brevblokkId,
+                    OMGJØRING_BEGRUNNELSE.brevblokkId,
+                    INNVILGELSE_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1.brevblokkId,
+                    INNVILGELSE_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_2.brevblokkId,
+                    INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                    INNVILGELSE_EGENANDEL.brevblokkId,
+                    INNVILGELSE_MELDEKORT.brevblokkId,
+                    INNVILGELSE_UTBETALING.brevblokkId,
+                    INNVILGELSE_SKATTEKORT.brevblokkId,
+                    INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                    INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                    INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                    RETT_TIL_INNSYN.brevBlokkId,
+                    PERSONOPPLYSNINGER.brevBlokkId,
+                    HJELP_FRA_ANDRE.brevBlokkId,
+                    VEILEDNING_FRA_NAV.brevBlokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
+                    SPØRSMÅL.brevBlokkId,
+                )
+            writeStringToFile(
+                filePath = "build/temp/omgjoring_innvilgelse_endret_virkningsdato_med_til_og_med_og_arbeidstid.html",
+                content =
+                htmlInnhold,
+            )
+        }
+    }
 }

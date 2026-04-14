@@ -295,14 +295,20 @@ class BehandlingsresultatData(
         val fraOgMedNode = this.get("gyldigFraOgMed")
         val tilOgMedNode = this.get("gyldigTilOgMed")
 
-        if (fraOgMedNode == null || fraOgMedNode.isNull) {
-            return true
-        }
+        val fraOgMedDato: LocalDate =
+            if (fraOgMedNode == null || fraOgMedNode.isNull) {
+                LocalDate.MIN
+            } else {
+                fraOgMedNode.asDato()
+            }
+        val tilOgMedDato: LocalDate =
+            if (tilOgMedNode == null || tilOgMedNode.isNull) {
+                LocalDate.MAX
+            } else {
+                tilOgMedNode.asDato()
+            }
 
-        val fraOgMed = fraOgMedNode.asDato()
-        val tilOgMed = if (tilOgMedNode == null || tilOgMedNode.isNull) null else tilOgMedNode.asDato()
-
-        return virkningsdato >= fraOgMed && (tilOgMed == null || virkningsdato <= tilOgMed)
+        return virkningsdato >= fraOgMedDato && virkningsdato <= tilOgMedDato
     }
 
     fun behandlingId(): UUID = jsonNode["behandlingId"].let { UUID.fromString(it.asText()) }
