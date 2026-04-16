@@ -52,7 +52,8 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_UTBETALING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.OMGJØRING_BEGRUNNELSE
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.OMGJØRING_OVERSKRIFT
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.OMGJØRING_OVERSKRIFT_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.OMGJØRING_OVERSKRIFT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.omgjøring.OmgjøringMelding
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_1
@@ -514,7 +515,8 @@ class VedtakHtmlTest {
 
             htmlInnhold brevblokkRekkefølgeShouldBe
                 listOf(
-                    OMGJØRING_OVERSKRIFT.brevblokkId,
+                    OMGJØRING_OVERSKRIFT_DEL_1.brevblokkId,
+                    OMGJØRING_OVERSKRIFT_DEL_2.brevblokkId,
                     OMGJØRING_BEGRUNNELSE.brevblokkId,
                     INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
                     INNVILGELSE_BARNETILLEGG.brevblokkId,
@@ -560,7 +562,8 @@ class VedtakHtmlTest {
 
             htmlInnhold brevblokkRekkefølgeShouldBe
                 listOf(
-                    OMGJØRING_OVERSKRIFT.brevblokkId,
+                    OMGJØRING_OVERSKRIFT_DEL_1.brevblokkId,
+                    OMGJØRING_OVERSKRIFT_DEL_2.brevblokkId,
                     OMGJØRING_BEGRUNNELSE.brevblokkId,
                     INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
                     INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
@@ -607,7 +610,8 @@ class VedtakHtmlTest {
 
             htmlInnhold brevblokkRekkefølgeShouldBe
                 listOf(
-                    OMGJØRING_OVERSKRIFT.brevblokkId,
+                    OMGJØRING_OVERSKRIFT_DEL_1.brevblokkId,
+                    OMGJØRING_OVERSKRIFT_DEL_2.brevblokkId,
                     OMGJØRING_BEGRUNNELSE.brevblokkId,
                     INNVILGELSE_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1.brevblokkId,
                     INNVILGELSE_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_2.brevblokkId,
@@ -656,7 +660,8 @@ class VedtakHtmlTest {
 
             htmlInnhold brevblokkRekkefølgeShouldBe
                 listOf(
-                    OMGJØRING_OVERSKRIFT.brevblokkId,
+                    OMGJØRING_OVERSKRIFT_DEL_1.brevblokkId,
+                    OMGJØRING_OVERSKRIFT_DEL_2.brevblokkId,
                     OMGJØRING_BEGRUNNELSE.brevblokkId,
                     INNVILGELSE_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1.brevblokkId,
                     INNVILGELSE_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_2.brevblokkId,
