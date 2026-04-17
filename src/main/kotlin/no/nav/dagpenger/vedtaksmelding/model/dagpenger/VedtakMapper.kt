@@ -136,6 +136,7 @@ class VedtakMapper(
                 DagpengerOpplysning.AntallStønadsukerErEndret.fra(behandlingsresultatData)?.let { this.add(it) }
                 DagpengerOpplysning.DagsatsErEndret.fra(behandlingsresultatData)?.let { this.add(it) }
                 DagpengerOpplysning.FastsattVanligArbeidstidPerUkeErEndret.fra(behandlingsresultatData)?.let { this.add(it) }
+                DagpengerOpplysning.NyRettFraOgMed.fra(behandlingsresultatData)?.let { this.add(it) }
             }
 
         val deriverteOpplysninger =

@@ -43,6 +43,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.OMGJØRING_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.OMGJØRING_OVERSKRIFT_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.OMGJØRING_OVERSKRIFT_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.OMGJØRING_OVERSKRIFT_MED_FOMDATO_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.oppfylt
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 
@@ -91,11 +92,21 @@ class OmgjøringMelding(
         }
 
     private fun innledningBlokker(): List<String> =
-        listOf(
-            OMGJØRING_OVERSKRIFT_DEL_1.brevblokkId,
-            OMGJØRING_OVERSKRIFT_DEL_2.brevblokkId,
-            OMGJØRING_BEGRUNNELSE.brevblokkId,
-        )
+        when (vedtak.finnOpplysning("opplysning.ny-rett-fra-og-med")) {
+            null ->
+                listOf(
+                    OMGJØRING_OVERSKRIFT_DEL_1.brevblokkId,
+                    OMGJØRING_OVERSKRIFT_DEL_2.brevblokkId,
+                    OMGJØRING_BEGRUNNELSE.brevblokkId,
+                )
+
+            else ->
+                listOf(
+                    OMGJØRING_OVERSKRIFT_MED_FOMDATO_DEL_1.brevblokkId,
+                    OMGJØRING_OVERSKRIFT_DEL_2.brevblokkId,
+                    OMGJØRING_BEGRUNNELSE.brevblokkId,
+                )
+        }
 
     private fun nittiProsentRegelBlokker(): List<String> =
         vedtak

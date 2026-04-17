@@ -154,6 +154,41 @@ class OmgjøringUtenKlageTest {
     }
 
     @Test
+    fun `Riktige brevblokker når virkningsdato er endret`() {
+        val forventedeBrevblokker =
+            listOf(
+                InnvilgelseBrevblokker.OMGJØRING_OVERSKRIFT_MED_FOMDATO_DEL_1.brevblokkId,
+                InnvilgelseBrevblokker.OMGJØRING_OVERSKRIFT_DEL_2.brevblokkId,
+                InnvilgelseBrevblokker.OMGJØRING_BEGRUNNELSE.brevblokkId,
+                InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT.brevblokkId,
+                InnvilgelseBrevblokker.INNVILGELSE_UTBETALING.brevblokkId,
+                InnvilgelseBrevblokker.INNVILGELSE_SKATTEKORT.brevblokkId,
+                InnvilgelseBrevblokker.INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                InnvilgelseBrevblokker.INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                Vedtaksmelding.FasteBrevblokker.RETT_TIL_INNSYN.brevBlokkId,
+                Vedtaksmelding.FasteBrevblokker.PERSONOPPLYSNINGER.brevBlokkId,
+                Vedtaksmelding.FasteBrevblokker.HJELP_FRA_ANDRE.brevBlokkId,
+                Vedtaksmelding.FasteBrevblokker.VEILEDNING_FRA_NAV.brevBlokkId,
+                Vedtaksmelding.FasteBrevblokker.RETT_TIL_Å_KLAGE.brevBlokkId,
+                Vedtaksmelding.FasteBrevblokker.SPØRSMÅL.brevBlokkId,
+            )
+        OmgjøringMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    utfall = Vedtak.Utfall.OMGJORT_MED_INNVILGELSE,
+                    opplysninger =
+                        setOf(
+                            DagpengerOpplysning.EtForvaltningsorganKanOmgjøreSittEgetVedtakUtenAtDetErPåklaget(verdi = true),
+                            DagpengerOpplysning.NyRettFraOgMed(verdi = LocalDate.now().minusWeeks(4)),
+                        ),
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokker
+    }
+
+    @Test
     fun `Riktige brevblokker når til-og-med-dato er endret`() {
         val forventedeBrevblokker =
             listOf(

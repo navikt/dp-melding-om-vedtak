@@ -54,6 +54,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.OMGJØRING_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.OMGJØRING_OVERSKRIFT_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.OMGJØRING_OVERSKRIFT_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.OMGJØRING_OVERSKRIFT_MED_FOMDATO_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.omgjøring.OmgjøringMelding
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_1
@@ -544,7 +545,7 @@ class VedtakHtmlTest {
     }
 
     @Test
-    fun `Html av omgjøring innvilgelse når det er lagt til et barn og endret antall stønadsuker`() {
+    fun `Html av omgjøring innvilgelse når virkningsdato, antall barn og antall stønadsuker er endret`() {
         runBlocking {
             val omgjøringMelding =
                 OmgjøringMelding(
@@ -562,7 +563,7 @@ class VedtakHtmlTest {
 
             htmlInnhold brevblokkRekkefølgeShouldBe
                 listOf(
-                    OMGJØRING_OVERSKRIFT_DEL_1.brevblokkId,
+                    OMGJØRING_OVERSKRIFT_MED_FOMDATO_DEL_1.brevblokkId,
                     OMGJØRING_OVERSKRIFT_DEL_2.brevblokkId,
                     OMGJØRING_BEGRUNNELSE.brevblokkId,
                     INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
@@ -592,7 +593,7 @@ class VedtakHtmlTest {
     }
 
     @Test
-    fun `Html av omgjøring innvilgelse med tom-dato når det er lagt til et barn, endret antall stønadsuker og arbeidstid`() {
+    fun `Html av omgjøring innvilgelse med tom-dato og endret virkningsdato, antall barn, antall stønadsuker og arbeidstid`() {
         runBlocking {
             val omgjøringMelding =
                 OmgjøringMelding(
@@ -610,7 +611,7 @@ class VedtakHtmlTest {
 
             htmlInnhold brevblokkRekkefølgeShouldBe
                 listOf(
-                    OMGJØRING_OVERSKRIFT_DEL_1.brevblokkId,
+                    OMGJØRING_OVERSKRIFT_MED_FOMDATO_DEL_1.brevblokkId,
                     OMGJØRING_OVERSKRIFT_DEL_2.brevblokkId,
                     OMGJØRING_BEGRUNNELSE.brevblokkId,
                     INNVILGELSE_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1.brevblokkId,
@@ -660,7 +661,7 @@ class VedtakHtmlTest {
 
             htmlInnhold brevblokkRekkefølgeShouldBe
                 listOf(
-                    OMGJØRING_OVERSKRIFT_DEL_1.brevblokkId,
+                    OMGJØRING_OVERSKRIFT_MED_FOMDATO_DEL_1.brevblokkId,
                     OMGJØRING_OVERSKRIFT_DEL_2.brevblokkId,
                     OMGJØRING_BEGRUNNELSE.brevblokkId,
                     INNVILGELSE_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1.brevblokkId,

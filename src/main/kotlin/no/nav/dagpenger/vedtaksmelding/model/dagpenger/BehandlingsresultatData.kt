@@ -90,6 +90,7 @@ class BehandlingsresultatData(
                     .lastOrNull { it.harRett }
                     ?.tilOgMed
             }
+
             else -> null
         }
     }
@@ -105,6 +106,13 @@ class BehandlingsresultatData(
             logger.error(e) { "Fant ikke rettighetsperioder" }
             throw OpplysningDataException("Fant ikke rettighetsperioder")
         }
+    }
+
+    fun nyRettFraOgMed(): LocalDate? {
+        val nyeRettighetsperioder = rettighetsperioder.filter { it.opprinnelse == "Ny" }
+        return nyeRettighetsperioder
+            .firstOrNull { it.harRett }
+            ?.fraOgMed
     }
 
     fun flyttall(id: UUID): Double {
@@ -324,18 +332,21 @@ class BehandlingsresultatData(
                     else -> throw UtfallIkkeStøttet(førteTil = førteTil, behandletHendelseType = behandletHendelseType)
                 }
             }
+
             "Avslag" -> {
                 when (behandletHendelseType) {
                     "Søknad" -> Vedtak.Utfall.AVSLÅTT
                     else -> throw UtfallIkkeStøttet(førteTil = førteTil, behandletHendelseType = behandletHendelseType)
                 }
             }
+
             "Gjenopptak" -> {
                 when (behandletHendelseType) {
                     "Søknad" -> GJENOPPTAK
                     else -> throw UtfallIkkeStøttet(førteTil = førteTil, behandletHendelseType = behandletHendelseType)
                 }
             }
+
             else -> throw UtfallIkkeStøttet(førteTil = førteTil, behandletHendelseType = behandletHendelseType)
         }
     }

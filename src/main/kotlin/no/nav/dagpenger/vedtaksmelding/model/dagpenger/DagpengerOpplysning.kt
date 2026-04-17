@@ -1317,6 +1317,20 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         }
     }
 
+    class NyRettFraOgMed(
+        override val verdi: LocalDate,
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, LocalDate>(verdi) {
+        override val opplysningTekstId = "opplysning.ny-rett-fra-og-med"
+        override val enhet = Enhet.ENHETSLØS
+
+        companion object {
+            fun fra(behandlingsresultatData: BehandlingsresultatData): NyRettFraOgMed? =
+                behandlingsresultatData.nyRettFraOgMed()?.let {
+                    NyRettFraOgMed(verdi = it)
+                }
+        }
+    }
+
     override fun equals(other: Any?): Boolean =
         this.opplysningTekstId == (other as? DagpengerOpplysning<*, *>)?.opplysningTekstId &&
             this.verdi == other.verdi &&
