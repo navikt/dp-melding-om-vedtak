@@ -43,7 +43,7 @@ class OrdinæreDagpengerTest {
                     Vedtak(
                         behandlingId = behandlingId,
                         utfall = Vedtak.Utfall.AVSLÅTT,
-                        opplysninger = emptySet(),
+                        opplysninger = setOf(DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false)),
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -59,7 +59,17 @@ class OrdinæreDagpengerTest {
                 alleBrevblokker = emptyList(),
             )
         }
-
+        shouldThrow<ManglerBrevstøtte> {
+            InnvilgelseMelding(
+                vedtak =
+                    Vedtak(
+                        behandlingId = behandlingId,
+                        utfall = Vedtak.Utfall.STANS,
+                        opplysninger = setOf(DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false)),
+                    ),
+                alleBrevblokker = emptyList(),
+            )
+        }
         shouldNotThrowAny {
             InnvilgelseMelding(
                 vedtak =

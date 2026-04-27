@@ -28,7 +28,7 @@ class AvslagMeldingTaptArbeidstidTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.KravTilTaptArbeidstid(false),
+                            DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
                             DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5),
                             DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5),
                             DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste6Måneder(true),
@@ -53,7 +53,7 @@ class AvslagMeldingTaptArbeidstidTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.KravTilTaptArbeidstid(false),
+                            DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
                             DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5),
                             DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5),
                             DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste12Måneder(true),
@@ -78,7 +78,7 @@ class AvslagMeldingTaptArbeidstidTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.KravTilTaptArbeidstid(false),
+                            DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
                             DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5),
                             DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5),
                             DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste36Måneder(true),
@@ -103,7 +103,7 @@ class AvslagMeldingTaptArbeidstidTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.KravTilTaptArbeidstid(false),
+                            DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
                             DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(true),
                             DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5),
                             DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5),
@@ -129,7 +129,7 @@ class AvslagMeldingTaptArbeidstidTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.KravTilTaptArbeidstid(false),
+                            DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
                             DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(true),
                             DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5),
                             DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5),
@@ -156,7 +156,7 @@ class AvslagMeldingTaptArbeidstidTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.KravTilTaptArbeidstid(false),
+                            DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
                             DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(true),
                             DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5),
                             DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5),

@@ -91,7 +91,7 @@ class VedtakMapperTest {
             it.hentOpplysning<DagpengerOpplysning.OppfyllerKravetTilOpphold>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.IkkeFulleYtelser>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.KravTilTapAvArbeidsinntektOgArbeidstid>() shouldNotBe null
-            it.hentOpplysning<DagpengerOpplysning.KravTilTaptArbeidstid>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.KravTilTapAvArbeidsinntekt>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.IkkeStreikEllerLockout>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.KravTilAlder>() shouldNotBe null
@@ -167,7 +167,7 @@ class VedtakMapperTest {
             it.hentOpplysning<DagpengerOpplysning.OppfyllerKravetTilOpphold>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.IkkeFulleYtelser>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.KravTilTapAvArbeidsinntektOgArbeidstid>() shouldNotBe null
-            it.hentOpplysning<DagpengerOpplysning.KravTilTaptArbeidstid>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.KravTilTapAvArbeidsinntekt>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.IkkeStreikEllerLockout>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.KravTilAlder>() shouldNotBe null

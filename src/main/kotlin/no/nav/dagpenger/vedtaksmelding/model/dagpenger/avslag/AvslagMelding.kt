@@ -57,7 +57,7 @@ class AvslagMelding(
                 vedtak.finnOpplysning<DagpengerOpplysning.KravTilAlder>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.KravTilTapAvArbeidsinntektOgArbeidstid>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.KravTilTapAvArbeidsinntekt>(),
-                vedtak.finnOpplysning<DagpengerOpplysning.KravTilTaptArbeidstid>(),
+                vedtak.finnOpplysning<DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.OppfyllerKravetTilIkkeUtestengt>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.KravTilUtdanning>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.KravTilArbeidssøker>(),
@@ -124,7 +124,7 @@ class AvslagMelding(
         }
 
     private fun blokkerAvslagTaptArbeidstid(): List<String> =
-        when (vedtak.ikkeOppfylt<DagpengerOpplysning.KravTilTaptArbeidstid>()) {
+        when (vedtak.ikkeOppfylt<DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid>()) {
             true ->
                 when (gjelderPermitteringFisk()) {
                     true ->

@@ -21,7 +21,7 @@ class AvslagMeldingAndreFulleYtelserTest {
                         utfall = Vedtak.Utfall.AVSLÅTT,
                         opplysninger =
                             setOf(
-                                DagpengerOpplysning.KravTilTaptArbeidstid(false),
+                                DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
                             ),
                     ),
                 alleBrevblokker = emptyList(),

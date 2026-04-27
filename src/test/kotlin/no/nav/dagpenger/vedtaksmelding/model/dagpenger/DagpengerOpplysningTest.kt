@@ -62,7 +62,7 @@ class DagpengerOpplysningTest {
             DagpengerOpplysning.OppfyllerKravetTilOpphold(behandlingsresultatData),
             DagpengerOpplysning.IkkeFulleYtelser(behandlingsresultatData),
             DagpengerOpplysning.KravTilTapAvArbeidsinntektOgArbeidstid(behandlingsresultatData),
-            DagpengerOpplysning.KravTilTaptArbeidstid(behandlingsresultatData),
+            DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(behandlingsresultatData),
             DagpengerOpplysning.KravTilTapAvArbeidsinntekt(behandlingsresultatData),
             DagpengerOpplysning.IkkeStreikEllerLockout(behandlingsresultatData),
             DagpengerOpplysning.KravTilAlder(behandlingsresultatData),
@@ -289,7 +289,7 @@ class DagpengerOpplysningTest {
         DagpengerOpplysning.OppfyllerKravetTilOpphold(behandlingsresultatData).verdi shouldBe true
         DagpengerOpplysning.IkkeFulleYtelser(behandlingsresultatData).verdi shouldBe true
         DagpengerOpplysning.KravTilTapAvArbeidsinntektOgArbeidstid(behandlingsresultatData).verdi shouldBe true
-        DagpengerOpplysning.KravTilTaptArbeidstid(behandlingsresultatData).verdi shouldBe true
+        DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(behandlingsresultatData).verdi shouldBe true
         DagpengerOpplysning.KravTilTapAvArbeidsinntekt(behandlingsresultatData).verdi shouldBe true
         DagpengerOpplysning.IkkeStreikEllerLockout(behandlingsresultatData).verdi shouldBe true
         DagpengerOpplysning.KravTilAlder(behandlingsresultatData).verdi shouldBe true

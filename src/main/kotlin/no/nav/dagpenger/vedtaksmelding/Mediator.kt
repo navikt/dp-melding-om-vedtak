@@ -163,7 +163,7 @@ class Mediator(
         logger.info { "Henter brevkKomponenter for behandlingtype: $behandlingstype" }
 
         return when (behandlingstype) {
-            RETT_TIL_DAGPENGER -> {
+            RETT_TIL_DAGPENGER, MELDEKORT -> {
                 val vedtak =
                     behandlingKlient
                         .hentBehandlingResultat(
@@ -209,9 +209,6 @@ class Mediator(
                 )
             }
 
-            // TODO: Må kunne tilby egendefinert brev
-            MELDEKORT -> throw NotImplementedError("Meldekort-behandling har ikke støtte for vedtaksmelding")
-            // TODO: Må kunne tilby egendefinert brev
             MANUELL -> throw NotImplementedError("Manuell behandling har ikke støtte for vedtaksmelding")
             INNSENDING -> throw NotImplementedError("Innsending-behandling har ikke støtte for vedtaksmelding")
             REVURDERING -> throw NotImplementedError("Revurdering-behandling har ikke støtte for vedtaksmelding")

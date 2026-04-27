@@ -99,11 +99,12 @@ class VedtakMapper(
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravTilArbeidssøker(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilEthvertArbeid(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.OppyllerMeldeplikt(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilIkkeUtestengt(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilOpphold(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.IkkeFulleYtelser(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.KravTilTapAvArbeidsinntektOgArbeidstid(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.KravTilTaptArbeidstid(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.KravTilTapAvArbeidsinntekt(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.IkkeStreikEllerLockout(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.KravTilAlder(behandlingsresultatData) }
@@ -135,8 +136,8 @@ class VedtakMapper(
                 it.deriverteOpplysninger
             }
 
-        val opplysnings = opplysningerFraData + deriverteOpplysninger
+        val opplysninger = opplysningerFraData + deriverteOpplysninger
 
-        return opplysnings
+        return opplysninger
     }
 }

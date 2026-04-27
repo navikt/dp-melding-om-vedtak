@@ -77,6 +77,17 @@ class GjenopptakOrdinæreDagpengerTest {
                 alleBrevblokker = emptyList(),
             )
         }
+        shouldThrow<ManglerBrevstøtte> {
+            GjenopptakMelding(
+                vedtak =
+                    Vedtak(
+                        behandlingId = behandlingId,
+                        utfall = Vedtak.Utfall.STANS,
+                        opplysninger = emptySet(),
+                    ),
+                alleBrevblokker = emptyList(),
+            )
+        }
         shouldNotThrowAny {
             GjenopptakMelding(
                 vedtak =

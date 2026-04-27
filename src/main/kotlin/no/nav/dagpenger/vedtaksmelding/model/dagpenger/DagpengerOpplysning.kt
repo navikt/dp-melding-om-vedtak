@@ -955,6 +955,23 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
+    class OppyllerMeldeplikt(
+        override val verdi: Boolean,
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("019d870c-6847-71fa-89d2-81a53d19cfcf")
+        }
+
+        override val enhet: Enhet.ENHETSLØS = Enhet.ENHETSLØS
+        override val opplysningTekstId: String = "opplysning.oppfyller-meldeplikt"
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            behandlingsresultatData.boolsk(
+                opplysningTypeId,
+            ),
+        )
+    }
+
     class OppfyllerKravetTilIkkeUtestengt(
         override val verdi: Boolean,
     ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
@@ -1023,7 +1040,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
-    class KravTilTaptArbeidstid(
+    class OppfyllerVilkåretOmTapAvArbeidstid(
         override val verdi: Boolean,
     ) : DagpengerOpplysning<Enhet.ENHETSLØS, Boolean>(verdi) {
         companion object {
@@ -1031,7 +1048,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         }
 
         override val enhet: Enhet.ENHETSLØS = Enhet.ENHETSLØS
-        override val opplysningTekstId: String = "opplysning.krav-til-tapt-arbeidstid"
+        override val opplysningTekstId: String = "opplysning.oppfyller-vilkaaret-om-tap-av-arbeidstid"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
             behandlingsresultatData.boolsk(
