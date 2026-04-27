@@ -19,6 +19,7 @@ class AvslagMeldingAndreFulleYtelserTest {
                     Vedtak(
                         behandlingId = UUIDv7.ny(),
                         utfall = Vedtak.Utfall.AVSLÅTT,
+                        automatiskBehandling = false,
                         opplysninger =
                             setOf(
                                 DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
@@ -36,6 +37,7 @@ class AvslagMeldingAndreFulleYtelserTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger = setOf(DagpengerOpplysning.IkkeFulleYtelser(false)),
                 ),
             alleBrevblokker = emptyList(),

@@ -59,6 +59,7 @@ class MediatorTest {
             Vedtak(
                 behandlingId = behandlingId,
                 utfall = Vedtak.Utfall.AVSLÅTT,
+                automatiskBehandling = false,
                 opplysninger =
                     setOf(
                         DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false),
@@ -95,6 +96,7 @@ class MediatorTest {
         Vedtak(
             behandlingId = behandlingId,
             utfall = Vedtak.Utfall.AVSLÅTT,
+            automatiskBehandling = false,
             opplysninger =
                 setOf(
                     DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false),
@@ -147,6 +149,7 @@ class MediatorTest {
             Vedtak(
                 behandlingId = behandlingId,
                 utfall = Vedtak.Utfall.AVSLÅTT,
+                automatiskBehandling = false,
                 opplysninger = setOf(DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false)),
             )
         val behandlingKlient =

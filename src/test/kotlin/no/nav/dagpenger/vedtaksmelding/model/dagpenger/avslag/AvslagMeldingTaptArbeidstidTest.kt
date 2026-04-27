@@ -26,6 +26,7 @@ class AvslagMeldingTaptArbeidstidTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
@@ -51,6 +52,7 @@ class AvslagMeldingTaptArbeidstidTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
@@ -76,6 +78,7 @@ class AvslagMeldingTaptArbeidstidTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
@@ -101,6 +104,7 @@ class AvslagMeldingTaptArbeidstidTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
@@ -127,6 +131,7 @@ class AvslagMeldingTaptArbeidstidTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
@@ -152,8 +157,8 @@ class AvslagMeldingTaptArbeidstidTest {
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
-//                    vilkår = setOf(arbeidstidIkkeOppfylt, permitteringFiskVilkår),
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),

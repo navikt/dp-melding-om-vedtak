@@ -10,6 +10,7 @@ class VedtakTest {
         Vedtak(
             behandlingId = UUID.randomUUID(),
             utfall = Vedtak.Utfall.INNVILGET,
+            automatiskBehandling = false,
             opplysninger =
                 setOf(
                     DagpengerOpplysning.HarSamordnet(true),
@@ -28,6 +29,7 @@ class VedtakTest {
         Vedtak(
             behandlingId = UUID.randomUUID(),
             utfall = Vedtak.Utfall.INNVILGET,
+            automatiskBehandling = false,
             opplysninger =
                 setOf(
                     DagpengerOpplysning.HarSamordnet(true),

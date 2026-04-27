@@ -50,6 +50,7 @@ class AvslagMeldingAlleVilkårTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste12Måneder(true),
@@ -112,6 +113,7 @@ class AvslagMeldingAlleVilkårTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste6Måneder(true),
@@ -177,6 +179,7 @@ class AvslagMeldingAlleVilkårTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste36Måneder(true),

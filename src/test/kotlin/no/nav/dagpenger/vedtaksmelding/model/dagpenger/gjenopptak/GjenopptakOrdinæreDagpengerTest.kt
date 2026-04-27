@@ -61,6 +61,7 @@ class GjenopptakOrdinæreDagpengerTest {
                     Vedtak(
                         behandlingId = behandlingId,
                         utfall = Vedtak.Utfall.AVSLÅTT,
+                        automatiskBehandling = false,
                         opplysninger = emptySet(),
                     ),
                 alleBrevblokker = emptyList(),
@@ -72,6 +73,7 @@ class GjenopptakOrdinæreDagpengerTest {
                     Vedtak(
                         behandlingId = behandlingId,
                         utfall = Vedtak.Utfall.INNVILGET,
+                        automatiskBehandling = false,
                         opplysninger = emptySet(),
                     ),
                 alleBrevblokker = emptyList(),
@@ -83,6 +85,7 @@ class GjenopptakOrdinæreDagpengerTest {
                     Vedtak(
                         behandlingId = behandlingId,
                         utfall = Vedtak.Utfall.STANS,
+                        automatiskBehandling = true,
                         opplysninger = emptySet(),
                     ),
                 alleBrevblokker = emptyList(),
@@ -94,6 +97,7 @@ class GjenopptakOrdinæreDagpengerTest {
                     Vedtak(
                         behandlingId = behandlingId,
                         utfall = Vedtak.Utfall.GJENOPPTAK,
+                        automatiskBehandling = false,
                         opplysninger = emptySet(),
                     ),
                 alleBrevblokker = emptyList(),
@@ -130,6 +134,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.GJENOPPTAK,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.Egenandel(3000),
@@ -171,6 +176,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.GJENOPPTAK,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.Egenandel(3000),
@@ -212,6 +218,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.GJENOPPTAK,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.Egenandel(verdi = 3000),
@@ -254,6 +261,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.GJENOPPTAK,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.Egenandel(verdi = 3000),
@@ -297,6 +305,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.GJENOPPTAK,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.Egenandel(verdi = 3000),
@@ -342,6 +351,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.GJENOPPTAK,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.Egenandel(verdi = 3000),
@@ -387,6 +397,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.GJENOPPTAK,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.Egenandel(verdi = 3000),
@@ -434,6 +445,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.GJENOPPTAK,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.Egenandel(verdi = 3000),
@@ -479,6 +491,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.GJENOPPTAK,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = true),
@@ -526,6 +539,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.GJENOPPTAK,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.Egenandel(verdi = 3000),
@@ -575,6 +589,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.GJENOPPTAK,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = true),
@@ -622,6 +637,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.GJENOPPTAK,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.Egenandel(verdi = 3000),
@@ -667,6 +683,7 @@ class GjenopptakOrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.GJENOPPTAK,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.Egenandel(verdi = 3000),

@@ -19,8 +19,8 @@ class AvslagMeldingTaptArbeidsinntektTest {
             vedtak =
                 Vedtak(
                     behandlingId = behandlingId,
-//                    vilkår = setOf(taptArbeidsinntektIkkeOppfylt),
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger = setOf(taptArbeidsinntektIkkeOppfylt),
                 ),
             alleBrevblokker = emptyList(),

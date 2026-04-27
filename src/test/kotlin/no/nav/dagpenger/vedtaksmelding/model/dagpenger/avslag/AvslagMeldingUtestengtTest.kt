@@ -18,6 +18,7 @@ class AvslagMeldingUtestengtTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger = setOf(DagpengerOpplysning.OppfyllerKravetTilIkkeUtestengt(false)),
                 ),
             alleBrevblokker = emptyList(),

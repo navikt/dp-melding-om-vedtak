@@ -1,5 +1,6 @@
 {
   "behandlingId": "0198c683-0770-734f-8ae2-34dfa8a714e5",
+  "automatisk": false,
   "behandletHendelse": {
     "datatype": "UUID",
     "id": "9c9225e9-68d1-4837-b156-cc5376364c37",

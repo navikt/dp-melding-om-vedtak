@@ -18,6 +18,7 @@ class AvslagMeldingMinsteinntektTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false),

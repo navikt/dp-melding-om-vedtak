@@ -18,6 +18,7 @@ class AvslagMeldingAlderTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger = setOf(DagpengerOpplysning.KravTilAlder(false)),
                 ),
             alleBrevblokker = emptyList(),

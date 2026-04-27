@@ -38,6 +38,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                     Vedtak(
                         behandlingId = behandlingId,
                         utfall = Vedtak.Utfall.AVSLÅTT,
+                        automatiskBehandling = false,
                         opplysninger = setOf(reellArbeidssøkerIkkeOppfylt),
                     ),
                 alleBrevblokker = emptyList(),
@@ -49,6 +50,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                     Vedtak(
                         behandlingId = behandlingId,
                         utfall = Vedtak.Utfall.AVSLÅTT,
+                        automatiskBehandling = false,
                         opplysninger = emptySet(),
                     ),
                 alleBrevblokker = emptyList(),
@@ -63,6 +65,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger = setOf(reellArbeidssøkerIkkeOppfylt, heltidDeltidIkkeOppfylt),
                 ),
             alleBrevblokker = emptyList(),
@@ -84,6 +87,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger = setOf(minsteinntektIkkeOppfylt),
                 ),
             alleBrevblokker = emptyList(),
@@ -102,6 +106,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger = setOf(reellArbeidssøkerIkkeOppfylt, mobilitetIkkeOppfylt),
                 ),
             alleBrevblokker = emptyList(),
@@ -122,6 +127,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger = setOf(reellArbeidssøkerIkkeOppfylt, arbeidsførIkkeOppfylt),
                 ),
             alleBrevblokker = emptyList(),
@@ -141,6 +147,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger = setOf(reellArbeidssøkerIkkeOppfylt, ethvertArbeidIkkeOppfylt),
                 ),
             alleBrevblokker = emptyList(),
@@ -160,6 +167,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger = setOf(registrertArbeidssøkerIkkeOppfylt),
                 ),
             alleBrevblokker = emptyList(),
@@ -179,6 +187,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             reellArbeidssøkerIkkeOppfylt,

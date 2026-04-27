@@ -20,6 +20,7 @@ class AvslagMeldingStreikLockoutTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.AVSLÅTT,
+                    automatiskBehandling = false,
                     opplysninger = setOf(avslagStreikEllerLockoutIkkeOppfylt),
                 ),
             alleBrevblokker = emptyList(),

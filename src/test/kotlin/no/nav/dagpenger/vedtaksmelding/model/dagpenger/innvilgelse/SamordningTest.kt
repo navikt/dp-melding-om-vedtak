@@ -56,6 +56,7 @@ class SamordningTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.HarSamordnet(true),
@@ -93,6 +94,7 @@ class SamordningTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.HarSamordnet(true),
@@ -130,6 +132,7 @@ class SamordningTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.HarSamordnet(true),
@@ -167,6 +170,7 @@ class SamordningTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.HarSamordnet(true),
@@ -204,6 +208,7 @@ class SamordningTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.HarSamordnet(true),
@@ -241,6 +246,7 @@ class SamordningTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.HarSamordnet(true),
@@ -278,6 +284,7 @@ class SamordningTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.HarSamordnet(true),
@@ -315,6 +322,7 @@ class SamordningTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.HarSamordnet(true),
@@ -354,6 +362,7 @@ class SamordningTest {
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.HarSamordnet(true),

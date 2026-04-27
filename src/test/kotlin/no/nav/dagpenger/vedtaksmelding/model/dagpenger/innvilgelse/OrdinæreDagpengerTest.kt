@@ -43,6 +43,7 @@ class OrdinæreDagpengerTest {
                     Vedtak(
                         behandlingId = behandlingId,
                         utfall = Vedtak.Utfall.AVSLÅTT,
+                        automatiskBehandling = false,
                         opplysninger = setOf(DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false)),
                     ),
                 alleBrevblokker = emptyList(),
@@ -54,6 +55,7 @@ class OrdinæreDagpengerTest {
                     Vedtak(
                         behandlingId = behandlingId,
                         utfall = Vedtak.Utfall.GJENOPPTAK,
+                        automatiskBehandling = false,
                         opplysninger = emptySet(),
                     ),
                 alleBrevblokker = emptyList(),
@@ -65,6 +67,7 @@ class OrdinæreDagpengerTest {
                     Vedtak(
                         behandlingId = behandlingId,
                         utfall = Vedtak.Utfall.STANS,
+                        automatiskBehandling = true,
                         opplysninger = setOf(DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false)),
                     ),
                 alleBrevblokker = emptyList(),
@@ -76,6 +79,7 @@ class OrdinæreDagpengerTest {
                     Vedtak(
                         behandlingId = behandlingId,
                         utfall = Vedtak.Utfall.INNVILGET,
+                        automatiskBehandling = false,
                         opplysninger = emptySet(),
                     ),
                 alleBrevblokker = emptyList(),
@@ -108,6 +112,7 @@ class OrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.Egenandel(3000),
@@ -143,6 +148,7 @@ class OrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
                     setOf(
                         DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1),
                         DagpengerOpplysning.Egenandel(3000),
@@ -156,6 +162,7 @@ class OrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(0),
@@ -193,6 +200,7 @@ class OrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1),
@@ -210,6 +218,7 @@ class OrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1),
@@ -250,6 +259,7 @@ class OrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1),
@@ -289,6 +299,7 @@ class OrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.Egenandel(3000),
@@ -326,6 +337,7 @@ class OrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.Egenandel(3000),
@@ -363,6 +375,7 @@ class OrdinæreDagpengerTest {
                 Vedtak(
                     behandlingId = behandlingId,
                     utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.Egenandel(3000),

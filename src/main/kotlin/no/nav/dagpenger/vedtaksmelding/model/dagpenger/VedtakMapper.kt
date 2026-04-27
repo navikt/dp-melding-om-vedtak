@@ -10,13 +10,12 @@ class VedtakMapper(
     fun vedtak(): Vedtak =
         Vedtak(
             behandlingId = behandlingsresultatData.behandlingId(),
-            utfall = utfall(),
+            utfall = behandlingsresultatData.utfall(),
+            automatiskBehandling = behandlingsresultatData.automatiskBehandling(),
             opplysninger = this.build(),
         )
 
     private val behandlingsresultatData = BehandlingsresultatData(vedtakJson)
-
-    private fun utfall(): Vedtak.Utfall = behandlingsresultatData.utfall()
 
     private fun MutableSet<DagpengerOpplysning<*, *>>.addIfPresent(func: () -> DagpengerOpplysning<*, *>) {
         try {
