@@ -106,114 +106,49 @@ class BehandlingsresultatData(
         }
     }
 
-    fun flyttall(id: UUID): Double {
-        val verdi = verdiNode(id)
+    fun flyttall(id: UUID): Double = pickPeriodeForVirkningsdato(perioderFlyttall(id), id).verdi
 
-        return when (verdi["datatype"].asText() == "desimaltall") {
-            true -> {
-                verdi["verdi"]
-                    .also { require(it.isNumber) { "Forventet at desimaltall har number verdi, men var $it" } }
-                    .asDouble()
-            }
+    fun heltall(id: UUID): Int = pickPeriodeForVirkningsdato(perioderHeltall(id), id).verdi
 
-            false -> throw IllegalArgumentException("Ugyldig verdinode: $verdi")
+    fun penger(id: UUID): Number = pickPeriodeForVirkningsdato(perioderPenger(id), id).verdi
+
+    fun tekst(id: UUID): String = pickPeriodeForVirkningsdato(perioderTekst(id), id).verdi
+
+    fun boolsk(id: UUID): Boolean = pickPeriodeForVirkningsdato(perioderBoolsk(id), id).verdi
+
+    fun dato(id: UUID): LocalDate = pickPeriodeForVirkningsdato(perioderDato(id), id).verdi
+
+    // TODO: Vurder om *Last-variantene faktisk trengs, eller om virkningsdato-basert oppslag
+    // er riktig også for EgenandelGjenstående og AntallStønadsdagerSomGjenstår. Usikker på
+    // opprinnelig intensjon — disse plukker siste periode i JSON-rekkefølge uten hensyn til virkningsdato.
+    fun heltallLast(id: UUID): Int = lastPeriode(perioderHeltall(id), id).verdi
+
+    fun pengerLast(id: UUID): Number = lastPeriode(perioderPenger(id), id).verdi
+
+    private fun <V : Any> pickPeriodeForVirkningsdato(
+        perioder: List<Periode<V>>,
+        opplysningTypeId: UUID,
+    ): Periode<V> {
+        val matches = perioder.filter { it.inkludererDato(virkningsdato()) }
+        if (matches.isEmpty()) {
+            throw PeriodeIkkeFunnet(opplysningTypeId, virkningsdato())
         }
+        if (matches.size > 1) {
+            throw OpplysningDataException(
+                "Fant flere enn èn periode for opplysning med opplysningTypeId $opplysningTypeId og virkningsdato ${virkningsdato()}",
+            )
+        }
+        return matches.single()
     }
 
-    fun heltall(id: UUID): Int {
-        val verdi = verdiNode(id)
-        return when (verdi["datatype"].asText() == "heltall") {
-            true -> {
-                verdi["verdi"]
-                    .also { require(it.isInt) { "Forventet at heltall har int verdi, men var $it" } }
-                    .asInt()
-            }
-
-            false -> throw IllegalArgumentException("Ugyldig verdinode: $verdi")
+    private fun <V : Any> lastPeriode(
+        perioder: List<Periode<V>>,
+        opplysningTypeId: UUID,
+    ): Periode<V> {
+        if (perioder.isEmpty()) {
+            throw PeriodeIkkeFunnet(opplysningTypeId, virkningsdato())
         }
-    }
-
-    fun heltallLast(id: UUID): Int {
-        val verdi = verdiNodeLast(id)
-        return when (verdi["datatype"].asText() == "heltall") {
-            true -> {
-                verdi["verdi"]
-                    .also { require(it.isInt) { "Forventet at heltall har int verdi, men var $it" } }
-                    .asInt()
-            }
-
-            false -> throw IllegalArgumentException("Ugyldig verdinode: $verdi")
-        }
-    }
-
-    fun penger(id: UUID): Number {
-        val verdi = verdiNode(id)
-
-        return when (verdi["datatype"].asText() == "penger") {
-            true -> {
-                val node = verdi["verdi"]
-                require(node.isNumber) { "Forventet at penger har number verdi, men var $node" }
-                if (node.isInt) node.asInt() else node.asDouble()
-            }
-
-            false -> throw IllegalArgumentException("Ugyldig verdinode: $verdi")
-        }
-    }
-
-    fun pengerLast(id: UUID): Number {
-        val verdi = verdiNodeLast(id)
-
-        return when (verdi["datatype"].asText() == "penger") {
-            true -> {
-                val node = verdi["verdi"]
-                require(node.isNumber) { "Forventet at penger har number verdi, men var $node" }
-                if (node.isInt) node.asInt() else node.asDouble()
-            }
-
-            false -> throw IllegalArgumentException("Ugyldig verdinode: $verdi")
-        }
-    }
-
-    fun tekst(id: UUID): String {
-        val verdi = verdiNode(id)
-
-        return when (verdi["datatype"].asText() == "tekst") {
-            true -> {
-                verdi["verdi"].also { require(it.isTextual) { "Forventet tekstlig verdi, men var $it" } }.asText()
-            }
-
-            false -> throw IllegalArgumentException("Ugyldig verdinode: $verdi")
-        }
-    }
-
-    fun boolsk(id: UUID): Boolean {
-        val verdiNode = verdiNode(id)
-
-        return verdiNode.let { verdi ->
-            when (verdi["datatype"].asText() == "boolsk") {
-                true -> {
-                    verdi["verdi"]
-                        .also {
-                            require(it.isBoolean) { "Forventet at boolsk har boolsk verdi, men var $it" }
-                        }.asBoolean()
-                }
-
-                false -> throw IllegalArgumentException("Ugyldig verdinode: $verdi")
-            }
-        }
-    }
-
-    fun dato(id: UUID): LocalDate {
-        val verdi = verdiNode(id)
-        return when (verdi["datatype"].asText() == "dato") {
-            true -> {
-                verdi["verdi"]
-                    .also { require(it.isDato()) { "Forventet at dato har riktig dato verdi, men var $it" } }
-                    .asDato()
-            }
-
-            false -> throw IllegalArgumentException("Ugyldig verdinode: $verdi")
-        }
+        return perioder.last()
     }
 
     private fun JsonNode.isDato(): Boolean = toDateOrNull() != null
@@ -228,6 +163,78 @@ class BehandlingsresultatData(
             null
         }
 
+    fun perioderHeltall(id: UUID): List<Periode<Int>> =
+        perioder(id, "heltall") { node ->
+            require(node.isInt) { "Forventet at heltall har int verdi, men var $node" }
+            node.asInt()
+        }
+
+    fun perioderFlyttall(id: UUID): List<Periode<Double>> =
+        perioder(id, "desimaltall") { node ->
+            require(node.isNumber) { "Forventet at desimaltall har number verdi, men var $node" }
+            node.asDouble()
+        }
+
+    fun perioderPenger(id: UUID): List<Periode<Number>> =
+        perioder(id, "penger") { node ->
+            require(node.isNumber) { "Forventet at penger har number verdi, men var $node" }
+            if (node.isInt) node.asInt() else node.asDouble()
+        }
+
+    fun perioderTekst(id: UUID): List<Periode<String>> =
+        perioder(id, "tekst") { node ->
+            require(node.isTextual) { "Forventet tekstlig verdi, men var $node" }
+            node.asText()
+        }
+
+    fun perioderBoolsk(id: UUID): List<Periode<Boolean>> =
+        perioder(id, "boolsk") { node ->
+            require(node.isBoolean) { "Forventet at boolsk har boolsk verdi, men var $node" }
+            node.asBoolean()
+        }
+
+    fun perioderDato(id: UUID): List<Periode<LocalDate>> =
+        perioder(id, "dato") { node ->
+            require(node.isDato()) { "Forventet at dato har riktig dato verdi, men var $node" }
+            node.asDato()
+        }
+
+    private fun <V : Any> perioder(
+        opplysningTypeId: UUID,
+        forventetDatatype: String,
+        extract: (JsonNode) -> V,
+    ): List<Periode<V>> {
+        val opplysningNode =
+            opplysningNoder
+                .filter { it["opplysningTypeId"].asText() == opplysningTypeId.toString() }
+                .also {
+                    if (it.isEmpty()) throw BehandlingResultatOpplysningIkkeFunnet(opplysningTypeId)
+                    if (it.size > 1) {
+                        throw OpplysningDataException(
+                            "Fant flere enn èn opplysningstype med opplysningTypeId $opplysningTypeId",
+                        )
+                    }
+                }.single()
+
+        val perioderNode = opplysningNode["perioder"] ?: return emptyList()
+        return perioderNode.map { periodeNode ->
+            val verdiNode = periodeNode["verdi"]
+            require(verdiNode["datatype"].asText() == forventetDatatype) {
+                "Forventet datatype $forventetDatatype for opplysning $opplysningTypeId, men var ${verdiNode["datatype"]}"
+            }
+            val fraOgMedNode = periodeNode.get("gyldigFraOgMed")
+            val tilOgMedNode = periodeNode.get("gyldigTilOgMed")
+            Periode(
+                verdi = extract(verdiNode["verdi"]),
+                opprinnelse = Opprinnelse.fra(periodeNode["opprinnelse"].asText()),
+                gyldigFraOgMed = if (fraOgMedNode == null || fraOgMedNode.isNull) null else fraOgMedNode.asDato(),
+                gyldigTilOgMed = if (tilOgMedNode == null || tilOgMedNode.isNull) null else tilOgMedNode.asDato(),
+            )
+        }
+    }
+
+    // TODO: Kan kollapses til perioderPenger(opplysningTypeId).any { it.opprinnelse == NY }
+    // (eller tilsvarende for andre datatyper). Vurder å fjerne denne i en egen runde.
     internal fun periodeMedOpprinnelseNyFinnes(opplysningTypeId: UUID): Boolean? =
         opplysningNoder
             .singleOrNull {
@@ -238,71 +245,6 @@ class BehandlingsresultatData(
                         it["opprinnelse"].asText() == "Ny"
                     }
             }
-
-    private fun verdiNode(opplysningTypeId: UUID): JsonNode =
-        opplysningNoder
-            .filter {
-                it["opplysningTypeId"].asText() == opplysningTypeId.toString()
-            }.also {
-                if (it.isEmpty()) {
-                    throw BehandlingResultatOpplysningIkkeFunnet(opplysningTypeId)
-                }
-
-                if (it.size > 1) {
-                    throw OpplysningDataException("Fant flere enn èn opplysningstype med opplysningTypeId $opplysningTypeId")
-                }
-            }.single()
-            .let { opplysningNode ->
-
-                opplysningNode["perioder"]
-                    .filter {
-                        it.periodeInkludererVirkningsdato(virkningsdato())
-                    }.also {
-                        if (it.isEmpty()) {
-                            throw PeriodeIkkeFunnet(
-                                opplysningTypeId = opplysningTypeId,
-                                virkningsdato = virkningsdato(),
-                            )
-                        }
-
-                        if (it.size > 1) {
-                            throw OpplysningDataException(
-                                "Fant flere enn èn periode for opplysning med opplysningTypeId $opplysningTypeId og virkningsdato ${virkningsdato()}",
-                            )
-                        }
-                    }.single()["verdi"]
-            }
-
-    private fun verdiNodeLast(opplysningTypeId: UUID): JsonNode =
-        opplysningNoder
-            .filter {
-                it["opplysningTypeId"].asText() == opplysningTypeId.toString()
-            }.also {
-                if (it.isEmpty()) {
-                    throw BehandlingResultatOpplysningIkkeFunnet(opplysningTypeId)
-                }
-
-                if (it.size > 1) {
-                    throw OpplysningDataException("Fant flere enn èn opplysningstype med opplysningTypeId $opplysningTypeId")
-                }
-            }.single()
-            .let { opplysningNode ->
-                opplysningNode["perioder"].last()["verdi"]
-            }
-
-    private fun JsonNode.periodeInkludererVirkningsdato(virkningsdato: LocalDate): Boolean {
-        val fraOgMedNode = this.get("gyldigFraOgMed")
-        val tilOgMedNode = this.get("gyldigTilOgMed")
-
-        if (fraOgMedNode == null || fraOgMedNode.isNull) {
-            return true
-        }
-
-        val fraOgMed = fraOgMedNode.asDato()
-        val tilOgMed = if (tilOgMedNode == null || tilOgMedNode.isNull) null else tilOgMedNode.asDato()
-
-        return virkningsdato >= fraOgMed && (tilOgMed == null || virkningsdato <= tilOgMed)
-    }
 
     fun behandlingId(): UUID = jsonNode["behandlingId"].let { UUID.fromString(it.asText()) }
 

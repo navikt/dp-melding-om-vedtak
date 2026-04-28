@@ -40,6 +40,7 @@ class BehandlingsresultatDataTest {
                       "opplysningTypeId": "$testOpplysningId",
                       "perioder": [
                         {
+                          "opprinnelse": "Arvet",
                           "gyldigFraOgMed": "$periodeFraOgMed",
                           $tilOgMedFelt
                           "verdi": {
@@ -284,6 +285,7 @@ class BehandlingsresultatDataTest {
                   "opplysningTypeId": "$testOpplysningId",
                   "perioder": [
                     {
+                      "opprinnelse": "Arvet",
                       "gyldigFraOgMed": "2025-01-01",
                       "gyldigTilOgMed": "2025-12-31",
                       "verdi": {
@@ -292,6 +294,7 @@ class BehandlingsresultatDataTest {
                       }
                     },
                     {
+                      "opprinnelse": "Arvet",
                       "gyldigFraOgMed": "2025-06-01",
                       "gyldigTilOgMed": "2025-06-30",
                       "verdi": {
