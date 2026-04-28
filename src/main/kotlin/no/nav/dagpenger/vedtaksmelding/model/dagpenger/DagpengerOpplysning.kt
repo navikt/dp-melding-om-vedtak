@@ -24,7 +24,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
 
     sealed class Periodisert<E : Enhet, V : Any>(
         verdi: V,
-        perioder: List<Periode<V>>,
+        val perioder: List<Periode<V>>,
     ) : DagpengerOpplysning<E, V>(verdi) {
         init {
             require(perioder.isNotEmpty()) { "Periodisert opplysning må ha minst én periode" }
