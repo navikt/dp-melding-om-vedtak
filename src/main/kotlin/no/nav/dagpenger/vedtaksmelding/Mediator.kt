@@ -13,6 +13,7 @@ import no.nav.dagpenger.vedtaksmelding.apiconfig.Maskin
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.ARBEIDSSØKERPERIODE
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.Companion.tilBehandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.INNSENDING
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.KLAGE
@@ -163,7 +164,7 @@ class Mediator(
         logger.info { "Henter brevkKomponenter for behandlingtype: $behandlingstype" }
 
         return when (behandlingstype) {
-            RETT_TIL_DAGPENGER, MELDEKORT -> {
+            RETT_TIL_DAGPENGER, ARBEIDSSØKERPERIODE -> {
                 val vedtak =
                     behandlingKlient
                         .hentBehandlingResultat(
@@ -212,6 +213,7 @@ class Mediator(
             MANUELL -> throw NotImplementedError("Manuell behandling har ikke støtte for vedtaksmelding")
             INNSENDING -> throw NotImplementedError("Innsending-behandling har ikke støtte for vedtaksmelding")
             REVURDERING -> throw NotImplementedError("Revurdering-behandling har ikke støtte for vedtaksmelding")
+            MELDEKORT -> throw NotImplementedError("Meldekort-behandling har ikke støtte for vedtaksmelding")
         }
     }
 

@@ -9,6 +9,7 @@ enum class Behandlingstype {
     MANUELL,
     INNSENDING,
     REVURDERING,
+    ARBEIDSSØKERPERIODE,
     ;
 
     companion object {
@@ -21,6 +22,7 @@ enum class Behandlingstype {
                 BehandlingstypeDTO.MANUELL -> MANUELL
                 BehandlingstypeDTO.INNSENDING -> INNSENDING
                 BehandlingstypeDTO.REVURDERING -> REVURDERING
+                BehandlingstypeDTO.ARBEIDSSØKERPERIODE -> ARBEIDSSØKERPERIODE
             }
     }
 }
