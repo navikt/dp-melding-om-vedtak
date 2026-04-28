@@ -25,7 +25,8 @@ data class Periode<V : Any>(
     val gyldigTilOgMed: LocalDate? = null,
 ) {
     fun inkludererDato(dato: LocalDate): Boolean {
-        if (gyldigFraOgMed == null) return true
-        return dato >= gyldigFraOgMed && (gyldigTilOgMed == null || dato <= gyldigTilOgMed)
+        val etterStart = gyldigFraOgMed == null || dato >= gyldigFraOgMed
+        val førSlutt = gyldigTilOgMed == null || dato <= gyldigTilOgMed
+        return etterStart && førSlutt
     }
 }
