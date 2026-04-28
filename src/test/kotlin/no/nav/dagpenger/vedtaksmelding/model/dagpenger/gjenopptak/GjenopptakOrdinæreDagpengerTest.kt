@@ -4,6 +4,8 @@ import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Opprinnelse
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Periode
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevblokker.HJELP_FRA_ANDRE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevblokker.PERSONOPPLYSNINGER
@@ -137,7 +139,7 @@ class GjenopptakOrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = false),
                         ),
                 ),
@@ -179,7 +181,7 @@ class GjenopptakOrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = false),
                             DagpengerOpplysning.SisteDagMedRett(LocalDate.of(2026, 7, 10)),
                         ),
@@ -221,10 +223,10 @@ class GjenopptakOrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.Egenandel(verdi = 3000),
-                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000),
+                            DagpengerOpplysning.Egenandel(verdi = 3000, listOf(Periode(verdi = 3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000, listOf(Periode(verdi = 2000, Opprinnelse.NY))),
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = false),
-                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259),
+                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -264,11 +266,11 @@ class GjenopptakOrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.Egenandel(verdi = 3000),
-                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000),
+                            DagpengerOpplysning.Egenandel(verdi = 3000, listOf(Periode(verdi = 3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000, listOf(Periode(verdi = 2000, Opprinnelse.NY))),
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = false),
-                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259),
-                            DagpengerOpplysning.OppfyllerKravetTilPermittering(verdi = true),
+                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
+                            DagpengerOpplysning.OppfyllerKravetTilPermittering(verdi = true, listOf(Periode(verdi = true, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -308,11 +310,14 @@ class GjenopptakOrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.Egenandel(verdi = 3000),
-                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000),
+                            DagpengerOpplysning.Egenandel(verdi = 3000, listOf(Periode(verdi = 3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000, listOf(Periode(verdi = 2000, Opprinnelse.NY))),
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = false),
-                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259),
-                            DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(verdi = true),
+                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
+                            DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(
+                                verdi = true,
+                                listOf(Periode(verdi = true, Opprinnelse.NY)),
+                            ),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -354,10 +359,10 @@ class GjenopptakOrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.Egenandel(verdi = 3000),
-                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000),
+                            DagpengerOpplysning.Egenandel(verdi = 3000, listOf(Periode(verdi = 3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000, listOf(Periode(verdi = 2000, Opprinnelse.NY))),
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = true),
-                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259),
+                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -400,11 +405,11 @@ class GjenopptakOrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.Egenandel(verdi = 3000),
-                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000),
+                            DagpengerOpplysning.Egenandel(verdi = 3000, listOf(Periode(verdi = 3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000, listOf(Periode(verdi = 2000, Opprinnelse.NY))),
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = true),
-                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259),
-                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(verdi = 3),
+                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(verdi = 3, listOf(Periode(verdi = 3, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -448,12 +453,15 @@ class GjenopptakOrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.Egenandel(verdi = 3000),
-                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000),
+                            DagpengerOpplysning.Egenandel(verdi = 3000, listOf(Periode(verdi = 3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000, listOf(Periode(verdi = 2000, Opprinnelse.NY))),
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = true),
-                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259),
-                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(verdi = 3),
-                            DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(verdi = 50),
+                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(verdi = 3, listOf(Periode(verdi = 3, Opprinnelse.NY))),
+                            DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
+                                verdi = 50,
+                                listOf(Periode(verdi = 50, Opprinnelse.NY)),
+                            ),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -495,10 +503,10 @@ class GjenopptakOrdinæreDagpengerTest {
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = true),
-                            DagpengerOpplysning.EgenandelGjenstående(verdi = 0),
-                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259),
-                            DagpengerOpplysning.HarSamordnet(verdi = true),
-                            DagpengerOpplysning.PleiepengerDagsats(verdi = 260),
+                            DagpengerOpplysning.EgenandelGjenstående(verdi = 0, listOf(Periode(verdi = 0, Opprinnelse.NY))),
+                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
+                            DagpengerOpplysning.HarSamordnet(verdi = true, listOf(Periode(verdi = true, Opprinnelse.NY))),
+                            DagpengerOpplysning.PleiepengerDagsats(verdi = 260, listOf(Periode(verdi = 260, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -542,14 +550,14 @@ class GjenopptakOrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.Egenandel(verdi = 3000),
-                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000),
+                            DagpengerOpplysning.Egenandel(verdi = 3000, listOf(Periode(verdi = 3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000, listOf(Periode(verdi = 2000, Opprinnelse.NY))),
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = true),
-                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259),
-                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(verdi = 3),
-                            DagpengerOpplysning.HarSamordnet(verdi = true),
-                            DagpengerOpplysning.PleiepengerDagsats(verdi = 260),
-                            DagpengerOpplysning.SykepengerDagsats(verdi = 100),
+                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(verdi = 3, listOf(Periode(verdi = 3, Opprinnelse.NY))),
+                            DagpengerOpplysning.HarSamordnet(verdi = true, listOf(Periode(verdi = true, Opprinnelse.NY))),
+                            DagpengerOpplysning.PleiepengerDagsats(verdi = 260, listOf(Periode(verdi = 260, Opprinnelse.NY))),
+                            DagpengerOpplysning.SykepengerDagsats(verdi = 100, listOf(Periode(verdi = 100, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -593,12 +601,15 @@ class GjenopptakOrdinæreDagpengerTest {
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = true),
-                            DagpengerOpplysning.EgenandelGjenstående(verdi = 0),
-                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259),
-                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(verdi = 3),
-                            DagpengerOpplysning.HarSamordnet(verdi = true),
-                            DagpengerOpplysning.OmsorgspengerDagsats(verdi = 260),
-                            DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(verdi = 100),
+                            DagpengerOpplysning.EgenandelGjenstående(verdi = 0, listOf(Periode(verdi = 0, Opprinnelse.NY))),
+                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(verdi = 3, listOf(Periode(verdi = 3, Opprinnelse.NY))),
+                            DagpengerOpplysning.HarSamordnet(verdi = true, listOf(Periode(verdi = true, Opprinnelse.NY))),
+                            DagpengerOpplysning.OmsorgspengerDagsats(verdi = 260, listOf(Periode(verdi = 260, Opprinnelse.NY))),
+                            DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
+                                verdi = 100,
+                                listOf(Periode(verdi = 100, Opprinnelse.NY)),
+                            ),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -640,11 +651,11 @@ class GjenopptakOrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.Egenandel(verdi = 3000),
-                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000),
+                            DagpengerOpplysning.Egenandel(verdi = 3000, listOf(Periode(verdi = 3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000, listOf(Periode(verdi = 2000, Opprinnelse.NY))),
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = false),
-                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259),
-                            DagpengerOpplysning.GodkjentLokalArbeidssøker(true),
+                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
+                            DagpengerOpplysning.GodkjentLokalArbeidssøker(true, listOf(Periode(true, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -686,11 +697,11 @@ class GjenopptakOrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.Egenandel(verdi = 3000),
-                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000),
+                            DagpengerOpplysning.Egenandel(verdi = 3000, listOf(Periode(verdi = 3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000, listOf(Periode(verdi = 2000, Opprinnelse.NY))),
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = false),
-                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259),
-                            DagpengerOpplysning.GodkjentKunDeltidssøker(true),
+                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
+                            DagpengerOpplysning.GodkjentKunDeltidssøker(true, listOf(Periode(true, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),

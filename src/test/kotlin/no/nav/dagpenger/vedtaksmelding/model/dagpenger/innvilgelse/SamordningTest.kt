@@ -2,6 +2,8 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse
 
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Opprinnelse
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Periode
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
@@ -59,9 +61,9 @@ class SamordningTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.HarSamordnet(true),
-                            DagpengerOpplysning.Egenandel(3000),
-                            DagpengerOpplysning.SykepengerDagsats(100),
+                            DagpengerOpplysning.HarSamordnet(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.SykepengerDagsats(100, listOf(Periode(100, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -97,9 +99,9 @@ class SamordningTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.HarSamordnet(true),
-                            DagpengerOpplysning.Egenandel(3000),
-                            DagpengerOpplysning.PleiepengerDagsats(100),
+                            DagpengerOpplysning.HarSamordnet(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.PleiepengerDagsats(100, listOf(Periode(100, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -135,9 +137,9 @@ class SamordningTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.HarSamordnet(true),
-                            DagpengerOpplysning.Egenandel(3000),
-                            DagpengerOpplysning.OmsorgspengerDagsats(100),
+                            DagpengerOpplysning.HarSamordnet(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.OmsorgspengerDagsats(100, listOf(Periode(100, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -173,9 +175,9 @@ class SamordningTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.HarSamordnet(true),
-                            DagpengerOpplysning.Egenandel(3000),
-                            DagpengerOpplysning.OpplæringspengerDagsats(100),
+                            DagpengerOpplysning.HarSamordnet(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.OpplæringspengerDagsats(100, listOf(Periode(100, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -211,9 +213,9 @@ class SamordningTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.HarSamordnet(true),
-                            DagpengerOpplysning.Egenandel(3000),
-                            DagpengerOpplysning.UføreDagsats(100),
+                            DagpengerOpplysning.HarSamordnet(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.UføreDagsats(100, listOf(Periode(100, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -249,9 +251,9 @@ class SamordningTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.HarSamordnet(true),
-                            DagpengerOpplysning.Egenandel(3000),
-                            DagpengerOpplysning.ForeldrepengerDagsats(100),
+                            DagpengerOpplysning.HarSamordnet(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.ForeldrepengerDagsats(100, listOf(Periode(100, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -287,9 +289,9 @@ class SamordningTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.HarSamordnet(true),
-                            DagpengerOpplysning.Egenandel(3000),
-                            DagpengerOpplysning.SvangerskapspengerDagsats(100),
+                            DagpengerOpplysning.HarSamordnet(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.SvangerskapspengerDagsats(100, listOf(Periode(100, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -325,11 +327,11 @@ class SamordningTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.HarSamordnet(true),
-                            DagpengerOpplysning.Egenandel(3000),
-                            DagpengerOpplysning.SykepengerDagsats(100),
-                            DagpengerOpplysning.ForeldrepengerDagsats(100),
-                            DagpengerOpplysning.SvangerskapspengerDagsats(100),
+                            DagpengerOpplysning.HarSamordnet(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.SykepengerDagsats(100, listOf(Periode(100, Opprinnelse.NY))),
+                            DagpengerOpplysning.ForeldrepengerDagsats(100, listOf(Periode(100, Opprinnelse.NY))),
+                            DagpengerOpplysning.SvangerskapspengerDagsats(100, listOf(Periode(100, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -365,8 +367,8 @@ class SamordningTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.HarSamordnet(true),
-                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.HarSamordnet(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),

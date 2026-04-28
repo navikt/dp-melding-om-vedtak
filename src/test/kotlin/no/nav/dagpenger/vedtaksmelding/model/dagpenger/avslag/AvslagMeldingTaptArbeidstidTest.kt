@@ -2,6 +2,8 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag
 
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Opprinnelse
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Periode
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
@@ -29,10 +31,10 @@ class AvslagMeldingTaptArbeidstidTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
-                            DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5),
-                            DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5),
-                            DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste6Måneder(true),
+                            DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false, listOf(Periode(false, Opprinnelse.NY))),
+                            DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5, listOf(Periode(37.5, Opprinnelse.NY))),
+                            DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5, listOf(Periode(20.5, Opprinnelse.NY))),
+                            DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste6Måneder(true, listOf(Periode(true, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -55,10 +57,13 @@ class AvslagMeldingTaptArbeidstidTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
-                            DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5),
-                            DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5),
-                            DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste12Måneder(true),
+                            DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false, listOf(Periode(false, Opprinnelse.NY))),
+                            DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5, listOf(Periode(37.5, Opprinnelse.NY))),
+                            DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5, listOf(Periode(20.5, Opprinnelse.NY))),
+                            DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste12Måneder(
+                                true,
+                                listOf(Periode(true, Opprinnelse.NY)),
+                            ),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -81,10 +86,13 @@ class AvslagMeldingTaptArbeidstidTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
-                            DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5),
-                            DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5),
-                            DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste36Måneder(true),
+                            DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false, listOf(Periode(false, Opprinnelse.NY))),
+                            DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5, listOf(Periode(37.5, Opprinnelse.NY))),
+                            DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5, listOf(Periode(20.5, Opprinnelse.NY))),
+                            DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste36Måneder(
+                                true,
+                                listOf(Periode(true, Opprinnelse.NY)),
+                            ),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -107,11 +115,11 @@ class AvslagMeldingTaptArbeidstidTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
-                            DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(true),
-                            DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5),
-                            DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5),
-                            DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste6Måneder(true),
+                            DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false, listOf(Periode(false, Opprinnelse.NY))),
+                            DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5, listOf(Periode(37.5, Opprinnelse.NY))),
+                            DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5, listOf(Periode(20.5, Opprinnelse.NY))),
+                            DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste6Måneder(true, listOf(Periode(true, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -134,11 +142,14 @@ class AvslagMeldingTaptArbeidstidTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
-                            DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(true),
-                            DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5),
-                            DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5),
-                            DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste12Måneder(true),
+                            DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false, listOf(Periode(false, Opprinnelse.NY))),
+                            DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5, listOf(Periode(37.5, Opprinnelse.NY))),
+                            DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5, listOf(Periode(20.5, Opprinnelse.NY))),
+                            DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste12Måneder(
+                                true,
+                                listOf(Periode(true, Opprinnelse.NY)),
+                            ),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -161,11 +172,14 @@ class AvslagMeldingTaptArbeidstidTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
-                            DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(true),
-                            DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5),
-                            DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5),
-                            DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste36Måneder(true),
+                            DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false, listOf(Periode(false, Opprinnelse.NY))),
+                            DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5, listOf(Periode(37.5, Opprinnelse.NY))),
+                            DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5, listOf(Periode(20.5, Opprinnelse.NY))),
+                            DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste36Måneder(
+                                true,
+                                listOf(Periode(true, Opprinnelse.NY)),
+                            ),
                         ),
                 ),
             alleBrevblokker = emptyList(),

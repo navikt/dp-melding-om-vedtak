@@ -29,6 +29,8 @@ import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.INNSENDING
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MANUELL
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Opprinnelse
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Periode
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.VedtakMapper
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
@@ -62,7 +64,7 @@ class MediatorTest {
                 automatiskBehandling = false,
                 opplysninger =
                     setOf(
-                        DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false),
+                        DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false, listOf(Periode(false, Opprinnelse.NY))),
                     ),
             )
         val behandlingKlient =
@@ -99,7 +101,7 @@ class MediatorTest {
             automatiskBehandling = false,
             opplysninger =
                 setOf(
-                    DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false),
+                    DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false, listOf(Periode(false, Opprinnelse.NY))),
                 ),
         )
         val meldingOmVedtakDataDTO =
@@ -150,7 +152,7 @@ class MediatorTest {
                 behandlingId = behandlingId,
                 utfall = Vedtak.Utfall.AVSLÅTT,
                 automatiskBehandling = false,
-                opplysninger = setOf(DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false)),
+                opplysninger = setOf(DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false, listOf(Periode(false, Opprinnelse.NY)))),
             )
         val behandlingKlient =
             mockk<BehandlingKlient>().also {

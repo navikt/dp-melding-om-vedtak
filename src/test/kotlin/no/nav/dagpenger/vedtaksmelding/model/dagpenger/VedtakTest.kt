@@ -1,6 +1,8 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
 import io.kotest.matchers.shouldBe
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Opprinnelse
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Periode
 import org.junit.jupiter.api.Test
 import java.util.UUID
 
@@ -13,8 +15,8 @@ class VedtakTest {
             automatiskBehandling = false,
             opplysninger =
                 setOf(
-                    DagpengerOpplysning.HarSamordnet(true),
-                    DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false),
+                    DagpengerOpplysning.HarSamordnet(true, listOf(Periode(true, Opprinnelse.NY))),
+                    DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false, listOf(Periode(false, Opprinnelse.NY))),
                 ),
         ).let {
             it.oppfylt<DagpengerOpplysning.HarSamordnet>() shouldBe true
@@ -32,8 +34,8 @@ class VedtakTest {
             automatiskBehandling = false,
             opplysninger =
                 setOf(
-                    DagpengerOpplysning.HarSamordnet(true),
-                    DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false),
+                    DagpengerOpplysning.HarSamordnet(true, listOf(Periode(true, Opprinnelse.NY))),
+                    DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false, listOf(Periode(false, Opprinnelse.NY))),
                 ),
         ).let {
             it.ikkeOppfylt<DagpengerOpplysning.HarSamordnet>() shouldBe false

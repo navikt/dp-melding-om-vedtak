@@ -4,6 +4,8 @@ import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Opprinnelse
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Periode
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.ManglerBrevstøtte
@@ -44,7 +46,10 @@ class OrdinæreDagpengerTest {
                         behandlingId = behandlingId,
                         utfall = Vedtak.Utfall.AVSLÅTT,
                         automatiskBehandling = false,
-                        opplysninger = setOf(DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false)),
+                        opplysninger =
+                            setOf(
+                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false, listOf(Periode(false, Opprinnelse.NY))),
+                            ),
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -68,7 +73,10 @@ class OrdinæreDagpengerTest {
                         behandlingId = behandlingId,
                         utfall = Vedtak.Utfall.STANS,
                         automatiskBehandling = true,
-                        opplysninger = setOf(DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false)),
+                        opplysninger =
+                            setOf(
+                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false, listOf(Periode(false, Opprinnelse.NY))),
+                            ),
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -115,7 +123,7 @@ class OrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -150,8 +158,8 @@ class OrdinæreDagpengerTest {
                     utfall = Vedtak.Utfall.INNVILGET,
                     automatiskBehandling = false,
                     setOf(
-                        DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1),
-                        DagpengerOpplysning.Egenandel(3000),
+                        DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1, listOf(Periode(1, Opprinnelse.NY))),
+                        DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                     ),
                 ),
             alleBrevblokker = emptyList(),
@@ -165,8 +173,8 @@ class OrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(0),
-                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(0, listOf(Periode(0, Opprinnelse.NY))),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -203,10 +211,11 @@ class OrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1),
-                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1, listOf(Periode(1, Opprinnelse.NY))),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
                                 10,
+                                listOf(Periode(10, Opprinnelse.NY)),
                             ),
                         ),
                 ),
@@ -221,10 +230,11 @@ class OrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1),
-                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1, listOf(Periode(1, Opprinnelse.NY))),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
                                 0,
+                                listOf(Periode(0, Opprinnelse.NY)),
                             ),
                         ),
                 ),
@@ -262,10 +272,11 @@ class OrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1),
-                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1, listOf(Periode(1, Opprinnelse.NY))),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
                                 10,
+                                listOf(Periode(10, Opprinnelse.NY)),
                             ),
                         ),
                 ),
@@ -302,7 +313,7 @@ class OrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.SisteDagMedRett(LocalDate.of(2025, 9, 10)),
                         ),
                 ),
@@ -340,8 +351,8 @@ class OrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.Egenandel(3000),
-                            DagpengerOpplysning.GodkjentLokalArbeidssøker(true),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.GodkjentLokalArbeidssøker(true, listOf(Periode(true, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -378,8 +389,8 @@ class OrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.Egenandel(3000),
-                            DagpengerOpplysning.GodkjentKunDeltidssøker(true),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.GodkjentKunDeltidssøker(true, listOf(Periode(true, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),

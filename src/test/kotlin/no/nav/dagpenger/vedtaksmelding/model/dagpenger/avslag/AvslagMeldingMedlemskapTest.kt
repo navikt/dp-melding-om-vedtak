@@ -2,6 +2,8 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag
 
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Opprinnelse
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Periode
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
@@ -19,7 +21,7 @@ class AvslagMeldingMedlemskapTest {
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     automatiskBehandling = false,
-                    opplysninger = setOf(DagpengerOpplysning.OppfyllerMedlemskap(false)),
+                    opplysninger = setOf(DagpengerOpplysning.OppfyllerMedlemskap(false, listOf(Periode(false, Opprinnelse.NY)))),
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

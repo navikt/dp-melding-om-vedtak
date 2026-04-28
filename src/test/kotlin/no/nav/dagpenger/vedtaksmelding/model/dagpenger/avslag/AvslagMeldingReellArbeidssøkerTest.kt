@@ -4,6 +4,8 @@ import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Opprinnelse
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Periode
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
@@ -23,12 +25,20 @@ import org.junit.jupiter.api.Test
 class AvslagMeldingReellArbeidssøkerTest {
     private val behandlingId = UUIDv7.ny()
 
-    private val reellArbeidssøkerIkkeOppfylt = DagpengerOpplysning.KravTilArbeidssøker(false)
-    private val heltidDeltidIkkeOppfylt = DagpengerOpplysning.OppfyllerKravTilArbeidssøker(false)
-    private val mobilitetIkkeOppfylt = DagpengerOpplysning.OppfyllerKravTilMobilitet(false)
-    private val arbeidsførIkkeOppfylt = DagpengerOpplysning.OppfyllerKravTilArbeidsfør(false)
-    private val ethvertArbeidIkkeOppfylt = DagpengerOpplysning.OppfyllerKravetTilEthvertArbeid(false)
-    private val registrertArbeidssøkerIkkeOppfylt = DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false)
+    private val reellArbeidssøkerIkkeOppfylt = DagpengerOpplysning.KravTilArbeidssøker(false, listOf(Periode(false, Opprinnelse.NY)))
+    private val heltidDeltidIkkeOppfylt = DagpengerOpplysning.OppfyllerKravTilArbeidssøker(false, listOf(Periode(false, Opprinnelse.NY)))
+    private val mobilitetIkkeOppfylt = DagpengerOpplysning.OppfyllerKravTilMobilitet(false, listOf(Periode(false, Opprinnelse.NY)))
+    private val arbeidsførIkkeOppfylt = DagpengerOpplysning.OppfyllerKravTilArbeidsfør(false, listOf(Periode(false, Opprinnelse.NY)))
+    private val ethvertArbeidIkkeOppfylt =
+        DagpengerOpplysning.OppfyllerKravetTilEthvertArbeid(
+            false,
+            listOf(Periode(false, Opprinnelse.NY)),
+        )
+    private val registrertArbeidssøkerIkkeOppfylt =
+        DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
+            false,
+            listOf(Periode(false, Opprinnelse.NY)),
+        )
 
     @Test
     fun `Sjekker kriterier for brevstøtte`() {
@@ -81,7 +91,7 @@ class AvslagMeldingReellArbeidssøkerTest {
 
     @Test
     fun `Bugfix - Skal ikke legge til unntaksblokk når ikke blokk om heltid deltid eller hele norge inngår i brevblokklista`() {
-        val minsteinntektIkkeOppfylt = DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false)
+        val minsteinntektIkkeOppfylt = DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false, listOf(Periode(false, Opprinnelse.NY)))
         AvslagMelding(
             vedtak =
                 Vedtak(

@@ -2,6 +2,8 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.types.shouldBeInstanceOf
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Opprinnelse
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Periode
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.gjenopptak.GjenopptakMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseMelding
@@ -21,7 +23,7 @@ class VedtaksmeldingTest {
                         behandlingId = behandlingId,
                         opplysninger =
                             setOf(
-                                DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false),
+                                DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false, listOf(Periode(false, Opprinnelse.NY))),
                             ),
                         utfall = Vedtak.Utfall.AVSLÅTT,
                         automatiskBehandling = false,
@@ -58,7 +60,10 @@ class VedtaksmeldingTest {
                 vedtak =
                     Vedtak(
                         behandlingId = behandlingId,
-                        opplysninger = setOf(DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false)),
+                        opplysninger =
+                            setOf(
+                                DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false, listOf(Periode(false, Opprinnelse.NY))),
+                            ),
                         utfall = Vedtak.Utfall.STANS,
                         automatiskBehandling = true,
                     ),

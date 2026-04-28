@@ -2,6 +2,8 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse
 
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Opprinnelse
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Periode
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN_VERNEPLIKT
@@ -50,8 +52,11 @@ class VernepliktTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(true),
-                            DagpengerOpplysning.Egenandel(1000),
+                            DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(
+                                true,
+                                listOf(Periode(true, Opprinnelse.NY)),
+                            ),
+                            DagpengerOpplysning.Egenandel(1000, listOf(Periode(1000, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),

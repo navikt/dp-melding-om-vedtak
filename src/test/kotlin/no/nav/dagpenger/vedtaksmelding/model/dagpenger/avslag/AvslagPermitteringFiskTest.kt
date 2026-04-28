@@ -2,6 +2,8 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag
 
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Opprinnelse
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Periode
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING_PERMITTERT_FISK
@@ -13,7 +15,7 @@ import org.junit.jupiter.api.Test
 class AvslagPermitteringFiskTest {
     @Test
     fun `Riktige brevblokker for avslag på permitteringsårsak`() {
-        val avslåttVilkår = DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(false)
+        val avslåttVilkår = DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(false, listOf(Periode(false, Opprinnelse.NY)))
 
         AvslagMelding(
             vedtak =

@@ -3,6 +3,8 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Opprinnelse
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Periode
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_ANDRE_FULLE_YTELSER
@@ -22,7 +24,7 @@ class AvslagMeldingAndreFulleYtelserTest {
                         automatiskBehandling = false,
                         opplysninger =
                             setOf(
-                                DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false),
+                                DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false, listOf(Periode(false, Opprinnelse.NY))),
                             ),
                     ),
                 alleBrevblokker = emptyList(),
@@ -38,7 +40,7 @@ class AvslagMeldingAndreFulleYtelserTest {
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     automatiskBehandling = false,
-                    opplysninger = setOf(DagpengerOpplysning.IkkeFulleYtelser(false)),
+                    opplysninger = setOf(DagpengerOpplysning.IkkeFulleYtelser(false, listOf(Periode(false, Opprinnelse.NY)))),
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

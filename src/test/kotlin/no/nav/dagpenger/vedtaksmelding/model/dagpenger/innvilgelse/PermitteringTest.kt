@@ -2,6 +2,8 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse
 
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Opprinnelse
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Periode
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT
@@ -54,8 +56,8 @@ class PermitteringTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.Egenandel(3000),
-                            DagpengerOpplysning.OppfyllerKravetTilPermittering(true),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.OppfyllerKravetTilPermittering(true, listOf(Periode(true, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),

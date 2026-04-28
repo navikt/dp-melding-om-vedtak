@@ -2,6 +2,8 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag
 
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Opprinnelse
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Periode
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.AVSLAG_INNLEDNING
@@ -14,7 +16,7 @@ class AvslagMeldingTaptArbeidsinntektTest {
     @Test
     fun `Riktige brevblokker for avslag tapt arbeidsinntekt`() {
         val behandlingId = UUIDv7.ny()
-        val taptArbeidsinntektIkkeOppfylt = DagpengerOpplysning.KravTilTapAvArbeidsinntekt(false)
+        val taptArbeidsinntektIkkeOppfylt = DagpengerOpplysning.KravTilTapAvArbeidsinntekt(false, listOf(Periode(false, Opprinnelse.NY)))
         AvslagMelding(
             vedtak =
                 Vedtak(

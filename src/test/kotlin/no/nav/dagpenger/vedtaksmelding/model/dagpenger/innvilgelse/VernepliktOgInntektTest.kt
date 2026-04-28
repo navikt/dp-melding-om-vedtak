@@ -2,6 +2,8 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse
 
 import io.kotest.matchers.shouldBe
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Opprinnelse
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Periode
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN_VERNEPLIKT
@@ -52,10 +54,13 @@ class VernepliktOgInntektTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(true),
-                            DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(true),
-                            DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger(52),
-                            DagpengerOpplysning.Egenandel(3000),
+                            DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(
+                                true,
+                                listOf(Periode(true, Opprinnelse.NY)),
+                            ),
+                            DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger(52, listOf(Periode(52, Opprinnelse.NY))),
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                         ),
                 ),
             alleBrevblokker = emptyList(),
