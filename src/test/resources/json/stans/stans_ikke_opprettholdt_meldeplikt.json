@@ -3309,7 +3309,7 @@
           "opprettet": "2026-04-21T14:08:57.371753",
           "opprinnelse": "Arvet",
           "gyldigFraOgMed": "2026-04-06",
-          "gyldigTilOgMed": "2026-04-21",
+          "gyldigTilOgMed": "2026-04-19",
           "verdi": {
             "verdi": true,
             "datatype": "boolsk"
@@ -3328,7 +3328,7 @@
           "id": "019db00a-8082-7404-96c5-9b59569fc368",
           "opprettet": "2026-04-21T14:36:11.522657",
           "opprinnelse": "Ny",
-          "gyldigFraOgMed": "2026-04-22",
+          "gyldigFraOgMed": "2026-04-20",
           "verdi": {
             "verdi": false,
             "datatype": "boolsk"

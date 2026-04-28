@@ -5,6 +5,7 @@ import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.http.headersOf
 import kotlinx.coroutines.runBlocking
+import no.nav.dagpenger.saksbehandling.api.models.AutomatiskAvslagDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlingstypeDTO.RETT_TIL_DAGPENGER
@@ -50,6 +51,10 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_UTBETALING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_IKKE_MELDT_SEG_I_TIDE
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_INNLEDNING
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_SVART_NEI_TIL_Å_STÅ_TILMELDT
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansMelding
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_3
@@ -484,6 +489,90 @@ class VedtakHtmlTest {
                 )
             writeStringToFile(
                 filePath = "build/temp/gjenopptak_med_reberegning_tom_dato.html",
+                content =
+                htmlInnhold,
+            )
+        }
+    }
+
+    @Test
+    fun `Html av stans når bruker har svart Nei på spørsmål om å stå tilmeldt som arbeidssøker`() {
+        runBlocking {
+            val stansMelding =
+                StansMelding(
+                    vedtak = hentVedtak("/json/stans/stans_svarte_nei_paa_aa_staa_tilmeldt.json"),
+                    alleBrevblokker = sanityKlient.hentBrevBlokker(),
+                )
+            stansMelding.hentOpplysninger()
+            val brevBlokker = stansMelding.hentBrevBlokker()
+            val htmlInnhold =
+                HtmlConverter.toAutomatiskAvslagHtml(
+                    brevBlokker = brevBlokker,
+                    opplysninger = stansMelding.hentOpplysninger(),
+                    automatiskAvslag =
+                        AutomatiskAvslagDTO(
+                            fornavn = "Minni",
+                            etternavn = "Mus",
+                            fodselsnummer = "12345612345",
+                            sakId = "019dafe9-a736-7f5a-8e57-ce14d939caf1",
+                        ),
+                )
+
+            htmlInnhold brevblokkRekkefølgeShouldBe
+                listOf(
+                    STANS_INNLEDNING.brevblokkId,
+                    STANS_SVART_NEI_TIL_Å_STÅ_TILMELDT.brevblokkId,
+                    RETT_TIL_INNSYN.brevBlokkId,
+                    PERSONOPPLYSNINGER.brevBlokkId,
+                    HJELP_FRA_ANDRE.brevBlokkId,
+                    VEILEDNING_FRA_NAV.brevBlokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
+                    SPØRSMÅL.brevBlokkId,
+                )
+            writeStringToFile(
+                filePath = "build/temp/stans_svarte_nei_paa_aa_staa_tilmeldt.html",
+                content =
+                htmlInnhold,
+            )
+        }
+    }
+
+    @Test
+    fun `Html av stans når bruker ikke har levert meldekort i tide`() {
+        runBlocking {
+            val stansMelding =
+                StansMelding(
+                    vedtak = hentVedtak("/json/stans/stans_ikke_opprettholdt_meldeplikt.json"),
+                    alleBrevblokker = sanityKlient.hentBrevBlokker(),
+                )
+            stansMelding.hentOpplysninger()
+            val brevBlokker = stansMelding.hentBrevBlokker()
+            val htmlInnhold =
+                HtmlConverter.toAutomatiskAvslagHtml(
+                    brevBlokker = brevBlokker,
+                    opplysninger = stansMelding.hentOpplysninger(),
+                    automatiskAvslag =
+                        AutomatiskAvslagDTO(
+                            fornavn = "Minni",
+                            etternavn = "Mus",
+                            fodselsnummer = "12345612345",
+                            sakId = "019dafe9-a736-7f5a-8e57-ce14d939caf1",
+                        ),
+                )
+
+            htmlInnhold brevblokkRekkefølgeShouldBe
+                listOf(
+                    STANS_INNLEDNING.brevblokkId,
+                    STANS_IKKE_MELDT_SEG_I_TIDE.brevblokkId,
+                    RETT_TIL_INNSYN.brevBlokkId,
+                    PERSONOPPLYSNINGER.brevBlokkId,
+                    HJELP_FRA_ANDRE.brevBlokkId,
+                    VEILEDNING_FRA_NAV.brevBlokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
+                    SPØRSMÅL.brevBlokkId,
+                )
+            writeStringToFile(
+                filePath = "build/temp/stans_ikke_opprettholdt_meldeplikt.html",
                 content =
                 htmlInnhold,
             )

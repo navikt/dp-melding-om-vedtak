@@ -191,7 +191,7 @@ class VedtakMapperTest {
 
     @Test
     fun `Skal kunne lage opplysninger til bruk ved automatisk stans`() {
-        val vedtak = VedtakMapper("/json/stans/stans_svarte_nei_paa_aa_staa_tilmeldt.json".readFile()).vedtak()
+        val vedtak = VedtakMapper("/json/stans/stans_ikke_opprettholdt_meldeplikt.json".readFile()).vedtak()
         vedtak.behandlingId shouldBe UUID.fromString("019db00a-8079-7594-ac86-e1bf0cdf5fe5")
         vedtak.utfall shouldBe Vedtak.Utfall.STANS
         vedtak.also {
