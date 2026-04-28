@@ -1,6 +1,8 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans
 
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Opprinnelse
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Periode
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.STANS
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
@@ -12,6 +14,11 @@ class StansMelding(
     override val vedtak: Vedtak,
     alleBrevblokker: List<BrevBlokk>,
 ) : Vedtaksmelding(vedtak) {
+    companion object {
+        private fun List<Periode<Boolean>>.ikkeOppfyltNy(): Boolean =
+            this.any { periode -> periode.opprinnelse == Opprinnelse.NY && !periode.verdi }
+    }
+
     override val harBrevstøtte: Boolean =
         vedtak.utfall == STANS &&
             vedtak.automatiskBehandling &&
@@ -20,7 +27,7 @@ class StansMelding(
                 vedtak.finnOpplysning<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.OppyllerMeldeplikt>(),
             ).any {
-                !it.verdi
+                it.perioder.ikkeOppfyltNy()
             }
 
     override val brevBlokkIder: List<String>
