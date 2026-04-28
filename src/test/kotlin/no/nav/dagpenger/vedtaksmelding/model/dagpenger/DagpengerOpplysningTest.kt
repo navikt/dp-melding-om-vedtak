@@ -12,7 +12,7 @@ import java.time.YearMonth
 class DagpengerOpplysningTest {
     @Test
     fun `Skal kunne lage alle type opplysninger ordninær`() {
-        val behandlingsresultatData = BehandlingsresultatData("/json/innvigelse_ord_resultat.json".readFile())
+        val behandlingsresultatData = BehandlingsresultatData("/json/innvilgelse/innvigelse_ord_resultat.json".readFile())
         setOf(
             DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid(behandlingsresultatData),
             DagpengerOpplysning.InntektskravSiste12Måneder(behandlingsresultatData),
@@ -92,7 +92,7 @@ class DagpengerOpplysningTest {
 
     @Test
     fun `Opplysninger ved permittering`() {
-        val behandlingsresultatData = BehandlingsresultatData("/json/innvigelse_permittering_resultat.json".readFile())
+        val behandlingsresultatData = BehandlingsresultatData("/json/innvilgelse/innvigelse_permittering_resultat.json".readFile())
         DagpengerOpplysning.OppfyllerKravetTilPermittering(behandlingsresultatData).verdi shouldBe true
 
         DagpengerOpplysning.AntallPermitteringsuker(behandlingsresultatData).verdi shouldBe 26
@@ -101,7 +101,7 @@ class DagpengerOpplysningTest {
     @Test
     @Disabled("Trenger ny testdata med fisk")
     fun `Opplysninger ved permittering fisk`() {
-        val behandlingsresultatData = BehandlingsresultatData("/json/innvigelse_permittering_resultat.json".readFile())
+        val behandlingsresultatData = BehandlingsresultatData("/json/innvilgelse/innvigelse_permittering_resultat.json".readFile())
         DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(behandlingsresultatData) shouldBe true
         DagpengerOpplysning.AntallPermitteringsukerFisk(behandlingsresultatData).verdi shouldBe 26
     }
@@ -142,13 +142,13 @@ class DagpengerOpplysningTest {
 
     @Test
     fun `Siste dag med rett kan være null`() {
-        val behandlingsresultatData = BehandlingsresultatData("/json/innvigelse_ord_resultat.json".readFile())
+        val behandlingsresultatData = BehandlingsresultatData("/json/innvilgelse/innvigelse_ord_resultat.json".readFile())
         DagpengerOpplysning.SisteDagMedRett.fra(behandlingsresultatData) shouldBe null
     }
 
     @Test
     fun `Siste dag med rett blir satt på bakgrunn av rettighetsperiode`() {
-        val behandlingsresultatData = BehandlingsresultatData("/json/innvigelse_ord_resultat_til_og_med_dato.json".readFile())
+        val behandlingsresultatData = BehandlingsresultatData("/json/innvilgelse/innvigelse_ord_resultat_til_og_med_dato.json".readFile())
         DagpengerOpplysning.SisteDagMedRett.fra(behandlingsresultatData).also {
             requireNotNull(it) { "Forventet ikke null" }
             it.verdi shouldBe LocalDate.of(2025, 9, 9)
@@ -180,7 +180,8 @@ class DagpengerOpplysningTest {
 
     @Test
     fun `GrunnlagErReberegnet blir satt på bakgrunn av opprinnelse Ny`() {
-        val behandlingsresultatData = BehandlingsresultatData("/json/gjenopptak_innvilgelse_reberegning_og_forbruk.json".readFile())
+        val behandlingsresultatData =
+            BehandlingsresultatData("/json/gjenopptak/gjenopptak_innvilgelse_reberegning_og_forbruk.json".readFile())
         DagpengerOpplysning.GrunnlagErReberegnet.fra(behandlingsresultatData).also {
             requireNotNull(it) { "Forventet ikke null" }
             it.verdi shouldBe true
@@ -189,7 +190,7 @@ class DagpengerOpplysningTest {
 
     @Test
     fun `Skal kunne lage alle type opplysninger med verdi`() {
-        val behandlingsresultatData = BehandlingsresultatData("/json/avslag_resultat.json".readFile())
+        val behandlingsresultatData = BehandlingsresultatData("/json/avslag/avslag_resultat.json".readFile())
 
         DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid(behandlingsresultatData).verdi shouldBe 50.0
         DagpengerOpplysning.InntektskravSiste12Måneder(behandlingsresultatData).verdi shouldBe 186042

@@ -16,7 +16,7 @@ internal class BehandlingKlientTest {
     @Test
     fun `Skal kalle behandling-endepunkt med riktige headers og parse response`() {
         val behandlingId = UUID.fromString("01937743-812d-7a69-b492-d25eb9768c68")
-        val vedtakJson = "/json/innvigelse_ord_resultat.json".readFile()
+        val vedtakJson = "/json/innvilgelse/innvigelse_ord_resultat.json".readFile()
 
         val behandlingKlient =
             BehandlingHttpKlient(

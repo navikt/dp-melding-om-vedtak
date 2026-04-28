@@ -58,7 +58,7 @@ class BehandlingsresultatDataTest {
 
     @Test
     fun `Skal kunne parse behandlingsresultatdata for avslag`() {
-        val behandlingsresultatData = BehandlingsresultatData("/json/avslag_resultat.json".readFile())
+        val behandlingsresultatData = BehandlingsresultatData("/json/avslag/avslag_resultat.json".readFile())
 
         behandlingsresultatData.flyttall(DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid.opplysningTypeId) shouldBe 50
         behandlingsresultatData.penger(DagpengerOpplysning.InntektskravSiste12Måneder.opplysningTypeId) shouldBe 186042

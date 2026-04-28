@@ -146,7 +146,7 @@ class VedtakHtmlTest {
             requireNotNull(alleBrevblokker) { "alleBrevblokker should not be null" }
             val avslagMelding =
                 AvslagMelding(
-                    vedtak = hentVedtak("/json/avslag_resultat.json"),
+                    vedtak = hentVedtak("/json/avslag/avslag_resultat.json"),
                     alleBrevblokker = alleBrevblokker,
                 )
 
@@ -204,7 +204,7 @@ class VedtakHtmlTest {
         runBlocking {
             val innvilgelseMelding =
                 InnvilgelseMelding(
-                    vedtak = hentVedtak("/json/innvigelse_ord_resultat.json"),
+                    vedtak = hentVedtak("/json/innvilgelse/innvigelse_ord_resultat.json"),
                     alleBrevblokker = sanityKlient.hentBrevBlokker(),
                 )
             innvilgelseMelding.hentOpplysninger()
@@ -253,7 +253,7 @@ class VedtakHtmlTest {
         runBlocking {
             val gjenopptakMelding =
                 GjenopptakMelding(
-                    vedtak = hentVedtak("/json/gjenopptak_innvilgelse_ikke_reberegning_ikke_forbruk.json"),
+                    vedtak = hentVedtak("/json/gjenopptak/gjenopptak_innvilgelse_ikke_reberegning_ikke_forbruk.json"),
                     alleBrevblokker = sanityKlient.hentBrevBlokker(),
                 )
             gjenopptakMelding.hentOpplysninger()
@@ -300,7 +300,7 @@ class VedtakHtmlTest {
         runBlocking {
             val gjenopptakMelding =
                 GjenopptakMelding(
-                    vedtak = hentVedtak("/json/gjenopptak_innvilgelse_ikke_reberegning_forbruk.json"),
+                    vedtak = hentVedtak("/json/gjenopptak/gjenopptak_innvilgelse_ikke_reberegning_forbruk.json"),
                     alleBrevblokker = sanityKlient.hentBrevBlokker(),
                 )
             gjenopptakMelding.hentOpplysninger()
@@ -346,7 +346,7 @@ class VedtakHtmlTest {
         runBlocking {
             val gjenopptakMelding =
                 GjenopptakMelding(
-                    vedtak = hentVedtak("/json/gjenopptak_innvilgelse_ikke_reberegning_samordnet.json"),
+                    vedtak = hentVedtak("/json/gjenopptak/gjenopptak_innvilgelse_ikke_reberegning_samordnet.json"),
                     alleBrevblokker = sanityKlient.hentBrevBlokker(),
                 )
             gjenopptakMelding.hentOpplysninger()
@@ -395,7 +395,7 @@ class VedtakHtmlTest {
         runBlocking {
             val gjenopptakMelding =
                 GjenopptakMelding(
-                    vedtak = hentVedtak("/json/gjenopptak_innvilgelse_reberegning_og_forbruk.json"),
+                    vedtak = hentVedtak("/json/gjenopptak/gjenopptak_innvilgelse_reberegning_og_forbruk.json"),
                     alleBrevblokker = sanityKlient.hentBrevBlokker(),
                 )
             gjenopptakMelding.hentOpplysninger()
@@ -444,7 +444,7 @@ class VedtakHtmlTest {
         runBlocking {
             val gjenopptakMelding =
                 GjenopptakMelding(
-                    vedtak = hentVedtak("/json/gjenopptak_innvilgelse_reberegning_og_til_og_med_dato.json"),
+                    vedtak = hentVedtak("/json/gjenopptak/gjenopptak_innvilgelse_reberegning_og_til_og_med_dato.json"),
                     alleBrevblokker = sanityKlient.hentBrevBlokker(),
                 )
             gjenopptakMelding.hentOpplysninger()

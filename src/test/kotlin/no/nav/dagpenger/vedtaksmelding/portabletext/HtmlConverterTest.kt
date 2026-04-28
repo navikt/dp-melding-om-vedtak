@@ -83,7 +83,7 @@ class HtmlConverterTest {
                     objectMapper.readValue(it, ResultDTO::class.java)
                 }.result
 
-        hentVedtak("/json/avslag_resultat.json")
+        hentVedtak("/json/avslag/avslag_resultat.json")
             .let { vedtak -> Vedtaksmelding.byggVedtaksmelding(vedtak, sanityTekster) }
             .let { vedtakMelding ->
                 HtmlConverter.toHtml(
@@ -122,7 +122,7 @@ Dette er linje 4
 
         val vedtaksmelding =
             Vedtaksmelding.byggVedtaksmelding(
-                hentVedtak("/json/avslag_resultat.json"),
+                hentVedtak("/json/avslag/avslag_resultat.json"),
                 sanityTekster,
             )
 
@@ -172,7 +172,7 @@ Dette er linje 4
 
         val vedtaksmelding =
             Vedtaksmelding.byggVedtaksmelding(
-                hentVedtak("/json/avslag_resultat.json"),
+                hentVedtak("/json/avslag/avslag_resultat.json"),
                 sanityTekster,
             )
 

@@ -17,7 +17,7 @@ import java.util.UUID
 class VedtakMapperTest {
     @Test
     fun `Skal kunne hente opplysninger for permittering`() {
-        val vedtak = VedtakMapper("/json/innvigelse_permittering_resultat.json".readFile()).vedtak()
+        val vedtak = VedtakMapper("/json/innvilgelse/innvigelse_permittering_resultat.json".readFile()).vedtak()
         vedtak.behandlingId shouldBe UUID.fromString("0198c683-0770-734f-8ae2-34dfa8a714e5")
         vedtak.utfall shouldBe Vedtak.Utfall.INNVILGET
         vedtak.also {
@@ -29,7 +29,7 @@ class VedtakMapperTest {
     @Test
     @Disabled("Må ha testdata")
     fun `Skal kunne hente opplysninger for permittering i fiskeindustri`() {
-        val vedtak = VedtakMapper("/json/innvigelse_permittering_resultat.json".readFile()).vedtak()
+        val vedtak = VedtakMapper("/json/innvilgelse/innvigelse_permittering_resultat.json".readFile()).vedtak()
         vedtak.behandlingId shouldBe UUID.fromString("0198c683-0770-734f-8ae2-34dfa8a714e5")
         vedtak.utfall shouldBe Vedtak.Utfall.INNVILGET
         vedtak.also {
@@ -40,7 +40,7 @@ class VedtakMapperTest {
 
     @Test
     fun `Skal kunne lage alle type ordinære opplysninger, behandlingId og utfall for innvigelse ordinær`() {
-        val vedtak = VedtakMapper("/json/innvigelse_ord_resultat_til_og_med_dato.json".readFile()).vedtak()
+        val vedtak = VedtakMapper("/json/innvilgelse/innvigelse_ord_resultat_til_og_med_dato.json".readFile()).vedtak()
         vedtak.behandlingId shouldBe UUID.fromString("0198eba3-b1c3-7d50-a7ee-f0f8cd1cbf6b")
         vedtak.utfall shouldBe Vedtak.Utfall.INNVILGET
         vedtak.also {
@@ -116,7 +116,7 @@ class VedtakMapperTest {
 
     @Test
     fun `Skal kunne lage alle type opplysninger, behandlingId og utfall for innvigelse av gjenopptak ordinær`() {
-        val vedtak = VedtakMapper("/json/gjenopptak_innvilgelse_ikke_reberegning_ikke_forbruk.json".readFile()).vedtak()
+        val vedtak = VedtakMapper("/json/gjenopptak/gjenopptak_innvilgelse_ikke_reberegning_ikke_forbruk.json".readFile()).vedtak()
         vedtak.behandlingId shouldBe UUID.fromString("019cb369-13ae-70d4-a61f-07d53216c198")
         vedtak.utfall shouldBe Vedtak.Utfall.GJENOPPTAK
         vedtak.also {
@@ -154,9 +154,6 @@ class VedtakMapperTest {
             it.hentOpplysning<DagpengerOpplysning.SvangerskapspengerDagsats>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.OppfyllerKravTilMinsteinntekt>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.Egenandel>() shouldNotBe null
-// TODO: Denne må finnes!! Eller kan den være fraværende hvis ingen meldekort er beregnet? Er det da et gjenopptak?
-//       Se tråd hos PJ's: https://nav-it.slack.com/archives/C063581H0PR/p1772440810600219
-//            it.hentOpplysning<DagpengerOpplysning.EgenandelGjenstående>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.KravTilArbeidssøker>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.OppfyllerKravTilMobilitet>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.OppfyllerKravTilArbeidsfør>() shouldNotBe null
@@ -189,6 +186,18 @@ class VedtakMapperTest {
             // nullable opplysninger
             it.hentOpplysning<DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.GrunnlagErReberegnet>() shouldNotBe null
+        }
+    }
+
+    @Test
+    fun `Skal kunne lage opplysninger til bruk ved automatisk stans`() {
+        val vedtak = VedtakMapper("/json/stans/stans_svarte_nei_paa_aa_staa_tilmeldt.json".readFile()).vedtak()
+        vedtak.behandlingId shouldBe UUID.fromString("019db00a-8079-7594-ac86-e1bf0cdf5fe5")
+        vedtak.utfall shouldBe Vedtak.Utfall.STANS
+        vedtak.also {
+            it.hentOpplysning<DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.FastsattVanligArbeidstidPerUke>() shouldNotBe null
         }
     }
 }

@@ -92,7 +92,7 @@ class MediatorTest {
 
     @Test
     fun `Endelig brev - Henter avslag-melding når vedtak har utfall AVSLÅTT`() {
-        val vedtak = VedtakMapper("/json/innvigelse_ord_resultat.json".readFile()).vedtak()
+        val vedtak = VedtakMapper("/json/innvilgelse/innvigelse_ord_resultat.json".readFile()).vedtak()
         Vedtak(
             behandlingId = behandlingId,
             utfall = Vedtak.Utfall.AVSLÅTT,
@@ -347,7 +347,7 @@ class MediatorTest {
 
     @Test
     fun `hentAutomatiskAvslagBrev - Henter avslag-html med automatisk footer og lagrer i repository`() {
-        val vedtak = VedtakMapper("/json/avslag_resultat.json".readFile()).vedtak()
+        val vedtak = VedtakMapper("/json/avslag/avslag_resultat.json".readFile()).vedtak()
         val behandlingKlient =
             mockk<BehandlingKlient>().also {
                 coEvery { it.hentBehandlingResultat(behandlingId, Maskin) } returns Result.success(vedtak)

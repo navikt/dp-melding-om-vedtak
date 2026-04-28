@@ -5,10 +5,11 @@ import io.kotest.matchers.types.shouldBeInstanceOf
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.gjenopptak.GjenopptakMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseMelding
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansMelding
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 
-class VedtakMeldingTest {
+class VedtaksmeldingTest {
     private val behandlingId = UUIDv7.ny()
 
     @Test
@@ -51,6 +52,18 @@ class VedtakMeldingTest {
                     ),
                 alleBrevblokker = emptyList(),
             ).shouldBeInstanceOf<GjenopptakMelding>()
+
+        Vedtaksmelding
+            .byggVedtaksmelding(
+                vedtak =
+                    Vedtak(
+                        behandlingId = behandlingId,
+                        opplysninger = setOf(DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false)),
+                        utfall = Vedtak.Utfall.STANS,
+                        automatiskBehandling = true,
+                    ),
+                alleBrevblokker = emptyList(),
+            ).shouldBeInstanceOf<StansMelding>()
     }
 
     @Test
