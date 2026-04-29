@@ -7,7 +7,11 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.STANS
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.finnOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.hentOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.ikkeOppfylt
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_IKKE_MELDT_SEG_I_TIDE
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_2
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 
 class StansMelding(
@@ -21,7 +25,6 @@ class StansMelding(
 
     override val harBrevstøtte: Boolean =
         vedtak.utfall == STANS &&
-            vedtak.automatiskBehandling &&
             setOfNotNull<DagpengerOpplysning.Periodisert<*, Boolean>>(
                 vedtak.finnOpplysning<DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>(),
@@ -33,7 +36,8 @@ class StansMelding(
     override val brevBlokkIder: List<String>
         get() {
             return listOf(StansBrevblokker.STANS_INNLEDNING.brevblokkId) +
-                blokkerAutomatiskStans()
+                blokkerReellArbeidssøkerOgMeldeplikt() +
+                blokkerArbeidOverTerskel()
         }
 
     override val brevBlokker: List<BrevBlokk> =
@@ -48,15 +52,28 @@ class StansMelding(
         }
     }
 
-    private fun blokkerAutomatiskStans(): List<String> =
+    private fun blokkerReellArbeidssøkerOgMeldeplikt(): List<String> =
+
+        if (vedtak.ikkeOppfylt<DagpengerOpplysning.OppyllerMeldeplikt>() &&
+            vedtak.hentOpplysning<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>().perioder.ikkeOppfyltNy()
+        ) {
+            listOf(STANS_IKKE_MELDT_SEG_I_TIDE.brevblokkId)
+//        } else if (vedtak.ikkeOppfylt<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>()
+//            && TODO - vi trenger å få noe ekstra fra PJ for å avdekke dette
+//        ) {
+//            listOf(StansBrevblokker.STANS_REELL_ARBEIDSSØKER_SVART_NEI_TIL_Å_STÅ_TILMELDT.brevblokkId) }
+        } else if (vedtak.ikkeOppfylt<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>()) {
+            listOf(
+                STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_1.brevblokkId,
+                STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_2.brevblokkId,
+            )
+        } else {
+            emptyList()
+        }
+
+    private fun blokkerArbeidOverTerskel(): List<String> =
         if (vedtak.ikkeOppfylt<DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid>()) {
             listOf(StansBrevblokker.STANS_ARBEID_OVER_TERSKEL.brevblokkId)
-        } else if (vedtak.ikkeOppfylt<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>() &&
-            vedtak.ikkeOppfylt<DagpengerOpplysning.OppyllerMeldeplikt>()
-        ) {
-            listOf(StansBrevblokker.STANS_IKKE_MELDT_SEG_I_TIDE.brevblokkId)
-        } else if (vedtak.ikkeOppfylt<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>()) {
-            listOf(StansBrevblokker.STANS_SVART_NEI_TIL_Å_STÅ_TILMELDT.brevblokkId)
         } else {
             emptyList()
         }

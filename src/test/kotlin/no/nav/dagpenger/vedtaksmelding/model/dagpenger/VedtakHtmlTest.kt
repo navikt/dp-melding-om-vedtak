@@ -53,7 +53,9 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_IKKE_MELDT_SEG_I_TIDE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_INNLEDNING
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_SVART_NEI_TIL_Å_STÅ_TILMELDT
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_SVART_NEI_TIL_Å_STÅ_TILMELDT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansMelding
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_2
@@ -70,6 +72,7 @@ import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
@@ -495,6 +498,8 @@ class VedtakHtmlTest {
         }
     }
 
+    // TODO: Avventer til PJ's gir oss mer kontekst om årsaken til at 4-5 ikke er oppfylt
+    @Disabled
     @Test
     fun `Html av stans når bruker har svart Nei på spørsmål om å stå tilmeldt som arbeidssøker`() {
         runBlocking {
@@ -521,7 +526,50 @@ class VedtakHtmlTest {
             htmlInnhold brevblokkRekkefølgeShouldBe
                 listOf(
                     STANS_INNLEDNING.brevblokkId,
-                    STANS_SVART_NEI_TIL_Å_STÅ_TILMELDT.brevblokkId,
+                    STANS_REELL_ARBEIDSSØKER_SVART_NEI_TIL_Å_STÅ_TILMELDT.brevblokkId,
+                    RETT_TIL_INNSYN.brevBlokkId,
+                    PERSONOPPLYSNINGER.brevBlokkId,
+                    HJELP_FRA_ANDRE.brevBlokkId,
+                    VEILEDNING_FRA_NAV.brevBlokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
+                    SPØRSMÅL.brevBlokkId,
+                )
+            writeStringToFile(
+                filePath = "build/temp/stans_svarte_nei_paa_aa_staa_tilmeldt.html",
+                content =
+                htmlInnhold,
+            )
+        }
+    }
+
+    @Test
+    fun `Html av stans når bruker har blitt meldt ut av arbeidssøkerregisteret - ikke manglende meldeplikt`() {
+        runBlocking {
+            val stansMelding =
+                StansMelding(
+                    vedtak = hentVedtak("/json/stans/stans_ikke_registrert_arbeidssoker.json"),
+                    alleBrevblokker = sanityKlient.hentBrevBlokker(),
+                )
+            stansMelding.hentOpplysninger()
+            val brevBlokker = stansMelding.hentBrevBlokker()
+            val htmlInnhold =
+                HtmlConverter.toAutomatiskAvslagHtml(
+                    brevBlokker = brevBlokker,
+                    opplysninger = stansMelding.hentOpplysninger(),
+                    automatiskAvslag =
+                        AutomatiskAvslagDTO(
+                            fornavn = "Minni",
+                            etternavn = "Mus",
+                            fodselsnummer = "12345612345",
+                            sakId = "019dafe9-a736-7f5a-8e57-ce14d939caf1",
+                        ),
+                )
+
+            htmlInnhold brevblokkRekkefølgeShouldBe
+                listOf(
+                    STANS_INNLEDNING.brevblokkId,
+                    STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_1.brevblokkId,
+                    STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_2.brevblokkId,
                     RETT_TIL_INNSYN.brevBlokkId,
                     PERSONOPPLYSNINGER.brevBlokkId,
                     HJELP_FRA_ANDRE.brevBlokkId,

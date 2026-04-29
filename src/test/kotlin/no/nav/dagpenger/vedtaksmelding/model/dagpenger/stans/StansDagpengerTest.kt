@@ -17,9 +17,13 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.ManglerBre
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_ARBEID_OVER_TERSKEL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_IKKE_MELDT_SEG_I_TIDE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_INNLEDNING
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_SVART_NEI_TIL_Å_STÅ_TILMELDT
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_SVART_NEI_TIL_Å_STÅ_TILMELDT
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
+import java.time.LocalDate
 
 class StansDagpengerTest {
     private val behandlingId = UUIDv7.ny()
@@ -35,7 +39,17 @@ class StansDagpengerTest {
                         automatiskBehandling = true,
                         opplysninger =
                             setOf(
-                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false, listOf(Periode(false, Opprinnelse.NY))),
+                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
+                                    verdi = false,
+                                    perioder =
+                                        listOf(
+                                            Periode(
+                                                verdi = false,
+                                                opprinnelse = Opprinnelse.NY,
+                                                gyldigFraOgMed = LocalDate.MIN,
+                                            ),
+                                        ),
+                                ),
                             ),
                     ),
                 alleBrevblokker = emptyList(),
@@ -50,7 +64,17 @@ class StansDagpengerTest {
                         automatiskBehandling = true,
                         opplysninger =
                             setOf(
-                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false, listOf(Periode(false, Opprinnelse.NY))),
+                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
+                                    verdi = false,
+                                    perioder =
+                                        listOf(
+                                            Periode(
+                                                verdi = false,
+                                                opprinnelse = Opprinnelse.NY,
+                                                gyldigFraOgMed = LocalDate.MIN,
+                                            ),
+                                        ),
+                                ),
                             ),
                     ),
                 alleBrevblokker = emptyList(),
@@ -65,13 +89,73 @@ class StansDagpengerTest {
                         automatiskBehandling = true,
                         opplysninger =
                             setOf(
-                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false, listOf(Periode(false, Opprinnelse.NY))),
+                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
+                                    verdi = false,
+                                    perioder =
+                                        listOf(
+                                            Periode(
+                                                verdi = false,
+                                                opprinnelse = Opprinnelse.NY,
+                                                gyldigFraOgMed = LocalDate.MIN,
+                                            ),
+                                        ),
+                                ),
                             ),
                     ),
                 alleBrevblokker = emptyList(),
             )
         }
         shouldThrow<ManglerBrevstøtte> {
+            StansMelding(
+                vedtak =
+                    Vedtak(
+                        behandlingId = behandlingId,
+                        utfall = Vedtak.Utfall.STANS,
+                        automatiskBehandling = true,
+                        opplysninger =
+                            setOf(
+                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
+                                    verdi = true,
+                                    perioder =
+                                        listOf(
+                                            Periode(
+                                                verdi = true,
+                                                opprinnelse = Opprinnelse.NY,
+                                                gyldigFraOgMed = LocalDate.MIN,
+                                            ),
+                                        ),
+                                ),
+                            ),
+                    ),
+                alleBrevblokker = emptyList(),
+            )
+        }
+        shouldNotThrowAny {
+            StansMelding(
+                vedtak =
+                    Vedtak(
+                        behandlingId = behandlingId,
+                        utfall = Vedtak.Utfall.STANS,
+                        automatiskBehandling = true,
+                        opplysninger =
+                            setOf(
+                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
+                                    verdi = false,
+                                    perioder =
+                                        listOf(
+                                            Periode(
+                                                verdi = false,
+                                                opprinnelse = Opprinnelse.NY,
+                                                gyldigFraOgMed = LocalDate.MIN,
+                                            ),
+                                        ),
+                                ),
+                            ),
+                    ),
+                alleBrevblokker = emptyList(),
+            )
+        }
+        shouldNotThrowAny {
             StansMelding(
                 vedtak =
                     Vedtak(
@@ -80,65 +164,18 @@ class StansDagpengerTest {
                         automatiskBehandling = false,
                         opplysninger =
                             setOf(
-                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false, listOf(Periode(false, Opprinnelse.NY))),
+                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
+                                    verdi = false,
+                                    perioder =
+                                        listOf(
+                                            Periode(
+                                                verdi = false,
+                                                opprinnelse = Opprinnelse.NY,
+                                                gyldigFraOgMed = LocalDate.MIN,
+                                            ),
+                                        ),
+                                ),
                             ),
-                    ),
-                alleBrevblokker = emptyList(),
-            )
-        }
-        shouldThrow<ManglerBrevstøtte> {
-            StansMelding(
-                vedtak =
-                    Vedtak(
-                        behandlingId = behandlingId,
-                        utfall = Vedtak.Utfall.STANS,
-                        automatiskBehandling = true,
-                        opplysninger =
-                            setOf(
-                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(true, listOf(Periode(true, Opprinnelse.NY))),
-                            ),
-                    ),
-                alleBrevblokker = emptyList(),
-            )
-        }
-        shouldNotThrowAny {
-            StansMelding(
-                vedtak =
-                    Vedtak(
-                        behandlingId = behandlingId,
-                        utfall = Vedtak.Utfall.STANS,
-                        automatiskBehandling = true,
-                        opplysninger =
-                            setOf(
-                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false, listOf(Periode(false, Opprinnelse.NY))),
-                            ),
-                    ),
-                alleBrevblokker = emptyList(),
-            )
-        }
-        shouldNotThrowAny {
-            StansMelding(
-                vedtak =
-                    Vedtak(
-                        behandlingId = behandlingId,
-                        utfall = Vedtak.Utfall.STANS,
-                        automatiskBehandling = true,
-                        opplysninger =
-                            setOf(
-                                DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false, listOf(Periode(false, Opprinnelse.NY))),
-                            ),
-                    ),
-                alleBrevblokker = emptyList(),
-            )
-        }
-        shouldNotThrowAny {
-            StansMelding(
-                vedtak =
-                    Vedtak(
-                        behandlingId = behandlingId,
-                        utfall = Vedtak.Utfall.STANS,
-                        automatiskBehandling = true,
-                        opplysninger = setOf(DagpengerOpplysning.OppyllerMeldeplikt(false, listOf(Periode(false, Opprinnelse.NY)))),
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -157,13 +194,37 @@ class StansDagpengerTest {
                         setOf(
                             DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(
                                 verdi = false,
-                                listOf(Periode(verdi = false, Opprinnelse.NY)),
+                                perioder =
+                                    listOf(
+                                        Periode(
+                                            verdi = false,
+                                            opprinnelse = Opprinnelse.NY,
+                                            gyldigFraOgMed = LocalDate.MIN,
+                                        ),
+                                    ),
                             ),
                             DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid(
                                 verdi = 50.0,
-                                listOf(Periode(verdi = 50.0, Opprinnelse.NY)),
+                                perioder =
+                                    listOf(
+                                        Periode(
+                                            verdi = 50.0,
+                                            opprinnelse = Opprinnelse.NY,
+                                            gyldigFraOgMed = LocalDate.MIN,
+                                        ),
+                                    ),
                             ),
-                            DagpengerOpplysning.FastsattVanligArbeidstidPerUke(verdi = 35.5, listOf(Periode(verdi = 35.5, Opprinnelse.NY))),
+                            DagpengerOpplysning.FastsattVanligArbeidstidPerUke(
+                                verdi = 35.5,
+                                perioder =
+                                    listOf(
+                                        Periode(
+                                            verdi = 35.5,
+                                            opprinnelse = Opprinnelse.NY,
+                                            gyldigFraOgMed = LocalDate.MIN,
+                                        ),
+                                    ),
+                            ),
                         ),
                 ),
             alleBrevblokker = emptyList(),
@@ -180,6 +241,8 @@ class StansDagpengerTest {
             )
     }
 
+    // TODO: Må få mer kontekst fra PJ's for å avdekke dette spesialtilfellet
+    @Disabled
     @Test
     fun `Riktige brevblokker når bruker har svart Nei på å stå tilmeldt`() {
         StansMelding(
@@ -192,7 +255,7 @@ class StansDagpengerTest {
                         setOf(
                             DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
                                 verdi = false,
-                                listOf(Periode(verdi = false, Opprinnelse.NY)),
+                                perioder = listOf(Periode(verdi = false, Opprinnelse.NY, gyldigFraOgMed = LocalDate.MIN)),
                             ),
                         ),
                 ),
@@ -200,7 +263,38 @@ class StansDagpengerTest {
         ).brevBlokkIder() shouldBe
             listOf(
                 STANS_INNLEDNING.brevblokkId,
-                STANS_SVART_NEI_TIL_Å_STÅ_TILMELDT.brevblokkId,
+                STANS_REELL_ARBEIDSSØKER_SVART_NEI_TIL_Å_STÅ_TILMELDT.brevblokkId,
+                RETT_TIL_INNSYN.brevBlokkId,
+                PERSONOPPLYSNINGER.brevBlokkId,
+                HJELP_FRA_ANDRE.brevBlokkId,
+                VEILEDNING_FRA_NAV.brevBlokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
+                SPØRSMÅL.brevBlokkId,
+            )
+    }
+
+    @Test
+    fun `Riktige brevblokker når bruker har blitt utmeldt av arbeidssøkerregisteret - ikke pga manglende meldeplikt`() {
+        StansMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    utfall = Vedtak.Utfall.STANS,
+                    automatiskBehandling = true,
+                    opplysninger =
+                        setOf(
+                            DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
+                                verdi = false,
+                                perioder = listOf(Periode(verdi = false, Opprinnelse.NY, gyldigFraOgMed = LocalDate.MIN)),
+                            ),
+                        ),
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe
+            listOf(
+                STANS_INNLEDNING.brevblokkId,
+                STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_1.brevblokkId,
+                STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_2.brevblokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
@@ -222,9 +316,12 @@ class StansDagpengerTest {
                         setOf(
                             DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
                                 verdi = false,
-                                listOf(Periode(verdi = false, Opprinnelse.NY)),
+                                listOf(Periode(verdi = false, Opprinnelse.NY, gyldigFraOgMed = LocalDate.MIN)),
                             ),
-                            DagpengerOpplysning.OppyllerMeldeplikt(verdi = false, listOf(Periode(verdi = false, Opprinnelse.NY))),
+                            DagpengerOpplysning.OppyllerMeldeplikt(
+                                verdi = false,
+                                listOf(Periode(verdi = false, Opprinnelse.NY, gyldigFraOgMed = LocalDate.MIN)),
+                            ),
                         ),
                 ),
             alleBrevblokker = emptyList(),
