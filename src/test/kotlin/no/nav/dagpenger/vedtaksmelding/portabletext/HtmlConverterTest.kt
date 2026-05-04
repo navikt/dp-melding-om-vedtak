@@ -21,7 +21,6 @@ import no.nav.dagpenger.vedtaksmelding.util.readFile
 import no.nav.dagpenger.vedtaksmelding.util.writeStringToFile
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.jsoup.Jsoup
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 @Suppress("ktlint:standard:max-line-length")
@@ -48,8 +47,6 @@ class HtmlConverterTest {
             }
     }
 
-    // TODO - kan enables når Giao har publisert i Sanity. P.t. ligger hubba.bubba med to versjoner i sanity.json
-    @Disabled
     @Test
     fun `Skal bygge HTML med ulike tekst formattering`() {
         val sanityTekster =
