@@ -1,6 +1,5 @@
 package no.nav.dagpenger.vedtaksmelding
 
-import com.fasterxml.jackson.core.type.TypeReference
 import io.github.oshai.kotlinlogging.KotlinLogging
 import no.nav.dagpenger.saksbehandling.api.models.AutomatiskAvslagDTO
 import no.nav.dagpenger.saksbehandling.api.models.BrevVariantDTO
@@ -30,6 +29,7 @@ import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 import no.nav.dagpenger.vedtaksmelding.portabletext.HtmlConverter
 import no.nav.dagpenger.vedtaksmelding.sanity.ResultDTO
 import no.nav.dagpenger.vedtaksmelding.sanity.SanityKlient
+import tools.jackson.core.type.TypeReference
 import java.time.LocalDateTime
 import java.util.UUID
 

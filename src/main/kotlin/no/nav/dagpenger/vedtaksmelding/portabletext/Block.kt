@@ -3,14 +3,14 @@
 package no.nav.dagpenger.vedtaksmelding.portabletext
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.core.JsonParser
-import com.fasterxml.jackson.databind.DeserializationContext
-import com.fasterxml.jackson.databind.JsonDeserializer
-import com.fasterxml.jackson.databind.JsonNode
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import no.nav.dagpenger.vedtaksmelding.portabletext.Child.Type.OPPLYSNING_REFERENCE
 import no.nav.dagpenger.vedtaksmelding.portabletext.Child.Type.SPAN
 import no.nav.dagpenger.vedtaksmelding.portabletext.MarkDef.Type.LINK
+import tools.jackson.core.JsonParser
+import tools.jackson.databind.DeserializationContext
+import tools.jackson.databind.JsonNode
+import tools.jackson.databind.ValueDeserializer
+import tools.jackson.databind.annotation.JsonDeserialize
 
 data class BrevBlokk(
     val _type: String,
@@ -68,19 +68,19 @@ sealed interface Child {
         }
     }
 
-    object ListChildDeserializer : JsonDeserializer<List<Child>>() {
+    object ListChildDeserializer : ValueDeserializer<List<Child>>() {
         override fun deserialize(
             p: JsonParser,
             ctxt: DeserializationContext,
         ): List<Child> =
-            p.readValueAsTree<JsonNode>().map {
-                when (val type = p.codec.treeToValue(it.get("_type"), Child.Type::class.java)) {
+            p.readValueAsTree<JsonNode>().values().map {
+                when (ctxt.readTreeAsValue(it.get("_type"), Child.Type::class.java)) {
                     SPAN -> {
-                        p.codec.treeToValue(it, Child.Span::class.java)
+                        ctxt.readTreeAsValue(it, Child.Span::class.java)
                     }
 
                     OPPLYSNING_REFERENCE -> {
-                        p.codec.treeToValue(it, Child.OpplysningReference::class.java)
+                        ctxt.readTreeAsValue(it, Child.OpplysningReference::class.java)
                     }
                 }
             }
@@ -102,13 +102,13 @@ sealed interface Mark {
 
     data object Code : Mark
 
-    object ListMarkDeserialiser : JsonDeserializer<List<Mark>>() {
+    object ListMarkDeserialiser : ValueDeserializer<List<Mark>>() {
         override fun deserialize(
             p: JsonParser,
             ctxt: DeserializationContext,
         ): List<Mark> =
-            p.readValueAsTree<JsonNode>().map {
-                when (val text = it.asText()) {
+            p.readValueAsTree<JsonNode>().values().map {
+                when (val text = it.asString()) {
                     "em" -> Em
                     "strong" -> Strong
                     "underline" -> Underline
@@ -136,14 +136,14 @@ sealed interface MarkDef {
         override val _type: Type = LINK
     }
 
-    object ListMarkDefDeserializer : JsonDeserializer<List<MarkDef>>() {
+    object ListMarkDefDeserializer : ValueDeserializer<List<MarkDef>>() {
         override fun deserialize(
             p: JsonParser,
             ctxt: DeserializationContext,
         ): List<MarkDef> =
-            p.readValueAsTree<JsonNode>().map {
-                when (p.codec.treeToValue(it.get("_type"), Type::class.java)) {
-                    LINK -> p.codec.treeToValue(it, Link::class.java)
+            p.readValueAsTree<JsonNode>().values().map {
+                when (ctxt.readTreeAsValue(it.get("_type"), Type::class.java)) {
+                    LINK -> ctxt.readTreeAsValue(it, Link::class.java)
                     else -> throw IllegalArgumentException("Unknown type")
                 }
             }

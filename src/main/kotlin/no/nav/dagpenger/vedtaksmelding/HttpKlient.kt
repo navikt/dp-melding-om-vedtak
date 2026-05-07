@@ -1,8 +1,5 @@
 package no.nav.dagpenger.vedtaksmelding
 
-import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
@@ -11,7 +8,8 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
-import io.ktor.serialization.jackson.jackson
+import io.ktor.serialization.jackson3.jackson
+import no.nav.dagpenger.vedtaksmelding.serder.applyDefault
 
 private val sikkerlogg = KotlinLogging.logger("tjenestekall")
 
@@ -24,9 +22,7 @@ internal fun lagHttpKlient(
         expectSuccess = expectSucces
         install(ContentNegotiation) {
             jackson {
-                registerModule(JavaTimeModule())
-                disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-                configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                applyDefault()
             }
         }
         install(Logging) {

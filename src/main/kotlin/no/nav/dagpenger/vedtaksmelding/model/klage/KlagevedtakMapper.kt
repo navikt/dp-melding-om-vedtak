@@ -1,11 +1,9 @@
 package no.nav.dagpenger.vedtaksmelding.model.klage
 
-import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.databind.JsonNode
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.github.oshai.kotlinlogging.KotlinLogging
+import no.nav.dagpenger.vedtaksmelding.serder.defaultObjectMapper
+import tools.jackson.databind.JsonNode
+import tools.jackson.databind.ObjectMapper
 import java.time.LocalDate
 import java.util.UUID
 
@@ -16,10 +14,7 @@ class KlagevedtakMapper(
     vedtakJson: String,
 ) {
     private val vedtak: JsonNode
-    private val objectMapper: ObjectMapper =
-        jacksonObjectMapper()
-            .registerModule(JavaTimeModule())
-            .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+    private val objectMapper: ObjectMapper = defaultObjectMapper()
 
     init {
         vedtak = objectMapper.readTree(vedtakJson)
@@ -39,7 +34,7 @@ class KlagevedtakMapper(
         }.getOrThrow()
 
     private val behandlingId by lazy {
-        UUID.fromString(vedtak.get("behandlingId").asText())
+        UUID.fromString(vedtak.get("behandlingId").asString())
             ?: throw IllegalArgumentException("behandlingId mangler")
     }
 
@@ -82,15 +77,16 @@ class KlagevedtakMapper(
     private fun JsonNode.utfallsverdi(opplysningNavnId: String): String? =
         this
             .get("utfallOpplysninger")
+            .values()
             .find {
-                it.get("opplysningNavnId").asText() == opplysningNavnId
+                it.get("opplysningNavnId").asString() == opplysningNavnId
             }?.get("verdi")
-            ?.asText()
+            ?.asString()
 
     private fun JsonNode.datoVerdi(opplysningNavnId: String): LocalDate? =
         this.hentVerdiNode(opplysningNavnId)?.let {
             try {
-                LocalDate.parse(it.asText())
+                LocalDate.parse(it.asString())
             } catch (e: Exception) {
                 val verdi = it.get("verdi")
                 logger.error(e) { "Kan ikke parse $verdi til LocalDate" }
@@ -113,7 +109,8 @@ class KlagevedtakMapper(
     private fun JsonNode.hentVerdiNode(opplysningNavnId: String): JsonNode? =
         this
             .get("behandlingOpplysninger")
+            .values()
             .find {
-                it.get("opplysningNavnId").asText() == opplysningNavnId
+                it.get("opplysningNavnId").asString() == opplysningNavnId
             }?.get("verdi")
 }

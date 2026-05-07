@@ -1,11 +1,6 @@
 package no.nav.dagpenger.vedtaksmelding
 
 import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.natpryce.konfig.ConfigurationMap
 import com.natpryce.konfig.ConfigurationProperties
 import com.natpryce.konfig.EnvironmentVariables
@@ -17,6 +12,10 @@ import no.nav.dagpenger.oauth2.OAuth2Config
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Klient
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Maskin
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
+import no.nav.dagpenger.vedtaksmelding.serder.applyDefault
+import tools.jackson.databind.ObjectMapper
+import tools.jackson.databind.SerializationFeature
+import tools.jackson.module.kotlin.jacksonMapperBuilder
 
 object Configuration {
     private val defaultProperties =
@@ -75,10 +74,9 @@ object Configuration {
     val sanityApiUrl by lazy { properties[Key("SANITY_API_URL", stringType)] }
 
     val objectMapper: ObjectMapper =
-        jacksonObjectMapper()
-            .registerModule(JavaTimeModule())
-            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-            .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-            .setSerializationInclusion(JsonInclude.Include.NON_NULL)
+        jacksonMapperBuilder()
+            .applyDefault()
+            .changeDefaultPropertyInclusion { JsonInclude.Value.construct(JsonInclude.Include.NON_NULL, JsonInclude.Include.USE_DEFAULTS) }
             .enable(SerializationFeature.INDENT_OUTPUT)
+            .build()
 }

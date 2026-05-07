@@ -17,7 +17,7 @@ dependencies {
     implementation("io.ktor:ktor-server-swagger:${libs.versions.ktor.get()}")
     implementation(libs.ktor.server.metrics.micrometer)
     implementation("io.micrometer:micrometer-registry-prometheus:1.14.3")
-    implementation(libs.jackson.datatype.jsr310)
+    implementation(libs.bundles.jackson)
     implementation("no.nav.dagpenger:oauth2-klient:2025.12.19-08.15.2e150cd55270")
     implementation(libs.bundles.postgres)
 

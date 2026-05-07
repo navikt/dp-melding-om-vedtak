@@ -3,8 +3,7 @@ package no.nav.dagpenger.vedtaksmelding.apiconfig
 import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
-import io.ktor.serialization.jackson.JacksonConverter
-import io.ktor.serialization.jackson.jackson
+import io.ktor.serialization.jackson3.JacksonConverter
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.install
@@ -37,9 +36,7 @@ fun Application.apiConfig() {
     }
 
     install(ContentNegotiation) {
-        jackson {
-            register(ContentType.Application.Json, JacksonConverter(objectMapper))
-        }
+        register(ContentType.Application.Json, JacksonConverter(objectMapper))
     }
 
     install(CallLogging) {

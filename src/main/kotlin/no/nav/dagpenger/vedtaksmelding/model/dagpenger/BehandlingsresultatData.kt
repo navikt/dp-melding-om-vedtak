@@ -1,13 +1,11 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
-import com.fasterxml.jackson.core.type.TypeReference
-import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.databind.JsonNode
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.github.oshai.kotlinlogging.KotlinLogging
 import no.nav.dagpenger.vedtaksmelding.model.OpplysningDataException
+import no.nav.dagpenger.vedtaksmelding.serder.defaultObjectMapper
+import tools.jackson.core.type.TypeReference
+import tools.jackson.databind.JsonNode
+import tools.jackson.databind.ObjectMapper
 import java.time.LocalDate
 import java.util.UUID
 
@@ -17,10 +15,7 @@ class BehandlingsresultatData(
     json: String,
 ) {
     companion object {
-        private val objectMapper: ObjectMapper =
-            jacksonObjectMapper()
-                .registerModule(JavaTimeModule())
-                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+        private val objectMapper: ObjectMapper = defaultObjectMapper()
     }
 
     private data class Rettighetsperiode(
@@ -184,7 +179,7 @@ class BehandlingsresultatData(
     fun perioderTekst(id: UUID): List<Periode<String>> =
         perioder(id, "tekst") { node ->
             require(node.isTextual) { "Forventet tekstlig verdi, men var $node" }
-            node.asText()
+            node.asString()
         }
 
     fun perioderBoolsk(id: UUID): List<Periode<Boolean>> =
@@ -206,7 +201,8 @@ class BehandlingsresultatData(
     ): List<Periode<V>> {
         val opplysningNode =
             opplysningNoder
-                .filter { it["opplysningTypeId"].asText() == opplysningTypeId.toString() }
+                .values()
+                .filter { it["opplysningTypeId"].asString() == opplysningTypeId.toString() }
                 .also {
                     if (it.isEmpty()) throw BehandlingResultatOpplysningIkkeFunnet(opplysningTypeId)
                     if (it.size > 1) {
@@ -217,16 +213,16 @@ class BehandlingsresultatData(
                 }.single()
 
         val perioderNode = opplysningNode["perioder"] ?: return emptyList()
-        return perioderNode.map { periodeNode ->
+        return perioderNode.values().map { periodeNode ->
             val verdiNode = periodeNode["verdi"]
-            require(verdiNode["datatype"].asText() == forventetDatatype) {
+            require(verdiNode["datatype"].asString() == forventetDatatype) {
                 "Forventet datatype $forventetDatatype for opplysning $opplysningTypeId, men var ${verdiNode["datatype"]}"
             }
             val fraOgMedNode = periodeNode.get("gyldigFraOgMed")
             val tilOgMedNode = periodeNode.get("gyldigTilOgMed")
             Periode(
                 verdi = extract(verdiNode["verdi"]),
-                opprinnelse = Opprinnelse.fra(periodeNode["opprinnelse"].asText()),
+                opprinnelse = Opprinnelse.fra(periodeNode["opprinnelse"].asString()),
                 gyldigFraOgMed = if (fraOgMedNode == null || fraOgMedNode.isNull) null else fraOgMedNode.asDato(),
                 gyldigTilOgMed = if (tilOgMedNode == null || tilOgMedNode.isNull) null else tilOgMedNode.asDato(),
             )
@@ -237,19 +233,21 @@ class BehandlingsresultatData(
     // (eller tilsvarende for andre datatyper). Vurder å fjerne denne i en egen runde.
     internal fun periodeMedOpprinnelseNyFinnes(opplysningTypeId: UUID): Boolean? =
         opplysningNoder
+            .values()
             .singleOrNull {
-                it["opplysningTypeId"].asText() == opplysningTypeId.toString()
+                it["opplysningTypeId"].asString() == opplysningTypeId.toString()
             }?.let { opplysningNode ->
                 opplysningNode["perioder"]
+                    .values()
                     .any {
-                        it["opprinnelse"].asText() == "Ny"
+                        it["opprinnelse"].asString() == "Ny"
                     }
             }
 
-    fun behandlingId(): UUID = jsonNode["behandlingId"].let { UUID.fromString(it.asText()) }
+    fun behandlingId(): UUID = jsonNode["behandlingId"].let { UUID.fromString(it.asString()) }
 
     fun utfall(): Vedtak.Utfall {
-        val førteTil = jsonNode["førteTil"].asText()
+        val førteTil = jsonNode["førteTil"].asString()
         return when (førteTil) {
             "Innvilgelse" -> Vedtak.Utfall.INNVILGET
             "Avslag" -> Vedtak.Utfall.AVSLÅTT
