@@ -402,6 +402,7 @@ components:
         - "INNSENDING"
         - "REVURDERING"
         - "ARBEIDSSØKERPERIODE"
+        - "FERIETILLEGG"
 
     AutomatiskAvslag:
       type: object

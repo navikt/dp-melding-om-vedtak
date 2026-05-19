@@ -25,6 +25,7 @@ import no.nav.dagpenger.vedtaksmelding.db.PostgresDataSourceBuilder.dataSource
 import no.nav.dagpenger.vedtaksmelding.db.PostgresVedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.FERIETILLEGG
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.INNSENDING
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MANUELL
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
@@ -221,6 +222,29 @@ class MediatorTest {
                         behandlingId = behandlingId,
                         klient = klient,
                         behanldingstype = MANUELL,
+                    )
+                }
+            }
+        }
+    }
+
+    @Test
+    fun `Kaster feil hvis behandlingstype er FERIETILLEGG`() {
+        withMigratedDb { dataSource ->
+            val repository = PostgresVedtaksmeldingRepository(dataSource)
+            val mediator =
+                Mediator(
+                    behandlingKlient = mockk<BehandlingKlient>(),
+                    sanityKlient = sanityKlient,
+                    klageBehandlingKlient = mockKlageBehandlingKlient,
+                    vedtaksmeldingRepository = repository,
+                )
+            runBlocking {
+                shouldThrow<NotImplementedError> {
+                    mediator.hentBrevKomponenterOgLagre(
+                        behandlingId = behandlingId,
+                        klient = klient,
+                        behanldingstype = FERIETILLEGG,
                     )
                 }
             }

@@ -32,6 +32,7 @@ import no.nav.dagpenger.vedtaksmelding.apiconfig.Klient
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Maskin
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.FERIETILLEGG
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.INNSENDING
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.KLAGE
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MANUELL
@@ -192,6 +193,13 @@ class MeldingOmVedtakApiTest {
                     it.hentForhåndsvisning(
                         behandlingId = any(),
                         klient = any(),
+                        meldingOmVedtakData = lagMeldingOmVedtakDataDTO(FERIETILLEGG),
+                    )
+                } throws IllegalArgumentException("Ferietillegg behandling har ikke støtte for vedtaksmelding")
+                coEvery {
+                    it.hentForhåndsvisning(
+                        behandlingId = any(),
+                        klient = any(),
                         meldingOmVedtakData = lagMeldingOmVedtakDataDTO(INNSENDING),
                     )
                 } throws IllegalArgumentException("Innsending-behandling har ikke støtte for vedtaksmelding")
@@ -254,6 +262,26 @@ class MeldingOmVedtakApiTest {
                           "title": "Bad request",
                           "status": 400,
                           "detail": "Manuell behandling har ikke støtte for vedtaksmelding",
+                          "instance": "dp-melding-om-vedtak/melding-om-vedtak/$behandlingId/html"
+                        }
+                        """.trimIndent()
+                }
+
+            client
+                .post("/melding-om-vedtak/$behandlingId/html") {
+                    autentisert(token = saksbehandlerToken)
+                    header(HttpHeaders.ContentType, ContentType.Application.Json)
+                    setBody(requestBody(lagMeldingOmVedtakDataDTO(FERIETILLEGG)))
+                }.let { response ->
+                    response.status shouldBe HttpStatusCode.BadRequest
+                    response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
+                        //language=JSON
+                        """
+                        {
+                          "type": "dagpenger.nav.no/saksbehandling:problem:bad-request",
+                          "title": "Bad request",
+                          "status": 400,
+                          "detail": "Ferietillegg behandling har ikke støtte for vedtaksmelding",
                           "instance": "dp-melding-om-vedtak/melding-om-vedtak/$behandlingId/html"
                         }
                         """.trimIndent()
