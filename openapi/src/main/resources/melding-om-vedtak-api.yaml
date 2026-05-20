@@ -336,7 +336,7 @@ components:
         sakId:
           type: string
         behandlingstype:
-          $ref: '#/components/schemas/Behandlingstype'
+          type: string
         fornavn:
           type: string
         mellomnavn:
@@ -390,19 +390,6 @@ components:
       enum:
         - "GENERERT"
         - "EGENDEFINERT"
-
-    Behandlingstype:
-      type: string
-      enum:
-        - "RETT_TIL_DAGPENGER"
-        - "SØKNAD"
-        - "KLAGE"
-        - "MELDEKORT"
-        - "MANUELL"
-        - "INNSENDING"
-        - "REVURDERING"
-        - "ARBEIDSSØKERPERIODE"
-        - "FERIETILLEGG"
 
     AutomatiskAvslag:
       type: object

@@ -22,7 +22,6 @@ import io.mockk.slot
 import no.nav.dagpenger.saksbehandling.api.models.AutomatiskAvslagDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
-import no.nav.dagpenger.saksbehandling.api.models.BehandlingstypeDTO
 import no.nav.dagpenger.saksbehandling.api.models.BrevVariantDTO
 import no.nav.dagpenger.saksbehandling.api.models.HttpProblemDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
@@ -32,11 +31,7 @@ import no.nav.dagpenger.vedtaksmelding.apiconfig.Klient
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Maskin
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
-import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.FERIETILLEGG
-import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.INNSENDING
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.KLAGE
-import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MANUELL
-import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MELDEKORT
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.RETT_TIL_DAGPENGER
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
@@ -179,30 +174,9 @@ class MeldingOmVedtakApiTest {
                     it.hentForhåndsvisning(
                         behandlingId = any(),
                         klient = any(),
-                        meldingOmVedtakData = lagMeldingOmVedtakDataDTO(MELDEKORT),
+                        meldingOmVedtakData = lagMeldingOmVedtakDataDTO(Behandlingstype.FRITEKST),
                     )
-                } throws IllegalArgumentException("Meldekort-behandling har ikke støtte for vedtaksmelding")
-                coEvery {
-                    it.hentForhåndsvisning(
-                        behandlingId = any(),
-                        klient = any(),
-                        meldingOmVedtakData = lagMeldingOmVedtakDataDTO(MANUELL),
-                    )
-                } throws IllegalArgumentException("Manuell behandling har ikke støtte for vedtaksmelding")
-                coEvery {
-                    it.hentForhåndsvisning(
-                        behandlingId = any(),
-                        klient = any(),
-                        meldingOmVedtakData = lagMeldingOmVedtakDataDTO(FERIETILLEGG),
-                    )
-                } throws IllegalArgumentException("Ferietillegg behandling har ikke støtte for vedtaksmelding")
-                coEvery {
-                    it.hentForhåndsvisning(
-                        behandlingId = any(),
-                        klient = any(),
-                        meldingOmVedtakData = lagMeldingOmVedtakDataDTO(INNSENDING),
-                    )
-                } throws IllegalArgumentException("Innsending-behandling har ikke støtte for vedtaksmelding")
+                } throws IllegalArgumentException("har ikke støtte for vedtaksmelding")
             }
 
         testApplication {
@@ -231,7 +205,7 @@ class MeldingOmVedtakApiTest {
                 .post("/melding-om-vedtak/$behandlingId/html") {
                     autentisert(token = saksbehandlerToken)
                     header(HttpHeaders.ContentType, ContentType.Application.Json)
-                    setBody(requestBody(lagMeldingOmVedtakDataDTO(MELDEKORT)))
+                    setBody(requestBody(lagMeldingOmVedtakDataDTO(Behandlingstype.FRITEKST)))
                 }.let { response ->
                     response.status shouldBe HttpStatusCode.BadRequest
                     response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
@@ -241,67 +215,7 @@ class MeldingOmVedtakApiTest {
                           "type": "dagpenger.nav.no/saksbehandling:problem:bad-request",
                           "title": "Bad request",
                           "status": 400,
-                          "detail": "Meldekort-behandling har ikke støtte for vedtaksmelding",
-                          "instance": "dp-melding-om-vedtak/melding-om-vedtak/$behandlingId/html"
-                        }
-                        """.trimIndent()
-                }
-
-            client
-                .post("/melding-om-vedtak/$behandlingId/html") {
-                    autentisert(token = saksbehandlerToken)
-                    header(HttpHeaders.ContentType, ContentType.Application.Json)
-                    setBody(requestBody(lagMeldingOmVedtakDataDTO(MANUELL)))
-                }.let { response ->
-                    response.status shouldBe HttpStatusCode.BadRequest
-                    response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
-                        //language=JSON
-                        """
-                        {
-                          "type": "dagpenger.nav.no/saksbehandling:problem:bad-request",
-                          "title": "Bad request",
-                          "status": 400,
-                          "detail": "Manuell behandling har ikke støtte for vedtaksmelding",
-                          "instance": "dp-melding-om-vedtak/melding-om-vedtak/$behandlingId/html"
-                        }
-                        """.trimIndent()
-                }
-
-            client
-                .post("/melding-om-vedtak/$behandlingId/html") {
-                    autentisert(token = saksbehandlerToken)
-                    header(HttpHeaders.ContentType, ContentType.Application.Json)
-                    setBody(requestBody(lagMeldingOmVedtakDataDTO(FERIETILLEGG)))
-                }.let { response ->
-                    response.status shouldBe HttpStatusCode.BadRequest
-                    response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
-                        //language=JSON
-                        """
-                        {
-                          "type": "dagpenger.nav.no/saksbehandling:problem:bad-request",
-                          "title": "Bad request",
-                          "status": 400,
-                          "detail": "Ferietillegg behandling har ikke støtte for vedtaksmelding",
-                          "instance": "dp-melding-om-vedtak/melding-om-vedtak/$behandlingId/html"
-                        }
-                        """.trimIndent()
-                }
-
-            client
-                .post("/melding-om-vedtak/$behandlingId/html") {
-                    autentisert(token = saksbehandlerToken)
-                    header(HttpHeaders.ContentType, ContentType.Application.Json)
-                    setBody(requestBody(lagMeldingOmVedtakDataDTO(INNSENDING)))
-                }.let { response ->
-                    response.status shouldBe HttpStatusCode.BadRequest
-                    response.bodyAsText() shouldEqualSpecifiedJsonIgnoringOrder
-                        //language=JSON
-                        """
-                        {
-                          "type": "dagpenger.nav.no/saksbehandling:problem:bad-request",
-                          "title": "Bad request",
-                          "status": 400,
-                          "detail": "Innsending-behandling har ikke støtte for vedtaksmelding",
+                          "detail": "har ikke støtte for vedtaksmelding",
                           "instance": "dp-melding-om-vedtak/melding-om-vedtak/$behandlingId/html"
                         }
                         """.trimIndent()
@@ -309,13 +223,10 @@ class MeldingOmVedtakApiTest {
         }
     }
 
-    private fun lagMeldingOmVedtakDataDTO(
-        behandlingstype: Behandlingstype = RETT_TIL_DAGPENGER,
-        brevVariant: BrevVariantDTO = BrevVariantDTO.GENERERT,
-    ): MeldingOmVedtakDataDTO =
+    private fun lagMeldingOmVedtakDataDTO(behandlingstype: Behandlingstype = RETT_TIL_DAGPENGER): MeldingOmVedtakDataDTO =
         MeldingOmVedtakDataDTO(
             sakId = "sak123",
-            behandlingstype = BehandlingstypeDTO.valueOf(behandlingstype.name),
+            behandlingstype = behandlingstype.name,
             fornavn = "Test ForNavn",
             etternavn = "Test EtterNavn",
             fodselsnummer = "12345678901",
@@ -348,7 +259,7 @@ class MeldingOmVedtakApiTest {
         val requestBody =
             """
             {
-                "behandlingstype": "${meldingOmVedtakData.behandlingstype.value}",
+                "behandlingstype": "${meldingOmVedtakData.behandlingstype}",
                 "fornavn": "${meldingOmVedtakData.fornavn}",
                 "etternavn": "${meldingOmVedtakData.etternavn}",
                 "fodselsnummer": "${meldingOmVedtakData.fodselsnummer}",
@@ -702,7 +613,7 @@ class MeldingOmVedtakApiTest {
     private fun requestBody(meldingOmVedtakData: MeldingOmVedtakDataDTO = lagMeldingOmVedtakDataDTO()): String =
         """
             {
-                "behandlingstype": "${meldingOmVedtakData.behandlingstype.value}",
+                "behandlingstype": "${meldingOmVedtakData.behandlingstype}",
                 "fornavn": "${meldingOmVedtakData.fornavn}",
                 "etternavn": "${meldingOmVedtakData.etternavn}",
                 "fodselsnummer": "${meldingOmVedtakData.fodselsnummer}",

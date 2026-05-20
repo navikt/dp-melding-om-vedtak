@@ -15,7 +15,6 @@ import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.saksbehandling.api.models.AutomatiskAvslagDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerDTO
 import no.nav.dagpenger.saksbehandling.api.models.BehandlerEnhetDTO
-import no.nav.dagpenger.saksbehandling.api.models.BehandlingstypeDTO
 import no.nav.dagpenger.saksbehandling.api.models.BrevVariantDTO
 import no.nav.dagpenger.saksbehandling.api.models.MeldingOmVedtakDataDTO
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Maskin
@@ -25,9 +24,7 @@ import no.nav.dagpenger.vedtaksmelding.db.PostgresDataSourceBuilder.dataSource
 import no.nav.dagpenger.vedtaksmelding.db.PostgresVedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
-import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.FERIETILLEGG
-import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.INNSENDING
-import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MANUELL
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.FRITEKST
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.DagpengerOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Opprinnelse
@@ -107,7 +104,7 @@ class MediatorTest {
         )
         val meldingOmVedtakDataDTO =
             MeldingOmVedtakDataDTO(
-                behandlingstype = BehandlingstypeDTO.RETT_TIL_DAGPENGER,
+                behandlingstype = "RETT_TIL_DAGPENGER",
                 fornavn = "Ola",
                 etternavn = "Nordmann",
                 fodselsnummer = "12345678901",
@@ -198,53 +195,7 @@ class MediatorTest {
                     mediator.hentBrevKomponenterOgLagre(
                         behandlingId = behandlingId,
                         klient = klient,
-                        behanldingstype = INNSENDING,
-                    )
-                }
-            }
-        }
-    }
-
-    @Test
-    fun `Kaster feil hvis behandlingstype er MANUELL`() {
-        withMigratedDb { dataSource ->
-            val repository = PostgresVedtaksmeldingRepository(dataSource)
-            val mediator =
-                Mediator(
-                    behandlingKlient = mockk<BehandlingKlient>(),
-                    sanityKlient = sanityKlient,
-                    klageBehandlingKlient = mockKlageBehandlingKlient,
-                    vedtaksmeldingRepository = repository,
-                )
-            runBlocking {
-                shouldThrow<NotImplementedError> {
-                    mediator.hentBrevKomponenterOgLagre(
-                        behandlingId = behandlingId,
-                        klient = klient,
-                        behanldingstype = MANUELL,
-                    )
-                }
-            }
-        }
-    }
-
-    @Test
-    fun `Kaster feil hvis behandlingstype er FERIETILLEGG`() {
-        withMigratedDb { dataSource ->
-            val repository = PostgresVedtaksmeldingRepository(dataSource)
-            val mediator =
-                Mediator(
-                    behandlingKlient = mockk<BehandlingKlient>(),
-                    sanityKlient = sanityKlient,
-                    klageBehandlingKlient = mockKlageBehandlingKlient,
-                    vedtaksmeldingRepository = repository,
-                )
-            runBlocking {
-                shouldThrow<NotImplementedError> {
-                    mediator.hentBrevKomponenterOgLagre(
-                        behandlingId = behandlingId,
-                        klient = klient,
-                        behanldingstype = FERIETILLEGG,
+                        behanldingstype = FRITEKST,
                     )
                 }
             }
@@ -304,8 +255,8 @@ class MediatorTest {
                     klageBehandlingKlient = mockKlageBehandlingKlient,
                     vedtaksmeldingRepository = vedtaksmeldingRepository,
                 ),
-            ).also {
-                coEvery { it.hentBrevKomponenterOgLagre(behandlingId, klient, behanldingstype = any()) } returns
+            ).also { mediator ->
+                coEvery { mediator.hentBrevKomponenterOgLagre(behandlingId, klient, behanldingstype = any()) } returns
                     mockk<Vedtaksmelding>(relaxed = true).also {
                         coEvery { it.hentBrevBlokker() } returns
                             listOf(
@@ -348,7 +299,7 @@ class MediatorTest {
                         klient = klient,
                         meldingOmVedtakData =
                             mockk<MeldingOmVedtakDataDTO>(relaxed = true).also {
-                                every { it.behandlingstype } returns BehandlingstypeDTO.RETT_TIL_DAGPENGER
+                                every { it.behandlingstype } returns "RETT_TIL_DAGPENGER"
                             },
                     ).utvidedeBeskrivelser
             require(true) {

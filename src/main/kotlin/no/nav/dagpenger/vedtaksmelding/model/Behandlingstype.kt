@@ -1,30 +1,19 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
-import no.nav.dagpenger.saksbehandling.api.models.BehandlingstypeDTO
-
 enum class Behandlingstype {
     RETT_TIL_DAGPENGER,
-    KLAGE,
-    MELDEKORT,
-    MANUELL,
-    INNSENDING,
-    REVURDERING,
     ARBEIDSSØKERPERIODE,
-    FERIETILLEGG,
+    KLAGE,
+    FRITEKST,
     ;
 
     companion object {
-        fun BehandlingstypeDTO.tilBehandlingstype(): Behandlingstype =
-            when (this) {
-                BehandlingstypeDTO.RETT_TIL_DAGPENGER -> RETT_TIL_DAGPENGER
-                BehandlingstypeDTO.SØKNAD -> RETT_TIL_DAGPENGER
-                BehandlingstypeDTO.KLAGE -> KLAGE
-                BehandlingstypeDTO.MELDEKORT -> MELDEKORT
-                BehandlingstypeDTO.MANUELL -> MANUELL
-                BehandlingstypeDTO.INNSENDING -> INNSENDING
-                BehandlingstypeDTO.REVURDERING -> REVURDERING
-                BehandlingstypeDTO.ARBEIDSSØKERPERIODE -> ARBEIDSSØKERPERIODE
-                BehandlingstypeDTO.FERIETILLEGG -> FERIETILLEGG
+        fun String.tilBehandlingstype(): Behandlingstype =
+            when (this.uppercase()) {
+                "RETT_TIL_DAGPENGER" -> RETT_TIL_DAGPENGER
+                "ARBEIDSSØKERPERIODE" -> ARBEIDSSØKERPERIODE
+                "KLAGE" -> KLAGE
+                else -> FRITEKST
             }
     }
 }

@@ -14,13 +14,8 @@ import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.ARBEIDSSØKERPERIODE
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.Companion.tilBehandlingstype
-import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.FERIETILLEGG
-import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.INNSENDING
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.KLAGE
-import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MANUELL
-import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MELDEKORT
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.RETT_TIL_DAGPENGER
-import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.REVURDERING
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.TomtVedtak
@@ -211,11 +206,7 @@ class Mediator(
                 )
             }
 
-            INNSENDING -> throw NotImplementedError("Innsending-behandling har ikke støtte for vedtaksmelding")
-            MANUELL -> throw NotImplementedError("Manuell behandling har ikke støtte for vedtaksmelding")
-            REVURDERING -> throw NotImplementedError("Revurdering-behandling har ikke støtte for vedtaksmelding")
-            MELDEKORT -> throw NotImplementedError("Meldekort-behandling har ikke støtte for vedtaksmelding")
-            FERIETILLEGG -> throw NotImplementedError("Ferietillegg-behandling har ikke støtte for vedtaksmelding")
+            Behandlingstype.FRITEKST -> throw NotImplementedError("Behandling: $behandlingId har kun støtte for fritekstbrev")
         }
     }
 
