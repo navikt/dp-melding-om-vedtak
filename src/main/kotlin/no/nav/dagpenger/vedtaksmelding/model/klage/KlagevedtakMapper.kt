@@ -24,7 +24,6 @@ class KlagevedtakMapper(
         runCatching {
             KlageVedtak(
                 behandlingId = behandlingId,
-                fagsakId = fagsakId,
                 opplysninger = vedtakOpplysninger,
             )
         }.onFailure {
@@ -37,9 +36,6 @@ class KlagevedtakMapper(
         UUID.fromString(vedtak.get("behandlingId").asString())
             ?: throw IllegalArgumentException("behandlingId mangler")
     }
-
-    // TODO: FagsakId må hentes fra vedtakJson
-    val fagsakId = "fagsakId"
 
     private val vedtakOpplysninger: Set<KlageOpplysning<*, *>> by lazy {
         buildSet {

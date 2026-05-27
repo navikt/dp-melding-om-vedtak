@@ -11,7 +11,6 @@ class KlagevedtakMapperTest {
             vedtakJson = klageVedtakJson,
         ).vedtak().let { vedtak ->
             vedtak.behandlingId shouldBe UUID.fromString("0196a5b8-3dab-779f-ba9c-a116e298b2b1")
-            vedtak.fagsakId shouldBe "fagsakId"
             vedtak.opplysninger.size shouldBe 8
             vedtak.filterIsInstance<KlageOpplysning.KlageMottattDato>().single().let {
                 it.formatertVerdi() shouldBe "7. mai 2025"

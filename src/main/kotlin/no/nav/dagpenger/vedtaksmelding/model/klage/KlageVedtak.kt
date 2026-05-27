@@ -23,7 +23,6 @@ inline fun <reified T : KlageOpplysning<*, *>> KlageVedtak.filterIsInstance(): L
 
 data class KlageVedtak(
     val behandlingId: UUID,
-    val fagsakId: String,
     val opplysninger: Set<KlageOpplysning<*, *>>,
 ) {
     fun finnOpplysning(opplysningTekstId: String) = this.opplysninger.singleOrNull { it.opplysningTekstId == opplysningTekstId }
