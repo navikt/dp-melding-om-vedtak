@@ -77,6 +77,7 @@ class AvslagMeldingAlleVilkårTest {
                             DagpengerOpplysning.OppfyllerMedlemskap(false, listOf(Periode(false, Opprinnelse.NY))),
                             DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false, listOf(Periode(false, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -141,6 +142,7 @@ class AvslagMeldingAlleVilkårTest {
                             DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false, listOf(Periode(false, Opprinnelse.NY))),
                             DagpengerOpplysning.OppfyllerKravetTilPermittering(false, listOf(Periode(false, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -210,6 +212,7 @@ class AvslagMeldingAlleVilkårTest {
                             DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false, listOf(Periode(false, Opprinnelse.NY))),
                             DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(false, listOf(Periode(false, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

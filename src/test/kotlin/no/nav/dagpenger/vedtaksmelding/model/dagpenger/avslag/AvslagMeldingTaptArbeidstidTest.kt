@@ -36,6 +36,7 @@ class AvslagMeldingTaptArbeidstidTest {
                             DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5, listOf(Periode(20.5, Opprinnelse.NY))),
                             DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste6Måneder(true, listOf(Periode(true, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -65,6 +66,7 @@ class AvslagMeldingTaptArbeidstidTest {
                                 listOf(Periode(true, Opprinnelse.NY)),
                             ),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -94,6 +96,7 @@ class AvslagMeldingTaptArbeidstidTest {
                                 listOf(Periode(true, Opprinnelse.NY)),
                             ),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -121,6 +124,7 @@ class AvslagMeldingTaptArbeidstidTest {
                             DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5, listOf(Periode(20.5, Opprinnelse.NY))),
                             DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste6Måneder(true, listOf(Periode(true, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -151,6 +155,7 @@ class AvslagMeldingTaptArbeidstidTest {
                                 listOf(Periode(true, Opprinnelse.NY)),
                             ),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -181,6 +186,7 @@ class AvslagMeldingTaptArbeidstidTest {
                                 listOf(Periode(true, Opprinnelse.NY)),
                             ),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

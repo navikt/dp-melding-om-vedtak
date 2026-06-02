@@ -56,7 +56,7 @@ class InnvilgelseMelding(
     override val vedtak: Vedtak,
     alleBrevblokker: List<BrevBlokk>,
 ) : Vedtaksmelding(vedtak) {
-    override val harBrevstøtte: Boolean = vedtak.utfall == INNVILGET
+    override val harBrevstøtte: Boolean = vedtak.utfall == INNVILGET && vedtak.behandletHendelseType == "SØKNAD"
 
     init {
         require(this.harBrevstøtte) {

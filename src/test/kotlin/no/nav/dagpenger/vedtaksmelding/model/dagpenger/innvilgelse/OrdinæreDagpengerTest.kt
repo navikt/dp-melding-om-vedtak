@@ -51,6 +51,7 @@ class OrdinæreDagpengerTest {
                             setOf(
                                 DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false, listOf(Periode(false, Opprinnelse.NY))),
                             ),
+                        behandletHendelseType = "SØKNAD",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -63,6 +64,7 @@ class OrdinæreDagpengerTest {
                         utfall = Vedtak.Utfall.GJENOPPTAK,
                         automatiskBehandling = false,
                         opplysninger = emptySet(),
+                        behandletHendelseType = "SØKNAD",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -78,6 +80,7 @@ class OrdinæreDagpengerTest {
                             setOf(
                                 DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false, listOf(Periode(false, Opprinnelse.NY))),
                             ),
+                        behandletHendelseType = "SØKNAD",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -90,6 +93,7 @@ class OrdinæreDagpengerTest {
                         utfall = Vedtak.Utfall.INNVILGET,
                         automatiskBehandling = false,
                         opplysninger = emptySet(),
+                        behandletHendelseType = "SØKNAD",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -126,6 +130,7 @@ class OrdinæreDagpengerTest {
                         setOf(
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -162,6 +167,7 @@ class OrdinæreDagpengerTest {
                         DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1, listOf(Periode(1, Opprinnelse.NY))),
                         DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                     ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -177,6 +183,7 @@ class OrdinæreDagpengerTest {
                             DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(0, listOf(Periode(0, Opprinnelse.NY))),
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder - INNVILGELSE_BARNETILLEGG.brevblokkId
@@ -219,6 +226,7 @@ class OrdinæreDagpengerTest {
                                 listOf(Periode(10, Opprinnelse.NY)),
                             ),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -238,6 +246,7 @@ class OrdinæreDagpengerTest {
                                 listOf(Periode(0, Opprinnelse.NY)),
                             ),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder - INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId
@@ -280,6 +289,7 @@ class OrdinæreDagpengerTest {
                                 listOf(Periode(10, Opprinnelse.NY)),
                             ),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -318,6 +328,7 @@ class OrdinæreDagpengerTest {
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.SisteDagMedRett(LocalDate.of(2025, 9, 10)),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -356,6 +367,7 @@ class OrdinæreDagpengerTest {
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.GodkjentLokalArbeidssøker(true, listOf(Periode(true, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -394,6 +406,7 @@ class OrdinæreDagpengerTest {
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.GodkjentKunDeltidssøker(true, listOf(Periode(true, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder

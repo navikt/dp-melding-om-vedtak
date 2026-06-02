@@ -13,6 +13,7 @@ class VedtakMapper(
             utfall = behandlingsresultatData.utfall(),
             automatiskBehandling = behandlingsresultatData.automatiskBehandling(),
             opplysninger = this.build(),
+            behandletHendelseType = behandlingsresultatData.behandletHendelseType(),
         )
 
     private val behandlingsresultatData = BehandlingsresultatData(vedtakJson)

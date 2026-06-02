@@ -64,6 +64,7 @@ class MediatorTest {
                     setOf(
                         DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false, listOf(Periode(false, Opprinnelse.NY))),
                     ),
+                behandletHendelseType = "SØKNAD",
             )
         val behandlingKlient =
             mockk<BehandlingKlient>().also {
@@ -101,6 +102,7 @@ class MediatorTest {
                 setOf(
                     DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false, listOf(Periode(false, Opprinnelse.NY))),
                 ),
+            behandletHendelseType = "SØKNAD",
         )
         val meldingOmVedtakDataDTO =
             MeldingOmVedtakDataDTO(
@@ -151,6 +153,7 @@ class MediatorTest {
                 utfall = Vedtak.Utfall.AVSLÅTT,
                 automatiskBehandling = false,
                 opplysninger = setOf(DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(false, listOf(Periode(false, Opprinnelse.NY)))),
+                behandletHendelseType = "SØKNAD",
             )
         val behandlingKlient =
             mockk<BehandlingKlient>().also {

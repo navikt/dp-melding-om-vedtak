@@ -26,6 +26,7 @@ class AvslagMeldingAndreFulleYtelserTest {
                             setOf(
                                 DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false, listOf(Periode(false, Opprinnelse.NY))),
                             ),
+                        behandletHendelseType = "SØKNAD",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -41,6 +42,7 @@ class AvslagMeldingAndreFulleYtelserTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     automatiskBehandling = false,
                     opplysninger = setOf(DagpengerOpplysning.IkkeFulleYtelser(false, listOf(Periode(false, Opprinnelse.NY)))),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

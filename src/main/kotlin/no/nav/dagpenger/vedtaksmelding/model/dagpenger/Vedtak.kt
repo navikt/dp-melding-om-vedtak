@@ -29,6 +29,7 @@ data class Vedtak(
     val utfall: Utfall,
     val automatiskBehandling: Boolean,
     val opplysninger: Set<DagpengerOpplysning<*, *>>,
+    val behandletHendelseType: String,
 ) {
     fun finnOpplysning(opplysningTekstId: String) = this.opplysninger.singleOrNull { it.opplysningTekstId == opplysningTekstId }
 

@@ -24,6 +24,7 @@ class AvslagMeldingStreikLockoutTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     automatiskBehandling = false,
                     opplysninger = setOf(avslagStreikEllerLockoutIkkeOppfylt),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

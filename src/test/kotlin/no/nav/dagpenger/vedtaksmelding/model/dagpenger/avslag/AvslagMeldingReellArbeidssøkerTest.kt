@@ -50,6 +50,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                         utfall = Vedtak.Utfall.AVSLÅTT,
                         automatiskBehandling = false,
                         opplysninger = setOf(reellArbeidssøkerIkkeOppfylt),
+                        behandletHendelseType = "SØKNAD",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -62,6 +63,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                         utfall = Vedtak.Utfall.AVSLÅTT,
                         automatiskBehandling = false,
                         opplysninger = emptySet(),
+                        behandletHendelseType = "SØKNAD",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -77,6 +79,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     automatiskBehandling = false,
                     opplysninger = setOf(reellArbeidssøkerIkkeOppfylt, heltidDeltidIkkeOppfylt),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -99,6 +102,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     automatiskBehandling = false,
                     opplysninger = setOf(minsteinntektIkkeOppfylt),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -118,6 +122,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     automatiskBehandling = false,
                     opplysninger = setOf(reellArbeidssøkerIkkeOppfylt, mobilitetIkkeOppfylt),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -139,6 +144,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     automatiskBehandling = false,
                     opplysninger = setOf(reellArbeidssøkerIkkeOppfylt, arbeidsførIkkeOppfylt),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -159,6 +165,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     automatiskBehandling = false,
                     opplysninger = setOf(reellArbeidssøkerIkkeOppfylt, ethvertArbeidIkkeOppfylt),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -179,6 +186,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     automatiskBehandling = false,
                     opplysninger = setOf(registrertArbeidssøkerIkkeOppfylt),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -207,6 +215,7 @@ class AvslagMeldingReellArbeidssøkerTest {
                             ethvertArbeidIkkeOppfylt,
                             registrertArbeidssøkerIkkeOppfylt,
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

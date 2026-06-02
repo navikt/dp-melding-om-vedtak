@@ -51,6 +51,7 @@ class StansDagpengerTest {
                                         ),
                                 ),
                             ),
+                        behandletHendelseType = "ARBEIDSSØKERPERIODE",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -76,6 +77,7 @@ class StansDagpengerTest {
                                         ),
                                 ),
                             ),
+                        behandletHendelseType = "ARBEIDSSØKERPERIODE",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -101,6 +103,7 @@ class StansDagpengerTest {
                                         ),
                                 ),
                             ),
+                        behandletHendelseType = "ARBEIDSSØKERPERIODE",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -126,6 +129,7 @@ class StansDagpengerTest {
                                         ),
                                 ),
                             ),
+                        behandletHendelseType = "ARBEIDSSØKERPERIODE",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -151,6 +155,7 @@ class StansDagpengerTest {
                                         ),
                                 ),
                             ),
+                        behandletHendelseType = "ARBEIDSSØKERPERIODE",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -176,6 +181,7 @@ class StansDagpengerTest {
                                         ),
                                 ),
                             ),
+                        behandletHendelseType = "ARBEIDSSØKERPERIODE",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -226,6 +232,7 @@ class StansDagpengerTest {
                                     ),
                             ),
                         ),
+                    behandletHendelseType = "MELDEKORT",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -258,6 +265,7 @@ class StansDagpengerTest {
                                 perioder = listOf(Periode(verdi = false, Opprinnelse.NY, gyldigFraOgMed = LocalDate.MIN)),
                             ),
                         ),
+                    behandletHendelseType = "ARBEIDSSØKERPERIODE",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -288,6 +296,7 @@ class StansDagpengerTest {
                                 perioder = listOf(Periode(verdi = false, Opprinnelse.NY, gyldigFraOgMed = LocalDate.MIN)),
                             ),
                         ),
+                    behandletHendelseType = "ARBEIDSSØKERPERIODE",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe
@@ -323,6 +332,7 @@ class StansDagpengerTest {
                                 listOf(Periode(verdi = false, Opprinnelse.NY, gyldigFraOgMed = LocalDate.MIN)),
                             ),
                         ),
+                    behandletHendelseType = "ARBEIDSSØKERPERIODE",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

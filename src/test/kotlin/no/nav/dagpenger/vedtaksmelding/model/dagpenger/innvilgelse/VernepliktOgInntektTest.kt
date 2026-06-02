@@ -62,6 +62,7 @@ class VernepliktOgInntektTest {
                             DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger(52, listOf(Periode(52, Opprinnelse.NY))),
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder

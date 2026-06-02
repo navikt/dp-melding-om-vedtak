@@ -58,6 +58,7 @@ class VernepliktTest {
                             ),
                             DagpengerOpplysning.Egenandel(1000, listOf(Periode(1000, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder

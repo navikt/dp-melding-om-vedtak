@@ -24,6 +24,7 @@ class AvslagMeldingTaptArbeidsinntektTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     automatiskBehandling = false,
                     opplysninger = setOf(taptArbeidsinntektIkkeOppfylt),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

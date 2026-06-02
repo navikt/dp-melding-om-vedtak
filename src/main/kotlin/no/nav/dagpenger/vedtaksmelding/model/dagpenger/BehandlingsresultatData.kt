@@ -31,6 +31,8 @@ class BehandlingsresultatData(
 
     fun automatiskBehandling(): Boolean = jsonNode["automatisk"].asBoolean()
 
+    fun behandletHendelseType() = jsonNode["behandletHendelse"]["type"].stringValue().uppercase()
+
     private val rettighetsperioder: List<Rettighetsperiode> = rettighetsperioder().sortedBy { it.fraOgMed }
 
     fun virkningsdato(): LocalDate {
