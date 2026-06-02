@@ -1,8 +1,8 @@
 package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
 import io.kotest.matchers.shouldBe
-import java.util.UUID
 import org.junit.jupiter.api.Test
+import java.util.UUID
 
 class VedtakTest {
     @Test
