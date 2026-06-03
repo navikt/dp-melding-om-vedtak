@@ -12,7 +12,6 @@ enum class Behandlingstype {
         fun String.tilBehandlingstype(): Behandlingstype =
             when (this.uppercase()) {
                 "SØKNAD" -> SØKNAD
-                "RETT_TIL_DAGPENGER" -> SØKNAD
                 "ARBEIDSSØKERPERIODE" -> ARBEIDSSØKERPERIODE
                 "MELDEKORT" -> MELDEKORT
                 "KLAGE" -> KLAGE
