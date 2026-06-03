@@ -95,7 +95,7 @@ class VedtakHtmlTest {
 
     private val meldingOmVedtakData =
         MeldingOmVedtakDataDTO(
-            behandlingstype = "RETT_TIL_DAGPENGER",
+            behandlingstype = "SØKNAD",
             fornavn = "Test ForNavn",
             etternavn = "Test EtterNavn",
             fodselsnummer = "12345678901",

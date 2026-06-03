@@ -32,7 +32,7 @@ import no.nav.dagpenger.vedtaksmelding.apiconfig.Maskin
 import no.nav.dagpenger.vedtaksmelding.apiconfig.Saksbehandler
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.KLAGE
-import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.RETT_TIL_DAGPENGER
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.SØKNAD
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevblokker.RETT_TIL_Å_KLAGE
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
@@ -156,7 +156,7 @@ class MeldingOmVedtakApiTest {
                     )
                 } returns
                     MeldingOmVedtakResponseDTO(
-                        html = "<html><body>Test HTML Test RETT_TIL_DAGPENGER</body></html>",
+                        html = "<html><body>Test HTML Test SØKNAD</body></html>",
                         utvidedeBeskrivelser = listOf(),
                     )
                 coEvery {
@@ -196,7 +196,7 @@ class MeldingOmVedtakApiTest {
                         """
                         {
                           "utvidedeBeskrivelser": [],
-                         "html" : "<html><body>Test HTML Test RETT_TIL_DAGPENGER</body></html>"
+                         "html" : "<html><body>Test HTML Test SØKNAD</body></html>"
                         } 
                         """.trimIndent()
                 }
@@ -223,7 +223,7 @@ class MeldingOmVedtakApiTest {
         }
     }
 
-    private fun lagMeldingOmVedtakDataDTO(behandlingstype: Behandlingstype = RETT_TIL_DAGPENGER): MeldingOmVedtakDataDTO =
+    private fun lagMeldingOmVedtakDataDTO(behandlingstype: Behandlingstype = SØKNAD): MeldingOmVedtakDataDTO =
         MeldingOmVedtakDataDTO(
             sakId = "sak123",
             behandlingstype = behandlingstype.name,

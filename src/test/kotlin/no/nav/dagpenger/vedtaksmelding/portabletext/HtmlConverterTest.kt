@@ -193,7 +193,7 @@ Dette er linje 4
 
     private val meldingOmVedtakDTO =
         MeldingOmVedtakDataDTO(
-            behandlingstype = "RETT_TIL_DAGPENGER",
+            behandlingstype = "SØKNAD",
             fornavn = "Test ForNavn",
             etternavn = "Test EtterNavn",
             fodselsnummer = "12345678901",

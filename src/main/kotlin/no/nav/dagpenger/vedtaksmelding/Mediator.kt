@@ -16,7 +16,7 @@ import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.ARBEIDSSØKERPERIOD
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.Companion.tilBehandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.KLAGE
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MELDEKORT
-import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.RETT_TIL_DAGPENGER
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.SØKNAD
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.TomtVedtak
@@ -161,7 +161,7 @@ class Mediator(
         logger.info { "Henter brevkKomponenter for behandlingtype: $behandlingstype" }
 
         return when (behandlingstype) {
-            RETT_TIL_DAGPENGER, ARBEIDSSØKERPERIODE, MELDEKORT -> {
+            SØKNAD, ARBEIDSSØKERPERIODE, MELDEKORT -> {
                 val vedtak =
                     behandlingKlient
                         .hentBehandlingResultat(

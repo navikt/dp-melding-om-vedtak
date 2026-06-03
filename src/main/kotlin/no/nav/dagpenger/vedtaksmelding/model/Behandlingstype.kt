@@ -1,7 +1,7 @@
 package no.nav.dagpenger.vedtaksmelding.model
 
 enum class Behandlingstype {
-    RETT_TIL_DAGPENGER,
+    SØKNAD,
     ARBEIDSSØKERPERIODE,
     MELDEKORT,
     KLAGE,
@@ -11,7 +11,8 @@ enum class Behandlingstype {
     companion object {
         fun String.tilBehandlingstype(): Behandlingstype =
             when (this.uppercase()) {
-                "RETT_TIL_DAGPENGER" -> RETT_TIL_DAGPENGER
+                "SØKNAD" -> SØKNAD
+                "RETT_TIL_DAGPENGER" -> SØKNAD
                 "ARBEIDSSØKERPERIODE" -> ARBEIDSSØKERPERIODE
                 "MELDEKORT" -> MELDEKORT
                 "KLAGE" -> KLAGE

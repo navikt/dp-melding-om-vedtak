@@ -34,7 +34,7 @@ internal class HtmlE2ETest {
         val jsonString =
             """
             {
-                "behandlingstype": "RETT_TIL_DAGPENGER",
+                "behandlingstype": "SØKNAD",
                 "fornavn": "Test ForNavn",
                 "etternavn": "Test EtterNavn",
                 "fodselsnummer": "12345678901",

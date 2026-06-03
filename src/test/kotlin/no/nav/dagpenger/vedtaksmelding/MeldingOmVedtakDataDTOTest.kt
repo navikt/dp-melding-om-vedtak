@@ -29,7 +29,7 @@ class MeldingOmVedtakDataDTOTest {
         etternavn: String,
     ): MeldingOmVedtakDataDTO =
         MeldingOmVedtakDataDTO(
-            behandlingstype = "RETT_TIL_DAGPENGER",
+            behandlingstype = "SØKNAD",
             fornavn = fornavn,
             etternavn = etternavn,
             fodselsnummer = "12345678901",

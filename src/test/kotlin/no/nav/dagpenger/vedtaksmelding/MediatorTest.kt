@@ -84,7 +84,7 @@ class MediatorTest {
                     .hentBrevKomponenterOgLagre(
                         behandlingId = behandlingId,
                         klient = klient,
-                        behanldingstype = Behandlingstype.RETT_TIL_DAGPENGER,
+                        behanldingstype = Behandlingstype.SØKNAD,
                     ).shouldBeInstanceOf<AvslagMelding>()
             }
             repository.hentSanityInnhold(behandlingId) shouldEqualJson resource
@@ -106,7 +106,7 @@ class MediatorTest {
         )
         val meldingOmVedtakDataDTO =
             MeldingOmVedtakDataDTO(
-                behandlingstype = "RETT_TIL_DAGPENGER",
+                behandlingstype = "SØKNAD",
                 fornavn = "Ola",
                 etternavn = "Nordmann",
                 fodselsnummer = "12345678901",
@@ -173,7 +173,7 @@ class MediatorTest {
                 .hentBrevKomponenterOgLagre(
                     behandlingId = behandlingId,
                     klient = klient,
-                    behanldingstype = Behandlingstype.RETT_TIL_DAGPENGER,
+                    behanldingstype = Behandlingstype.SØKNAD,
                 ).shouldBeInstanceOf<AvslagMelding>()
         }
 
@@ -222,7 +222,7 @@ class MediatorTest {
                 mediator.hentBrevKomponenterOgLagre(
                     behandlingId = behandlingId,
                     klient = klient,
-                    Behandlingstype.RETT_TIL_DAGPENGER,
+                    Behandlingstype.SØKNAD,
                 )
             }
         }
@@ -302,7 +302,7 @@ class MediatorTest {
                         klient = klient,
                         meldingOmVedtakData =
                             mockk<MeldingOmVedtakDataDTO>(relaxed = true).also {
-                                every { it.behandlingstype } returns "RETT_TIL_DAGPENGER"
+                                every { it.behandlingstype } returns "SØKNAD"
                             },
                     ).utvidedeBeskrivelser
             require(true) {
