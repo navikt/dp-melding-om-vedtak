@@ -58,6 +58,7 @@ class PermitteringFiskTest {
                         setOf(
                             DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(true, listOf(Periode(true, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder

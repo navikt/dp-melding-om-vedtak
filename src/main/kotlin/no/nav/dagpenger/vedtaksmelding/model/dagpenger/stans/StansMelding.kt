@@ -25,6 +25,7 @@ class StansMelding(
 
     override val harBrevstøtte: Boolean =
         vedtak.utfall == STANS &&
+            vedtak.behandletHendelseType in setOf("MELDEKORT", "ARBEIDSSØKERPERIODE") &&
             setOfNotNull<DagpengerOpplysning.Periodisert<*, Boolean>>(
                 vedtak.finnOpplysning<DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>(),

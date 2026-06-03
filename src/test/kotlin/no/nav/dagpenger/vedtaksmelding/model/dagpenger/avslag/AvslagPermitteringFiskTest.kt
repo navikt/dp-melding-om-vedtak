@@ -24,6 +24,7 @@ class AvslagPermitteringFiskTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     automatiskBehandling = false,
                     opplysninger = setOf(avslåttVilkår),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

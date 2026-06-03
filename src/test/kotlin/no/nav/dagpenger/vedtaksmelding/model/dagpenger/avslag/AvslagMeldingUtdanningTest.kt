@@ -21,6 +21,7 @@ class AvslagMeldingUtdanningTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     automatiskBehandling = false,
                     opplysninger = setOf(DagpengerOpplysning.KravTilUtdanning(false, listOf(Periode(false, Opprinnelse.NY)))),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

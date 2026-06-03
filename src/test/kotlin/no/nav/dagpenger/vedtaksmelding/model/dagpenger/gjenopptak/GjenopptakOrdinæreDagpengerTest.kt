@@ -65,6 +65,7 @@ class GjenopptakOrdinæreDagpengerTest {
                         utfall = Vedtak.Utfall.AVSLÅTT,
                         automatiskBehandling = false,
                         opplysninger = emptySet(),
+                        behandletHendelseType = "SØKNAD",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -77,6 +78,7 @@ class GjenopptakOrdinæreDagpengerTest {
                         utfall = Vedtak.Utfall.INNVILGET,
                         automatiskBehandling = false,
                         opplysninger = emptySet(),
+                        behandletHendelseType = "SØKNAD",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -89,6 +91,7 @@ class GjenopptakOrdinæreDagpengerTest {
                         utfall = Vedtak.Utfall.STANS,
                         automatiskBehandling = true,
                         opplysninger = emptySet(),
+                        behandletHendelseType = "SØKNAD",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -101,6 +104,7 @@ class GjenopptakOrdinæreDagpengerTest {
                         utfall = Vedtak.Utfall.GJENOPPTAK,
                         automatiskBehandling = false,
                         opplysninger = emptySet(),
+                        behandletHendelseType = "SØKNAD",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -142,6 +146,7 @@ class GjenopptakOrdinæreDagpengerTest {
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = false),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -185,6 +190,7 @@ class GjenopptakOrdinæreDagpengerTest {
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = false),
                             DagpengerOpplysning.SisteDagMedRett(LocalDate.of(2026, 7, 10)),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -228,6 +234,7 @@ class GjenopptakOrdinæreDagpengerTest {
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = false),
                             DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -272,6 +279,7 @@ class GjenopptakOrdinæreDagpengerTest {
                             DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
                             DagpengerOpplysning.OppfyllerKravetTilPermittering(verdi = true, listOf(Periode(verdi = true, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -319,6 +327,7 @@ class GjenopptakOrdinæreDagpengerTest {
                                 listOf(Periode(verdi = true, Opprinnelse.NY)),
                             ),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -364,6 +373,7 @@ class GjenopptakOrdinæreDagpengerTest {
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = true),
                             DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -411,6 +421,7 @@ class GjenopptakOrdinæreDagpengerTest {
                             DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
                             DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(verdi = 3, listOf(Periode(verdi = 3, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -463,6 +474,7 @@ class GjenopptakOrdinæreDagpengerTest {
                                 listOf(Periode(verdi = 50, Opprinnelse.NY)),
                             ),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -508,6 +520,7 @@ class GjenopptakOrdinæreDagpengerTest {
                             DagpengerOpplysning.HarSamordnet(verdi = true, listOf(Periode(verdi = true, Opprinnelse.NY))),
                             DagpengerOpplysning.PleiepengerDagsats(verdi = 260, listOf(Periode(verdi = 260, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -559,6 +572,7 @@ class GjenopptakOrdinæreDagpengerTest {
                             DagpengerOpplysning.PleiepengerDagsats(verdi = 260, listOf(Periode(verdi = 260, Opprinnelse.NY))),
                             DagpengerOpplysning.SykepengerDagsats(verdi = 100, listOf(Periode(verdi = 100, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -611,6 +625,7 @@ class GjenopptakOrdinæreDagpengerTest {
                                 listOf(Periode(verdi = 100, Opprinnelse.NY)),
                             ),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -657,6 +672,7 @@ class GjenopptakOrdinæreDagpengerTest {
                             DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
                             DagpengerOpplysning.GodkjentLokalArbeidssøker(true, listOf(Periode(true, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -703,6 +719,7 @@ class GjenopptakOrdinæreDagpengerTest {
                             DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
                             DagpengerOpplysning.GodkjentKunDeltidssøker(true, listOf(Periode(true, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder

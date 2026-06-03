@@ -22,6 +22,7 @@ class AvslagPermitteringTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     automatiskBehandling = false,
                     opplysninger = setOf(DagpengerOpplysning.OppfyllerKravetTilPermittering(false, listOf(Periode(false, Opprinnelse.NY)))),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

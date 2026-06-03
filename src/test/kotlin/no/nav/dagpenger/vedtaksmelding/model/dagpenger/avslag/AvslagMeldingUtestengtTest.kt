@@ -25,6 +25,7 @@ class AvslagMeldingUtestengtTest {
                         setOf(
                             DagpengerOpplysning.OppfyllerKravetTilIkkeUtestengt(false, listOf(Periode(false, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

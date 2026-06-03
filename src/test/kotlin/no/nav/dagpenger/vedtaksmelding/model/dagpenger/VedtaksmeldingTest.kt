@@ -2,8 +2,6 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.types.shouldBeInstanceOf
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Opprinnelse
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Periode
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.gjenopptak.GjenopptakMelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseMelding
@@ -27,6 +25,7 @@ class VedtaksmeldingTest {
                             ),
                         utfall = Vedtak.Utfall.AVSLÅTT,
                         automatiskBehandling = false,
+                        behandletHendelseType = "SØKNAD",
                     ),
                 alleBrevblokker = emptyList(),
             ).shouldBeInstanceOf<AvslagMelding>()
@@ -39,6 +38,7 @@ class VedtaksmeldingTest {
                         opplysninger = emptySet(),
                         utfall = Vedtak.Utfall.INNVILGET,
                         automatiskBehandling = false,
+                        behandletHendelseType = "SØKNAD",
                     ),
                 alleBrevblokker = emptyList(),
             ).shouldBeInstanceOf<InnvilgelseMelding>()
@@ -51,6 +51,7 @@ class VedtaksmeldingTest {
                         opplysninger = emptySet(),
                         utfall = Vedtak.Utfall.GJENOPPTAK,
                         automatiskBehandling = false,
+                        behandletHendelseType = "SØKNAD",
                     ),
                 alleBrevblokker = emptyList(),
             ).shouldBeInstanceOf<GjenopptakMelding>()
@@ -66,6 +67,7 @@ class VedtaksmeldingTest {
                             ),
                         utfall = Vedtak.Utfall.STANS,
                         automatiskBehandling = true,
+                        behandletHendelseType = "ARBEIDSSØKERPERIODE",
                     ),
                 alleBrevblokker = emptyList(),
             ).shouldBeInstanceOf<StansMelding>()
@@ -81,6 +83,7 @@ class VedtaksmeldingTest {
                         opplysninger = emptySet(),
                         utfall = Vedtak.Utfall.AVSLÅTT,
                         automatiskBehandling = false,
+                        behandletHendelseType = "SØKNAD",
                     ),
                 alleBrevblokker = emptyList(),
             )

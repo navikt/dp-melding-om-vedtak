@@ -54,7 +54,7 @@ class GjenopptakMelding(
     override val vedtak: Vedtak,
     alleBrevblokker: List<BrevBlokk>,
 ) : Vedtaksmelding(vedtak) {
-    override val harBrevstøtte: Boolean = vedtak.utfall == GJENOPPTAK
+    override val harBrevstøtte: Boolean = vedtak.utfall == GJENOPPTAK && vedtak.behandletHendelseType == "SØKNAD"
 
     init {
         require(this.harBrevstøtte) {

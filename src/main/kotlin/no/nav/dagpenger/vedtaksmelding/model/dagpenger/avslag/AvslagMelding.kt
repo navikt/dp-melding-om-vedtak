@@ -52,6 +52,7 @@ class AvslagMelding(
 ) : Vedtaksmelding(vedtak) {
     override val harBrevstøtte: Boolean =
         vedtak.utfall == AVSLÅTT &&
+            vedtak.behandletHendelseType == "SØKNAD" &&
             setOfNotNull<DagpengerOpplysning<*, Boolean>>(
                 vedtak.finnOpplysning<DagpengerOpplysning.OppfyllerKravTilMinsteinntekt>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.KravTilAlder>(),

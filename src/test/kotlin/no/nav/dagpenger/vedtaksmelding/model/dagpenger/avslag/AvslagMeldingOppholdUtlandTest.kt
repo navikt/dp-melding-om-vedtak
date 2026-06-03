@@ -22,6 +22,7 @@ class AvslagMeldingOppholdUtlandTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     automatiskBehandling = false,
                     opplysninger = setOf(DagpengerOpplysning.OppfyllerKravetTilOpphold(false, listOf(Periode(false, Opprinnelse.NY)))),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

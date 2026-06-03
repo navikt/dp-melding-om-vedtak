@@ -22,6 +22,7 @@ class AvslagMeldingAlderTest {
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     automatiskBehandling = false,
                     opplysninger = setOf(DagpengerOpplysning.KravTilAlder(false, listOf(Periode(false, Opprinnelse.NY)))),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe

@@ -65,6 +65,7 @@ class SamordningTest {
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.SykepengerDagsats(100, listOf(Periode(100, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -103,6 +104,7 @@ class SamordningTest {
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.PleiepengerDagsats(100, listOf(Periode(100, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -141,6 +143,7 @@ class SamordningTest {
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.OmsorgspengerDagsats(100, listOf(Periode(100, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -179,6 +182,7 @@ class SamordningTest {
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.OpplæringspengerDagsats(100, listOf(Periode(100, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -217,6 +221,7 @@ class SamordningTest {
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.UføreDagsats(100, listOf(Periode(100, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -255,6 +260,7 @@ class SamordningTest {
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.ForeldrepengerDagsats(100, listOf(Periode(100, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -293,6 +299,7 @@ class SamordningTest {
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.SvangerskapspengerDagsats(100, listOf(Periode(100, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -333,6 +340,7 @@ class SamordningTest {
                             DagpengerOpplysning.ForeldrepengerDagsats(100, listOf(Periode(100, Opprinnelse.NY))),
                             DagpengerOpplysning.SvangerskapspengerDagsats(100, listOf(Periode(100, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
@@ -370,6 +378,7 @@ class SamordningTest {
                             DagpengerOpplysning.HarSamordnet(true, listOf(Periode(true, Opprinnelse.NY))),
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                         ),
+                    behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),
         ).brevBlokkIder() shouldBe forventedeBrevblokkIder
