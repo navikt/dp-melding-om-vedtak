@@ -14,12 +14,14 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevb
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevblokker.SPØRSMÅL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevblokker.VEILEDNING_FRA_NAV
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.ManglerBrevstøtte
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_ALDER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_ARBEID_OVER_TERSKEL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_IKKE_MELDT_SEG_I_TIDE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_SVART_NEI_TIL_Å_STÅ_TILMELDT
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_TRENGER_DU_FORTSATT_DAGPENGER
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -239,6 +241,7 @@ class StansDagpengerTest {
             listOf(
                 STANS_INNLEDNING.brevblokkId,
                 STANS_ARBEID_OVER_TERSKEL.brevblokkId,
+                STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
@@ -272,6 +275,7 @@ class StansDagpengerTest {
             listOf(
                 STANS_INNLEDNING.brevblokkId,
                 STANS_REELL_ARBEIDSSØKER_SVART_NEI_TIL_Å_STÅ_TILMELDT.brevblokkId,
+                STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
@@ -304,6 +308,7 @@ class StansDagpengerTest {
                 STANS_INNLEDNING.brevblokkId,
                 STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_1.brevblokkId,
                 STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_2.brevblokkId,
+                STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
@@ -325,11 +330,11 @@ class StansDagpengerTest {
                         setOf(
                             DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
                                 verdi = false,
-                                listOf(Periode(verdi = false, Opprinnelse.NY, gyldigFraOgMed = LocalDate.MIN)),
+                                perioder = listOf(Periode(verdi = false, Opprinnelse.NY, gyldigFraOgMed = LocalDate.MIN)),
                             ),
                             DagpengerOpplysning.OppyllerMeldeplikt(
                                 verdi = false,
-                                listOf(Periode(verdi = false, Opprinnelse.NY, gyldigFraOgMed = LocalDate.MIN)),
+                                perioder = listOf(Periode(verdi = false, Opprinnelse.NY, gyldigFraOgMed = LocalDate.MIN)),
                             ),
                         ),
                     behandletHendelseType = "ARBEIDSSØKERPERIODE",
@@ -339,6 +344,38 @@ class StansDagpengerTest {
             listOf(
                 STANS_INNLEDNING.brevblokkId,
                 STANS_IKKE_MELDT_SEG_I_TIDE.brevblokkId,
+                STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId,
+                RETT_TIL_INNSYN.brevBlokkId,
+                PERSONOPPLYSNINGER.brevBlokkId,
+                HJELP_FRA_ANDRE.brevBlokkId,
+                VEILEDNING_FRA_NAV.brevBlokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
+                SPØRSMÅL.brevBlokkId,
+            )
+    }
+
+    @Test
+    fun `Riktige brevblokker når bruker har fylt 67 år`() {
+        StansMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    utfall = Vedtak.Utfall.STANS,
+                    automatiskBehandling = true,
+                    opplysninger =
+                        setOf(
+                            DagpengerOpplysning.KravTilAlder(
+                                verdi = false,
+                                perioder = listOf(Periode(verdi = false, Opprinnelse.NY, gyldigFraOgMed = LocalDate.now().minusDays(2))),
+                            ),
+                        ),
+                    behandletHendelseType = "MELDEKORT",
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe
+            listOf(
+                STANS_INNLEDNING.brevblokkId,
+                STANS_ALDER.brevblokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,

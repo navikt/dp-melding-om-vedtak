@@ -8,10 +8,14 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.STANS
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.finnOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.hentOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.ikkOppfyltBlokker
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.ikkeOppfylt
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_ALDER
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_ARBEID_OVER_TERSKEL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_IKKE_MELDT_SEG_I_TIDE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_TRENGER_DU_FORTSATT_DAGPENGER
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 
 class StansMelding(
@@ -30,15 +34,25 @@ class StansMelding(
                 vedtak.finnOpplysning<DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.OppyllerMeldeplikt>(),
+                vedtak.finnOpplysning<DagpengerOpplysning.KravTilAlder>(),
             ).any {
                 it.perioder.ikkeOppfyltNy()
             }
 
     override val brevBlokkIder: List<String>
         get() {
+            val fasteBrevblokkerStans =
+                if (vedtak.ikkeOppfylt<DagpengerOpplysning.KravTilAlder>()) {
+                    emptyList()
+                } else {
+                    listOf(STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId)
+                }
+
             return listOf(StansBrevblokker.STANS_INNLEDNING.brevblokkId) +
                 blokkerReellArbeidssøkerOgMeldeplikt() +
-                blokkerArbeidOverTerskel()
+                blokkerArbeidOverTerskel() +
+                blokkerAlder() +
+                fasteBrevblokkerStans
         }
 
     override val brevBlokker: List<BrevBlokk> =
@@ -73,9 +87,12 @@ class StansMelding(
         }
 
     private fun blokkerArbeidOverTerskel(): List<String> =
-        if (vedtak.ikkeOppfylt<DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid>()) {
-            listOf(StansBrevblokker.STANS_ARBEID_OVER_TERSKEL.brevblokkId)
-        } else {
-            emptyList()
+        vedtak.ikkOppfyltBlokker<DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid> {
+            listOf(STANS_ARBEID_OVER_TERSKEL.brevblokkId)
+        }
+
+    private fun blokkerAlder(): List<String> =
+        vedtak.ikkOppfyltBlokker<DagpengerOpplysning.KravTilAlder> {
+            listOf(STANS_ALDER.brevblokkId)
         }
 }

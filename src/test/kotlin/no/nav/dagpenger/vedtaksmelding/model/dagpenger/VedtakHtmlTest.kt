@@ -55,6 +55,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.ST
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_SVART_NEI_TIL_Å_STÅ_TILMELDT
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_TRENGER_DU_FORTSATT_DAGPENGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansMelding
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_2
@@ -569,6 +570,7 @@ class VedtakHtmlTest {
                     STANS_INNLEDNING.brevblokkId,
                     STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_1.brevblokkId,
                     STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_2.brevblokkId,
+                    STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId,
                     RETT_TIL_INNSYN.brevBlokkId,
                     PERSONOPPLYSNINGER.brevBlokkId,
                     HJELP_FRA_ANDRE.brevBlokkId,
@@ -611,6 +613,50 @@ class VedtakHtmlTest {
                 listOf(
                     STANS_INNLEDNING.brevblokkId,
                     STANS_IKKE_MELDT_SEG_I_TIDE.brevblokkId,
+                    STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId,
+                    RETT_TIL_INNSYN.brevBlokkId,
+                    PERSONOPPLYSNINGER.brevBlokkId,
+                    HJELP_FRA_ANDRE.brevBlokkId,
+                    VEILEDNING_FRA_NAV.brevBlokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
+                    SPØRSMÅL.brevBlokkId,
+                )
+            writeStringToFile(
+                filePath = "build/temp/stans_ikke_opprettholdt_meldeplikt.html",
+                content =
+                htmlInnhold,
+            )
+        }
+    }
+
+    @Test
+    fun `Html av stans når bruker har fylt 67`() {
+        runBlocking {
+            val stansMelding =
+                StansMelding(
+                    vedtak = hentVedtak("/json/stans/stans_ikke_opprettholdt_meldeplikt.json"),
+                    alleBrevblokker = sanityKlient.hentBrevBlokker(),
+                )
+            stansMelding.hentOpplysninger()
+            val brevBlokker = stansMelding.hentBrevBlokker()
+            val htmlInnhold =
+                HtmlConverter.toAutomatiskAvslagHtml(
+                    brevBlokker = brevBlokker,
+                    opplysninger = stansMelding.hentOpplysninger(),
+                    automatiskAvslag =
+                        AutomatiskAvslagDTO(
+                            fornavn = "Minni",
+                            etternavn = "Mus",
+                            fodselsnummer = "12345612345",
+                            sakId = "019dafe9-a736-7f5a-8e57-ce14d939caf1",
+                        ),
+                )
+
+            htmlInnhold brevblokkRekkefølgeShouldBe
+                listOf(
+                    STANS_INNLEDNING.brevblokkId,
+                    STANS_IKKE_MELDT_SEG_I_TIDE.brevblokkId,
+                    STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId,
                     RETT_TIL_INNSYN.brevBlokkId,
                     PERSONOPPLYSNINGER.brevBlokkId,
                     HJELP_FRA_ANDRE.brevBlokkId,

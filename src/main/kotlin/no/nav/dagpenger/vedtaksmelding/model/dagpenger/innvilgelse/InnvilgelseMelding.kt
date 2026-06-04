@@ -66,7 +66,7 @@ class InnvilgelseMelding(
 
     override val brevBlokkIder: List<String>
         get() {
-            val avsluttendeBrevblokker =
+            val fasteBrevblokkerInnvilgelse =
                 listOf(
                     INNVILGELSE_MELDEKORT.brevblokkId,
                     INNVILGELSE_UTBETALING.brevblokkId,
@@ -88,7 +88,7 @@ class InnvilgelseMelding(
                 arbeidstidenDinBlokker() +
                 reellArbeidssøkerBlokker() +
                 egenandelBlokker() +
-                avsluttendeBrevblokker
+                fasteBrevblokkerInnvilgelse
         }
     override val brevBlokker: List<BrevBlokk> =
         run {
