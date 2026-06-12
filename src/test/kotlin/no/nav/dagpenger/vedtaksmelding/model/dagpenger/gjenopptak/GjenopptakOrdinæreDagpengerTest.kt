@@ -128,11 +128,11 @@ class GjenopptakOrdinæreDagpengerTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
         GjenopptakMelding(
@@ -171,11 +171,11 @@ class GjenopptakOrdinæreDagpengerTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
         GjenopptakMelding(
@@ -214,11 +214,11 @@ class GjenopptakOrdinæreDagpengerTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
         GjenopptakMelding(
@@ -258,11 +258,11 @@ class GjenopptakOrdinæreDagpengerTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
         GjenopptakMelding(
@@ -303,11 +303,11 @@ class GjenopptakOrdinæreDagpengerTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
         GjenopptakMelding(
@@ -353,11 +353,11 @@ class GjenopptakOrdinæreDagpengerTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
         GjenopptakMelding(
@@ -400,11 +400,11 @@ class GjenopptakOrdinæreDagpengerTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
         GjenopptakMelding(
@@ -449,11 +449,11 @@ class GjenopptakOrdinæreDagpengerTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
         GjenopptakMelding(
@@ -499,11 +499,11 @@ class GjenopptakOrdinæreDagpengerTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
         GjenopptakMelding(
@@ -548,11 +548,11 @@ class GjenopptakOrdinæreDagpengerTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
         GjenopptakMelding(
@@ -599,11 +599,11 @@ class GjenopptakOrdinæreDagpengerTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
         GjenopptakMelding(
@@ -651,11 +651,11 @@ class GjenopptakOrdinæreDagpengerTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
         GjenopptakMelding(
@@ -698,11 +698,11 @@ class GjenopptakOrdinæreDagpengerTest {
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                 INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                 INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
         GjenopptakMelding(

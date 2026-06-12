@@ -50,11 +50,11 @@ abstract class Vedtaksmelding(
     companion object {
         val fasteAvsluttendeBlokker =
             listOf(
+                RETT_TIL_Å_KLAGE.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
 

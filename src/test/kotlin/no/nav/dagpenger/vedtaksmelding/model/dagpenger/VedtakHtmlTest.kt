@@ -182,11 +182,11 @@ class VedtakHtmlTest {
                     AVSLAG_INNLEDNING.brevblokkId,
                     AVSLAG_MINSTEINNTEKT_DEL_1.brevblokkId,
                     AVSLAG_MINSTEINNTEKT_DEL_2.brevblokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     RETT_TIL_INNSYN.brevBlokkId,
                     PERSONOPPLYSNINGER.brevBlokkId,
                     HJELP_FRA_ANDRE.brevBlokkId,
                     VEILEDNING_FRA_NAV.brevBlokkId,
-                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     SPØRSMÅL.brevBlokkId,
                 )
 
@@ -241,11 +241,11 @@ class VedtakHtmlTest {
                     INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                     INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                     INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     RETT_TIL_INNSYN.brevBlokkId,
                     PERSONOPPLYSNINGER.brevBlokkId,
                     HJELP_FRA_ANDRE.brevBlokkId,
                     VEILEDNING_FRA_NAV.brevBlokkId,
-                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     SPØRSMÅL.brevBlokkId,
                 )
             writeStringToFile(
@@ -288,11 +288,11 @@ class VedtakHtmlTest {
                     INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                     INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                     INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     RETT_TIL_INNSYN.brevBlokkId,
                     PERSONOPPLYSNINGER.brevBlokkId,
                     HJELP_FRA_ANDRE.brevBlokkId,
                     VEILEDNING_FRA_NAV.brevBlokkId,
-                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     SPØRSMÅL.brevBlokkId,
                 )
             writeStringToFile(
@@ -334,11 +334,11 @@ class VedtakHtmlTest {
                     INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                     INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                     INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     RETT_TIL_INNSYN.brevBlokkId,
                     PERSONOPPLYSNINGER.brevBlokkId,
                     HJELP_FRA_ANDRE.brevBlokkId,
                     VEILEDNING_FRA_NAV.brevBlokkId,
-                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     SPØRSMÅL.brevBlokkId,
                 )
             writeStringToFile(
@@ -383,11 +383,11 @@ class VedtakHtmlTest {
                     INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                     INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                     INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     RETT_TIL_INNSYN.brevBlokkId,
                     PERSONOPPLYSNINGER.brevBlokkId,
                     HJELP_FRA_ANDRE.brevBlokkId,
                     VEILEDNING_FRA_NAV.brevBlokkId,
-                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     SPØRSMÅL.brevBlokkId,
                 )
             writeStringToFile(
@@ -432,11 +432,11 @@ class VedtakHtmlTest {
                     INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                     INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                     INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     RETT_TIL_INNSYN.brevBlokkId,
                     PERSONOPPLYSNINGER.brevBlokkId,
                     HJELP_FRA_ANDRE.brevBlokkId,
                     VEILEDNING_FRA_NAV.brevBlokkId,
-                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     SPØRSMÅL.brevBlokkId,
                 )
             writeStringToFile(
@@ -483,11 +483,11 @@ class VedtakHtmlTest {
                     INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
                     INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
                     INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     RETT_TIL_INNSYN.brevBlokkId,
                     PERSONOPPLYSNINGER.brevBlokkId,
                     HJELP_FRA_ANDRE.brevBlokkId,
                     VEILEDNING_FRA_NAV.brevBlokkId,
-                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     SPØRSMÅL.brevBlokkId,
                 )
             writeStringToFile(
@@ -527,11 +527,10 @@ class VedtakHtmlTest {
                 listOf(
                     STANS_INNLEDNING.brevblokkId,
                     STANS_REELL_ARBEIDSSØKER_SVART_NEI_TIL_Å_STÅ_TILMELDT.brevblokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     RETT_TIL_INNSYN.brevBlokkId,
                     PERSONOPPLYSNINGER.brevBlokkId,
                     HJELP_FRA_ANDRE.brevBlokkId,
-                    VEILEDNING_FRA_NAV.brevBlokkId,
-                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     SPØRSMÅL.brevBlokkId,
                 )
             writeStringToFile(
@@ -571,11 +570,11 @@ class VedtakHtmlTest {
                     STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_1.brevblokkId,
                     STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_2.brevblokkId,
                     STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     RETT_TIL_INNSYN.brevBlokkId,
                     PERSONOPPLYSNINGER.brevBlokkId,
                     HJELP_FRA_ANDRE.brevBlokkId,
                     VEILEDNING_FRA_NAV.brevBlokkId,
-                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     SPØRSMÅL.brevBlokkId,
                 )
             writeStringToFile(
@@ -614,11 +613,11 @@ class VedtakHtmlTest {
                     STANS_INNLEDNING.brevblokkId,
                     STANS_IKKE_MELDT_SEG_I_TIDE.brevblokkId,
                     STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     RETT_TIL_INNSYN.brevBlokkId,
                     PERSONOPPLYSNINGER.brevBlokkId,
                     HJELP_FRA_ANDRE.brevBlokkId,
                     VEILEDNING_FRA_NAV.brevBlokkId,
-                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     SPØRSMÅL.brevBlokkId,
                 )
             writeStringToFile(
@@ -657,11 +656,11 @@ class VedtakHtmlTest {
                     STANS_INNLEDNING.brevblokkId,
                     STANS_IKKE_MELDT_SEG_I_TIDE.brevblokkId,
                     STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     RETT_TIL_INNSYN.brevBlokkId,
                     PERSONOPPLYSNINGER.brevBlokkId,
                     HJELP_FRA_ANDRE.brevBlokkId,
                     VEILEDNING_FRA_NAV.brevBlokkId,
-                    RETT_TIL_Å_KLAGE.brevBlokkId,
                     SPØRSMÅL.brevBlokkId,
                 )
             writeStringToFile(

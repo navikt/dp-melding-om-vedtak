@@ -242,11 +242,11 @@ class StansDagpengerTest {
                 STANS_INNLEDNING.brevblokkId,
                 STANS_ARBEID_OVER_TERSKEL.brevblokkId,
                 STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
     }
@@ -276,11 +276,11 @@ class StansDagpengerTest {
                 STANS_INNLEDNING.brevblokkId,
                 STANS_REELL_ARBEIDSSØKER_SVART_NEI_TIL_Å_STÅ_TILMELDT.brevblokkId,
                 STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
     }
@@ -309,11 +309,11 @@ class StansDagpengerTest {
                 STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_1.brevblokkId,
                 STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_2.brevblokkId,
                 STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
     }
@@ -345,11 +345,11 @@ class StansDagpengerTest {
                 STANS_INNLEDNING.brevblokkId,
                 STANS_IKKE_MELDT_SEG_I_TIDE.brevblokkId,
                 STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
     }
@@ -376,11 +376,11 @@ class StansDagpengerTest {
             listOf(
                 STANS_INNLEDNING.brevblokkId,
                 STANS_ALDER.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
                 RETT_TIL_INNSYN.brevBlokkId,
                 PERSONOPPLYSNINGER.brevBlokkId,
                 HJELP_FRA_ANDRE.brevBlokkId,
                 VEILEDNING_FRA_NAV.brevBlokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
                 SPØRSMÅL.brevBlokkId,
             )
     }
