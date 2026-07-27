@@ -233,6 +233,17 @@ class StansDagpengerTest {
                                         ),
                                     ),
                             ),
+                            DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
+                                verdi = true,
+                                perioder =
+                                    listOf(
+                                        Periode(
+                                            verdi = true,
+                                            opprinnelse = Opprinnelse.ARVET,
+                                            gyldigFraOgMed = LocalDate.MIN,
+                                        ),
+                                    ),
+                            ),
                         ),
                     behandletHendelseType = "MELDEKORT",
                 ),
@@ -367,6 +378,17 @@ class StansDagpengerTest {
                             DagpengerOpplysning.KravTilAlder(
                                 verdi = false,
                                 perioder = listOf(Periode(verdi = false, Opprinnelse.NY, gyldigFraOgMed = LocalDate.now().minusDays(2))),
+                            ),
+                            DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
+                                verdi = true,
+                                perioder =
+                                    listOf(
+                                        Periode(
+                                            verdi = true,
+                                            opprinnelse = Opprinnelse.ARVET,
+                                            gyldigFraOgMed = LocalDate.MIN,
+                                        ),
+                                    ),
                             ),
                         ),
                     behandletHendelseType = "MELDEKORT",

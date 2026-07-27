@@ -64,6 +64,7 @@ class VedtaksmeldingTest {
                         opplysninger =
                             setOf(
                                 DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false, listOf(Periode(false, Opprinnelse.NY))),
+                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(true, listOf(Periode(true, Opprinnelse.NY))),
                             ),
                         utfall = Vedtak.Utfall.STANS,
                         automatiskBehandling = true,
