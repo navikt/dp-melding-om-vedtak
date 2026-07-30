@@ -13,8 +13,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.ikkeOppfylt
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_ALDER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_ARBEID_OVER_TERSKEL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_IKKE_MELDT_SEG_I_TIDE
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_1
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_GENERELL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_TRENGER_DU_FORTSATT_DAGPENGER
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 
@@ -79,8 +78,7 @@ class StansMelding(
 //            listOf(StansBrevblokker.STANS_REELL_ARBEIDSSØKER_SVART_NEI_TIL_Å_STÅ_TILMELDT.brevblokkId) }
         } else if (vedtak.hentOpplysning<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>().perioder.ikkeOppfyltNy()) {
             listOf(
-                STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_1.brevblokkId,
-                STANS_REELL_ARBEIDSSØKER_GENERELL_DEL_2.brevblokkId,
+                STANS_REELL_ARBEIDSSØKER_GENERELL.brevblokkId,
             )
         } else {
             emptyList()
