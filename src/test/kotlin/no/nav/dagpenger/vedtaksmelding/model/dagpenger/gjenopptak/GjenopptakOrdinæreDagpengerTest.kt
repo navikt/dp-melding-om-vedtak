@@ -41,7 +41,8 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_GENERISK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_OMSORGSPENGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_PLEIEPENGER
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SANKSJON
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SANKSJON_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SANKSJON_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SANKSJON_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SKATTEKORT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE
@@ -163,7 +164,8 @@ class GjenopptakOrdinæreDagpengerTest {
                 INNVILGELSE_SANKSJON_INNLEDNING.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
-                INNVILGELSE_SANKSJON.brevblokkId,
+                INNVILGELSE_SANKSJON_DEL_1.brevblokkId,
+                INNVILGELSE_SANKSJON_DEL_2.brevblokkId,
                 GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK.brevblokkId,
                 GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
                 GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
