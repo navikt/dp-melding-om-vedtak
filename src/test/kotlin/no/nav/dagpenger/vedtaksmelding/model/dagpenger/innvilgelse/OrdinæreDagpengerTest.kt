@@ -26,6 +26,8 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_NITTI_PROSENT_REGEL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR_FOM_TOM
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SANKSJON
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SANKSJON_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SKATTEKORT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_STANS_ÅRSAKER
@@ -49,7 +51,10 @@ class OrdinæreDagpengerTest {
                         automatiskBehandling = false,
                         opplysninger =
                             setOf(
-                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false, listOf(Periode(false, Opprinnelse.NY))),
+                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
+                                    false,
+                                    listOf(Periode(false, Opprinnelse.NY)),
+                                ),
                             ),
                         behandletHendelseType = "SØKNAD",
                     ),
@@ -78,7 +83,10 @@ class OrdinæreDagpengerTest {
                         automatiskBehandling = true,
                         opplysninger =
                             setOf(
-                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false, listOf(Periode(false, Opprinnelse.NY))),
+                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
+                                    false,
+                                    listOf(Periode(false, Opprinnelse.NY)),
+                                ),
                             ),
                         behandletHendelseType = "SØKNAD",
                     ),
@@ -137,6 +145,49 @@ class OrdinæreDagpengerTest {
     }
 
     @Test
+    fun `Rikige brevblokker for innvilgelse av ordinære dagpenger med sanksjon`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                INNVILGELSE_ORDINÆR.brevblokkId,
+                INNVILGELSE_SANKSJON_INNLEDNING.brevblokkId,
+                INNVILGELSE_MED_EGENANDEL.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_SANKSJON.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
+
+        InnvilgelseMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
+                    opplysninger =
+                        setOf(
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.ErIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet(
+                                true,
+                                listOf(Periode(true, Opprinnelse.NY)),
+                            ),
+                            DagpengerOpplysning.AntallUkerMedSanksjon(18, listOf(Periode(18, Opprinnelse.NY))),
+                        ),
+                    behandletHendelseType = "SØKNAD",
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
     fun `Rikige brevblokker for innvilgelse av ordinære dagpenger med barnetillegg-opplysning`() {
         val forventedeBrevblokkIder =
             listOf(
@@ -180,7 +231,10 @@ class OrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(0, listOf(Periode(0, Opprinnelse.NY))),
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(
+                                0,
+                                listOf(Periode(0, Opprinnelse.NY)),
+                            ),
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                         ),
                     behandletHendelseType = "SØKNAD",
@@ -219,7 +273,10 @@ class OrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1, listOf(Periode(1, Opprinnelse.NY))),
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(
+                                1,
+                                listOf(Periode(1, Opprinnelse.NY)),
+                            ),
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
                                 10,
@@ -239,7 +296,10 @@ class OrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1, listOf(Periode(1, Opprinnelse.NY))),
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(
+                                1,
+                                listOf(Periode(1, Opprinnelse.NY)),
+                            ),
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
                                 0,
@@ -282,7 +342,10 @@ class OrdinæreDagpengerTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(1, listOf(Periode(1, Opprinnelse.NY))),
+                            DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(
+                                1,
+                                listOf(Periode(1, Opprinnelse.NY)),
+                            ),
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
                                 10,

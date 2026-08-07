@@ -40,6 +40,8 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_SVANGERSKAPSPENGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_SYKEPENGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_UFØRE
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SANKSJON
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SANKSJON_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SKATTEKORT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_STANS_ÅRSAKER
@@ -74,8 +76,10 @@ class GjenopptakMelding(
                     INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
                 )
             return innledningBlokker() +
-                gjenståendeEgenandelInnledning() +
+                innledningMedEllerUtenSanksjonBlokker() +
+                innledningGjenståendeEgenandel() +
                 virkningsdatoBlokker() +
+                sanksjonBlokker() +
                 dagpengeperiodeBlokker() +
                 reberegningBlokker() +
                 beregningBlokker() +
@@ -103,7 +107,10 @@ class GjenopptakMelding(
                 )
 
             erInnvilgetSomPermittertIFiskeindustri() ->
-                listOf(INNVILGELSE_PERMITTERT_FISK.brevblokkId, GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId)
+                listOf(
+                    INNVILGELSE_PERMITTERT_FISK.brevblokkId,
+                    GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                )
 
             else -> {
                 when (vedtak.finnOpplysning("opplysning.siste-dag-med-rett")) {
@@ -122,7 +129,7 @@ class GjenopptakMelding(
             }
         }
 
-    private fun gjenståendeEgenandelInnledning(): List<String> {
+    private fun innledningGjenståendeEgenandel(): List<String> {
         vedtak.finnOpplysning<DagpengerOpplysning.EgenandelGjenstående> {
             return when (it.toDouble()) {
                 0.0 -> emptyList()
@@ -132,11 +139,25 @@ class GjenopptakMelding(
         return listOf(INNVILGELSE_MED_EGENANDEL.brevblokkId)
     }
 
+    private fun innledningMedEllerUtenSanksjonBlokker(): List<String> =
+        if (erIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet()) {
+            listOf(INNVILGELSE_SANKSJON_INNLEDNING.brevblokkId)
+        } else {
+            emptyList()
+        }
+
     private fun virkningsdatoBlokker(): List<String> =
         when {
             erInnvilgetSomPermittert() -> listOf(INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT.brevblokkId)
             erInnvilgetSomPermittertIFiskeindustri() -> listOf(INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT_FISK.brevblokkId)
             else -> listOf(INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId)
+        }
+
+    private fun sanksjonBlokker(): List<String> =
+        if (erIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet()) {
+            listOf(INNVILGELSE_SANKSJON.brevblokkId)
+        } else {
+            emptyList()
         }
 
     // TODO PERM/FISK: Blokker for permittering og permittering fisk. De må ha egne blokker pga egne tellere.
@@ -283,4 +304,7 @@ class GjenopptakMelding(
     private fun erInnvilgetSomPermittertIFiskeindustri() = vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri>()
 
     private fun oppfyllerKravetTilReberegningAvGrunnlag() = vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilReberegningAvGrunnlag>()
+
+    private fun erIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet() =
+        vedtak.oppfylt<DagpengerOpplysning.ErIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet>()
 }

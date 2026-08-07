@@ -44,6 +44,8 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR_FOM_TOM
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_SYKEPENGER
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SANKSJON
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SANKSJON_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SKATTEKORT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_STANS_ÅRSAKER
@@ -249,6 +251,56 @@ class VedtakHtmlTest {
                 )
             writeStringToFile(
                 filePath = "build/temp/innvilgelse.html",
+                content =
+                htmlInnhold,
+            )
+        }
+    }
+
+    @Test
+    fun `Html av innvilgelse med sanksjon`() {
+        runBlocking {
+            val innvilgelseMelding =
+                InnvilgelseMelding(
+                    vedtak = hentVedtak("/json/innvilgelse/innvilgelse_med_sanksjon.json"),
+                    alleBrevblokker = sanityKlient.hentBrevBlokker(),
+                )
+            innvilgelseMelding.hentOpplysninger()
+            val brevBlokker = innvilgelseMelding.hentBrevBlokker()
+            val htmlInnhold =
+                HtmlConverter.toHtml(
+                    brevBlokker = brevBlokker,
+                    opplysninger = innvilgelseMelding.hentOpplysninger(),
+                    meldingOmVedtakData = meldingOmVedtakData,
+                )
+
+            htmlInnhold brevblokkRekkefølgeShouldBe
+                listOf(
+                    INNVILGELSE_ORDINÆR.brevblokkId,
+                    INNVILGELSE_SANKSJON_INNLEDNING.brevblokkId,
+                    INNVILGELSE_MED_EGENANDEL.brevblokkId,
+                    INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                    INNVILGELSE_SANKSJON.brevblokkId,
+                    INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                    INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                    INNVILGELSE_GRUNNLAG.brevblokkId,
+                    INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                    INNVILGELSE_EGENANDEL.brevblokkId,
+                    INNVILGELSE_MELDEKORT.brevblokkId,
+                    INNVILGELSE_UTBETALING.brevblokkId,
+                    INNVILGELSE_SKATTEKORT.brevblokkId,
+                    INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                    INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                    INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
+                    RETT_TIL_INNSYN.brevBlokkId,
+                    PERSONOPPLYSNINGER.brevBlokkId,
+                    HJELP_FRA_ANDRE.brevBlokkId,
+                    VEILEDNING_FRA_NAV.brevBlokkId,
+                    SPØRSMÅL.brevBlokkId,
+                )
+            writeStringToFile(
+                filePath = "build/temp/innvilgelse_med_sanksjon.html",
                 content =
                 htmlInnhold,
             )

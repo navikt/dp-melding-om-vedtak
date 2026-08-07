@@ -34,7 +34,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class KravTilProsentvisTapAvArbeidstid(
         override val verdi: Double,
         perioder: List<Periode<Double>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Double>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Double>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9435-72a8-b1ce-9575cbc2a762")
         }
@@ -53,7 +53,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class InntektskravSiste12Måneder(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9413-77ce-92ec-d29700f04248")
         }
@@ -72,7 +72,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class InntektskravSiste36Måneder(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9413-77ce-92ec-d29700f04249")
         }
@@ -91,7 +91,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class ArbeidsinntektSiste12Måneder(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9413-77ce-92ec-d29700f04241")
         }
@@ -110,7 +110,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class ArbeidsinntektSiste36Måneder private constructor(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9413-77ce-92ec-d29700f04242")
         }
@@ -129,7 +129,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class AntallGSomGisSomGrunnlagVedVerneplikt(
         override val verdi: Double,
         perioder: List<Periode<Double>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Double>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Double>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9421-766c-9dc6-41fe6c9a1dff")
         }
@@ -148,7 +148,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class BruktBeregningsregelGrunnlag(
         override val verdi: String,
         perioder: List<Periode<String>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, String>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, String>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9410-7481-b263-4606fdd10cba")
         }
@@ -169,7 +169,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class HarBruktBeregningsregelArbeidstidSiste6Måneder(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9435-72a8-b1ce-9575cbc2a764")
         }
@@ -188,7 +188,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class HarBruktBeregningsregelArbeidstidSiste12Måneder(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9435-72a8-b1ce-9575cbc2a765")
         }
@@ -207,7 +207,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class HarBruktBeregningsregelArbeidstidSiste36Måneder(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9435-72a8-b1ce-9575cbc2a766")
         }
@@ -226,7 +226,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class UtbetaltArbeidsinntektPeriode1(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9410-7481-b263-4606fdd10cad")
         }
@@ -245,7 +245,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class UtbetaltArbeidsinntektPeriode2(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9410-7481-b263-4606fdd10cae")
         }
@@ -264,7 +264,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class UtbetaltArbeidsinntektPeriode3(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9410-7481-b263-4606fdd10caf")
         }
@@ -283,7 +283,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class AntallStønadsukerSomGisVedOrdinæreDagpenger(
         override val verdi: Int,
         perioder: List<Periode<Int>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.UKER, Int>(verdi, perioder) {
+    ) : Periodisert<Enhet.UKER, Int>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-943d-77a7-969c-147999f15459")
         }
@@ -302,7 +302,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class KravetTilAntallUkerFørGjenopptak(
         override val verdi: Int,
         perioder: List<Periode<Int>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.UKER, Int>(verdi, perioder) {
+    ) : Periodisert<Enhet.UKER, Int>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("019a2ff0-1674-716f-91dd-a454cbff8b19")
         }
@@ -321,7 +321,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class KravetTilAntallUkerArbeidForReberegningAvGrunnlag(
         override val verdi: Int,
         perioder: List<Periode<Int>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.UKER, Int>(verdi, perioder) {
+    ) : Periodisert<Enhet.UKER, Int>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("019cf5e9-6e7e-7988-9ae5-b91341d5cef0")
         }
@@ -340,7 +340,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9428-74d5-b160-f63a4c61a242")
         }
@@ -360,7 +360,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class AntallBarnSomGirRettTilBarnetillegg(
         override val verdi: Int,
         perioder: List<Periode<Int>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.BARN, Int>(verdi, perioder) {
+    ) : Periodisert<Enhet.BARN, Int>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9428-74d5-b160-f63a4c61a23c")
         }
@@ -379,7 +379,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class BarnetilleggIKroner(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9428-74d5-b160-f63a4c61a244")
         }
@@ -395,10 +395,29 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
+    class AntallUkerMedSanksjon(
+        override val verdi: Int,
+        perioder: List<Periode<Int>>,
+    ) : Periodisert<Enhet.UKER, Int>(verdi, perioder) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("019e82fd-f97c-7395-be5c-7de504871871")
+        }
+
+        override val enhet: Enhet.UKER = Enhet.UKER
+        override val opplysningTekstId = "opplysning.antall-uker-med-sanksjon"
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            behandlingsresultatData.heltall(
+                opplysningTypeId,
+            ),
+            behandlingsresultatData.perioderHeltall(opplysningTypeId),
+        )
+    }
+
     class FørsteMånedAvOpptjeningsperiode(
         override val verdi: LocalDate,
         perioder: List<Periode<LocalDate>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, LocalDate>(verdi, perioder),
+    ) : Periodisert<Enhet.ENHETSLØS, LocalDate>(verdi, perioder),
         DeriverbarOpplysning {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9413-77ce-92ec-d29700f04247")
@@ -446,7 +465,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class SisteMånedAvOpptjeningsperiode(
         override val verdi: LocalDate,
         perioder: List<Periode<LocalDate>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, LocalDate>(verdi, perioder),
+    ) : Periodisert<Enhet.ENHETSLØS, LocalDate>(verdi, perioder),
         DeriverbarOpplysning {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9414-7823-8d29-0e25b7feb7d0")
@@ -494,7 +513,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class SeksGangerGrunnbeløp(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9410-7481-b263-4606fdd10ca8")
         }
@@ -513,7 +532,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class Aldersgrense(
         override val verdi: Int,
         perioder: List<Periode<Int>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Int>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Int>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-940b-76ff-acf5-ba7bcb367234")
         }
@@ -532,7 +551,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class Grunnlag(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9410-7481-b263-4606fdd10cbd")
         }
@@ -551,7 +570,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9428-74d5-b160-f63a4c61a24f")
         }
@@ -570,7 +589,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class FastsattVanligArbeidstidPerUke(
         override val verdi: Double,
         perioder: List<Periode<Double>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.TIMER, Double>(verdi, perioder) {
+    ) : Periodisert<Enhet.TIMER, Double>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9435-72a8-b1ce-9575cbc2a76a")
         }
@@ -589,7 +608,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class FastsattNyArbeidstidPerUke(
         override val verdi: Double,
         perioder: List<Periode<Double>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.TIMER, Double>(verdi, perioder) {
+    ) : Periodisert<Enhet.TIMER, Double>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9435-72a8-b1ce-9575cbc2a76b")
         }
@@ -608,7 +627,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class HarSamordnet(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9428-74d5-b160-f63a4c61a250")
         }
@@ -627,7 +646,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class SykepengerDagsats(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9433-70e9-a85b-c246150c45d4")
         }
@@ -646,7 +665,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class PleiepengerDagsats(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9433-70e9-a85b-c246150c45d5")
         }
@@ -665,7 +684,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class OmsorgspengerDagsats(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9433-70e9-a85b-c246150c45d6")
         }
@@ -684,7 +703,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class OpplæringspengerDagsats(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9433-70e9-a85b-c246150c45d7")
         }
@@ -703,7 +722,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class UføreDagsats(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9433-70e9-a85b-c246150c45d8")
         }
@@ -722,7 +741,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class ForeldrepengerDagsats(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9433-70e9-a85b-c246150c45d9")
         }
@@ -741,7 +760,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class SvangerskapspengerDagsats(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9433-70e9-a85b-c246150c45da")
         }
@@ -794,7 +813,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class OppfyllerKravTilMinsteinntekt(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9413-77ce-92ec-d29700f0424c")
         }
@@ -814,7 +833,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9421-766c-9dc6-41fe6c9a1e05")
         }
@@ -830,10 +849,29 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
+    class ErIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet(
+        override val verdi: Boolean,
+        perioder: List<Periode<Boolean>>,
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("019e82fc-04e7-7f8d-bd52-6a7041ebb15f")
+        }
+
+        override val opplysningTekstId = "opplysning.er-ilagt-sanksjonsperiode-ved-selvforskyldt-arbeidsloshet"
+        override val enhet = Enhet.ENHETSLØS
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            behandlingsresultatData.boolsk(
+                opplysningTypeId,
+            ),
+            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+        )
+    }
+
     class PeriodeSomGisVedVerneplikt(
         override val verdi: Int,
         perioder: List<Periode<Int>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.UKER, Int>(verdi, perioder) {
+    ) : Periodisert<Enhet.UKER, Int>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9421-766c-9dc6-41fe6c9a1e01")
         }
@@ -854,7 +892,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class AntallPermitteringsuker(
         override val verdi: Int,
         perioder: List<Periode<Int>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.UKER, Int>(verdi, perioder) {
+    ) : Periodisert<Enhet.UKER, Int>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0195042d-918e-7fae-8fb7-7f38eed42710")
         }
@@ -875,7 +913,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class AntallPermitteringsukerFisk(
         override val verdi: Int,
         perioder: List<Periode<Int>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.UKER, Int>(verdi, perioder) {
+    ) : Periodisert<Enhet.UKER, Int>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0195235a-599b-7b27-97a8-bc6142066a87")
         }
@@ -894,7 +932,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class Egenandel(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-943f-78d9-b874-00a4944c54ef")
         }
@@ -913,7 +951,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class EgenandelGjenstående(
         override val verdi: Number,
         perioder: List<Periode<Number>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("01997b70-a12c-7622-bff8-82a20687e640")
         }
@@ -932,7 +970,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class AntallStønadsdagerSomGjenstår(
         override val verdi: Int,
         perioder: List<Periode<Int>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.DAGER, Int>(verdi, perioder) {
+    ) : Periodisert<Enhet.DAGER, Int>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("01992956-e349-76b1-8f68-c9d481df3a32")
         }
@@ -951,7 +989,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class KravTilArbeidssøker(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9442-707b-a6ee-e96c06877be2")
         }
@@ -970,7 +1008,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class OppfyllerKravTilMobilitet(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9442-707b-a6ee-e96c06877bdb")
         }
@@ -989,7 +1027,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class OppfyllerKravTilArbeidsfør(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9442-707b-a6ee-e96c06877bdd")
         }
@@ -1008,7 +1046,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class OppfyllerKravTilArbeidssøker(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9442-707b-a6ee-e96c06877bd8")
         }
@@ -1027,7 +1065,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class OppfyllerKravetTilEthvertArbeid(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9442-707b-a6ee-e96c06877bdf")
         }
@@ -1046,7 +1084,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class OppyllerKravTilRegistrertArbeidssøker(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9442-707b-a6ee-e96c06877be1")
         }
@@ -1065,7 +1103,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class OppyllerMeldeplikt(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("019d870c-6847-71fa-89d2-81a53d19cfcf")
         }
@@ -1084,7 +1122,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class OppfyllerKravetTilIkkeUtestengt(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9447-7e36-a569-3e9f42bff9f7")
         }
@@ -1103,7 +1141,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class OppfyllerKravetTilOpphold(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9443-72b4-8b30-5f6cdb24d54b")
         }
@@ -1122,7 +1160,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class IkkeFulleYtelser(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-943f-78d9-b874-00a4944c54f1")
         }
@@ -1141,7 +1179,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class KravTilTapAvArbeidsinntektOgArbeidstid(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9435-72a8-b1ce-9575cbc2a76f")
         }
@@ -1160,7 +1198,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class OppfyllerVilkåretOmTapAvArbeidstid(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9435-72a8-b1ce-9575cbc2a76e")
         }
@@ -1179,7 +1217,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class KravTilTapAvArbeidsinntekt(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9435-72a8-b1ce-9575cbc2a761")
         }
@@ -1198,7 +1236,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class IkkeStreikEllerLockout(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-91df-746a-a8ac-4a6b2b30685f")
         }
@@ -1217,7 +1255,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class KravTilAlder(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-940b-76ff-acf5-ba7bcb367237")
         }
@@ -1236,7 +1274,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class KravTilUtdanning(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9445-734c-a7ee-045edf29b52d")
         }
@@ -1255,7 +1293,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class OppfyllerMedlemskap(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9443-72b4-8b30-5f6cdb24d54d")
         }
@@ -1274,7 +1312,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class GodkjentLokalArbeidssøker(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9442-707b-a6ee-e96c06877bda")
         }
@@ -1293,7 +1331,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class GodkjentKunDeltidssøker(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194881f-9441-7d1b-a06a-6727543a141f")
         }
@@ -1312,7 +1350,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class OppfyllerKravetTilPermittering(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("0194d111-db2f-7395-bcfb-959f245fd2a6")
         }
@@ -1331,7 +1369,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class OppfyllerKravetTilPermitteringFiskeindustri(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("019522b0-c722-76d4-8d7f-78f556c51f72")
         }
@@ -1350,7 +1388,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
     class OppfyllerKravetTilReberegningAvGrunnlag(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
-    ) : DagpengerOpplysning.Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
         companion object {
             val opplysningTypeId: UUID = UUID.fromString("019ce147-cbd3-78a9-8dba-0cc7d10df505")
         }

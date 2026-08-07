@@ -41,6 +41,8 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_GENERISK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_OMSORGSPENGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_PLEIEPENGER
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SANKSJON
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SANKSJON_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SKATTEKORT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_STANS_ÅRSAKER
@@ -145,6 +147,54 @@ class GjenopptakOrdinæreDagpengerTest {
                         setOf(
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = false),
+                        ),
+                    behandletHendelseType = "SØKNAD",
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Riktige brevblokker ved sanksjon når det ikke er reberegnet grunnlag og ikke forbrukt av dagpengeperioden`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                GJENOPPTAK_INNLEDNING_VIRKNINGSDATO.brevblokkId,
+                GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                INNVILGELSE_SANKSJON_INNLEDNING.brevblokkId,
+                INNVILGELSE_MED_EGENANDEL.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                INNVILGELSE_SANKSJON.brevblokkId,
+                GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK.brevblokkId,
+                GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
+                GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
+                RETT_TIL_INNSYN.brevBlokkId,
+                PERSONOPPLYSNINGER.brevBlokkId,
+                HJELP_FRA_ANDRE.brevBlokkId,
+                VEILEDNING_FRA_NAV.brevBlokkId,
+                SPØRSMÅL.brevBlokkId,
+            )
+        GjenopptakMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    utfall = Vedtak.Utfall.GJENOPPTAK,
+                    automatiskBehandling = false,
+                    opplysninger =
+                        setOf(
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.GrunnlagErReberegnet(verdi = false),
+                            DagpengerOpplysning.ErIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet(
+                                true,
+                                listOf(Periode(true, Opprinnelse.NY)),
+                            ),
+                            DagpengerOpplysning.AntallUkerMedSanksjon(18, listOf(Periode(18, Opprinnelse.NY))),
                         ),
                     behandletHendelseType = "SØKNAD",
                 ),

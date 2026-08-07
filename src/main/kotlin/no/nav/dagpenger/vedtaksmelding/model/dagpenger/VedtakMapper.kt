@@ -67,6 +67,7 @@ class VedtakMapper(
                 }
                 this.addIfPresent { DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.BarnetilleggIKroner(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.AntallUkerMedSanksjon(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.FørsteMånedAvOpptjeningsperiode(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.SisteMånedAvOpptjeningsperiode(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.SeksGangerGrunnbeløp(behandlingsresultatData) }
@@ -112,6 +113,7 @@ class VedtakMapper(
                 this.addIfPresent { DagpengerOpplysning.OppfyllerMedlemskap(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.GodkjentLokalArbeidssøker(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.GodkjentKunDeltidssøker(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.ErIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet(behandlingsresultatData) }
                 this.addIfPresent {
                     DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(
                         behandlingsresultatData,

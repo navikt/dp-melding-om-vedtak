@@ -11,6 +11,8 @@ enum class InnvilgelseBrevblokker(
     INNVILGELSE_GODKJENT_LOKAL_ELLER_DELTID_ARBEIDSSØKER_DEL_2(
         brevblokkId = "brev.blokk.innvilgelse-godkjent-lokal-eller-deltid-arbeidssoker-del-2",
     ),
+    INNVILGELSE_SANKSJON_INNLEDNING(brevblokkId = "brev.blokk.innvilgelse-sanksjon-innledning"),
+    INNVILGELSE_SANKSJON(brevblokkId = "brev.blokk.innvilgelse-sanksjon"),
     INNVILGELSE_MED_EGENANDEL(brevblokkId = "brev.blokk.innvilgelse-med-egenandel"),
     INNVILGELSE_UTEN_EGENANDEL(brevblokkId = "brev.blokk.innvilgelse-uten-egenandel"),
     INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE(brevblokkId = "brev.blokk.begrunnelse-innvilgelsesdato"),
