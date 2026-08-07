@@ -25,6 +25,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG_VERNEPLIKT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_HVA_SKJER_ETTER_PERMITTERINGEN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MED_EGENANDEL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_NITTI_PROSENT_REGEL
@@ -40,6 +41,9 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_SVANGERSKAPSPENGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_SYKEPENGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_UFØRE
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SANKSJON_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SANKSJON_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SANKSJON_INNLEDNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SKATTEKORT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_STANS_ÅRSAKER
@@ -76,8 +80,10 @@ class InnvilgelseMelding(
                     INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
                 )
             return innledningBlokker() +
-                medEllerUtenEgenandelBlokker() +
+                innledningMedEllerUtenSanksjonBlokker() +
+                innledningMedEllerUtenEgenandelBlokker() +
                 virkningsdatoBlokker() +
+                sanksjonBlokker() +
                 dagpengeperiodeBlokker() +
                 permittertOgPermittertFiskBlokker() +
                 listOf(INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId) +
@@ -209,9 +215,23 @@ class InnvilgelseMelding(
             emptyList()
         }
 
-    private fun medEllerUtenEgenandelBlokker(): List<String> =
+    private fun innledningMedEllerUtenSanksjonBlokker(): List<String> =
+        if (erIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet()) {
+            listOf(INNVILGELSE_SANKSJON_INNLEDNING.brevblokkId)
+        } else {
+            emptyList()
+        }
+
+    private fun sanksjonBlokker(): List<String> =
+        if (erIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet()) {
+            listOf(INNVILGELSE_SANKSJON_DEL_1.brevblokkId, INNVILGELSE_SANKSJON_DEL_2.brevblokkId)
+        } else {
+            emptyList()
+        }
+
+    private fun innledningMedEllerUtenEgenandelBlokker(): List<String> =
         vedtak.finnOpplysning<DagpengerOpplysning.Egenandel> { it.toDouble() > 0.0 }?.let {
-            listOf(InnvilgelseBrevblokker.INNVILGELSE_MED_EGENANDEL.brevblokkId)
+            listOf(INNVILGELSE_MED_EGENANDEL.brevblokkId)
         } ?: listOf(INNVILGELSE_UTEN_EGENANDEL.brevblokkId)
 
     private fun egenandelBlokker(): List<String> =
@@ -269,4 +289,7 @@ class InnvilgelseMelding(
     private fun erInnvilgetSomPermittert() = vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermittering>()
 
     private fun erInnvilgetSomPermittertIFiskeindustri() = vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri>()
+
+    private fun erIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet() =
+        vedtak.oppfylt<DagpengerOpplysning.ErIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet>()
 }
