@@ -37,7 +37,7 @@ dependencies {
     testImplementation(libs.bundles.postgres.test)
     testImplementation(libs.ktor.client.mock)
 
-    testImplementation("org.jsoup:jsoup:1.15.3")
+    testImplementation("org.jsoup:jsoup:1.23.1")
 }
 
 application {
