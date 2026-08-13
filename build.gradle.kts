@@ -24,7 +24,7 @@ dependencies {
     implementation(libs.ktor.client.cio)
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.client.logging.jvm)
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:1.9.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:1.11.0")
 
     val kotlinxHtmlVersion = "0.12.0"
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinxHtmlVersion")
