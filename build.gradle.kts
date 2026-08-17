@@ -7,16 +7,16 @@ plugins {
 }
 dependencies {
     implementation(project(":openapi"))
-    implementation("ch.qos.logback:logback-classic:1.5.21")
+    implementation("ch.qos.logback:logback-classic:1.6.3")
     implementation("net.logstash.logback:logstash-logback-encoder:9.0")
-    implementation("com.fasterxml.uuid:java-uuid-generator:5.1.0")
+    implementation("com.fasterxml.uuid:java-uuid-generator:5.2.0")
     implementation(libs.kotlin.logging)
     implementation(libs.konfig)
     implementation(libs.bundles.ktor.server)
     implementation(libs.ktor.server.cio)
     implementation("io.ktor:ktor-server-swagger:${libs.versions.ktor.get()}")
     implementation(libs.ktor.server.metrics.micrometer)
-    implementation("io.micrometer:micrometer-registry-prometheus:1.14.3")
+    implementation("io.micrometer:micrometer-registry-prometheus:1.17.0")
     implementation(libs.bundles.jackson)
     implementation("no.nav.dagpenger:oauth2-klient:2025.12.19-08.15.2e150cd55270")
     implementation(libs.bundles.postgres)
@@ -24,7 +24,7 @@ dependencies {
     implementation(libs.ktor.client.cio)
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.client.logging.jvm)
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:1.9.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:1.11.0")
 
     val kotlinxHtmlVersion = "0.12.0"
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinxHtmlVersion")
@@ -37,7 +37,7 @@ dependencies {
     testImplementation(libs.bundles.postgres.test)
     testImplementation(libs.ktor.client.mock)
 
-    testImplementation("org.jsoup:jsoup:1.15.3")
+    testImplementation("org.jsoup:jsoup:1.23.1")
 }
 
 application {
