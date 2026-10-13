@@ -18,7 +18,7 @@ dependencies {
     implementation(libs.ktor.server.metrics.micrometer)
     implementation("io.micrometer:micrometer-registry-prometheus:1.17.1")
     implementation(libs.bundles.jackson)
-    implementation("no.nav.dagpenger:oauth2-klient:2026.10.09-12.23.1525536141d8")
+    implementation("no.nav.dagpenger:oauth2-klient:2026.10.13-12.23.8d41639f42c9")
     implementation(libs.bundles.postgres)
 
     implementation(libs.ktor.client.cio)
