@@ -49,6 +49,7 @@ class VedtakMapperTest {
             it.hentOpplysning<DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.InntektskravSiste12Måneder>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.InntektskravSiste36Måneder>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.TerskelFor12Måneder>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.ArbeidsinntektSiste12Måneder>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.ArbeidsinntektSiste36Måneder>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.AntallGSomGisSomGrunnlagVedVerneplikt>() shouldNotBe null

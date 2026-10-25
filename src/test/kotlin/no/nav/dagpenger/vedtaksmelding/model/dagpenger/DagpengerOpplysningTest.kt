@@ -18,6 +18,7 @@ class DagpengerOpplysningTest {
             DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid(behandlingsresultatData),
             DagpengerOpplysning.InntektskravSiste12Måneder(behandlingsresultatData),
             DagpengerOpplysning.InntektskravSiste36Måneder(behandlingsresultatData),
+            DagpengerOpplysning.TerskelFor12Måneder(behandlingsresultatData),
             DagpengerOpplysning.ArbeidsinntektSiste12Måneder(behandlingsresultatData),
             DagpengerOpplysning.ArbeidsinntektSiste36Måneder(behandlingsresultatData),
             DagpengerOpplysning.AntallGSomGisSomGrunnlagVedVerneplikt(behandlingsresultatData),
@@ -95,15 +96,10 @@ class DagpengerOpplysningTest {
     fun `Opplysninger ved permittering`() {
         val behandlingsresultatData =
             BehandlingsresultatData("/json/innvilgelse/innvigelse_permittering_resultat.json".readFile())
-        DagpengerOpplysning
-            .OppfyllerKravetTilPermittering(behandlingsresultatData)
-            .verdi shouldBe true
-        DagpengerOpplysning
-            .AntallPermitteringsuker(behandlingsresultatData)
-            .verdi shouldBe 26
-        DagpengerOpplysning
-            .LangDagpengeperiode(behandlingsresultatData)
-            .verdi shouldBe 104
+        DagpengerOpplysning.OppfyllerKravetTilPermittering(behandlingsresultatData).verdi shouldBe true
+        DagpengerOpplysning.AntallPermitteringsuker(behandlingsresultatData).verdi shouldBe 26
+        DagpengerOpplysning.LangDagpengeperiode(behandlingsresultatData).verdi shouldBe 104
+        DagpengerOpplysning.TerskelFor12Måneder(behandlingsresultatData).verdi shouldBe 273098
 
         setOf(
             DagpengerOpplysning.OppfyllerKravetTilPermittering(behandlingsresultatData),

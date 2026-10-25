@@ -11,7 +11,8 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.ManglerBrevstøtte
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_BARNETILLEGG
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_3
@@ -116,7 +117,8 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_ORDINÆR.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
-                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_DEL_1.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_DEL_2.brevblokkId,
                 INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
                 INNVILGELSE_GRUNNLAG.brevblokkId,
                 INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
@@ -155,7 +157,8 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
                 INNVILGELSE_SANKSJON_DEL_1.brevblokkId,
                 INNVILGELSE_SANKSJON_DEL_2.brevblokkId,
-                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_DEL_1.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_DEL_2.brevblokkId,
                 INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
                 INNVILGELSE_GRUNNLAG.brevblokkId,
                 INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
@@ -196,7 +199,8 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_ORDINÆR.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
-                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_DEL_1.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_DEL_2.brevblokkId,
                 INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
                 INNVILGELSE_BARNETILLEGG.brevblokkId,
                 INNVILGELSE_GRUNNLAG.brevblokkId,
@@ -252,7 +256,8 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_ORDINÆR.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
-                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_DEL_1.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_DEL_2.brevblokkId,
                 INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
                 INNVILGELSE_BARNETILLEGG.brevblokkId,
                 INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId,
@@ -321,7 +326,8 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_ORDINÆR.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
-                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_DEL_1.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_DEL_2.brevblokkId,
                 INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
                 INNVILGELSE_BARNETILLEGG.brevblokkId,
                 INNVILGELSE_NITTI_PROSENT_REGEL.brevblokkId,
@@ -406,7 +412,8 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_ORDINÆR.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
-                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_DEL_1.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_DEL_2.brevblokkId,
                 INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
                 INNVILGELSE_GRUNNLAG.brevblokkId,
                 INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
@@ -445,7 +452,8 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_ORDINÆR.brevblokkId,
                 INNVILGELSE_MED_EGENANDEL.brevblokkId,
                 INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
-                INNVILGELSE_DAGPENGEPERIODE.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_DEL_1.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_DEL_2.brevblokkId,
                 INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
                 INNVILGELSE_GRUNNLAG.brevblokkId,
                 INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,

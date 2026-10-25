@@ -33,6 +33,7 @@ class VedtakMapper(
                 this.addIfPresent { DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.InntektskravSiste12Måneder(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.InntektskravSiste36Måneder(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.TerskelFor12Måneder(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.ArbeidsinntektSiste12Måneder(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.ArbeidsinntektSiste36Måneder(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.AntallGSomGisSomGrunnlagVedVerneplikt(behandlingsresultatData) }

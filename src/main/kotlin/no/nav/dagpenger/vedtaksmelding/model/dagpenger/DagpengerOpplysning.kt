@@ -43,10 +43,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.krav-til-prosentvis-tap-av-arbeidstid"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.flyttall(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderFlyttall(opplysningTypeId),
+            verdi = behandlingsresultatData.flyttall(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderFlyttall(opplysningTypeId),
         )
     }
 
@@ -62,10 +60,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet: Enhet.KRONER = Enhet.KRONER
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -81,10 +77,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet: Enhet.KRONER = Enhet.KRONER
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -100,10 +94,25 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.arbeidsinntekt-siste-12-mnd"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
+        )
+    }
+
+    class TerskelFor12Måneder(
+        override val verdi: Number,
+        perioder: List<Periode<Number>>,
+    ) : Periodisert<Enhet.KRONER, Number>(verdi, perioder) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("0194881f-943d-77a7-969c-147999f1544c")
+        }
+
+        override val enhet: Enhet.KRONER = Enhet.KRONER
+        override val opplysningTekstId: String = "opplysning.terskel-for-12-mnd"
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -119,10 +128,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.arbeidsinntekt-siste-36-mnd"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -138,10 +145,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.antall-g-som-gis-som-grunnlag-ved-verneplikt"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.flyttall(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderFlyttall(opplysningTypeId),
+            verdi = behandlingsresultatData.flyttall(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderFlyttall(opplysningTypeId),
         )
     }
 
@@ -157,10 +162,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.brukt-beregningsregel-grunnlag"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.tekst(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderTekst(opplysningTypeId),
+            verdi = behandlingsresultatData.tekst(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderTekst(opplysningTypeId),
         )
 
         override fun formatertVerdi(): String = this.verdi.lowercase()
@@ -178,10 +181,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.har-brukt-beregningsregel-arbeidstid-siste-6-mnd"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -197,10 +198,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.har-brukt-beregningsregel-arbeidstid-siste-12-mnd"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -216,10 +215,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.har-brukt-beregningsregel-arbeidstid-siste-36-mnd"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -235,10 +232,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.utbetalt-arbeidsinntekt-periode-1"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -254,10 +249,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.utbetalt-arbeidsinntekt-periode-2"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -273,10 +266,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.utbetalt-arbeidsinntekt-periode-3"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -292,8 +283,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.heltall(opplysningTypeId),
-            behandlingsresultatData.perioderHeltall(opplysningTypeId),
+            verdi = behandlingsresultatData.heltall(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderHeltall(opplysningTypeId),
         )
     }
 
@@ -309,10 +300,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.kravet-til-antall-uker-foer-gjenopptak"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.heltall(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderHeltall(opplysningTypeId),
+            verdi = behandlingsresultatData.heltall(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderHeltall(opplysningTypeId),
         )
     }
 
@@ -328,10 +317,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.kravet-til-antall-uker-arbeid-for-reberegning-av-grunnlag"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.heltall(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderHeltall(opplysningTypeId),
+            verdi = behandlingsresultatData.heltall(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderHeltall(opplysningTypeId),
         )
     }
 
@@ -348,10 +335,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
             "opplysning.andel-av-dagsats-med-barnetillegg-som-overstiger-maks-andel-av-dagpengegrunnlaget"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -367,10 +352,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId = "opplysning.antall-barn-som-gir-rett-til-barnetillegg"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.heltall(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderHeltall(opplysningTypeId),
+            verdi = behandlingsresultatData.heltall(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderHeltall(opplysningTypeId),
         )
     }
 
@@ -386,10 +369,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet: Enhet.KRONER = Enhet.KRONER
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -405,10 +386,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId = "opplysning.antall-uker-med-sanksjon"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.heltall(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderHeltall(opplysningTypeId),
+            verdi = behandlingsresultatData.heltall(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderHeltall(opplysningTypeId),
         )
     }
 
@@ -425,10 +404,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet: Enhet.ENHETSLØS = Enhet.ENHETSLØS
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.dato(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderDato(opplysningTypeId),
+            verdi = behandlingsresultatData.dato(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderDato(opplysningTypeId),
         )
 
         override val deriverteOpplysninger: Set<DagpengerOpplysning<Enhet.ENHETSLØS, YearMonth>> =
@@ -473,10 +450,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet: Enhet.ENHETSLØS = Enhet.ENHETSLØS
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.dato(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderDato(opplysningTypeId),
+            verdi = behandlingsresultatData.dato(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderDato(opplysningTypeId),
         )
 
         override val deriverteOpplysninger: Set<DagpengerOpplysning<Enhet.ENHETSLØS, YearMonth>> =
@@ -520,10 +495,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.KRONER
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -539,10 +512,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.ENHETSLØS
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.heltall(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderHeltall(opplysningTypeId),
+            verdi = behandlingsresultatData.heltall(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderHeltall(opplysningTypeId),
         )
     }
 
@@ -558,10 +529,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.KRONER
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -577,10 +546,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.KRONER
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -596,10 +563,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.TIMER
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.flyttall(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderFlyttall(opplysningTypeId),
+            verdi = behandlingsresultatData.flyttall(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderFlyttall(opplysningTypeId),
         )
     }
 
@@ -615,10 +580,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.TIMER
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.flyttall(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderFlyttall(opplysningTypeId),
+            verdi = behandlingsresultatData.flyttall(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderFlyttall(opplysningTypeId),
         )
     }
 
@@ -634,10 +597,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.ENHETSLØS
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -653,10 +614,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.KRONER
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -672,10 +631,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.KRONER
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -691,10 +648,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.KRONER
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -710,10 +665,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.KRONER
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -729,10 +682,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.KRONER
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -748,10 +699,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.KRONER
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -767,8 +716,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.KRONER
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(opplysningTypeId),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -784,8 +733,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.UKER
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.heltall(opplysningTypeId),
-            behandlingsresultatData.perioderHeltall(opplysningTypeId),
+            verdi = behandlingsresultatData.heltall(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderHeltall(opplysningTypeId),
         )
     }
 
@@ -837,10 +786,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.ENHETSLØS
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -857,10 +804,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.ENHETSLØS
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -876,10 +821,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val enhet = Enhet.ENHETSLØS
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -895,10 +838,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.periode-som-gis-ved-verneplikt"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.heltall(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderHeltall(opplysningTypeId),
+            verdi = behandlingsresultatData.heltall(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderHeltall(opplysningTypeId),
         )
     }
 
@@ -916,10 +857,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.antall-permitteringsuker"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.heltall(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderHeltall(opplysningTypeId),
+            verdi = behandlingsresultatData.heltall(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderHeltall(opplysningTypeId),
         )
     }
 
@@ -937,10 +876,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.antall-permitteringsuker-fisk"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.heltall(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderHeltall(opplysningTypeId),
+            verdi = behandlingsresultatData.heltall(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderHeltall(opplysningTypeId),
         )
     }
 
@@ -956,10 +893,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.egenandel"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.penger(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.penger(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -975,10 +910,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.egenandel-gjenstaaende"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.pengerLast(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderPenger(opplysningTypeId),
+            verdi = behandlingsresultatData.pengerLast(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderPenger(opplysningTypeId),
         )
     }
 
@@ -994,10 +927,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.antall-stonadsdager-som-gjenstaar"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.heltallLast(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderHeltall(opplysningTypeId),
+            verdi = behandlingsresultatData.heltallLast(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderHeltall(opplysningTypeId),
         )
     }
 
@@ -1013,10 +944,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.krav-til-arbeidssoker"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1032,10 +961,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.oppfyller-krav-til-mobilitet"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1051,10 +978,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.oppfyller-krav-til-arbeidsfor"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1070,10 +995,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.oppfyller-krav-til-arbeidssoker"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1089,10 +1012,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.oppfyller-kravet-til-ethvert-arbeid"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1108,10 +1029,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.oppfyller-krav-til-registrert-arbeidssoker"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1127,10 +1046,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.oppfyller-meldeplikt"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1146,10 +1063,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.oppfyller-kravet-til-ikke-utestengt"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1165,10 +1080,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.oppfyller-kravet-til-opphold"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1184,10 +1097,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.ikke-fulle-ytelser"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1203,10 +1114,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.krav-til-tap-av-arbeidsinntekt-og-arbeidstid"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1222,10 +1131,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.oppfyller-vilkaaret-om-tap-av-arbeidstid"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1241,10 +1148,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.krav-til-tap-av-arbeidsinntekt"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1260,10 +1165,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.ikke-streik-eller-lockout"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1279,10 +1182,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.krav-til-alder"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1298,10 +1199,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.krav-til-utdanning"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1317,10 +1216,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.oppfyller-medlemskap"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1336,10 +1233,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.godkjent-lokal-arbeidssoker"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1355,10 +1250,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.godkjent-kun-deltidssoker"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1374,10 +1267,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.oppfyller-kravet-til-permittering"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1393,10 +1284,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.oppfyller-kravet-til-permittering-fiskeindustri"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
@@ -1412,10 +1301,8 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.oppfyller-kravet-til-reberegning-av-grunnlag"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.boolsk(
-                opplysningTypeId,
-            ),
-            behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
         )
     }
 
