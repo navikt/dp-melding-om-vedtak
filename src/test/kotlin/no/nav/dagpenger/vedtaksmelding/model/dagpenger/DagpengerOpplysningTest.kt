@@ -2,8 +2,6 @@ package no.nav.dagpenger.vedtaksmelding.model.dagpenger
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Opprinnelse
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Periode
 import no.nav.dagpenger.vedtaksmelding.util.readFile
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -14,7 +12,8 @@ import java.time.YearMonth
 class DagpengerOpplysningTest {
     @Test
     fun `Skal kunne lage alle type opplysninger ordninær`() {
-        val behandlingsresultatData = BehandlingsresultatData("/json/innvilgelse/innvigelse_ord_resultat.json".readFile())
+        val behandlingsresultatData =
+            BehandlingsresultatData("/json/innvilgelse/innvigelse_ord_resultat.json".readFile())
         setOf(
             DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid(behandlingsresultatData),
             DagpengerOpplysning.InntektskravSiste12Måneder(behandlingsresultatData),
@@ -94,22 +93,39 @@ class DagpengerOpplysningTest {
 
     @Test
     fun `Opplysninger ved permittering`() {
-        val behandlingsresultatData = BehandlingsresultatData("/json/innvilgelse/innvigelse_permittering_resultat.json".readFile())
+        val behandlingsresultatData =
+            BehandlingsresultatData("/json/innvilgelse/innvigelse_permittering_resultat.json".readFile())
         DagpengerOpplysning
             .OppfyllerKravetTilPermittering(behandlingsresultatData)
-            .verdi shouldBe
-            true
-
+            .verdi shouldBe true
         DagpengerOpplysning
             .AntallPermitteringsuker(behandlingsresultatData)
-            .verdi shouldBe
-            26
+            .verdi shouldBe 26
+        DagpengerOpplysning
+            .LangDagpengeperiode(behandlingsresultatData)
+            .verdi shouldBe 104
+
+        setOf(
+            DagpengerOpplysning.OppfyllerKravetTilPermittering(behandlingsresultatData),
+            DagpengerOpplysning.LangDagpengeperiode(behandlingsresultatData),
+            DagpengerOpplysning.AntallStønadsuker(104),
+        ).also {
+            DagpengerOpplysning.MinstEllerUnder2GInntekt.fra(opplysninger = it)!!.verdi shouldBe "minst"
+        }
+        setOf(
+            DagpengerOpplysning.OppfyllerKravetTilPermittering(behandlingsresultatData),
+            DagpengerOpplysning.LangDagpengeperiode(behandlingsresultatData),
+            DagpengerOpplysning.AntallStønadsuker(52),
+        ).also {
+            DagpengerOpplysning.MinstEllerUnder2GInntekt.fra(opplysninger = it)!!.verdi shouldBe "under"
+        }
     }
 
     @Test
     @Disabled("Trenger ny testdata med fisk")
     fun `Opplysninger ved permittering fisk`() {
-        val behandlingsresultatData = BehandlingsresultatData("/json/innvilgelse/innvigelse_permittering_resultat.json".readFile())
+        val behandlingsresultatData =
+            BehandlingsresultatData("/json/innvilgelse/innvigelse_permittering_resultat.json".readFile())
         DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(behandlingsresultatData) shouldBe
             true
         DagpengerOpplysning
@@ -122,16 +138,25 @@ class DagpengerOpplysningTest {
     fun `AntallStønadsuker blir satt basert på andre opplysninger`() {
         DagpengerOpplysning.AntallStønadsuker.fra(
             setOf<DagpengerOpplysning<*, *>>(
-                DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(true, listOf(Periode(true, Opprinnelse.NY))),
+                DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(
+                    true,
+                    listOf(Periode(true, Opprinnelse.NY)),
+                ),
                 DagpengerOpplysning.PeriodeSomGisVedVerneplikt(26, listOf(Periode(26, Opprinnelse.NY))),
-                DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger(104, listOf(Periode(104, Opprinnelse.NY))),
+                DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger(
+                    104,
+                    listOf(Periode(104, Opprinnelse.NY)),
+                ),
             ),
         ) shouldBe DagpengerOpplysning.AntallStønadsuker(26)
 
         DagpengerOpplysning.AntallStønadsuker.fra(
             setOf<DagpengerOpplysning<*, *>>(
                 DagpengerOpplysning.PeriodeSomGisVedVerneplikt(26, listOf(Periode(26, Opprinnelse.NY))),
-                DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger(104, listOf(Periode(104, Opprinnelse.NY))),
+                DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger(
+                    104,
+                    listOf(Periode(104, Opprinnelse.NY)),
+                ),
             ),
         ) shouldBe DagpengerOpplysning.AntallStønadsuker(104)
     }
@@ -140,8 +165,14 @@ class DagpengerOpplysningTest {
     fun `AntallStønadsuker kan være null`() {
         DagpengerOpplysning.AntallStønadsuker.fra(
             setOf<DagpengerOpplysning<*, *>>(
-                DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(true, listOf(Periode(true, Opprinnelse.NY))),
-                DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger(104, listOf(Periode(104, Opprinnelse.NY))),
+                DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(
+                    true,
+                    listOf(Periode(true, Opprinnelse.NY)),
+                ),
+                DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger(
+                    104,
+                    listOf(Periode(104, Opprinnelse.NY)),
+                ),
             ),
         ) shouldBe null
 
@@ -154,13 +185,15 @@ class DagpengerOpplysningTest {
 
     @Test
     fun `Siste dag med rett kan være null`() {
-        val behandlingsresultatData = BehandlingsresultatData("/json/innvilgelse/innvigelse_ord_resultat.json".readFile())
+        val behandlingsresultatData =
+            BehandlingsresultatData("/json/innvilgelse/innvigelse_ord_resultat.json".readFile())
         DagpengerOpplysning.SisteDagMedRett.fra(behandlingsresultatData) shouldBe null
     }
 
     @Test
     fun `Siste dag med rett blir satt på bakgrunn av rettighetsperiode`() {
-        val behandlingsresultatData = BehandlingsresultatData("/json/innvilgelse/innvigelse_ord_resultat_til_og_med_dato.json".readFile())
+        val behandlingsresultatData =
+            BehandlingsresultatData("/json/innvilgelse/innvigelse_ord_resultat_til_og_med_dato.json".readFile())
         DagpengerOpplysning.SisteDagMedRett.fra(behandlingsresultatData).also {
             requireNotNull(it) { "Forventet ikke null" }
             it.verdi shouldBe LocalDate.of(2025, 9, 9)
