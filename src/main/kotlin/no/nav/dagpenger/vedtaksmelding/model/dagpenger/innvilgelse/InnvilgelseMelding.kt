@@ -197,8 +197,8 @@ class InnvilgelseMelding(
 
     private fun innledningBlokker(): List<String> =
         when {
-            erInnvilgetSomPermittert() -> listOf(INNVILGELSE_PERMITTERT.brevblokkId)
             erInnvilgetSomPermittertIFiskeindustri() -> listOf(INNVILGELSE_PERMITTERT_FISK.brevblokkId)
+            erInnvilgetSomPermittert() -> listOf(INNVILGELSE_PERMITTERT.brevblokkId)
             else -> {
                 when (vedtak.finnOpplysning("opplysning.siste-dag-med-rett")) {
                     null -> listOf(INNVILGELSE_ORDINÆR.brevblokkId)
@@ -243,26 +243,24 @@ class InnvilgelseMelding(
 
     private fun virkningsdatoBlokker(): List<String> =
         when {
-            erInnvilgetSomPermittert() -> listOf(INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT.brevblokkId)
             erInnvilgetSomPermittertIFiskeindustri() -> listOf(INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT_FISK.brevblokkId)
+            erInnvilgetSomPermittert() -> listOf(INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT.brevblokkId)
             else -> listOf(INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId)
         }
 
     private fun dagpengeperiodeBlokker(): List<String> =
         when {
             erInnvilgetMedVerneplikt() -> listOf(INNVILGELSE_DAGPENGEPERIODE_VERNEPLIKT.brevblokkId)
-            erInnvilgetSomPermittert() ->
-                listOf(
-                    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_1.brevblokkId,
-                    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_2.brevblokkId,
-                )
-
             erInnvilgetSomPermittertIFiskeindustri() ->
                 listOf(
                     INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_1.brevblokkId,
                     INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_2.brevblokkId,
                 )
-
+            erInnvilgetSomPermittert() ->
+                listOf(
+                    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_1.brevblokkId,
+                    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_2.brevblokkId,
+                )
             else -> {
                 when (vedtak.finnOpplysning("opplysning.siste-dag-med-rett")) {
                     null ->
@@ -297,9 +295,10 @@ class InnvilgelseMelding(
 
     private fun erInnvilgetMedVerneplikt() = vedtak.oppfylt<DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget>()
 
-    private fun erInnvilgetSomPermittert() = vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermittering>()
-
     private fun erInnvilgetSomPermittertIFiskeindustri() = vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri>()
+
+    private fun erInnvilgetSomPermittert() =
+        vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermittering>() && !erInnvilgetSomPermittertIFiskeindustri()
 
     private fun erIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet() =
         vedtak.oppfylt<DagpengerOpplysning.ErIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet>()
