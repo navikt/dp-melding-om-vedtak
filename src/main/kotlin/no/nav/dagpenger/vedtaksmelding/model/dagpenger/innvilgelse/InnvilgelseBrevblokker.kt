@@ -48,7 +48,8 @@ enum class InnvilgelseBrevblokker(
 
     INNVILGELSE_PERMITTERT(brevblokkId = "brev.blokk.innvilgelse-permittert"),
     INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT(brevblokkId = "brev.blokk.begrunnelse-innvilgelsesdato-permittert"),
-    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert"),
+    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_1(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert-del-1"),
+    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_2(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert-del-2"),
     INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT(brevblokkId = "brev.blokk.arbeidsforhold-avslutt-permittert"),
     INNVILGELSE_HVA_SKJER_ETTER_PERMITTERINGEN(brevblokkId = "brev.blokk.hva-skjer-etter-permitteringen"),
 

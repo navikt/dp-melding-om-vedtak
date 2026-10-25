@@ -292,9 +292,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         override val opplysningTekstId: String = "opplysning.antall-stonadsuker-som-gis-ved-ordinare-dagpenger"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            behandlingsresultatData.heltall(
-                opplysningTypeId,
-            ),
+            behandlingsresultatData.heltall(opplysningTypeId),
             behandlingsresultatData.perioderHeltall(opplysningTypeId),
         )
     }
@@ -771,6 +769,23 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
             behandlingsresultatData.penger(opplysningTypeId),
             behandlingsresultatData.perioderPenger(opplysningTypeId),
+        )
+    }
+
+    class LangDagpengeperiode(
+        override val verdi: Int,
+        perioder: List<Periode<Int>>,
+    ) : Periodisert<Enhet.UKER, Int>(verdi, perioder) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("0194881f-943d-77a7-969c-147999f1544b")
+        }
+
+        override val opplysningTekstId = "opplysning.lang-dagpengeperiode"
+        override val enhet = Enhet.UKER
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            behandlingsresultatData.heltall(opplysningTypeId),
+            behandlingsresultatData.perioderHeltall(opplysningTypeId),
         )
     }
 
@@ -1425,6 +1440,34 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
                 behandlingsresultatData.sisteDagMedRett()?.let {
                     SisteDagMedRett(it)
                 }
+        }
+    }
+
+    class MinstEllerUnder2GInntekt(
+        override val verdi: String,
+    ) : DagpengerOpplysning<Enhet.ENHETSLØS, String>(verdi) {
+        override val opplysningTekstId = "opplysning.minst-eller-under"
+        override val enhet = Enhet.ENHETSLØS
+
+        companion object {
+            fun fra(opplysninger: Set<DagpengerOpplysning<*, *>>): MinstEllerUnder2GInntekt? {
+                val antallStønadsuker: Int? = opplysninger.filterIsInstance<AntallStønadsuker>().singleOrNull()?.verdi
+                val langDagpengeperiode: Int? =
+                    opplysninger.filterIsInstance<LangDagpengeperiode>().singleOrNull()?.verdi
+                return when (langDagpengeperiode == null || antallStønadsuker == null) {
+                    true -> {
+                        null
+                    }
+
+                    false -> {
+                        if (antallStønadsuker == langDagpengeperiode) {
+                            MinstEllerUnder2GInntekt("minst")
+                        } else {
+                            MinstEllerUnder2GInntekt("under")
+                        }
+                    }
+                }
+            }
         }
     }
 

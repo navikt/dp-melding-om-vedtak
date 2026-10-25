@@ -18,11 +18,13 @@ class VedtakMapperTest {
     @Test
     fun `Skal kunne hente opplysninger for permittering`() {
         val vedtak = VedtakMapper("/json/innvilgelse/innvigelse_permittering_resultat.json".readFile()).vedtak()
-        vedtak.behandlingId shouldBe UUID.fromString("0198c683-0770-734f-8ae2-34dfa8a714e5")
+        vedtak.behandlingId shouldBe UUID.fromString("01a0ec86-754b-752e-a1c9-9a3631014177")
         vedtak.utfall shouldBe Vedtak.Utfall.INNVILGET
         vedtak.also {
             it.hentOpplysning<DagpengerOpplysning.OppfyllerKravetTilPermittering>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.AntallPermitteringsuker>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.LangDagpengeperiode>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.MinstEllerUnder2GInntekt>() shouldNotBe null
         }
     }
 
