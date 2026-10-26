@@ -28,12 +28,13 @@ class StansMelding(
 
     override val harBrevstøtte: Boolean =
         vedtak.utfall == STANS &&
-            vedtak.behandletHendelseType in setOf("MELDEKORT", "ARBEIDSSØKERPERIODE") &&
+            vedtak.behandletHendelseType in setOf("MELDEKORT", "ARBEIDSSØKERPERIODE", "MANUELL", "SAMORDNING") &&
             setOfNotNull<DagpengerOpplysning.Periodisert<*, Boolean>>(
                 vedtak.finnOpplysning<DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.OppyllerMeldeplikt>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.KravTilAlder>(),
+                vedtak.finnOpplysning<DagpengerOpplysning.HarGittFullstendigeOgRiktigeOpplysninger>(),
             ).any {
                 it.perioder.ikkeOppfyltNy()
             }

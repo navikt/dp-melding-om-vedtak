@@ -1306,6 +1306,23 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
+    class HarGittFullstendigeOgRiktigeOpplysninger(
+        override val verdi: Boolean,
+        perioder: List<Periode<Boolean>>,
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("019bc5f8-fdf3-7240-afaf-52c0486eddc5")
+        }
+
+        override val enhet: Enhet.ENHETSLØS = Enhet.ENHETSLØS
+        override val opplysningTekstId: String = "opplysning.har-gitt-fullstendige-og-riktige-opplysninger"
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+        )
+    }
+
     // Under følger opplysninger som ikke har opplysningTypeId, men er konstruert på bakgrunn av andre opplysninger.
     class Virkningsdato(
         override val verdi: LocalDate,
