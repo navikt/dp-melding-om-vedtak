@@ -11,6 +11,12 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_3
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_3
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_3
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_EGENANDEL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING_EGENANDEL
@@ -166,10 +172,27 @@ class GjenopptakMelding(
     private fun dagpengeperiodeBlokker(): List<String> =
         when (vedtak.finnOpplysning("opplysning.siste-dag-med-rett")) {
             null -> {
-                if (vedtak.finnOpplysning<DagpengerOpplysning.AntallStønadsdagerSomGjenstår>() != null) {
-                    listOf(GJENOPPTAK_DAGPENGEPERIODE.brevblokkId)
-                } else {
-                    listOf(GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK.brevblokkId)
+                when {
+                    erInnvilgetSomPermittert() ->
+                        listOf(
+                            GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1.brevblokkId,
+                            GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2.brevblokkId,
+                            GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_3.brevblokkId,
+                        )
+
+                    erInnvilgetSomPermittertIFiskeindustri() ->
+                        listOf(
+                            GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_1.brevblokkId,
+                            GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_2.brevblokkId,
+                            GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_3.brevblokkId,
+                        )
+
+                    else ->
+                        if (vedtak.finnOpplysning<DagpengerOpplysning.AntallStønadsdagerSomGjenstår>() != null) {
+                            listOf(GJENOPPTAK_DAGPENGEPERIODE.brevblokkId)
+                        } else {
+                            listOf(GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK.brevblokkId)
+                        }
                 }
             }
 
@@ -300,9 +323,10 @@ class GjenopptakMelding(
 
     private fun erInnvilgetMedVerneplikt() = vedtak.oppfylt<DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget>()
 
-    private fun erInnvilgetSomPermittert() = vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermittering>()
-
     private fun erInnvilgetSomPermittertIFiskeindustri() = vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri>()
+
+    private fun erInnvilgetSomPermittert() =
+        vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermittering>() && !erInnvilgetSomPermittertIFiskeindustri()
 
     private fun oppfyllerKravetTilReberegningAvGrunnlag() = vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilReberegningAvGrunnlag>()
 

@@ -36,8 +36,6 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_NITTI_PROSENT_REGEL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR_FOM_TOM
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_PERMITTERT
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_PERMITTERT_FISK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_GENERISK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_OMSORGSPENGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SAMORDNET_PLEIEPENGER
@@ -49,8 +47,6 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_STANS_ÅRSAKER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_UTBETALING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT_FISK
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
@@ -285,99 +281,6 @@ class GjenopptakOrdinæreDagpengerTest {
                             DagpengerOpplysning.EgenandelGjenstående(verdi = 2000, listOf(Periode(verdi = 2000, Opprinnelse.NY))),
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = false),
                             DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
-                        ),
-                    behandletHendelseType = "SØKNAD",
-                ),
-            alleBrevblokker = emptyList(),
-        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
-    }
-
-    @Test
-    fun `Riktige brevblokker når det ikke er reberegnet grunnlag og forbruk av periode - permittert`() {
-        val forventedeBrevblokkIder =
-            listOf(
-                INNVILGELSE_PERMITTERT.brevblokkId,
-                GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
-                GJENOPPTAK_INNLEDNING_EGENANDEL.brevblokkId,
-                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT.brevblokkId,
-                GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
-                GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
-                GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
-                GJENOPPTAK_EGENANDEL.brevblokkId,
-                INNVILGELSE_MELDEKORT.brevblokkId,
-                INNVILGELSE_UTBETALING.brevblokkId,
-                INNVILGELSE_SKATTEKORT.brevblokkId,
-                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
-                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
-                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
-                RETT_TIL_INNSYN.brevBlokkId,
-                PERSONOPPLYSNINGER.brevBlokkId,
-                HJELP_FRA_ANDRE.brevBlokkId,
-                VEILEDNING_FRA_NAV.brevBlokkId,
-                SPØRSMÅL.brevBlokkId,
-            )
-        GjenopptakMelding(
-            vedtak =
-                Vedtak(
-                    behandlingId = behandlingId,
-                    utfall = Vedtak.Utfall.GJENOPPTAK,
-                    automatiskBehandling = false,
-                    opplysninger =
-                        setOf(
-                            DagpengerOpplysning.Egenandel(verdi = 3000, listOf(Periode(verdi = 3000, Opprinnelse.NY))),
-                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000, listOf(Periode(verdi = 2000, Opprinnelse.NY))),
-                            DagpengerOpplysning.GrunnlagErReberegnet(verdi = false),
-                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
-                            DagpengerOpplysning.OppfyllerKravetTilPermittering(verdi = true, listOf(Periode(verdi = true, Opprinnelse.NY))),
-                        ),
-                    behandletHendelseType = "SØKNAD",
-                ),
-            alleBrevblokker = emptyList(),
-        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
-    }
-
-    @Test
-    fun `Riktige brevblokker når det ikke er reberegnet grunnlag og forbruk av periode - permittert fisk`() {
-        val forventedeBrevblokkIder =
-            listOf(
-                INNVILGELSE_PERMITTERT_FISK.brevblokkId,
-                GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
-                GJENOPPTAK_INNLEDNING_EGENANDEL.brevblokkId,
-                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT_FISK.brevblokkId,
-                GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
-                GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
-                GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
-                GJENOPPTAK_EGENANDEL.brevblokkId,
-                INNVILGELSE_MELDEKORT.brevblokkId,
-                INNVILGELSE_UTBETALING.brevblokkId,
-                INNVILGELSE_SKATTEKORT.brevblokkId,
-                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
-                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
-                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
-                RETT_TIL_Å_KLAGE.brevBlokkId,
-                RETT_TIL_INNSYN.brevBlokkId,
-                PERSONOPPLYSNINGER.brevBlokkId,
-                HJELP_FRA_ANDRE.brevBlokkId,
-                VEILEDNING_FRA_NAV.brevBlokkId,
-                SPØRSMÅL.brevBlokkId,
-            )
-        GjenopptakMelding(
-            vedtak =
-                Vedtak(
-                    behandlingId = behandlingId,
-                    utfall = Vedtak.Utfall.GJENOPPTAK,
-                    automatiskBehandling = false,
-                    opplysninger =
-                        setOf(
-                            DagpengerOpplysning.Egenandel(verdi = 3000, listOf(Periode(verdi = 3000, Opprinnelse.NY))),
-                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000, listOf(Periode(verdi = 2000, Opprinnelse.NY))),
-                            DagpengerOpplysning.GrunnlagErReberegnet(verdi = false),
-                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
-                            DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(
-                                verdi = true,
-                                listOf(Periode(verdi = true, Opprinnelse.NY)),
-                            ),
                         ),
                     behandletHendelseType = "SØKNAD",
                 ),

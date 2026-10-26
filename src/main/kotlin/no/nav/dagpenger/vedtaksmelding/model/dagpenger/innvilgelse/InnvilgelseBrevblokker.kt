@@ -63,6 +63,18 @@ enum class InnvilgelseBrevblokker(
     GJENOPPTAK_INNLEDNING_EGENANDEL(brevblokkId = "brev.blokk.gjenopptak-innledning-egenandel"),
     GJENOPPTAK_INNLEDNING_VIRKNINGSDATO(brevblokkId = "brev.blokk.gjenopptak-innledning-virkningsdato"),
     GJENOPPTAK_DAGPENGEPERIODE(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak"),
+    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak-permittert-del-1"),
+    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak-permittert-del-2"),
+    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_3(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak-permittert-del-3"),
+    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_1(
+        brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak-permittert-fisk-del-1",
+    ),
+    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_2(
+        brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak-permittert-fisk-del-2",
+    ),
+    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_3(
+        brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak-permittert-fisk-del-3",
+    ),
     GJENOPPTAK_EGENANDEL(brevblokkId = "brev.blokk.gjenopptak-egenandel"),
     GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak-uten-forbruk"),
     GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1(

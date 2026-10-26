@@ -27,6 +27,9 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_3
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_3
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING_SAMME_PERIODE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING_VIRKNINGSDATO
@@ -661,6 +664,54 @@ class VedtakHtmlTest {
                 )
             writeStringToFile(
                 filePath = "build/temp/gjenopptak_med_reberegning_tom_dato.html",
+                content =
+                htmlInnhold,
+            )
+        }
+    }
+
+    @Test
+    fun `Html av gjenopptak permittering når bruker har hatt forbruk av dagpengeteller og ingen egenandel igjen`() {
+        runBlocking {
+            val gjenopptakMelding =
+                GjenopptakMelding(
+                    vedtak = hentVedtak("/json/gjenopptak/gjenopptak_innvilgelse_permittert.json"),
+                    alleBrevblokker = sanityKlient.hentBrevBlokker(),
+                )
+            gjenopptakMelding.hentOpplysninger()
+            val brevBlokker = gjenopptakMelding.hentBrevBlokker()
+            val htmlInnhold =
+                HtmlConverter.toHtml(
+                    brevBlokker = brevBlokker,
+                    opplysninger = gjenopptakMelding.hentOpplysninger(),
+                    meldingOmVedtakData = meldingOmVedtakData,
+                )
+
+            htmlInnhold brevblokkRekkefølgeShouldBe
+                listOf(
+                    INNVILGELSE_PERMITTERT.brevblokkId,
+                    GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                    INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT.brevblokkId,
+                    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1.brevblokkId,
+                    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2.brevblokkId,
+                    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_3.brevblokkId,
+                    GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
+                    GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
+                    INNVILGELSE_MELDEKORT.brevblokkId,
+                    INNVILGELSE_UTBETALING.brevblokkId,
+                    INNVILGELSE_SKATTEKORT.brevblokkId,
+                    INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                    INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                    INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
+                    RETT_TIL_INNSYN.brevBlokkId,
+                    PERSONOPPLYSNINGER.brevBlokkId,
+                    HJELP_FRA_ANDRE.brevBlokkId,
+                    VEILEDNING_FRA_NAV.brevBlokkId,
+                    SPØRSMÅL.brevBlokkId,
+                )
+            writeStringToFile(
+                filePath = "build/temp/gjenopptak_permittert.html",
                 content =
                 htmlInnhold,
             )
