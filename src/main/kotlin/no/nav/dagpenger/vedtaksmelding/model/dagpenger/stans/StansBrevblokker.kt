@@ -9,5 +9,7 @@ enum class StansBrevblokker(
     STANS_REELL_ARBEIDSSØKER_GENERELL("brev.blokk.stans-reell-arbeidssoker-generell"),
     STANS_IKKE_MELDT_SEG_I_TIDE("brev.blokk.stans-ikke-meldt-seg-i-tide"),
     STANS_ALDER("brev.blokk.stans-alder"),
+    STANS_URIKTIGE_ELLER_MANGLENDE_OPPLYSNINGER_DEL_1("brev.blokk.stans-uriktige-eller-manglende-opplysninger-del-1"),
+    STANS_URIKTIGE_ELLER_MANGLENDE_OPPLYSNINGER_DEL_2("brev.blokk.stans-uriktige-eller-manglende-opplysninger-del-2"),
     STANS_TRENGER_DU_FORTSATT_DAGPENGER("brev.blokk.trenger-du-fortsatt-dagpenger"),
 }

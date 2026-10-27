@@ -15,6 +15,8 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.ST
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_IKKE_MELDT_SEG_I_TIDE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_GENERELL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_TRENGER_DU_FORTSATT_DAGPENGER
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_URIKTIGE_ELLER_MANGLENDE_OPPLYSNINGER_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_URIKTIGE_ELLER_MANGLENDE_OPPLYSNINGER_DEL_2
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 
 class StansMelding(
@@ -52,6 +54,7 @@ class StansMelding(
                 blokkerReellArbeidssøkerOgMeldeplikt() +
                 blokkerArbeidOverTerskel() +
                 blokkerAlder() +
+                blokkerUriKtigeEllerManglendeOpplysninger() +
                 fasteBrevblokkerStans
         }
 
@@ -93,5 +96,13 @@ class StansMelding(
     private fun blokkerAlder(): List<String> =
         vedtak.ikkOppfyltBlokker<DagpengerOpplysning.KravTilAlder> {
             listOf(STANS_ALDER.brevblokkId)
+        }
+
+    private fun blokkerUriKtigeEllerManglendeOpplysninger(): List<String> =
+        vedtak.ikkOppfyltBlokker<DagpengerOpplysning.HarGittFullstendigeOgRiktigeOpplysninger> {
+            listOf(
+                STANS_URIKTIGE_ELLER_MANGLENDE_OPPLYSNINGER_DEL_1.brevblokkId,
+                STANS_URIKTIGE_ELLER_MANGLENDE_OPPLYSNINGER_DEL_2.brevblokkId,
+            )
         }
 }

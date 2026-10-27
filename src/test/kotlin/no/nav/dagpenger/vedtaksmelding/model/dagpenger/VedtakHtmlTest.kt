@@ -73,6 +73,8 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.ST
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_GENERELL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_REELL_ARBEIDSSØKER_SVART_NEI_TIL_Å_STÅ_TILMELDT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_TRENGER_DU_FORTSATT_DAGPENGER
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_URIKTIGE_ELLER_MANGLENDE_OPPLYSNINGER_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_URIKTIGE_ELLER_MANGLENDE_OPPLYSNINGER_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansMelding
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.klage.KlageBrevBlokker.KLAGE_OPPRETTHOLDELSE_DEL_2
@@ -874,6 +876,44 @@ class VedtakHtmlTest {
                 listOf(
                     STANS_INNLEDNING.brevblokkId,
                     STANS_IKKE_MELDT_SEG_I_TIDE.brevblokkId,
+                    STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
+                    RETT_TIL_INNSYN.brevBlokkId,
+                    PERSONOPPLYSNINGER.brevBlokkId,
+                    HJELP_FRA_ANDRE.brevBlokkId,
+                    VEILEDNING_FRA_NAV.brevBlokkId,
+                    SPØRSMÅL.brevBlokkId,
+                )
+            writeStringToFile(
+                filePath = "build/temp/stans_ikke_opprettholdt_meldeplikt.html",
+                content =
+                htmlInnhold,
+            )
+        }
+    }
+
+    @Test
+    fun `Html av stans når bruker har oppgitt uriktige eller manglende opplysninger`() {
+        runBlocking {
+            val stansMelding =
+                StansMelding(
+                    vedtak = hentVedtak("/json/stans/stans_uriktige_eller_manglende_opplysninger.json"),
+                    alleBrevblokker = sanityKlient.hentBrevBlokker(),
+                )
+            stansMelding.hentOpplysninger()
+            val brevBlokker = stansMelding.hentBrevBlokker()
+            val htmlInnhold =
+                HtmlConverter.toHtml(
+                    brevBlokker = brevBlokker,
+                    opplysninger = stansMelding.hentOpplysninger(),
+                    meldingOmVedtakData = meldingOmVedtakData,
+                )
+
+            htmlInnhold brevblokkRekkefølgeShouldBe
+                listOf(
+                    STANS_INNLEDNING.brevblokkId,
+                    STANS_URIKTIGE_ELLER_MANGLENDE_OPPLYSNINGER_DEL_1.brevblokkId,
+                    STANS_URIKTIGE_ELLER_MANGLENDE_OPPLYSNINGER_DEL_2.brevblokkId,
                     STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId,
                     RETT_TIL_Å_KLAGE.brevBlokkId,
                     RETT_TIL_INNSYN.brevBlokkId,
