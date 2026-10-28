@@ -326,7 +326,8 @@ class GjenopptakMelding(
     private fun erInnvilgetSomPermittertIFiskeindustri() = vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri>()
 
     private fun erInnvilgetSomPermittert() =
-        vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermittering>() && !erInnvilgetSomPermittertIFiskeindustri()
+        vedtak.oppfylt<DagpengerOpplysning.SkalPermitteringVurderes>() &&
+            vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermittering>()
 
     private fun oppfyllerKravetTilReberegningAvGrunnlag() = vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilReberegningAvGrunnlag>()
 

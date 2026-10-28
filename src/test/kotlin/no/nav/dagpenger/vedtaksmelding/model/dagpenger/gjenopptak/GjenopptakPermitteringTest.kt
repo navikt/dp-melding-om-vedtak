@@ -82,6 +82,7 @@ class GjenopptakPermitteringTest {
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = false),
                             DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
                             DagpengerOpplysning.GodkjentLokalArbeidssøker(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.SkalPermitteringVurderes(true, listOf(Periode(true, Opprinnelse.NY))),
                             DagpengerOpplysning.OppfyllerKravetTilPermittering(true, listOf(Periode(true, Opprinnelse.NY))),
                         ),
                     behandletHendelseType = "SØKNAD",

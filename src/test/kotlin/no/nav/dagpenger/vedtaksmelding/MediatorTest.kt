@@ -93,7 +93,7 @@ class MediatorTest {
 
     @Test
     fun `Endelig brev - Henter avslag-melding når vedtak har utfall AVSLÅTT`() {
-        val vedtak = VedtakMapper("/json/innvilgelse/innvigelse_ord_resultat.json".readFile()).vedtak()
+        val vedtak = VedtakMapper("/json/innvilgelse/innvilgelse_ordinaer.json".readFile()).vedtak()
         Vedtak(
             behandlingId = behandlingId,
             utfall = Vedtak.Utfall.AVSLÅTT,

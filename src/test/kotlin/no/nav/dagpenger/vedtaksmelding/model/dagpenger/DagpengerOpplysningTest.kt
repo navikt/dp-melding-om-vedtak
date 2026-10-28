@@ -13,7 +13,7 @@ class DagpengerOpplysningTest {
     @Test
     fun `Skal kunne lage alle type opplysninger ordninær`() {
         val behandlingsresultatData =
-            BehandlingsresultatData("/json/innvilgelse/innvigelse_ord_resultat.json".readFile())
+            BehandlingsresultatData("/json/innvilgelse/innvilgelse_ordinaer.json".readFile())
         setOf(
             DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid(behandlingsresultatData),
             DagpengerOpplysning.InntektskravSiste12Måneder(behandlingsresultatData),
@@ -21,7 +21,6 @@ class DagpengerOpplysningTest {
             DagpengerOpplysning.TerskelFor12Måneder(behandlingsresultatData),
             DagpengerOpplysning.ArbeidsinntektSiste12Måneder(behandlingsresultatData),
             DagpengerOpplysning.ArbeidsinntektSiste36Måneder(behandlingsresultatData),
-            DagpengerOpplysning.AntallGSomGisSomGrunnlagVedVerneplikt(behandlingsresultatData),
             DagpengerOpplysning.BruktBeregningsregelGrunnlag(behandlingsresultatData),
             DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste6Måneder(behandlingsresultatData),
             DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste12Måneder(behandlingsresultatData),
@@ -52,7 +51,6 @@ class DagpengerOpplysningTest {
             DagpengerOpplysning.ForeldrepengerDagsats(behandlingsresultatData),
             DagpengerOpplysning.SvangerskapspengerDagsats(behandlingsresultatData),
             DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(behandlingsresultatData),
-            DagpengerOpplysning.PeriodeSomGisVedVerneplikt(behandlingsresultatData),
             DagpengerOpplysning.Egenandel(behandlingsresultatData),
             DagpengerOpplysning.KravTilArbeidssøker(behandlingsresultatData),
             DagpengerOpplysning.OppfyllerKravTilMobilitet(behandlingsresultatData),
@@ -94,23 +92,39 @@ class DagpengerOpplysningTest {
 
     @Test
     fun `Opplysninger ved permittering`() {
-        val behandlingsresultatData =
-            BehandlingsresultatData("/json/innvilgelse/innvigelse_permittering_resultat.json".readFile())
-        DagpengerOpplysning.OppfyllerKravetTilPermittering(behandlingsresultatData).verdi shouldBe true
-        DagpengerOpplysning.AntallPermitteringsuker(behandlingsresultatData).verdi shouldBe 26
-        DagpengerOpplysning.LangDagpengeperiode(behandlingsresultatData).verdi shouldBe 104
-        DagpengerOpplysning.TerskelFor12Måneder(behandlingsresultatData).verdi shouldBe 273098
+        val behandlingsresultatLangDagpengeperiode =
+            BehandlingsresultatData("/json/innvilgelse/innvilgelse_permittering.json".readFile())
+        DagpengerOpplysning.OppfyllerKravetTilPermittering(behandlingsresultatLangDagpengeperiode).verdi shouldBe true
+        DagpengerOpplysning.AntallPermitteringsuker(behandlingsresultatLangDagpengeperiode).verdi shouldBe 26
+        DagpengerOpplysning.LangDagpengeperiode(behandlingsresultatLangDagpengeperiode).verdi shouldBe 104
+        DagpengerOpplysning.TerskelFor12Måneder(behandlingsresultatLangDagpengeperiode).verdi shouldBe 273098
 
         setOf(
-            DagpengerOpplysning.OppfyllerKravetTilPermittering(behandlingsresultatData),
-            DagpengerOpplysning.LangDagpengeperiode(behandlingsresultatData),
+            DagpengerOpplysning.LangDagpengeperiode(behandlingsresultatLangDagpengeperiode),
             DagpengerOpplysning.AntallStønadsuker(104),
         ).also {
             DagpengerOpplysning.MinstEllerUnder2GInntekt.fra(opplysninger = it)!!.verdi shouldBe "minst"
         }
+    }
+
+    @Test
+    fun `Lang dagpengeperiode skal vise minst 2G inntekt`() {
+        val behandlingsresultatKortDagpengeperiode =
+            BehandlingsresultatData("/json/innvilgelse/innvilgelse_ordinaer.json".readFile())
         setOf(
-            DagpengerOpplysning.OppfyllerKravetTilPermittering(behandlingsresultatData),
-            DagpengerOpplysning.LangDagpengeperiode(behandlingsresultatData),
+            DagpengerOpplysning.LangDagpengeperiode(behandlingsresultatKortDagpengeperiode),
+            DagpengerOpplysning.AntallStønadsuker(104),
+        ).also {
+            DagpengerOpplysning.MinstEllerUnder2GInntekt.fra(opplysninger = it)!!.verdi shouldBe "minst"
+        }
+    }
+
+    @Test
+    fun `Kort dagpengeperiode skal vise under 2G inntekt`() {
+        val behandlingsresultatKortDagpengeperiode =
+            BehandlingsresultatData("/json/innvilgelse/innvilgelse_kort_dagpengeperiode.json".readFile())
+        setOf(
+            DagpengerOpplysning.KortDagpengeperiode(behandlingsresultatKortDagpengeperiode),
             DagpengerOpplysning.AntallStønadsuker(52),
         ).also {
             DagpengerOpplysning.MinstEllerUnder2GInntekt.fra(opplysninger = it)!!.verdi shouldBe "under"
@@ -121,7 +135,7 @@ class DagpengerOpplysningTest {
     @Disabled("Trenger ny testdata med fisk")
     fun `Opplysninger ved permittering fisk`() {
         val behandlingsresultatData =
-            BehandlingsresultatData("/json/innvilgelse/innvigelse_permittering_resultat.json".readFile())
+            BehandlingsresultatData("/json/innvilgelse/innvilgelse_permittering.json".readFile())
         DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(behandlingsresultatData) shouldBe
             true
         DagpengerOpplysning
@@ -182,14 +196,14 @@ class DagpengerOpplysningTest {
     @Test
     fun `Siste dag med rett kan være null`() {
         val behandlingsresultatData =
-            BehandlingsresultatData("/json/innvilgelse/innvigelse_ord_resultat.json".readFile())
+            BehandlingsresultatData("/json/innvilgelse/innvilgelse_ordinaer.json".readFile())
         DagpengerOpplysning.SisteDagMedRett.fra(behandlingsresultatData) shouldBe null
     }
 
     @Test
     fun `Siste dag med rett blir satt på bakgrunn av rettighetsperiode`() {
         val behandlingsresultatData =
-            BehandlingsresultatData("/json/innvilgelse/innvigelse_ord_resultat_til_og_med_dato.json".readFile())
+            BehandlingsresultatData("/json/innvilgelse/innvilgelse_ordinaer_til_og_med_dato.json".readFile())
         DagpengerOpplysning.SisteDagMedRett.fra(behandlingsresultatData).also {
             requireNotNull(it) { "Forventet ikke null" }
             it.verdi shouldBe LocalDate.of(2025, 9, 9)

@@ -60,6 +60,7 @@ class PermitteringTest {
                         setOf(
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.OppfyllerKravetTilPermittering(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.SkalPermitteringVurderes(true, listOf(Periode(true, Opprinnelse.NY))),
                         ),
                     behandletHendelseType = "SØKNAD",
                 ),

@@ -120,6 +120,7 @@ class VedtakMapper(
                         behandlingsresultatData,
                     )
                 }
+                this.addIfPresent { DagpengerOpplysning.SkalPermitteringVurderes(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.AntallPermitteringsuker(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.AntallPermitteringsukerFisk(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilPermittering(behandlingsresultatData) }

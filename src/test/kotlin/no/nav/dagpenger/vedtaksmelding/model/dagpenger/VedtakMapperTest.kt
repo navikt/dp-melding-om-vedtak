@@ -17,7 +17,7 @@ import java.util.UUID
 class VedtakMapperTest {
     @Test
     fun `Skal kunne hente opplysninger for permittering`() {
-        val vedtak = VedtakMapper("/json/innvilgelse/innvigelse_permittering_resultat.json".readFile()).vedtak()
+        val vedtak = VedtakMapper("/json/innvilgelse/innvilgelse_permittering.json".readFile()).vedtak()
         vedtak.behandlingId shouldBe UUID.fromString("01a0ec86-754b-752e-a1c9-9a3631014177")
         vedtak.utfall shouldBe Vedtak.Utfall.INNVILGET
         vedtak.also {
@@ -31,7 +31,7 @@ class VedtakMapperTest {
     @Test
     @Disabled("Må ha testdata")
     fun `Skal kunne hente opplysninger for permittering i fiskeindustri`() {
-        val vedtak = VedtakMapper("/json/innvilgelse/innvigelse_permittering_resultat.json".readFile()).vedtak()
+        val vedtak = VedtakMapper("/json/innvilgelse/innvilgelse_permittering.json".readFile()).vedtak()
         vedtak.behandlingId shouldBe UUID.fromString("0198c683-0770-734f-8ae2-34dfa8a714e5")
         vedtak.utfall shouldBe Vedtak.Utfall.INNVILGET
         vedtak.also {
@@ -42,7 +42,7 @@ class VedtakMapperTest {
 
     @Test
     fun `Skal kunne lage alle type ordinære opplysninger, behandlingId og utfall for innvigelse ordinær`() {
-        val vedtak = VedtakMapper("/json/innvilgelse/innvigelse_ord_resultat_til_og_med_dato.json".readFile()).vedtak()
+        val vedtak = VedtakMapper("/json/innvilgelse/innvilgelse_ordinaer_til_og_med_dato.json".readFile()).vedtak()
         vedtak.behandlingId shouldBe UUID.fromString("0198eba3-b1c3-7d50-a7ee-f0f8cd1cbf6b")
         vedtak.utfall shouldBe Vedtak.Utfall.INNVILGET
         vedtak.also {

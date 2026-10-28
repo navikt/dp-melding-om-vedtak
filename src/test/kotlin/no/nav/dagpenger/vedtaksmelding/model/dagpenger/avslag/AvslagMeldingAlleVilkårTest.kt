@@ -140,6 +140,7 @@ class AvslagMeldingAlleVilkårTest {
                             DagpengerOpplysning.OppfyllerKravetTilOpphold(false, listOf(Periode(false, Opprinnelse.NY))),
                             DagpengerOpplysning.OppfyllerMedlemskap(false, listOf(Periode(false, Opprinnelse.NY))),
                             DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(false, listOf(Periode(false, Opprinnelse.NY))),
+                            DagpengerOpplysning.SkalPermitteringVurderes(true, listOf(Periode(false, Opprinnelse.NY))),
                             DagpengerOpplysning.OppfyllerKravetTilPermittering(false, listOf(Periode(false, Opprinnelse.NY))),
                         ),
                     behandletHendelseType = "SØKNAD",

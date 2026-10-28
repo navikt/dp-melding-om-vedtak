@@ -21,7 +21,11 @@ class AvslagPermitteringTest {
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     automatiskBehandling = false,
-                    opplysninger = setOf(DagpengerOpplysning.OppfyllerKravetTilPermittering(false, listOf(Periode(false, Opprinnelse.NY)))),
+                    opplysninger =
+                        setOf(
+                            DagpengerOpplysning.SkalPermitteringVurderes(true, listOf(Periode(false, Opprinnelse.NY))),
+                            DagpengerOpplysning.OppfyllerKravetTilPermittering(false, listOf(Periode(false, Opprinnelse.NY))),
+                        ),
                     behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),

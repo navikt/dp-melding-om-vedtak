@@ -231,7 +231,7 @@ class VedtakHtmlTest {
         runBlocking {
             val innvilgelseMelding =
                 InnvilgelseMelding(
-                    vedtak = hentVedtak("/json/innvilgelse/innvigelse_ord_resultat.json"),
+                    vedtak = hentVedtak("/json/innvilgelse/innvilgelse_ordinaer.json"),
                     alleBrevblokker = sanityKlient.hentBrevBlokker(),
                 )
             innvilgelseMelding.hentOpplysninger()
@@ -251,7 +251,6 @@ class VedtakHtmlTest {
                     INNVILGELSE_DAGPENGEPERIODE_DEL_1.brevblokkId,
                     INNVILGELSE_DAGPENGEPERIODE_DEL_2.brevblokkId,
                     INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
-                    INNVILGELSE_BARNETILLEGG.brevblokkId,
                     INNVILGELSE_GRUNNLAG.brevblokkId,
                     INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
                     INNVILGELSE_EGENANDEL.brevblokkId,
@@ -281,7 +280,7 @@ class VedtakHtmlTest {
         runBlocking {
             val innvilgelseMelding =
                 InnvilgelseMelding(
-                    vedtak = hentVedtak("/json/innvilgelse/innvigelse_permittering_resultat.json"),
+                    vedtak = hentVedtak("/json/innvilgelse/innvilgelse_permittering.json"),
                     alleBrevblokker = sanityKlient.hentBrevBlokker(),
                 )
             innvilgelseMelding.hentOpplysninger()

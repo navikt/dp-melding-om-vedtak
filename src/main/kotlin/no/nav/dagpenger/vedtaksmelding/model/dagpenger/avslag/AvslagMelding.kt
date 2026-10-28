@@ -44,6 +44,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.avslag.AvslagBrevblokker.
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.finnOpplysning
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.ikkOppfyltBlokker
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.ikkeOppfylt
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.oppfylt
 import no.nav.dagpenger.vedtaksmelding.portabletext.BrevBlokk
 
 class AvslagMelding(
@@ -243,7 +244,9 @@ class AvslagMelding(
             false -> emptyList()
         }
 
-    private fun avslåttPermittering(): Boolean = vedtak.ikkeOppfylt<DagpengerOpplysning.OppfyllerKravetTilPermittering>()
+    private fun avslåttPermittering(): Boolean =
+        vedtak.oppfylt<DagpengerOpplysning.SkalPermitteringVurderes>() &&
+            vedtak.ikkeOppfylt<DagpengerOpplysning.OppfyllerKravetTilPermittering>()
 
     private fun avslåttPermitteringFisk(): Boolean = vedtak.ikkeOppfylt<DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri>()
 

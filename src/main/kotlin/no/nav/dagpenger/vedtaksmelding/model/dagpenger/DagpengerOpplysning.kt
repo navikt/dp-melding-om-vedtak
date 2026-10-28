@@ -860,6 +860,23 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
+    class SkalPermitteringVurderes(
+        override val verdi: Boolean,
+        perioder: List<Periode<Boolean>>,
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("0194881f-9444-7a73-a458-0af81c034d86")
+        }
+
+        override val enhet: Enhet.ENHETSLØS = Enhet.ENHETSLØS
+        override val opplysningTekstId: String = "opplysning.skal-permittering-vurderes"
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+        )
+    }
+
     // Denne baserer seg på om oppfyllerKravetTilPermittering(0194d111-db2f-7395-bcfb-959f245fd2a6) er true i PJ.
     // nullable
     class AntallPermitteringsuker(
@@ -1378,7 +1395,6 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
                 val kortDagpengeperiode: Int? =
                     opplysninger.filterIsInstance<KortDagpengeperiode>().singleOrNull()?.verdi
 
-
                 val antallStønadsuker: Int? = opplysninger.filterIsInstance<AntallStønadsuker>().singleOrNull()?.verdi
                 return when ((kortDagpengeperiode == null && langDagpengeperiode == null) || antallStønadsuker == null) {
                     true -> {
@@ -1386,10 +1402,10 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
                     }
 
                     false -> {
-                        if (antallStønadsuker == langDagpengeperiode) {
-                            MinstEllerUnder2GInntekt("minst")
-                        } else {
-                            MinstEllerUnder2GInntekt("under")
+                        when (antallStønadsuker) {
+                            langDagpengeperiode -> MinstEllerUnder2GInntekt("minst")
+                            kortDagpengeperiode -> MinstEllerUnder2GInntekt("under")
+                            else -> null
                         }
                     }
                 }
