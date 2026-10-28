@@ -738,6 +738,23 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
+    class KortDagpengeperiode(
+        override val verdi: Int,
+        perioder: List<Periode<Int>>,
+    ) : Periodisert<Enhet.UKER, Int>(verdi, perioder) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("0194881f-943d-77a7-969c-147999f1544a")
+        }
+
+        override val opplysningTekstId = "opplysning.kort-dagpengeperiode"
+        override val enhet = Enhet.UKER
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            verdi = behandlingsresultatData.heltall(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderHeltall(opplysningTypeId),
+        )
+    }
+
     // Denne er komplisert og settes basert på kvote. Dersom både verneplikt-kvote og dagpenger-kvote finnes,
     // tar verneplikt-kvoten presedens.
     // i dp-behandling: Dersom KravTilMinsteinntektId("0194881f-9413-77ce-92ec-d29700f0424c") er true,
@@ -1355,10 +1372,15 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
 
         companion object {
             fun fra(opplysninger: Set<DagpengerOpplysning<*, *>>): MinstEllerUnder2GInntekt? {
-                val antallStønadsuker: Int? = opplysninger.filterIsInstance<AntallStønadsuker>().singleOrNull()?.verdi
                 val langDagpengeperiode: Int? =
                     opplysninger.filterIsInstance<LangDagpengeperiode>().singleOrNull()?.verdi
-                return when (langDagpengeperiode == null || antallStønadsuker == null) {
+
+                val kortDagpengeperiode: Int? =
+                    opplysninger.filterIsInstance<KortDagpengeperiode>().singleOrNull()?.verdi
+
+
+                val antallStønadsuker: Int? = opplysninger.filterIsInstance<AntallStønadsuker>().singleOrNull()?.verdi
+                return when ((kortDagpengeperiode == null && langDagpengeperiode == null) || antallStønadsuker == null) {
                     true -> {
                         null
                     }
