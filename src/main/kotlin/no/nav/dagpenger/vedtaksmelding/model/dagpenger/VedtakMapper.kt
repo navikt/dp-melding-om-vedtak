@@ -132,6 +132,7 @@ class VedtakMapper(
                 this.addIfPresent { DagpengerOpplysning.KravetTilAntallUkerArbeidForReberegningAvGrunnlag(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilReberegningAvGrunnlag(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.HarGittFullstendigeOgRiktigeOpplysninger(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.HarGittAlleNødvendigeOpplysninger(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.LangDagpengeperiode(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.KortDagpengeperiode(behandlingsresultatData) }
                 DagpengerOpplysning.AntallStønadsuker.fra(this)?.let { this.add(it) }

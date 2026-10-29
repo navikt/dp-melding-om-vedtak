@@ -922,7 +922,45 @@ class VedtakHtmlTest {
                     SPØRSMÅL.brevBlokkId,
                 )
             writeStringToFile(
-                filePath = "build/temp/stans_ikke_opprettholdt_meldeplikt.html",
+                filePath = "build/temp/stans_uriktige_eller_manglende_opplysninger.html",
+                content =
+                htmlInnhold,
+            )
+        }
+    }
+
+    @Test
+    fun `Html av stans når bruker ikke har gitt alle nødvendige opplysninger`() {
+        runBlocking {
+            val stansMelding =
+                StansMelding(
+                    vedtak = hentVedtak("/json/stans/stans_ikke_gitt_alle_nodvendige_opplysninger.json"),
+                    alleBrevblokker = sanityKlient.hentBrevBlokker(),
+                )
+            stansMelding.hentOpplysninger()
+            val brevBlokker = stansMelding.hentBrevBlokker()
+            val htmlInnhold =
+                HtmlConverter.toHtml(
+                    brevBlokker = brevBlokker,
+                    opplysninger = stansMelding.hentOpplysninger(),
+                    meldingOmVedtakData = meldingOmVedtakData,
+                )
+
+            htmlInnhold brevblokkRekkefølgeShouldBe
+                listOf(
+                    STANS_INNLEDNING.brevblokkId,
+                    STANS_URIKTIGE_ELLER_MANGLENDE_OPPLYSNINGER_DEL_1.brevblokkId,
+                    STANS_URIKTIGE_ELLER_MANGLENDE_OPPLYSNINGER_DEL_2.brevblokkId,
+                    STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
+                    RETT_TIL_INNSYN.brevBlokkId,
+                    PERSONOPPLYSNINGER.brevBlokkId,
+                    HJELP_FRA_ANDRE.brevBlokkId,
+                    VEILEDNING_FRA_NAV.brevBlokkId,
+                    SPØRSMÅL.brevBlokkId,
+                )
+            writeStringToFile(
+                filePath = "build/temp/stans_ikke_gitt_alle_nodvendige_opplysninger.html",
                 content =
                 htmlInnhold,
             )

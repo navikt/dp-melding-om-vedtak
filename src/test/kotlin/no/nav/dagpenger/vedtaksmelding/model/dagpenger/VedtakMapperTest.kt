@@ -215,4 +215,19 @@ class VedtakMapperTest {
             it.hentOpplysning<DagpengerOpplysning.FastsattVanligArbeidstidPerUke>() shouldNotBe null
         }
     }
+
+    @Test
+    fun `Skal kunne lage opplysninger til bruk ved stans`() {
+        val vedtak = VedtakMapper("/json/stans/stans_ikke_gitt_alle_nodvendige_opplysninger.json".readFile()).vedtak()
+        vedtak.behandlingId shouldBe UUID.fromString("01a15dd2-68c3-76e1-924f-8d9b2d382211")
+        vedtak.utfall shouldBe Vedtak.Utfall.STANS
+        vedtak.also {
+            it.hentOpplysning<DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.OppyllerMeldeplikt>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.KravTilAlder>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.HarGittFullstendigeOgRiktigeOpplysninger>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.HarGittAlleNødvendigeOpplysninger>() shouldNotBe null
+        }
+    }
 }

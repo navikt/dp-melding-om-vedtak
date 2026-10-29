@@ -450,4 +450,48 @@ class StansDagpengerTest {
                 SPØRSMÅL.brevBlokkId,
             )
     }
+
+    @Test
+    fun `Riktige brevblokker når bruker ikke har oppgitt alle nødvendige opplysninger`() {
+        StansMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    utfall = Vedtak.Utfall.STANS,
+                    automatiskBehandling = false,
+                    opplysninger =
+                        setOf(
+                            DagpengerOpplysning.HarGittAlleNødvendigeOpplysninger(
+                                verdi = false,
+                                perioder = listOf(Periode(verdi = false, Opprinnelse.NY, gyldigFraOgMed = LocalDate.now())),
+                            ),
+                            DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
+                                verdi = true,
+                                perioder =
+                                    listOf(
+                                        Periode(
+                                            verdi = true,
+                                            opprinnelse = Opprinnelse.ARVET,
+                                            gyldigFraOgMed = LocalDate.MIN,
+                                        ),
+                                    ),
+                            ),
+                        ),
+                    behandletHendelseType = "MELDEKORT",
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe
+            listOf(
+                STANS_INNLEDNING.brevblokkId,
+                STANS_URIKTIGE_ELLER_MANGLENDE_OPPLYSNINGER_DEL_1.brevblokkId,
+                STANS_URIKTIGE_ELLER_MANGLENDE_OPPLYSNINGER_DEL_2.brevblokkId,
+                STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
+                RETT_TIL_INNSYN.brevBlokkId,
+                PERSONOPPLYSNINGER.brevBlokkId,
+                HJELP_FRA_ANDRE.brevBlokkId,
+                VEILEDNING_FRA_NAV.brevBlokkId,
+                SPØRSMÅL.brevBlokkId,
+            )
+    }
 }

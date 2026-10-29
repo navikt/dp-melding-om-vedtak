@@ -37,6 +37,7 @@ class StansMelding(
                 vedtak.finnOpplysning<DagpengerOpplysning.OppyllerMeldeplikt>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.KravTilAlder>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.HarGittFullstendigeOgRiktigeOpplysninger>(),
+                vedtak.finnOpplysning<DagpengerOpplysning.HarGittAlleNødvendigeOpplysninger>(),
             ).any {
                 it.perioder.ikkeOppfyltNy()
             }
@@ -54,7 +55,7 @@ class StansMelding(
                 blokkerReellArbeidssøkerOgMeldeplikt() +
                 blokkerArbeidOverTerskel() +
                 blokkerAlder() +
-                blokkerUriKtigeEllerManglendeOpplysninger() +
+                blokkerUriktigeEllerManglendeOpplysninger() +
                 fasteBrevblokkerStans
         }
 
@@ -98,11 +99,15 @@ class StansMelding(
             listOf(STANS_ALDER.brevblokkId)
         }
 
-    private fun blokkerUriKtigeEllerManglendeOpplysninger(): List<String> =
-        vedtak.ikkOppfyltBlokker<DagpengerOpplysning.HarGittFullstendigeOgRiktigeOpplysninger> {
+    private fun blokkerUriktigeEllerManglendeOpplysninger(): List<String> =
+        if (vedtak.ikkeOppfylt<DagpengerOpplysning.HarGittFullstendigeOgRiktigeOpplysninger>() ||
+            vedtak.ikkeOppfylt<DagpengerOpplysning.HarGittAlleNødvendigeOpplysninger>()
+        ) {
             listOf(
                 STANS_URIKTIGE_ELLER_MANGLENDE_OPPLYSNINGER_DEL_1.brevblokkId,
                 STANS_URIKTIGE_ELLER_MANGLENDE_OPPLYSNINGER_DEL_2.brevblokkId,
             )
+        } else {
+            emptyList()
         }
 }
