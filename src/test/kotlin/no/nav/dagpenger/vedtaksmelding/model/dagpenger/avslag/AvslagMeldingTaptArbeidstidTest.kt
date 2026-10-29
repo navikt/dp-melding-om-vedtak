@@ -119,6 +119,7 @@ class AvslagMeldingTaptArbeidstidTest {
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false, listOf(Periode(false, Opprinnelse.NY))),
+                            DagpengerOpplysning.SkalPermitteringFiskeindustriVurderes(true, listOf(Periode(true, Opprinnelse.NY))),
                             DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(true, listOf(Periode(true, Opprinnelse.NY))),
                             DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5, listOf(Periode(37.5, Opprinnelse.NY))),
                             DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5, listOf(Periode(20.5, Opprinnelse.NY))),
@@ -147,6 +148,7 @@ class AvslagMeldingTaptArbeidstidTest {
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false, listOf(Periode(false, Opprinnelse.NY))),
+                            DagpengerOpplysning.SkalPermitteringFiskeindustriVurderes(true, listOf(Periode(true, Opprinnelse.NY))),
                             DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(true, listOf(Periode(true, Opprinnelse.NY))),
                             DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5, listOf(Periode(37.5, Opprinnelse.NY))),
                             DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5, listOf(Periode(20.5, Opprinnelse.NY))),
@@ -178,6 +180,7 @@ class AvslagMeldingTaptArbeidstidTest {
                     opplysninger =
                         setOf(
                             DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(false, listOf(Periode(false, Opprinnelse.NY))),
+                            DagpengerOpplysning.SkalPermitteringFiskeindustriVurderes(true, listOf(Periode(true, Opprinnelse.NY))),
                             DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(true, listOf(Periode(true, Opprinnelse.NY))),
                             DagpengerOpplysning.FastsattVanligArbeidstidPerUke(37.5, listOf(Periode(37.5, Opprinnelse.NY))),
                             DagpengerOpplysning.FastsattNyArbeidstidPerUke(20.5, listOf(Periode(20.5, Opprinnelse.NY))),

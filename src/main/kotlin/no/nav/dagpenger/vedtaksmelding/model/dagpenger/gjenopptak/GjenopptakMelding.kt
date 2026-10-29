@@ -6,6 +6,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.GJENOPPTAK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.finnOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.ikkeOppfylt
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1
@@ -327,7 +328,8 @@ class GjenopptakMelding(
 
     private fun erInnvilgetSomPermittert() =
         vedtak.oppfylt<DagpengerOpplysning.SkalPermitteringVurderes>() &&
-            vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermittering>()
+            vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermittering>() &&
+            vedtak.ikkeOppfylt<DagpengerOpplysning.SkalPermitteringFiskeindustriVurderes>()
 
     private fun oppfyllerKravetTilReberegningAvGrunnlag() = vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilReberegningAvGrunnlag>()
 

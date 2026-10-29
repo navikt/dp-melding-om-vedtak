@@ -877,6 +877,23 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
+    class SkalPermitteringFiskeindustriVurderes(
+        override val verdi: Boolean,
+        perioder: List<Periode<Boolean>>,
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("0194881f-9444-7a73-a458-0af81c034d88")
+        }
+
+        override val enhet: Enhet.ENHETSLØS = Enhet.ENHETSLØS
+        override val opplysningTekstId: String = "opplysning.skal-permittering-fisk-vurderes"
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+        )
+    }
+
     // Denne baserer seg på om oppfyllerKravetTilPermittering(0194d111-db2f-7395-bcfb-959f245fd2a6) er true i PJ.
     // nullable
     class AntallPermitteringsuker(

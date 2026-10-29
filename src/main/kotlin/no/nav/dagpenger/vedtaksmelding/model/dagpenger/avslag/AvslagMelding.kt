@@ -246,12 +246,14 @@ class AvslagMelding(
 
     private fun avslåttPermittering(): Boolean =
         vedtak.oppfylt<DagpengerOpplysning.SkalPermitteringVurderes>() &&
+            vedtak.ikkeOppfylt<DagpengerOpplysning.SkalPermitteringFiskeindustriVurderes>() &&
             vedtak.ikkeOppfylt<DagpengerOpplysning.OppfyllerKravetTilPermittering>()
 
-    private fun avslåttPermitteringFisk(): Boolean = vedtak.ikkeOppfylt<DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri>()
+    private fun avslåttPermitteringFisk(): Boolean =
+        vedtak.oppfylt<DagpengerOpplysning.SkalPermitteringFiskeindustriVurderes>() &&
+            vedtak.ikkeOppfylt<DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri>()
 
-    private fun gjelderPermitteringFisk(): Boolean =
-        vedtak.finnOpplysning<DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri>() != null
+    private fun gjelderPermitteringFisk(): Boolean = vedtak.oppfylt<DagpengerOpplysning.SkalPermitteringFiskeindustriVurderes>()
 
     private fun harBrukBeregningsregelArbeidstidSiste6Mnd(): Boolean =
         vedtak.opplysninger.any {

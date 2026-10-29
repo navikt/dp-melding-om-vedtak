@@ -15,15 +15,17 @@ import org.junit.jupiter.api.Test
 class AvslagPermitteringFiskTest {
     @Test
     fun `Riktige brevblokker for avslag på permitteringsårsak`() {
-        val avslåttVilkår = DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(false, listOf(Periode(false, Opprinnelse.NY)))
-
         AvslagMelding(
             vedtak =
                 Vedtak(
                     behandlingId = UUIDv7.ny(),
                     utfall = Vedtak.Utfall.AVSLÅTT,
                     automatiskBehandling = false,
-                    opplysninger = setOf(avslåttVilkår),
+                    opplysninger =
+                        setOf(
+                            DagpengerOpplysning.SkalPermitteringFiskeindustriVurderes(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(false, listOf(Periode(false, Opprinnelse.NY))),
+                        ),
                     behandletHendelseType = "SØKNAD",
                 ),
             alleBrevblokker = emptyList(),

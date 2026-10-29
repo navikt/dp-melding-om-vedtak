@@ -23,7 +23,8 @@ class AvslagPermitteringTest {
                     automatiskBehandling = false,
                     opplysninger =
                         setOf(
-                            DagpengerOpplysning.SkalPermitteringVurderes(true, listOf(Periode(false, Opprinnelse.NY))),
+                            DagpengerOpplysning.SkalPermitteringVurderes(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.SkalPermitteringFiskeindustriVurderes(false, listOf(Periode(false, Opprinnelse.NY))),
                             DagpengerOpplysning.OppfyllerKravetTilPermittering(false, listOf(Periode(false, Opprinnelse.NY))),
                         ),
                     behandletHendelseType = "SØKNAD",

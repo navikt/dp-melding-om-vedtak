@@ -6,6 +6,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtak.Utfall.INNVILGET
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.finnOpplysning
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.ikkeOppfylt
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN_VERNEPLIKT
@@ -299,7 +300,8 @@ class InnvilgelseMelding(
 
     private fun erInnvilgetSomPermittert() =
         vedtak.oppfylt<DagpengerOpplysning.SkalPermitteringVurderes>() &&
-            vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermittering>()
+            vedtak.oppfylt<DagpengerOpplysning.OppfyllerKravetTilPermittering>() &&
+            vedtak.ikkeOppfylt<DagpengerOpplysning.SkalPermitteringFiskeindustriVurderes>()
 
     private fun erIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet() =
         vedtak.oppfylt<DagpengerOpplysning.ErIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet>()
