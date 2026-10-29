@@ -29,6 +29,18 @@ class VedtakMapperTest {
     }
 
     @Test
+    fun `Skal kunne hente opplysninger om kort dagpengperiode`() {
+        val vedtak = VedtakMapper("/json/innvilgelse/innvilgelse_kort_dagpengeperiode.json".readFile()).vedtak()
+        vedtak.behandlingId shouldBe UUID.fromString("01a1813d-127b-71d5-84a5-4727701648a2")
+        vedtak.utfall shouldBe Vedtak.Utfall.INNVILGET
+        vedtak.also {
+            it.hentOpplysning<DagpengerOpplysning.AntallStønadsuker>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.KortDagpengeperiode>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.MinstEllerUnder2GInntekt>() shouldNotBe null
+        }
+    }
+
+    @Test
     @Disabled("Må ha testdata")
     fun `Skal kunne hente opplysninger for permittering i fiskeindustri`() {
         val vedtak = VedtakMapper("/json/innvilgelse/innvilgelse_permittering.json".readFile()).vedtak()
