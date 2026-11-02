@@ -22,7 +22,8 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MED_EGENANDEL
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_NITTI_PROSENT_REGEL
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR
@@ -123,7 +124,8 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_GRUNNLAG.brevblokkId,
                 INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
                 INNVILGELSE_EGENANDEL.brevblokkId,
-                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_1.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_2.brevblokkId,
                 INNVILGELSE_UTBETALING.brevblokkId,
                 INNVILGELSE_SKATTEKORT.brevblokkId,
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
@@ -163,7 +165,8 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_GRUNNLAG.brevblokkId,
                 INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
                 INNVILGELSE_EGENANDEL.brevblokkId,
-                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_1.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_2.brevblokkId,
                 INNVILGELSE_UTBETALING.brevblokkId,
                 INNVILGELSE_SKATTEKORT.brevblokkId,
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
@@ -206,7 +209,8 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_GRUNNLAG.brevblokkId,
                 INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
                 INNVILGELSE_EGENANDEL.brevblokkId,
-                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_1.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_2.brevblokkId,
                 INNVILGELSE_UTBETALING.brevblokkId,
                 INNVILGELSE_SKATTEKORT.brevblokkId,
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
@@ -264,7 +268,8 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_GRUNNLAG.brevblokkId,
                 INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
                 INNVILGELSE_EGENANDEL.brevblokkId,
-                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_1.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_2.brevblokkId,
                 INNVILGELSE_UTBETALING.brevblokkId,
                 INNVILGELSE_SKATTEKORT.brevblokkId,
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
@@ -334,7 +339,8 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_GRUNNLAG.brevblokkId,
                 INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
                 INNVILGELSE_EGENANDEL.brevblokkId,
-                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_1.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_2.brevblokkId,
                 INNVILGELSE_UTBETALING.brevblokkId,
                 INNVILGELSE_SKATTEKORT.brevblokkId,
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
@@ -380,7 +386,8 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_GRUNNLAG.brevblokkId,
                 INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
                 INNVILGELSE_EGENANDEL.brevblokkId,
-                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_1.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_2.brevblokkId,
                 INNVILGELSE_UTBETALING.brevblokkId,
                 INNVILGELSE_SKATTEKORT.brevblokkId,
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
@@ -420,7 +427,8 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_GODKJENT_LOKAL_ELLER_DELTID_ARBEIDSSØKER_DEL_1.brevblokkId,
                 INNVILGELSE_GODKJENT_LOKAL_ELLER_DELTID_ARBEIDSSØKER_DEL_2.brevblokkId,
                 INNVILGELSE_EGENANDEL.brevblokkId,
-                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_1.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_2.brevblokkId,
                 INNVILGELSE_UTBETALING.brevblokkId,
                 INNVILGELSE_SKATTEKORT.brevblokkId,
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
@@ -460,7 +468,8 @@ class OrdinæreDagpengerTest {
                 INNVILGELSE_GODKJENT_LOKAL_ELLER_DELTID_ARBEIDSSØKER_DEL_1.brevblokkId,
                 INNVILGELSE_GODKJENT_LOKAL_ELLER_DELTID_ARBEIDSSØKER_DEL_2.brevblokkId,
                 INNVILGELSE_EGENANDEL.brevblokkId,
-                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_1.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_2.brevblokkId,
                 INNVILGELSE_UTBETALING.brevblokkId,
                 INNVILGELSE_SKATTEKORT.brevblokkId,
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,

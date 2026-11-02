@@ -12,7 +12,8 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_GRUNNLAG_VERNEPLIKT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MED_EGENANDEL
-import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELDEKORT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_MELD_FRA_OM_ENDRINGER
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ORDINÆR
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_SKATTEKORT
@@ -38,7 +39,8 @@ class VernepliktOgInntektTest {
                 INNVILGELSE_VERNEPLIKT_GUNSTIGEST.brevblokkId,
                 INNVILGELSE_ARBEIDSTIDEN_DIN_VERNEPLIKT.brevblokkId,
                 INNVILGELSE_EGENANDEL.brevblokkId,
-                INNVILGELSE_MELDEKORT.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_1.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_2.brevblokkId,
                 INNVILGELSE_UTBETALING.brevblokkId,
                 INNVILGELSE_SKATTEKORT.brevblokkId,
                 INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
