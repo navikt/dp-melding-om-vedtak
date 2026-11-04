@@ -224,7 +224,7 @@ class VedtakMapperTest {
         vedtak.also {
             it.hentOpplysning<DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>() shouldNotBe null
-            it.hentOpplysning<DagpengerOpplysning.OppyllerMeldeplikt>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.OppfyllerMeldeplikt>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.KravTilAlder>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.HarGittFullstendigeOgRiktigeOpplysninger>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.HarGittAlleNødvendigeOpplysninger>() shouldNotBe null

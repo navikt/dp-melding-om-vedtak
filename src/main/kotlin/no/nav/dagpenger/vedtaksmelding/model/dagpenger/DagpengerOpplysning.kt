@@ -1085,7 +1085,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
-    class OppyllerMeldeplikt(
+    class OppfyllerMeldeplikt(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,
     ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {

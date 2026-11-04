@@ -101,7 +101,7 @@ class VedtakMapper(
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravTilArbeidssøker(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilEthvertArbeid(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.OppyllerMeldeplikt(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.OppfyllerMeldeplikt(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilIkkeUtestengt(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilOpphold(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.IkkeFulleYtelser(behandlingsresultatData) }

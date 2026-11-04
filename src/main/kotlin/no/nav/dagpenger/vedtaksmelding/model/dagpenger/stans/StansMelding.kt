@@ -30,11 +30,11 @@ class StansMelding(
 
     override val harBrevstøtte: Boolean =
         vedtak.utfall == STANS &&
-            vedtak.behandletHendelseType in setOf("MELDEKORT", "ARBEIDSSØKERPERIODE", "MANUELL", "SAMORDNING") &&
+            vedtak.behandletHendelseType in setOf("MELDEKORT", "ARBEIDSSØKERPERIODE", "MANUELL", "SAMORDNING", "OMGJØRING") &&
             setOfNotNull<DagpengerOpplysning.Periodisert<*, Boolean>>(
                 vedtak.finnOpplysning<DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>(),
-                vedtak.finnOpplysning<DagpengerOpplysning.OppyllerMeldeplikt>(),
+                vedtak.finnOpplysning<DagpengerOpplysning.OppfyllerMeldeplikt>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.KravTilAlder>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.HarGittFullstendigeOgRiktigeOpplysninger>(),
                 vedtak.finnOpplysning<DagpengerOpplysning.HarGittAlleNødvendigeOpplysninger>(),
@@ -73,7 +73,7 @@ class StansMelding(
 
     private fun blokkerReellArbeidssøkerOgMeldeplikt(): List<String> =
 
-        if (vedtak.ikkeOppfylt<DagpengerOpplysning.OppyllerMeldeplikt>() &&
+        if (vedtak.ikkeOppfylt<DagpengerOpplysning.OppfyllerMeldeplikt>() &&
             vedtak.hentOpplysning<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>().perioder.ikkeOppfyltNy()
         ) {
             listOf(STANS_IKKE_MELDT_SEG_I_TIDE.brevblokkId)

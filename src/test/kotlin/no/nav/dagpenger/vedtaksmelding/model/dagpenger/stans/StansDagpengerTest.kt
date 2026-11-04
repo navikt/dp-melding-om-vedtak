@@ -32,7 +32,7 @@ class StansDagpengerTest {
     private val behandlingId = UUIDv7.ny()
 
     @Test
-    fun `Kriterier for å lage stans-brev`() {
+    fun `Mangler brevstøtte for stans når utfall er avslått`() {
         shouldThrow<ManglerBrevstøtte> {
             StansMelding(
                 vedtak =
@@ -59,6 +59,10 @@ class StansDagpengerTest {
                 alleBrevblokker = emptyList(),
             )
         }
+    }
+
+    @Test
+    fun `Mangler brevstøtte for stans når utfall er innvilget`() {
         shouldThrow<ManglerBrevstøtte> {
             StansMelding(
                 vedtak =
@@ -85,6 +89,10 @@ class StansDagpengerTest {
                 alleBrevblokker = emptyList(),
             )
         }
+    }
+
+    @Test
+    fun `Mangler brevstøtte for stans når utfall er gjenopptak`() {
         shouldThrow<ManglerBrevstøtte> {
             StansMelding(
                 vedtak =
@@ -111,6 +119,10 @@ class StansDagpengerTest {
                 alleBrevblokker = emptyList(),
             )
         }
+    }
+
+    @Test
+    fun `Mangler brevstøtte for stans når ingen aktuelle vilkår er ikke-oppfylt`() {
         shouldThrow<ManglerBrevstøtte> {
             StansMelding(
                 vedtak =
@@ -137,6 +149,10 @@ class StansDagpengerTest {
                 alleBrevblokker = emptyList(),
             )
         }
+    }
+
+    @Test
+    fun `Har brevstøtte for automatisk stans når vilkår om registrert arbeidssøker ikke er oppfylt - hendelse arbeidssøkerperiode`() {
         shouldNotThrowAny {
             StansMelding(
                 vedtak =
@@ -163,6 +179,10 @@ class StansDagpengerTest {
                 alleBrevblokker = emptyList(),
             )
         }
+    }
+
+    @Test
+    fun `Har brevstøtte for manuell stans når vilkår om registrert arbeidssøker ikke er oppfylt - hendelse arbeidssøkerperiode`() {
         shouldNotThrowAny {
             StansMelding(
                 vedtak =
@@ -185,6 +205,211 @@ class StansDagpengerTest {
                                 ),
                             ),
                         behandletHendelseType = "ARBEIDSSØKERPERIODE",
+                    ),
+                alleBrevblokker = emptyList(),
+            )
+        }
+    }
+
+    @Test
+    fun `Har brevstøtte for automatisk stans når vilkår om tap av arbeidstid ikke er oppfylt - hendelse arbeidssøkerperiode`() {
+        shouldNotThrowAny {
+            StansMelding(
+                vedtak =
+                    Vedtak(
+                        behandlingId = behandlingId,
+                        utfall = Vedtak.Utfall.STANS,
+                        automatiskBehandling = true,
+                        opplysninger =
+                            setOf(
+                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
+                                    verdi = true,
+                                    perioder =
+                                        listOf(
+                                            Periode(
+                                                verdi = true,
+                                                opprinnelse = Opprinnelse.NY,
+                                                gyldigFraOgMed = LocalDate.MIN,
+                                            ),
+                                        ),
+                                ),
+                                DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(
+                                    verdi = false,
+                                    perioder =
+                                        listOf(
+                                            Periode(
+                                                verdi = false,
+                                                opprinnelse = Opprinnelse.NY,
+                                                gyldigFraOgMed = LocalDate.MIN,
+                                            ),
+                                        ),
+                                ),
+                            ),
+                        behandletHendelseType = "ARBEIDSSØKERPERIODE",
+                    ),
+                alleBrevblokker = emptyList(),
+            )
+        }
+    }
+
+    @Test
+    fun `Har brevstøtte for automatisk stans når vilkår om meldeplikt ikke er oppfylt - hendelse meldekort`() {
+        shouldNotThrowAny {
+            StansMelding(
+                vedtak =
+                    Vedtak(
+                        behandlingId = behandlingId,
+                        utfall = Vedtak.Utfall.STANS,
+                        automatiskBehandling = true,
+                        opplysninger =
+                            setOf(
+                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
+                                    verdi = true,
+                                    perioder =
+                                        listOf(
+                                            Periode(
+                                                verdi = true,
+                                                opprinnelse = Opprinnelse.NY,
+                                                gyldigFraOgMed = LocalDate.MIN,
+                                            ),
+                                        ),
+                                ),
+                                DagpengerOpplysning.OppfyllerMeldeplikt(
+                                    verdi = false,
+                                    perioder =
+                                        listOf(
+                                            Periode(
+                                                verdi = false,
+                                                opprinnelse = Opprinnelse.NY,
+                                                gyldigFraOgMed = LocalDate.MIN,
+                                            ),
+                                        ),
+                                ),
+                            ),
+                        behandletHendelseType = "MELDEKORT",
+                    ),
+                alleBrevblokker = emptyList(),
+            )
+        }
+    }
+
+    @Test
+    fun `Har brevstøtte for automatisk stans når vilkår om alder ikke er oppfylt - hendelse omgjøring`() {
+        shouldNotThrowAny {
+            StansMelding(
+                vedtak =
+                    Vedtak(
+                        behandlingId = behandlingId,
+                        utfall = Vedtak.Utfall.STANS,
+                        automatiskBehandling = true,
+                        opplysninger =
+                            setOf(
+                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
+                                    verdi = true,
+                                    perioder =
+                                        listOf(
+                                            Periode(
+                                                verdi = true,
+                                                opprinnelse = Opprinnelse.NY,
+                                                gyldigFraOgMed = LocalDate.MIN,
+                                            ),
+                                        ),
+                                ),
+                                DagpengerOpplysning.KravTilAlder(
+                                    verdi = false,
+                                    perioder =
+                                        listOf(
+                                            Periode(
+                                                verdi = false,
+                                                opprinnelse = Opprinnelse.NY,
+                                                gyldigFraOgMed = LocalDate.now(),
+                                            ),
+                                        ),
+                                ),
+                            ),
+                        behandletHendelseType = "OMGJØRING",
+                    ),
+                alleBrevblokker = emptyList(),
+            )
+        }
+    }
+
+    @Test
+    fun `Har brevstøtte for stans når vilkår om fullstendige og riktige opplysninger ikke er oppfylt - hendelse samordning`() {
+        shouldNotThrowAny {
+            StansMelding(
+                vedtak =
+                    Vedtak(
+                        behandlingId = behandlingId,
+                        utfall = Vedtak.Utfall.STANS,
+                        automatiskBehandling = true,
+                        opplysninger =
+                            setOf(
+                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
+                                    verdi = true,
+                                    perioder =
+                                        listOf(
+                                            Periode(
+                                                verdi = true,
+                                                opprinnelse = Opprinnelse.NY,
+                                                gyldigFraOgMed = LocalDate.MIN,
+                                            ),
+                                        ),
+                                ),
+                                DagpengerOpplysning.HarGittFullstendigeOgRiktigeOpplysninger(
+                                    verdi = false,
+                                    perioder =
+                                        listOf(
+                                            Periode(
+                                                verdi = false,
+                                                opprinnelse = Opprinnelse.NY,
+                                                gyldigFraOgMed = LocalDate.now(),
+                                            ),
+                                        ),
+                                ),
+                            ),
+                        behandletHendelseType = "SAMORDNING",
+                    ),
+                alleBrevblokker = emptyList(),
+            )
+        }
+    }
+
+    @Test
+    fun `Har brevstøtte for stans når vilkår om fullstendige og å gi alle nødvendige opplysninger ikke er oppfylt - hendelse manuell`() {
+        shouldNotThrowAny {
+            StansMelding(
+                vedtak =
+                    Vedtak(
+                        behandlingId = behandlingId,
+                        utfall = Vedtak.Utfall.STANS,
+                        automatiskBehandling = true,
+                        opplysninger =
+                            setOf(
+                                DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
+                                    verdi = true,
+                                    perioder =
+                                        listOf(
+                                            Periode(
+                                                verdi = true,
+                                                opprinnelse = Opprinnelse.NY,
+                                                gyldigFraOgMed = LocalDate.MIN,
+                                            ),
+                                        ),
+                                ),
+                                DagpengerOpplysning.HarGittAlleNødvendigeOpplysninger(
+                                    verdi = false,
+                                    perioder =
+                                        listOf(
+                                            Periode(
+                                                verdi = false,
+                                                opprinnelse = Opprinnelse.NY,
+                                                gyldigFraOgMed = LocalDate.now(),
+                                            ),
+                                        ),
+                                ),
+                            ),
+                        behandletHendelseType = "MANUELL",
                     ),
                 alleBrevblokker = emptyList(),
             )
@@ -343,7 +568,7 @@ class StansDagpengerTest {
                                 verdi = false,
                                 perioder = listOf(Periode(verdi = false, Opprinnelse.NY, gyldigFraOgMed = LocalDate.MIN)),
                             ),
-                            DagpengerOpplysning.OppyllerMeldeplikt(
+                            DagpengerOpplysning.OppfyllerMeldeplikt(
                                 verdi = false,
                                 perioder = listOf(Periode(verdi = false, Opprinnelse.NY, gyldigFraOgMed = LocalDate.MIN)),
                             ),
