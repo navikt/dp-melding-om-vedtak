@@ -14,8 +14,11 @@ import no.nav.dagpenger.vedtaksmelding.db.VedtaksmeldingRepository
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.ARBEIDSSØKERPERIODE
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.Companion.tilBehandlingstype
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.FRITEKST
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.KLAGE
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MANUELL
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.MELDEKORT
+import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.SAMORDNING
 import no.nav.dagpenger.vedtaksmelding.model.Behandlingstype.SØKNAD
 import no.nav.dagpenger.vedtaksmelding.model.UtvidetBeskrivelse
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
@@ -158,10 +161,10 @@ class Mediator(
                     object : TypeReference<ResultDTO>() {},
                 ).result
 
-        logger.info { "Henter brevkKomponenter for behandlingtype: $behandlingstype" }
+        logger.info { "Henter brevkomponenter for behandling $behandlingId, behandlingstype: $behandlingstype" }
 
         return when (behandlingstype) {
-            SØKNAD, ARBEIDSSØKERPERIODE, MELDEKORT -> {
+            SØKNAD, ARBEIDSSØKERPERIODE, MELDEKORT, MANUELL, SAMORDNING -> {
                 val vedtak =
                     behandlingKlient
                         .hentBehandlingResultat(
@@ -207,7 +210,7 @@ class Mediator(
                 )
             }
 
-            Behandlingstype.FRITEKST -> throw NotImplementedError("Behandling: $behandlingId har kun støtte for fritekstbrev")
+            FRITEKST -> throw NotImplementedError("Behandling: $behandlingId har kun støtte for fritekstbrev")
         }
     }
 

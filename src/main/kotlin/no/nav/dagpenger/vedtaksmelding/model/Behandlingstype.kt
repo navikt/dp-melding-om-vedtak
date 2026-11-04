@@ -4,6 +4,8 @@ enum class Behandlingstype {
     SØKNAD,
     ARBEIDSSØKERPERIODE,
     MELDEKORT,
+    MANUELL,
+    SAMORDNING,
     KLAGE,
     FRITEKST,
     ;
@@ -14,6 +16,8 @@ enum class Behandlingstype {
                 "SØKNAD" -> SØKNAD
                 "ARBEIDSSØKERPERIODE" -> ARBEIDSSØKERPERIODE
                 "MELDEKORT" -> MELDEKORT
+                "MANUELL" -> MANUELL
+                "SAMORDNING" -> SAMORDNING
                 "KLAGE" -> KLAGE
                 else -> FRITEKST
             }
