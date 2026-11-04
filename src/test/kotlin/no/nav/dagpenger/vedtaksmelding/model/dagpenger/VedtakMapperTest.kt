@@ -219,7 +219,7 @@ class VedtakMapperTest {
     @Test
     fun `Skal kunne lage opplysninger til bruk ved stans`() {
         val vedtak = VedtakMapper("/json/stans/stans_ikke_gitt_alle_nodvendige_opplysninger.json".readFile()).vedtak()
-        vedtak.behandlingId shouldBe UUID.fromString("01a15dd2-68c3-76e1-924f-8d9b2d382211")
+        vedtak.behandlingId shouldBe UUID.fromString("01a1a717-e3b8-7678-94fa-1cd9350e5a33")
         vedtak.utfall shouldBe Vedtak.Utfall.STANS
         vedtak.also {
             it.hentOpplysning<DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid>() shouldNotBe null

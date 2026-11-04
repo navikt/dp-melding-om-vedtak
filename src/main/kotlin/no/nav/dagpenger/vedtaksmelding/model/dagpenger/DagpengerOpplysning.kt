@@ -1383,7 +1383,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         }
 
         override val enhet: Enhet.ENHETSLØS = Enhet.ENHETSLØS
-        override val opplysningTekstId: String = "opplysning.har-gitt-alle-nødvendige-opplysninger"
+        override val opplysningTekstId: String = "opplysning.har-gitt-alle-nodvendige-opplysninger"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
             verdi = behandlingsresultatData.boolsk(opplysningTypeId),

@@ -294,8 +294,8 @@ class StansDagpengerTest {
     }
 
     @Test
-    fun `Har brevstøtte for automatisk stans når vilkår om alder ikke er oppfylt - hendelse omgjøring`() {
-        shouldNotThrowAny {
+    fun `Har ikke brevstøtte for stans ved omgjøring`() {
+        shouldThrow<ManglerBrevstøtte> {
             StansMelding(
                 vedtak =
                     Vedtak(
