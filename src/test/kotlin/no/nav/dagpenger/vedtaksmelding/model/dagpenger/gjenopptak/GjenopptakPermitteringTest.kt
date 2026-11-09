@@ -13,6 +13,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevb
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding.FasteBrevblokker.VEILEDNING_FRA_NAV
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1_GJENSTÅENDE_PERM
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_3
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_1
@@ -84,6 +85,62 @@ class GjenopptakPermitteringTest {
                             DagpengerOpplysning.GrunnlagErReberegnet(verdi = false),
                             DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
                             DagpengerOpplysning.GodkjentLokalArbeidssøker(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.SkalPermitteringVurderes(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.SkalPermitteringFiskeindustriVurderes(false, listOf(Periode(false, Opprinnelse.NY))),
+                            DagpengerOpplysning.OppfyllerKravetTilPermittering(true, listOf(Periode(true, Opprinnelse.NY))),
+                        ),
+                    behandletHendelseType = "SØKNAD",
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Riktige brevblokker gjenopptak permittering når det ikke er reberegning, har brukt perm-periode`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                INNVILGELSE_PERMITTERT.brevblokkId,
+                GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                GJENOPPTAK_INNLEDNING_EGENANDEL.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT.brevblokkId,
+                GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1_GJENSTÅENDE_PERM.brevblokkId,
+                GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2.brevblokkId,
+                GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_3.brevblokkId,
+                GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
+                GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
+                GJENOPPTAK_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_1.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_2.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                RETT_TIL_Å_KLAGE.brevBlokkId,
+                RETT_TIL_INNSYN.brevBlokkId,
+                PERSONOPPLYSNINGER.brevBlokkId,
+                HJELP_FRA_ANDRE.brevBlokkId,
+                VEILEDNING_FRA_NAV.brevBlokkId,
+                SPØRSMÅL.brevBlokkId,
+            )
+        GjenopptakMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = behandlingId,
+                    utfall = Vedtak.Utfall.GJENOPPTAK,
+                    automatiskBehandling = false,
+                    opplysninger =
+                        setOf(
+                            DagpengerOpplysning.Egenandel(verdi = 3000, listOf(Periode(verdi = 3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.EgenandelGjenstående(verdi = 2000, listOf(Periode(verdi = 2000, Opprinnelse.NY))),
+                            DagpengerOpplysning.GrunnlagErReberegnet(verdi = false),
+                            DagpengerOpplysning.AntallStønadsdagerSomGjenstår(verdi = 259, listOf(Periode(verdi = 259, Opprinnelse.NY))),
+                            DagpengerOpplysning.AntallPermitteringsdagerSomGjenstår(
+                                verdi = 100,
+                                listOf(Periode(verdi = 100, Opprinnelse.NY)),
+                            ),
+                            DagpengerOpplysning.AntallDagerIEnUkePermittering(verdi = 5, listOf(Periode(verdi = 5, Opprinnelse.ARVET))),
+                            DagpengerOpplysning.AntallPermitteringsuker(verdi = 26, listOf(Periode(verdi = 26, Opprinnelse.ARVET))),
                             DagpengerOpplysning.SkalPermitteringVurderes(true, listOf(Periode(true, Opprinnelse.NY))),
                             DagpengerOpplysning.SkalPermitteringFiskeindustriVurderes(false, listOf(Periode(false, Opprinnelse.NY))),
                             DagpengerOpplysning.OppfyllerKravetTilPermittering(true, listOf(Periode(true, Opprinnelse.NY))),

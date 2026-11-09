@@ -50,8 +50,9 @@ enum class InnvilgelseBrevblokker(
 
     INNVILGELSE_PERMITTERT(brevblokkId = "brev.blokk.innvilgelse-permittert"),
     INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT(brevblokkId = "brev.blokk.begrunnelse-innvilgelsesdato-permittert"),
-    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_1(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert-del-1"),
-    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_2(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert-del-2"),
+    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_1(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert-del-1x"),
+    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_2(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert-del-2x"),
+    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_3(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert-del-3x"),
     INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT(brevblokkId = "brev.blokk.arbeidsforhold-avslutt-permittert"),
     INNVILGELSE_HVA_SKJER_ETTER_PERMITTERINGEN(brevblokkId = "brev.blokk.hva-skjer-etter-permitteringen"),
 
@@ -65,7 +66,13 @@ enum class InnvilgelseBrevblokker(
     GJENOPPTAK_INNLEDNING_VIRKNINGSDATO(brevblokkId = "brev.blokk.gjenopptak-innledning-virkningsdato"),
     GJENOPPTAK_DAGPENGEPERIODE(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak"),
     GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak-permittert-del-1"),
+    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1_GJENSTÅENDE_PERM(
+        brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak-permittert-del-1-gjenstaaende-perm",
+    ),
     GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak-permittert-del-2"),
+    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2_UTEN_FORBRUK(
+        brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak-permittert-del-2-uten-forbruk",
+    ),
     GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_3(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak-permittert-del-3"),
     GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_1(
         brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak-permittert-fisk-del-1",

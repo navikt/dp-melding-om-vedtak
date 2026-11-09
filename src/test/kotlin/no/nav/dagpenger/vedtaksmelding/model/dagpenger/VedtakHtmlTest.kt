@@ -28,7 +28,9 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_3
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1_GJENSTÅENDE_PERM
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2_UTEN_FORBRUK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_3
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING_SAMME_PERIODE
@@ -42,6 +44,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_3
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_EGENANDEL
@@ -301,6 +304,7 @@ class VedtakHtmlTest {
                     INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT.brevblokkId,
                     INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_1.brevblokkId,
                     INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_2.brevblokkId,
+                    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_3.brevblokkId,
                     INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT.brevblokkId,
                     INNVILGELSE_HVA_SKJER_ETTER_PERMITTERINGEN.brevblokkId,
                     INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
@@ -703,7 +707,7 @@ class VedtakHtmlTest {
                     INNVILGELSE_PERMITTERT.brevblokkId,
                     GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
                     INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT.brevblokkId,
-                    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1.brevblokkId,
+                    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1_GJENSTÅENDE_PERM.brevblokkId,
                     GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2.brevblokkId,
                     GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_3.brevblokkId,
                     GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
@@ -723,7 +727,108 @@ class VedtakHtmlTest {
                     SPØRSMÅL.brevBlokkId,
                 )
             writeStringToFile(
-                filePath = "build/temp/gjenopptak_permittert.html",
+                filePath = "build/temp/gjenopptak_innvilgelse_permittert.html",
+                content =
+                htmlInnhold,
+            )
+        }
+    }
+
+    @Test
+    fun `Html av gjenopptak permittering når antall permitteringsdager er endret, men ikke forbruk`() {
+        runBlocking {
+            val gjenopptakMelding =
+                GjenopptakMelding(
+                    vedtak = hentVedtak("/json/gjenopptak/gjenopptak_innvilgelse_endret_permitteringsdager_ikke_forbruk.json"),
+                    alleBrevblokker = sanityKlient.hentBrevBlokker(),
+                )
+            gjenopptakMelding.hentOpplysninger()
+            val brevBlokker = gjenopptakMelding.hentBrevBlokker()
+            val htmlInnhold =
+                HtmlConverter.toHtml(
+                    brevBlokker = brevBlokker,
+                    opplysninger = gjenopptakMelding.hentOpplysninger(),
+                    meldingOmVedtakData = meldingOmVedtakData,
+                )
+
+            htmlInnhold brevblokkRekkefølgeShouldBe
+                listOf(
+                    INNVILGELSE_PERMITTERT.brevblokkId,
+                    GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                    INNVILGELSE_MED_EGENANDEL.brevblokkId,
+                    INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT.brevblokkId,
+                    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1.brevblokkId,
+                    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2_UTEN_FORBRUK.brevblokkId,
+                    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_3.brevblokkId,
+                    GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
+                    GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
+                    INNVILGELSE_MELDEKORT_DEL_1.brevblokkId,
+                    INNVILGELSE_MELDEKORT_DEL_2.brevblokkId,
+                    INNVILGELSE_UTBETALING.brevblokkId,
+                    INNVILGELSE_SKATTEKORT.brevblokkId,
+                    INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                    INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                    INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
+                    RETT_TIL_INNSYN.brevBlokkId,
+                    PERSONOPPLYSNINGER.brevBlokkId,
+                    HJELP_FRA_ANDRE.brevBlokkId,
+                    VEILEDNING_FRA_NAV.brevBlokkId,
+                    SPØRSMÅL.brevBlokkId,
+                )
+            writeStringToFile(
+                filePath = "build/temp/gjenopptak_endret_permitteringsdager_ikke_forbruk.html",
+                content =
+                htmlInnhold,
+            )
+        }
+    }
+
+    // Disablet fordi gjenstående permitteringsdager bare ser ut til å gjelde for hver enkelt dag i en beregnet meldeperiode. Usikker på om den kan brukes.
+    @Disabled
+    @Test
+    fun `Html av gjenopptak permittering når permitteringsperioden har forbruk`() {
+        runBlocking {
+            val gjenopptakMelding =
+                GjenopptakMelding(
+                    vedtak = hentVedtak("/json/gjenopptak/gjenopptak_innvilgelse_permittert_har_forbruk.json"),
+                    alleBrevblokker = sanityKlient.hentBrevBlokker(),
+                )
+            gjenopptakMelding.hentOpplysninger()
+            val brevBlokker = gjenopptakMelding.hentBrevBlokker()
+            val htmlInnhold =
+                HtmlConverter.toHtml(
+                    brevBlokker = brevBlokker,
+                    opplysninger = gjenopptakMelding.hentOpplysninger(),
+                    meldingOmVedtakData = meldingOmVedtakData,
+                )
+
+            htmlInnhold brevblokkRekkefølgeShouldBe
+                listOf(
+                    INNVILGELSE_PERMITTERT.brevblokkId,
+                    GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                    INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT.brevblokkId,
+                    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1_GJENSTÅENDE_PERM.brevblokkId,
+                    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2.brevblokkId,
+                    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_3.brevblokkId,
+                    GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
+                    GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
+                    INNVILGELSE_MELDEKORT_DEL_1.brevblokkId,
+                    INNVILGELSE_MELDEKORT_DEL_2.brevblokkId,
+                    INNVILGELSE_UTBETALING.brevblokkId,
+                    INNVILGELSE_SKATTEKORT.brevblokkId,
+                    INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                    INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                    INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
+                    RETT_TIL_INNSYN.brevBlokkId,
+                    PERSONOPPLYSNINGER.brevBlokkId,
+                    HJELP_FRA_ANDRE.brevBlokkId,
+                    VEILEDNING_FRA_NAV.brevBlokkId,
+                    SPØRSMÅL.brevBlokkId,
+                )
+            writeStringToFile(
+                filePath = "build/temp/gjenopptak_innvilgelse_permittert_har_forbruk.html",
                 content =
                 htmlInnhold,
             )

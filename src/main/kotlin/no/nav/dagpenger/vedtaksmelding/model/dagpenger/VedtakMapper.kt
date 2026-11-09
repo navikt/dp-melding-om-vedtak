@@ -95,6 +95,9 @@ class VedtakMapper(
                 this.addIfPresent { DagpengerOpplysning.Egenandel(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.EgenandelGjenstående(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.AntallStønadsdagerSomGjenstår(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.AntallPermitteringsdagerSomGjenstår(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.AntallPermitteringsdagerSomErForbrukt(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.AntallDagerIEnUkePermittering(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.KravTilArbeidssøker(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravTilMobilitet(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravTilArbeidsfør(behandlingsresultatData) }

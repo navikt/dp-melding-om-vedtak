@@ -983,6 +983,57 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
+    class AntallDagerIEnUkePermittering(
+        override val verdi: Int,
+        perioder: List<Periode<Int>>,
+    ) : Periodisert<Enhet.DAGER, Int>(verdi, perioder) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("01a02334-b6e7-7565-878c-2b1e1e99e286")
+        }
+
+        override val enhet: Enhet.DAGER = Enhet.DAGER
+        override val opplysningTekstId: String = "opplysning.antall-dager-i-en-uke-permittering"
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            verdi = behandlingsresultatData.heltallLast(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderHeltall(opplysningTypeId),
+        )
+    }
+
+    class AntallPermitteringsdagerSomGjenstår(
+        override val verdi: Int,
+        perioder: List<Periode<Int>>,
+    ) : Periodisert<Enhet.DAGER, Int>(verdi, perioder) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("01a01e28-a90b-7109-beae-b69d61cea3c0")
+        }
+
+        override val enhet: Enhet.DAGER = Enhet.DAGER
+        override val opplysningTekstId: String = "opplysning.antall-permitteringsdager-som-gjenstaar"
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            verdi = behandlingsresultatData.heltallLast(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderHeltall(opplysningTypeId),
+        )
+    }
+
+    class AntallPermitteringsdagerSomErForbrukt(
+        override val verdi: Int,
+        perioder: List<Periode<Int>>,
+    ) : Periodisert<Enhet.DAGER, Int>(verdi, perioder) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("01a01e28-4bc6-7132-a846-a5666f92427c")
+        }
+
+        override val enhet: Enhet.DAGER = Enhet.DAGER
+        override val opplysningTekstId: String = "opplysning.antall-permitteringsdager-som-er-forbrukt"
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            verdi = behandlingsresultatData.heltallLast(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderHeltall(opplysningTypeId),
+        )
+    }
+
     class KravTilArbeidssøker(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,

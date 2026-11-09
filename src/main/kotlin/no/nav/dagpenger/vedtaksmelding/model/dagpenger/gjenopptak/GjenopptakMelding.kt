@@ -13,7 +13,9 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_3
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1_GJENSTÅENDE_PERM
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2_UTEN_FORBRUK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_3
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_2
@@ -170,18 +172,47 @@ class GjenopptakMelding(
             emptyList()
         }
 
-    // TODO PERM/FISK: Blokker for permittering og permittering fisk. De må ha egne blokker pga egne tellere.
-    //                 Verneplikt kan bruke samme blokk som ordinær.
+    // TODO FISK: Blokker for permittering fisk må ha egne blokker pga egne tellere.
+    // Verneplikt kan bruke samme blokker som ordinær.
     private fun dagpengeperiodeBlokker(): List<String> =
         when (vedtak.finnOpplysning("opplysning.siste-dag-med-rett")) {
             null -> {
                 when {
-                    erInnvilgetSomPermittert() ->
-                        listOf(
-                            GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1.brevblokkId,
-                            GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2.brevblokkId,
-                            GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_3.brevblokkId,
-                        )
+                    erInnvilgetSomPermittert() -> {
+                        val brevblokkIdDagpengeperiode =
+                            if (vedtak.finnOpplysning<DagpengerOpplysning.AntallStønadsdagerSomGjenstår>() != null) {
+                                GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2.brevblokkId
+                            } else {
+                                GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2_UTEN_FORBRUK.brevblokkId
+                            }
+                        if (vedtak.finnOpplysning<DagpengerOpplysning.AntallPermitteringsdagerSomGjenstår>() != null &&
+                            vedtak.finnOpplysning<DagpengerOpplysning.AntallPermitteringsuker>() != null &&
+                            vedtak.finnOpplysning<DagpengerOpplysning.AntallDagerIEnUkePermittering>() != null
+                        ) {
+                            val gjenståendePermitteringsdager =
+                                vedtak.finnOpplysning<DagpengerOpplysning.AntallPermitteringsdagerSomGjenstår>()!!.verdi
+                            val innvilgedePermitteringsdager =
+                                vedtak.finnOpplysning<DagpengerOpplysning.AntallPermitteringsuker>()!!.verdi *
+                                    vedtak.finnOpplysning<DagpengerOpplysning.AntallDagerIEnUkePermittering>()!!.verdi
+                            val brevblokkIdPermitteringsperiode =
+                                if (gjenståendePermitteringsdager > 0 && gjenståendePermitteringsdager < innvilgedePermitteringsdager) {
+                                    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1_GJENSTÅENDE_PERM.brevblokkId
+                                } else {
+                                    GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1.brevblokkId
+                                }
+                            listOf(
+                                brevblokkIdPermitteringsperiode,
+                                brevblokkIdDagpengeperiode,
+                                GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_3.brevblokkId,
+                            )
+                        } else {
+                            listOf(
+                                GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1.brevblokkId,
+                                brevblokkIdDagpengeperiode,
+                                GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_3.brevblokkId,
+                            )
+                        }
+                    }
 
                     erInnvilgetSomPermittertIFiskeindustri() ->
                         listOf(
