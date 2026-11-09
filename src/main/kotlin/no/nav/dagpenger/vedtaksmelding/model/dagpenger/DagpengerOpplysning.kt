@@ -1005,7 +1005,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         perioder: List<Periode<Int>>,
     ) : Periodisert<Enhet.DAGER, Int>(verdi, perioder) {
         companion object {
-            val opplysningTypeId: UUID = UUID.fromString("01a01e28-a90b-7109-beae-b69d61cea3c0")
+            val opplysningTypeId: UUID = UUID.fromString("01a01e29-0db9-76a0-8621-5df3a7fb06ef")
         }
 
         override val enhet: Enhet.DAGER = Enhet.DAGER
