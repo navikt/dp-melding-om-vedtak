@@ -777,7 +777,7 @@ class VedtakHtmlTest {
                     SPØRSMÅL.brevBlokkId,
                 )
             writeStringToFile(
-                filePath = "build/temp/gjenopptak_endret_permitteringsdager_ikke_forbruk.html",
+                filePath = "build/temp/gjenopptak_innvilgelse_endret_permitteringsdager_ikke_forbruk.html",
                 content =
                 htmlInnhold,
             )

@@ -122,16 +122,12 @@ object HtmlConverter {
                 p(classes = "melding-om-vedtak-signatur") {
                     +beslutter.navn()
                     br { }
-                    +"Beslutter"
-                    br { }
                     +beslutter.enhet.navn
                     br { }
                 }
             }
             p(classes = "melding-om-vedtak-signatur") {
                 +meldingOmVedtakData.saksbehandler.navn()
-                br { }
-                +"Saksbehandler"
                 br { }
                 +meldingOmVedtakData.saksbehandler.enhet.navn
                 br { }
