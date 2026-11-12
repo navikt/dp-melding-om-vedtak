@@ -9360,7 +9360,7 @@
           "opprinnelse": "Ny",
           "gyldigFraOgMed": "2026-11-09",
           "verdi": {
-            "verdi": 128,
+            "verdi": 130,
             "enhet": "dager",
             "datatype": "heltall"
           },

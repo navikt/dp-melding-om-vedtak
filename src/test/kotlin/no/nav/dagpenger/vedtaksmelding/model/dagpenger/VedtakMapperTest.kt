@@ -22,7 +22,7 @@ class VedtakMapperTest {
         vedtak.utfall shouldBe Vedtak.Utfall.INNVILGET
         vedtak.also {
             it.hentOpplysning<DagpengerOpplysning.OppfyllerKravetTilPermittering>() shouldNotBe null
-            it.hentOpplysning<DagpengerOpplysning.AntallPermitteringsuker>() shouldNotBe null
+            it.hentOpplysning<DagpengerOpplysning.LovfestetFritaksperiodePermittering>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.LangDagpengeperiode>() shouldNotBe null
             it.hentOpplysning<DagpengerOpplysning.MinstEllerUnder2GInntekt>() shouldNotBe null
         }

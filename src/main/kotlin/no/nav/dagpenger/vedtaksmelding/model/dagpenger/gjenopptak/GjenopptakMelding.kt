@@ -186,16 +186,18 @@ class GjenopptakMelding(
                                 GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_2_UTEN_FORBRUK.brevblokkId
                             }
                         if (vedtak.finnOpplysning<DagpengerOpplysning.AntallPermitteringsdagerSomGjenstår>() != null &&
-                            vedtak.finnOpplysning<DagpengerOpplysning.AntallPermitteringsuker>() != null &&
+                            vedtak.finnOpplysning<DagpengerOpplysning.LovfestetFritaksperiodePermittering>() != null &&
                             vedtak.finnOpplysning<DagpengerOpplysning.AntallDagerIEnUkePermittering>() != null
                         ) {
                             val gjenståendePermitteringsdager =
                                 vedtak.finnOpplysning<DagpengerOpplysning.AntallPermitteringsdagerSomGjenstår>()!!.verdi
-                            val innvilgedePermitteringsdager =
-                                vedtak.finnOpplysning<DagpengerOpplysning.AntallPermitteringsuker>()!!.verdi *
+                            val lovfestetAntallDagerFritaksperiodePermittering =
+                                vedtak.finnOpplysning<DagpengerOpplysning.LovfestetFritaksperiodePermittering>()!!.verdi *
                                     vedtak.finnOpplysning<DagpengerOpplysning.AntallDagerIEnUkePermittering>()!!.verdi
                             val brevblokkIdPermitteringsperiode =
-                                if (gjenståendePermitteringsdager > 0 && gjenståendePermitteringsdager < innvilgedePermitteringsdager) {
+                                if (gjenståendePermitteringsdager > 0 &&
+                                    gjenståendePermitteringsdager < lovfestetAntallDagerFritaksperiodePermittering
+                                ) {
                                     GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1_GJENSTÅENDE_PERM.brevblokkId
                                 } else {
                                     GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1.brevblokkId

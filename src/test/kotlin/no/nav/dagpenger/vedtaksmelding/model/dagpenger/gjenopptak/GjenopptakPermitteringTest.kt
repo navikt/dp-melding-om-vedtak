@@ -140,7 +140,10 @@ class GjenopptakPermitteringTest {
                                 listOf(Periode(verdi = 100, Opprinnelse.NY)),
                             ),
                             DagpengerOpplysning.AntallDagerIEnUkePermittering(verdi = 5, listOf(Periode(verdi = 5, Opprinnelse.ARVET))),
-                            DagpengerOpplysning.AntallPermitteringsuker(verdi = 26, listOf(Periode(verdi = 26, Opprinnelse.ARVET))),
+                            DagpengerOpplysning.LovfestetFritaksperiodePermittering(
+                                verdi = 26,
+                                listOf(Periode(verdi = 26, Opprinnelse.ARVET)),
+                            ),
                             DagpengerOpplysning.SkalPermitteringVurderes(true, listOf(Periode(true, Opprinnelse.NY))),
                             DagpengerOpplysning.SkalPermitteringFiskeindustriVurderes(false, listOf(Periode(false, Opprinnelse.NY))),
                             DagpengerOpplysning.OppfyllerKravetTilPermittering(true, listOf(Periode(true, Opprinnelse.NY))),

@@ -96,7 +96,6 @@ class VedtakMapper(
                 this.addIfPresent { DagpengerOpplysning.EgenandelGjenstående(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.AntallStønadsdagerSomGjenstår(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.AntallPermitteringsdagerSomGjenstår(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.AntallPermitteringsdagerSomErForbrukt(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.AntallDagerIEnUkePermittering(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.KravTilArbeidssøker(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravTilMobilitet(behandlingsresultatData) }
@@ -125,7 +124,7 @@ class VedtakMapper(
                 }
                 this.addIfPresent { DagpengerOpplysning.SkalPermitteringVurderes(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.SkalPermitteringFiskeindustriVurderes(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.AntallPermitteringsuker(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.LovfestetFritaksperiodePermittering(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.AntallPermitteringsukerFisk(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilPermittering(behandlingsresultatData) }
                 this.addIfPresent {

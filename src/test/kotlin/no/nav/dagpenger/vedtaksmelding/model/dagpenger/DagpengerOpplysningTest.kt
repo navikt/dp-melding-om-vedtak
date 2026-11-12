@@ -78,7 +78,7 @@ class DagpengerOpplysningTest {
         }
 
         shouldThrow<BehandlingsresultatData.BehandlingResultatOpplysningIkkeFunnet> {
-            DagpengerOpplysning.AntallPermitteringsuker(behandlingsresultatData)
+            DagpengerOpplysning.LovfestetFritaksperiodePermittering(behandlingsresultatData)
         }
 
         shouldThrow<BehandlingsresultatData.BehandlingResultatOpplysningIkkeFunnet> {
@@ -95,7 +95,7 @@ class DagpengerOpplysningTest {
         val behandlingsresultatLangDagpengeperiode =
             BehandlingsresultatData("/json/innvilgelse/innvilgelse_permittering.json".readFile())
         DagpengerOpplysning.OppfyllerKravetTilPermittering(behandlingsresultatLangDagpengeperiode).verdi shouldBe true
-        DagpengerOpplysning.AntallPermitteringsuker(behandlingsresultatLangDagpengeperiode).verdi shouldBe 26
+        DagpengerOpplysning.LovfestetFritaksperiodePermittering(behandlingsresultatLangDagpengeperiode).verdi shouldBe 26
         DagpengerOpplysning.LangDagpengeperiode(behandlingsresultatLangDagpengeperiode).verdi shouldBe 104
         DagpengerOpplysning.TerskelFor12Måneder(behandlingsresultatLangDagpengeperiode).verdi shouldBe 273098
 

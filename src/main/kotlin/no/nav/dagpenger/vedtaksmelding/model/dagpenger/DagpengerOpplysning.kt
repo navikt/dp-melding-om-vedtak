@@ -894,9 +894,7 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
-    // Denne baserer seg på om oppfyllerKravetTilPermittering(0194d111-db2f-7395-bcfb-959f245fd2a6) er true i PJ.
-    // nullable
-    class AntallPermitteringsuker(
+    class LovfestetFritaksperiodePermittering(
         override val verdi: Int,
         perioder: List<Periode<Int>>,
     ) : Periodisert<Enhet.UKER, Int>(verdi, perioder) {
@@ -1005,28 +1003,11 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         perioder: List<Periode<Int>>,
     ) : Periodisert<Enhet.DAGER, Int>(verdi, perioder) {
         companion object {
-            val opplysningTypeId: UUID = UUID.fromString("01a01e29-0db9-76a0-8621-5df3a7fb06ef")
+            val opplysningTypeId: UUID = UUID.fromString("01a01e28-0ad3-77e4-aaf5-e23392821cfb")
         }
 
         override val enhet: Enhet.DAGER = Enhet.DAGER
         override val opplysningTekstId: String = "opplysning.antall-permitteringsdager-som-gjenstaar"
-
-        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
-            verdi = behandlingsresultatData.heltallLast(opplysningTypeId),
-            perioder = behandlingsresultatData.perioderHeltall(opplysningTypeId),
-        )
-    }
-
-    class AntallPermitteringsdagerSomErForbrukt(
-        override val verdi: Int,
-        perioder: List<Periode<Int>>,
-    ) : Periodisert<Enhet.DAGER, Int>(verdi, perioder) {
-        companion object {
-            val opplysningTypeId: UUID = UUID.fromString("01a01e28-4bc6-7132-a846-a5666f92427c")
-        }
-
-        override val enhet: Enhet.DAGER = Enhet.DAGER
-        override val opplysningTekstId: String = "opplysning.antall-permitteringsdager-som-er-forbrukt"
 
         constructor(behandlingsresultatData: BehandlingsresultatData) : this(
             verdi = behandlingsresultatData.heltallLast(opplysningTypeId),
