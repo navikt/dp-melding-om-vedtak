@@ -9,6 +9,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.Vedtaksmelding
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_ARBEIDSTIDEN_DIN
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_1_GJENSTÅENDE_PERM
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_3
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_EGENANDEL
@@ -30,7 +31,7 @@ import org.junit.jupiter.api.Test
 
 class PermitteringTest {
     @Test
-    fun `Rikig brevblokker rekkefølge for innvilgelse med permittering`() {
+    fun `Rikig brevblokker rekkefølge for innvilgelse permittering ved lovfestet lengde på permitteringsperioden`() {
         val forventedeBrevblokkIder =
             listOf(
                 INNVILGELSE_PERMITTERT.brevblokkId,
@@ -65,6 +66,56 @@ class PermitteringTest {
                             DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
                             DagpengerOpplysning.OppfyllerKravetTilPermittering(true, listOf(Periode(true, Opprinnelse.NY))),
                             DagpengerOpplysning.SkalPermitteringVurderes(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.LovfestetFritaksperiodePermittering(26, listOf(Periode(verdi = 26, Opprinnelse.NY))),
+                            DagpengerOpplysning.AntallPermitteringsdagerSomGjenstår(130, listOf(Periode(verdi = 130, Opprinnelse.NY))),
+                            DagpengerOpplysning.AntallDagerIEnUkePermittering(5, listOf(Periode(verdi = 5, Opprinnelse.NY))),
+                            DagpengerOpplysning.SkalPermitteringFiskeindustriVurderes(false, listOf(Periode(false, Opprinnelse.NY))),
+                        ),
+                    behandletHendelseType = "SØKNAD",
+                ),
+            alleBrevblokker = emptyList(),
+        ).brevBlokkIder() shouldBe forventedeBrevblokkIder
+    }
+
+    @Test
+    fun `Rikig brevblokker rekkefølge for innvilgelse permittering ved redusert lengde på permitteringsperioden`() {
+        val forventedeBrevblokkIder =
+            listOf(
+                INNVILGELSE_PERMITTERT.brevblokkId,
+                INNVILGELSE_MED_EGENANDEL.brevblokkId,
+                INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE_PERMITTERT.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_1_GJENSTÅENDE_PERM.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_2.brevblokkId,
+                INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_3.brevblokkId,
+                INNVILGELSE_ARBEIDSFORHOLD_AVSLUTT_PERMITTERT.brevblokkId,
+                INNVILGELSE_HVA_SKJER_ETTER_PERMITTERINGEN.brevblokkId,
+                INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                INNVILGELSE_GRUNNLAG.brevblokkId,
+                INNVILGELSE_ARBEIDSTIDEN_DIN.brevblokkId,
+                INNVILGELSE_EGENANDEL.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_1.brevblokkId,
+                INNVILGELSE_MELDEKORT_DEL_2.brevblokkId,
+                INNVILGELSE_UTBETALING.brevblokkId,
+                INNVILGELSE_SKATTEKORT.brevblokkId,
+                INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+            ) + Vedtaksmelding.fasteAvsluttendeBlokker
+
+        InnvilgelseMelding(
+            vedtak =
+                Vedtak(
+                    behandlingId = UUIDv7.ny(),
+                    utfall = Vedtak.Utfall.INNVILGET,
+                    automatiskBehandling = false,
+                    opplysninger =
+                        setOf(
+                            DagpengerOpplysning.Egenandel(3000, listOf(Periode(3000, Opprinnelse.NY))),
+                            DagpengerOpplysning.OppfyllerKravetTilPermittering(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.SkalPermitteringVurderes(true, listOf(Periode(true, Opprinnelse.NY))),
+                            DagpengerOpplysning.LovfestetFritaksperiodePermittering(26, listOf(Periode(verdi = 26, Opprinnelse.NY))),
+                            DagpengerOpplysning.AntallPermitteringsdagerSomGjenstår(34, listOf(Periode(verdi = 34, Opprinnelse.NY))),
+                            DagpengerOpplysning.AntallDagerIEnUkePermittering(5, listOf(Periode(verdi = 5, Opprinnelse.NY))),
                             DagpengerOpplysning.SkalPermitteringFiskeindustriVurderes(false, listOf(Periode(false, Opprinnelse.NY))),
                         ),
                     behandletHendelseType = "SØKNAD",

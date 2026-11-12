@@ -17,6 +17,7 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_3
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_1_GJENSTÅENDE_PERM
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_3
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_1
@@ -260,12 +261,40 @@ class InnvilgelseMelding(
                     INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_1.brevblokkId,
                     INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_2.brevblokkId,
                 )
-            erInnvilgetSomPermittert() ->
-                listOf(
-                    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_1.brevblokkId,
-                    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_2.brevblokkId,
-                    INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_3.brevblokkId,
-                )
+
+            erInnvilgetSomPermittert() -> {
+                if (vedtak.finnOpplysning<DagpengerOpplysning.AntallPermitteringsdagerSomGjenstår>() != null &&
+                    vedtak.finnOpplysning<DagpengerOpplysning.LovfestetFritaksperiodePermittering>() != null &&
+                    vedtak.finnOpplysning<DagpengerOpplysning.AntallDagerIEnUkePermittering>() != null
+                ) {
+                    val gjenståendePermitteringsdager =
+                        vedtak.finnOpplysning<DagpengerOpplysning.AntallPermitteringsdagerSomGjenstår>()!!.verdi
+                    val lovfestetAntallDagerFritaksperiodePermittering =
+                        vedtak.finnOpplysning<DagpengerOpplysning.LovfestetFritaksperiodePermittering>()!!.verdi *
+                            vedtak.finnOpplysning<DagpengerOpplysning.AntallDagerIEnUkePermittering>()!!.verdi
+
+                    val brevblokkIdPermitteringsperiode =
+                        if (gjenståendePermitteringsdager > 0 &&
+                            gjenståendePermitteringsdager < lovfestetAntallDagerFritaksperiodePermittering
+                        ) {
+                            INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_1_GJENSTÅENDE_PERM.brevblokkId
+                        } else {
+                            INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_1.brevblokkId
+                        }
+                    listOf(
+                        brevblokkIdPermitteringsperiode,
+                        INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_2.brevblokkId,
+                        INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_3.brevblokkId,
+                    )
+                } else {
+                    listOf(
+                        INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_1.brevblokkId,
+                        INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_2.brevblokkId,
+                        INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_DEL_3.brevblokkId,
+                    )
+                }
+            }
+
             else -> {
                 when (vedtak.finnOpplysning("opplysning.siste-dag-med-rett")) {
                     null ->
@@ -273,6 +302,7 @@ class InnvilgelseMelding(
                             INNVILGELSE_DAGPENGEPERIODE_DEL_1.brevblokkId,
                             INNVILGELSE_DAGPENGEPERIODE_DEL_2.brevblokkId,
                         )
+
                     else ->
                         listOf(
                             INNVILGELSE_DAGPENGEPERIODE_HVIS_TOM_DATO_DEL_1.brevblokkId,
