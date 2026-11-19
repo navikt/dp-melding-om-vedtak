@@ -391,6 +391,23 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
+    class AntallSanksjonsdagerSomGjenstår(
+        override val verdi: Int,
+        perioder: List<Periode<Int>>,
+    ) : Periodisert<Enhet.DAGER, Int>(verdi, perioder) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("17ca728c-1994-438d-acbf-4098bc1c0dcd")
+        }
+
+        override val enhet: Enhet.DAGER = Enhet.DAGER
+        override val opplysningTekstId: String = "opplysning.antall-sanksjonsdager-som-gjenstaar"
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            verdi = behandlingsresultatData.heltallLast(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderHeltall(opplysningTypeId),
+        )
+    }
+
     class FørsteMånedAvOpptjeningsperiode(
         override val verdi: LocalDate,
         perioder: List<Periode<LocalDate>>,

@@ -22,7 +22,10 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBr
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_3
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_DAGPENGEPERIODE_UTEN_FORBRUK
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_EGENANDEL
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_GJENSTAAENDE_SANKSJON_DEL_1
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_GJENSTAAENDE_SANKSJON_DEL_2
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING_EGENANDEL
+import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING_GJENSTAAENDE_SANKSJON
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING_SAMME_PERIODE
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_INNLEDNING_VIRKNINGSDATO
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.innvilgelse.InnvilgelseBrevblokker.GJENOPPTAK_REBEREGNING_IKKE_RETT
@@ -153,7 +156,13 @@ class GjenopptakMelding(
 
     private fun innledningMedEllerUtenSanksjonBlokker(): List<String> =
         if (erIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet()) {
-            listOf(INNVILGELSE_SANKSJON_INNLEDNING.brevblokkId)
+            if (vedtak.finnOpplysning<DagpengerOpplysning.AntallSanksjonsdagerSomGjenstår>() != null &&
+                vedtak.finnOpplysning<DagpengerOpplysning.AntallSanksjonsdagerSomGjenstår>()!!.verdi > 0
+            ) {
+                listOf(GJENOPPTAK_INNLEDNING_GJENSTAAENDE_SANKSJON.brevblokkId)
+            } else {
+                listOf(INNVILGELSE_SANKSJON_INNLEDNING.brevblokkId)
+            }
         } else {
             emptyList()
         }
@@ -167,7 +176,16 @@ class GjenopptakMelding(
 
     private fun sanksjonBlokker(): List<String> =
         if (erIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet()) {
-            listOf(INNVILGELSE_SANKSJON_DEL_1.brevblokkId, INNVILGELSE_SANKSJON_DEL_2.brevblokkId)
+            if (vedtak.finnOpplysning<DagpengerOpplysning.AntallSanksjonsdagerSomGjenstår>() != null &&
+                vedtak.finnOpplysning<DagpengerOpplysning.AntallSanksjonsdagerSomGjenstår>()!!.verdi > 0
+            ) {
+                listOf(
+                    GJENOPPTAK_GJENSTAAENDE_SANKSJON_DEL_1.brevblokkId,
+                    GJENOPPTAK_GJENSTAAENDE_SANKSJON_DEL_2.brevblokkId,
+                )
+            } else {
+                listOf(INNVILGELSE_SANKSJON_DEL_1.brevblokkId, INNVILGELSE_SANKSJON_DEL_2.brevblokkId)
+            }
         } else {
             emptyList()
         }

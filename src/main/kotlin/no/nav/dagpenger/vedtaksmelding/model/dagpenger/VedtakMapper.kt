@@ -69,6 +69,7 @@ class VedtakMapper(
                 this.addIfPresent { DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.BarnetilleggIKroner(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.AntallUkerMedSanksjon(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.AntallSanksjonsdagerSomGjenstår(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.FørsteMånedAvOpptjeningsperiode(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.SisteMånedAvOpptjeningsperiode(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.SeksGangerGrunnbeløp(behandlingsresultatData) }

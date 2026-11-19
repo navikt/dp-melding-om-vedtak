@@ -64,9 +64,13 @@ enum class InnvilgelseBrevblokker(
     INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_1(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert-fisk-del-1"),
     INNVILGELSE_DAGPENGEPERIODE_PERMITTERT_FISK_DEL_2(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-permittert-fisk-del-2"),
 
+    GJENOPPTAK_INNLEDNING_GJENSTAAENDE_SANKSJON(brevblokkId = "brev.blokk.gjenopptak-innledning-gjenstaaende-sanksjon"),
     GJENOPPTAK_INNLEDNING_SAMME_PERIODE(brevblokkId = "brev.blokk.gjenopptak-innledning-samme-periode"),
     GJENOPPTAK_INNLEDNING_EGENANDEL(brevblokkId = "brev.blokk.gjenopptak-innledning-egenandel"),
     GJENOPPTAK_INNLEDNING_VIRKNINGSDATO(brevblokkId = "brev.blokk.gjenopptak-innledning-virkningsdato"),
+    GJENOPPTAK_GJENSTAAENDE_SANKSJON_DEL_1(brevblokkId = "brev.blokk.gjenopptak-gjenstaaende-sanksjon-del-1"),
+    GJENOPPTAK_GJENSTAAENDE_SANKSJON_DEL_2(brevblokkId = "brev.blokk.gjenopptak-gjenstaaende-sanksjon-del-2"),
+
     GJENOPPTAK_DAGPENGEPERIODE(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak"),
     GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1(brevblokkId = "brev.blokk.hvor-lenge-kan-du-faa-dagpenger-gjenopptak-permittert-del-1"),
     GJENOPPTAK_DAGPENGEPERIODE_PERMITTERT_DEL_1_GJENSTÅENDE_PERM(
