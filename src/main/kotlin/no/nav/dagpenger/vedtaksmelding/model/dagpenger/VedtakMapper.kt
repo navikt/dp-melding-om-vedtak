@@ -56,11 +56,7 @@ class VedtakMapper(
                 this.addIfPresent { DagpengerOpplysning.UtbetaltArbeidsinntektPeriode1(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.UtbetaltArbeidsinntektPeriode2(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.UtbetaltArbeidsinntektPeriode3(behandlingsresultatData) }
-                this.addIfPresent {
-                    DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger(
-                        behandlingsresultatData,
-                    )
-                }
+                this.addIfPresent { DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger(behandlingsresultatData) }
                 this.addIfPresent {
                     DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
                         behandlingsresultatData,
@@ -75,11 +71,7 @@ class VedtakMapper(
                 this.addIfPresent { DagpengerOpplysning.SeksGangerGrunnbeløp(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.Aldersgrense(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.Grunnlag(behandlingsresultatData) }
-                this.addIfPresent {
-                    DagpengerOpplysning.DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel(
-                        behandlingsresultatData,
-                    )
-                }
+                this.addIfPresent { DagpengerOpplysning.DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.Virkningsdato(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.FastsattVanligArbeidstidPerUke(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.FastsattNyArbeidstidPerUke(behandlingsresultatData) }
@@ -104,6 +96,7 @@ class VedtakMapper(
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravTilArbeidssøker(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilEthvertArbeid(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(behandlingsresultatData) }
+                this.addIfPresent { DagpengerOpplysning.ØnskerÅVæreRegistrertSomArbeidssøker(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerMeldeplikt(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilIkkeUtestengt(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilOpphold(behandlingsresultatData) }
@@ -118,19 +111,13 @@ class VedtakMapper(
                 this.addIfPresent { DagpengerOpplysning.GodkjentLokalArbeidssøker(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.GodkjentKunDeltidssøker(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.ErIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet(behandlingsresultatData) }
-                this.addIfPresent {
-                    DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(
-                        behandlingsresultatData,
-                    )
-                }
+                this.addIfPresent { DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.SkalPermitteringVurderes(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.SkalPermitteringFiskeindustriVurderes(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.LovfestetFritaksperiodePermittering(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.AntallPermitteringsukerFisk(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilPermittering(behandlingsresultatData) }
-                this.addIfPresent {
-                    DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(behandlingsresultatData)
-                }
+                this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.KravetTilAntallUkerFørGjenopptak(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.KravetTilAntallUkerArbeidForReberegningAvGrunnlag(behandlingsresultatData) }
                 this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilReberegningAvGrunnlag(behandlingsresultatData) }

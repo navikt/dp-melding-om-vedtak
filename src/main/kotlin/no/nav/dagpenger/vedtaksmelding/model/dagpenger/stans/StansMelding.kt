@@ -77,14 +77,12 @@ class StansMelding(
             vedtak.hentOpplysning<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>().perioder.ikkeOppfyltNy()
         ) {
             listOf(STANS_IKKE_MELDT_SEG_I_TIDE.brevblokkId)
-//        } else if (vedtak.hentOpplysning<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>().perioder.ikkeOppfyltNy()
-//            && TODO - vi trenger å få noe ekstra fra PJ for å avdekke dette
-//        ) {
-//            listOf(StansBrevblokker.STANS_REELL_ARBEIDSSØKER_SVART_NEI_TIL_Å_STÅ_TILMELDT.brevblokkId) }
+        } else if (vedtak.hentOpplysning<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>().perioder.ikkeOppfyltNy() &&
+            vedtak.ikkeOppfylt<DagpengerOpplysning.ØnskerÅVæreRegistrertSomArbeidssøker>()
+        ) {
+            listOf(StansBrevblokker.STANS_REELL_ARBEIDSSØKER_SVART_NEI_TIL_Å_STÅ_TILMELDT.brevblokkId)
         } else if (vedtak.hentOpplysning<DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker>().perioder.ikkeOppfyltNy()) {
-            listOf(
-                STANS_REELL_ARBEIDSSØKER_GENERELL.brevblokkId,
-            )
+            listOf(STANS_REELL_ARBEIDSSØKER_GENERELL.brevblokkId)
         } else {
             emptyList()
         }

@@ -1134,6 +1134,23 @@ sealed class DagpengerOpplysning<E : Enhet, V : Any>(
         )
     }
 
+    class ØnskerÅVæreRegistrertSomArbeidssøker(
+        override val verdi: Boolean,
+        perioder: List<Periode<Boolean>>,
+    ) : Periodisert<Enhet.ENHETSLØS, Boolean>(verdi, perioder) {
+        companion object {
+            val opplysningTypeId: UUID = UUID.fromString("019ffffa-05bf-7428-ba34-ef848dab0f39")
+        }
+
+        override val enhet: Enhet.ENHETSLØS = Enhet.ENHETSLØS
+        override val opplysningTekstId: String = "opplysning.onsker-a-vaere-registrert-som-arbeidssoker"
+
+        constructor(behandlingsresultatData: BehandlingsresultatData) : this(
+            verdi = behandlingsresultatData.boolsk(opplysningTypeId),
+            perioder = behandlingsresultatData.perioderBoolsk(opplysningTypeId),
+        )
+    }
+
     class OppfyllerMeldeplikt(
         override val verdi: Boolean,
         perioder: List<Periode<Boolean>>,

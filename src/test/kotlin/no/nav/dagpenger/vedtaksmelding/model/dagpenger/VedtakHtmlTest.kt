@@ -948,8 +948,6 @@ class VedtakHtmlTest {
         }
     }
 
-    // TODO: Avventer til PJ's gir oss mer kontekst om årsaken til at 4-5 ikke er oppfylt
-    @Disabled
     @Test
     fun `Html av stans når bruker har svart Nei på spørsmål om å stå tilmeldt som arbeidssøker`() {
         runBlocking {
@@ -977,10 +975,12 @@ class VedtakHtmlTest {
                 listOf(
                     STANS_INNLEDNING.brevblokkId,
                     STANS_REELL_ARBEIDSSØKER_SVART_NEI_TIL_Å_STÅ_TILMELDT.brevblokkId,
+                    STANS_TRENGER_DU_FORTSATT_DAGPENGER.brevblokkId,
                     RETT_TIL_Å_KLAGE.brevBlokkId,
                     RETT_TIL_INNSYN.brevBlokkId,
                     PERSONOPPLYSNINGER.brevBlokkId,
                     HJELP_FRA_ANDRE.brevBlokkId,
+                    VEILEDNING_FRA_NAV.brevBlokkId,
                     SPØRSMÅL.brevBlokkId,
                 )
             writeStringToFile(

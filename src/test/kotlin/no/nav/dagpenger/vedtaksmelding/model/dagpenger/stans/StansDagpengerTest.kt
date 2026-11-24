@@ -24,7 +24,6 @@ import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.ST
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_URIKTIGE_ELLER_MANGLENDE_OPPLYSNINGER_DEL_1
 import no.nav.dagpenger.vedtaksmelding.model.dagpenger.stans.StansBrevblokker.STANS_URIKTIGE_ELLER_MANGLENDE_OPPLYSNINGER_DEL_2
 import no.nav.dagpenger.vedtaksmelding.uuid.UUIDv7
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
 
@@ -488,10 +487,8 @@ class StansDagpengerTest {
             )
     }
 
-    // TODO: Må få mer kontekst fra PJ's for å avdekke dette spesialtilfellet
-    @Disabled
     @Test
-    fun `Riktige brevblokker når bruker har svart Nei på å stå tilmeldt`() {
+    fun `Riktige brevblokker når bruker er utmeldt av arbeidssøkerregisteret pga svart Nei til å stå tilmeldt`() {
         StansMelding(
             vedtak =
                 Vedtak(
@@ -502,7 +499,11 @@ class StansDagpengerTest {
                         setOf(
                             DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
                                 verdi = false,
-                                perioder = listOf(Periode(verdi = false, Opprinnelse.NY, gyldigFraOgMed = LocalDate.MIN)),
+                                perioder = listOf(Periode(verdi = false, Opprinnelse.NY, gyldigFraOgMed = LocalDate.now())),
+                            ),
+                            DagpengerOpplysning.ØnskerÅVæreRegistrertSomArbeidssøker(
+                                verdi = false,
+                                perioder = listOf(Periode(verdi = false, Opprinnelse.NY, gyldigFraOgMed = LocalDate.now())),
                             ),
                         ),
                     behandletHendelseType = "ARBEIDSSØKERPERIODE",
@@ -523,7 +524,7 @@ class StansDagpengerTest {
     }
 
     @Test
-    fun `Riktige brevblokker når bruker har blitt utmeldt av arbeidssøkerregisteret - ikke pga manglende meldeplikt`() {
+    fun `Riktige brevblokker når bruker er utmeldt av arbeidssøkerregisteret av andre årsaker`() {
         StansMelding(
             vedtak =
                 Vedtak(
