@@ -647,6 +647,55 @@ class VedtakHtmlTest {
     }
 
     @Test
+    fun `Html av gjenopptak innvilgelse når bruker tidligere har hatt permittering og nå innvilges ordinære dp`() {
+        runBlocking {
+            val gjenopptakMelding =
+                GjenopptakMelding(
+                    vedtak = hentVedtak("/json/gjenopptak/gjenopptak_innvilgelse_tidligere_perm_naa_ordinaer.json"),
+                    alleBrevblokker = sanityKlient.hentBrevBlokker(),
+                )
+            gjenopptakMelding.hentOpplysninger()
+            val brevBlokker = gjenopptakMelding.hentBrevBlokker()
+            val htmlInnhold =
+                HtmlConverter.toHtml(
+                    brevBlokker = brevBlokker,
+                    opplysninger = gjenopptakMelding.hentOpplysninger(),
+                    meldingOmVedtakData = meldingOmVedtakData,
+                )
+
+            htmlInnhold brevblokkRekkefølgeShouldBe
+                listOf(
+                    GJENOPPTAK_INNLEDNING_VIRKNINGSDATO.brevblokkId,
+                    GJENOPPTAK_INNLEDNING_SAMME_PERIODE.brevblokkId,
+                    INNVILGELSE_VIRKNINGSDATO_BEGRUNNELSE.brevblokkId,
+                    GJENOPPTAK_DAGPENGEPERIODE.brevblokkId,
+                    GJENOPPTAK_REBEREGNING_IKKE_RETT.brevblokkId,
+                    INNVILGELSE_SLIK_HAR_VI_BEREGNET_DAGPENGENE_DINE.brevblokkId,
+                    INNVILGELSE_BARNETILLEGG.brevblokkId,
+                    GJENOPPTAK_ARBEIDSTIDEN_DIN.brevblokkId,
+                    INNVILGELSE_MELDEKORT_DEL_1.brevblokkId,
+                    INNVILGELSE_MELDEKORT_DEL_2.brevblokkId,
+                    INNVILGELSE_UTBETALING.brevblokkId,
+                    INNVILGELSE_SKATTEKORT.brevblokkId,
+                    INNVILGELSE_STANS_ÅRSAKER.brevblokkId,
+                    INNVILGELSE_MELD_FRA_OM_ENDRINGER.brevblokkId,
+                    INNVILGELSE_KONSEKVENSER_FEILOPPLYSNING.brevblokkId,
+                    RETT_TIL_Å_KLAGE.brevBlokkId,
+                    RETT_TIL_INNSYN.brevBlokkId,
+                    PERSONOPPLYSNINGER.brevBlokkId,
+                    HJELP_FRA_ANDRE.brevBlokkId,
+                    VEILEDNING_FRA_NAV.brevBlokkId,
+                    SPØRSMÅL.brevBlokkId,
+                )
+            writeStringToFile(
+                filePath = "build/temp/gjenopptak_innvilgelse_tidligere_perm_naa_ordinaer.html",
+                content =
+                htmlInnhold,
+            )
+        }
+    }
+
+    @Test
     fun `Html av gjenopptak innvilgelse med samordning når bruker har hatt forbruk av dagpengeteller`() {
         runBlocking {
             val gjenopptakMelding =

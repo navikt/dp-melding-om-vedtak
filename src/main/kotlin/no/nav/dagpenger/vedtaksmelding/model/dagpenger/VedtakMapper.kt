@@ -18,113 +18,179 @@ class VedtakMapper(
 
     private val behandlingsresultatData = BehandlingsresultatData(vedtakJson)
 
-    private fun MutableSet<DagpengerOpplysning<*, *>>.addIfPresent(func: () -> DagpengerOpplysning<*, *>) {
+    private fun MutableSet<DagpengerOpplysning<*, *>>.leggTilHvisVerdiFinnesPåVirkningsdato(func: () -> DagpengerOpplysning<*, *>) {
         try {
             this.add(func())
         } catch (e: BehandlingsresultatData.BehandlingResultatOpplysningIkkeFunnet) {
             logger.debug { "Opplysning ikke funnet: ${e.message} for behandlingId: ${behandlingsresultatData.behandlingId()}" }
+        } catch (e: BehandlingsresultatData.PeriodeIkkeFunnet) {
+            logger.debug { "Periode ikke funnet: ${e.message} for behandlingId: ${behandlingsresultatData.behandlingId()}" }
         }
     }
 
     private fun build(): Set<DagpengerOpplysning<*, *>> {
         val opplysningerFraData =
             buildSet {
-                this.addIfPresent { DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.InntektskravSiste12Måneder(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.InntektskravSiste36Måneder(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.TerskelFor12Måneder(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.ArbeidsinntektSiste12Måneder(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.ArbeidsinntektSiste36Måneder(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.AntallGSomGisSomGrunnlagVedVerneplikt(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.BruktBeregningsregelGrunnlag(behandlingsresultatData) }
-                this.addIfPresent {
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.KravTilProsentvisTapAvArbeidstid(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.InntektskravSiste12Måneder(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.InntektskravSiste36Måneder(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.TerskelFor12Måneder(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.ArbeidsinntektSiste12Måneder(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.ArbeidsinntektSiste36Måneder(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
+                    DagpengerOpplysning.AntallGSomGisSomGrunnlagVedVerneplikt(
+                        behandlingsresultatData,
+                    )
+                }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.BruktBeregningsregelGrunnlag(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
                     DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste6Måneder(
                         behandlingsresultatData,
                     )
                 }
-                this.addIfPresent {
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
                     DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste12Måneder(
                         behandlingsresultatData,
                     )
                 }
-                this.addIfPresent {
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
                     DagpengerOpplysning.HarBruktBeregningsregelArbeidstidSiste36Måneder(
                         behandlingsresultatData,
                     )
                 }
-                this.addIfPresent { DagpengerOpplysning.UtbetaltArbeidsinntektPeriode1(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.UtbetaltArbeidsinntektPeriode2(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.UtbetaltArbeidsinntektPeriode3(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger(behandlingsresultatData) }
-                this.addIfPresent {
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.UtbetaltArbeidsinntektPeriode1(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.UtbetaltArbeidsinntektPeriode2(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.UtbetaltArbeidsinntektPeriode3(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
+                    DagpengerOpplysning.AntallStønadsukerSomGisVedOrdinæreDagpenger(
+                        behandlingsresultatData,
+                    )
+                }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
                     DagpengerOpplysning.AndelAvDagsatsMedBarnetilleggSomOverstigerMaksAndelAvDagpengegrunnlaget(
                         behandlingsresultatData,
                     )
                 }
-                this.addIfPresent { DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.BarnetilleggIKroner(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.AntallUkerMedSanksjon(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.AntallSanksjonsdagerSomGjenstår(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.FørsteMånedAvOpptjeningsperiode(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.SisteMånedAvOpptjeningsperiode(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.SeksGangerGrunnbeløp(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.Aldersgrense(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.Grunnlag(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.Virkningsdato(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.FastsattVanligArbeidstidPerUke(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.FastsattNyArbeidstidPerUke(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.HarSamordnet(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.SykepengerDagsats(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.PleiepengerDagsats(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.OmsorgspengerDagsats(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.OpplæringspengerDagsats(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.UføreDagsats(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.ForeldrepengerDagsats(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.SvangerskapspengerDagsats(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.PeriodeSomGisVedVerneplikt(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.Egenandel(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.EgenandelGjenstående(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.AntallStønadsdagerSomGjenstår(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.AntallPermitteringsdagerSomGjenstår(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.AntallDagerIEnUkePermittering(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.KravTilArbeidssøker(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.OppfyllerKravTilMobilitet(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.OppfyllerKravTilArbeidsfør(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.OppfyllerKravTilArbeidssøker(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilEthvertArbeid(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.ØnskerÅVæreRegistrertSomArbeidssøker(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.OppfyllerMeldeplikt(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilIkkeUtestengt(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilOpphold(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.IkkeFulleYtelser(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.KravTilTapAvArbeidsinntektOgArbeidstid(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.KravTilTapAvArbeidsinntekt(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.IkkeStreikEllerLockout(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.KravTilAlder(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.KravTilUtdanning(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.OppfyllerMedlemskap(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.GodkjentLokalArbeidssøker(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.GodkjentKunDeltidssøker(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.ErIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.SkalPermitteringVurderes(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.SkalPermitteringFiskeindustriVurderes(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.LovfestetFritaksperiodePermittering(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.AntallPermitteringsukerFisk(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilPermittering(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.KravetTilAntallUkerFørGjenopptak(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.KravetTilAntallUkerArbeidForReberegningAvGrunnlag(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.OppfyllerKravetTilReberegningAvGrunnlag(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.HarGittFullstendigeOgRiktigeOpplysninger(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.HarGittAlleNødvendigeOpplysninger(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.LangDagpengeperiode(behandlingsresultatData) }
-                this.addIfPresent { DagpengerOpplysning.KortDagpengeperiode(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
+                    DagpengerOpplysning.AntallBarnSomGirRettTilBarnetillegg(
+                        behandlingsresultatData,
+                    )
+                }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.BarnetilleggIKroner(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.AntallUkerMedSanksjon(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.AntallSanksjonsdagerSomGjenstår(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.FørsteMånedAvOpptjeningsperiode(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.SisteMånedAvOpptjeningsperiode(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.SeksGangerGrunnbeløp(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.Aldersgrense(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.Grunnlag(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
+                    DagpengerOpplysning.DagsatsMedBarnetilleggEtterSamordningOg90ProsentRegel(behandlingsresultatData)
+                }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.Virkningsdato(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.FastsattVanligArbeidstidPerUke(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.FastsattNyArbeidstidPerUke(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.HarSamordnet(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.SykepengerDagsats(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.PleiepengerDagsats(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.OmsorgspengerDagsats(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.OpplæringspengerDagsats(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.UføreDagsats(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.ForeldrepengerDagsats(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.SvangerskapspengerDagsats(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.OppfyllerKravTilMinsteinntekt(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.PeriodeSomGisVedVerneplikt(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.Egenandel(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.EgenandelGjenstående(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.AntallStønadsdagerSomGjenstår(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
+                    DagpengerOpplysning.AntallPermitteringsdagerSomGjenstår(
+                        behandlingsresultatData,
+                    )
+                }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.AntallDagerIEnUkePermittering(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.KravTilArbeidssøker(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.OppfyllerKravTilMobilitet(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.OppfyllerKravTilArbeidsfør(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.OppfyllerKravTilArbeidssøker(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.OppfyllerKravetTilEthvertArbeid(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
+                    DagpengerOpplysning.OppyllerKravTilRegistrertArbeidssøker(
+                        behandlingsresultatData,
+                    )
+                }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
+                    DagpengerOpplysning.ØnskerÅVæreRegistrertSomArbeidssøker(
+                        behandlingsresultatData,
+                    )
+                }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.OppfyllerMeldeplikt(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.OppfyllerKravetTilIkkeUtestengt(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.OppfyllerKravetTilOpphold(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.IkkeFulleYtelser(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
+                    DagpengerOpplysning.KravTilTapAvArbeidsinntektOgArbeidstid(
+                        behandlingsresultatData,
+                    )
+                }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
+                    DagpengerOpplysning.OppfyllerVilkåretOmTapAvArbeidstid(
+                        behandlingsresultatData,
+                    )
+                }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.KravTilTapAvArbeidsinntekt(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.IkkeStreikEllerLockout(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.KravTilAlder(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.KravTilUtdanning(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.OppfyllerMedlemskap(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.GodkjentLokalArbeidssøker(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.GodkjentKunDeltidssøker(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
+                    DagpengerOpplysning.ErIlagtSanksjonsperiodeVedSelvforskyldtArbeidsløshet(behandlingsresultatData)
+                }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
+                    DagpengerOpplysning.GrunnlagetForVernepliktErHøyereEnnDagpengegrunnlaget(behandlingsresultatData)
+                }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.SkalPermitteringVurderes(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
+                    DagpengerOpplysning.SkalPermitteringFiskeindustriVurderes(
+                        behandlingsresultatData,
+                    )
+                }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
+                    DagpengerOpplysning.LovfestetFritaksperiodePermittering(
+                        behandlingsresultatData,
+                    )
+                }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.AntallPermitteringsukerFisk(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.OppfyllerKravetTilPermittering(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
+                    DagpengerOpplysning.OppfyllerKravetTilPermitteringFiskeindustri(
+                        behandlingsresultatData,
+                    )
+                }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.KravetTilAntallUkerFørGjenopptak(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
+                    DagpengerOpplysning.KravetTilAntallUkerArbeidForReberegningAvGrunnlag(behandlingsresultatData)
+                }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
+                    DagpengerOpplysning.OppfyllerKravetTilReberegningAvGrunnlag(
+                        behandlingsresultatData,
+                    )
+                }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
+                    DagpengerOpplysning.HarGittFullstendigeOgRiktigeOpplysninger(
+                        behandlingsresultatData,
+                    )
+                }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato {
+                    DagpengerOpplysning.HarGittAlleNødvendigeOpplysninger(
+                        behandlingsresultatData,
+                    )
+                }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.LangDagpengeperiode(behandlingsresultatData) }
+                this.leggTilHvisVerdiFinnesPåVirkningsdato { DagpengerOpplysning.KortDagpengeperiode(behandlingsresultatData) }
                 DagpengerOpplysning.AntallStønadsuker.fra(this)?.let { this.add(it) }
                 DagpengerOpplysning.MinstEllerUnder2GInntekt.fra(this)?.let { this.add(it) }
                 DagpengerOpplysning.SisteDagMedRett.fra(behandlingsresultatData)?.let { this.add(it) }
